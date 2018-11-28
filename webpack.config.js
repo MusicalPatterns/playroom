@@ -23,7 +23,6 @@ module.exports = {
     },
     resolve: {
         extensions: ['.ts', '.tsx', '.js'],
-        mainFields: ['patternModule', 'browser', 'module', 'main'],
     },
     plugins: [
         new CopyWebpackPlugin([{
