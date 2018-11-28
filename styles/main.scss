@@ -1,0 +1,44 @@
+input.invalid {
+  box-shadow: 0 0 1.5px 1px red;
+  -webkit-box-shadow: 0 0 1.5px 1px red;
+  -webkit-appearance: none;
+}
+
+input.unsubmitted {
+  box-shadow: 0 0 1.5px 1px yellow;
+  -webkit-box-shadow: 0 0 1.5px 1px yellow;
+  -webkit-appearance: none;
+}
+
+input {
+  border: inset;
+}
+
+ul {
+  list-style: none;
+}
+
+li:hover {
+  cursor: pointer;
+}
+
+.secret-submitted {
+  opacity: 0;
+}
+
+#pattern-spec-inputs div {
+  span {
+    width: 150px;
+    display: inline-block;
+    margin-right: 10px;
+  }
+
+  input {
+    margin-right: 10px;
+  }
+}
+
+#play, #pause, #enable-immersive-audio {
+  cursor: pointer;
+  padding: 10px;
+}
