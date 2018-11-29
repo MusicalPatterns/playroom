@@ -1,5 +1,3 @@
-// tslint:disable:variable-name file-name-casing no-default-export
-
 import { enableImmersiveAudio } from '@musical-patterns/performer'
 import * as React from 'react'
 

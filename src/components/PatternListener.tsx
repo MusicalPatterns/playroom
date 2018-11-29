@@ -1,5 +1,3 @@
-// tslint:disable:variable-name file-name-casing no-default-export
-
 import { compilePattern } from '@musical-patterns/compiler'
 import { restart } from '@musical-patterns/performer'
 import { doAsync, Pattern, PatternSpec, ThreadSpec } from '@musical-patterns/shared'

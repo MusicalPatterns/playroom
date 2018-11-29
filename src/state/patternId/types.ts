@@ -1,4 +1,4 @@
-import { PatternId } from '@musical-patterns/shared'
+import { PatternId } from '@musical-patterns/registry'
 
 enum PatternIdStateActionType {
     SET_PATTERN_ID = 'SET_PATTERN_ID',

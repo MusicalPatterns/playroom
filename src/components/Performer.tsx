@@ -1,5 +1,3 @@
-// tslint:disable:variable-name file-name-casing no-default-export
-
 import * as React from 'react'
 import SpatializationEnabler from './SpatializationEnabler'
 import TimeControls from './TimeControls'

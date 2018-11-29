@@ -1,5 +1,3 @@
-// tslint:disable:variable-name file-name-casing no-default-export
-
 import { unCamelCase } from '@musical-patterns/shared'
 import * as React from 'react'
 import { buildPatternSpecEventAttacher, PatternSpecEventAttacher, PatternSpecEventParameters } from '../patternSpec'

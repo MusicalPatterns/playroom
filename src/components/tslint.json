@@ -1,0 +1,10 @@
+{
+  "extends": [
+    "../../tslint.json"
+  ],
+  "rules": {
+    "variable-name": false,
+    "file-name-casing": false,
+    "no-default-export": false
+  }
+}

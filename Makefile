@@ -11,4 +11,4 @@ lint:
 	musical-patterns lint
 
 build:
-	musical-patterns build --command webpack
+	musical-patterns build webpack

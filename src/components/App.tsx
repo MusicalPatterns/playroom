@@ -1,6 +1,5 @@
-// tslint:disable:variable-name file-name-casing no-default-export
-
-import { Pattern, PatternId, PatternMetadata, Patterns } from '@musical-patterns/shared'
+import { PatternId } from '@musical-patterns/registry'
+import { Pattern, PatternMetadata, Patterns } from '@musical-patterns/shared'
 import * as React from 'react'
 import { connect } from 'react-redux'
 import { ImmutableRootState, RootStateKeys } from '../state'

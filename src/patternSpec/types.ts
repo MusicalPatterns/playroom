@@ -1,4 +1,5 @@
-import { PatternId, Patterns } from '@musical-patterns/shared'
+import { PatternId } from '@musical-patterns/registry'
+import { Patterns } from '@musical-patterns/shared'
 import * as React from 'react'
 import { Dispatch } from 'redux'
 import { ImmutablePatternSpecState } from '../state'
