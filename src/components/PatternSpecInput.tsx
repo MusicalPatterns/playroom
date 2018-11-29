@@ -1,4 +1,4 @@
-import { unCamelCase } from '@musical-patterns/shared'
+import { unCamelCase } from '@musical-patterns/utilities'
 import * as React from 'react'
 import { buildPatternSpecEventAttacher, PatternSpecEventAttacher, PatternSpecEventParameters } from '../patternSpec'
 import { PatternSpecStateKeys, StringifiedPatternSpec, StringifiedPatternSpecInputStates } from '../state'

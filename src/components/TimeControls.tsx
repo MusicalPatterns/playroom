@@ -1,5 +1,5 @@
 import { togglePaused } from '@musical-patterns/performer'
-import { from } from '@musical-patterns/shared'
+import { from } from '@musical-patterns/utilities'
 import * as React from 'react'
 import { connect } from 'react-redux'
 import { Dispatch } from 'redux'

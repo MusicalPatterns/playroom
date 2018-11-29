@@ -1,5 +1,5 @@
 import { PatternId } from '@musical-patterns/registry'
-import { Pattern } from '@musical-patterns/shared'
+import { Pattern } from '@musical-patterns/utilities'
 import * as React from 'react'
 import { connect } from 'react-redux'
 import { Dispatch } from 'redux'

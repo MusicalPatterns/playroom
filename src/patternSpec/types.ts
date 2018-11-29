@@ -1,5 +1,5 @@
 import { PatternId } from '@musical-patterns/registry'
-import { Patterns } from '@musical-patterns/shared'
+import { Patterns } from '@musical-patterns/utilities'
 import * as React from 'react'
 import { Dispatch } from 'redux'
 import { ImmutablePatternSpecState } from '../state'

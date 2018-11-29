@@ -1,4 +1,4 @@
-import { PatternSpec } from '@musical-patterns/shared'
+import { PatternSpec } from '@musical-patterns/utilities'
 import { StringifiedPatternSpecInputStates } from '../state'
 
 const buildInitialDisabledButtons: (patternSpec: PatternSpec) => StringifiedPatternSpecInputStates =

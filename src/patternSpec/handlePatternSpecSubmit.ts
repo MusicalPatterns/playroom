@@ -1,4 +1,4 @@
-import { deepEqual } from '@musical-patterns/shared'
+import { deepEqual } from '@musical-patterns/utilities'
 import { BatchAction, batchActions } from 'redux-batched-actions'
 import { ActionType, PatternSpecStateKeys, StringifiedPatternSpec, StringifiedPatternSpecInputStates } from '../state'
 import { PatternSpecEventHandler, PatternSpecEventHandlerParameters } from './types'

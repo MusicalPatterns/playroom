@@ -1,6 +1,6 @@
 import { compilePattern } from '@musical-patterns/compiler'
 import { restart } from '@musical-patterns/performer'
-import { doAsync, Pattern, PatternSpec, ThreadSpec } from '@musical-patterns/shared'
+import { doAsync, Pattern, PatternSpec, ThreadSpec } from '@musical-patterns/utilities'
 import * as React from 'react'
 import { connect } from 'react-redux'
 import { destringifyPatternSpec } from '../patternSpec'
