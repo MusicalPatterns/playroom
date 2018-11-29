@@ -1,4 +1,4 @@
-import { Patterns } from '@musical-patterns/utilities'
+import { Patterns } from '@musical-patterns/pattern'
 
 enum PatternsStateActionType {
     SET_PATTERNS = 'SET_PATTERNS',

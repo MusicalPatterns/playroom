@@ -1,4 +1,5 @@
-import { Maybe, Patterns } from '@musical-patterns/utilities'
+import { Patterns } from '@musical-patterns/pattern'
+import { Maybe } from '@musical-patterns/utilities'
 import { Reducer } from 'redux'
 import { initialPatterns } from './state'
 import { PatternsStateAction, PatternsStateActionType } from './types'

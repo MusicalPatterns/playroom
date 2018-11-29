@@ -1,5 +1,5 @@
-import { PatternId } from '@musical-patterns/registry'
-import { Maybe, Patterns, Time } from '@musical-patterns/utilities'
+import { PatternId, Patterns } from '@musical-patterns/pattern'
+import { Maybe, Time } from '@musical-patterns/utilities'
 import { PatternChangeEventExtractor, PatternSpecEventExtractor } from '../patternSpec'
 import { ImmutablePatternSpecState, StringifiedPatternSpec } from '../state'
 

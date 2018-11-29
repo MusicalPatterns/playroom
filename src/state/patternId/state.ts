@@ -1,4 +1,4 @@
-import { PatternId } from '@musical-patterns/registry'
+import { PatternId } from '@musical-patterns/pattern'
 import { Maybe } from '@musical-patterns/utilities'
 
 // tslint:disable-next-line:no-null-keyword
