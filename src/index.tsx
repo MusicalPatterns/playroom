@@ -5,8 +5,8 @@ import { render } from 'react-dom'
 import { Provider } from 'react-redux'
 // tslint:disable-next-line:no-import-side-effect no-reaching-imports
 import '../styles/main.scss'
-import { App, onPerformerUpdate } from './components'
-import { ActionType, store } from './state'
+import { onPerformerUpdate } from './performer'
+import { ActionType, App, store } from './root'
 
 const setupPlayroom: (patterns: Patterns) => HTMLDivElement =
     (patterns: Patterns): HTMLDivElement => {

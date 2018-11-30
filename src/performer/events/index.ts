@@ -1,0 +1,1 @@
+export { onPerformerUpdate } from './onPerformerUpdate'
