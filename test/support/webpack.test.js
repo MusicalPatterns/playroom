@@ -1,0 +1,31 @@
+const HtmlWebpackPlugin = require('html-webpack-plugin')
+
+module.exports = {
+    entry: './test/support/testIndex.js',
+    mode: 'development',
+    module: {
+        rules: [
+            {
+                test: /\.tsx?$/,
+                loader: 'awesome-typescript-loader',
+                exclude: /test/,
+            },
+            {
+                test: /\.scss$/,
+                use: [
+                    'style-loader',
+                    'css-loader',
+                    'sass-loader',
+                ],
+            },
+        ],
+    },
+    resolve: {
+        extensions: ['.ts', '.tsx', '.js'],
+    },
+    plugins: [
+        new HtmlWebpackPlugin({
+            title: 'Musical Patterns - Testing Playroom',
+        }),
+    ],
+}

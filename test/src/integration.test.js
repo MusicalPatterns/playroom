@@ -8,14 +8,15 @@ import {
     openChrome,
     openTab,
 } from 'puppet-strings'
-import { sleep } from '../support'
+import { sleep, startTestPlayroom, stopTestPlayroom } from '../support'
+import { stopTestPlayroom } from '../support/startTestPlayroom'
 
 jasmine.DEFAULT_TIMEOUT_INTERVAL = 10000
 
 let browser, tab, page
 
 const selectAnExamplePattern = async () => {
-    const exampleSong = await findElement(tab, 'li#STEPWISE')
+    const exampleSong = await findElement(tab, 'li#TEST')
     await clickElement(exampleSong)
 }
 
@@ -27,17 +28,20 @@ const elementInnerText = selector => evalInTab(tab, [ selector ], `[selector] = 
 
 describe('ui integration', () => {
     beforeAll(async () => {
+        await startTestPlayroom()
         browser = await openChrome({ headless: false })
-        tab = await openTab(browser, 'http://localhost:8080')
+        tab = await openTab(browser, 'http://localhost:8081')
         page = tab.puppeteer.page
     })
 
     afterAll(async () => {
+        stopTestPlayroom()
+
         await closeBrowser(browser)
     })
 
     it('the time controls do not appear if you have not yet selected a pattern', async done => {
-        await navigate(tab, 'http://localhost:8080')
+        await navigate(tab, 'http://localhost:8081')
         expect(await elementExists('#secret-timer'))
             .toBeFalsy()
 
