@@ -1,5 +1,5 @@
 import { Reducer } from 'redux'
-import { initialPatternSpecState } from './state'
+import { initialPatternSpecState } from './initial'
 import {
     ImmutablePatternSpecState,
     PatternSpecStateAction,

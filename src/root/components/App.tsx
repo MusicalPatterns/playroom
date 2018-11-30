@@ -1,7 +1,7 @@
 import { Pattern, PatternId, PatternMetadata, Patterns } from '@musical-patterns/pattern'
 import * as React from 'react'
 import { connect } from 'react-redux'
-import { PatternList } from '../../patterns'
+import { ImmutablePatternState, PatternList, PatternStateKeys } from '../../pattern'
 import { PatternSpecInputs } from '../../patternSpec'
 import { Performer } from '../../performer'
 import { ImmutableRootState, RootStateKeys } from '../state'
@@ -9,10 +9,14 @@ import PatternListener from './PatternListener'
 import { AppProps } from './types'
 
 const mapStateToProps: (state: ImmutableRootState) => AppProps =
-    (state: ImmutableRootState): AppProps => ({
-        patternId: state.get(RootStateKeys.PATTERN_ID),
-        patterns: state.get(RootStateKeys.PATTERNS),
-    })
+    (state: ImmutableRootState): AppProps => {
+        const patternState: ImmutablePatternState = state.get(RootStateKeys.PATTERN)
+
+        return {
+            patternId: patternState.get(PatternStateKeys.PATTERN_ID),
+            patterns: patternState.get(PatternStateKeys.PATTERNS),
+        }
+    }
 
 const patternDescription: (patternId: PatternId, patterns: Patterns) => string =
     (patternId: PatternId, patterns: Patterns): string => {

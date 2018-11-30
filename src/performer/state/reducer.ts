@@ -1,5 +1,5 @@
 import { Reducer } from 'redux'
-import { initialPerformerState } from './state'
+import { initialPerformerState } from './initial'
 import { ImmutablePerformerState, PerformerStateAction, PerformerStateActionType, PerformerStateKeys } from './types'
 
 const performerReducer: Reducer<ImmutablePerformerState, PerformerStateAction> =

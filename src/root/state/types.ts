@@ -1,27 +1,24 @@
 import { PatternId, Patterns } from '@musical-patterns/pattern'
 import { Maybe, TypedMap } from '@musical-patterns/utilities'
-import { PatternIdStateAction } from '../../patternId'
-import { PatternsStateAction } from '../../patterns'
+import { ImmutablePatternState, PatternStateAction } from '../../pattern'
 import { ImmutablePatternSpecState, PatternSpecStateAction } from '../../patternSpec'
 import { ImmutablePerformerState, PerformerStateAction } from '../../performer'
 
-type Action = PatternIdStateAction |
+type Action =
     PatternSpecStateAction |
     PerformerStateAction |
-    PatternsStateAction
+    PatternStateAction
 
 enum RootStateKeys {
-    PATTERN_ID = 'PATTERN_ID',
     PATTERN_SPEC = 'PATTERN_SPEC',
     PERFORMER = 'PERFORMER',
-    PATTERNS = 'PATTERNS',
+    PATTERN = 'PATTERN',
 }
 
 interface RootState {
-    [ RootStateKeys.PATTERN_ID ]: Maybe<PatternId>,
     [ RootStateKeys.PATTERN_SPEC ]: ImmutablePatternSpecState,
     [ RootStateKeys.PERFORMER ]: ImmutablePerformerState,
-    [ RootStateKeys.PATTERNS ]: Maybe<Patterns>,
+    [ RootStateKeys.PATTERN ]: ImmutablePatternState,
 }
 
 type ImmutableRootState = TypedMap<RootStateValueTypes, RootState>
@@ -29,8 +26,7 @@ type ImmutableRootState = TypedMap<RootStateValueTypes, RootState>
 type RootStateValueTypes =
     ImmutablePatternSpecState |
     ImmutablePerformerState |
-    Maybe<PatternId> |
-    Maybe<Patterns>
+    ImmutablePatternState
 
 export {
     ImmutableRootState,

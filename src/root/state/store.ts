@@ -4,8 +4,7 @@ import { Map } from 'immutable'
 import { applyMiddleware, compose, createStore, Reducer, Store } from 'redux'
 import { batchDispatchMiddleware, enableBatching } from 'redux-batched-actions'
 import { combineReducers } from 'redux-immutable'
-import { patternIdReducer } from '../../patternId'
-import { patternsReducer } from '../../patterns'
+import { patternReducer } from '../../pattern'
 import { patternSpecReducer } from '../../patternSpec'
 import { performerReducer } from '../../performer'
 import { RootStateKeys } from './types'
@@ -13,8 +12,7 @@ import { RootStateKeys } from './types'
 const initialState: any = Map()
 
 const rootReducer: Reducer = combineReducers({
-    [ RootStateKeys.PATTERN_ID ]: patternIdReducer,
-    [ RootStateKeys.PATTERNS ]: patternsReducer,
+    [ RootStateKeys.PATTERN ]: patternReducer,
     [ RootStateKeys.PATTERN_SPEC ]: patternSpecReducer,
     [ RootStateKeys.PERFORMER ]: performerReducer,
 } as any)
