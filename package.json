@@ -7,7 +7,7 @@
     "@musical-patterns/cli": "^1.0.0",
     "@musical-patterns/compiler": "^1.0.9",
     "@musical-patterns/pattern": "^1.0.2",
-    "@musical-patterns/performer": "^1.0.40",
+    "@musical-patterns/performer": "^1.0.44",
     "@musical-patterns/utilities": "^1.0.70",
     "@types/react": "^16.7.3",
     "@types/react-dom": "^16.0.9",
