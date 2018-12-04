@@ -4,7 +4,7 @@
   "main": "dist/main.js",
   "typings": "dist/index.d.ts",
   "devDependencies": {
-    "@musical-patterns/cli": "^1.0.5",
+    "@musical-patterns/cli": "^1.0.10",
     "@musical-patterns/compiler": "^1.0.17",
     "@musical-patterns/pattern": "^1.0.2",
     "@musical-patterns/performer": "^1.0.45",

@@ -6,6 +6,9 @@ node_modules
 .module-cache
 *.log*
 dist
-patterns/**/node_modules
-tsconfig.json
 tsconfig-common.json
+tsconfig.json
+tsconfig-node.json
+tslint.json
+test/tslint.json
+test/mockDom.ts
