@@ -1,4 +1,5 @@
+.idea/
+samples/
 src/
 styles/
-test/
-.idea/
+test/src/
