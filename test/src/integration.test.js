@@ -11,7 +11,7 @@ import {
 import { sleep, startTestPlayroom, stopTestPlayroom } from '../support'
 import { stopTestPlayroom } from '../support/startTestPlayroom'
 
-jasmine.DEFAULT_TIMEOUT_INTERVAL = 10000
+jasmine.DEFAULT_TIMEOUT_INTERVAL = 20000
 
 let browser, tab, page
 
