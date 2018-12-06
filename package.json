@@ -1,17 +1,17 @@
 {
   "name": "@musical-patterns/playroom",
-  "version": "1.0.12",
+  "version": "1.0.13",
   "main": "dist/main.js",
   "typings": "dist/index.d.ts",
   "scripts": {
     "build": "webpack"
   },
   "devDependencies": {
-    "@musical-patterns/cli": "^1.0.35",
-    "@musical-patterns/compiler": "^1.0.21",
-    "@musical-patterns/pattern": "^1.0.9",
-    "@musical-patterns/performer": "^1.0.52",
-    "@musical-patterns/utilities": "^1.0.84",
+    "@musical-patterns/cli": "^1.0.38",
+    "@musical-patterns/compiler": "^1.0.22",
+    "@musical-patterns/pattern": "^1.0.10",
+    "@musical-patterns/performer": "^1.0.54",
+    "@musical-patterns/utilities": "^1.0.87",
     "@types/react": "^16.7.13",
     "@types/react-dom": "^16.0.9",
     "@types/react-redux": "^6.0.9",
@@ -32,7 +32,7 @@
     "sass-loader": "^7.1.0",
     "style-loader": "^0.23.1",
     "typescript": "^3.2.1",
-    "webpack": "^4.27.0",
+    "webpack": "^4.27.1",
     "webpack-cli": "^3.1.2",
     "webpack-dev-server": "^3.1.10"
   }
