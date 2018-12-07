@@ -1,21 +1,21 @@
 import { closeBrowser, openChrome, openTab } from 'puppet-strings'
-import { startTestPlayroom, stopTestPlayroom } from './support'
+import { APP_URL, startServer, stopServer } from './support'
 
 jasmine.DEFAULT_TIMEOUT_INTERVAL = 10000
 
 const testGlobals = {}
 
 beforeAll(async done => {
-    await startTestPlayroom()
+    await startServer()
     testGlobals.browser = await openChrome({ headless: false })
-    testGlobals.tab = await openTab(testGlobals.browser, 'http://localhost:8081')
+    testGlobals.tab = await openTab(testGlobals.browser, APP_URL)
     testGlobals.page = testGlobals.tab.puppeteer.page
     done()
 }, 60000)
 
 afterAll(async done => {
     await closeBrowser(testGlobals.browser)
-    await stopTestPlayroom()
+    await stopServer()
     done()
 })
 

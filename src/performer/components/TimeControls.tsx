@@ -32,7 +32,7 @@ const TimeControls: (timeControlsProps: TimeControlsProps) => JSX.Element =
         return (
             <div>
                 <div {...{ id: control, onClick }}>{control}</div>
-                <div {...{ id: 'secret-timer' }}>{Math.round(from.Time(time))}</div>
+                <div {...{ id: 'timer' }}>{Math.round(from.Time(time))}</div>
             </div>
         )
     }

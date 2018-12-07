@@ -1,0 +1,5 @@
+export { sleep } from './sleep'
+export { selectTestPattern } from './selectTestPattern'
+export { elementExists, elementInnerText, elementValue } from './checkElement'
+export { press } from './keyboard'
+export { modify } from './modify'
