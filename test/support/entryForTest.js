@@ -1,4 +1,4 @@
-import { setupPlayroom } from '../../dist/main'
+import { setupPlayroom } from '../../src'
 
 const patterns = {
     TEST: {

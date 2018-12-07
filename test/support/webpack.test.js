@@ -1,7 +1,7 @@
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 
 module.exports = {
-    entry: './test/support/testIndex.js',
+    entry: './test/support/entryForTest.js',
     mode: 'development',
     module: {
         rules: [
