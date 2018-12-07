@@ -27,17 +27,18 @@ const elementValue = selector => evalInTab(tab, [ selector ], `[selector] = argu
 const elementInnerText = selector => evalInTab(tab, [ selector ], `[selector] = arguments; return document.querySelector(selector).innerText`)
 
 describe('ui integration', () => {
-    beforeAll(async () => {
+    beforeAll(async (done) => {
         await startTestPlayroom()
         browser = await openChrome({ headless: false })
         tab = await openTab(browser, 'http://localhost:8081')
         page = tab.puppeteer.page
+        done()
     }, 60000)
 
-    afterAll(async () => {
-        stopTestPlayroom()
-
+    afterAll(async (done) => {
         await closeBrowser(browser)
+        await stopTestPlayroom()
+        done()
     })
 
     it('the time controls do not appear if you have not yet selected a pattern', async done => {

@@ -1,10 +1,13 @@
-const { exec } = require('child_process')
+const childProcess = require('child_process')
+const psTree = require('ps-tree')
+
+let server
 
 const startTestPlayroom = async () => {
-    const start = exec('sh ./test/support/start.sh')
+    server = childProcess.exec('webpack-dev-server --config test/support/webpack.test.js')
 
     return new Promise(resolve => {
-        start.stdout.on('data', data => {
+        server.stdout.on('data', data => {
             if (data.includes('Compiled successfully.')) {
                 resolve()
             }
@@ -12,8 +15,18 @@ const startTestPlayroom = async () => {
     })
 }
 
-const stopTestPlayroom = () => {
-    exec('sh ./test/support/stop.sh')
+const stopTestPlayroom = async () => {
+    return new Promise(resolve => {
+        psTree(server.pid, (err, children) => {
+            const kill = childProcess.exec(`taskkill /f /pid ${children[ 0 ].PID}`)
+
+            kill.stdout.on('data', data => {
+                if (data.includes('has been terminated.')) {
+                    resolve()
+                }
+            })
+        })
+    })
 }
 
 export {
