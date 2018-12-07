@@ -11,7 +11,7 @@ import {
 import { sleep, startTestPlayroom, stopTestPlayroom } from '../support'
 import { stopTestPlayroom } from '../support/startTestPlayroom'
 
-jasmine.DEFAULT_TIMEOUT_INTERVAL = 20000
+jasmine.DEFAULT_TIMEOUT_INTERVAL = 10000
 
 let browser, tab, page
 
@@ -32,7 +32,7 @@ describe('ui integration', () => {
         browser = await openChrome({ headless: false })
         tab = await openTab(browser, 'http://localhost:8081')
         page = tab.puppeteer.page
-    })
+    }, 60000)
 
     afterAll(async () => {
         stopTestPlayroom()
