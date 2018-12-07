@@ -6,6 +6,11 @@
   "scripts": {
     "build": "webpack"
   },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/MusicalPatterns/playroom.git"
+  },
+  "license": "MIT",
   "devDependencies": {
     "@musical-patterns/cli": "^1.0.39",
     "@musical-patterns/compiler": "^1.0.22",
