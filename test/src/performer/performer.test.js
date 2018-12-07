@@ -1,45 +1,19 @@
-import {
-    clickElement,
-    closeBrowser,
-    evalInTab,
-    fillInElement,
-    findElement,
-    navigate,
-    openChrome,
-    openTab,
-} from 'puppet-strings'
-import { sleep, startTestPlayroom, stopTestPlayroom } from '../../support'
-
-jasmine.DEFAULT_TIMEOUT_INTERVAL = 10000
-
-let browser, tab, page
+import { clickElement, evalInTab, fillInElement, findElement, navigate } from 'puppet-strings'
+import { testGlobals } from '../../setup'
+import { sleep } from '../../support'
 
 const selectAnExamplePattern = async () => {
-    const exampleSong = await findElement(tab, 'li#TEST')
+    const exampleSong = await findElement(testGlobals.tab, 'li#TEST')
     await clickElement(exampleSong)
 }
 
-const elementExists = selector => evalInTab(tab, [ selector ], `[selector] = arguments; return !!document.querySelector(selector)`)
+const elementExists = selector => evalInTab(testGlobals.tab, [ selector ], `[selector] = arguments; return !!document.querySelector(selector)`)
 
-const elementInnerText = selector => evalInTab(tab, [ selector ], `[selector] = arguments; return document.querySelector(selector).innerText`)
+const elementInnerText = selector => evalInTab(testGlobals.tab, [ selector ], `[selector] = arguments; return document.querySelector(selector).innerText`)
 
 describe('ui integration', () => {
-    beforeAll(async (done) => {
-        await startTestPlayroom()
-        browser = await openChrome({ headless: false })
-        tab = await openTab(browser, 'http://localhost:8081')
-        page = tab.puppeteer.page
-        done()
-    }, 60000)
-
-    afterAll(async (done) => {
-        await closeBrowser(browser)
-        await stopTestPlayroom()
-        done()
-    })
-
     it('the time controls do not appear if you have not yet selected a pattern', async done => {
-        await navigate(tab, 'http://localhost:8081')
+        await navigate(testGlobals.tab, 'http://localhost:8081')
         expect(await elementExists('#secret-timer'))
             .toBeFalsy()
 
@@ -63,12 +37,12 @@ describe('ui integration', () => {
         })
 
         it('pauses the music when you click pause after clicking play', async done => {
-            const play = await findElement(tab, '#play')
+            const play = await findElement(testGlobals.tab, '#play')
             await clickElement(play)
 
             await sleep(100)
 
-            const pause = await findElement(tab, '#pause')
+            const pause = await findElement(testGlobals.tab, '#pause')
             await clickElement(pause)
 
             const secretTime = parseInt(await elementInnerText('#secret-timer'))
@@ -81,13 +55,13 @@ describe('ui integration', () => {
 
         describe('after pressing play', () => {
             beforeEach(async done => {
-                const play = await findElement(tab, '#play')
+                const play = await findElement(testGlobals.tab, '#play')
                 await clickElement(play)
                 done()
             })
 
             afterEach(async done => {
-                const pause = await findElement(tab, '#pause')
+                const pause = await findElement(testGlobals.tab, '#pause')
                 await clickElement(pause)
                 done()
             })
@@ -122,10 +96,10 @@ describe('ui integration', () => {
                 await sleep(1000)
                 const secretTime = parseInt(await elementInnerText('#secret-timer'))
 
-                const input = await findElement(tab, 'input#patternPitchScalar')
+                const input = await findElement(testGlobals.tab, 'input#patternPitchScalar')
                 await fillInElement(input, '2')
                 await clickElement(input)
-                await page.keyboard.press('Enter')
+                await testGlobals.page.keyboard.press('Enter')
                 await sleep(100)
 
                 let secretTimeAfterResetting = parseInt(await elementInnerText('#secret-timer'))

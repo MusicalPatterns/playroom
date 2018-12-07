@@ -7,7 +7,7 @@
     "build": "webpack"
   },
   "devDependencies": {
-    "@musical-patterns/cli": "^1.0.38",
+    "@musical-patterns/cli": "^1.0.39",
     "@musical-patterns/compiler": "^1.0.22",
     "@musical-patterns/pattern": "^1.0.10",
     "@musical-patterns/performer": "^1.0.54",
@@ -32,7 +32,7 @@
     "redux-immutable": "^4.0.0",
     "sass-loader": "^7.1.0",
     "style-loader": "^0.23.1",
-    "typescript": "^3.2.1",
+    "typescript": "^3.2.2",
     "webpack": "^4.27.1",
     "webpack-cli": "^3.1.2",
     "webpack-dev-server": "^3.1.10"
