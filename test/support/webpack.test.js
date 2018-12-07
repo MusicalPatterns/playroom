@@ -23,6 +23,9 @@ module.exports = {
     resolve: {
         extensions: ['.ts', '.tsx', '.js'],
     },
+    devServer: {
+        port: 8081,
+    },
     plugins: [
         new HtmlWebpackPlugin({
             title: 'Musical Patterns - Testing Playroom',
