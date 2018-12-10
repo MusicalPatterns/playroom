@@ -1,6 +1,4 @@
 import { setupPlayroom } from '../../../src'
 import { patternsForTest } from './patternsForTest'
 
-const playroom = setupPlayroom(patternsForTest)
-
-document.body.appendChild(playroom)
+setupPlayroom(patternsForTest).then(playroom => document.body.appendChild(playroom))

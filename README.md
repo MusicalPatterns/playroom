@@ -12,7 +12,7 @@ const patterns: Patterns = {
 	// your patterns here
 }
 
-const playroom: HTMLDivElement = setupPlayroom(patterns)
+const playroom: HTMLDivElement = await setupPlayroom(patterns)
 
 document.body.appendChild(playroom)
 

@@ -8,15 +8,15 @@ import '../styles/main.scss'
 import { onPerformerUpdate } from './performer'
 import { ActionType, App, store } from './root'
 
-const setupPlayroom: (patterns: Patterns) => HTMLDivElement =
-    (patterns: Patterns): HTMLDivElement => {
+const setupPlayroom: (patterns: Patterns) => Promise<HTMLDivElement> =
+    async (patterns: Patterns): Promise<HTMLDivElement> => {
         const root: HTMLDivElement = document.createElement('div')
 
         store.subscribe(() => render(<Provider store={store}><App/></Provider>, root))
 
         render(<Provider store={store}><App/></Provider>, root)
 
-        setupPerformer({ onUpdate: onPerformerUpdate })
+        await setupPerformer({ onUpdate: onPerformerUpdate })
 
         store.dispatch({ type: ActionType.SET_PATTERNS, data: patterns })
 

@@ -1,6 +1,6 @@
 {
   "name": "@musical-patterns/playroom",
-  "version": "1.0.20",
+  "version": "1.0.21",
   "main": "dist/main.js",
   "typings": "dist/index.d.ts",
   "repository": {
@@ -9,7 +9,7 @@
   },
   "license": "MIT",
   "devDependencies": {
-    "@musical-patterns/cli": "^1.0.55",
+    "@musical-patterns/cli": "^1.0.56",
     "@musical-patterns/compiler": "^1.0.28",
     "@musical-patterns/pattern": "^1.0.15",
     "@musical-patterns/performer": "^1.0.68",
