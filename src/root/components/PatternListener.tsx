@@ -1,6 +1,6 @@
 import { compilePattern } from '@musical-patterns/compiler'
 import { Pattern, PatternSpec } from '@musical-patterns/pattern'
-import { restart, ThreadSpec } from '@musical-patterns/performer'
+import { perform, ThreadSpec } from '@musical-patterns/performer'
 import { doAsync } from '@musical-patterns/utilities'
 import * as React from 'react'
 import { connect } from 'react-redux'
@@ -21,7 +21,7 @@ const PatternListener: (patternListenerProps: PatternListenerProps) => JSX.Eleme
             const spec: PatternSpec = destringifyPatternSpec(submittedPatternSpec)
             const threadSpecs: ThreadSpec[] = await compilePattern({ ...pattern, spec })
 
-            restart(threadSpecs)
+            perform(threadSpecs)
         })
 
         return <div/>
