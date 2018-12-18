@@ -1,2 +1,5 @@
 build:
 	webpack
+
+start_test:
+	webpack-dev-server --config test/support/infrastructure/webpack.test.js

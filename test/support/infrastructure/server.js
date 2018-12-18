@@ -4,7 +4,7 @@ const psTree = require('ps-tree')
 let server
 
 const startServer = async () => {
-    server = childProcess.exec('webpack-dev-server --config test/support/infrastructure/webpack.test.js')
+    server = childProcess.exec('make start_test')
 
     return new Promise(resolve => {
         server.stdout.on('data', data => {
@@ -18,12 +18,13 @@ const startServer = async () => {
 const stopServer = async () => {
     return new Promise(resolve => {
         psTree(server.pid, (err, children) => {
-            const kill = childProcess.exec(`taskkill /f /pid ${children[ 0 ].PID}`)
-
-            kill.stdout.on('data', data => {
-                if (data.includes('has been terminated.')) {
-                    resolve()
-                }
+            const kills = children.map(child => childProcess.exec(`taskkill /f /pid ${child.PID}`))
+            kills.forEach(kill => {
+                kill.stdout.on('data', data => {
+                    if (data.includes('has been terminated.')) {
+                        resolve()
+                    }
+                })
             })
         })
     })
