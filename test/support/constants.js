@@ -1,11 +1,13 @@
-const TEST_PATTERN_ID = 'TEST'
+import { playroomTestPattern } from '@musical-patterns/pattern-playroom-test'
+
+const TEST_PATTERN_ID = playroomTestPattern.id
 const APP_URL = 'http://localhost:8081'
-const TEST_PATTERN_SPEC_PROPERTY_TWO_VALUE = 4186
-const TEST_PATTERN_SPEC_PROPERTY_ONE_VALUE = 100
-const TEST_MODIFICATION = '2'
-const INVALID_TEST_MODIFICATION = '$.&%!'
 const TEST_PATTERN_SPEC_PROPERTY_ONE_KEY = 'patternDurationScalar'
 const TEST_PATTERN_SPEC_PROPERTY_TWO_KEY = 'patternPitchScalar'
+const TEST_PATTERN_SPEC_PROPERTY_ONE_VALUE = playroomTestPattern.spec[ TEST_PATTERN_SPEC_PROPERTY_ONE_KEY ]
+const TEST_PATTERN_SPEC_PROPERTY_TWO_VALUE = playroomTestPattern.spec[ TEST_PATTERN_SPEC_PROPERTY_TWO_KEY ]
+const TEST_MODIFICATION = '2'
+const INVALID_TEST_MODIFICATION = '$.&%!'
 
 export {
     APP_URL,
