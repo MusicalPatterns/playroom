@@ -1,5 +1,8 @@
 build:
-	webpack
+	webpack --config webpack.prod.js
+
+build_local:
+	webpack --config webpack.local.js
 
 start_test:
-	webpack-dev-server --config test/support/infrastructure/webpack.test.js
+	webpack-dev-server --config webpack.test.js
