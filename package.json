@@ -9,7 +9,7 @@
   },
   "license": "MIT",
   "devDependencies": {
-    "@musical-patterns/cli": "^1.0.96",
+    "@musical-patterns/cli": "^1.0.99",
     "@musical-patterns/compiler": "^1.0.35",
     "@musical-patterns/pattern": "^1.0.29",
     "@musical-patterns/pattern-playroom-test": "^1.0.18",

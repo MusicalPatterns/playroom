@@ -1,9 +1,14 @@
-import { unCamelCase } from '@musical-patterns/utilities'
+import { camelCaseToLowerCase } from '@musical-patterns/utilities'
 import * as React from 'react'
 import { buildPatternSpecEventAttacher, PatternSpecEventAttacher, PatternSpecEventParameters } from '../events'
 import { PatternSpecStateKeys } from '../state'
 import { StringifiedPatternSpec, StringifiedPatternSpecInputStates } from '../types'
 import { PatternSpecInputProps } from './types'
+
+const presentPatternSpecKey: (patternSpecKey: string) => string =
+    (patternSpecKey: string): string =>
+        camelCaseToLowerCase(patternSpecKey)
+            .replace(/pattern /g, '')
 
 const PatternSpecInput: (patternSpecInputProps: PatternSpecInputProps) => JSX.Element =
     (patternSpecInputProps: PatternSpecInputProps): JSX.Element => {
@@ -56,7 +61,7 @@ const PatternSpecInput: (patternSpecInputProps: PatternSpecInputProps) => JSX.El
 
         return (
             <div>
-                <span>{unCamelCase(patternSpecKey)}</span>
+                <span>{presentPatternSpecKey(patternSpecKey)}</span>
                 <input {...{ onChange, onKeyPress, value: patternSpecValue, className, onBlur, id: patternSpecKey }}/>
                 <button {...{ onClick, disabled, value: patternSpecValue, id: patternSpecKey }}>submit</button>
                 <span {...{ className: 'secret-submitted', id: patternSpecKey }}>{submittedPatternSpecValue}</span>
