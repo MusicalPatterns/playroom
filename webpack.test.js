@@ -6,6 +6,7 @@ const path = require('path')
 module.exports = merge(common, {
     entry: './test/support/infrastructure/entryForTest.js',
     devServer: {
+        disableHostCheck: true,
         port: 8081,
     },
     output: {
