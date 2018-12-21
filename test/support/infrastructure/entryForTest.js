@@ -1,6 +1,6 @@
-import { playroomTestPattern } from '@musical-patterns/pattern-playroom-test'
+import { pattern } from '@musical-patterns/pattern-playroom-test'
 import { setupPlayroom } from '../../../src'
 
 setupPlayroom({
-    [ playroomTestPattern.id ]: playroomTestPattern,
+    [ pattern.id ]: pattern,
 }).then(playroom => document.body.appendChild(playroom))
