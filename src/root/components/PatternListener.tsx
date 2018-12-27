@@ -24,7 +24,7 @@ const PatternListener: (patternListenerProps: PatternListenerProps) => JSX.Eleme
             const spec: PatternSpec = destringifyPatternSpec(submittedPatternSpec)
             const threadSpecs: ThreadSpec[] = await compilePattern({ ...pattern, spec })
             if (debugMode) {
-                logMessageToConsole(`thread specs: ${threadSpecs}`)
+                logMessageToConsole('thread specs: ', threadSpecs)
             }
 
             await perform(threadSpecs)
