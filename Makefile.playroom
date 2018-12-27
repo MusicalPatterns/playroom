@@ -8,4 +8,4 @@ build_dev:
 	@webpack --config webpack.dev.js
 
 start_test:
-	@webpack-dev-server --config webpack.test.js
+	@webpack-dev-server --config webpack.test.js --color
