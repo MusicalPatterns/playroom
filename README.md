@@ -17,3 +17,5 @@ const playroom: HTMLDivElement = await setupPlayroom(patterns)
 document.body.appendChild(playroom)
 
 ```
+
+The second optional argument to `setupPlayroom` is debug mode, a boolean defaulting to false, which will log compiled thread specs to the developer console.

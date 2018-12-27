@@ -4,22 +4,26 @@ import { Maybe, TypedMap } from '@musical-patterns/utilities'
 enum PatternStateKeys {
     PATTERNS = 'PATTERNS',
     PATTERN_ID = 'PATTERN_ID',
+    DEBUG_MODE = 'DEBUG_MODE',
 }
 
 interface PatternState {
     [ PatternStateKeys.PATTERNS ]: Maybe<Patterns>,
     [ PatternStateKeys.PATTERN_ID ]: Maybe<PatternId>,
+    [ PatternStateKeys.DEBUG_MODE ]: boolean,
 }
 
 type PatternStateValueTypes =
     Maybe<Patterns> |
-    Maybe<PatternId>
+    Maybe<PatternId> |
+    boolean
 
 type ImmutablePatternState = TypedMap<PatternStateValueTypes, PatternState>
 
 enum PatternStateActionType {
     SET_PATTERNS = 'SET_PATTERNS',
     SET_PATTERN_ID = 'SET_PATTERN_ID',
+    SET_DEBUG_MODE = 'SET_DEBUG_MODE',
 }
 
 interface SetPatterns {
@@ -32,9 +36,15 @@ interface SetPatternId {
     type: PatternStateActionType.SET_PATTERN_ID,
 }
 
+interface SetDebugMode {
+    data: boolean,
+    type: PatternStateActionType.SET_DEBUG_MODE,
+}
+
 type PatternStateAction =
     SetPatterns |
-    SetPatternId
+    SetPatternId |
+    SetDebugMode
 
 export {
     PatternStateKeys,

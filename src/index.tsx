@@ -3,13 +3,14 @@ import { setupPerformer } from '@musical-patterns/performer'
 import * as React from 'react'
 import { render } from 'react-dom'
 import { Provider } from 'react-redux'
+import { BatchAction, batchActions } from 'redux-batched-actions'
 // tslint:disable-next-line:no-import-side-effect no-reaching-imports
 import '../styles/main.scss'
 import { onPerformerUpdate } from './performer'
 import { ActionType, App, store } from './root'
 
-const setupPlayroom: (patterns: Patterns) => Promise<HTMLDivElement> =
-    async (patterns: Patterns): Promise<HTMLDivElement> => {
+const setupPlayroom: (patterns: Patterns, debugMode?: boolean) => Promise<HTMLDivElement> =
+    async (patterns: Patterns, debugMode: boolean = false): Promise<HTMLDivElement> => {
         const root: HTMLDivElement = document.createElement('div')
 
         store.subscribe(() => render(<Provider store={store}><App/></Provider>, root))
@@ -18,7 +19,11 @@ const setupPlayroom: (patterns: Patterns) => Promise<HTMLDivElement> =
 
         await setupPerformer({ onUpdate: onPerformerUpdate })
 
-        store.dispatch({ type: ActionType.SET_PATTERNS, data: patterns })
+        const batchedAction: BatchAction = batchActions([
+            { type: ActionType.SET_PATTERNS, data: patterns },
+            { type: ActionType.SET_DEBUG_MODE, data: debugMode },
+        ])
+        store.dispatch(batchedAction)
 
         return root
     }

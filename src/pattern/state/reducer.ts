@@ -13,6 +13,10 @@ const patternReducer: Reducer<ImmutablePatternState, PatternStateAction> =
                 return patternsState.set(PatternStateKeys.PATTERN_ID, action.data)
             }
 
+            case PatternStateActionType.SET_DEBUG_MODE: {
+                return patternsState.set(PatternStateKeys.DEBUG_MODE, action.data)
+            }
+
             default: {
                 return patternsState
             }

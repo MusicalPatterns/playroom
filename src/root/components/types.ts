@@ -8,6 +8,7 @@ interface AppProps {
 }
 
 interface PatternListenerPropsFromState {
+    debugMode: boolean,
     submittedPatternSpec: StringifiedPatternSpec,
 }
 
