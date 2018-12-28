@@ -1,5 +1,5 @@
 import { Patterns } from '@musical-patterns/pattern'
-import { setupPerformer } from '@musical-patterns/performer'
+import { enableImmersiveAudio, setupPerformer } from '@musical-patterns/performer'
 import * as React from 'react'
 import { render } from 'react-dom'
 import { Provider } from 'react-redux'
@@ -18,10 +18,12 @@ const setupPlayroom: (patterns: Patterns, debugMode?: boolean) => Promise<HTMLDi
         render(<Provider store={store}><App/></Provider>, root)
 
         await setupPerformer({ onUpdate: onPerformerUpdate })
+        const enterImmersiveAudioHandler: VoidFunction = enableImmersiveAudio()
 
         const batchedAction: BatchAction = batchActions([
             { type: ActionType.SET_PATTERNS, data: patterns },
             { type: ActionType.SET_DEBUG_MODE, data: debugMode },
+            { type: ActionType.SET_ENTER_IMMERSIVE_AUDIO_HANDLER, data: enterImmersiveAudioHandler },
         ])
         store.dispatch(batchedAction)
 

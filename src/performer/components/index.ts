@@ -1,5 +1,7 @@
-import Performer from './Performer'
+import EnterImmersiveAudioButton from './EnterImmersiveAudioButton'
+import TimeControls from './TimeControls'
 
 export {
-    Performer,
+    TimeControls,
+    EnterImmersiveAudioButton,
 }

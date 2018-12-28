@@ -5,7 +5,8 @@ export {
     PerformerStateAction,
 } from './state'
 export {
-    Performer,
+    TimeControls,
+    EnterImmersiveAudioButton,
 } from './components'
 export {
     onPerformerUpdate,

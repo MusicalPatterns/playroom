@@ -3,7 +3,7 @@ import * as React from 'react'
 import { connect } from 'react-redux'
 import { ImmutablePatternState, PatternList, PatternStateKeys } from '../../pattern'
 import { PatternSpecInputs } from '../../patternSpec'
-import { Performer } from '../../performer'
+import { EnterImmersiveAudioButton, TimeControls } from '../../performer'
 import { ImmutableRootState, RootStateKeys } from '../state'
 import PatternListener from './PatternListener'
 import { AppProps } from './types'
@@ -41,8 +41,10 @@ const App: React.ComponentType<AppProps> =
                     <div>{patternDescription(patternId, patterns)}</div>
                     <PatternSpecInputs/>
                     <PatternListener {...{ patternId, patterns }}/>
-                    <Performer/>
+                    <TimeControls/>
                 </div>}
+
+                <EnterImmersiveAudioButton/>
             </div>
         )
     }

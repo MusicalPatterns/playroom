@@ -12,8 +12,13 @@ interface TimeControlsPropsFromDispatch {
 interface TimeControlsProps extends TimeControlsPropsFromState, TimeControlsPropsFromDispatch {
 }
 
+interface EnterImmersiveAudioButtonProps {
+    enterImmersiveAudioHandler: VoidFunction,
+}
+
 export {
     TimeControlsProps,
     TimeControlsPropsFromDispatch,
     TimeControlsPropsFromState,
+    EnterImmersiveAudioButtonProps,
 }
