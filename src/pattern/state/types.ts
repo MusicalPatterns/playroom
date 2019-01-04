@@ -1,4 +1,4 @@
-import { PatternId, Patterns } from '@musical-patterns/pattern'
+import { PatternId, Patterns } from '@musical-patterns/registry'
 import { Maybe, TypedMap } from '@musical-patterns/utilities'
 
 enum PatternStateKeys {

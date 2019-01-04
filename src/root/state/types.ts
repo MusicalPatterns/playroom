@@ -1,5 +1,4 @@
-import { PatternId, Patterns } from '@musical-patterns/pattern'
-import { Maybe, TypedMap } from '@musical-patterns/utilities'
+import { TypedMap } from '@musical-patterns/utilities'
 import { ImmutablePatternState, PatternStateAction } from '../../pattern'
 import { ImmutablePatternSpecState, PatternSpecStateAction } from '../../patternSpec'
 import { ImmutablePerformerState, PerformerStateAction } from '../../performer'

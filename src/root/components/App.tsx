@@ -1,4 +1,4 @@
-import { Pattern, PatternId, PatternMetadata, Patterns } from '@musical-patterns/pattern'
+import { Pattern, PatternId, PatternMetadata, Patterns } from '@musical-patterns/registry'
 import * as React from 'react'
 import { connect } from 'react-redux'
 import { ImmutablePatternState, PatternList, PatternStateKeys } from '../../pattern'

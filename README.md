@@ -8,7 +8,7 @@ the web-based UI for enjoying and experimenting with the patterns
 
 ```
 import { setupPlayroom } from '@musical-patterns/playroom'
-import { Patterns } from '@musical-patterns/pattern'
+import { Patterns } from '@musical-patterns/registry'
 
 const patterns: Patterns = {
 	// your patterns here

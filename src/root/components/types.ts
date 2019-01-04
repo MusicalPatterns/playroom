@@ -1,4 +1,4 @@
-import { PatternId, Patterns } from '@musical-patterns/pattern'
+import { PatternId, Patterns } from '@musical-patterns/registry'
 import { Maybe } from '@musical-patterns/utilities'
 import { StringifiedPatternSpec } from '../../patternSpec'
 

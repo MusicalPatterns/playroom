@@ -1,4 +1,4 @@
-import { Patterns } from '@musical-patterns/pattern'
+import { Patterns } from '@musical-patterns/registry'
 import { PatternChangeEventExtractor } from '../events'
 
 interface PatternListPropsFromParent {
