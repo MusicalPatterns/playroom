@@ -1,4 +1,4 @@
-import { PatternSpec } from '@musical-patterns/registry'
+import { PatternSpec } from '@musical-patterns/pattern'
 import { StringifiedPatternSpec } from '../types'
 
 const displayedPatternSpecDefaults: StringifiedPatternSpec = {}

@@ -1,4 +1,4 @@
-import { PatternSpec } from '@musical-patterns/registry'
+import { PatternSpec } from '@musical-patterns/pattern'
 import { BatchAction, batchActions } from 'redux-batched-actions'
 import {
     buildInitialDisabledButtons,
