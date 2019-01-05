@@ -17,8 +17,7 @@ interface PatternListenerPropsFromParent {
     patterns: Patterns,
 }
 
-interface PatternListenerProps extends PatternListenerPropsFromState, PatternListenerPropsFromParent {
-}
+interface PatternListenerProps extends PatternListenerPropsFromState, PatternListenerPropsFromParent {}
 
 export {
     AppProps,

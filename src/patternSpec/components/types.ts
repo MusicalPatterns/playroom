@@ -12,8 +12,7 @@ interface PatternSpecInputsPropsFromDispatch {
     handlePatternSpecKeyboardSubmit: PatternSpecEventExtractor,
 }
 
-interface PatternSpecInputsProps extends PatternSpecInputsPropsFromState, PatternSpecInputsPropsFromDispatch {
-}
+interface PatternSpecInputsProps extends PatternSpecInputsPropsFromState, PatternSpecInputsPropsFromDispatch {}
 
 interface PatternSpecInputProps {
     patternSpecInputsProps: PatternSpecInputsProps,

@@ -9,8 +9,7 @@ interface TimeControlsPropsFromDispatch {
     onClick: () => void,
 }
 
-interface TimeControlsProps extends TimeControlsPropsFromState, TimeControlsPropsFromDispatch {
-}
+interface TimeControlsProps extends TimeControlsPropsFromState, TimeControlsPropsFromDispatch {}
 
 interface EnterImmersiveAudioButtonProps {
     enterImmersiveAudioHandler: VoidFunction,

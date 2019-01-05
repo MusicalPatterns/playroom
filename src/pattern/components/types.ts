@@ -9,8 +9,7 @@ interface PatternListPropsFromDispatch {
     handlePatternChangeEvent: PatternChangeEventExtractor,
 }
 
-interface PatternListProps extends PatternListPropsFromParent, PatternListPropsFromDispatch {
-}
+interface PatternListProps extends PatternListPropsFromParent, PatternListPropsFromDispatch {}
 
 export {
     PatternListPropsFromDispatch,
