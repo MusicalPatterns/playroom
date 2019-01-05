@@ -2,13 +2,13 @@ import { findElement } from 'puppet-strings'
 import { testGlobals } from '../../setup'
 import {
     elementValue,
+    modify,
     PATTERN_SPEC_HEADER,
     selectTestPattern,
-    TEST_PATTERN_SPEC_PROPERTY_ONE_VALUE,
-    TEST_PATTERN_SPEC_PROPERTY_TWO_VALUE,
     TEST_PATTERN_SPEC_PROPERTY_ONE_KEY,
+    TEST_PATTERN_SPEC_PROPERTY_ONE_VALUE,
     TEST_PATTERN_SPEC_PROPERTY_TWO_KEY,
-    modify,
+    TEST_PATTERN_SPEC_PROPERTY_TWO_VALUE,
 } from '../../support'
 
 describe('pattern list', () => {

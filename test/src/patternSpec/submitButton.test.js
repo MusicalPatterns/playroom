@@ -1,3 +1,5 @@
+import { clickElement, fillInElement, findElement } from 'puppet-strings'
+import { testGlobals } from '../../setup'
 import {
     elementExists,
     press,
@@ -5,8 +7,6 @@ import {
     TEST_MODIFICATION,
     TEST_PATTERN_SPEC_PROPERTY_ONE_KEY,
 } from '../../support'
-import { clickElement, fillInElement, findElement } from 'puppet-strings'
-import { testGlobals } from '../../setup'
 
 describe('submit button', () => {
     beforeEach(async done => {

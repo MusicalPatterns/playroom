@@ -1,3 +1,5 @@
+import { clickElement, fillInElement, findElement } from 'puppet-strings'
+import { testGlobals } from '../../setup'
 import {
     elementInnerText,
     INVALID_TEST_MODIFICATION,
@@ -5,8 +7,6 @@ import {
     TEST_PATTERN_SPEC_PROPERTY_ONE_KEY,
     TEST_PATTERN_SPEC_PROPERTY_ONE_VALUE,
 } from '../../support'
-import { clickElement, fillInElement, findElement } from 'puppet-strings'
-import { testGlobals } from '../../setup'
 
 describe('invalid inputs', () => {
     let input

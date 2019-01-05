@@ -22,14 +22,14 @@ module.exports = {
         ],
     },
     resolve: {
-        extensions: ['.ts', '.tsx', '.js', '.json'],
+        extensions: [ '.ts', '.tsx', '.js', '.json' ],
     },
     plugins: [
-        new CopyWebpackPlugin([{
+        new CopyWebpackPlugin([ {
             from: 'node_modules/@musical-patterns/performer/dist/*.wav',
             to: path.join(__dirname, './dist'),
             flatten: true,
-        }]),
+        } ]),
     ],
     output: {
         library: 'playroom',
