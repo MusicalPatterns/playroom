@@ -1,0 +1,5 @@
+Makefile.patternPlayroom:
+	@:
+
+start:
+	@musical-patterns-playroom

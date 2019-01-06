@@ -8,7 +8,7 @@ const testGlobals = {}
 beforeAll(async done => {
     await startServer()
     testGlobals.browser = await openChrome({ headless: false })
-    testGlobals.tab = await openTab(testGlobals.browser, APP_URL)
+    testGlobals.tab = await openTab(testGlobals.browser, APP_URL, { timeout: 60000 })
     testGlobals.page = testGlobals.tab.puppeteer.page
     done()
 }, 60000)

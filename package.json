@@ -1,6 +1,6 @@
 {
   "name": "@musical-patterns/playroom",
-  "version": "1.0.64",
+  "version": "1.0.65",
   "main": "dist/main.js",
   "typings": "dist/index.d.ts",
   "repository": {
@@ -8,7 +8,10 @@
     "url": "https://github.com/MusicalPatterns/playroom.git"
   },
   "bin": {
-    "musical-patterns-playroom": "bin/index.sh"
+    "musical-patterns-playroom": "bin/playroom.sh"
+  },
+  "scripts": {
+    "postinstall": "bash ./bin/postinstall.sh"
   },
   "license": "MIT",
   "dependencies": {

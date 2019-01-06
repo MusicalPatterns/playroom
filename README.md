@@ -4,6 +4,13 @@
 
 The web-based UI for enjoying and experimenting with the patterns.
 
+Similar to the `@musical-patterns/cli` repo, upon installation, copies playroom files into the pattern repo.
+
+These files are:
+
+- Makefile.patternPlayroom
+- webpack.config.js
+
 ## usage
 
 ```
