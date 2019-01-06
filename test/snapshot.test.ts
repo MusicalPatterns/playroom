@@ -7,11 +7,11 @@ describe('snapshot', () => {
     const { pattern, snapshot } = require('../src/indexForTest')
 
     if (!pattern) {
-        const repoName: string = path.dirname(__dirname)
+        const pathArray: string[] = path.dirname(__dirname)
             .split(path.sep)
-            .pop() || ''
+        const submoduleCategory: string = pathArray[ pathArray.length - 2 ]
 
-        if (!([ 'cli', 'utilities', 'performer', 'compiler', 'pattern', 'registry', 'playroom', 'lab' ].includes(repoName))) {
+        if (submoduleCategory === 'patterns') {
             it('includes this test', () => {
                 fail(`A pattern was not found. Ensure you are exporting the pattern from your 'src/indexForTest.ts'.`)
             })
@@ -19,7 +19,6 @@ describe('snapshot', () => {
     }
     else {
         it('stays locked down', async (done: DoneFn) => {
-
             // tslint:disable-next-line:no-unsafe-any
             expect(JSON.stringify(await compilePattern(pattern), undefined, 2))
                 .toEqual(JSON.stringify(snapshot, undefined, 2))
