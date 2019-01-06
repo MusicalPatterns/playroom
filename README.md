@@ -10,6 +10,7 @@ These files are:
 
 - Makefile.patternPlayroom
 - webpack.config.js
+- src/playroom.ts
 
 ## usage
 
