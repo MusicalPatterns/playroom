@@ -1,5 +1,5 @@
-Makefile.patternPlayroom:
+Makefile.playroom:
 	@:
 
 start:
-	@musical-patterns-playroom --config node_modules/@musical-patterns/playroom/webpack.pattern.js
+	@musical-patterns-playroom
