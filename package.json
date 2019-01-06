@@ -1,11 +1,14 @@
 {
   "name": "@musical-patterns/playroom",
-  "version": "1.0.56",
+  "version": "1.0.57",
   "main": "dist/main.js",
   "typings": "dist/index.d.ts",
   "repository": {
     "type": "git",
     "url": "https://github.com/MusicalPatterns/playroom.git"
+  },
+  "bin": {
+    "musical-patterns-playroom": "bin/index.sh"
   },
   "license": "MIT",
   "devDependencies": {
