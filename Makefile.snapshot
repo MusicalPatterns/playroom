@@ -1,5 +1,0 @@
-Makefile.snapshot:
-	@:
-
-snapshot:
-	@bash node_modules/.bin/mps
