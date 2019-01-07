@@ -1,6 +1,6 @@
 {
   "name": "@musical-patterns/playroom",
-  "version": "1.0.78",
+  "version": "1.0.79",
   "main": "dist/main.js",
   "typings": "dist/index.d.ts",
   "repository": {
@@ -8,7 +8,7 @@
     "url": "https://github.com/MusicalPatterns/playroom.git"
   },
   "bin": {
-    "musical-patterns-playroom": "bin/playroom.sh"
+    "musical-patterns-playroom": "bin/index.sh"
   },
   "scripts": {
     "postinstall": "bash ./bin/postinstall.sh"
@@ -29,13 +29,13 @@
     "webpack-merge": "^4.2.1"
   },
   "devDependencies": {
-    "@musical-patterns/cli": "^1.0.241",
-    "@musical-patterns/compiler": "^1.0.59",
-    "@musical-patterns/pattern": "^1.0.71",
-    "@musical-patterns/pattern-playroom-test": "^1.0.38",
-    "@musical-patterns/performer": "^1.0.103",
-    "@musical-patterns/registry": "^1.0.13",
-    "@musical-patterns/utilities": "^1.0.135",
+    "@musical-patterns/cli": "^1.0.242",
+    "@musical-patterns/compiler": "^1.0.60",
+    "@musical-patterns/pattern": "^1.0.72",
+    "@musical-patterns/pattern-playroom-test": "^1.0.39",
+    "@musical-patterns/performer": "^1.0.104",
+    "@musical-patterns/registry": "^1.0.14",
+    "@musical-patterns/utilities": "^1.0.136",
     "@types/react": "^16.7.18",
     "@types/react-dom": "^16.0.9",
     "@types/react-redux": "^6.0.12",

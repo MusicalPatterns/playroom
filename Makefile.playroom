@@ -2,7 +2,7 @@ Makefile.playroom:
 	@:
 
 build:
-	@musical-patterns build "webpack --config webpack.prod.js"
+	@musical-patterns-cli build "webpack --config webpack.prod.js"
 
 build_dev:
 	@webpack --config webpack.dev.js

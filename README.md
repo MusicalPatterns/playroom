@@ -31,3 +31,11 @@ document.body.appendChild(playroom)
 ```
 
 The second optional argument to `setupPlayroom` is debug mode, a boolean defaulting to false, which will log compiled thread specs to the developer console.
+
+## cli
+
+```
+musical-patterns-playroom
+```
+
+This will start up a `webpack-dev-server` with the current patterns running in it.
