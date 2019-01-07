@@ -4,8 +4,6 @@ import * as React from 'react'
 import { render } from 'react-dom'
 import { Provider } from 'react-redux'
 import { BatchAction, batchActions } from 'redux-batched-actions'
-// tslint:disable-next-line:no-import-side-effect no-reaching-imports
-import '../styles/main.scss'
 import { onPerformerUpdate } from './performer'
 import { ActionType, App, store } from './root'
 

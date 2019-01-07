@@ -1,3 +1,7 @@
+input {
+  border: inset;
+}
+
 input.invalid {
   box-shadow: 0 0 1.5px 1px red;
   -webkit-box-shadow: 0 0 1.5px 1px red;
@@ -8,22 +12,6 @@ input.unsubmitted {
   box-shadow: 0 0 1.5px 1px yellow;
   -webkit-box-shadow: 0 0 1.5px 1px yellow;
   -webkit-appearance: none;
-}
-
-input {
-  border: inset;
-}
-
-ul {
-  list-style: none;
-}
-
-li:hover {
-  cursor: pointer;
-}
-
-.secret-submitted {
-  opacity: 0;
 }
 
 #pattern-spec-inputs div {
@@ -38,7 +26,6 @@ li:hover {
   }
 }
 
-#play, #pause, #enable-immersive-audio {
-  cursor: pointer;
-  padding: 10px;
+.secret-submitted {
+  opacity: 0;
 }

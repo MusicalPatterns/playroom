@@ -11,3 +11,6 @@ export {
 export {
     onPerformerUpdate,
 } from './events'
+
+// tslint:disable-next-line:no-import-side-effect
+import './styles.scss'
