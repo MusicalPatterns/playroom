@@ -1,6 +1,6 @@
 import { pattern } from '@musical-patterns/pattern-playroom-test'
 
-const TEST_PATTERN_ID = pattern.id
+const TEST_PATTERN_ID = pattern.patternId
 const APP_URL = 'http://localhost:8081'
 const TEST_PATTERN_SPEC_PROPERTY_ONE_KEY = 'patternDurationScalar'
 const TEST_PATTERN_SPEC_PROPERTY_TWO_KEY = 'patternPitchScalar'
