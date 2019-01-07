@@ -34,12 +34,9 @@ const PatternList: (PatternListProps: PatternListProps) => JSX.Element =
             .unshift(<option key='-1' value='' hidden disabled>please select a pattern</option>)
 
         return (
-            <div>
-                <h3>pattern selection</h3>
-                <ul>
-                    {options}
-                </ul>
-            </div>
+            <ul>
+                {options}
+            </ul>
         )
     }
 
