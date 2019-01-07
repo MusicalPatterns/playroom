@@ -12,6 +12,8 @@ const mapStateToProps: (state: ImmutableRootState) => EnterImmersiveAudioButtonP
 
 const EnterImmersiveAudioButton: (props: EnterImmersiveAudioButtonProps) => JSX.Element =
     ({ enterImmersiveAudioHandler }: EnterImmersiveAudioButtonProps): JSX.Element =>
-        <div {...{ onClick: enterImmersiveAudioHandler, id: 'enable-immersive-audio' }}>enable immersive audio</div>
+        <button {...{ onClick: enterImmersiveAudioHandler, id: 'enable-immersive-audio' }}>
+            enable immersive audio
+        </button>
 
 export default connect(mapStateToProps)(EnterImmersiveAudioButton)
