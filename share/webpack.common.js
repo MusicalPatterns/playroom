@@ -1,6 +1,7 @@
 const path = require('path')
 const CopyWebpackPlugin = require('copy-webpack-plugin')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
+const FaviconsWebpackPlugin = require('favicons-webpack-plugin')
 
 module.exports = {
     entry: './src/playroom.ts',
@@ -33,5 +34,6 @@ module.exports = {
             to: path.join(__dirname, './dist'),
             flatten: true,
         } ]),
+        new FaviconsWebpackPlugin('./node_modules/@musical-patterns/playroom/assets/favicon.png'),
     ],
 }
