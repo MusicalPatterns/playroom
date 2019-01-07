@@ -9,3 +9,6 @@ build_dev:
 
 start_test:
 	@webpack-dev-server --config webpack.test.js --color
+
+start_qa:
+	@webpack-dev-server --config webpack.qa.js --color

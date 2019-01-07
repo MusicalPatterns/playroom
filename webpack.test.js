@@ -15,7 +15,7 @@ module.exports = merge(common, {
     },
     plugins: [
         new HtmlWebpackPlugin({
-            title: 'Musical Patterns - Testing Playroom',
+            title: 'Musical Patterns - Playroom Test',
         }),
     ],
 })
