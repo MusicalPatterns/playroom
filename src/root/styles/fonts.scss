@@ -31,7 +31,8 @@
  * © 2018 MyFonts Inc
 */
 
-@import url("//hello.myfonts.net/count/38613A");
+@import url('//hello.myfonts.net/count/38613A');
+@import url('https://fonts.googleapis.com/css?family=Nobile');
 
 @font-face {
   font-family: 'LeipzigerAnt-Dem';
@@ -72,28 +73,28 @@
 
 .leipziger-antiqua-bold {
   font-weight: normal;
-  font-family: LeipzigerAnt-Dem, serif;
+  font-family: 'LeipzigerAnt-Dem', serif;
 }
 
 .leipziger-antiqua-regular {
   font-weight: normal;
-  font-family: LeipzigerAnt-Reg, serif;
+  font-family: 'LeipzigerAnt-Reg', serif;
 }
 
 .leipziger-antiqua-small-caps {
   font-weight: normal;
-  font-family: LeipzigerAntCapReg, serif;
+  font-family: 'LeipzigerAntCapReg', serif;
 }
 
 .leipziger-antiqua-italics {
   font-weight: normal;
-  font-family: LeipzigerAnt-Ita, serif;
+  font-family: 'LeipzigerAnt-Ita', serif;
 }
 
 * {
-  @extend .leipziger-antiqua-regular;
+  font-family: 'Nobile', sans-serif;
 }
 
-h1 {
+h1, h2, h3 {
   @extend .leipziger-antiqua-bold;
 }
