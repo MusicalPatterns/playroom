@@ -3,11 +3,17 @@ import { Time, TypedMap } from '@musical-patterns/utilities'
 enum PerformerStateActionType {
     SET_TIME = 'SET_TIME',
     TOGGLE_PAUSED = 'TOGGLE_PAUSED',
+    SET_PAUSED = 'SET_PAUSED',
     SET_ENTER_IMMERSIVE_AUDIO_HANDLER = 'SET_ENTER_IMMERSIVE_AUDIO_HANDLER',
 }
 
-interface SetPaused {
+interface TogglePaused {
     type: PerformerStateActionType.TOGGLE_PAUSED,
+}
+
+interface SetPaused {
+    data: boolean,
+    type: PerformerStateActionType.SET_PAUSED,
 }
 
 interface SetTime {
@@ -21,6 +27,7 @@ interface SetEnterImmersiveAudioHandler {
 }
 
 type PerformerStateAction =
+    TogglePaused |
     SetPaused |
     SetTime |
     SetEnterImmersiveAudioHandler

@@ -114,5 +114,23 @@ describe('time controls', () => {
 
             done()
         })
+
+        it('resets the time to the beginning and stops playing when you press stop', async done => {
+            await sleep(LONG_ENOUGH_FOR_TIME_TO_PASS)
+
+            const stop = await findElement(testGlobals.tab, '#stop')
+            await clickElement(stop)
+
+            await sleep(LONG_ENOUGH_FOR_TIME_TO_HAVE_BEEN_RESET)
+            let timeAfterResetting = await currentTime()
+            expect(timeAfterResetting)
+                .toBe(0)
+
+            await sleep(LONG_ENOUGH_FOR_TIME_TO_PASS)
+            expect(await currentTime())
+                .toBe(0)
+
+            done()
+        })
     })
 })

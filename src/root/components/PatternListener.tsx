@@ -1,8 +1,8 @@
 import { compilePattern } from '@musical-patterns/compiler'
 import { PatternSpec } from '@musical-patterns/pattern'
-import { perform, ThreadSpec } from '@musical-patterns/performer'
+import { perform, setTime, ThreadSpec } from '@musical-patterns/performer'
 import { Pattern } from '@musical-patterns/registry'
-import { doAsync, logMessageToConsole } from '@musical-patterns/utilities'
+import { BEGINNING, doAsync, logMessageToConsole } from '@musical-patterns/utilities'
 import * as React from 'react'
 import { connect } from 'react-redux'
 import { PatternStateKeys } from '../../pattern'
@@ -28,6 +28,7 @@ const PatternListener: (patternListenerProps: PatternListenerProps) => JSX.Eleme
                 logMessageToConsole('thread specs: ', threadSpecs)
             }
 
+            setTime(BEGINNING)
             await perform(threadSpecs)
         })
 

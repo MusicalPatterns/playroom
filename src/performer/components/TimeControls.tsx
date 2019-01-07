@@ -1,10 +1,11 @@
 import { faPause, faPlay, faStop, IconDefinition } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { togglePaused } from '@musical-patterns/performer'
+import { stop, togglePaused } from '@musical-patterns/performer'
 import { from } from '@musical-patterns/utilities'
 import * as React from 'react'
 import { connect } from 'react-redux'
 import { Dispatch } from 'redux'
+import { BatchAction, batchActions } from 'redux-batched-actions'
 import { ActionType, ImmutableRootState, RootStateKeys } from '../../root'
 import { ImmutablePerformerState, PerformerStateKeys } from '../state'
 import { TimeControlsProps, TimeControlsPropsFromDispatch, TimeControlsPropsFromState } from './types'
@@ -21,21 +22,29 @@ const mapStateToProps: (state: ImmutableRootState) => TimeControlsPropsFromState
 
 const mapDispatchToProps: (dispatch: Dispatch) => TimeControlsPropsFromDispatch =
     (dispatch: Dispatch): TimeControlsPropsFromDispatch => ({
-        onClick: (): void => {
+        stopHandler: async (): Promise<void> => {
+            stop()
+            const batchedAction: BatchAction = batchActions([
+                { type: ActionType.SET_PAUSED, data: true },
+                { type: ActionType.SET_TIME, data: 0 },
+            ])
+            dispatch(batchedAction)
+        },
+        togglePausedHandler: (): void => {
             dispatch({ type: ActionType.TOGGLE_PAUSED })
             togglePaused()
         },
     })
 
 const TimeControls: (timeControlsProps: TimeControlsProps) => JSX.Element =
-    ({ onClick, paused, time }: TimeControlsProps): JSX.Element => {
+    ({ togglePausedHandler, stopHandler, paused, time }: TimeControlsProps): JSX.Element => {
         const controlId: string = paused ? 'play' : 'pause'
         const icon: IconDefinition = paused ? faPlay : faPause
 
         return (
             <div {...{ id: 'time-controls' }}>
-                <div><FontAwesomeIcon {...{ icon: faStop }}/></div>
-                <div {...{ id: controlId, onClick }}><FontAwesomeIcon {...{ icon }}/></div>
+                <div {...{ id: 'stop', onClick: stopHandler }}><FontAwesomeIcon {...{ icon: faStop }}/></div>
+                <div {...{ id: controlId, onClick: togglePausedHandler }}><FontAwesomeIcon {...{ icon }}/></div>
                 <div>
                     <div {...{ id: 'timer' }}>{Math.round(from.Time(time))}</div>
                 </div>

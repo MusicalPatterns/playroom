@@ -14,6 +14,9 @@ const performerReducer: Reducer<ImmutablePerformerState, PerformerStateAction> =
                     !performerState.get(PerformerStateKeys.PAUSED),
                 )
             }
+            case PerformerStateActionType.SET_PAUSED: {
+                return performerState.set(PerformerStateKeys.PAUSED, action.data)
+            }
             case PerformerStateActionType.SET_TIME: {
                 return performerState.set(PerformerStateKeys.TIME, action.data)
             }

@@ -6,7 +6,8 @@ interface TimeControlsPropsFromState {
 }
 
 interface TimeControlsPropsFromDispatch {
-    onClick: () => void,
+    stopHandler: VoidFunction,
+    togglePausedHandler: VoidFunction,
 }
 
 interface TimeControlsProps extends TimeControlsPropsFromState, TimeControlsPropsFromDispatch {}
