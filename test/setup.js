@@ -14,10 +14,14 @@ beforeAll(async done => {
 }, 60000)
 
 afterAll(async done => {
+    console.log('hi travis i am in after all')
     await closeBrowser(testGlobals.browser)
+    console.log('hi travis i closed the brower')
     await stopServer()
+    console.log('hi travis i stopped the server')
     done()
-})
+    console.log('hi travis i am past the done')
+}, 60000)
 
 export {
     testGlobals,
