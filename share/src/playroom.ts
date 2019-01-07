@@ -1,10 +1,19 @@
 import { setupPlayroom } from '@musical-patterns/playroom'
 import { buildPatterns, Patterns } from '@musical-patterns/registry'
-import { pattern } from './patterns'
+import { pattern, patterns } from './patterns'
 
-const patterns: Patterns = buildPatterns({
-    [ pattern.patternId ]: pattern,
-})
+let patternsForPlayroom: Patterns
 
-setupPlayroom(patterns)
+if (!patterns) {
+    patternsForPlayroom = buildPatterns({
+        [ pattern.patternId ]: pattern,
+    })
+}
+else {
+    patternsForPlayroom = patterns
+}
+
+const debugMode: boolean = process.env.NODE_ENV === 'development'
+
+setupPlayroom(patterns, debugMode)
     .then((playroom: HTMLDivElement) => document.body.appendChild(playroom))

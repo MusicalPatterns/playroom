@@ -6,3 +6,6 @@ set +e
 
 share_file_with_positioning_struggles Makefile.playroom
 share_file_with_positioning_struggles src/playroom.ts
+share_file_with_positioning_struggles webpack.common.js
+share_file_with_positioning_struggles webpack.lab.js
+share_file_with_positioning_struggles webpack.pattern.js
