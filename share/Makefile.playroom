@@ -3,6 +3,3 @@ Makefile.playroom:
 
 start:
 	@musical-patterns-playroom
-
-build:
-	@musical-patterns build "webpack --config webpack.lab.js"
