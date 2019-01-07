@@ -25,8 +25,8 @@ const PatternList: (PatternListProps: PatternListProps) => JSX.Element =
         const options: JSX.Element[] = Object.entries(patterns)
             .map(([ patternId, pattern ]: [ string, Pattern ], key: number): JSX.Element =>
                 (
-                    <li {...{ key, onClick, id: patternId }} >
-                        <div>{pattern.metadata.formattedName}</div>
+                    <li {...{ key }} >
+                        <div {...{ onClick, id: patternId }}>{pattern.metadata.formattedName}</div>
                         <div>{pattern.metadata.musicalIdeaIllustrated}</div>
                     </li>
                 ))
