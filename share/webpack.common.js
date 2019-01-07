@@ -34,6 +34,6 @@ module.exports = {
             to: path.join(__dirname, './dist'),
             flatten: true,
         } ]),
-        new FaviconsWebpackPlugin('./assets/favicon.png'),
+        new FaviconsWebpackPlugin('node_modules/@musical-patterns/playroom/assets/favicon.png'),
     ],
 }
