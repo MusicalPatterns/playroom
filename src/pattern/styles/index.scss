@@ -4,7 +4,17 @@ ul {
 }
 
 li {
-  text-decoration: underline;
+  padding-bottom: 10px;
+
+  div:first-child {
+    font-size: 14px;
+    font-weight: bold;
+  }
+
+  div {
+    pointer-events: none;
+    font-size: 12px;
+  }
 
   &:hover {
     cursor: pointer;
