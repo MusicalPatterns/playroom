@@ -1,9 +1,15 @@
-#play, #pause, #enable-immersive-audio {
-  cursor: pointer;
-  padding: 10px;
-}
-
 #no-pattern-message {
   margin: 20px 0;
   font-size: 12px;
+}
+
+#time-controls {
+  display: flex;
+  width: 20%;
+
+  &> div {
+    flex: 1;
+    cursor: pointer;
+    padding: 10px;
+  }
 }
