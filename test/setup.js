@@ -15,7 +15,9 @@ beforeAll(async done => {
 
 afterAll(async done => {
     await closeBrowser(testGlobals.browser)
+    console.log('about to stop server')
     await stopServer()
+    console.log('stopped server')
     done()
 }, 60000)
 
