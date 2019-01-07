@@ -1,7 +1,7 @@
 import { closeBrowser, openChrome, openTab } from 'puppet-strings'
 import { APP_URL, startServer, stopServer } from './support'
 
-jasmine.DEFAULT_TIMEOUT_INTERVAL = 10000
+jasmine.DEFAULT_TIMEOUT_INTERVAL = 60000
 
 const testGlobals = {}
 
