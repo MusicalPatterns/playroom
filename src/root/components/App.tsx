@@ -47,7 +47,7 @@ const App: React.ComponentType<AppProps> =
                             <div>{patternDescription(patternId, patterns)}</div>
                             <PatternListener {...{ patternId, patterns }}/>
                         </div> :
-                        <span>To begin, select a pattern from the list on the left.</span>
+                        <div id='no-pattern-message'>To begin, select a pattern from the list on the left.</div>
                     }
                 </div>
 
