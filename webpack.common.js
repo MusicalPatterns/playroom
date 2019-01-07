@@ -19,10 +19,14 @@ module.exports = {
                     'sass-loader',
                 ],
             },
+            {
+                test: /\.(eot|woff|woff2|ttf|svg)/,
+                loader: 'file-loader',
+            },
         ],
     },
     resolve: {
-        extensions: [ '.ts', '.tsx', '.js', '.json' ],
+        extensions: [ '.ts', '.tsx', '.js', '.json', '.scss' ],
     },
     plugins: [
         new CopyWebpackPlugin([ {
