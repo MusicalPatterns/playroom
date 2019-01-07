@@ -8,5 +8,7 @@ module.exports = merge(common, {
     devServer: {
         disableHostCheck: true,
         contentBase: path.join(__dirname, './dist'),
+        open: true,
+        port: 8080,
     },
 })
