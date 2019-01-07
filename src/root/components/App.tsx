@@ -34,18 +34,26 @@ const App: React.ComponentType<AppProps> =
         }
 
         return (
-            <div>
-                <h1>Musical Patterns</h1>
-                <PatternList {...{ patterns }}/>
+            <div id='container'>
+                <div id='left'>
+                    <h1>Musical Patterns</h1>
+                    <PatternList {...{ patterns }}/>
+                </div>
 
-                {patternId && <div>
-                    <div>{patternDescription(patternId, patterns)}</div>
-                    <PatternSpecInputs/>
-                    <PatternListener {...{ patternId, patterns }}/>
-                    <TimeControls/>
-                </div>}
+                <div id='center'>
+                    {patternId && <div>
+                        <TimeControls/>
+                        <EnterImmersiveAudioButton/>
+                        <div>{patternDescription(patternId, patterns)}</div>
+                        <PatternListener {...{ patternId, patterns }}/>
+                    </div>}
+                </div>
 
-                <EnterImmersiveAudioButton/>
+                <div id='right'>
+                    {patternId && <div>
+                        <PatternSpecInputs/>
+                    </div>}
+                </div>
             </div>
         )
     }

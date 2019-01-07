@@ -1,0 +1,36 @@
+body {
+  margin: 0;
+}
+
+#root, body, html {
+  height: 100%;
+}
+
+#container {
+  display: grid;
+  grid-template-columns: 4181fr 6765fr 2584fr;
+  grid-template-rows: 1fr;
+  height: 100%;
+}
+
+#left {
+  grid-column-start: 1;
+  grid-column-end: 1;
+  background-color: #eeeeee;
+}
+
+#center {
+  grid-column-start: 2;
+  grid-column-end: 2;
+  background-color: #ffffff;
+}
+
+#right {
+  grid-column-start: 3;
+  grid-column-end: 3;
+  background-color: #dddddd;
+}
+
+#left, #center, #right {
+  padding: 20px;
+}

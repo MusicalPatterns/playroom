@@ -10,6 +10,7 @@ import { ActionType, App, store } from './root'
 const setupPlayroom: (patterns: Patterns, debugMode?: boolean) => Promise<HTMLDivElement> =
     async (patterns: Patterns, debugMode: boolean = false): Promise<HTMLDivElement> => {
         const root: HTMLDivElement = document.createElement('div')
+        root.id = 'root'
 
         store.subscribe(() => render(<Provider store={store}><App/></Provider>, root))
 
