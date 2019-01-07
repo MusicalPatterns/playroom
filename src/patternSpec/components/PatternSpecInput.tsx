@@ -60,11 +60,11 @@ const PatternSpecInput: (patternSpecInputProps: PatternSpecInputProps) => JSX.El
         const className: string = invalid ? 'invalid' : unsubmitted ? 'unsubmitted' : 'submitted'
 
         return (
-            <div>
-                <span>{presentPatternSpecKey(patternSpecKey)}</span>
+            <div {...{ className: 'pattern-spec-input' }}>
+                <span {...{ className: 'secret-submitted', id: patternSpecKey }}>{submittedPatternSpecValue}</span>
+                <div>{presentPatternSpecKey(patternSpecKey)}</div>
                 <input {...{ onChange, onKeyPress, value: patternSpecValue, className, onBlur, id: patternSpecKey }}/>
                 <button {...{ onClick, disabled, value: patternSpecValue, id: patternSpecKey }}>submit</button>
-                <span {...{ className: 'secret-submitted', id: patternSpecKey }}>{submittedPatternSpecValue}</span>
             </div>
         )
     }

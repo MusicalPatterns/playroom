@@ -14,18 +14,29 @@ input.unsubmitted {
   -webkit-appearance: none;
 }
 
-#pattern-spec-inputs div {
-  span {
-    width: 150px;
-    display: inline-block;
-    margin-right: 10px;
+.pattern-spec-input {
+  display: flex;
+
+  div, input, button {
+    margin-left: 10px;
+  }
+
+  div {
+    flex: 6765;
+    text-align: right;
   }
 
   input {
-    margin-right: 10px;
+    flex: 4181;
+    min-width: 0;
+  }
+
+  button {
+    flex: 2584;
   }
 }
 
 .secret-submitted {
   opacity: 0;
+  width: 5px;
 }

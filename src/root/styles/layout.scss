@@ -11,6 +11,7 @@
 }
 
 #left {
+  text-align: left;
   grid-column-start: 1;
   grid-column-end: 1;
   background-color: #dddddd;
@@ -23,6 +24,7 @@
 }
 
 #right {
+  text-align: right;
   grid-column-start: 3;
   grid-column-end: 3;
   background-color: #eeeeee;
