@@ -36,7 +36,12 @@ const App: React.ComponentType<AppProps> =
         return (
             <div id='container'>
                 <div id='left'>
-                    <h1>Musical Patterns</h1>
+                    <div id='title'>
+                        <div id='title-contents'>
+                            <h1>Musical Patterns</h1>
+                            <div>Douglas Blumeyer</div>
+                        </div>
+                    </div>
                     <PatternList {...{ patterns }}/>
                 </div>
 
