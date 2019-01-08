@@ -3,6 +3,7 @@ import { Time } from '@musical-patterns/utilities'
 interface TimeControlsPropsFromState {
     paused: boolean,
     time: Time,
+    totalDuration: Time,
 }
 
 interface TimeControlsPropsFromDispatch {

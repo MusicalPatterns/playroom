@@ -17,6 +17,7 @@ const mapStateToProps: (state: ImmutableRootState) => TimeControlsPropsFromState
         return {
             paused: performerState.get(PerformerStateKeys.PAUSED),
             time: performerState.get(PerformerStateKeys.TIME),
+            totalDuration: performerState.get(PerformerStateKeys.TOTAL_DURATION),
         }
     }
 
@@ -37,17 +38,28 @@ const mapDispatchToProps: (dispatch: Dispatch) => TimeControlsPropsFromDispatch 
     })
 
 const TimeControls: (timeControlsProps: TimeControlsProps) => JSX.Element =
-    ({ togglePausedHandler, stopHandler, paused, time }: TimeControlsProps): JSX.Element => {
+    ({ togglePausedHandler, stopHandler, paused, time, totalDuration }: TimeControlsProps): JSX.Element => {
         const controlId: string = paused ? 'play' : 'pause'
         const icon: IconDefinition = paused ? faPlay : faPause
 
+        const totalTimeForDisplay: number = Math.round(from.Time(totalDuration))
+        const timeForDisplay: number = Math.round(from.Time(time)) % totalTimeForDisplay || 0
+
         return (
-            <div {...{ id: 'time-controls' }}>
-                <div {...{ id: 'stop', onClick: stopHandler }}><FontAwesomeIcon {...{ icon: faStop }}/></div>
-                <div {...{ id: controlId, onClick: togglePausedHandler }}><FontAwesomeIcon {...{ icon }}/></div>
-                <div>
-                    <div {...{ id: 'timer' }}>{Math.round(from.Time(time))}</div>
+            <div>
+                <div {...{ id: 'time-controls' }}>
+                    <div {...{ id: 'stop', onClick: stopHandler }}><FontAwesomeIcon {...{ icon: faStop }}/></div>
+                    <div {...{ id: controlId, onClick: togglePausedHandler }}><FontAwesomeIcon {...{ icon }}/></div>
+                    <input {...{
+                        max: totalTimeForDisplay,
+                        min: 0,
+                        readOnly: true,
+                        type: 'range',
+                        value: timeForDisplay,
+                    }}/>
                 </div>
+                <div {...{ id: 'secret-timer' }}>{timeForDisplay}</div>
+                <div {...{ id: 'secret-total-duration' }}>{totalTimeForDisplay}</div>
             </div>
         )
     }

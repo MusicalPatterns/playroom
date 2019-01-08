@@ -14,12 +14,12 @@ const LONG_ENOUGH_FOR_TIME_TO_PASS = 100
 const LONG_ENOUGH_FOR_TIME_TO_HAVE_BEEN_RESET = 100
 const A_BIT_LONGER = 1000
 
-const currentTime = async () => parseInt(await elementInnerText('#timer'))
+const currentTime = async () => parseInt(await elementInnerText('#secret-timer'))
 
 describe('time controls', () => {
     it('do not appear if you have not yet selected a pattern', async done => {
         await navigate(testGlobals.tab, APP_URL)
-        expect(await elementExists('#timer'))
+        expect(await elementExists('#secret-timer'))
             .toBeFalsy()
 
         done()
@@ -129,6 +129,20 @@ describe('time controls', () => {
             await sleep(LONG_ENOUGH_FOR_TIME_TO_PASS)
             expect(await currentTime())
                 .toBe(0)
+
+            done()
+        })
+
+        it('wraps time back around to the beginning', async done => {
+            const initialTime = await currentTime()
+
+            const totalDuration = parseInt(await elementInnerText('#secret-total-duration'))
+            await sleep(totalDuration - LONG_ENOUGH_FOR_TIME_TO_PASS)
+            const beforeWrappingTime = await currentTime()
+            expect(beforeWrappingTime).toBeGreaterThan(initialTime)
+
+            await sleep(LONG_ENOUGH_FOR_TIME_TO_PASS + LONG_ENOUGH_FOR_TIME_TO_PASS)
+            expect(await currentTime()).toBeLessThan(beforeWrappingTime)
 
             done()
         })

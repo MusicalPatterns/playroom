@@ -4,6 +4,7 @@ import { ImmutablePerformerState, PerformerStateKeys } from './types'
 const initialPerformerState: ImmutablePerformerState = typedMap({
     [ PerformerStateKeys.PAUSED ]: true,
     [ PerformerStateKeys.TIME ]: BEGINNING,
+    [ PerformerStateKeys.TOTAL_DURATION ]: BEGINNING,
     [ PerformerStateKeys.ENTER_IMMERSIVE_AUDIO_HANDLER ]: noop,
 })
 

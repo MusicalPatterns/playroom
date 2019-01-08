@@ -1,0 +1,18 @@
+input[type=range] {
+  -webkit-appearance: none;
+  border: none;
+  outline: none;
+}
+
+input[type=range]::-webkit-slider-runnable-track, input[type=range]::-moz-range-track, input[type=range]::-ms-track {
+  background: #dddddd;
+  height: 2px;
+}
+
+input[type=range]::-webkit-slider-thumb, input[type=range]::-moz-range-thumb, input[type=range]::-ms-thumb {
+  -webkit-appearance: none;
+  height: 16px;
+  width: 2px;
+  background: #333333;
+  margin-top: -7px;
+}
