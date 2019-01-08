@@ -57,6 +57,9 @@ const App: React.ComponentType<AppProps> =
                 </div>
 
                 <div id='right'>
+                    <div id='title-spacer'>
+                    </div>
+
                     {patternId && <div>
                         <PatternSpecInputs/>
                     </div>}
