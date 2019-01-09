@@ -1,5 +1,5 @@
 import { pattern } from '@musical-patterns/pattern-playroom-test'
-import { pattern as otherPattern } from '@musical-patterns/pattern-performer-qa'
+import { otherPattern } from './otherPattern'
 
 const APP_URL = 'http://localhost:8081'
 
