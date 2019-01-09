@@ -1,23 +1,28 @@
 import { closeBrowser, openChrome, openTab } from 'puppet-strings'
 import { APP_URL, startServer, stopServer } from './support'
 
-jasmine.DEFAULT_TIMEOUT_INTERVAL = 10000
+const INTEGRATION_TEST_TIMEOUT = 60000
+jasmine.DEFAULT_TIMEOUT_INTERVAL = INTEGRATION_TEST_TIMEOUT
 
 const testGlobals = {}
 
 beforeAll(async done => {
     await startServer()
     testGlobals.browser = await openChrome()
-    testGlobals.tab = await openTab(testGlobals.browser, APP_URL)
+    testGlobals.tab = await openTab(testGlobals.browser, APP_URL, { timeout: INTEGRATION_TEST_TIMEOUT })
+    if (!testGlobals.tab) {
+        fail('Could not open the tab in time. Please increase your Puppeteer timeout.')
+        done()
+    }
     testGlobals.page = testGlobals.tab.puppeteer.page
     done()
-}, 60000)
+}, INTEGRATION_TEST_TIMEOUT)
 
 afterAll(async done => {
     await closeBrowser(testGlobals.browser)
     await stopServer()
     done()
-}, 60000)
+}, INTEGRATION_TEST_TIMEOUT)
 
 export {
     testGlobals,
