@@ -1,6 +1,7 @@
 import { PropsFromApp } from '../../root'
 import { PatternSpecInputEventExtractor } from '../events'
 import { ImmutablePatternSpecState } from '../state'
+import { StringifiedPatternSpec } from '../types'
 
 interface PatternSpecInputsPropsFromState {
     patternSpecState: ImmutablePatternSpecState,
@@ -20,11 +21,15 @@ interface PatternSpecInputProps {
     patternSpecKey: string,
 }
 
+interface PatternSpecPropsFromState {
+    submittedPatternSpecState: StringifiedPatternSpec,
+}
+
 interface PatternSpecPropsFromDispatch {
     resetHandler: (parameters: PropsFromApp) => void,
 }
 
-interface PatternSpecProps extends PatternSpecPropsFromDispatch, PropsFromApp {}
+interface PatternSpecProps extends PatternSpecPropsFromState, PatternSpecPropsFromDispatch, PropsFromApp {}
 
 enum PatternSpecInputStates {
     INVALID = 'invalid',
@@ -37,6 +42,7 @@ export {
     PatternSpecInputsProps,
     PatternSpecInputsPropsFromDispatch,
     PatternSpecInputsPropsFromState,
+    PatternSpecPropsFromState,
     PatternSpecPropsFromDispatch,
     PatternSpecProps,
     PatternSpecInputStates,

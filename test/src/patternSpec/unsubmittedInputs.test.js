@@ -4,20 +4,14 @@ import {
     loseFocus,
     PATTERN_SPEC_PROPERTY_ONE_KEY,
     press,
-    reset,
-    selectTestPattern,
+    standardTestReset,
     TEST_MODIFICATION,
 } from '../../support'
 import { PatternSpecInputStates } from '../../../src/indexForTest'
 
 describe('unsubmitted inputs', () => {
-    beforeAll(async done => {
-        await selectTestPattern()
-        done()
-    })
-
     beforeEach(async done => {
-        await reset()
+        await standardTestReset()
         done()
     })
 

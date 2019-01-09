@@ -1,24 +1,18 @@
 import { clickElement, fillInElement, findElement } from 'puppet-strings'
+import { PatternSpecInputStates } from '../../../src/indexForTest'
 import { testGlobals } from '../../setup'
 import {
     elementInnerText,
     INVALID_TEST_MODIFICATION,
     PATTERN_SPEC_PROPERTY_ONE_KEY,
-    reset,
-    selectTestPattern,
+    standardTestReset,
     TEST_PATTERN_SPEC_PROPERTY_ONE_VALUE,
 } from '../../support'
-import { PatternSpecInputStates } from '../../../src/indexForTest'
 
 describe('invalid inputs', () => {
-    beforeAll(async done => {
-        await selectTestPattern()
-        done()
-    })
-
     let input
     beforeEach(async done => {
-        await reset()
+        await standardTestReset()
 
         input = await findElement(testGlobals.tab, `input#${PATTERN_SPEC_PROPERTY_ONE_KEY}`)
         await fillInElement(input, INVALID_TEST_MODIFICATION)

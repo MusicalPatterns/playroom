@@ -2,11 +2,10 @@ import { clickElement, findElement } from 'puppet-strings'
 import { testGlobals } from '../../setup'
 import { OTHER_TEST_PATTERN_ID } from '../constants'
 import { TEST_PATTERN_ID } from './../constants'
-import { reset } from './reset'
 
-const selectTestPatternAndReset = async () => {
+const standardTestReset = async () => {
+    await selectOtherTestPattern()
     await selectTestPattern()
-    await reset()
 }
 
 const selectTestPattern = async () => {
@@ -21,6 +20,6 @@ const selectOtherTestPattern = async () => {
 
 export {
     selectTestPattern,
-    selectTestPatternAndReset,
+    standardTestReset,
     selectOtherTestPattern,
 }

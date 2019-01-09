@@ -10,7 +10,7 @@ import {
     PATTERN_SPEC_HEADER,
     PATTERN_SPEC_PROPERTY_ONE_KEY,
     PATTERN_SPEC_PROPERTY_TWO_KEY,
-    reset,
+    standardTestReset,
     selectOtherTestPattern,
     selectTestPattern,
     TEST_MODIFICATION,
@@ -21,8 +21,7 @@ import { PatternSpecInputStates } from '../../../src/indexForTest'
 
 describe('pattern list', () => {
     beforeEach(async done => {
-        await selectTestPattern()
-        await reset()
+        await standardTestReset()
         done()
     })
 

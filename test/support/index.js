@@ -2,8 +2,6 @@ export {
     sleep,
     selectOtherTestPattern,
     selectTestPattern,
-    selectTestPatternAndReset,
-    selectTestPatternAndReset,
     elementExists,
     elementInnerText,
     elementValue,
@@ -11,6 +9,7 @@ export {
     modify,
     reset,
     loseFocus,
+    standardTestReset,
 } from './control'
 export { startServer, stopServer } from './infrastructure'
 

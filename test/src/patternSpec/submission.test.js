@@ -5,17 +5,15 @@ import {
     modify,
     PATTERN_SPEC_PROPERTY_ONE_KEY,
     PATTERN_SPEC_PROPERTY_TWO_KEY,
-    selectTestPattern,
+    standardTestReset,
     TEST_MODIFICATION,
     TEST_PATTERN_SPEC_PROPERTY_ONE_VALUE,
     TEST_PATTERN_SPEC_PROPERTY_TWO_VALUE,
 } from '../../support'
-import { reset } from '../../support/control'
 
 describe('submitting pattern spec changes', () => {
     beforeEach(async done => {
-        await selectTestPattern()
-        await reset()
+        await standardTestReset()
         done()
     })
 
@@ -61,8 +59,7 @@ describe('submitting pattern spec changes', () => {
         expect(await elementInnerText(`.secret-submitted#${PATTERN_SPEC_PROPERTY_ONE_KEY}`))
             .toBe(`${TEST_PATTERN_SPEC_PROPERTY_ONE_VALUE}`)
         expect(await elementInnerText(`.secret-submitted#${PATTERN_SPEC_PROPERTY_TWO_KEY}`))
-        // this doesn't make any sense why this suddenly started happening backwards in modify as a result of adding the reset test...
-            .toBe(`${TEST_MODIFICATION}${TEST_PATTERN_SPEC_PROPERTY_TWO_VALUE}`)
+            .toBe(`${TEST_PATTERN_SPEC_PROPERTY_TWO_VALUE}${TEST_MODIFICATION}`)
 
         done()
     })

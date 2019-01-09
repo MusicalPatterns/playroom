@@ -6,9 +6,8 @@ import {
     elementInnerText,
     modify,
     PATTERN_SPEC_PROPERTY_ONE_KEY,
-    reset,
-    selectTestPattern,
     sleep,
+    standardTestReset,
 } from '../../support'
 import { selectOtherTestPattern } from '../../support/control/selectTestPattern'
 
@@ -28,8 +27,7 @@ describe('time controls', () => {
     })
 
     beforeEach(async done => {
-        await selectTestPattern()
-        await reset()
+        await standardTestReset()
         done()
     })
 

@@ -2,8 +2,7 @@ export { sleep } from './sleep'
 export {
     selectTestPattern,
     selectOtherTestPattern,
-    selectTestPatternAndReset,
-    selectTestPatternAndReset,
+    standardTestReset,
 }from './selectTestPattern'
 export { elementExists, elementInnerText, elementValue } from './checkElement'
 export { press } from './keyboard'

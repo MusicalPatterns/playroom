@@ -4,15 +4,13 @@ import {
     elementExists,
     PATTERN_SPEC_PROPERTY_ONE_KEY,
     press,
-    reset,
-    selectTestPattern,
+    standardTestReset,
     TEST_MODIFICATION,
 } from '../../support'
 
 describe('submit button', () => {
     beforeEach(async done => {
-        await selectTestPattern()
-        await reset()
+        await standardTestReset()
         done()
     })
 
