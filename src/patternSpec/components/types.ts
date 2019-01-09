@@ -26,6 +26,12 @@ interface PatternSpecPropsFromDispatch {
 
 interface PatternSpecProps extends PatternSpecPropsFromDispatch, PropsFromApp {}
 
+enum PatternSpecInputStates {
+    INVALID = 'invalid',
+    UNSUBMITTED = 'unsubmitted',
+    VALID_AND_SUBMITTED = 'valid-and-submitted',
+}
+
 export {
     PatternSpecInputProps,
     PatternSpecInputsProps,
@@ -33,4 +39,5 @@ export {
     PatternSpecInputsPropsFromState,
     PatternSpecPropsFromDispatch,
     PatternSpecProps,
+    PatternSpecInputStates,
 }

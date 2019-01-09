@@ -7,7 +7,7 @@ import {
 } from '../events'
 import { PatternSpecStateKeys } from '../state'
 import { StringifiedPatternSpec, StringifiedPatternSpecInputStates } from '../types'
-import { PatternSpecInputProps } from './types'
+import { PatternSpecInputProps, PatternSpecInputStates } from './types'
 
 const presentPatternSpecKey: (patternSpecKey: string) => string =
     (patternSpecKey: string): string =>
@@ -61,7 +61,9 @@ const PatternSpecInput: (patternSpecInputProps: PatternSpecInputProps) => JSX.El
             patternSpecEventParameters,
         })
 
-        const className: string = invalid ? 'invalid' : unsubmitted ? 'unsubmitted' : 'submitted'
+        const className: string = invalid ?
+            PatternSpecInputStates.INVALID :
+            unsubmitted ? PatternSpecInputStates.UNSUBMITTED : PatternSpecInputStates.VALID_AND_SUBMITTED
 
         return (
             <div {...{ className: 'pattern-spec-input' }}>

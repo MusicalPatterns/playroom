@@ -49,7 +49,7 @@ describe('reset button', () => {
 
         await reset()
 
-        await findElement(testGlobals.tab, `input#${PATTERN_SPEC_PROPERTY_ONE_KEY}.submitted`)
+        await findElement(testGlobals.tab, `input#${PATTERN_SPEC_PROPERTY_ONE_KEY}.valid-and-submitted`)
 
         done()
     })
@@ -63,7 +63,7 @@ describe('reset button', () => {
 
         await reset()
 
-        await findElement(testGlobals.tab, `input#${PATTERN_SPEC_PROPERTY_ONE_KEY}.submitted`)
+        await findElement(testGlobals.tab, `input#${PATTERN_SPEC_PROPERTY_ONE_KEY}.valid-and-submitted`)
 
         done()
     })

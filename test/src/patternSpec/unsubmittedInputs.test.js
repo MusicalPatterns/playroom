@@ -39,7 +39,7 @@ describe('unsubmitted inputs', () => {
 
         await loseFocus()
 
-        await findElement(testGlobals.tab, `input#${PATTERN_SPEC_PROPERTY_ONE_KEY}.submitted`)
+        await findElement(testGlobals.tab, `input#${PATTERN_SPEC_PROPERTY_ONE_KEY}.valid-and-submitted`)
 
         done()
     })

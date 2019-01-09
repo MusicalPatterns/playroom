@@ -56,7 +56,7 @@ describe('pattern list', () => {
 
                 await selectOtherTestPattern()
 
-                await findElement(testGlobals.tab, `input#${PATTERN_SPEC_PROPERTY_ONE_KEY}.submitted`)
+                await findElement(testGlobals.tab, `input#${PATTERN_SPEC_PROPERTY_ONE_KEY}.valid-and-submitted`)
 
                 done()
             })
@@ -70,7 +70,7 @@ describe('pattern list', () => {
 
                 await selectOtherTestPattern()
 
-                await findElement(testGlobals.tab, `input#${PATTERN_SPEC_PROPERTY_ONE_KEY}.submitted`)
+                await findElement(testGlobals.tab, `input#${PATTERN_SPEC_PROPERTY_ONE_KEY}.valid-and-submitted`)
 
                 done()
             })
