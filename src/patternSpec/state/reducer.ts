@@ -14,6 +14,9 @@ const patternSpecReducer: Reducer<ImmutablePatternSpecState, PatternSpecStateAct
         action: PatternSpecStateAction,
     ): ImmutablePatternSpecState => {
         switch (action.type) {
+            case PatternSpecStateActionType.SET_DEFAULT_PATTERN_SPEC: {
+                return patternSpecState.set(PatternSpecStateKeys.DEFAULT_PATTERN_SPEC, action.data)
+            }
             case PatternSpecStateActionType.SET_DISABLED_PATTERN_SPEC_BUTTONS: {
                 return patternSpecState.set(PatternSpecStateKeys.DISABLED_PATTERN_SPEC_BUTTONS, action.data)
             }

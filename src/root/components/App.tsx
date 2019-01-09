@@ -61,7 +61,7 @@ const App: React.ComponentType<AppProps> =
                     </div>
 
                     {patternId && <div>
-                        <PatternSpec {...{ patternId, patterns }}/>
+                        <PatternSpec/>
                     </div>}
                 </div>
             </div>

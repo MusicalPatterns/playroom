@@ -2,33 +2,36 @@ import { deepEqual } from '@musical-patterns/utilities'
 import * as React from 'react'
 import { connect } from 'react-redux'
 import { Dispatch } from 'redux'
-import { ImmutableRootState, PropsFromApp, RootStateKeys } from '../../root'
-import { handleReset, stringifyPatternSpec } from '../events'
+import { ImmutableRootState, RootStateKeys } from '../../root'
+import { handleReset } from '../events'
 import { PatternSpecStateKeys } from '../state'
+import { StringifiedPatternSpec } from '../types'
 import PatternSpecInputs from './PatternSpecInputs'
 import { PatternSpecProps, PatternSpecPropsFromDispatch, PatternSpecPropsFromState } from './types'
 
 const mapStateToProps: (state: ImmutableRootState) => PatternSpecPropsFromState =
     (state: ImmutableRootState): PatternSpecPropsFromState => ({
-        submittedPatternSpecState: state.get(RootStateKeys.PATTERN_SPEC)
+        defaultPatternSpec: state.get(RootStateKeys.PATTERN_SPEC)
+            .get(PatternSpecStateKeys.DEFAULT_PATTERN_SPEC),
+        submittedPatternSpec: state.get(RootStateKeys.PATTERN_SPEC)
             .get(PatternSpecStateKeys.SUBMITTED_PATTERN_SPEC),
     })
 
 const mapDispatchToProps: (dispatch: Dispatch) => PatternSpecPropsFromDispatch =
     (dispatch: Dispatch): PatternSpecPropsFromDispatch => ({
-        resetHandler: ({ patternId, patterns }: PropsFromApp): void => {
-            handleReset({ dispatch, patternId, patterns })
+        resetHandler: (defaultPatternSpec: StringifiedPatternSpec): void => {
+            handleReset({ dispatch, defaultPatternSpec })
         },
     })
 
 const PatternSpec: (patternSpecProps: PatternSpecProps) => JSX.Element =
     (props: PatternSpecProps): JSX.Element => {
-        const { submittedPatternSpecState, resetHandler, patternId, patterns } = props
+        const { defaultPatternSpec, submittedPatternSpec, resetHandler } = props
         const onClick: VoidFunction = (): void => {
-            resetHandler({ patternId, patterns })
+            resetHandler(defaultPatternSpec)
         }
 
-        const disabled: boolean = deepEqual(submittedPatternSpecState, stringifyPatternSpec(patterns[ patternId ].spec))
+        const disabled: boolean = deepEqual(submittedPatternSpec, defaultPatternSpec)
 
         return (
             <div>

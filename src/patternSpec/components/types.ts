@@ -22,14 +22,15 @@ interface PatternSpecInputProps {
 }
 
 interface PatternSpecPropsFromState {
-    submittedPatternSpecState: StringifiedPatternSpec,
+    defaultPatternSpec: StringifiedPatternSpec,
+    submittedPatternSpec: StringifiedPatternSpec,
 }
 
 interface PatternSpecPropsFromDispatch {
-    resetHandler: (parameters: PropsFromApp) => void,
+    resetHandler: (defaultPatternSpecState: StringifiedPatternSpec) => void,
 }
 
-interface PatternSpecProps extends PatternSpecPropsFromState, PatternSpecPropsFromDispatch, PropsFromApp {}
+interface PatternSpecProps extends PatternSpecPropsFromState, PatternSpecPropsFromDispatch {}
 
 enum PatternSpecInputStates {
     INVALID = 'invalid',

@@ -2,19 +2,17 @@ import { PatternSpec } from '@musical-patterns/pattern'
 import { Action, ActionType } from '../../root'
 import { StringifiedPatternSpec, StringifiedPatternSpecInputStates } from '../types'
 import { buildInitialStringifiedPatternSpecInputStates } from './buildInitialStringifiedPatternSpecInputStates'
-import { stringifyPatternSpec } from './stringifyPatternSpec'
 
-const buildResetActions: (patternSpec: PatternSpec) => Action[] =
-    (patternSpec: PatternSpec): Action[] => {
-        const stringifiedPatternSpec: StringifiedPatternSpec = stringifyPatternSpec(patternSpec)
+const buildResetActions: (defaultPatternSpec: StringifiedPatternSpec) => Action[] =
+    (defaultPatternSpec: PatternSpec): Action[] => {
         const initialAllDisabledButtonsPatternSpecState: StringifiedPatternSpecInputStates =
-            buildInitialStringifiedPatternSpecInputStates(patternSpec, true)
+            buildInitialStringifiedPatternSpecInputStates(defaultPatternSpec, true)
         const initialNoInvalidOrUnsubmittedInputState: StringifiedPatternSpecInputStates =
-            buildInitialStringifiedPatternSpecInputStates(patternSpec, false)
+            buildInitialStringifiedPatternSpecInputStates(defaultPatternSpec, false)
 
         return [
-            { type: ActionType.SET_SUBMITTED_PATTERN_SPEC, data: stringifiedPatternSpec },
-            { type: ActionType.SET_DISPLAYED_PATTERN_SPEC, data: stringifiedPatternSpec },
+            { type: ActionType.SET_SUBMITTED_PATTERN_SPEC, data: defaultPatternSpec },
+            { type: ActionType.SET_DISPLAYED_PATTERN_SPEC, data: defaultPatternSpec },
             { type: ActionType.SET_DISABLED_PATTERN_SPEC_BUTTONS, data: initialAllDisabledButtonsPatternSpecState },
             { type: ActionType.SET_INVALID_PATTERN_SPEC_INPUTS, data: initialNoInvalidOrUnsubmittedInputState },
             { type: ActionType.SET_UNSUBMITTED_PATTERN_SPEC_INPUTS, data: initialNoInvalidOrUnsubmittedInputState },
