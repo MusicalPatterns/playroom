@@ -15,7 +15,7 @@ export {
     StringifiedPatternSpecInputStates,
 } from './types'
 export {
-    PatternSpecInputs,
+    PatternSpec,
 } from './components'
 
 // tslint:disable-next-line:no-import-side-effect

@@ -31,7 +31,7 @@ enum PatternSpecStateActionType {
     SET_UNSUBMITTED_PATTERN_SPEC_INPUTS = 'SET_UNSUBMITTED_PATTERN_SPEC_INPUTS',
 }
 
-interface SetDisabledSongSpecButtons {
+interface SetDisabledPatternSpecButtons {
     data: StringifiedPatternSpecInputStates,
     type: PatternSpecStateActionType.SET_DISABLED_PATTERN_SPEC_BUTTONS,
 }
@@ -57,7 +57,7 @@ interface SetUnsubmittedPatternSpecInputs {
 }
 
 type PatternSpecStateAction =
-    SetDisabledSongSpecButtons |
+    SetDisabledPatternSpecButtons |
     SetSubmittedPatternSpec |
     SetDisplayedPatternSpec |
     SetInvalidPatternSpecInputs |

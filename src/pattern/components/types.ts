@@ -1,15 +1,11 @@
-import { Patterns } from '@musical-patterns/registry'
+import { PropsFromApp } from '../../root'
 import { PatternChangeEventExtractor } from '../events'
-
-interface PatternListPropsFromParent {
-    patterns: Patterns,
-}
 
 interface PatternListPropsFromDispatch {
     handlePatternChangeEvent: PatternChangeEventExtractor,
 }
 
-interface PatternListProps extends PatternListPropsFromParent, PatternListPropsFromDispatch {}
+interface PatternListProps extends PatternListPropsFromDispatch, PropsFromApp {}
 
 export {
     PatternListPropsFromDispatch,

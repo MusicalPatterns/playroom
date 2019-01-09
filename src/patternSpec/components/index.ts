@@ -1,5 +1,5 @@
-import PatternSpecInputs from './PatternSpecInputs'
+import PatternSpec from './PatternSpec'
 
 export {
-    PatternSpecInputs,
+    PatternSpec,
 }

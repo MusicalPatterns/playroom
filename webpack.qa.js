@@ -5,7 +5,7 @@ const merge = require('webpack-merge')
 const path = require('path')
 
 module.exports = merge(common, {
-    entry: './test/qa/entryForQa.js',
+    entry: './test/support/infrastructure/entryForTest.js',
     devServer: {
         disableHostCheck: true,
         port: 8083,

@@ -1,13 +1,13 @@
 import { PatternMetadata } from '@musical-patterns/pattern'
-import { Pattern, PatternId, Patterns } from '@musical-patterns/registry'
+import { Pattern } from '@musical-patterns/registry'
 import * as React from 'react'
 import { connect } from 'react-redux'
 import { ImmutablePatternState, PatternList, PatternStateKeys } from '../../pattern'
-import { PatternSpecInputs } from '../../patternSpec'
+import { PatternSpec } from '../../patternSpec'
 import { EnterImmersiveAudioButton, TimeControls } from '../../performer'
 import { ImmutableRootState, RootStateKeys } from '../state'
 import PatternListener from './PatternListener'
-import { AppProps } from './types'
+import { AppProps, PropsFromApp } from './types'
 
 const mapStateToProps: (state: ImmutableRootState) => AppProps =
     (state: ImmutableRootState): AppProps => {
@@ -19,8 +19,8 @@ const mapStateToProps: (state: ImmutableRootState) => AppProps =
         }
     }
 
-const patternDescription: (patternId: PatternId, patterns: Patterns) => string =
-    (patternId: PatternId, patterns: Patterns): string => {
+const patternDescription: (propsFromApp: PropsFromApp) => string =
+    ({ patternId, patterns }: PropsFromApp): string => {
         const pattern: Pattern = patterns[ patternId ]
         const patternMetadata: PatternMetadata = pattern.metadata
 
@@ -42,14 +42,14 @@ const App: React.ComponentType<AppProps> =
                             <div>Douglas Blumeyer</div>
                         </div>
                     </div>
-                    <PatternList {...{ patterns }}/>
+                    <PatternList {...{ patternId, patterns }}/>
                 </div>
 
                 <div id='center'>
                     {patternId ? <div>
                             <TimeControls/>
                             <EnterImmersiveAudioButton/>
-                            <div>{patternDescription(patternId, patterns)}</div>
+                            <div>{patternDescription({ patternId, patterns })}</div>
                             <PatternListener {...{ patternId, patterns }}/>
                         </div> :
                         <div id='no-pattern-message'>To begin, select a pattern from the list on the left.</div>
@@ -61,7 +61,7 @@ const App: React.ComponentType<AppProps> =
                     </div>
 
                     {patternId && <div>
-                        <PatternSpecInputs/>
+                        <PatternSpec {...{ patternId, patterns }}/>
                     </div>}
                 </div>
             </div>

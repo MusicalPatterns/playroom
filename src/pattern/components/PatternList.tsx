@@ -7,27 +7,32 @@ import { PatternListProps, PatternListPropsFromDispatch } from './types'
 
 const mapDispatchToProps: (dispatch: Dispatch) => PatternListPropsFromDispatch =
     (dispatch: Dispatch): PatternListPropsFromDispatch => ({
-        handlePatternChangeEvent: async ({ event, patterns }: PatternChangeEventExtractorParameters): Promise<void> => {
+        handlePatternChangeEvent: async (parameters: PatternChangeEventExtractorParameters): Promise<void> => {
+            const { event, patterns, patternId } = parameters
             const target: HTMLLIElement = event.target as HTMLLIElement
-            const patternId: PatternId = target.id as PatternId
+            const newPatternId: PatternId = target.id as PatternId
 
-            await handlePatternChange({ dispatch, patternId, patterns })
+            if (newPatternId === patternId) {
+                return
+            }
+
+            await handlePatternChange({ dispatch, patternId: newPatternId, patterns })
         },
     })
 
 const PatternList: (PatternListProps: PatternListProps) => JSX.Element =
-    ({ handlePatternChangeEvent, patterns }: PatternListProps): JSX.Element => {
+    ({ handlePatternChangeEvent, patternId, patterns }: PatternListProps): JSX.Element => {
         const onClick: (event: React.SyntheticEvent) => void =
             (event: React.SyntheticEvent): void => {
-                handlePatternChangeEvent({ event, patterns })
+                handlePatternChangeEvent({ event, patterns, patternId })
             }
 
         const options: JSX.Element[] = Object.entries(patterns)
-            .map(([ patternId, pattern ]: [ string, Pattern ], key: number): JSX.Element =>
+            .map(([ listedPatternId, listedPattern ]: [ string, Pattern ], key: number): JSX.Element =>
                 (
                     <li {...{ key }} >
-                        <div {...{ onClick, id: patternId }}>{pattern.metadata.formattedName}</div>
-                        <div>{pattern.metadata.musicalIdeaIllustrated}</div>
+                        <div {...{ onClick, id: listedPatternId }}>{listedPattern.metadata.formattedName}</div>
+                        <div>{listedPattern.metadata.musicalIdeaIllustrated}</div>
                     </li>
                 ))
 

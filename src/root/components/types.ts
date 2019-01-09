@@ -7,6 +7,11 @@ interface AppProps {
     patterns: Maybe<Patterns>,
 }
 
+interface PropsFromApp {
+    patternId: PatternId,
+    patterns: Patterns,
+}
+
 interface PatternListenerPropsFromState {
     debugMode: boolean,
     submittedPatternSpec: StringifiedPatternSpec,
@@ -16,18 +21,12 @@ interface PatternListenerPropsFromDispatch {
     setTotalDuration: (totalDuration: Time) => void,
 }
 
-interface PatternListenerPropsFromParent {
-    patternId: PatternId,
-    patterns: Patterns,
-}
-
-interface PatternListenerProps extends PatternListenerPropsFromState,
-    PatternListenerPropsFromDispatch,
-    PatternListenerPropsFromParent {}
+interface PatternListenerProps extends PatternListenerPropsFromState, PatternListenerPropsFromDispatch, PropsFromApp {}
 
 export {
     AppProps,
     PatternListenerPropsFromState,
     PatternListenerPropsFromDispatch,
     PatternListenerProps,
+    PropsFromApp,
 }

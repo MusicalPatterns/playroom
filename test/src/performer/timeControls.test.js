@@ -5,10 +5,13 @@ import {
     elementExists,
     elementInnerText,
     modify,
+    PATTERN_SPEC_PROPERTY_ONE_KEY,
+    reset,
     selectTestPattern,
+    selectTestPatternAndReset,
     sleep,
-    TEST_PATTERN_SPEC_PROPERTY_ONE_KEY,
 } from '../../support'
+import { selectOtherTestPattern } from '../../support/control/selectTestPattern'
 
 const LONG_ENOUGH_FOR_TIME_TO_PASS = 100
 const LONG_ENOUGH_FOR_TIME_TO_HAVE_BEEN_RESET = 100
@@ -27,6 +30,7 @@ describe('time controls', () => {
 
     beforeEach(async done => {
         await selectTestPattern()
+        await reset()
         done()
     })
 
@@ -82,7 +86,7 @@ describe('time controls', () => {
             await sleep(A_BIT_LONGER)
             const plentyOfTime = await currentTime()
 
-            await selectTestPattern()
+            await selectOtherTestPattern()
 
             await sleep(LONG_ENOUGH_FOR_TIME_TO_HAVE_BEEN_RESET)
             let timeAfterResetting = await currentTime()
@@ -100,7 +104,7 @@ describe('time controls', () => {
             await sleep(A_BIT_LONGER)
             const plentyOfTime = await currentTime()
 
-            const input = await findElement(testGlobals.tab, `input#${TEST_PATTERN_SPEC_PROPERTY_ONE_KEY}`)
+            const input = await findElement(testGlobals.tab, `input#${PATTERN_SPEC_PROPERTY_ONE_KEY}`)
             await modify(input)
 
             await sleep(LONG_ENOUGH_FOR_TIME_TO_HAVE_BEEN_RESET)

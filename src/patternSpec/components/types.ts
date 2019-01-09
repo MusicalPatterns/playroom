@@ -1,3 +1,4 @@
+import { PropsFromApp } from '../../root'
 import { PatternSpecEventExtractor } from '../events'
 import { ImmutablePatternSpecState } from '../state'
 
@@ -19,9 +20,17 @@ interface PatternSpecInputProps {
     patternSpecKey: string,
 }
 
+interface PatternSpecPropsFromDispatch {
+    resetHandler: (parameters: PropsFromApp) => void,
+}
+
+interface PatternSpecProps extends PatternSpecPropsFromDispatch, PropsFromApp {}
+
 export {
     PatternSpecInputProps,
     PatternSpecInputsProps,
     PatternSpecInputsPropsFromDispatch,
     PatternSpecInputsPropsFromState,
+    PatternSpecPropsFromDispatch,
+    PatternSpecProps,
 }
