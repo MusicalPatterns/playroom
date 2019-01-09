@@ -1,5 +1,6 @@
 import * as React from 'react'
 import { Dispatch } from 'redux'
+import { PropsFromApp } from '../../root/components'
 import { ImmutablePatternSpecState } from '../state'
 
 type PatternSpecEvent = React.SyntheticEvent | React.KeyboardEvent
@@ -42,6 +43,10 @@ interface BuildPatternSpecInputEventAttacherParameters {
 type BuildPatternSpecInputEventAttacher =
     (parameters: BuildPatternSpecInputEventAttacherParameters) => PatternSpecInputEventAttacher
 
+interface HandleResetParameters extends PropsFromApp {
+    dispatch: Dispatch,
+}
+
 export {
     PatternSpecEvent,
     PatternSpecEventParameters,
@@ -54,4 +59,5 @@ export {
     PatternSpecInputEventAttacher,
     BuildPatternSpecInputEventAttacher,
     BuildPatternSpecInputEventAttacherParameters,
+    HandleResetParameters,
 }

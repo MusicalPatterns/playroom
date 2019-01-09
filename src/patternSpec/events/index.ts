@@ -6,6 +6,7 @@ export { buildPatternSpecInputEventAttacher } from './buildPatternSpecInputEvent
 export { destringifyPatternSpec } from './destringifyPatternSpec'
 export { buildInitialDisabledButtons } from './buildInitialDisabledButtons'
 export { stringifyPatternSpec } from './stringifyPatternSpec'
+export { handleReset } from './handleReset'
 
 export {
     BuildPatternSpecInputEventExtractorParameters,
