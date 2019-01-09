@@ -1,4 +1,5 @@
 import { clickElement, fillInElement, findElement } from 'puppet-strings'
+import { SecretSelectorsForTest } from '../../../src/indexForTest'
 import { testGlobals } from '../../setup'
 import {
     elementInnerText,
@@ -21,7 +22,7 @@ describe('submitting pattern spec changes', () => {
         const input = await findElement(testGlobals.tab, `input#${PATTERN_SPEC_PROPERTY_ONE_KEY}`)
         await fillInElement(input, TEST_MODIFICATION)
 
-        expect(await elementInnerText(`.secret-submitted#${PATTERN_SPEC_PROPERTY_ONE_KEY}`))
+        expect(await elementInnerText(`.${SecretSelectorsForTest.SECRET_SUBMITTED_PATTERN_SPEC_INPUT}#${PATTERN_SPEC_PROPERTY_ONE_KEY}`))
             .toBe(`${TEST_PATTERN_SPEC_PROPERTY_ONE_VALUE}`)
 
         done()
@@ -31,7 +32,7 @@ describe('submitting pattern spec changes', () => {
         const input = await findElement(testGlobals.tab, `input#${PATTERN_SPEC_PROPERTY_ONE_KEY}`)
         await modify(input)
 
-        expect(await elementInnerText(`.secret-submitted#${PATTERN_SPEC_PROPERTY_ONE_KEY}`))
+        expect(await elementInnerText(`.${SecretSelectorsForTest.SECRET_SUBMITTED_PATTERN_SPEC_INPUT}#${PATTERN_SPEC_PROPERTY_ONE_KEY}`))
             .toBe(`${TEST_PATTERN_SPEC_PROPERTY_ONE_VALUE}${TEST_MODIFICATION}`)
 
         done()
@@ -43,7 +44,7 @@ describe('submitting pattern spec changes', () => {
         const button = await findElement(testGlobals.tab, `button#${PATTERN_SPEC_PROPERTY_ONE_KEY}`)
         await clickElement(button)
 
-        expect(await elementInnerText(`.secret-submitted#${PATTERN_SPEC_PROPERTY_ONE_KEY}`))
+        expect(await elementInnerText(`.${SecretSelectorsForTest.SECRET_SUBMITTED_PATTERN_SPEC_INPUT}#${PATTERN_SPEC_PROPERTY_ONE_KEY}`))
             .toBe(`${TEST_PATTERN_SPEC_PROPERTY_ONE_VALUE}${TEST_MODIFICATION}`)
 
         done()
@@ -56,9 +57,9 @@ describe('submitting pattern spec changes', () => {
         const inputTwo = await findElement(testGlobals.tab, `input#${PATTERN_SPEC_PROPERTY_TWO_KEY}`)
         await modify(inputTwo)
 
-        expect(await elementInnerText(`.secret-submitted#${PATTERN_SPEC_PROPERTY_ONE_KEY}`))
+        expect(await elementInnerText(`.${SecretSelectorsForTest.SECRET_SUBMITTED_PATTERN_SPEC_INPUT}#${PATTERN_SPEC_PROPERTY_ONE_KEY}`))
             .toBe(`${TEST_PATTERN_SPEC_PROPERTY_ONE_VALUE}`)
-        expect(await elementInnerText(`.secret-submitted#${PATTERN_SPEC_PROPERTY_TWO_KEY}`))
+        expect(await elementInnerText(`.${SecretSelectorsForTest.SECRET_SUBMITTED_PATTERN_SPEC_INPUT}#${PATTERN_SPEC_PROPERTY_TWO_KEY}`))
             .toBe(`${TEST_PATTERN_SPEC_PROPERTY_TWO_VALUE}${TEST_MODIFICATION}`)
 
         done()
@@ -73,9 +74,9 @@ describe('submitting pattern spec changes', () => {
         const button = await findElement(testGlobals.tab, `button#${PATTERN_SPEC_PROPERTY_TWO_KEY}`)
         await clickElement(button)
 
-        expect(await elementInnerText(`.secret-submitted#${PATTERN_SPEC_PROPERTY_ONE_KEY}`))
+        expect(await elementInnerText(`.${SecretSelectorsForTest.SECRET_SUBMITTED_PATTERN_SPEC_INPUT}#${PATTERN_SPEC_PROPERTY_ONE_KEY}`))
             .toBe(`${TEST_PATTERN_SPEC_PROPERTY_ONE_VALUE}`)
-        expect(await elementInnerText(`.secret-submitted#${PATTERN_SPEC_PROPERTY_TWO_KEY}`))
+        expect(await elementInnerText(`.${SecretSelectorsForTest.SECRET_SUBMITTED_PATTERN_SPEC_INPUT}#${PATTERN_SPEC_PROPERTY_TWO_KEY}`))
             .toBe(`${TEST_PATTERN_SPEC_PROPERTY_TWO_VALUE}${TEST_MODIFICATION}`)
 
         done()
@@ -88,9 +89,9 @@ describe('submitting pattern spec changes', () => {
         const inputTwo = await findElement(testGlobals.tab, `input#${PATTERN_SPEC_PROPERTY_TWO_KEY}`)
         await modify(inputTwo)
 
-        expect(await elementInnerText(`.secret-submitted#${PATTERN_SPEC_PROPERTY_ONE_KEY}`))
+        expect(await elementInnerText(`.${SecretSelectorsForTest.SECRET_SUBMITTED_PATTERN_SPEC_INPUT}#${PATTERN_SPEC_PROPERTY_ONE_KEY}`))
             .toBe(`${TEST_PATTERN_SPEC_PROPERTY_ONE_VALUE}${TEST_MODIFICATION}`)
-        expect(await elementInnerText(`.secret-submitted#${PATTERN_SPEC_PROPERTY_TWO_KEY}`))
+        expect(await elementInnerText(`.${SecretSelectorsForTest.SECRET_SUBMITTED_PATTERN_SPEC_INPUT}#${PATTERN_SPEC_PROPERTY_TWO_KEY}`))
             .toBe(`${TEST_PATTERN_SPEC_PROPERTY_TWO_VALUE}${TEST_MODIFICATION}`)
 
         done()

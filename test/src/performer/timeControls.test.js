@@ -1,4 +1,5 @@
 import { clickElement, findElement, navigate } from 'puppet-strings'
+import { SecretSelectorsForTest } from '../../../src/indexForTest'
 import { testGlobals } from '../../setup'
 import {
     APP_URL,
@@ -6,21 +7,21 @@ import {
     elementInnerText,
     modify,
     PATTERN_SPEC_PROPERTY_ONE_KEY,
+    selectOtherTestPattern,
     sleep,
     standardTestReset,
 } from '../../support'
-import { selectOtherTestPattern } from '../../support/control/selectTestPattern'
 
 const LONG_ENOUGH_FOR_TIME_TO_PASS = 100
 const LONG_ENOUGH_FOR_TIME_TO_HAVE_BEEN_RESET = 100
 const A_BIT_LONGER = 1000
 
-const currentTime = async () => parseInt(await elementInnerText('#secret-timer'))
+const currentTime = async () => parseInt(await elementInnerText(`#${SecretSelectorsForTest.SECRET_TIMER}`))
 
 describe('time controls', () => {
     it('do not appear if you have not yet selected a pattern', async done => {
         await navigate(testGlobals.tab, APP_URL)
-        expect(await elementExists('#secret-timer'))
+        expect(await elementExists(`#${SecretSelectorsForTest.SECRET_TIMER}`))
             .toBeFalsy()
 
         done()
@@ -137,7 +138,7 @@ describe('time controls', () => {
         it('wraps time back around to the beginning', async done => {
             const initialTime = await currentTime()
 
-            const totalDuration = parseInt(await elementInnerText('#secret-total-duration'))
+            const totalDuration = parseInt(await elementInnerText(`#${SecretSelectorsForTest.SECRET_TOTAL_DURATION}`))
             await sleep(totalDuration - LONG_ENOUGH_FOR_TIME_TO_PASS)
             const beforeWrappingTime = await currentTime()
             expect(beforeWrappingTime).toBeGreaterThan(initialTime)

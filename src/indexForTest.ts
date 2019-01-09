@@ -3,3 +3,6 @@
 export {
     PatternSpecInputStates,
 } from './patternSpec/indexForTest'
+export {
+    SecretSelectorsForTest,
+} from './types'

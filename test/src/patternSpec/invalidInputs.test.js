@@ -1,5 +1,5 @@
 import { clickElement, fillInElement, findElement } from 'puppet-strings'
-import { PatternSpecInputStates } from '../../../src/indexForTest'
+import { PatternSpecInputStates, SecretSelectorsForTest } from '../../../src/indexForTest'
 import { testGlobals } from '../../setup'
 import {
     elementInnerText,
@@ -37,7 +37,7 @@ describe('invalid inputs', () => {
         it('marks a pattern spec input as invalid when you submit invalid data, and it does not crash or attempt to recompile with this invalid data', async done => {
             await findElement(testGlobals.tab, `input#${PATTERN_SPEC_PROPERTY_ONE_KEY}.${PatternSpecInputStates.INVALID}`)
 
-            expect(await elementInnerText(`.secret-submitted#${PATTERN_SPEC_PROPERTY_ONE_KEY}`))
+            expect(await elementInnerText(`.${SecretSelectorsForTest.SECRET_SUBMITTED_PATTERN_SPEC_INPUT}#${PATTERN_SPEC_PROPERTY_ONE_KEY}`))
                 .toBe(`${TEST_PATTERN_SPEC_PROPERTY_ONE_VALUE}`)
 
             done()

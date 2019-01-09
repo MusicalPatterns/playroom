@@ -7,6 +7,7 @@ import { connect } from 'react-redux'
 import { Dispatch } from 'redux'
 import { BatchAction, batchActions } from 'redux-batched-actions'
 import { ActionType, ImmutableRootState, RootStateKeys } from '../../root'
+import { SecretSelectorsForTest } from '../../types'
 import { ImmutablePerformerState, PerformerStateKeys } from '../state'
 import { TimeControlsProps, TimeControlsPropsFromDispatch, TimeControlsPropsFromState } from './types'
 
@@ -58,8 +59,8 @@ const TimeControls: (timeControlsProps: TimeControlsProps) => JSX.Element =
                         value: timeForDisplay,
                     }}/>
                 </div>
-                <div {...{ id: 'secret-timer' }}>{timeForDisplay}</div>
-                <div {...{ id: 'secret-total-duration' }}>{totalTimeForDisplay}</div>
+                <div {...{ id: SecretSelectorsForTest.SECRET_TIMER }}>{timeForDisplay}</div>
+                <div {...{ id: SecretSelectorsForTest.SECRET_TOTAL_DURATION }}>{totalTimeForDisplay}</div>
             </div>
         )
     }

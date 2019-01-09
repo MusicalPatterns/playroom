@@ -1,5 +1,6 @@
 import { camelCaseToLowerCase } from '@musical-patterns/utilities'
 import * as React from 'react'
+import { SecretSelectorsForTest } from '../../types'
 import {
     buildPatternSpecInputEventAttacher,
     PatternSpecEventParameters,
@@ -67,7 +68,10 @@ const PatternSpecInput: (patternSpecInputProps: PatternSpecInputProps) => JSX.El
 
         return (
             <div {...{ className: 'pattern-spec-input' }}>
-                <span {...{ className: 'secret-submitted', id: patternSpecKey }}>{submittedPatternSpecValue}</span>
+                <span {...{
+                    className: SecretSelectorsForTest.SECRET_SUBMITTED_PATTERN_SPEC_INPUT,
+                    id: patternSpecKey,
+                }}>{submittedPatternSpecValue}</span>
                 <div>{presentPatternSpecKey(patternSpecKey)}</div>
                 <input {...{ onChange, onKeyPress, value: patternSpecValue, className, onBlur, id: patternSpecKey }}/>
                 <button {...{ onClick, disabled, value: patternSpecValue, id: patternSpecKey }}>submit</button>
