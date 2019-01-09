@@ -1,28 +1,14 @@
 import { PatternSpec } from '@musical-patterns/pattern'
 import { BatchAction, batchActions } from 'redux-batched-actions'
-import {
-    buildInitialStringifiedPatternSpecInputStates,
-    StringifiedPatternSpec,
-    StringifiedPatternSpecInputStates,
-    stringifyPatternSpec,
-} from '../../patternSpec'
+import { buildResetActions } from '../../patternSpec'
 import { Action, ActionType } from '../../root'
 import { PatternChangeEventHandler, PatternChangeEventHandlerParameters } from './types'
 
 const handlePatternChange: PatternChangeEventHandler =
     async ({ dispatch, patternId, patterns }: PatternChangeEventHandlerParameters): Promise<void> => {
         const patternSpec: PatternSpec = patterns[ patternId ].spec
-
-        const stringifiedPatternSpec: StringifiedPatternSpec = stringifyPatternSpec(patternSpec)
-        const initialDisabledButtons: StringifiedPatternSpecInputStates =
-            buildInitialStringifiedPatternSpecInputStates(patternSpec, true)
-
-        const actions: Action[] = [
-            { type: ActionType.SET_PATTERN_ID, data: patternId },
-            { type: ActionType.SET_SUBMITTED_PATTERN_SPEC, data: stringifiedPatternSpec },
-            { type: ActionType.SET_DISPLAYED_PATTERN_SPEC, data: stringifiedPatternSpec },
-            { type: ActionType.SET_DISABLED_PATTERN_SPEC_BUTTONS, data: initialDisabledButtons },
-        ]
+        const actions: Action[] = buildResetActions(patternSpec)
+            .concat([ { type: ActionType.SET_PATTERN_ID, data: patternId } ])
         const batchedAction: BatchAction = batchActions(actions)
         dispatch(batchedAction)
     }

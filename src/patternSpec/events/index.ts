@@ -7,6 +7,7 @@ export { destringifyPatternSpec } from './destringifyPatternSpec'
 export { buildInitialStringifiedPatternSpecInputStates } from './buildInitialStringifiedPatternSpecInputStates'
 export { stringifyPatternSpec } from './stringifyPatternSpec'
 export { handleReset } from './handleReset'
+export { buildResetActions } from './resetActions'
 
 export {
     BuildPatternSpecInputEventExtractorParameters,

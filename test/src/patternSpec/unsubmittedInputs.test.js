@@ -1,18 +1,13 @@
 import { clickElement, fillInElement, findElement } from 'puppet-strings'
 import { testGlobals } from '../../setup'
 import {
+    loseFocus,
     PATTERN_SPEC_PROPERTY_ONE_KEY,
-    PATTERN_SPEC_PROPERTY_TWO_KEY,
     press,
     reset,
     selectTestPattern,
     TEST_MODIFICATION,
 } from '../../support'
-
-const loseFocus = async () => {
-    const inputTwo = await findElement(testGlobals.tab, `input#${PATTERN_SPEC_PROPERTY_TWO_KEY}`)
-    await clickElement(inputTwo)
-}
 
 describe('unsubmitted inputs', () => {
     beforeAll(async done => {

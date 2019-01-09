@@ -9,6 +9,7 @@ export {
     press,
     modify,
     reset,
+    loseFocus,
 } from './control'
 export { startServer, stopServer } from './infrastructure'
 
