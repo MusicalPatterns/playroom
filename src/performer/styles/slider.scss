@@ -1,3 +1,5 @@
+@import '../../root/styles/colors';
+
 input[type=range] {
   -webkit-appearance: none;
   border: none;
@@ -5,17 +7,17 @@ input[type=range] {
 }
 
 input[type=range]::-webkit-slider-runnable-track {
-  background: #dddddd;
+  background: $light-grey;
   height: 2px;
 }
 
 input[type=range]::-moz-range-track {
-  background: #dddddd;
+  background: $light-grey;
   height: 2px;
 }
 
 input[type=range]::-ms-track {
-  background: #dddddd;
+  background: $light-grey;
   height: 2px;
 }
 
@@ -24,7 +26,7 @@ input[type=range]::-webkit-slider-thumb {
   border: none;
   height: 16px;
   width: 2px;
-  background: #333333;
+  background: $dark-grey;
   margin-top: -7px;
 }
 
@@ -33,7 +35,7 @@ input[type=range]::-moz-range-thumb {
   border: none;
   height: 16px;
   width: 2px;
-  background: #333333;
+  background: $dark-grey;
   margin-top: -7px;
 }
 
@@ -42,6 +44,6 @@ input[type=range]::-ms-thumb {
   border: none;
   height: 16px;
   width: 2px;
-  background: #333333;
+  background: $dark-grey;
   margin-top: -7px;
 }

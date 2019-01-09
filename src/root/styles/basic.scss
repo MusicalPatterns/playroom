@@ -1,5 +1,11 @@
+@import './colors';
+
 button {
   cursor: pointer;
+  background: $light-grey;
+  border: none;
+  border-radius: 3px;
+  height: 20px;
 
   &:disabled {
     cursor: inherit;
