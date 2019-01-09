@@ -8,6 +8,7 @@ import {
     selectTestPattern,
     TEST_MODIFICATION,
 } from '../../support'
+import { PatternSpecInputStates } from '../../../src/indexForTest'
 
 describe('unsubmitted inputs', () => {
     beforeAll(async done => {
@@ -26,7 +27,7 @@ describe('unsubmitted inputs', () => {
 
         await loseFocus()
 
-        await findElement(testGlobals.tab, `input#${PATTERN_SPEC_PROPERTY_ONE_KEY}.unsubmitted`)
+        await findElement(testGlobals.tab, `input#${PATTERN_SPEC_PROPERTY_ONE_KEY}.${PatternSpecInputStates.UNSUBMITTED}`)
 
         done()
     })
@@ -39,7 +40,7 @@ describe('unsubmitted inputs', () => {
 
         await loseFocus()
 
-        await findElement(testGlobals.tab, `input#${PATTERN_SPEC_PROPERTY_ONE_KEY}.valid-and-submitted`)
+        await findElement(testGlobals.tab, `input#${PATTERN_SPEC_PROPERTY_ONE_KEY}.${PatternSpecInputStates.VALID_AND_SUBMITTED}`)
 
         done()
     })

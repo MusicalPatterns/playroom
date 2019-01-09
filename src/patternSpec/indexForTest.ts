@@ -2,4 +2,4 @@
 
 export {
     PatternSpecInputStates,
-} from './patternSpec/indexForTest'
+} from './components/indexForTest'

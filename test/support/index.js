@@ -1,5 +1,6 @@
 export {
     sleep,
+    selectOtherTestPattern,
     selectTestPattern,
     selectTestPatternAndReset,
     selectTestPatternAndReset,

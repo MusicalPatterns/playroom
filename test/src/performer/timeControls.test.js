@@ -8,7 +8,6 @@ import {
     PATTERN_SPEC_PROPERTY_ONE_KEY,
     reset,
     selectTestPattern,
-    selectTestPatternAndReset,
     sleep,
 } from '../../support'
 import { selectOtherTestPattern } from '../../support/control/selectTestPattern'

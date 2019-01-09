@@ -8,6 +8,7 @@ import {
     selectTestPattern,
     TEST_PATTERN_SPEC_PROPERTY_ONE_VALUE,
 } from '../../support'
+import { PatternSpecInputStates } from '../../../src/indexForTest'
 
 describe('invalid inputs', () => {
     beforeAll(async done => {
@@ -26,7 +27,7 @@ describe('invalid inputs', () => {
     })
 
     it('does not mark a pattern spec input as invalid if you only type invalid data but do not submit it; only marks it as unsubmitted', async done => {
-        await findElement(testGlobals.tab, `input#${PATTERN_SPEC_PROPERTY_ONE_KEY}.unsubmitted`)
+        await findElement(testGlobals.tab, `input#${PATTERN_SPEC_PROPERTY_ONE_KEY}.${PatternSpecInputStates.UNSUBMITTED}`)
 
         done()
     })
@@ -40,7 +41,7 @@ describe('invalid inputs', () => {
         })
 
         it('marks a pattern spec input as invalid when you submit invalid data, and it does not crash or attempt to recompile with this invalid data', async done => {
-            await findElement(testGlobals.tab, `input#${PATTERN_SPEC_PROPERTY_ONE_KEY}.invalid`)
+            await findElement(testGlobals.tab, `input#${PATTERN_SPEC_PROPERTY_ONE_KEY}.${PatternSpecInputStates.INVALID}`)
 
             expect(await elementInnerText(`.secret-submitted#${PATTERN_SPEC_PROPERTY_ONE_KEY}`))
                 .toBe(`${TEST_PATTERN_SPEC_PROPERTY_ONE_VALUE}`)
@@ -49,11 +50,11 @@ describe('invalid inputs', () => {
         })
 
         it('resets the pattern spec input to valid (unsubmitted) state after typing anything into it', async done => {
-            await findElement(testGlobals.tab, `input#${PATTERN_SPEC_PROPERTY_ONE_KEY}.invalid`)
+            await findElement(testGlobals.tab, `input#${PATTERN_SPEC_PROPERTY_ONE_KEY}.${PatternSpecInputStates.INVALID}`)
 
             await fillInElement(input, INVALID_TEST_MODIFICATION)
 
-            await findElement(testGlobals.tab, `input#${PATTERN_SPEC_PROPERTY_ONE_KEY}.unsubmitted`)
+            await findElement(testGlobals.tab, `input#${PATTERN_SPEC_PROPERTY_ONE_KEY}.${PatternSpecInputStates.UNSUBMITTED}`)
 
             done()
         })

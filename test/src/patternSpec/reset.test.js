@@ -13,6 +13,7 @@ import {
     TEST_PATTERN_SPEC_PROPERTY_ONE_VALUE,
     TEST_PATTERN_SPEC_PROPERTY_TWO_VALUE,
 } from '../../support'
+import { PatternSpecInputStates } from '../../../src/indexForTest'
 
 describe('reset button', () => {
     beforeAll(async done => {
@@ -45,11 +46,11 @@ describe('reset button', () => {
         const input = await findElement(testGlobals.tab, `input#${PATTERN_SPEC_PROPERTY_ONE_KEY}`)
         await fillInElement(input, TEST_MODIFICATION)
         await loseFocus()
-        await findElement(testGlobals.tab, `input#${PATTERN_SPEC_PROPERTY_ONE_KEY}.unsubmitted`)
+        await findElement(testGlobals.tab, `input#${PATTERN_SPEC_PROPERTY_ONE_KEY}.${PatternSpecInputStates.UNSUBMITTED}`)
 
         await reset()
 
-        await findElement(testGlobals.tab, `input#${PATTERN_SPEC_PROPERTY_ONE_KEY}.valid-and-submitted`)
+        await findElement(testGlobals.tab, `input#${PATTERN_SPEC_PROPERTY_ONE_KEY}.${PatternSpecInputStates.VALID_AND_SUBMITTED}`)
 
         done()
     })
@@ -59,11 +60,11 @@ describe('reset button', () => {
         await fillInElement(input, INVALID_TEST_MODIFICATION)
         const button = await findElement(testGlobals.tab, `button#${PATTERN_SPEC_PROPERTY_ONE_KEY}`)
         await clickElement(button)
-        await findElement(testGlobals.tab, `input#${PATTERN_SPEC_PROPERTY_ONE_KEY}.invalid`)
+        await findElement(testGlobals.tab, `input#${PATTERN_SPEC_PROPERTY_ONE_KEY}.${PatternSpecInputStates.INVALID}`)
 
         await reset()
 
-        await findElement(testGlobals.tab, `input#${PATTERN_SPEC_PROPERTY_ONE_KEY}.valid-and-submitted`)
+        await findElement(testGlobals.tab, `input#${PATTERN_SPEC_PROPERTY_ONE_KEY}.${PatternSpecInputStates.VALID_AND_SUBMITTED}`)
 
         done()
     })
