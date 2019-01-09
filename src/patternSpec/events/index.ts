@@ -1,17 +1,17 @@
-export { handlePatternSpecBlur } from './handlePatternSpecBlur'
-export { handlePatternSpecChange } from './handlePatternSpecChange'
-export { handlePatternSpecSubmit } from './handlePatternSpecSubmit'
-export { buildPatternSpecEventExtractor } from './buildPatternSpecEventExtractor'
-export { buildPatternSpecEventAttacher } from './buildPatternSpecEventAttacher'
+export { handlePatternSpecInputBlur } from './handlePatternSpecInputBlur'
+export { handlePatternSpecInputChange } from './handlePatternSpecInputChange'
+export { handlePatternSpecInputSubmit } from './handlePatternSpecInputSubmit'
+export { buildPatternSpecInputEventExtractor } from './buildPatternSpecInputEventExtractor'
+export { buildPatternSpecInputEventAttacher } from './buildPatternSpecInputEventAttacher'
 export { destringifyPatternSpec } from './destringifyPatternSpec'
 export { buildInitialDisabledButtons } from './buildInitialDisabledButtons'
 export { stringifyPatternSpec } from './stringifyPatternSpec'
 
 export {
-    BuildPatternSpecEventExtractorParameters,
-    BuildPatternSpecEventExtractor,
-    PatternSpecEventExtractor,
+    BuildPatternSpecInputEventExtractorParameters,
+    BuildPatternSpecInputEventExtractor,
+    PatternSpecInputEventExtractor,
     PatternSpecEvent,
     PatternSpecEventParameters,
-    PatternSpecEventAttacher,
+    PatternSpecInputEventAttacher,
 } from './types'

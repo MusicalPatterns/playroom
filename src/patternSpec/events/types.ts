@@ -9,48 +9,49 @@ interface PatternSpecEventParameters {
     patternSpecState: ImmutablePatternSpecState,
 }
 
-interface PatternSpecEventHandlerParameters extends PatternSpecEventParameters {
+interface PatternSpecInputEventHandlerParameters extends PatternSpecEventParameters {
     dispatch: Dispatch,
     patternSpecValue: string,
 }
 
-type PatternSpecEventHandler = (parameters: PatternSpecEventHandlerParameters) => Promise<void> | void
+type PatternSpecInputEventHandler = (parameters: PatternSpecInputEventHandlerParameters) => Promise<void> | void
 
-interface PatternSpecEventExtractorParameters extends PatternSpecEventParameters {
+interface PatternSpecInputEventExtractorParameters extends PatternSpecEventParameters {
     event: PatternSpecEvent,
 }
 
-type PatternSpecEventExtractor = (parameters: PatternSpecEventExtractorParameters) => void
+type PatternSpecInputEventExtractor = (parameters: PatternSpecInputEventExtractorParameters) => void
 
-interface BuildPatternSpecEventExtractorParameters {
+interface BuildPatternSpecInputEventExtractorParameters {
     abortIfNotSubmitting?: boolean,
     dispatch: Dispatch,
-    patternSpecEventHandler: PatternSpecEventHandler,
+    patternSpecInputEventHandler: PatternSpecInputEventHandler,
 }
 
-type BuildPatternSpecEventExtractor = (
-    parameters: BuildPatternSpecEventExtractorParameters,
-) => PatternSpecEventExtractor
+type BuildPatternSpecInputEventExtractor = (
+    parameters: BuildPatternSpecInputEventExtractorParameters,
+) => PatternSpecInputEventExtractor
 
-type PatternSpecEventAttacher = (event: PatternSpecEvent) => void
+type PatternSpecInputEventAttacher = (event: PatternSpecEvent) => void
 
-interface BuildPatternSpecEventAttacherParameters {
-    patternSpecEventExtractor: PatternSpecEventExtractor,
+interface BuildPatternSpecInputEventAttacherParameters {
+    patternSpecEventExtractor: PatternSpecInputEventExtractor,
     patternSpecEventParameters: PatternSpecEventParameters,
 }
 
-type BuildPatternSpecEventAttacher = (parameters: BuildPatternSpecEventAttacherParameters) => PatternSpecEventAttacher
+type BuildPatternSpecInputEventAttacher =
+    (parameters: BuildPatternSpecInputEventAttacherParameters) => PatternSpecInputEventAttacher
 
 export {
     PatternSpecEvent,
     PatternSpecEventParameters,
-    PatternSpecEventHandler,
-    PatternSpecEventHandlerParameters,
-    PatternSpecEventExtractor,
-    PatternSpecEventExtractorParameters,
-    BuildPatternSpecEventExtractor,
-    BuildPatternSpecEventExtractorParameters,
-    PatternSpecEventAttacher,
-    BuildPatternSpecEventAttacher,
-    BuildPatternSpecEventAttacherParameters,
+    PatternSpecInputEventHandler,
+    PatternSpecInputEventHandlerParameters,
+    PatternSpecInputEventExtractor,
+    PatternSpecInputEventExtractorParameters,
+    BuildPatternSpecInputEventExtractor,
+    BuildPatternSpecInputEventExtractorParameters,
+    PatternSpecInputEventAttacher,
+    BuildPatternSpecInputEventAttacher,
+    BuildPatternSpecInputEventAttacherParameters,
 }

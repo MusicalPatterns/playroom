@@ -1,6 +1,10 @@
 import { camelCaseToLowerCase } from '@musical-patterns/utilities'
 import * as React from 'react'
-import { buildPatternSpecEventAttacher, PatternSpecEventAttacher, PatternSpecEventParameters } from '../events'
+import {
+    buildPatternSpecInputEventAttacher,
+    PatternSpecEventParameters,
+    PatternSpecInputEventAttacher,
+} from '../events'
 import { PatternSpecStateKeys } from '../state'
 import { StringifiedPatternSpec, StringifiedPatternSpecInputStates } from '../types'
 import { PatternSpecInputProps } from './types'
@@ -40,19 +44,19 @@ const PatternSpecInput: (patternSpecInputProps: PatternSpecInputProps) => JSX.El
 
         const patternSpecEventParameters: PatternSpecEventParameters = { patternSpecKey, patternSpecState }
 
-        const onChange: PatternSpecEventAttacher = buildPatternSpecEventAttacher({
+        const onChange: PatternSpecInputEventAttacher = buildPatternSpecInputEventAttacher({
             patternSpecEventExtractor: handlePatternSpecChange,
             patternSpecEventParameters,
         })
-        const onKeyPress: PatternSpecEventAttacher = buildPatternSpecEventAttacher({
+        const onKeyPress: PatternSpecInputEventAttacher = buildPatternSpecInputEventAttacher({
             patternSpecEventExtractor: handlePatternSpecKeyboardSubmit,
             patternSpecEventParameters,
         })
-        const onClick: PatternSpecEventAttacher = buildPatternSpecEventAttacher({
+        const onClick: PatternSpecInputEventAttacher = buildPatternSpecInputEventAttacher({
             patternSpecEventExtractor: handlePatternSpecButtonSubmit,
             patternSpecEventParameters,
         })
-        const onBlur: PatternSpecEventAttacher = buildPatternSpecEventAttacher({
+        const onBlur: PatternSpecInputEventAttacher = buildPatternSpecInputEventAttacher({
             patternSpecEventExtractor: handlePatternSpecBlur,
             patternSpecEventParameters,
         })

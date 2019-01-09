@@ -1,16 +1,16 @@
 import { ActionType } from '../../root'
 import { PatternSpecStateKeys } from '../state'
 import { StringifiedPatternSpec, StringifiedPatternSpecInputStates } from '../types'
-import { PatternSpecEventHandler, PatternSpecEventHandlerParameters } from './types'
+import { PatternSpecInputEventHandler, PatternSpecInputEventHandlerParameters } from './types'
 
-const handlePatternSpecBlur: PatternSpecEventHandler =
-    (patternSpecHandlerParameters: PatternSpecEventHandlerParameters): void => {
+const handlePatternSpecInputBlur: PatternSpecInputEventHandler =
+    (patternSpecHandlerParameters: PatternSpecInputEventHandlerParameters): void => {
         const {
             patternSpecKey,
             patternSpecValue,
             dispatch,
             patternSpecState,
-        }: PatternSpecEventHandlerParameters = patternSpecHandlerParameters
+        }: PatternSpecInputEventHandlerParameters = patternSpecHandlerParameters
         const submittedPatternSpec: StringifiedPatternSpec =
             patternSpecState.get(PatternSpecStateKeys.SUBMITTED_PATTERN_SPEC)
         const unsubmittedPatternSpecInputs: StringifiedPatternSpecInputStates =
@@ -26,5 +26,5 @@ const handlePatternSpecBlur: PatternSpecEventHandler =
     }
 
 export {
-    handlePatternSpecBlur,
+    handlePatternSpecInputBlur,
 }

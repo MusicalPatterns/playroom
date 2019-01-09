@@ -3,10 +3,10 @@ import { connect } from 'react-redux'
 import { Dispatch } from 'redux'
 import { ImmutableRootState, RootStateKeys } from '../../root'
 import {
-    buildPatternSpecEventExtractor,
-    handlePatternSpecBlur,
-    handlePatternSpecChange,
-    handlePatternSpecSubmit,
+    buildPatternSpecInputEventExtractor,
+    handlePatternSpecInputBlur,
+    handlePatternSpecInputChange,
+    handlePatternSpecInputSubmit,
 } from '../events'
 import { PatternSpecStateKeys } from '../state'
 import { StringifiedPatternSpec } from '../types'
@@ -25,22 +25,22 @@ const mapStateToProps: (state: ImmutableRootState) => PatternSpecInputsPropsFrom
 
 const mapDispatchToProps: (dispatch: Dispatch) => PatternSpecInputsPropsFromDispatch =
     (dispatch: Dispatch): PatternSpecInputsPropsFromDispatch => ({
-        handlePatternSpecBlur: buildPatternSpecEventExtractor({
+        handlePatternSpecBlur: buildPatternSpecInputEventExtractor({
             dispatch,
-            patternSpecEventHandler: handlePatternSpecBlur,
+            patternSpecInputEventHandler: handlePatternSpecInputBlur,
         }),
-        handlePatternSpecButtonSubmit: buildPatternSpecEventExtractor({
+        handlePatternSpecButtonSubmit: buildPatternSpecInputEventExtractor({
             dispatch,
-            patternSpecEventHandler: handlePatternSpecSubmit,
+            patternSpecInputEventHandler: handlePatternSpecInputSubmit,
         }),
-        handlePatternSpecChange: buildPatternSpecEventExtractor({
+        handlePatternSpecChange: buildPatternSpecInputEventExtractor({
             dispatch,
-            patternSpecEventHandler: handlePatternSpecChange,
+            patternSpecInputEventHandler: handlePatternSpecInputChange,
         }),
-        handlePatternSpecKeyboardSubmit: buildPatternSpecEventExtractor({
+        handlePatternSpecKeyboardSubmit: buildPatternSpecInputEventExtractor({
             abortIfNotSubmitting: true,
             dispatch,
-            patternSpecEventHandler: handlePatternSpecSubmit,
+            patternSpecInputEventHandler: handlePatternSpecInputSubmit,
         }),
     })
 

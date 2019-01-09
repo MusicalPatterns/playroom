@@ -3,15 +3,15 @@ import { BatchAction, batchActions } from 'redux-batched-actions'
 import { ActionType } from '../../root'
 import { PatternSpecStateKeys } from '../state'
 import { StringifiedPatternSpec, StringifiedPatternSpecInputStates } from '../types'
-import { PatternSpecEventHandler, PatternSpecEventHandlerParameters } from './types'
+import { PatternSpecInputEventHandler, PatternSpecInputEventHandlerParameters } from './types'
 
 const validateValueByThrowingIfUnparsable: (patternSpecValue: string) => void =
     (patternSpecValue: string): void => {
         JSON.parse(patternSpecValue)
     }
 
-const handlePatternSpecSubmit: PatternSpecEventHandler =
-    async (patternSpecHandlerParameters: PatternSpecEventHandlerParameters): Promise<void> => {
+const handlePatternSpecInputSubmit: PatternSpecInputEventHandler =
+    async (patternSpecHandlerParameters: PatternSpecInputEventHandlerParameters): Promise<void> => {
         const { patternSpecKey, patternSpecValue, dispatch, patternSpecState } = patternSpecHandlerParameters
         const unsubmittedPatternSpecInputs: StringifiedPatternSpecInputStates =
             patternSpecState.get(PatternSpecStateKeys.UNSUBMITTED_PATTERN_SPEC_INPUTS)
@@ -60,5 +60,5 @@ const handlePatternSpecSubmit: PatternSpecEventHandler =
     }
 
 export {
-    handlePatternSpecSubmit,
+    handlePatternSpecInputSubmit,
 }

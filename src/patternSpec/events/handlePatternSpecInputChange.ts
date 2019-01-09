@@ -2,16 +2,16 @@ import { BatchAction, batchActions } from 'redux-batched-actions'
 import { ActionType } from '../../root'
 import { PatternSpecStateKeys } from '../state'
 import { StringifiedPatternSpec, StringifiedPatternSpecInputStates } from '../types'
-import { PatternSpecEventHandler, PatternSpecEventHandlerParameters } from './types'
+import { PatternSpecInputEventHandler, PatternSpecInputEventHandlerParameters } from './types'
 
-const handlePatternSpecChange: PatternSpecEventHandler =
-    (patternSpecHandlerParameters: PatternSpecEventHandlerParameters): void => {
+const handlePatternSpecInputChange: PatternSpecInputEventHandler =
+    (patternSpecHandlerParameters: PatternSpecInputEventHandlerParameters): void => {
         const {
             dispatch,
             patternSpecKey,
             patternSpecValue,
             patternSpecState,
-        }: PatternSpecEventHandlerParameters = patternSpecHandlerParameters
+        }: PatternSpecInputEventHandlerParameters = patternSpecHandlerParameters
         const displayedPatternSpec: StringifiedPatternSpec =
             patternSpecState.get(PatternSpecStateKeys.DISPLAYED_PATTERN_SPEC)
         const invalidPatternSpecInputs: StringifiedPatternSpecInputStates =
@@ -46,5 +46,5 @@ const handlePatternSpecChange: PatternSpecEventHandler =
     }
 
 export {
-    handlePatternSpecChange,
+    handlePatternSpecInputChange,
 }
