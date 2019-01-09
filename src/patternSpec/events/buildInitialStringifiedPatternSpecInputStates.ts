@@ -1,8 +1,9 @@
 import { PatternSpec } from '@musical-patterns/pattern'
 import { StringifiedPatternSpecInputStates } from '../types'
 
-const buildInitialDisabledButtons: (patternSpec: PatternSpec) => StringifiedPatternSpecInputStates =
-    (patternSpec: PatternSpec): StringifiedPatternSpecInputStates => {
+const buildInitialStringifiedPatternSpecInputStates:
+    (patternSpec: PatternSpec, state: boolean) => StringifiedPatternSpecInputStates =
+    (patternSpec: PatternSpec, state: boolean): StringifiedPatternSpecInputStates => {
         const disabledButtonsAccumulator: StringifiedPatternSpecInputStates = {}
 
         return Object.keys(patternSpec)
@@ -10,12 +11,12 @@ const buildInitialDisabledButtons: (patternSpec: PatternSpec) => StringifiedPatt
                 (accumulator: StringifiedPatternSpecInputStates, key: string): StringifiedPatternSpecInputStates =>
                     ({
                         ...accumulator,
-                        [ key ]: true,
+                        [ key ]: state,
                     }),
                 disabledButtonsAccumulator,
             )
     }
 
 export {
-    buildInitialDisabledButtons,
+    buildInitialStringifiedPatternSpecInputStates,
 }

@@ -1,7 +1,7 @@
 import { PatternSpec } from '@musical-patterns/pattern'
 import { BatchAction, batchActions } from 'redux-batched-actions'
 import {
-    buildInitialDisabledButtons,
+    buildInitialStringifiedPatternSpecInputStates,
     StringifiedPatternSpec,
     StringifiedPatternSpecInputStates,
     stringifyPatternSpec,
@@ -14,7 +14,8 @@ const handlePatternChange: PatternChangeEventHandler =
         const patternSpec: PatternSpec = patterns[ patternId ].spec
 
         const stringifiedPatternSpec: StringifiedPatternSpec = stringifyPatternSpec(patternSpec)
-        const initialDisabledButtons: StringifiedPatternSpecInputStates = buildInitialDisabledButtons(patternSpec)
+        const initialDisabledButtons: StringifiedPatternSpecInputStates =
+            buildInitialStringifiedPatternSpecInputStates(patternSpec, true)
 
         const actions: Action[] = [
             { type: ActionType.SET_PATTERN_ID, data: patternId },

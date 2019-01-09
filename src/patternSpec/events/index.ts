@@ -4,7 +4,7 @@ export { handlePatternSpecInputSubmit } from './handlePatternSpecInputSubmit'
 export { buildPatternSpecInputEventExtractor } from './buildPatternSpecInputEventExtractor'
 export { buildPatternSpecInputEventAttacher } from './buildPatternSpecInputEventAttacher'
 export { destringifyPatternSpec } from './destringifyPatternSpec'
-export { buildInitialDisabledButtons } from './buildInitialDisabledButtons'
+export { buildInitialStringifiedPatternSpecInputStates } from './buildInitialStringifiedPatternSpecInputStates'
 export { stringifyPatternSpec } from './stringifyPatternSpec'
 export { handleReset } from './handleReset'
 

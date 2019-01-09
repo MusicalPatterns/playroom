@@ -2,7 +2,7 @@ import { PatternSpec } from '@musical-patterns/pattern'
 import { BatchAction, batchActions } from 'redux-batched-actions'
 import { Action, ActionType } from '../../root'
 import { StringifiedPatternSpec, StringifiedPatternSpecInputStates } from '../types'
-import { buildInitialDisabledButtons } from './buildInitialDisabledButtons'
+import { buildInitialStringifiedPatternSpecInputStates } from './buildInitialStringifiedPatternSpecInputStates'
 import { stringifyPatternSpec } from './stringifyPatternSpec'
 import { HandleResetParameters } from './types'
 
@@ -11,18 +11,10 @@ const handleReset: ({ dispatch, patternId, patterns }: HandleResetParameters) =>
         const patternSpec: PatternSpec = patterns[ patternId ].spec
 
         const stringifiedPatternSpec: StringifiedPatternSpec = stringifyPatternSpec(patternSpec)
-        const initialDisabledButtons: StringifiedPatternSpecInputStates = buildInitialDisabledButtons(patternSpec)
-
-        const invalidInputsAccumulator: StringifiedPatternSpecInputStates = {}
-        const initialInvalidAndUnsubmittedButtons: StringifiedPatternSpecInputStates = Object.keys(patternSpec)
-            .reduce(
-                (accumulator: StringifiedPatternSpecInputStates, key: string): StringifiedPatternSpecInputStates =>
-                    ({
-                        ...accumulator,
-                        [ key ]: false,
-                    }),
-                invalidInputsAccumulator,
-            )
+        const initialDisabledButtons: StringifiedPatternSpecInputStates =
+            buildInitialStringifiedPatternSpecInputStates(patternSpec, true)
+        const initialInvalidAndUnsubmittedButtons: StringifiedPatternSpecInputStates =
+            buildInitialStringifiedPatternSpecInputStates(patternSpec, false)
 
         const actions: Action[] = [
             { type: ActionType.SET_SUBMITTED_PATTERN_SPEC, data: stringifiedPatternSpec },

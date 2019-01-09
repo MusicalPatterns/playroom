@@ -1,6 +1,6 @@
 import * as React from 'react'
 import { Dispatch } from 'redux'
-import { PropsFromApp } from '../../root/components'
+import { PropsFromApp } from '../../root'
 import { ImmutablePatternSpecState } from '../state'
 
 type PatternSpecEvent = React.SyntheticEvent | React.KeyboardEvent

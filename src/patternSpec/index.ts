@@ -1,5 +1,5 @@
 export {
-    buildInitialDisabledButtons,
+    buildInitialStringifiedPatternSpecInputStates,
     stringifyPatternSpec,
     destringifyPatternSpec,
 } from './events'
