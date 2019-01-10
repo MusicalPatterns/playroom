@@ -21,3 +21,7 @@ button {
     @include glow($focus);
   }
 }
+
+img {
+  width: 100%;
+}

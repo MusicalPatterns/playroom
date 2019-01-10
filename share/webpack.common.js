@@ -13,6 +13,14 @@ module.exports = {
                 exclude: /test/,
             },
             {
+                test: /\.html$/,
+                loader: 'html-loader',
+            },
+            {
+                test: /\.(jpg|png|svg)/,
+                loader: 'file-loader',
+            },
+            {
                 test: /\.scss$/,
                 use: [
                     'style-loader',
