@@ -98,7 +98,7 @@ describe('time controls', () => {
             done()
         })
 
-        it('resets the time to the beginning but keeps playing when you select new pattern spec', async done => {
+        it('keeps playing when you select new pattern spec but does not reset time to the beginning', async done => {
             await sleep(A_BIT_LONGER)
             const plentyOfTime = await currentTime()
 
@@ -108,7 +108,7 @@ describe('time controls', () => {
             await sleep(LONG_ENOUGH_FOR_TIME_TO_HAVE_BEEN_RESET)
             let timeAfterResetting = await currentTime()
             expect(timeAfterResetting)
-                .toBeLessThan(plentyOfTime)
+                .toBeGreaterThan(plentyOfTime)
 
             await sleep(LONG_ENOUGH_FOR_TIME_TO_PASS)
             expect(await currentTime())
@@ -145,6 +145,25 @@ describe('time controls', () => {
 
             await sleep(LONG_ENOUGH_FOR_TIME_TO_PASS + LONG_ENOUGH_FOR_TIME_TO_PASS)
             expect(await currentTime()).toBeLessThan(beforeWrappingTime)
+
+            done()
+        })
+
+        it('pressing rewind sets time to the beginning but keeps playing', async done => {
+            await sleep(A_BIT_LONGER)
+            const plentyOfTime = await currentTime()
+
+            const rewind = await findElement(testGlobals.tab, '#rewind')
+            await clickElement(rewind)
+
+            await sleep(LONG_ENOUGH_FOR_TIME_TO_HAVE_BEEN_RESET)
+            let timeAfterResetting = await currentTime()
+            expect(timeAfterResetting)
+                .toBeLessThan(plentyOfTime)
+
+            await sleep(LONG_ENOUGH_FOR_TIME_TO_PASS)
+            expect(await currentTime())
+                .toBeGreaterThan(timeAfterResetting)
 
             done()
         })

@@ -1,7 +1,7 @@
-import { faPause, faPlay, faStop, IconDefinition } from '@fortawesome/free-solid-svg-icons'
+import { faFastBackward, faPause, faPlay, faStop, IconDefinition } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { stop, togglePaused } from '@musical-patterns/performer'
-import { from } from '@musical-patterns/utilities'
+import { setTime, stop, togglePaused } from '@musical-patterns/performer'
+import { BEGINNING, from } from '@musical-patterns/utilities'
 import * as React from 'react'
 import { connect } from 'react-redux'
 import { Dispatch } from 'redux'
@@ -24,11 +24,15 @@ const mapStateToProps: (state: ImmutableRootState) => TimeControlsPropsFromState
 
 const mapDispatchToProps: (dispatch: Dispatch) => TimeControlsPropsFromDispatch =
     (dispatch: Dispatch): TimeControlsPropsFromDispatch => ({
+        rewindHandler: async (): Promise<void> => {
+            await setTime(BEGINNING)
+            dispatch({ type: ActionType.SET_TIME, data: 0 })
+        },
         stopHandler: async (): Promise<void> => {
-            stop()
+            await stop()
             const batchedAction: BatchAction = batchActions([
                 { type: ActionType.SET_PAUSED, data: true },
-                { type: ActionType.SET_TIME, data: 0 },
+                { type: ActionType.SET_TIME, data: BEGINNING },
             ])
             dispatch(batchedAction)
         },
@@ -39,7 +43,8 @@ const mapDispatchToProps: (dispatch: Dispatch) => TimeControlsPropsFromDispatch 
     })
 
 const TimeControls: (timeControlsProps: TimeControlsProps) => JSX.Element =
-    ({ togglePausedHandler, stopHandler, paused, time, totalDuration }: TimeControlsProps): JSX.Element => {
+    (props: TimeControlsProps): JSX.Element => {
+        const { rewindHandler, togglePausedHandler, stopHandler, paused, time, totalDuration } = props
         const controlId: string = paused ? 'play' : 'pause'
         const icon: IconDefinition = paused ? faPlay : faPause
 
@@ -49,8 +54,15 @@ const TimeControls: (timeControlsProps: TimeControlsProps) => JSX.Element =
         return (
             <div {...{ id: 'time-controls-container' }}>
                 <div {...{ id: 'time-controls' }}>
-                    <div {...{ id: 'stop', onClick: stopHandler }}><FontAwesomeIcon {...{ icon: faStop }}/></div>
-                    <div {...{ id: controlId, onClick: togglePausedHandler }}><FontAwesomeIcon {...{ icon }}/></div>
+                    <div {...{ id: 'rewind', onClick: rewindHandler }}>
+                        <FontAwesomeIcon {...{ icon: faFastBackward }}/>
+                    </div>
+                    <div {...{ id: 'stop', onClick: stopHandler }}>
+                        <FontAwesomeIcon {...{ icon: faStop }}/>
+                    </div>
+                    <div {...{ id: controlId, onClick: togglePausedHandler }}>
+                        <FontAwesomeIcon {...{ icon }}/>
+                    </div>
                     <input {...{
                         max: totalTimeForDisplay,
                         min: 0,

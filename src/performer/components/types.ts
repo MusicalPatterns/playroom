@@ -7,6 +7,7 @@ interface TimeControlsPropsFromState {
 }
 
 interface TimeControlsPropsFromDispatch {
+    rewindHandler: VoidFunction,
     stopHandler: VoidFunction,
     togglePausedHandler: VoidFunction,
 }

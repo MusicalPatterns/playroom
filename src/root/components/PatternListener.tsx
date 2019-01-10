@@ -1,8 +1,8 @@
 import { calculatePatternTotalCompiledDuration, compilePattern } from '@musical-patterns/compiler'
 import { PatternSpec } from '@musical-patterns/pattern'
-import { Note, perform, setTime, ThreadSpec } from '@musical-patterns/performer'
+import { Note, perform, ThreadSpec } from '@musical-patterns/performer'
 import { Pattern } from '@musical-patterns/registry'
-import { BEGINNING, doAsync, logMessageToConsole, Time } from '@musical-patterns/utilities'
+import { doAsync, logMessageToConsole, Time } from '@musical-patterns/utilities'
 import * as React from 'react'
 import { connect } from 'react-redux'
 import { Dispatch } from 'redux'
@@ -27,8 +27,10 @@ const mapDispatchToProps: (dispatch: Dispatch) => PatternListenerPropsFromDispat
     })
 
 const PatternListener: (patternListenerProps: PatternListenerProps) => JSX.Element =
-    ({ debugMode, patternId, patterns, submittedPatternSpec, setTotalDuration }: PatternListenerProps): JSX.Element => {
+    (props: PatternListenerProps): JSX.Element => {
         doAsync(async () => {
+            const { debugMode, patternId, patterns, submittedPatternSpec, setTotalDuration } = props
+
             const pattern: Pattern = patterns[ patternId ]
             const spec: PatternSpec = destringifyPatternSpec(submittedPatternSpec)
             const patternWithSpecApplied: Pattern = { ...pattern, spec }
@@ -41,7 +43,6 @@ const PatternListener: (patternListenerProps: PatternListenerProps) => JSX.Eleme
             const totalDuration: Time = await calculatePatternTotalCompiledDuration(patternWithSpecApplied)
             setTotalDuration(totalDuration)
 
-            setTime(BEGINNING)
             await perform(threadSpecs)
         })
 
