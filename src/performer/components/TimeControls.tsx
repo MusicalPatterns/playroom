@@ -1,7 +1,7 @@
 import { faFastBackward, faPause, faPlay, faStop, IconDefinition } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { setTime, stop, togglePaused } from '@musical-patterns/performer'
-import { BEGINNING, from } from '@musical-patterns/utilities'
+import { BEGINNING, DECIMAL, from, to } from '@musical-patterns/utilities'
 import * as React from 'react'
 import { connect } from 'react-redux'
 import { Dispatch } from 'redux'
@@ -36,6 +36,11 @@ const mapDispatchToProps: (dispatch: Dispatch) => TimeControlsPropsFromDispatch 
             ])
             dispatch(batchedAction)
         },
+        timeChangeHandler: async (event: React.SyntheticEvent): Promise<void> => {
+            const target: HTMLInputElement = event.target as HTMLInputElement
+
+            await setTime(to.Time(parseInt(target.value, DECIMAL)))
+        },
         togglePausedHandler: (): void => {
             dispatch({ type: ActionType.TOGGLE_PAUSED })
             togglePaused()
@@ -44,7 +49,15 @@ const mapDispatchToProps: (dispatch: Dispatch) => TimeControlsPropsFromDispatch 
 
 const TimeControls: (timeControlsProps: TimeControlsProps) => JSX.Element =
     (props: TimeControlsProps): JSX.Element => {
-        const { rewindHandler, togglePausedHandler, stopHandler, paused, time, totalDuration } = props
+        const {
+            rewindHandler,
+            timeChangeHandler,
+            togglePausedHandler,
+            stopHandler,
+            paused,
+            time,
+            totalDuration,
+        } = props
         const controlId: string = paused ? 'play' : 'pause'
         const icon: IconDefinition = paused ? faPlay : faPause
 
@@ -66,7 +79,7 @@ const TimeControls: (timeControlsProps: TimeControlsProps) => JSX.Element =
                     <input {...{
                         max: totalTimeForDisplay,
                         min: 0,
-                        readOnly: true,
+                        onChange: timeChangeHandler,
                         type: 'range',
                         value: timeForDisplay,
                     }}/>

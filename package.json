@@ -39,7 +39,7 @@
     "@musical-patterns/pattern-playroom-test": "^1.0.43",
     "@musical-patterns/performer": "^1.0.121",
     "@musical-patterns/registry": "^1.0.17",
-    "@musical-patterns/utilities": "^1.0.144",
+    "@musical-patterns/utilities": "^1.0.145",
     "@types/react": "^16.7.18",
     "@types/react-dom": "^16.0.9",
     "@types/react-redux": "^6.0.12",

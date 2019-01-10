@@ -1,4 +1,5 @@
 import { Time } from '@musical-patterns/utilities'
+import * as React from 'react'
 
 interface TimeControlsPropsFromState {
     paused: boolean,
@@ -9,6 +10,7 @@ interface TimeControlsPropsFromState {
 interface TimeControlsPropsFromDispatch {
     rewindHandler: VoidFunction,
     stopHandler: VoidFunction,
+    timeChangeHandler: (event: React.SyntheticEvent) => Promise<void>,
     togglePausedHandler: VoidFunction,
 }
 
