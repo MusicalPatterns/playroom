@@ -1,6 +1,8 @@
 import { clickElement, fillInElement, findElement } from 'puppet-strings'
+import { PatternSpecInputStates } from '../../../src/indexForTest'
 import { testGlobals } from '../../setup'
 import {
+    elementExists,
     elementValue,
     INVALID_TEST_MODIFICATION,
     loseFocus,
@@ -10,14 +12,14 @@ import {
     PATTERN_SPEC_HEADER,
     PATTERN_SPEC_PROPERTY_ONE_KEY,
     PATTERN_SPEC_PROPERTY_TWO_KEY,
-    standardTestReset,
     selectOtherTestPattern,
     selectTestPattern,
+    standardTestReset,
     TEST_MODIFICATION,
+    TEST_PATTERN_ID,
     TEST_PATTERN_SPEC_PROPERTY_ONE_VALUE,
     TEST_PATTERN_SPEC_PROPERTY_TWO_VALUE,
 } from '../../support'
-import { PatternSpecInputStates } from '../../../src/indexForTest'
 
 describe('pattern list', () => {
     beforeEach(async done => {
@@ -27,6 +29,13 @@ describe('pattern list', () => {
 
     it('shows a header for the pattern after you select it', async done => {
         await findElement(testGlobals.tab, 'h3', PATTERN_SPEC_HEADER)
+        done()
+    })
+
+    it('the selected pattern is highlighted', async done => {
+        expect(elementExists(`#${TEST_PATTERN_ID}.selected`))
+            .toBeTruthy()
+
         done()
     })
 

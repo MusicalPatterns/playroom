@@ -3,7 +3,7 @@
 @import '../../styleVariables/fonts';
 
 ul {
-  list-style: none;
+  list-style: square;
   padding-inline-start: 0;
   margin-block-start: 0;
   margin-block-end: 0;
@@ -13,18 +13,23 @@ ul {
 
 li {
   padding-bottom: $small;
+  color: $grey;
 
   div:first-child {
     font-size: $medium;
     @extend .leipziger-antiqua-bold;
-
-    &:hover {
-      cursor: pointer;
-      color: $hover;
-    }
   }
 
   div {
     font-size: $small;
+  }
+
+  &:hover {
+    cursor: pointer;
+    color: $light-grey;
+  }
+
+  &.selected {
+    color: $almost-white;
   }
 }
