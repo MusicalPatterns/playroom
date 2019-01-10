@@ -33,7 +33,6 @@
 
 @import url('//hello.myfonts.net/count/38613A');
 @import url('https://fonts.googleapis.com/css?family=Nobile');
-@import './colors.scss';
 
 @font-face {
   font-family: 'LeipzigerAnt-Dem';
@@ -70,33 +69,4 @@
   url('../../../assets/fonts/38613A_3_0.woff') format('woff'),
   url('../../../assets/fonts/38613A_3_0.ttf') format('truetype'),
   url('../../../assets/fonts/38613A_3_0.svg') format('svg');
-}
-
-.leipziger-antiqua-bold {
-  font-weight: normal;
-  font-family: 'LeipzigerAnt-Dem', serif;
-}
-
-.leipziger-antiqua-regular {
-  font-weight: normal;
-  font-family: 'LeipzigerAnt-Reg', serif;
-}
-
-.leipziger-antiqua-small-caps {
-  font-weight: normal;
-  font-family: 'LeipzigerAntCapReg', serif;
-}
-
-.leipziger-antiqua-italics {
-  font-weight: normal;
-  font-family: 'LeipzigerAnt-Ita', serif;
-}
-
-* {
-  font-family: 'Nobile', sans-serif;
-  color: $almost-black;
-}
-
-h1, h2, h3 {
-  @extend .leipziger-antiqua-bold;
 }

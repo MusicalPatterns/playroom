@@ -1,0 +1,30 @@
+@import './colors.scss';
+
+.leipziger-antiqua-bold {
+  font-weight: normal;
+  font-family: 'LeipzigerAnt-Dem', serif;
+}
+
+.leipziger-antiqua-regular {
+  font-weight: normal;
+  font-family: 'LeipzigerAnt-Reg', serif;
+}
+
+.leipziger-antiqua-small-caps {
+  font-weight: normal;
+  font-family: 'LeipzigerAntCapReg', serif;
+}
+
+.leipziger-antiqua-italics {
+  font-weight: normal;
+  font-family: 'LeipzigerAnt-Ita', serif;
+}
+
+* {
+  font-family: 'Nobile', sans-serif;
+  color: $almost-black;
+}
+
+h1, h2, h3 {
+  @extend .leipziger-antiqua-bold;
+}
