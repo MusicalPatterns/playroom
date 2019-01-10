@@ -1,6 +1,6 @@
-const common = require('./webpack.common')
+const browser = require('./webpack.browser')
 const merge = require('webpack-merge')
 
-module.exports = merge(common, {
+module.exports = merge(browser, {
     mode: 'production',
 })

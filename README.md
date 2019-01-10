@@ -12,6 +12,8 @@ These files are:
 - src/playroom.ts
 - webpack.common.js
 - webpack.pattern.js
+- webpack.local.js
+- webpack.prod.js
 - webpack.lab.js
 
 ## usage
