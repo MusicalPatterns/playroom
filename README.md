@@ -39,3 +39,19 @@ musical-patterns-playroom
 ```
 
 This will start up a `webpack-dev-server` with the current patterns running in it.
+
+## assets notes
+
+If you want any of the assets, I'm afraid you'll need to find some way to get thm into into your bundle.
+I suggest `npm i copy-webpack-plugin` and adding this to your `webpack.config.js`.
+Except add one entry to this array each for .wav, .svg, .eot, .woff, .woff2, and .ttf.
+
+```
+new CopyWebpackPlugin([
+	{
+		from: 'node_modules/@musical-patterns/performer/dist/*.wav',
+		to: path.join(__dirname, './dist'),
+		flatten: true,
+	},
+]),
+```
