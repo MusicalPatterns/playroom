@@ -1,5 +1,3 @@
-import { PatternMetadata } from '@musical-patterns/pattern'
-import { Pattern } from '@musical-patterns/registry'
 import * as React from 'react'
 import { connect } from 'react-redux'
 import { ImmutablePatternState, PatternList, PatternStateKeys } from '../../pattern'
@@ -7,7 +5,8 @@ import { PatternSpec } from '../../patternSpec'
 import { EnterImmersiveAudioButton, TimeControls } from '../../performer'
 import { ImmutableRootState, RootStateKeys } from '../state'
 import PatternListener from './PatternListener'
-import { AppProps, PropsFromApp } from './types'
+import Post from './Post'
+import { AppProps } from './types'
 
 const mapStateToProps: (state: ImmutableRootState) => AppProps =
     (state: ImmutableRootState): AppProps => {
@@ -17,14 +16,6 @@ const mapStateToProps: (state: ImmutableRootState) => AppProps =
             patternId: patternState.get(PatternStateKeys.PATTERN_ID),
             patterns: patternState.get(PatternStateKeys.PATTERNS),
         }
-    }
-
-const patternDescription: (propsFromApp: PropsFromApp) => string =
-    ({ patternId, patterns }: PropsFromApp): string => {
-        const pattern: Pattern = patterns[ patternId ]
-        const patternMetadata: PatternMetadata = pattern.metadata
-
-        return `${patternMetadata.formattedName}: ${patternMetadata.description}`
     }
 
 const App: React.ComponentType<AppProps> =
@@ -52,7 +43,7 @@ const App: React.ComponentType<AppProps> =
                                 <TimeControls/>
                                 <EnterImmersiveAudioButton/>
                             </div>
-                            <div>{patternDescription({ patternId, patterns })}</div>
+                            <Post {...{ patternId, patterns }} />
                             <PatternListener {...{ patternId, patterns }}/>
                         </div> :
                         <div id='no-pattern-message'>To begin, select a pattern from the list on the left.</div>
