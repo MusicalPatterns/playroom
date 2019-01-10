@@ -29,11 +29,38 @@ module.exports = {
         new HtmlWebpackPlugin({
             title: 'Musical Patterns',
         }),
-        new CopyWebpackPlugin([ {
-            from: 'node_modules/@musical-patterns/playroom/dist/*.wav',
-            to: path.join(__dirname, './dist'),
-            flatten: true,
-        } ]),
+        new CopyWebpackPlugin([
+            {
+                from: 'node_modules/@musical-patterns/playroom/dist/*.wav',
+                to: path.join(__dirname, './dist'),
+                flatten: true,
+            },
+            {
+                from: 'node_modules/@musical-patterns/playroom/dist/*.eot',
+                to: path.join(__dirname, './dist'),
+                flatten: true,
+            },
+            {
+                from: 'node_modules/@musical-patterns/playroom/dist/*.woff2',
+                to: path.join(__dirname, './dist'),
+                flatten: true,
+            },
+            {
+                from: 'node_modules/@musical-patterns/playroom/dist/*.woff',
+                to: path.join(__dirname, './dist'),
+                flatten: true,
+            },
+            {
+                from: 'node_modules/@musical-patterns/playroom/dist/*.ttf',
+                to: path.join(__dirname, './dist'),
+                flatten: true,
+            },
+            {
+                from: 'node_modules/@musical-patterns/playroom/dist/*.svg',
+                to: path.join(__dirname, './dist'),
+                flatten: true,
+            },
+        ]),
         new FaviconsWebpackPlugin('./node_modules/@musical-patterns/playroom/assets/favicon.png'),
     ],
 }
