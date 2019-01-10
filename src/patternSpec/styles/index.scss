@@ -1,30 +1,35 @@
+@import '../../root/styles/colors';
+@import '../../root/styles/sizes';
+
 #title-spacer {
   padding-bottom: 50%;
 }
 
 input {
   border: none;
-  border-radius: 3px;
+  outline: none;
+  border-radius: $border-size;
 }
 
 input.invalid {
-  box-shadow: 0 0 1.5px 1px red;
-  -webkit-box-shadow: 0 0 1.5px 1px red;
+  box-shadow: 0 0 $line-size $line-size $invalid;
+  -webkit-box-shadow: 0 0 $line-size $line-size $invalid;
   -webkit-appearance: none;
 }
 
 input.unsubmitted {
-  box-shadow: 0 0 1.5px 1px yellow;
-  -webkit-box-shadow: 0 0 1.5px 1px yellow;
+  box-shadow: 0 0 $line-size $line-size $unsubmitted;
+  -webkit-box-shadow: 0 0 $line-size $line-size $unsubmitted;
   -webkit-appearance: none;
 }
 
 .pattern-spec-input {
   display: flex;
-  margin-bottom: 5px;
+  align-items: center;
+  margin-bottom: $tiny;
 
   div, input, button {
-    margin-left: 10px;
+    margin-left: $small;
   }
 
   div {
@@ -35,6 +40,7 @@ input.unsubmitted {
   input {
     flex: 4181;
     min-width: 0;
+    height: $big;
   }
 
   button {
@@ -42,3 +48,6 @@ input.unsubmitted {
   }
 }
 
+#reset {
+  margin-bottom: $tiny;
+}

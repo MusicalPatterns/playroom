@@ -1,4 +1,5 @@
 @import '../../root/styles/colors';
+@import '../../root/styles/sizes';
 
 input[type=range] {
   -webkit-appearance: none;
@@ -8,42 +9,48 @@ input[type=range] {
 
 input[type=range]::-webkit-slider-runnable-track {
   background: $light-grey;
-  height: 2px;
+  border-radius: $border-size;
+  height: $border-size;
 }
 
 input[type=range]::-moz-range-track {
   background: $light-grey;
-  height: 2px;
+  border-radius: $border-size;
+  height: $border-size;
 }
 
 input[type=range]::-ms-track {
   background: $light-grey;
-  height: 2px;
+  border-radius: $border-size;
+  height: $border-size;
 }
 
 input[type=range]::-webkit-slider-thumb {
   -webkit-appearance: none;
   border: none;
-  height: 16px;
-  width: 2px;
-  background: $dark-grey;
-  margin-top: -7px;
+  border-radius: $border-size;
+  height: $medium;
+  width: $border-size;
+  background: $almost-black;
+  margin-top: $slider-offset;
 }
 
 input[type=range]::-moz-range-thumb {
   -webkit-appearance: none;
   border: none;
-  height: 16px;
-  width: 2px;
-  background: $dark-grey;
-  margin-top: -7px;
+  border-radius: $border-size;
+  height: $medium;
+  width: $border-size;
+  background: $almost-black;
+  margin-top: $slider-offset;
 }
 
 input[type=range]::-ms-thumb {
   -webkit-appearance: none;
   border: none;
-  height: 16px;
-  width: 2px;
-  background: $dark-grey;
-  margin-top: -7px;
+  border-radius: $border-size;
+  height: $medium;
+  width: $border-size;
+  background: $almost-black;
+  margin-top: $slider-offset;
 }

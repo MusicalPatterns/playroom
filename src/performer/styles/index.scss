@@ -1,32 +1,34 @@
 @import './slider';
 @import '../../root/styles/colors';
+@import '../../root/styles/sizes';
 
 #no-pattern-message {
-  margin: 20px 0;
-  font-size: 12px;
+  margin: $big 0;
+  font-size: $small;
 }
 
 #time-controls {
-  border: 2px solid $light-grey;
-  border-radius: 5px;
+  border: $border-size solid $light-grey;
+  border-radius: $border-size;
   display: flex;
   align-items: center;
-  margin: 20px 0;
-  padding: 5px 10px;
+  margin: $big 0;
+  padding: $tiny $small;
+  font-size: $medium;
 
   div {
     cursor: pointer;
-    padding-right: 10px;
-    height: 16px;
-    width: 16px;
+    padding-right: $small;
+    height: $medium;
+    width: $medium;
 
     &:hover {
-      color: $dark-grey;
+      color: $hover;
     }
   }
 
   input {
     flex: auto;
-    height: 16px;
+    height: $medium;
   }
 }

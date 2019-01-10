@@ -1,5 +1,6 @@
 @import "../../root/styles/fonts";
 @import "../../root/styles/colors";
+@import "../../root/styles/sizes";
 
 ul {
   list-style: none;
@@ -11,19 +12,19 @@ ul {
 }
 
 li {
-  padding-bottom: 10px;
+  padding-bottom: $small;
 
   div:first-child {
-    font-size: 14px;
+    font-size: $medium;
     @extend .leipziger-antiqua-bold;
 
     &:hover {
       cursor: pointer;
-      color: $dark-grey;
+      color: $hover;
     }
   }
 
   div {
-    font-size: 12px;
+    font-size: $small;
   }
 }

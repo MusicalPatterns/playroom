@@ -1,0 +1,19 @@
+$fibonacci-series: (1, 1, 2, 3, 5, 8, 13, 21, 34, 55, 89, 144, 233, 377, 610, 987, 1597, 2584, 4181, 6765);
+$fibonacci-series-size-offset: 4;
+
+$line-size: 1px * nth($fibonacci-series, 0 + $fibonacci-series-size-offset);    // 3
+$border-size: 1px *nth($fibonacci-series, 1 + $fibonacci-series-size-offset);   // 5
+$tiny: 1px * nth($fibonacci-series, 2 + $fibonacci-series-size-offset);         // 8
+$small: 1px *nth($fibonacci-series, 3 + $fibonacci-series-size-offset);         // 13
+$medium: 1px * nth($fibonacci-series, 4 + $fibonacci-series-size-offset);       // 21
+$big: 1px *nth($fibonacci-series, 5 + $fibonacci-series-size-offset);           // 34
+$huge: 1px * nth($fibonacci-series, 6 + $fibonacci-series-size-offset);         // 55
+
+$title-min-height: 1px * nth($fibonacci-series, 9 + $fibonacci-series-size-offset);
+
+$fibonacci-series-layout-offset: 14;
+$left: 1fr * nth($fibonacci-series, 0 + $fibonacci-series-layout-offset);
+$center: 1fr * nth($fibonacci-series, 2 + $fibonacci-series-layout-offset);
+$right: 1fr * nth($fibonacci-series, 1 + $fibonacci-series-layout-offset);
+
+$slider-offset: -$tiny;

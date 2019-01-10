@@ -33,6 +33,7 @@
 
 @import url('//hello.myfonts.net/count/38613A');
 @import url('https://fonts.googleapis.com/css?family=Nobile');
+@import './colors.scss';
 
 @font-face {
   font-family: 'LeipzigerAnt-Dem';
@@ -93,6 +94,7 @@
 
 * {
   font-family: 'Nobile', sans-serif;
+  color: $almost-black;
 }
 
 h1, h2, h3 {
