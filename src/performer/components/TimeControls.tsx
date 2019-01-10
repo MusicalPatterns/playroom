@@ -47,7 +47,7 @@ const TimeControls: (timeControlsProps: TimeControlsProps) => JSX.Element =
         const timeForDisplay: number = Math.round(from.Time(time)) % totalTimeForDisplay || 0
 
         return (
-            <div>
+            <div {...{ id: 'time-controls-container' }}>
                 <div {...{ id: 'time-controls' }}>
                     <div {...{ id: 'stop', onClick: stopHandler }}><FontAwesomeIcon {...{ icon: faStop }}/></div>
                     <div {...{ id: controlId, onClick: togglePausedHandler }}><FontAwesomeIcon {...{ icon }}/></div>

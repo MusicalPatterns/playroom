@@ -8,27 +8,43 @@
 }
 
 #time-controls {
-  border: $border-size solid $light-grey;
+  border: $border-size solid $dark-grey;
   border-radius: $border-size;
   display: flex;
   align-items: center;
   margin: $big 0;
   padding: $tiny $small;
   font-size: $medium;
+  background: $almost-black;
+  color: $almost-white;
 
   div {
     cursor: pointer;
     padding-right: $small;
     height: $medium;
     width: $medium;
-
-    &:hover {
-      color: $hover;
-    }
   }
 
   input {
     flex: auto;
     height: $medium;
+  }
+
+  path {
+    color: $almost-white;
+
+    &:hover {
+      color: $white;
+    }
+  }
+}
+
+#performer {
+  display: flex;
+  align-items: center;
+
+  #time-controls-container {
+    flex: auto;
+    padding-right: $medium;
   }
 }

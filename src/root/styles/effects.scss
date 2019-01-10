@@ -1,0 +1,7 @@
+@import './sizes';
+
+@mixin glow($color) {
+  box-shadow: 0 0 $line-size $line-size $color;
+  -webkit-box-shadow: 0 0 $line-size $line-size $color;
+  -webkit-appearance: none;
+}

@@ -46,9 +46,12 @@ const App: React.ComponentType<AppProps> =
                 </div>
 
                 <div id='center'>
-                    {patternId ? <div>
-                            <TimeControls/>
-                            <EnterImmersiveAudioButton/>
+                    {patternId ?
+                        <div>
+                            <div id='performer'>
+                                <TimeControls/>
+                                <EnterImmersiveAudioButton/>
+                            </div>
                             <div>{patternDescription({ patternId, patterns })}</div>
                             <PatternListener {...{ patternId, patterns }}/>
                         </div> :
