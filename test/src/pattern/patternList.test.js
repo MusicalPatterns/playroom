@@ -9,7 +9,7 @@ import {
     modify,
     OTHER_TEST_PATTERN_SPEC_PROPERTY_ONE_VALUE,
     OTHER_TEST_PATTERN_SPEC_PROPERTY_TWO_VALUE,
-    PATTERN_SPEC_HEADER,
+    TEST_PATTERN_TITLE,
     PATTERN_SPEC_PROPERTY_ONE_KEY,
     PATTERN_SPEC_PROPERTY_TWO_KEY,
     selectOtherTestPattern,
@@ -28,7 +28,7 @@ describe('pattern list', () => {
     })
 
     it('shows a header for the pattern after you select it', async done => {
-        await findElement(testGlobals.tab, 'h3', PATTERN_SPEC_HEADER)
+        await findElement(testGlobals.tab, 'h1', TEST_PATTERN_TITLE)
         done()
     })
 
