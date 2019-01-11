@@ -19,10 +19,27 @@ module.exports = merge(common, {
         new HtmlWebpackPlugin({
             title: 'Musical Patterns - Playroom QA',
         }),
-        new CopyWebpackPlugin([ {
-            from: 'node_modules/@musical-patterns/performer/dist/*.wav',
-            to: path.join(__dirname, './test-qa'),
-            flatten: true,
-        } ]),
+        new CopyWebpackPlugin([
+            {
+                from: 'node_modules/@musical-patterns/performer/dist/*.wav',
+                to: path.join(__dirname, './test-qa'),
+                flatten: true,
+            },
+            {
+                from: 'node_modules/@musical-patterns/pattern-playroom-test/dist/*.jpg',
+                to: path.join(__dirname, './test-qa'),
+                flatten: true,
+            },
+            {
+                from: 'node_modules/@musical-patterns/pattern-playroom-test/dist/*.png',
+                to: path.join(__dirname, './test-qa'),
+                flatten: true,
+            },
+            {
+                from: 'node_modules/@musical-patterns/pattern-playroom-test/dist/*.svg',
+                to: path.join(__dirname, './test-qa'),
+                flatten: true,
+            },
+        ]),
     ],
 })
