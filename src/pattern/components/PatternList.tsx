@@ -9,7 +9,7 @@ const mapDispatchToProps: (dispatch: Dispatch) => PatternListPropsFromDispatch =
     (dispatch: Dispatch): PatternListPropsFromDispatch => ({
         handlePatternChangeEvent: async (parameters: PatternChangeEventExtractorParameters): Promise<void> => {
             const { event, patterns, patternId } = parameters
-            const target: HTMLLIElement = event.target as HTMLLIElement
+            const target: HTMLLIElement = event.currentTarget as HTMLLIElement
             const newPatternId: PatternId = target.id as PatternId
 
             if (newPatternId === patternId) {

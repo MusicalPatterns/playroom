@@ -3,7 +3,7 @@ import * as React from 'react'
 import { TimeInMinutesAndSecondsProps } from './types'
 
 const TimeInMinutesAndSeconds: (props: TimeInMinutesAndSecondsProps) => JSX.Element =
-    ({ timeForDisplay }: TimeInMinutesAndSecondsProps): JSX.Element => {
+    ({ disabled, timeForDisplay }: TimeInMinutesAndSecondsProps): JSX.Element => {
         const totalSeconds: number = Math.round(timeForDisplay / MILLISECONDS_PER_SECOND)
         const timeMinutesPart: string = Math.floor(totalSeconds / SECONDS_PER_MINUTE)
             .toString()
@@ -14,10 +14,10 @@ const TimeInMinutesAndSeconds: (props: TimeInMinutesAndSecondsProps) => JSX.Elem
         }
 
         return (
-            <div id='time-in-seconds'>
-                <div>{timeMinutesPart}</div>
+            <div {...{ id: 'time-in-minutes-and-seconds', className: disabled ? 'disabled' : '' }}>
+                <div>{disabled ? '-' : timeMinutesPart}</div>
                 <div>:</div>
-                <div>{timeSecondsPart}</div>
+                <div>{disabled ? '--' : timeSecondsPart}</div>
             </div>
         )
     }

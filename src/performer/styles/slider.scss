@@ -2,31 +2,57 @@
 @import '../../sizes';
 
 input[type=range] {
+  transition: background 0.5s ease;
+
   -webkit-appearance: none;
   border: none;
   outline: none;
   background: $almost-black;
+
+  &:disabled {
+    background: $almost-white;
+  }
 }
 
 input[type=range]::-webkit-slider-runnable-track {
+  transition: background 0.5s ease;
+
   background: $dark-grey;
   border-radius: $border-size;
   height: $border-size;
+}
+
+input[type=range]:disabled::-webkit-slider-runnable-track {
+  background: $light-grey;
 }
 
 input[type=range]::-moz-range-track {
+  transition: background 0.5s ease;
+
   background: $dark-grey;
   border-radius: $border-size;
   height: $border-size;
+}
+
+input[type=range]:disabled::-moz-range-track {
+  background: $light-grey;
 }
 
 input[type=range]::-ms-track {
+  transition: background 0.5s ease;
+
   background: $dark-grey;
   border-radius: $border-size;
   height: $border-size;
 }
 
+input[type=range]:disabled::-ms-track {
+  background: $light-grey;
+}
+
 input[type=range]::-webkit-slider-thumb {
+  transition: background 0.5s ease;
+
   -webkit-appearance: none;
   border: none;
   border-radius: $border-size;
@@ -35,9 +61,16 @@ input[type=range]::-webkit-slider-thumb {
   background: $grey;
   margin-top: $slider-offset;
   cursor: pointer;
+}
+
+input[type=range]:disabled::-webkit-slider-thumb {
+  cursor: inherit;
+  background: $light-grey;
 }
 
 input[type=range]::-moz-range-thumb {
+  transition: background 0.5s ease;
+
   -webkit-appearance: none;
   border: none;
   border-radius: $border-size;
@@ -48,7 +81,14 @@ input[type=range]::-moz-range-thumb {
   cursor: pointer;
 }
 
+input[type=range]:disabled::-moz-range-thumb {
+  cursor: inherit;
+  background: $light-grey;
+}
+
 input[type=range]::-ms-thumb {
+  transition: background 0.5s ease;
+
   -webkit-appearance: none;
   border: none;
   border-radius: $border-size;
@@ -57,4 +97,9 @@ input[type=range]::-ms-thumb {
   background: $grey;
   margin-top: $slider-offset;
   cursor: pointer;
+}
+
+input[type=range]:disabled::-ms-thumb {
+  cursor: inherit;
+  background: $light-grey;
 }

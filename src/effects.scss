@@ -5,3 +5,8 @@
   -webkit-box-shadow: 0 0 $line-size $line-size $color;
   -webkit-appearance: none;
 }
+
+@mixin no-glow() {
+  box-shadow: none;
+  -webkit-box-shadow: none;
+}

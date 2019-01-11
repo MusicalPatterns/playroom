@@ -1,0 +1,24 @@
+@import '../../sizes';
+
+#time-in-minutes-and-seconds {
+  padding-right: 0;
+  width: $huge;
+
+  div {
+    padding-right: 0;
+    display: inline-block;
+    width: $tiny;
+  }
+
+  div:first-child {
+    width: $small;
+  }
+
+  div:last-child {
+    width: $medium;
+  }
+
+  &.disabled {
+    user-select: none;
+  }
+}

@@ -1,61 +1,13 @@
 @import '../../colors';
 @import '../../sizes';
+@import '../../effects';
 @import './slider';
+@import './timeInMinutesAndSeconds';
+@import './timeControls';
 
 #no-pattern-message {
   margin: $big 0;
   font-size: $small;
-}
-
-#time-controls {
-  border: $border-size solid $dark-grey;
-  border-radius: $border-size;
-  display: flex;
-  align-items: center;
-  margin: $big 0;
-  padding: $tiny $small;
-  font-size: $medium;
-  background: $almost-black;
-  color: $almost-white;
-
-  div {
-    cursor: pointer;
-    padding-right: $small;
-    height: $medium;
-  }
-
-  #time-in-seconds {
-    padding-right: 0;
-    width: $huge;
-
-    div {
-      padding-right: 0;
-      display: inline-block;
-      width: $tiny;
-    }
-
-    div:first-child {
-      width: $small;
-    }
-
-    div:last-child {
-      width: $medium;
-    }
-  }
-
-  input {
-    flex: auto;
-    height: $medium;
-    padding-right: $small;
-  }
-
-  path {
-    color: $almost-white;
-
-    &:hover {
-      color: $white;
-    }
-  }
 }
 
 #performer {

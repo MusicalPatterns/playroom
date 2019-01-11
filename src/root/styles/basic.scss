@@ -6,6 +6,8 @@ button {
   cursor: pointer;
   background: $light-grey;
   border: none;
+  outline: none;
+
   border-radius: $border-size;
   height: $big;
   min-width: $huge;
@@ -17,7 +19,6 @@ button {
   }
 
   &:focus {
-    outline: none;
     @include glow($focus);
   }
 }

@@ -5,12 +5,8 @@ export {
     PerformerStateAction,
 } from './state'
 export {
-    TimeControls,
-    EnterImmersiveAudioButton,
+    Performer,
 } from './components'
-export {
-    onPerformerUpdate,
-} from './events'
 
 // tslint:disable-next-line:no-import-side-effect
 import './styles'

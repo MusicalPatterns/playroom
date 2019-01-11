@@ -1,0 +1,67 @@
+@import '../../colors';
+@import '../../sizes';
+@import '../../effects';
+
+#time-controls {
+  transition: background 0.5s ease, color 0.5s ease, border 0.5s ease;
+
+  display: flex;
+  align-items: center;
+  margin: $big 0;
+  padding: $tiny $small;
+  font-size: $medium;
+
+  border-radius: $border-size;
+  border: $border-size solid $dark-grey;
+  background: $almost-black;
+  color: $almost-white;
+
+  button {
+    transition: background 0.5s ease;
+    @include no-glow();
+
+    height: $medium;
+    min-width: $medium;
+    width: $medium;
+    margin-right: $tiny;
+    background: $almost-black;
+    padding: 0;
+
+    &:disabled {
+      background: $almost-white;
+    }
+
+    svg {
+      width: $medium;
+      height: $medium;
+    }
+  }
+
+  input {
+    flex: auto;
+    height: $medium;
+    padding-right: $small;
+  }
+
+  path {
+    color: $almost-white;
+
+    &:hover {
+      color: $white;
+    }
+  }
+
+  &.disabled {
+    border: $border-size solid $light-grey;
+    background: $almost-white;
+    color: $light-grey;
+
+    path {
+      color: $light-grey;
+
+      &:hover {
+        color: $light-grey;
+      }
+    }
+  }
+}

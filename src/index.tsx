@@ -1,11 +1,16 @@
-import { enableImmersiveAudio, setupPerformer } from '@musical-patterns/performer'
+import { enableImmersiveAudio, OnUpdate, setupPerformer } from '@musical-patterns/performer'
 import { Patterns } from '@musical-patterns/registry'
+import { Time } from '@musical-patterns/utilities'
 import * as React from 'react'
 import { render } from 'react-dom'
 import { Provider } from 'react-redux'
 import { BatchAction, batchActions } from 'redux-batched-actions'
-import { onPerformerUpdate } from './performer'
 import { ActionType, App, store } from './root'
+
+const onPerformerUpdate: OnUpdate =
+    (time: Time): void => {
+        store.dispatch({ type: ActionType.SET_TIME, data: time })
+    }
 
 const setupPlayroom: (patterns: Patterns, debugMode?: boolean) => Promise<HTMLDivElement> =
     async (patterns: Patterns, debugMode: boolean = false): Promise<HTMLDivElement> => {

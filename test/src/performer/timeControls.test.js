@@ -19,10 +19,14 @@ const A_BIT_LONGER = 1000
 const currentTime = async () => parseInt(await elementInnerText(`#${SecretSelectorsForTest.SECRET_TIMER}`))
 
 describe('time controls', () => {
-    it('do not appear if you have not yet selected a pattern', async done => {
+    it('are disabled if you have not yet selected a pattern', async done => {
         await navigate(testGlobals.tab, APP_URL)
-        expect(await elementExists(`#${SecretSelectorsForTest.SECRET_TIMER}`))
-            .toBeFalsy()
+        expect(await elementExists(`#rewind:disabled`))
+            .toBeTruthy()
+        expect(await elementExists(`#stop:disabled`))
+            .toBeTruthy()
+        expect(await elementExists(`#play:disabled`))
+            .toBeTruthy()
 
         done()
     })
