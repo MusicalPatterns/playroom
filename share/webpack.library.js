@@ -8,4 +8,10 @@ module.exports = merge(common, {
         library: 'pattern',
         libraryTarget: 'umd',
     },
+    externals: [
+        '@musical-patterns/compiler',
+        '@musical-patterns/pattern',
+        '@musical-patterns/registry',
+        '@musical-patterns/utilities',
+    ],
 })

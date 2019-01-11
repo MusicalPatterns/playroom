@@ -27,10 +27,4 @@ module.exports = {
     resolve: {
         extensions: [ '.ts', '.tsx', '.js', '.json' ],
     },
-    externals: [
-        '@musical-patterns/compiler',
-        '@musical-patterns/pattern',
-        '@musical-patterns/registry',
-        '@musical-patterns/utilities',
-    ],
 }
