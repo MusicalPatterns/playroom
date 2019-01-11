@@ -5,7 +5,7 @@ const Title: () => JSX.Element =
         <div id='title'>
             <div id='title-contents'>
                 <h1>Musical Patterns</h1>
-                <div>Douglas Blumeyer</div>
+                <div><a {...{ href: 'https://douglasblumeyer.com', target: '__blank' }}>Douglas Blumeyer</a></div>
             </div>
         </div>
     )

@@ -26,3 +26,13 @@ button {
 img {
   display: block;
 }
+
+a {
+  color: inherit;
+  text-decoration: inherit;
+  font-family: inherit;
+
+  &:hover {
+    color: $almost-white;
+  }
+}
