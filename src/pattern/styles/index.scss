@@ -20,8 +20,13 @@ li {
     @extend .leipziger-antiqua-bold;
   }
 
+  div:last-child {
+    color: $grey;
+  }
+
   div {
     font-size: $small;
+    pointer-events: none;
   }
 
   &:hover {
