@@ -20,9 +20,14 @@ interface EnterImmersiveAudioButtonProps {
     enterImmersiveAudioHandler: VoidFunction,
 }
 
+interface TimeInMinutesAndSecondsProps {
+    timeForDisplay: number,
+}
+
 export {
     TimeControlsProps,
     TimeControlsPropsFromDispatch,
     TimeControlsPropsFromState,
     EnterImmersiveAudioButtonProps,
+    TimeInMinutesAndSecondsProps,
 }

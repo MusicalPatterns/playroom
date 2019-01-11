@@ -22,12 +22,31 @@
     cursor: pointer;
     padding-right: $small;
     height: $medium;
-    width: $medium;
+  }
+
+  #time-in-seconds {
+    padding-right: 0;
+    width: $huge;
+
+    div {
+      padding-right: 0;
+      display: inline-block;
+      width: $tiny;
+    }
+
+    div:first-child {
+      width: $small;
+    }
+
+    div:last-child {
+      width: $medium;
+    }
   }
 
   input {
     flex: auto;
     height: $medium;
+    padding-right: $small;
   }
 
   path {

@@ -9,6 +9,7 @@ import { BatchAction, batchActions } from 'redux-batched-actions'
 import { ActionType, ImmutableRootState, RootStateKeys } from '../../root'
 import { SecretSelectorsForTest } from '../../types'
 import { ImmutablePerformerState, PerformerStateKeys } from '../state'
+import TimeInMinutesAndSeconds from './TimeInMinutesAndSeconds'
 import { TimeControlsProps, TimeControlsPropsFromDispatch, TimeControlsPropsFromState } from './types'
 
 const mapStateToProps: (state: ImmutableRootState) => TimeControlsPropsFromState =
@@ -83,6 +84,7 @@ const TimeControls: (timeControlsProps: TimeControlsProps) => JSX.Element =
                         type: 'range',
                         value: timeForDisplay,
                     }}/>
+                    <TimeInMinutesAndSeconds {...{ timeForDisplay }}/>
                 </div>
                 <div {...{ id: SecretSelectorsForTest.SECRET_TIMER }}>{timeForDisplay}</div>
                 <div {...{ id: SecretSelectorsForTest.SECRET_TOTAL_DURATION }}>{totalTimeForDisplay}</div>
