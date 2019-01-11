@@ -16,4 +16,5 @@ $left: 1fr * nth($fibonacci-series, 0 + $fibonacci-series-layout-offset);
 $center: 1fr * nth($fibonacci-series, 2 + $fibonacci-series-layout-offset);
 $right: 1fr * nth($fibonacci-series, 1 + $fibonacci-series-layout-offset);
 
-$slider-offset: -$tiny;
+$timeline-offset: -$tiny;
+$toggle-immersive-audio-button-width: 1px * nth($fibonacci-series, 9 + $fibonacci-series-size-offset);

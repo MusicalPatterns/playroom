@@ -6,9 +6,10 @@ import { connect } from 'react-redux'
 import { Dispatch } from 'redux'
 import { ImmutableRootState, RootStateKeys } from '../../root'
 import { SecretSelectorsForTest } from '../../types'
-import { buildRewindHandler, buildStopHandler, buildTimeChangeHandler, buildTogglePausedHandler } from '../events'
+import { buildRewindHandler, buildStopHandler, buildTogglePausedHandler } from '../events'
 import { ImmutablePerformerState, PerformerStateKeys } from '../state'
 import TimeInMinutesAndSeconds from './TimeInMinutesAndSeconds'
+import Timeline from './Timeline'
 import { TimeControlsProps, TimeControlsPropsFromDispatch, TimeControlsPropsFromState } from './types'
 
 const mapStateToProps: (state: ImmutableRootState) => TimeControlsPropsFromState =
@@ -26,7 +27,6 @@ const mapDispatchToProps: (dispatch: Dispatch) => TimeControlsPropsFromDispatch 
     (dispatch: Dispatch): TimeControlsPropsFromDispatch => ({
         rewindHandler: buildRewindHandler(dispatch),
         stopHandler: buildStopHandler(dispatch),
-        timeChangeHandler: buildTimeChangeHandler(dispatch),
         togglePausedHandler: buildTogglePausedHandler(dispatch),
     })
 
@@ -35,7 +35,6 @@ const TimeControls: (timeControlsProps: TimeControlsProps) => JSX.Element =
         const {
             disabled,
             rewindHandler,
-            timeChangeHandler,
             togglePausedHandler,
             stopHandler,
             paused,
@@ -60,14 +59,7 @@ const TimeControls: (timeControlsProps: TimeControlsProps) => JSX.Element =
                     <button {...{ id: controlId, onClick: togglePausedHandler, disabled }}>
                         <FontAwesomeIcon {...{ icon }}/>
                     </button>
-                    <input {...{
-                        disabled,
-                        max: totalTimeForDisplay,
-                        min: 0,
-                        onChange: timeChangeHandler,
-                        type: 'range',
-                        value: timeForDisplay,
-                    }}/>
+                    <Timeline {...{ disabled, timeForDisplay, totalTimeForDisplay }} />
                     <TimeInMinutesAndSeconds {...{ disabled, timeForDisplay }}/>
                 </div>
                 <div {...{ id: SecretSelectorsForTest.SECRET_TIMER }}>{timeForDisplay}</div>

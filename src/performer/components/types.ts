@@ -1,7 +1,7 @@
 import { Time } from '@musical-patterns/utilities'
 import * as React from 'react'
 
-interface TimeControlsPropsFromParent {
+interface MaybeDisabled {
     disabled: boolean,
 }
 
@@ -14,39 +14,43 @@ interface TimeControlsPropsFromState {
 interface TimeControlsPropsFromDispatch {
     rewindHandler: VoidFunction,
     stopHandler: VoidFunction,
-    timeChangeHandler: (event: React.SyntheticEvent) => Promise<void>,
     togglePausedHandler: VoidFunction,
 }
 
-interface TimeControlsProps extends TimeControlsPropsFromState,
-    TimeControlsPropsFromDispatch, TimeControlsPropsFromParent {}
+interface TimeControlsProps extends TimeControlsPropsFromState, TimeControlsPropsFromDispatch, MaybeDisabled {}
 
-interface EnterImmersiveAudioButtonPropsFromParent {
-    disabled: boolean,
+interface ToggleImmersiveAudioButtonPropsFromState {
+    immersiveAudio: boolean,
+    immersiveAudioReady: boolean,
+    toggleImmersiveAudioHandler: VoidFunction,
 }
 
-interface EnterImmersiveAudioButtonPropsFromState {
-    enterImmersiveAudioHandler: VoidFunction,
-}
+interface ToggleImmersiveAudioButtonProps extends MaybeDisabled,
+    ToggleImmersiveAudioButtonPropsFromState {}
 
-interface EnterImmersiveAudioButtonProps extends EnterImmersiveAudioButtonPropsFromParent,
-    EnterImmersiveAudioButtonPropsFromState {}
-
-interface TimeInMinutesAndSecondsProps {
-    disabled: boolean,
+interface TimeInMinutesAndSecondsProps extends MaybeDisabled {
     timeForDisplay: number,
 }
 
-interface PerformerProps {
-    disabled: boolean,
+interface TimelinePropsFromParent extends MaybeDisabled {
+    timeForDisplay: number,
+    totalTimeForDisplay: number,
 }
+
+interface TimelinePropsFromDispatch {
+    timeChangeHandler: (event: React.SyntheticEvent) => Promise<void>,
+}
+
+interface TimelineProps extends TimelinePropsFromParent, TimelinePropsFromDispatch {}
 
 export {
     TimeControlsProps,
     TimeControlsPropsFromDispatch,
     TimeControlsPropsFromState,
-    EnterImmersiveAudioButtonPropsFromState,
-    EnterImmersiveAudioButtonProps,
+    ToggleImmersiveAudioButtonPropsFromState,
+    ToggleImmersiveAudioButtonProps,
     TimeInMinutesAndSecondsProps,
-    PerformerProps,
+    MaybeDisabled,
+    TimelinePropsFromDispatch,
+    TimelineProps,
 }

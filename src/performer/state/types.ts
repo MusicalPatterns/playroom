@@ -5,7 +5,9 @@ enum PerformerStateActionType {
     SET_TOTAL_DURATION = 'SET_TOTAL_DURATION',
     TOGGLE_PAUSED = 'TOGGLE_PAUSED',
     SET_PAUSED = 'SET_PAUSED',
-    SET_ENTER_IMMERSIVE_AUDIO_HANDLER = 'SET_ENTER_IMMERSIVE_AUDIO_HANDLER',
+    SET_TOGGLE_IMMERSIVE_AUDIO_HANDLER = 'SET_TOGGLE_IMMERSIVE_AUDIO_HANDLER',
+    SET_IMMERSIVE_AUDIO_READY = 'SET_IMMERSIVE_AUDIO_READY',
+    TOGGLE_IMMERSIVE_AUDIO = 'TOGGLE_IMMERSIVE_AUDIO',
 }
 
 interface TogglePaused {
@@ -27,9 +29,17 @@ interface SetTotalDuration {
     type: PerformerStateActionType.SET_TOTAL_DURATION,
 }
 
-interface SetEnterImmersiveAudioHandler {
+interface SetToggleImmersiveAudioHandler {
     data: VoidFunction,
-    type: PerformerStateActionType.SET_ENTER_IMMERSIVE_AUDIO_HANDLER,
+    type: PerformerStateActionType.SET_TOGGLE_IMMERSIVE_AUDIO_HANDLER,
+}
+
+interface SetImmersiveAudioReady {
+    type: PerformerStateActionType.SET_IMMERSIVE_AUDIO_READY,
+}
+
+interface ToggleImmersiveAudio {
+    type: PerformerStateActionType.TOGGLE_IMMERSIVE_AUDIO,
 }
 
 type PerformerStateAction =
@@ -37,20 +47,26 @@ type PerformerStateAction =
     SetPaused |
     SetTime |
     SetTotalDuration |
-    SetEnterImmersiveAudioHandler
+    SetToggleImmersiveAudioHandler |
+    SetImmersiveAudioReady |
+    ToggleImmersiveAudio
 
 enum PerformerStateKeys {
     TIME = 'time',
     TOTAL_DURATION = 'totalDuration',
     PAUSED = 'paused',
-    ENTER_IMMERSIVE_AUDIO_HANDLER = 'enterImmersiveAudioHandler',
+    TOGGLE_IMMERSIVE_AUDIO_HANDLER = 'toggleImmersiveAudioHandler',
+    IMMERSIVE_AUDIO_READY = 'immersiveAudioReady',
+    IMMERSIVE_AUDIO = 'immersiveAudio',
 }
 
 interface PerformerState {
     [ PerformerStateKeys.TIME ]: Time,
     [ PerformerStateKeys.TOTAL_DURATION ]: Time,
     [ PerformerStateKeys.PAUSED ]: boolean,
-    [ PerformerStateKeys.ENTER_IMMERSIVE_AUDIO_HANDLER ]: VoidFunction,
+    [ PerformerStateKeys.TOGGLE_IMMERSIVE_AUDIO_HANDLER ]: VoidFunction,
+    [ PerformerStateKeys.IMMERSIVE_AUDIO_READY ]: boolean,
+    [ PerformerStateKeys.IMMERSIVE_AUDIO ]: boolean,
 }
 
 type PerformerStateValueTypes =

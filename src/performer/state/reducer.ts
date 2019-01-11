@@ -24,8 +24,17 @@ const performerReducer: Reducer<ImmutablePerformerState, PerformerStateAction> =
             case PerformerStateActionType.SET_TOTAL_DURATION: {
                 return performerState.set(PerformerStateKeys.TOTAL_DURATION, action.data)
             }
-            case PerformerStateActionType.SET_ENTER_IMMERSIVE_AUDIO_HANDLER: {
-                return performerState.set(PerformerStateKeys.ENTER_IMMERSIVE_AUDIO_HANDLER, action.data)
+            case PerformerStateActionType.SET_TOGGLE_IMMERSIVE_AUDIO_HANDLER: {
+                return performerState.set(PerformerStateKeys.TOGGLE_IMMERSIVE_AUDIO_HANDLER, action.data)
+            }
+            case PerformerStateActionType.SET_IMMERSIVE_AUDIO_READY: {
+                return performerState.set(PerformerStateKeys.IMMERSIVE_AUDIO_READY, true)
+            }
+            case PerformerStateActionType.TOGGLE_IMMERSIVE_AUDIO: {
+                return performerState.set(
+                    PerformerStateKeys.IMMERSIVE_AUDIO,
+                    !performerState.get(PerformerStateKeys.IMMERSIVE_AUDIO),
+                )
             }
             default: {
                 return performerState

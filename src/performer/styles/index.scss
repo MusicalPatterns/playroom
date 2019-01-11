@@ -1,9 +1,10 @@
 @import '../../colors';
 @import '../../sizes';
 @import '../../effects';
-@import './slider';
+@import './timeline';
 @import './timeInMinutesAndSeconds';
 @import './timeControls';
+@import './immersiveAudio';
 
 #no-pattern-message {
   margin: $big 0;

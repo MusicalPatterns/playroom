@@ -2,6 +2,7 @@ const HtmlWebpackPlugin = require('html-webpack-plugin')
 const common = require('./webpack.common')
 const merge = require('webpack-merge')
 const path = require('path')
+const webpack = require('webpack')
 
 module.exports = merge(common, {
     entry: './test/support/infrastructure/entryForTest.js',
@@ -16,6 +17,9 @@ module.exports = merge(common, {
     plugins: [
         new HtmlWebpackPlugin({
             title: 'Musical Patterns - Playroom Test',
+        }),
+        new webpack.DefinePlugin({
+            'process.env.NODE_ENV': JSON.stringify('test'),
         }),
     ],
 })
