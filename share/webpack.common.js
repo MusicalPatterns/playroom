@@ -1,3 +1,5 @@
+const { DefinePlugin } = require('webpack')
+
 module.exports = {
     module: {
         rules: [
@@ -27,4 +29,9 @@ module.exports = {
     resolve: {
         extensions: [ '.ts', '.tsx', '.js', '.json' ],
     },
+    plugins: [
+        new DefinePlugin({
+            'process.env.PUBLISH_DATE': JSON.stringify(new Date()),
+        }),
+    ]
 }

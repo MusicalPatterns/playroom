@@ -15,7 +15,7 @@ const PatternListItem: (props: PatternListItemProps) => JSX.Element =
             <li {...{ className, id: listedPatternId, key, onClick }} >
                 <div>{formattedName}</div>
                 <div>{musicalIdeaIllustrated}</div>
-                <div>last updated {formattedDate}</div>
+                <div>{formattedDate}</div>
             </li>
         )
     }
