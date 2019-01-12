@@ -1,0 +1,23 @@
+import * as React from 'react'
+import { PatternListItemProps } from './types'
+
+const PatternListItem: (props: PatternListItemProps) => JSX.Element =
+    ({ listedPattern, listedPatternId, patternId, key, onClick }: PatternListItemProps): JSX.Element => {
+        const { formattedName, musicalIdeaIllustrated, mostRecentPublish } = listedPattern.metadata
+        const formattedDate: string = new Date(mostRecentPublish).toLocaleString('en-us', {
+            day: 'numeric',
+            month: 'long',
+            year: 'numeric',
+        })
+        const className: string = patternId === listedPatternId ? 'selected' : ''
+
+        return (
+            <li {...{ className, id: listedPatternId, key, onClick }} >
+                <div>{formattedName}</div>
+                <div>{musicalIdeaIllustrated}</div>
+                <div>last updated {formattedDate}</div>
+            </li>
+        )
+    }
+
+export default PatternListItem
