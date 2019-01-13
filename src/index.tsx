@@ -9,10 +9,11 @@ import { ActionType, App, store } from './root'
 
 let root: HTMLDivElement
 
-const buildPlayroom: () => HTMLDivElement =
-    (): HTMLDivElement => {
+const buildPlayroom: (document: HTMLDocument) => HTMLDivElement =
+    (document: HTMLDocument): HTMLDivElement => {
         root = document.createElement('div')
         root.id = 'root'
+        document.body.appendChild(root)
 
         // @ts-ignore
         root.setup = setupPlayroom
@@ -39,5 +40,4 @@ const setupPlayroom: (patterns: Patterns, debugMode?: boolean) => Promise<void> 
 
 export {
     buildPlayroom,
-    setupPlayroom,
 }

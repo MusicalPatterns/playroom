@@ -1,8 +1,11 @@
 import { pattern } from '@musical-patterns/pattern-playroom-test'
-import { setupPlayroom } from '../../../src'
+import { buildPlayroom } from '../../../src'
 import { otherPattern } from '../otherPattern'
 
-setupPlayroom({
+const playroom = buildPlayroom(document)
+playroom.setup({
     [ pattern.patternId ]: pattern,
     [ otherPattern.patternId ]: otherPattern,
-}).then(playroom => document.body.appendChild(playroom))
+})
+    .then()
+    .catch()
