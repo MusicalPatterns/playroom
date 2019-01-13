@@ -7,22 +7,11 @@ import { BatchAction, batchActions } from 'redux-batched-actions'
 import { buildToggleImmersiveAudioHandler, onPerformerUpdate } from './performer'
 import { ActionType, App, store } from './root'
 
-let root: HTMLDivElement
-
-const buildPlayroom: (document: Document) => HTMLDivElement =
-    (document: Document): HTMLDivElement => {
-        root = document.createElement('div')
+const setupPlayroom: (patterns: Patterns, debugMode?: boolean) => Promise<HTMLDivElement> =
+    async (patterns: Patterns, debugMode: boolean = false): Promise<HTMLDivElement> => {
+        const root: HTMLDivElement = document.createElement('div')
         root.id = 'root'
-        document.body.appendChild(root)
 
-        // @ts-ignore
-        root.setup = setupPlayroom
-
-        return root
-    }
-
-const setupPlayroom: (patterns: Patterns, debugMode?: boolean) => Promise<void> =
-    async (patterns: Patterns, debugMode: boolean = false): Promise<void> => {
         store.subscribe(() => render(<Provider store={store}><App/></Provider>, root))
 
         render(<Provider store={store}><App/></Provider>, root)
@@ -36,8 +25,10 @@ const setupPlayroom: (patterns: Patterns, debugMode?: boolean) => Promise<void> 
             { type: ActionType.SET_TOGGLE_IMMERSIVE_AUDIO_HANDLER, data: toggleImmersiveAudioHandler },
         ])
         store.dispatch(batchedAction)
+
+        return root
     }
 
 export {
-    buildPlayroom,
+    setupPlayroom,
 }

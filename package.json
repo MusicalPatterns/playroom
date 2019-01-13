@@ -1,6 +1,6 @@
 {
   "name": "@musical-patterns/playroom",
-  "version": "1.0.111",
+  "version": "1.0.112",
   "main": "dist/main.js",
   "typings": "dist/index.d.ts",
   "repository": {
@@ -15,6 +15,7 @@
   },
   "license": "MIT",
   "dependencies": {
+    "@musical-patterns/performer": "^1.0.131",
     "awesome-typescript-loader": "^5.2.1",
     "copy-webpack-plugin": "^4.6.0",
     "css-loader": "^1.0.0",
@@ -38,7 +39,6 @@
     "@musical-patterns/compiler": "^1.0.71",
     "@musical-patterns/pattern": "^1.0.79",
     "@musical-patterns/pattern-playroom-test": "^1.0.52",
-    "@musical-patterns/performer": "^1.0.130",
     "@musical-patterns/registry": "^1.0.21",
     "@musical-patterns/utilities": "^1.0.149",
     "@types/react": "^16.7.18",

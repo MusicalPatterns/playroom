@@ -39,4 +39,7 @@ module.exports = {
         library: 'playroom',
         libraryTarget: 'umd',
     },
+    externals: [
+        '@musical-patterns/performer'
+    ],
 }
