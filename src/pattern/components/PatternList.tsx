@@ -46,9 +46,6 @@ const PatternList: (PatternListProps: PatternListProps) => JSX.Element =
                 <PatternListItem {...{ key, listedPattern, listedPatternId, onClick, patternId }} />
             ))
 
-        options
-            .unshift(<option key='-1' value='' hidden disabled>please select a pattern</option>)
-
         return (
             <ul>
                 {options}

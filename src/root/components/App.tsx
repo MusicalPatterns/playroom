@@ -26,19 +26,19 @@ const App: React.ComponentType<AppProps> =
         }
 
         return (
-            <div id='container'>
-                <div id='left'>
+            <div {...{ id: 'container' }}>
+                <div {...{ id: 'left' }}>
                     <Title/>
                     <PatternList {...{ patternId, patterns }}/>
                 </div>
 
-                <div id='center'>
+                <div {...{ id: 'center' }}>
                     <Performer {...{ disabled: !patternId }}/>
                     {patternId && <Post {...{ patternId, patterns }} />}
                 </div>
 
-                <div id='right'>
-                    <div id='title-spacer'/>
+                <div {...{ id: 'right' }}>
+                    <div {...{ id: 'title-spacer' }} />
                     {patternId && <PatternSpec/>}
                     {patternId && <PatternListener {...{ patternId, patterns }}/>}
                 </div>

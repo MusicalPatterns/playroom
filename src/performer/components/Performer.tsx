@@ -6,12 +6,12 @@ import { MaybeDisabled } from './types'
 const Performer: (props: MaybeDisabled) => JSX.Element =
     ({ disabled }: MaybeDisabled): JSX.Element => (
         <div>
-            <div id='performer'>
+            <div {...{ id: 'performer' }}>
                 <TimeControls {...{ disabled }}/>
                 <ToggleImmersiveAudioButton {...{ disabled }}/>
             </div>
             {disabled &&
-            <div id='no-pattern-message'>To begin, select a pattern from the list on the left.</div>
+            <div {...{ id: 'no-pattern-message' }}>To begin, select a pattern from the list on the left.</div>
             }
         </div>
     )
