@@ -1,4 +1,4 @@
-import { enableImmersiveAudio, OnUpdate, setupPerformer } from '@musical-patterns/performer'
+import { OnUpdate, setupPerformer } from '@musical-patterns/performer'
 import { Patterns } from '@musical-patterns/registry'
 import * as React from 'react'
 import { render } from 'react-dom'
@@ -7,11 +7,21 @@ import { BatchAction, batchActions } from 'redux-batched-actions'
 import { buildToggleImmersiveAudioHandler, onPerformerUpdate } from './performer'
 import { ActionType, App, store } from './root'
 
-const setupPlayroom: (patterns: Patterns, debugMode?: boolean) => Promise<HTMLDivElement> =
-    async (patterns: Patterns, debugMode: boolean = false): Promise<HTMLDivElement> => {
-        const root: HTMLDivElement = document.createElement('div')
+let root: HTMLDivElement
+
+const buildPlayroom: () => HTMLDivElement =
+    (): HTMLDivElement => {
+        root = document.createElement('div')
         root.id = 'root'
 
+        // @ts-ignore
+        root.setup = setupPlayroom
+
+        return root
+    }
+
+const setupPlayroom: (patterns: Patterns, debugMode?: boolean) => Promise<void> =
+    async (patterns: Patterns, debugMode: boolean = false): Promise<void> => {
         store.subscribe(() => render(<Provider store={store}><App/></Provider>, root))
 
         render(<Provider store={store}><App/></Provider>, root)
@@ -25,10 +35,9 @@ const setupPlayroom: (patterns: Patterns, debugMode?: boolean) => Promise<HTMLDi
             { type: ActionType.SET_TOGGLE_IMMERSIVE_AUDIO_HANDLER, data: toggleImmersiveAudioHandler },
         ])
         store.dispatch(batchedAction)
-
-        return root
     }
 
 export {
+    buildPlayroom,
     setupPlayroom,
 }
