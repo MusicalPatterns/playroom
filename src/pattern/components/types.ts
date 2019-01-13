@@ -10,7 +10,6 @@ interface PatternListPropsFromDispatch {
 interface PatternListProps extends PatternListPropsFromDispatch, PropsFromApp {}
 
 interface PatternListItemProps {
-    key: number,
     listedPattern: Pattern,
     listedPatternId: string,
     onClick: (event: React.SyntheticEvent) => void,
