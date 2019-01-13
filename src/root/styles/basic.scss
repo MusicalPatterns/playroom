@@ -21,6 +21,11 @@ button {
   &:focus {
     @include glow($focus);
   }
+
+  &:hover:enabled {
+    background-color: $almost-white;
+    color: $dark-grey;
+  }
 }
 
 img {

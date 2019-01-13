@@ -6,9 +6,15 @@ const onImmersiveAudioReady: VoidFunction =
         store.dispatch({ type: ActionType.SET_IMMERSIVE_AUDIO_READY })
     }
 
+const onImmersiveAudioUnavailable: VoidFunction =
+    (): void => {
+        store.dispatch({ type: ActionType.SET_IMMERSIVE_AUDIO_UNAVAILABLE })
+    }
+
 const buildToggleImmersiveAudioHandler: () => VoidFunction =
     (): VoidFunction => {
         const toggleImmersiveAudioHandler: VoidFunction = enableImmersiveAudio({
+            onNoVr: onImmersiveAudioUnavailable,
             onReady: onImmersiveAudioReady,
         })
 

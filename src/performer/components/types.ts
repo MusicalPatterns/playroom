@@ -22,6 +22,7 @@ interface TimeControlsProps extends TimeControlsPropsFromState, TimeControlsProp
 interface ToggleImmersiveAudioButtonPropsFromState {
     immersiveAudio: boolean,
     immersiveAudioReady: boolean,
+    immersiveAudioUnvailable: boolean,
     toggleImmersiveAudioHandler: VoidFunction,
 }
 
