@@ -9,8 +9,8 @@ import { ActionType, App, store } from './root'
 
 let root: HTMLDivElement
 
-const buildPlayroom: (document: HTMLDocument) => HTMLDivElement =
-    (document: HTMLDocument): HTMLDivElement => {
+const buildPlayroom: (document: Document) => HTMLDivElement =
+    (document: Document): HTMLDivElement => {
         root = document.createElement('div')
         root.id = 'root'
         document.body.appendChild(root)
