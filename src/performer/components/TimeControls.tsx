@@ -6,7 +6,7 @@ import { connect } from 'react-redux'
 import { Dispatch } from 'redux'
 import { ImmutableRootState, RootStateKeys } from '../../root'
 import { SecretSelectorsForTest } from '../../types'
-import { buildRewindHandler, buildStopHandler, buildTogglePausedHandler } from '../events'
+import { buildStopHandler, buildTogglePausedHandler, handleRewind } from '../events'
 import { ImmutablePerformerState, PerformerStateKeys } from '../state'
 import TimeInMinutesAndSeconds from './TimeInMinutesAndSeconds'
 import Timeline from './Timeline'
@@ -25,7 +25,7 @@ const mapStateToProps: (state: ImmutableRootState) => TimeControlsPropsFromState
 
 const mapDispatchToProps: (dispatch: Dispatch) => TimeControlsPropsFromDispatch =
     (dispatch: Dispatch): TimeControlsPropsFromDispatch => ({
-        rewindHandler: buildRewindHandler(dispatch),
+        rewindHandler: handleRewind,
         stopHandler: buildStopHandler(dispatch),
         togglePausedHandler: buildTogglePausedHandler(dispatch),
     })
