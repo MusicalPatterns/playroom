@@ -11,8 +11,10 @@ const stringifyPatternSpec: (patternSpec: PatternSpec) => StringifiedPatternSpec
                 (
                     stringifiedPatternSpec: StringifiedPatternSpec,
                     [ key, val ]: [ string, string ],
-                ): StringifiedPatternSpec =>
-                    ({ ...stringifiedPatternSpec, [ key ]: JSON.stringify(val) }),
+                ): StringifiedPatternSpec => ({
+                    ...stringifiedPatternSpec,
+                    [ key ]: JSON.stringify(val),
+                }),
                 displayedPatternSpecDefaults,
             )
 

@@ -1,10 +1,9 @@
-import { PatternSpec } from '@musical-patterns/pattern'
 import { Action, ActionType } from '../../root'
 import { StringifiedPatternSpec, StringifiedPatternSpecInputStates } from '../types'
 import { buildInitialStringifiedPatternSpecInputStates } from './buildInitialStringifiedPatternSpecInputStates'
 
 const buildResetActions: (defaultPatternSpec: StringifiedPatternSpec) => Action[] =
-    (defaultPatternSpec: PatternSpec): Action[] => {
+    (defaultPatternSpec: StringifiedPatternSpec): Action[] => {
         const initialAllDisabledButtonsPatternSpecState: StringifiedPatternSpecInputStates =
             buildInitialStringifiedPatternSpecInputStates(defaultPatternSpec, true)
         const initialNoInvalidOrUnsubmittedInputState: StringifiedPatternSpecInputStates =
