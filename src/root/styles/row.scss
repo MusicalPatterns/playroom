@@ -1,0 +1,53 @@
+@import '../../sizes';
+@import '../../colors';
+
+.row {
+  flex-grow: 0;
+
+  display: flex;
+  flex-wrap: wrap;
+
+  .left, .right {
+    padding: $big;
+    color: $almost-black;
+  }
+
+  .left {
+    flex: $phi;
+    text-align: left;
+    background-color: $white;
+    min-width: $big-area - $big - $big;
+
+    &.closed {
+      flex: 9999;
+    }
+  }
+
+  .right {
+    flex: 1;
+    text-align: right;
+    background-color: $grey;
+    min-width: $medium-area - $big - $big;
+
+    &:empty {
+      padding: 0 $big;
+    }
+
+    &.closed {
+      min-width: inherit;
+    }
+  }
+}
+
+#first-row {
+  min-height: $small-area;
+}
+
+#second-row {
+  min-height: $big-area;
+}
+
+#bottom-row {
+  flex-grow: 1;
+  align-items: stretch;
+}

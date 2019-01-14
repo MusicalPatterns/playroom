@@ -23,10 +23,15 @@ interface PatternListenerPropsFromDispatch {
 
 interface PatternListenerProps extends PatternListenerPropsFromState, PatternListenerPropsFromDispatch, PropsFromApp {}
 
+interface FirstRowProps {
+    patternId?: PatternId,
+}
+
 export {
     AppProps,
     PatternListenerPropsFromState,
     PatternListenerPropsFromDispatch,
     PatternListenerProps,
     PropsFromApp,
+    FirstRowProps,
 }
