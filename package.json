@@ -1,6 +1,6 @@
 {
   "name": "@musical-patterns/playroom",
-  "version": "1.0.116",
+  "version": "1.0.117",
   "main": "dist/main.js",
   "typings": "dist/index.d.ts",
   "repository": {
@@ -54,6 +54,7 @@
     "redux": "^4.0.1",
     "redux-batched-actions": "^0.4.1",
     "redux-immutable": "^4.0.0",
+    "svg-react-loader": "^0.4.6",
     "typescript": "^3.2.2"
   }
 }

@@ -5,13 +5,9 @@
 #hamburger {
   background-color: $dark-grey;
   color: $grey;
-  padding: 0;
+  padding: $tiny;
   width: $big;
   min-width: $big;
-  position: absolute;
-  left: $tiny;
-  top: $tiny;
-  z-index: 1;
 
   &:focus {
     @include no-glow();

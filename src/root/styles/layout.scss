@@ -15,9 +15,9 @@
     background-color: $dark-grey;
     color: $grey;
 
-    padding: 0 $big;
+    padding: 0 $big 0 0;
 
-    min-width: $small-area + $big;
+    min-width: $small-area + $big + $big;
 
     flex: 1;
 

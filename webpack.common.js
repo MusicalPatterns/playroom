@@ -7,6 +7,10 @@ module.exports = {
     module: {
         rules: [
             {
+                test: /\.svg$/,
+                use: 'svg-react-loader',
+            },
+            {
                 test: /\.tsx?$/,
                 loader: 'awesome-typescript-loader',
                 exclude: /test/,
@@ -20,13 +24,13 @@ module.exports = {
                 ],
             },
             {
-                test: /\.(eot|woff|woff2|ttf|svg)/,
+                test: /\.(eot|woff|woff2|ttf)/,
                 loader: 'file-loader',
             },
         ],
     },
     resolve: {
-        extensions: [ '.ts', '.tsx', '.js', '.json', '.scss' ],
+        extensions: [ '.ts', '.tsx', '.js', '.json', '.scss', '.svg' ],
     },
     plugins: [
         new CopyWebpackPlugin([ {

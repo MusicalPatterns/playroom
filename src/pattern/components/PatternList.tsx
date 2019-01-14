@@ -47,9 +47,11 @@ const PatternList: (PatternListProps: PatternListProps) => JSX.Element =
             ))
 
         return (
-            <ul {...{ id: 'pattern-list' }}>
-                {options}
-            </ul>
+            <div {...{ id: 'pattern-list' }}>
+                <ul>
+                    {options}
+                </ul>
+            </div>
         )
     }
 

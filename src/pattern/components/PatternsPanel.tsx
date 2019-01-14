@@ -17,8 +17,8 @@ const PatternsPanel: (props: PatternsPanelProps) => JSX.Element =
     ({ patternsPanelOpen, patternId, patterns }: PatternsPanelProps): JSX.Element => (
         <div {...{ id: 'patterns-panel', className: patternsPanelOpen ? 'open' : 'closed' }}>
             <Hamburger {...{ patternsPanelOpen }}/>
-            <Title/>
             <PatternList {...{ patternId, patterns }}/>
+            <Title/>
         </div>
     )
 
