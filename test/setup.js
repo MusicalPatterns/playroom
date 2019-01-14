@@ -8,7 +8,7 @@ const testGlobals = {}
 
 beforeAll(async done => {
     await startServer()
-    testGlobals.browser = await openChrome({ headless: false })
+    testGlobals.browser = await openChrome()
     testGlobals.tab = await openTab(testGlobals.browser, APP_URL, { timeout: INTEGRATION_TEST_TIMEOUT })
     if (!testGlobals.tab) {
         fail('Could not open the tab in time. Please increase your Puppeteer timeout.')
