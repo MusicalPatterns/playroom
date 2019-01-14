@@ -1,48 +1,84 @@
 @import '../../colors';
 @import '../../sizes';
 
-#container, #root, body, html {
+#root, body, html {
   height: 100%;
   margin: 0;
   padding: 0;
 }
 
-#container {
-  display: grid;
-  grid-template-columns: $left $center $right;
-  grid-template-rows: 1fr;
+#app {
+  display: flex;
+  min-height: 100%;
+
+  #patterns-panel {
+    background-color: $dark-grey;
+    color: $grey;
+
+    padding: 0 $big;
+
+    min-width: $small-area + $big;
+
+    flex: 1;
+
+    &.closed {
+      flex: 0;
+      min-width: $huge;
+      padding: 0;
+
+      #title, ul {
+        display: none;
+      }
+    }
+  }
+
+  #container {
+    flex: $phi + $phi + 1;
+
+    display: flex;
+    flex-direction: column;
+  }
 }
 
-#left {
-  text-align: left;
-  grid-column-start: 1;
-  grid-column-end: 1;
+.row {
+  flex-grow: 0;
 
-  background-color: $dark-grey;
-  color: $grey;
+  display: flex;
+  flex-wrap: wrap;
+
+  .left, .right {
+    padding: $big;
+    color: $almost-black;
+  }
+
+  .left {
+    flex: $phi;
+    text-align: left;
+    background-color: $white;
+    min-width: $big-area - $big - $big;
+  }
+
+  .right {
+    flex: 1;
+    text-align: right;
+    background-color: $grey;
+    min-width: $medium-area - $big - $big;
+
+    &:empty {
+      padding: 0 $big;
+    }
+  }
 }
 
-#center {
-  grid-column-start: 2;
-  grid-column-end: 2;
-
-  background-color: $white;
-  color: $almost-black;
+#first-row {
+  min-height: $small-area;
 }
 
-#right {
-  text-align: right;
-  grid-column-start: 3;
-  grid-column-end: 3;
-
-  background-color: $grey;
-  color: $almost-black;
+#second-row {
+  min-height: $big-area;
 }
 
-#left, #right {
-  padding: 0 $big;
-}
-
-#center {
-  padding: 0 $huge;
+#bottom-row {
+  flex-grow: 1;
+  align-items: stretch;
 }

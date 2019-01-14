@@ -14,9 +14,15 @@ interface PatternChangeEventExtractorParameters extends PropsFromApp {
 
 type PatternChangeEventExtractor = (parameters: PatternChangeEventExtractorParameters) => void
 
+interface HandleHamburgerParameters {
+    dispatch: Dispatch,
+    patternsPanelOpen: boolean,
+}
+
 export {
     PatternChangeEventExtractor,
     PatternChangeEventExtractorParameters,
     PatternChangeEventHandler,
     PatternChangeEventHandlerParameters,
+    HandleHamburgerParameters,
 }

@@ -2,7 +2,7 @@
 @import '../../sizes';
 
 input[type=range] {
-  transition: background 0.5s ease;
+  transition: background $duration ease;
 
   -webkit-appearance: none;
   border: none;
@@ -15,7 +15,7 @@ input[type=range] {
 }
 
 input[type=range]::-webkit-slider-runnable-track {
-  transition: background 0.5s ease;
+  transition: background $duration ease;
 
   background: $dark-grey;
   border-radius: $border-size;
@@ -27,7 +27,7 @@ input[type=range]:disabled::-webkit-slider-runnable-track {
 }
 
 input[type=range]::-moz-range-track {
-  transition: background 0.5s ease;
+  transition: background $duration ease;
 
   background: $dark-grey;
   border-radius: $border-size;
@@ -39,7 +39,7 @@ input[type=range]:disabled::-moz-range-track {
 }
 
 input[type=range]::-ms-track {
-  transition: background 0.5s ease;
+  transition: background $duration ease;
 
   background: $dark-grey;
   border-radius: $border-size;
@@ -51,7 +51,7 @@ input[type=range]:disabled::-ms-track {
 }
 
 input[type=range]::-webkit-slider-thumb {
-  transition: background 0.5s ease;
+  transition: background $duration ease;
 
   -webkit-appearance: none;
   border: none;
@@ -69,7 +69,7 @@ input[type=range]:disabled::-webkit-slider-thumb {
 }
 
 input[type=range]::-moz-range-thumb {
-  transition: background 0.5s ease;
+  transition: background $duration ease;
 
   -webkit-appearance: none;
   border: none;
@@ -87,7 +87,7 @@ input[type=range]:disabled::-moz-range-thumb {
 }
 
 input[type=range]::-ms-thumb {
-  transition: background 0.5s ease;
+  transition: background $duration ease;
 
   -webkit-appearance: none;
   border: none;

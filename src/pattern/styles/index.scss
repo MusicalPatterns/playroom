@@ -1,35 +1,4 @@
-@import '../../colors';
-@import '../../sizes';
-@import '../../fonts';
-
-ul {
-  list-style: square;
-  padding-inline-start: 0;
-  margin-block-start: 0;
-  margin-block-end: 0;
-  margin-inline-start: 0;
-  margin-inline-end: 0;
-}
-
-li {
-  padding-bottom: $small;
-  color: $grey;
-
-  div:first-child {
-    font-size: $medium;
-    @extend .leipziger-antiqua-bold;
-  }
-
-  div {
-    font-size: $small;
-  }
-
-  &:hover {
-    cursor: pointer;
-    color: $light-grey;
-  }
-
-  &.selected {
-    color: $almost-white;
-  }
-}
+@import './patternList';
+@import './patternListItem';
+@import './hamburger.scss';
+@import './title.scss';

@@ -1,0 +1,26 @@
+@import '../../colors';
+@import '../../sizes';
+@import '../../fonts';
+
+li {
+  padding-bottom: $small;
+  color: $grey;
+
+  div:first-child {
+    font-size: $medium;
+    @extend .leipziger-antiqua-bold;
+  }
+
+  div {
+    font-size: $small;
+  }
+
+  &:hover {
+    cursor: pointer;
+    color: $light-grey;
+  }
+
+  &.selected {
+    color: $almost-white;
+  }
+}

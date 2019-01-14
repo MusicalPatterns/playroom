@@ -9,10 +9,7 @@ const Post: (postProps: PropsFromApp) => JSX.Element =
         const patternMetadata: PatternMetadata = pattern.metadata
 
         return (
-            <div>
-                <h1>{patternMetadata.formattedName}</h1>
-                <div dangerouslySetInnerHTML={{ __html: patternMetadata.description }}/>
-            </div>
+            <div {...{ dangerouslySetInnerHTML: { __html: patternMetadata.description } }}/>
         )
     }
 

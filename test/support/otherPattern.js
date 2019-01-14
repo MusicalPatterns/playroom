@@ -4,7 +4,7 @@ const otherPattern = {
     material: pattern.material,
     patternId: pattern.patternId + 1,
     metadata:  Object.keys(pattern.metadata).reduce(
-        (accumulator, key) => ({ ...accumulator, [ key ]: 'Other ' + pattern.metadata[ key ] }),
+        (accumulator, key) => ({ ...accumulator, [ key ]: pattern.metadata[ key ] }),
         {},
     ),
     spec: Object.keys(pattern.spec).reduce(

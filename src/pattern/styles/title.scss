@@ -1,13 +1,6 @@
 @import '../../fonts';
 @import '../../sizes';
 
-#title:before {
-  content: '';
-  display: block;
-  height: 0;
-  padding-bottom: 100%;
-}
-
 #title {
   position: relative;
   min-height: $title-min-height;
@@ -15,8 +8,9 @@
   #title-contents {
     position: absolute;
     top: 50%;
-    transform: translate(0, -50%);
-    left: 0;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: $medium-area;
 
     h1 {
       line-height: $big;

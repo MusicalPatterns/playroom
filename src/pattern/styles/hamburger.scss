@@ -1,0 +1,28 @@
+@import '../../colors';
+@import '../../sizes';
+@import '../../effects';
+
+#hamburger {
+  background-color: $dark-grey;
+  color: $grey;
+  padding: 0;
+  width: $big;
+  min-width: $big;
+  position: absolute;
+  left: $tiny;
+  top: $tiny;
+  z-index: 1;
+
+  &:focus {
+    @include no-glow();
+  }
+
+  &:hover {
+    color: $light-grey;
+  }
+
+  svg {
+    width: $big;
+    height: $big;
+  }
+}

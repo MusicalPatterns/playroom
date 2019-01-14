@@ -6,7 +6,7 @@ export {
     PatternStateKeys,
 } from './state'
 export {
-    PatternList,
+    PatternsPanel,
 } from './components'
 
 // tslint:disable-next-line:no-import-side-effect

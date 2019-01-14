@@ -1,54 +1,5 @@
-@import '../../colors';
 @import '../../sizes';
-@import '../../effects';
-
-#title-spacer {
-  padding-bottom: 50%;
-}
-
-input {
-  border: none;
-  outline: none;
-  border-radius: $border-size;
-}
-
-input.invalid {
-  @include glow($invalid);
-}
-
-input.unsubmitted {
-  @include glow($unsubmitted);
-}
-
-.pattern-spec-input {
-  display: flex;
-  align-items: center;
-  margin-bottom: $tiny;
-
-  div, input, button {
-    margin-left: $small;
-  }
-
-  div {
-    flex: 6765;
-    text-align: right;
-  }
-
-  input {
-    padding: 0 $small;
-    flex: 4181;
-    min-width: 0;
-    height: $big;
-
-    &::selection {
-      background: $focus;
-    }
-  }
-
-  button {
-    flex: 2584;
-  }
-}
+@import './patternSpecInput';
 
 #reset {
   margin-bottom: $tiny;

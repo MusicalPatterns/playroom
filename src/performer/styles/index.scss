@@ -14,9 +14,10 @@
 #performer {
   display: flex;
   align-items: center;
+  flex-wrap: wrap;
+  justify-content: flex-start;
 
   #time-controls-container {
-    flex: auto;
     padding-right: $medium;
   }
 }

@@ -4,6 +4,7 @@ import { BEGINNING, doAsync } from '@musical-patterns/utilities'
 import { BatchAction, batchActions } from 'redux-batched-actions'
 import { buildResetActions, StringifiedPatternSpec, stringifyPatternSpec } from '../../patternSpec'
 import { Action, ActionType } from '../../root'
+import { WIDTH_BELOW_WHICH_PATTERNS_LIST_CLOSES_UPON_PATTERN_SELECTION } from './constants'
 import { PatternChangeEventHandler, PatternChangeEventHandlerParameters } from './types'
 
 const handlePatternChange: PatternChangeEventHandler =
@@ -17,6 +18,11 @@ const handlePatternChange: PatternChangeEventHandler =
                 { type: ActionType.SET_DEFAULT_PATTERN_SPEC, data: stringifiedPatternSpec },
                 { type: ActionType.SET_PATTERN_ID, data: patternId },
             ])
+
+        if (window.innerWidth < WIDTH_BELOW_WHICH_PATTERNS_LIST_CLOSES_UPON_PATTERN_SELECTION) {
+            actions.push({ type: ActionType.SET_PATTERNS_PANEL_OPEN, data: false })
+        }
+
         const batchedAction: BatchAction = batchActions(actions)
         dispatch(batchedAction)
 

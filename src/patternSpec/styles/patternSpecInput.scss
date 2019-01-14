@@ -1,0 +1,47 @@
+@import '../../colors';
+@import '../../sizes';
+@import '../../effects';
+
+.pattern-spec-input {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+
+  margin-bottom: $tiny;
+
+  div, input, button {
+    margin-left: $small;
+    min-width: $huge;
+  }
+
+  div {
+    flex: 6765;
+    text-align: right;
+  }
+
+  input {
+    padding: 0 $small;
+    flex: 4181;
+    height: $big;
+
+    border: none;
+    outline: none;
+    border-radius: $border-size;
+
+    &::selection {
+      background: $focus;
+    }
+
+    &.invalid {
+      @include glow($invalid);
+    }
+
+    &.unsubmitted {
+      @include glow($unsubmitted);
+    }
+  }
+
+  button {
+    flex: 2584;
+  }
+}

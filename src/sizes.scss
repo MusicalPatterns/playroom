@@ -1,5 +1,6 @@
 $fibonacci-series: (1, 1, 2, 3, 5, 8, 13, 21, 34, 55, 89, 144, 233, 377, 610, 987, 1597, 2584, 4181, 6765);
 $fibonacci-series-size-offset: 4;
+$phi: 1.618;
 
 $line-size: 1px * nth($fibonacci-series, 0 + $fibonacci-series-size-offset);    // 3
 $border-size: 1px *nth($fibonacci-series, 1 + $fibonacci-series-size-offset);   // 5
@@ -8,6 +9,11 @@ $small: 1px *nth($fibonacci-series, 3 + $fibonacci-series-size-offset);         
 $medium: 1px * nth($fibonacci-series, 4 + $fibonacci-series-size-offset);       // 21
 $big: 1px *nth($fibonacci-series, 5 + $fibonacci-series-size-offset);           // 34
 $huge: 1px * nth($fibonacci-series, 6 + $fibonacci-series-size-offset);         // 55
+$tiny-area: 1px * nth($fibonacci-series, 7 + $fibonacci-series-size-offset);    // 89
+$small-area: 1px * nth($fibonacci-series, 8 + $fibonacci-series-size-offset);   // 144
+$medium-area: 1px * nth($fibonacci-series, 9 + $fibonacci-series-size-offset);  // 233
+$big-area: 1px * nth($fibonacci-series, 10 + $fibonacci-series-size-offset);    // 377
+$huge-area: 1px * nth($fibonacci-series, 11 + $fibonacci-series-size-offset);   // 610
 
 $title-min-height: 1px * nth($fibonacci-series, 9 + $fibonacci-series-size-offset);
 
@@ -18,3 +24,5 @@ $right: 1fr * nth($fibonacci-series, 1 + $fibonacci-series-layout-offset);
 
 $timeline-offset: -$tiny;
 $toggle-immersive-audio-button-width: 1px * nth($fibonacci-series, 9 + $fibonacci-series-size-offset);
+
+$duration: 0.3s;

@@ -1,5 +1,5 @@
-import PatternList from './PatternList'
+import PatternsPanel from './PatternsPanel'
 
 export {
-    PatternList,
+    PatternsPanel,
 }
