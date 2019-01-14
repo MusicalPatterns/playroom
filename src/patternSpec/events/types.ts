@@ -1,5 +1,5 @@
 import * as React from 'react'
-import { Dispatch } from 'redux'
+import { DispatchAsProp } from '../../types'
 import { ImmutablePatternSpecState } from '../state'
 import { StringifiedPatternSpec } from '../types'
 
@@ -10,8 +10,7 @@ interface PatternSpecEventParameters {
     patternSpecState: ImmutablePatternSpecState,
 }
 
-interface PatternSpecInputEventHandlerParameters extends PatternSpecEventParameters {
-    dispatch: Dispatch,
+interface PatternSpecInputEventHandlerParameters extends PatternSpecEventParameters, DispatchAsProp {
     patternSpecValue: string,
 }
 
@@ -23,9 +22,8 @@ interface PatternSpecInputEventExtractorParameters extends PatternSpecEventParam
 
 type PatternSpecInputEventExtractor = (parameters: PatternSpecInputEventExtractorParameters) => void
 
-interface BuildPatternSpecInputEventExtractorParameters {
+interface BuildPatternSpecInputEventExtractorParameters extends DispatchAsProp {
     abortIfNotSubmitting?: boolean,
-    dispatch: Dispatch,
     patternSpecInputEventHandler: PatternSpecInputEventHandler,
 }
 
@@ -43,9 +41,8 @@ interface BuildPatternSpecInputEventAttacherParameters {
 type BuildPatternSpecInputEventAttacher =
     (parameters: BuildPatternSpecInputEventAttacherParameters) => PatternSpecInputEventAttacher
 
-interface HandleResetParameters {
+interface HandleResetParameters extends DispatchAsProp {
     defaultPatternSpec: StringifiedPatternSpec,
-    dispatch: Dispatch,
 }
 
 export {
