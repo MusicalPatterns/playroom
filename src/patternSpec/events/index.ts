@@ -1,19 +1,19 @@
-export { handlePatternSpecInputBlur } from './handlePatternSpecInputBlur'
-export { handlePatternSpecInputChange } from './handlePatternSpecInputChange'
-export { handlePatternSpecInputSubmit } from './handlePatternSpecInputSubmit'
-export { buildPatternSpecInputEventExtractor } from './buildPatternSpecInputEventExtractor'
-export { buildPatternSpecInputEventAttacher } from './buildPatternSpecInputEventAttacher'
+export { handlePatternSpecControlBlur } from './handlePatternSpecControlBlur'
+export { handlePatternSpecControlChange } from './handlePatternSpecControlChange'
+export { handlePatternSpecControlSubmit } from './handlePatternSpecControlSubmit'
+export { buildPatternSpecControlEventExtractor } from './buildPatternSpecControlEventExtractor'
+export { buildPatternSpecControlEventAttacher } from './buildPatternSpecControlEventAttacher'
 export { destringifyPatternSpec } from './destringifyPatternSpec'
-export { buildInitialStringifiedPatternSpecInputStates } from './buildInitialStringifiedPatternSpecInputStates'
+export { buildInitialStringifiedPatternSpecControlStates } from './buildInitialStringifiedPatternSpecControlStates'
 export { stringifyPatternSpec } from './stringifyPatternSpec'
 export { handleReset } from './handleReset'
 export { buildResetActions } from './resetActions'
 
 export {
-    BuildPatternSpecInputEventExtractorParameters,
-    BuildPatternSpecInputEventExtractor,
-    PatternSpecInputEventExtractor,
+    BuildPatternSpecControlEventExtractorParameters,
+    BuildPatternSpecControlEventExtractor,
+    PatternSpecControlEventExtractor,
     PatternSpecEvent,
     PatternSpecEventParameters,
-    PatternSpecInputEventAttacher,
+    PatternSpecControlEventAttacher,
 } from './types'

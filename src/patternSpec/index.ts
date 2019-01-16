@@ -1,5 +1,5 @@
 export {
-    buildInitialStringifiedPatternSpecInputStates,
+    buildInitialStringifiedPatternSpecControlStates,
     stringifyPatternSpec,
     destringifyPatternSpec,
     buildResetActions,
@@ -13,7 +13,7 @@ export {
 } from './state'
 export {
     StringifiedPatternSpec,
-    StringifiedPatternSpecInputStates,
+    StringifiedPatternSpecControlStates,
 } from './types'
 export {
     PatternSpec,

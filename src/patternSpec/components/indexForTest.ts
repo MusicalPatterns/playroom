@@ -1,5 +1,5 @@
 // tslint:disable:no-reaching-imports
 
 export {
-    PatternSpecInputStates,
+    PatternSpecControlStates,
 } from './types'

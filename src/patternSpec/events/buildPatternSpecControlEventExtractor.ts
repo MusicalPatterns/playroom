@@ -1,10 +1,10 @@
 import * as React from 'react'
 import { SUBMIT } from './constants'
 import {
-    BuildPatternSpecInputEventExtractor,
-    BuildPatternSpecInputEventExtractorParameters,
-    PatternSpecInputEventExtractor,
-    PatternSpecInputEventExtractorParameters,
+    BuildPatternSpecControlEventExtractor,
+    BuildPatternSpecControlEventExtractorParameters,
+    PatternSpecControlEventExtractor,
+    PatternSpecControlEventExtractorParameters,
 } from './types'
 
 const extractValueFromEvent: (event: React.SyntheticEvent | React.KeyboardEvent) => string =
@@ -14,11 +14,11 @@ const extractValueFromEvent: (event: React.SyntheticEvent | React.KeyboardEvent)
         return target.value
     }
 
-const buildPatternSpecInputEventExtractor: BuildPatternSpecInputEventExtractor =
-    (buildParameters: BuildPatternSpecInputEventExtractorParameters): PatternSpecInputEventExtractor => {
-        const { dispatch, patternSpecInputEventHandler, abortIfNotSubmitting } = buildParameters
+const buildPatternSpecControlEventExtractor: BuildPatternSpecControlEventExtractor =
+    (buildParameters: BuildPatternSpecControlEventExtractorParameters): PatternSpecControlEventExtractor => {
+        const { dispatch, patternSpecControlEventHandler, abortIfNotSubmitting } = buildParameters
 
-        return async (parameters: PatternSpecInputEventExtractorParameters): Promise<void> => {
+        return async (parameters: PatternSpecControlEventExtractorParameters): Promise<void> => {
             const { event, ...otherParameters } = parameters
             if (abortIfNotSubmitting) {
                 const keyboardEvent: React.KeyboardEvent = event as React.KeyboardEvent
@@ -32,10 +32,10 @@ const buildPatternSpecInputEventExtractor: BuildPatternSpecInputEventExtractor =
             }
             const patternSpecValue: string = extractValueFromEvent(event)
 
-            await patternSpecInputEventHandler({ ...otherParameters, patternSpecValue, dispatch })
+            await patternSpecControlEventHandler({ ...otherParameters, patternSpecValue, dispatch })
         }
     }
 
 export {
-    buildPatternSpecInputEventExtractor,
+    buildPatternSpecControlEventExtractor,
 }

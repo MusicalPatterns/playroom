@@ -1,25 +1,25 @@
 import { OptionedConstraint } from '@musical-patterns/pattern'
 import { Maybe } from '@musical-patterns/utilities'
-import { PatternSpecInputEventExtractor } from '../events'
+import { PatternSpecControlEventExtractor } from '../events'
 import { ImmutablePatternSpecState } from '../state'
 import { StringifiedPatternSpec } from '../types'
 
-interface PatternSpecInputsPropsFromState {
+interface PatternSpecControlsPropsFromState {
     patternSpecState: ImmutablePatternSpecState,
 }
 
-interface PatternSpecInputsPropsFromDispatch {
-    handlePatternSpecBlur: PatternSpecInputEventExtractor,
-    handlePatternSpecButtonSubmit: PatternSpecInputEventExtractor,
-    handlePatternSpecChange: PatternSpecInputEventExtractor,
-    handlePatternSpecKeyboardSubmit: PatternSpecInputEventExtractor,
+interface PatternSpecControlsPropsFromDispatch {
+    handlePatternSpecBlur: PatternSpecControlEventExtractor,
+    handlePatternSpecButtonSubmit: PatternSpecControlEventExtractor,
+    handlePatternSpecChange: PatternSpecControlEventExtractor,
+    handlePatternSpecKeyboardSubmit: PatternSpecControlEventExtractor,
 }
 
-interface PatternSpecInputsProps extends PatternSpecInputsPropsFromState, PatternSpecInputsPropsFromDispatch {}
+interface PatternSpecControlsProps extends PatternSpecControlsPropsFromState, PatternSpecControlsPropsFromDispatch {}
 
-interface PatternSpecInputProps {
+interface RangedPatternSpecControlProps {
     formattedName: Maybe<string>,
-    patternSpecInputsProps: PatternSpecInputsProps,
+    patternSpecControlsProps: PatternSpecControlsProps,
     patternSpecKey: string,
 }
 
@@ -34,24 +34,24 @@ interface PatternSpecPropsFromDispatch {
 
 interface PatternSpecProps extends PatternSpecPropsFromState, PatternSpecPropsFromDispatch {}
 
-enum PatternSpecInputStates {
+enum PatternSpecControlStates {
     INVALID = 'invalid',
     UNSUBMITTED = 'unsubmitted',
     VALID_AND_SUBMITTED = 'valid-and-submitted',
 }
 
-interface PatternSpecSelectProps extends PatternSpecInputProps {
+interface OptionedPatternSpecControlProps extends RangedPatternSpecControlProps {
     options: OptionedConstraint,
 }
 
 export {
-    PatternSpecInputProps,
-    PatternSpecInputsProps,
-    PatternSpecInputsPropsFromDispatch,
-    PatternSpecInputsPropsFromState,
+    RangedPatternSpecControlProps,
+    PatternSpecControlsProps,
+    PatternSpecControlsPropsFromDispatch,
+    PatternSpecControlsPropsFromState,
     PatternSpecPropsFromState,
     PatternSpecPropsFromDispatch,
     PatternSpecProps,
-    PatternSpecInputStates,
-    PatternSpecSelectProps,
+    PatternSpecControlStates,
+    OptionedPatternSpecControlProps,
 }

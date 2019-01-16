@@ -11,36 +11,36 @@ interface PatternSpecEventParameters {
     select?: boolean,
 }
 
-interface PatternSpecInputEventHandlerParameters extends PatternSpecEventParameters, DispatchAsProp {
+interface PatternSpecControlEventHandlerParameters extends PatternSpecEventParameters, DispatchAsProp {
     patternSpecValue: string,
 }
 
-type PatternSpecInputEventHandler = (parameters: PatternSpecInputEventHandlerParameters) => Promise<void> | void
+type PatternSpecControlEventHandler = (parameters: PatternSpecControlEventHandlerParameters) => Promise<void> | void
 
-interface PatternSpecInputEventExtractorParameters extends PatternSpecEventParameters {
+interface PatternSpecControlEventExtractorParameters extends PatternSpecEventParameters {
     event: PatternSpecEvent,
 }
 
-type PatternSpecInputEventExtractor = (parameters: PatternSpecInputEventExtractorParameters) => void
+type PatternSpecControlEventExtractor = (parameters: PatternSpecControlEventExtractorParameters) => void
 
-interface BuildPatternSpecInputEventExtractorParameters extends DispatchAsProp {
+interface BuildPatternSpecControlEventExtractorParameters extends DispatchAsProp {
     abortIfNotSubmitting?: boolean,
-    patternSpecInputEventHandler: PatternSpecInputEventHandler,
+    patternSpecControlEventHandler: PatternSpecControlEventHandler,
 }
 
-type BuildPatternSpecInputEventExtractor = (
-    parameters: BuildPatternSpecInputEventExtractorParameters,
-) => PatternSpecInputEventExtractor
+type BuildPatternSpecControlEventExtractor = (
+    parameters: BuildPatternSpecControlEventExtractorParameters,
+) => PatternSpecControlEventExtractor
 
-type PatternSpecInputEventAttacher = (event: PatternSpecEvent) => void
+type PatternSpecControlEventAttacher = (event: PatternSpecEvent) => void
 
-interface BuildPatternSpecInputEventAttacherParameters {
-    patternSpecEventExtractor: PatternSpecInputEventExtractor,
+interface BuildPatternSpecControlEventAttacherParameters {
+    patternSpecEventExtractor: PatternSpecControlEventExtractor,
     patternSpecEventParameters: PatternSpecEventParameters,
 }
 
-type BuildPatternSpecInputEventAttacher =
-    (parameters: BuildPatternSpecInputEventAttacherParameters) => PatternSpecInputEventAttacher
+type BuildPatternSpecControlEventAttacher =
+    (parameters: BuildPatternSpecControlEventAttacherParameters) => PatternSpecControlEventAttacher
 
 interface HandleResetParameters extends DispatchAsProp {
     defaultPatternSpec: StringifiedPatternSpec,
@@ -49,14 +49,14 @@ interface HandleResetParameters extends DispatchAsProp {
 export {
     PatternSpecEvent,
     PatternSpecEventParameters,
-    PatternSpecInputEventHandler,
-    PatternSpecInputEventHandlerParameters,
-    PatternSpecInputEventExtractor,
-    PatternSpecInputEventExtractorParameters,
-    BuildPatternSpecInputEventExtractor,
-    BuildPatternSpecInputEventExtractorParameters,
-    PatternSpecInputEventAttacher,
-    BuildPatternSpecInputEventAttacher,
-    BuildPatternSpecInputEventAttacherParameters,
+    PatternSpecControlEventHandler,
+    PatternSpecControlEventHandlerParameters,
+    PatternSpecControlEventExtractor,
+    PatternSpecControlEventExtractorParameters,
+    BuildPatternSpecControlEventExtractor,
+    BuildPatternSpecControlEventExtractorParameters,
+    PatternSpecControlEventAttacher,
+    BuildPatternSpecControlEventAttacher,
+    BuildPatternSpecControlEventAttacherParameters,
     HandleResetParameters,
 }

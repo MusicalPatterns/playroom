@@ -1,69 +1,69 @@
 import * as React from 'react'
 import { SecretSelectorsForTest } from '../../types'
 import {
-    buildPatternSpecInputEventAttacher,
+    buildPatternSpecControlEventAttacher,
+    PatternSpecControlEventAttacher,
     PatternSpecEventParameters,
-    PatternSpecInputEventAttacher,
 } from '../events'
 import { PatternSpecStateKeys } from '../state'
-import { StringifiedPatternSpec, StringifiedPatternSpecInputStates } from '../types'
+import { StringifiedPatternSpec, StringifiedPatternSpecControlStates } from '../types'
 import { presentPatternSpecKey } from './helpers'
-import { PatternSpecInputProps, PatternSpecInputStates } from './types'
+import { PatternSpecControlStates, RangedPatternSpecControlProps } from './types'
 
-const PatternSpecInput: (patternSpecInputProps: PatternSpecInputProps) => JSX.Element =
-    ({ formattedName, patternSpecKey, patternSpecInputsProps }: PatternSpecInputProps): JSX.Element => {
+const RangedPatternSpecControl: (rangedPatternSpecControlProps: RangedPatternSpecControlProps) => JSX.Element =
+    ({ formattedName, patternSpecKey, patternSpecControlsProps }: RangedPatternSpecControlProps): JSX.Element => {
         const {
             handlePatternSpecChange,
             handlePatternSpecKeyboardSubmit,
             handlePatternSpecButtonSubmit,
             handlePatternSpecBlur,
             patternSpecState,
-        } = patternSpecInputsProps
+        } = patternSpecControlsProps
 
         const displayedPatternSpec: StringifiedPatternSpec =
             patternSpecState.get(PatternSpecStateKeys.DISPLAYED_PATTERN_SPEC)
-        const invalidPatternSpecInputs: StringifiedPatternSpecInputStates =
-            patternSpecState.get(PatternSpecStateKeys.INVALID_PATTERN_SPEC_INPUTS)
-        const disabledPatternSpecButtons: StringifiedPatternSpecInputStates =
+        const invalidPatternSpecControls: StringifiedPatternSpecControlStates =
+            patternSpecState.get(PatternSpecStateKeys.INVALID_PATTERN_SPEC_CONTROLS)
+        const disabledPatternSpecButtons: StringifiedPatternSpecControlStates =
             patternSpecState.get(PatternSpecStateKeys.DISABLED_PATTERN_SPEC_BUTTONS)
-        const unsubmittedPatternSpecInputs: StringifiedPatternSpecInputStates =
-            patternSpecState.get(PatternSpecStateKeys.UNSUBMITTED_PATTERN_SPEC_INPUTS)
+        const unsubmittedPatternSpecControls: StringifiedPatternSpecControlStates =
+            patternSpecState.get(PatternSpecStateKeys.UNSUBMITTED_PATTERN_SPEC_CONTROLS)
         const submittedPatternSpec: StringifiedPatternSpec =
             patternSpecState.get(PatternSpecStateKeys.SUBMITTED_PATTERN_SPEC)
 
         const patternSpecValue: string = displayedPatternSpec[ patternSpecKey ]
-        const invalid: boolean = invalidPatternSpecInputs[ patternSpecKey ]
-        const unsubmitted: boolean = unsubmittedPatternSpecInputs[ patternSpecKey ]
+        const invalid: boolean = invalidPatternSpecControls[ patternSpecKey ]
+        const unsubmitted: boolean = unsubmittedPatternSpecControls[ patternSpecKey ]
         const disabled: boolean = disabledPatternSpecButtons[ patternSpecKey ]
         const submittedPatternSpecValue: string = submittedPatternSpec[ patternSpecKey ]
 
         const patternSpecEventParameters: PatternSpecEventParameters = { patternSpecKey, patternSpecState }
 
-        const onChange: PatternSpecInputEventAttacher = buildPatternSpecInputEventAttacher({
+        const onChange: PatternSpecControlEventAttacher = buildPatternSpecControlEventAttacher({
             patternSpecEventExtractor: handlePatternSpecChange,
             patternSpecEventParameters,
         })
-        const onKeyPress: PatternSpecInputEventAttacher = buildPatternSpecInputEventAttacher({
+        const onKeyPress: PatternSpecControlEventAttacher = buildPatternSpecControlEventAttacher({
             patternSpecEventExtractor: handlePatternSpecKeyboardSubmit,
             patternSpecEventParameters,
         })
-        const onClick: PatternSpecInputEventAttacher = buildPatternSpecInputEventAttacher({
+        const onClick: PatternSpecControlEventAttacher = buildPatternSpecControlEventAttacher({
             patternSpecEventExtractor: handlePatternSpecButtonSubmit,
             patternSpecEventParameters,
         })
-        const onBlur: PatternSpecInputEventAttacher = buildPatternSpecInputEventAttacher({
+        const onBlur: PatternSpecControlEventAttacher = buildPatternSpecControlEventAttacher({
             patternSpecEventExtractor: handlePatternSpecBlur,
             patternSpecEventParameters,
         })
 
         const className: string = invalid ?
-            PatternSpecInputStates.INVALID :
-            unsubmitted ? PatternSpecInputStates.UNSUBMITTED : PatternSpecInputStates.VALID_AND_SUBMITTED
+            PatternSpecControlStates.INVALID :
+            unsubmitted ? PatternSpecControlStates.UNSUBMITTED : PatternSpecControlStates.VALID_AND_SUBMITTED
 
         return (
-            <div {...{ className: 'pattern-spec-input' }}>
+            <div {...{ className: 'pattern-spec-control' }}>
                 <span {...{
-                    className: SecretSelectorsForTest.SECRET_SUBMITTED_PATTERN_SPEC_INPUT,
+                    className: SecretSelectorsForTest.SECRET_SUBMITTED_PATTERN_SPEC_CONTROL,
                     id: patternSpecKey,
                 }}>{submittedPatternSpecValue}</span>
                 <div>{formattedName || presentPatternSpecKey(patternSpecKey)}</div>
@@ -73,4 +73,4 @@ const PatternSpecInput: (patternSpecInputProps: PatternSpecInputProps) => JSX.El
         )
     }
 
-export default PatternSpecInput
+export default RangedPatternSpecControl

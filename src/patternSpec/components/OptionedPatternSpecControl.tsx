@@ -1,36 +1,37 @@
 import * as React from 'react'
 import { SecretSelectorsForTest } from '../../types'
 import {
-    buildPatternSpecInputEventAttacher,
+    buildPatternSpecControlEventAttacher,
+    PatternSpecControlEventAttacher,
     PatternSpecEventParameters,
-    PatternSpecInputEventAttacher,
 } from '../events'
 import { PatternSpecStateKeys } from '../state'
-import { StringifiedPatternSpec, StringifiedPatternSpecInputStates } from '../types'
+import { StringifiedPatternSpec, StringifiedPatternSpecControlStates } from '../types'
 import { presentPatternSpecKey } from './helpers'
-import { PatternSpecInputStates, PatternSpecSelectProps } from './types'
+import { OptionedPatternSpecControlProps, PatternSpecControlStates } from './types'
 
-const PatternSpecSelect: (props: PatternSpecSelectProps) => JSX.Element =
-    ({ formattedName, patternSpecKey, patternSpecInputsProps, options }: PatternSpecSelectProps): JSX.Element => {
+const OptionedPatternSpecControl: (props: OptionedPatternSpecControlProps) => JSX.Element =
+    (props: OptionedPatternSpecControlProps): JSX.Element => {
+        const { formattedName, patternSpecKey, patternSpecControlsProps, options } = props
         const {
             handlePatternSpecChange,
             handlePatternSpecKeyboardSubmit,
             handlePatternSpecButtonSubmit,
             handlePatternSpecBlur,
             patternSpecState,
-        } = patternSpecInputsProps
+        } = patternSpecControlsProps
 
         const displayedPatternSpec: StringifiedPatternSpec =
             patternSpecState.get(PatternSpecStateKeys.DISPLAYED_PATTERN_SPEC)
-        const disabledPatternSpecButtons: StringifiedPatternSpecInputStates =
+        const disabledPatternSpecButtons: StringifiedPatternSpecControlStates =
             patternSpecState.get(PatternSpecStateKeys.DISABLED_PATTERN_SPEC_BUTTONS)
-        const unsubmittedPatternSpecInputs: StringifiedPatternSpecInputStates =
-            patternSpecState.get(PatternSpecStateKeys.UNSUBMITTED_PATTERN_SPEC_INPUTS)
+        const unsubmittedPatternSpecControls: StringifiedPatternSpecControlStates =
+            patternSpecState.get(PatternSpecStateKeys.UNSUBMITTED_PATTERN_SPEC_CONTROLS)
         const submittedPatternSpec: StringifiedPatternSpec =
             patternSpecState.get(PatternSpecStateKeys.SUBMITTED_PATTERN_SPEC)
 
         const patternSpecValue: string = displayedPatternSpec[ patternSpecKey ]
-        const unsubmitted: boolean = unsubmittedPatternSpecInputs[ patternSpecKey ]
+        const unsubmitted: boolean = unsubmittedPatternSpecControls[ patternSpecKey ]
         const disabled: boolean = disabledPatternSpecButtons[ patternSpecKey ]
         const submittedPatternSpecValue: string = submittedPatternSpec[ patternSpecKey ]
 
@@ -40,33 +41,33 @@ const PatternSpecSelect: (props: PatternSpecSelectProps) => JSX.Element =
             select: true,
         }
 
-        const onChange: PatternSpecInputEventAttacher = buildPatternSpecInputEventAttacher({
+        const onChange: PatternSpecControlEventAttacher = buildPatternSpecControlEventAttacher({
             patternSpecEventExtractor: handlePatternSpecChange,
             patternSpecEventParameters,
         })
-        const onKeyPress: PatternSpecInputEventAttacher = buildPatternSpecInputEventAttacher({
+        const onKeyPress: PatternSpecControlEventAttacher = buildPatternSpecControlEventAttacher({
             patternSpecEventExtractor: handlePatternSpecKeyboardSubmit,
             patternSpecEventParameters,
         })
-        const onClick: PatternSpecInputEventAttacher = buildPatternSpecInputEventAttacher({
+        const onClick: PatternSpecControlEventAttacher = buildPatternSpecControlEventAttacher({
             patternSpecEventExtractor: handlePatternSpecButtonSubmit,
             patternSpecEventParameters,
         })
-        const onBlur: PatternSpecInputEventAttacher = buildPatternSpecInputEventAttacher({
+        const onBlur: PatternSpecControlEventAttacher = buildPatternSpecControlEventAttacher({
             patternSpecEventExtractor: handlePatternSpecBlur,
             patternSpecEventParameters,
         })
 
         const className: string =
-            unsubmitted ? PatternSpecInputStates.UNSUBMITTED : PatternSpecInputStates.VALID_AND_SUBMITTED
+            unsubmitted ? PatternSpecControlStates.UNSUBMITTED : PatternSpecControlStates.VALID_AND_SUBMITTED
 
         const optionElements: JSX.Element[] = options.map((option: string, key: number): JSX.Element =>
             <option {...{ key, value: option }}>{option}</option>)
 
         return (
-            <div {...{ className: 'pattern-spec-input' }}>
+            <div {...{ className: 'pattern-spec-control' }}>
                 <span {...{
-                    className: SecretSelectorsForTest.SECRET_SUBMITTED_PATTERN_SPEC_INPUT,
+                    className: SecretSelectorsForTest.SECRET_SUBMITTED_PATTERN_SPEC_CONTROL,
                     id: patternSpecKey,
                 }}>{
                     // tslint:disable-next-line:no-unsafe-any
@@ -87,4 +88,4 @@ const PatternSpecSelect: (props: PatternSpecSelectProps) => JSX.Element =
         )
     }
 
-export default PatternSpecSelect
+export default OptionedPatternSpecControl

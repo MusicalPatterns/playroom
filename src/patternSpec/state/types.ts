@@ -1,29 +1,29 @@
 import { PatternSpecAttributes } from '@musical-patterns/pattern'
 import { TypedMap } from '@musical-patterns/utilities'
-import { StringifiedPatternSpec, StringifiedPatternSpecInputStates } from '../types'
+import { StringifiedPatternSpec, StringifiedPatternSpecControlStates } from '../types'
 
 enum PatternSpecStateKeys {
     DEFAULT_PATTERN_SPEC = 'DEFAULT_PATTERN_SPEC',
     DISABLED_PATTERN_SPEC_BUTTONS = 'DISABLED_PATTERN_SPEC_BUTTONS',
     DISPLAYED_PATTERN_SPEC = 'DISPLAYED_PATTERN_SPEC',
-    INVALID_PATTERN_SPEC_INPUTS = 'INVALID_PATTERN_SPEC_INPUTS',
+    INVALID_PATTERN_SPEC_CONTROLS = 'INVALID_PATTERN_SPEC_CONTROLS',
     SUBMITTED_PATTERN_SPEC = 'SUBMITTED_PATTERN_SPEC',
-    UNSUBMITTED_PATTERN_SPEC_INPUTS = 'UNSUBMITTED_PATTERN_SPEC_INPUTS',
+    UNSUBMITTED_PATTERN_SPEC_CONTROLS = 'UNSUBMITTED_PATTERN_SPEC_CONTROLS',
     PATTERN_SPEC_ATTRIBUTES = 'PATTERN_SPEC_ATTRIBUTES',
 }
 
 interface PatternSpecState {
     [ PatternSpecStateKeys.DEFAULT_PATTERN_SPEC ]: StringifiedPatternSpec,
-    [ PatternSpecStateKeys.DISABLED_PATTERN_SPEC_BUTTONS ]: StringifiedPatternSpecInputStates,
+    [ PatternSpecStateKeys.DISABLED_PATTERN_SPEC_BUTTONS ]: StringifiedPatternSpecControlStates,
     [ PatternSpecStateKeys.DISPLAYED_PATTERN_SPEC ]: StringifiedPatternSpec,
-    [ PatternSpecStateKeys.INVALID_PATTERN_SPEC_INPUTS ]: StringifiedPatternSpecInputStates,
+    [ PatternSpecStateKeys.INVALID_PATTERN_SPEC_CONTROLS ]: StringifiedPatternSpecControlStates,
     [ PatternSpecStateKeys.SUBMITTED_PATTERN_SPEC ]: StringifiedPatternSpec,
-    [ PatternSpecStateKeys.UNSUBMITTED_PATTERN_SPEC_INPUTS ]: StringifiedPatternSpecInputStates,
+    [ PatternSpecStateKeys.UNSUBMITTED_PATTERN_SPEC_CONTROLS ]: StringifiedPatternSpecControlStates,
     [ PatternSpecStateKeys.PATTERN_SPEC_ATTRIBUTES ]: PatternSpecAttributes,
 }
 
 type PatternSpecStateValueTypes =
-    StringifiedPatternSpecInputStates |
+    StringifiedPatternSpecControlStates |
     StringifiedPatternSpec |
     PatternSpecAttributes
 
@@ -34,8 +34,8 @@ enum PatternSpecStateActionType {
     SET_DISABLED_PATTERN_SPEC_BUTTONS = 'SET_DISABLED_PATTERN_SPEC_BUTTONS',
     SET_SUBMITTED_PATTERN_SPEC = 'SET_SUBMITTED_PATTERN_SPEC',
     SET_DISPLAYED_PATTERN_SPEC = 'SET_DISPLAYED_PATTERN_SPEC',
-    SET_INVALID_PATTERN_SPEC_INPUTS = 'SET_INVALID_PATTERN_SPEC_INPUTS',
-    SET_UNSUBMITTED_PATTERN_SPEC_INPUTS = 'SET_UNSUBMITTED_PATTERN_SPEC_INPUTS',
+    SET_INVALID_PATTERN_SPEC_CONTROLS = 'SET_INVALID_PATTERN_SPEC_CONTROLS',
+    SET_UNSUBMITTED_PATTERN_SPEC_CONTROLS = 'SET_UNSUBMITTED_PATTERN_SPEC_CONTROLS',
     SET_PATTERN_SPEC_ATTRIBUTES = 'SET_PATTERN_SPEC_ATTRIBUTES',
 }
 
@@ -45,7 +45,7 @@ interface SetDefaultPatternSpec {
 }
 
 interface SetDisabledPatternSpecButtons {
-    data: StringifiedPatternSpecInputStates,
+    data: StringifiedPatternSpecControlStates,
     type: PatternSpecStateActionType.SET_DISABLED_PATTERN_SPEC_BUTTONS,
 }
 
@@ -59,14 +59,14 @@ interface SetDisplayedPatternSpec {
     type: PatternSpecStateActionType.SET_DISPLAYED_PATTERN_SPEC,
 }
 
-interface SetInvalidPatternSpecInputs {
-    data: StringifiedPatternSpecInputStates,
-    type: PatternSpecStateActionType.SET_INVALID_PATTERN_SPEC_INPUTS,
+interface SetInvalidPatternSpecControls {
+    data: StringifiedPatternSpecControlStates,
+    type: PatternSpecStateActionType.SET_INVALID_PATTERN_SPEC_CONTROLS,
 }
 
-interface SetUnsubmittedPatternSpecInputs {
-    data: StringifiedPatternSpecInputStates,
-    type: PatternSpecStateActionType.SET_UNSUBMITTED_PATTERN_SPEC_INPUTS,
+interface SetUnsubmittedPatternSpecControls {
+    data: StringifiedPatternSpecControlStates,
+    type: PatternSpecStateActionType.SET_UNSUBMITTED_PATTERN_SPEC_CONTROLS,
 }
 
 interface SetPatternSpecAttributes {
@@ -79,8 +79,8 @@ type PatternSpecStateAction =
     SetDisabledPatternSpecButtons |
     SetSubmittedPatternSpec |
     SetDisplayedPatternSpec |
-    SetInvalidPatternSpecInputs |
-    SetUnsubmittedPatternSpecInputs |
+    SetInvalidPatternSpecControls |
+    SetUnsubmittedPatternSpecControls |
     SetPatternSpecAttributes
 
 export {

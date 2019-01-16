@@ -1,5 +1,5 @@
 import { clickElement, fillInElement, findElement } from 'puppet-strings'
-import { PatternSpecInputStates } from '../../../src/indexForTest'
+import { PatternSpecControlStates } from '../../../src/indexForTest'
 import { testGlobals } from '../../setup'
 import {
     elementExists,
@@ -36,9 +36,9 @@ describe('reset button', () => {
         done()
     })
 
-    it('reset button is enabled when any pattern spec input is altered', async done => {
-        const input = await findElement(testGlobals.tab, `input#${PATTERN_SPEC_RANGED_PROPERTY_ONE_KEY}`)
-        await modify(input)
+    it('reset button is enabled when any control is altered', async done => {
+        const control = await findElement(testGlobals.tab, `input#${PATTERN_SPEC_RANGED_PROPERTY_ONE_KEY}`)
+        await modify(control)
 
         expect(await elementExists(`button#reset:enabled`))
             .toBeTruthy()
@@ -46,14 +46,14 @@ describe('reset button', () => {
         done()
     })
 
-    it('reset button is disabled when pattern spec input is altered back to the defaults', async done => {
-        const input = await findElement(testGlobals.tab, `input#${PATTERN_SPEC_RANGED_PROPERTY_ONE_KEY}`)
-        await modify(input)
+    it('reset button is disabled when the control is altered back to the defaults', async done => {
+        const control = await findElement(testGlobals.tab, `input#${PATTERN_SPEC_RANGED_PROPERTY_ONE_KEY}`)
+        await modify(control)
 
         expect(await elementExists(`button#reset:enabled`))
             .toBeTruthy()
 
-        await clickElement(input)
+        await clickElement(control)
         await press('Backspace')
         await press('Enter')
 
@@ -64,10 +64,10 @@ describe('reset button', () => {
     })
 
     it('resets the pattern spec to the pattern\'s defaults', async done => {
-        const inputOne = await findElement(testGlobals.tab, `input#${PATTERN_SPEC_RANGED_PROPERTY_ONE_KEY}`)
-        await modify(inputOne)
-        const inputTwo = await findElement(testGlobals.tab, `input#${PATTERN_SPEC_RANGED_PROPERTY_TWO_KEY}`)
-        await modify(inputTwo)
+        const controlOne = await findElement(testGlobals.tab, `input#${PATTERN_SPEC_RANGED_PROPERTY_ONE_KEY}`)
+        await modify(controlOne)
+        const controlTwo = await findElement(testGlobals.tab, `input#${PATTERN_SPEC_RANGED_PROPERTY_TWO_KEY}`)
+        await modify(controlTwo)
         await testGlobals.page.select(`select#${PATTERN_SPEC_OPTIONED_PROPERTY_ONE_KEY}`, TEST_PATTERN_SPEC_OPTIONED_PROPERTY_ONE_MODIFIED_VALUE)
 
         expect(await elementValue(`input#${PATTERN_SPEC_RANGED_PROPERTY_ONE_KEY}`))
@@ -89,43 +89,43 @@ describe('reset button', () => {
         done()
     })
 
-    it('if there were any unsubmitted inputs, they no longer appear as unsubmitted', async done => {
-        const inputToBeUnsubmitted = await findElement(testGlobals.tab, `input#${PATTERN_SPEC_RANGED_PROPERTY_ONE_KEY}`)
-        await fillInElement(inputToBeUnsubmitted, TEST_MODIFICATION)
+    it('if there were any unsubmitted controls, they no longer appear as unsubmitted', async done => {
+        const controlToBeUnsubmitted = await findElement(testGlobals.tab, `input#${PATTERN_SPEC_RANGED_PROPERTY_ONE_KEY}`)
+        await fillInElement(controlToBeUnsubmitted, TEST_MODIFICATION)
         await loseFocus()
-        expect(await elementExists(`input#${PATTERN_SPEC_RANGED_PROPERTY_ONE_KEY}.${PatternSpecInputStates.UNSUBMITTED}`))
+        expect(await elementExists(`input#${PATTERN_SPEC_RANGED_PROPERTY_ONE_KEY}.${PatternSpecControlStates.UNSUBMITTED}`))
             .toBeTruthy()
 
         await testGlobals.page.select(`select#${PATTERN_SPEC_OPTIONED_PROPERTY_ONE_KEY}`, TEST_PATTERN_SPEC_OPTIONED_PROPERTY_ONE_MODIFIED_VALUE)
         await loseFocus(`select#${PATTERN_SPEC_OPTIONED_PROPERTY_ONE_KEY}`)
-        expect(await elementExists(`select#${PATTERN_SPEC_OPTIONED_PROPERTY_ONE_KEY}.${PatternSpecInputStates.UNSUBMITTED}`))
+        expect(await elementExists(`select#${PATTERN_SPEC_OPTIONED_PROPERTY_ONE_KEY}.${PatternSpecControlStates.UNSUBMITTED}`))
             .toBeTruthy()
 
-        const inputToBeSubmittedSuchThatResetButtonIsEnabled = await findElement(testGlobals.tab, `input#${PATTERN_SPEC_RANGED_PROPERTY_TWO_KEY}`)
-        await modify(inputToBeSubmittedSuchThatResetButtonIsEnabled)
+        const controlToBeSubmittedSuchThatResetButtonIsEnabled = await findElement(testGlobals.tab, `input#${PATTERN_SPEC_RANGED_PROPERTY_TWO_KEY}`)
+        await modify(controlToBeSubmittedSuchThatResetButtonIsEnabled)
         await pushResetButton()
 
-        expect(await elementExists(`input#${PATTERN_SPEC_RANGED_PROPERTY_ONE_KEY}.${PatternSpecInputStates.VALID_AND_SUBMITTED}`))
+        expect(await elementExists(`input#${PATTERN_SPEC_RANGED_PROPERTY_ONE_KEY}.${PatternSpecControlStates.VALID_AND_SUBMITTED}`))
             .toBeTruthy()
-        expect(await elementExists(`select#${PATTERN_SPEC_OPTIONED_PROPERTY_ONE_KEY}.${PatternSpecInputStates.VALID_AND_SUBMITTED}`))
+        expect(await elementExists(`select#${PATTERN_SPEC_OPTIONED_PROPERTY_ONE_KEY}.${PatternSpecControlStates.VALID_AND_SUBMITTED}`))
             .toBeTruthy()
 
         done()
     })
 
-    it('if there were any invalid inputs, they no longer appear as invalid', async done => {
-        const inputToBeInvalid = await findElement(testGlobals.tab, `input#${PATTERN_SPEC_RANGED_PROPERTY_ONE_KEY}`)
-        await fillInElement(inputToBeInvalid, INVALID_TEST_MODIFICATION)
+    it('if there were any invalid controls, they no longer appear as invalid', async done => {
+        const controlToBeInvalid = await findElement(testGlobals.tab, `input#${PATTERN_SPEC_RANGED_PROPERTY_ONE_KEY}`)
+        await fillInElement(controlToBeInvalid, INVALID_TEST_MODIFICATION)
         const button = await findElement(testGlobals.tab, `button#${PATTERN_SPEC_RANGED_PROPERTY_ONE_KEY}`)
         await clickElement(button)
-        expect(await elementExists(`input#${PATTERN_SPEC_RANGED_PROPERTY_ONE_KEY}.${PatternSpecInputStates.INVALID}`))
+        expect(await elementExists(`input#${PATTERN_SPEC_RANGED_PROPERTY_ONE_KEY}.${PatternSpecControlStates.INVALID}`))
             .toBeTruthy()
 
         const inputToBeSubmittedSuchThatResetButtonIsEnabled = await findElement(testGlobals.tab, `input#${PATTERN_SPEC_RANGED_PROPERTY_TWO_KEY}`)
         await modify(inputToBeSubmittedSuchThatResetButtonIsEnabled)
         await pushResetButton()
 
-        expect(await elementExists(`input#${PATTERN_SPEC_RANGED_PROPERTY_ONE_KEY}.${PatternSpecInputStates.VALID_AND_SUBMITTED}`))
+        expect(await elementExists(`input#${PATTERN_SPEC_RANGED_PROPERTY_ONE_KEY}.${PatternSpecControlStates.VALID_AND_SUBMITTED}`))
             .toBeTruthy()
 
         done()

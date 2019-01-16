@@ -1,7 +1,7 @@
 // tslint:disable:no-reaching-imports
 
 export {
-    PatternSpecInputStates,
+    PatternSpecControlStates,
 } from './patternSpec/indexForTest'
 export {
     SecretSelectorsForTest,

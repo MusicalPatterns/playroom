@@ -6,7 +6,7 @@ import { ImmutableRootState, RootStateKeys } from '../../root'
 import { handleReset } from '../events'
 import { PatternSpecStateKeys } from '../state'
 import { StringifiedPatternSpec } from '../types'
-import PatternSpecInputs from './PatternSpecInputs'
+import PatternSpecControls from './PatternSpecControls'
 import { PatternSpecProps, PatternSpecPropsFromDispatch, PatternSpecPropsFromState } from './types'
 
 const mapStateToProps: (state: ImmutableRootState) => PatternSpecPropsFromState =
@@ -35,8 +35,8 @@ const PatternSpec: (patternSpecProps: PatternSpecProps) => JSX.Element =
 
         return (
             <div>
-                <h3>configuration</h3>
-                <PatternSpecInputs/>
+                <h3>controls</h3>
+                <PatternSpecControls/>
                 <button {...{ id: 'reset', onClick, disabled }}>reset</button>
             </div>
         )
