@@ -1,5 +1,9 @@
-import { calculatePatternTotalCompiledDuration, compilePattern } from '@musical-patterns/compiler'
-import { SettledPatternSpec } from '@musical-patterns/pattern'
+import {
+    calculatePatternTotalCompiledDuration,
+    compilePattern,
+    CompilePatternParameters,
+} from '@musical-patterns/compiler'
+import { PatternSpec } from '@musical-patterns/pattern'
 import { Note, perform, ThreadSpec } from '@musical-patterns/performer'
 import { Pattern } from '@musical-patterns/registry'
 import { doAsync, logMessageToConsole, Time } from '@musical-patterns/utilities'
@@ -7,7 +11,7 @@ import * as React from 'react'
 import { connect } from 'react-redux'
 import { Dispatch } from 'redux'
 import { PatternStateKeys } from '../../pattern'
-import { destringifySettledPatternSpec, PatternSpecStateKeys } from '../../patternSpec'
+import { destringifyPatternSpec, PatternSpecStateKeys } from '../../patternSpec'
 import { ActionType, ImmutableRootState, RootStateKeys } from '../state'
 import { PatternListenerProps, PatternListenerPropsFromDispatch, PatternListenerPropsFromState } from './types'
 
@@ -32,14 +36,15 @@ const PatternListener: (patternListenerProps: PatternListenerProps) => JSX.Eleme
             const { debugMode, patternId, patterns, submittedPatternSpec, setTotalDuration } = props
 
             const pattern: Pattern = patterns[ patternId ]
-            const spec: SettledPatternSpec = destringifySettledPatternSpec(submittedPatternSpec)
+            const spec: PatternSpec = destringifyPatternSpec(submittedPatternSpec)
+            const compilePatternParameters: CompilePatternParameters = { ...pattern, spec }
 
-            const threadSpecs: ThreadSpec[] = await compilePattern({ ...pattern, spec })
+            const threadSpecs: ThreadSpec[] = await compilePattern(compilePatternParameters)
             if (debugMode) {
                 logMessageToConsole('thread specs: ', threadSpecs)
             }
 
-            const totalDuration: Time = await calculatePatternTotalCompiledDuration({ ...pattern, spec })
+            const totalDuration: Time = await calculatePatternTotalCompiledDuration(compilePatternParameters)
             setTotalDuration(totalDuration)
 
             await perform(threadSpecs)

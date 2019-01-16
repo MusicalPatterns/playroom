@@ -1,4 +1,4 @@
-import { DiscretePatternSpecPropertyRange } from '@musical-patterns/pattern'
+import { OptionedConstraint } from '@musical-patterns/pattern'
 import { PatternSpecInputEventExtractor } from '../events'
 import { ImmutablePatternSpecState } from '../state'
 import { StringifiedPatternSpec } from '../types'
@@ -39,7 +39,7 @@ enum PatternSpecInputStates {
 }
 
 interface PatternSpecSelectProps extends PatternSpecInputProps {
-    options: DiscretePatternSpecPropertyRange,
+    options: OptionedConstraint,
 }
 
 export {

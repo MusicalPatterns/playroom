@@ -1,6 +1,6 @@
 // tslint:disable:max-file-line-count
 
-import { PatternSpecPropertyRange, PatternSpecPropertyType } from '@musical-patterns/pattern'
+import { Constraint, PatternSpecPropertyType } from '@musical-patterns/pattern'
 import { DictionaryOf, TypedMap } from '@musical-patterns/utilities'
 import { StringifiedPatternSpec, StringifiedPatternSpecInputStates } from '../types'
 
@@ -12,7 +12,7 @@ enum PatternSpecStateKeys {
     SUBMITTED_PATTERN_SPEC = 'SUBMITTED_PATTERN_SPEC',
     UNSUBMITTED_PATTERN_SPEC_INPUTS = 'UNSUBMITTED_PATTERN_SPEC_INPUTS',
     PATTERN_SPEC_PROPERTY_TYPES = 'PATTERN_SPEC_PROPERTY_TYPES',
-    PATTERN_SPEC_PROPERTY_RANGES = 'PATTERN_SPEC_PROPERTY_RANGES',
+    CONSTRAINTS = 'CONSTRAINTS',
 }
 
 interface PatternSpecState {
@@ -23,14 +23,14 @@ interface PatternSpecState {
     [ PatternSpecStateKeys.SUBMITTED_PATTERN_SPEC ]: StringifiedPatternSpec,
     [ PatternSpecStateKeys.UNSUBMITTED_PATTERN_SPEC_INPUTS ]: StringifiedPatternSpecInputStates,
     [ PatternSpecStateKeys.PATTERN_SPEC_PROPERTY_TYPES ]: DictionaryOf<PatternSpecPropertyType>,
-    [ PatternSpecStateKeys.PATTERN_SPEC_PROPERTY_RANGES ]: DictionaryOf<PatternSpecPropertyRange>,
+    [ PatternSpecStateKeys.CONSTRAINTS ]: DictionaryOf<Constraint>,
 }
 
 type PatternSpecStateValueTypes =
     StringifiedPatternSpecInputStates |
     StringifiedPatternSpec |
     DictionaryOf<PatternSpecPropertyType> |
-    DictionaryOf<PatternSpecPropertyRange>
+    DictionaryOf<Constraint>
 
 type ImmutablePatternSpecState = TypedMap<PatternSpecStateValueTypes, PatternSpecState>
 
@@ -42,7 +42,7 @@ enum PatternSpecStateActionType {
     SET_INVALID_PATTERN_SPEC_INPUTS = 'SET_INVALID_PATTERN_SPEC_INPUTS',
     SET_UNSUBMITTED_PATTERN_SPEC_INPUTS = 'SET_UNSUBMITTED_PATTERN_SPEC_INPUTS',
     SET_PATTERN_SPEC_PROPERTY_TYPES = 'SET_PATTERN_SPEC_PROPERTY_TYPES',
-    SET_PATTERN_SPEC_PROPERTY_RANGES = 'SET_PATTERN_SPEC_PROPERTY_RANGES',
+    SET_CONSTRAINTS = 'SET_CONSTRAINTS',
 }
 
 interface SetDefaultPatternSpec {
@@ -81,8 +81,8 @@ interface SetPatternSpecPropertyTypes {
 }
 
 interface SetPatternSpecPropertyRanges {
-    data: DictionaryOf<PatternSpecPropertyRange>,
-    type: PatternSpecStateActionType.SET_PATTERN_SPEC_PROPERTY_RANGES,
+    data: DictionaryOf<Constraint>,
+    type: PatternSpecStateActionType.SET_CONSTRAINTS,
 }
 
 type PatternSpecStateAction =

@@ -1,11 +1,11 @@
-import { SettledPatternSpec } from '@musical-patterns/pattern'
+import { PatternSpec } from '@musical-patterns/pattern'
 import { StringifiedPatternSpec } from '../types'
 
 const stringifiedPatternSpecAccumulator: StringifiedPatternSpec = {}
 
-const stringifySettledPatternSpec: (settledPatternSpec: SettledPatternSpec) => StringifiedPatternSpec =
-    (settledPatternSpec: SettledPatternSpec): StringifiedPatternSpec =>
-        Object.entries(settledPatternSpec)
+const stringifyPatternSpec: (patternSpec: PatternSpec) => StringifiedPatternSpec =
+    (patternSpec: PatternSpec): StringifiedPatternSpec =>
+        Object.entries(patternSpec)
             .reduce(
                 (
                     stringifiedPatternSpec: StringifiedPatternSpec,
@@ -18,5 +18,5 @@ const stringifySettledPatternSpec: (settledPatternSpec: SettledPatternSpec) => S
             )
 
 export {
-    stringifySettledPatternSpec,
+    stringifyPatternSpec,
 }

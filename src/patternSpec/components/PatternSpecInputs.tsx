@@ -1,8 +1,4 @@
-import {
-    DiscretePatternSpecPropertyRange,
-    PatternSpecPropertyRange,
-    PatternSpecPropertyType,
-} from '@musical-patterns/pattern'
+import { Constraint, OptionedConstraint, PatternSpecPropertyType } from '@musical-patterns/pattern'
 import { DictionaryOf } from '@musical-patterns/utilities'
 import * as React from 'react'
 import { connect } from 'react-redux'
@@ -58,14 +54,14 @@ const PatternSpecInputs: (patternSpecInputsProps: PatternSpecInputsProps) => JSX
             .sort()
             .map(
                 (patternSpecKey: string, key: number): JSX.Element => {
-                    if (patternSpecPropertyTypes[ patternSpecKey ] === PatternSpecPropertyType.CONTINUOUS) {
+                    if (patternSpecPropertyTypes[ patternSpecKey ] === PatternSpecPropertyType.RANGED) {
                         return <PatternSpecInput {...{ patternSpecInputsProps, patternSpecKey, key }} />
                     }
                     else {
-                        const patternSpecPropertyRanges: DictionaryOf<PatternSpecPropertyRange> = patternSpecState
-                            .get(PatternSpecStateKeys.PATTERN_SPEC_PROPERTY_RANGES)
-                        const options: DiscretePatternSpecPropertyRange =
-                            patternSpecPropertyRanges[ patternSpecKey ] as DiscretePatternSpecPropertyRange
+                        const constraints: DictionaryOf<Constraint> = patternSpecState
+                            .get(PatternSpecStateKeys.CONSTRAINTS)
+                        const options: OptionedConstraint =
+                            constraints[ patternSpecKey ] as OptionedConstraint
 
                         return <PatternSpecSelect {...{ patternSpecInputsProps, patternSpecKey, key, options }}/>
                     }

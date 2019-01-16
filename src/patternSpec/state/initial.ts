@@ -9,7 +9,7 @@ const initialPatternSpecState: ImmutablePatternSpecState = typedMap({
     [ PatternSpecStateKeys.SUBMITTED_PATTERN_SPEC ]: {},
     [ PatternSpecStateKeys.UNSUBMITTED_PATTERN_SPEC_INPUTS ]: {},
     [ PatternSpecStateKeys.PATTERN_SPEC_PROPERTY_TYPES ]: {},
-    [ PatternSpecStateKeys.PATTERN_SPEC_PROPERTY_RANGES ]: {},
+    [ PatternSpecStateKeys.CONSTRAINTS ]: {},
 })
 
 export {

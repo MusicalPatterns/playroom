@@ -35,8 +35,8 @@ const patternSpecReducer: Reducer<ImmutablePatternSpecState, PatternSpecStateAct
             case PatternSpecStateActionType.SET_PATTERN_SPEC_PROPERTY_TYPES: {
                 return patternSpecState.set(PatternSpecStateKeys.PATTERN_SPEC_PROPERTY_TYPES, action.data)
             }
-            case PatternSpecStateActionType.SET_PATTERN_SPEC_PROPERTY_RANGES: {
-                return patternSpecState.set(PatternSpecStateKeys.PATTERN_SPEC_PROPERTY_RANGES, action.data)
+            case PatternSpecStateActionType.SET_CONSTRAINTS: {
+                return patternSpecState.set(PatternSpecStateKeys.CONSTRAINTS, action.data)
             }
             default: {
                 return patternSpecState
