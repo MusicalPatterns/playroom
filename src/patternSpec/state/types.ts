@@ -1,7 +1,5 @@
-// tslint:disable:max-file-line-count
-
-import { Constraint, PatternSpecPropertyType } from '@musical-patterns/pattern'
-import { DictionaryOf, TypedMap } from '@musical-patterns/utilities'
+import { PatternSpecAttributes } from '@musical-patterns/pattern'
+import { TypedMap } from '@musical-patterns/utilities'
 import { StringifiedPatternSpec, StringifiedPatternSpecInputStates } from '../types'
 
 enum PatternSpecStateKeys {
@@ -11,8 +9,7 @@ enum PatternSpecStateKeys {
     INVALID_PATTERN_SPEC_INPUTS = 'INVALID_PATTERN_SPEC_INPUTS',
     SUBMITTED_PATTERN_SPEC = 'SUBMITTED_PATTERN_SPEC',
     UNSUBMITTED_PATTERN_SPEC_INPUTS = 'UNSUBMITTED_PATTERN_SPEC_INPUTS',
-    PATTERN_SPEC_PROPERTY_TYPES = 'PATTERN_SPEC_PROPERTY_TYPES',
-    CONSTRAINTS = 'CONSTRAINTS',
+    PATTERN_SPEC_ATTRIBUTES = 'PATTERN_SPEC_ATTRIBUTES',
 }
 
 interface PatternSpecState {
@@ -22,15 +19,13 @@ interface PatternSpecState {
     [ PatternSpecStateKeys.INVALID_PATTERN_SPEC_INPUTS ]: StringifiedPatternSpecInputStates,
     [ PatternSpecStateKeys.SUBMITTED_PATTERN_SPEC ]: StringifiedPatternSpec,
     [ PatternSpecStateKeys.UNSUBMITTED_PATTERN_SPEC_INPUTS ]: StringifiedPatternSpecInputStates,
-    [ PatternSpecStateKeys.PATTERN_SPEC_PROPERTY_TYPES ]: DictionaryOf<PatternSpecPropertyType>,
-    [ PatternSpecStateKeys.CONSTRAINTS ]: DictionaryOf<Constraint>,
+    [ PatternSpecStateKeys.PATTERN_SPEC_ATTRIBUTES ]: PatternSpecAttributes,
 }
 
 type PatternSpecStateValueTypes =
     StringifiedPatternSpecInputStates |
     StringifiedPatternSpec |
-    DictionaryOf<PatternSpecPropertyType> |
-    DictionaryOf<Constraint>
+    PatternSpecAttributes
 
 type ImmutablePatternSpecState = TypedMap<PatternSpecStateValueTypes, PatternSpecState>
 
@@ -41,8 +36,7 @@ enum PatternSpecStateActionType {
     SET_DISPLAYED_PATTERN_SPEC = 'SET_DISPLAYED_PATTERN_SPEC',
     SET_INVALID_PATTERN_SPEC_INPUTS = 'SET_INVALID_PATTERN_SPEC_INPUTS',
     SET_UNSUBMITTED_PATTERN_SPEC_INPUTS = 'SET_UNSUBMITTED_PATTERN_SPEC_INPUTS',
-    SET_PATTERN_SPEC_PROPERTY_TYPES = 'SET_PATTERN_SPEC_PROPERTY_TYPES',
-    SET_CONSTRAINTS = 'SET_CONSTRAINTS',
+    SET_PATTERN_SPEC_ATTRIBUTES = 'SET_PATTERN_SPEC_ATTRIBUTES',
 }
 
 interface SetDefaultPatternSpec {
@@ -75,14 +69,9 @@ interface SetUnsubmittedPatternSpecInputs {
     type: PatternSpecStateActionType.SET_UNSUBMITTED_PATTERN_SPEC_INPUTS,
 }
 
-interface SetPatternSpecPropertyTypes {
-    data: DictionaryOf<PatternSpecPropertyType>,
-    type: PatternSpecStateActionType.SET_PATTERN_SPEC_PROPERTY_TYPES,
-}
-
-interface SetPatternSpecPropertyRanges {
-    data: DictionaryOf<Constraint>,
-    type: PatternSpecStateActionType.SET_CONSTRAINTS,
+interface SetPatternSpecAttributes {
+    data: PatternSpecAttributes,
+    type: PatternSpecStateActionType.SET_PATTERN_SPEC_ATTRIBUTES,
 }
 
 type PatternSpecStateAction =
@@ -92,8 +81,7 @@ type PatternSpecStateAction =
     SetDisplayedPatternSpec |
     SetInvalidPatternSpecInputs |
     SetUnsubmittedPatternSpecInputs |
-    SetPatternSpecPropertyTypes |
-    SetPatternSpecPropertyRanges
+    SetPatternSpecAttributes
 
 export {
     PatternSpecState,

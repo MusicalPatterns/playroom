@@ -32,11 +32,8 @@ const patternSpecReducer: Reducer<ImmutablePatternSpecState, PatternSpecStateAct
             case PatternSpecStateActionType.SET_UNSUBMITTED_PATTERN_SPEC_INPUTS: {
                 return patternSpecState.set(PatternSpecStateKeys.UNSUBMITTED_PATTERN_SPEC_INPUTS, action.data)
             }
-            case PatternSpecStateActionType.SET_PATTERN_SPEC_PROPERTY_TYPES: {
-                return patternSpecState.set(PatternSpecStateKeys.PATTERN_SPEC_PROPERTY_TYPES, action.data)
-            }
-            case PatternSpecStateActionType.SET_CONSTRAINTS: {
-                return patternSpecState.set(PatternSpecStateKeys.CONSTRAINTS, action.data)
+            case PatternSpecStateActionType.SET_PATTERN_SPEC_ATTRIBUTES: {
+                return patternSpecState.set(PatternSpecStateKeys.PATTERN_SPEC_ATTRIBUTES, action.data)
             }
             default: {
                 return patternSpecState

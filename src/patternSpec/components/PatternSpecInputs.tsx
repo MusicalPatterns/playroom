@@ -1,5 +1,11 @@
-import { Constraint, OptionedConstraint, PatternSpecPropertyType } from '@musical-patterns/pattern'
-import { DictionaryOf } from '@musical-patterns/utilities'
+import {
+    defaultPatternSpecPropertyAttributes,
+    OptionedConstraint,
+    PatternSpecAttributes,
+    PatternSpecPropertyAttributes,
+    PatternSpecPropertyType,
+} from '@musical-patterns/pattern'
+import { Maybe } from '@musical-patterns/utilities'
 import * as React from 'react'
 import { connect } from 'react-redux'
 import { Dispatch } from 'redux'
@@ -47,23 +53,29 @@ const PatternSpecInputs: (patternSpecInputsProps: PatternSpecInputsProps) => JSX
         const { patternSpecState }: PatternSpecInputsProps = patternSpecInputsProps
         const displayedPatternSpec: StringifiedPatternSpec = patternSpecState
             .get(PatternSpecStateKeys.DISPLAYED_PATTERN_SPEC)
-        const patternSpecPropertyTypes: DictionaryOf<PatternSpecPropertyType> = patternSpecState
-            .get(PatternSpecStateKeys.PATTERN_SPEC_PROPERTY_TYPES)
+        const patternSpecAttributes: PatternSpecAttributes = patternSpecState
+            .get(PatternSpecStateKeys.PATTERN_SPEC_ATTRIBUTES)
 
         const patternSpecInputs: JSX.Element[] = Object.keys(displayedPatternSpec)
             .sort()
             .map(
                 (patternSpecKey: string, key: number): JSX.Element => {
-                    if (patternSpecPropertyTypes[ patternSpecKey ] === PatternSpecPropertyType.RANGED) {
-                        return <PatternSpecInput {...{ patternSpecInputsProps, patternSpecKey, key }} />
+                    const propertyAttributes: PatternSpecPropertyAttributes =
+                        patternSpecAttributes[ patternSpecKey ] || defaultPatternSpecPropertyAttributes
+                    const formattedName: Maybe<string> = propertyAttributes.formattedName
+                    if (propertyAttributes.patternSpecPropertyType === PatternSpecPropertyType.RANGED) {
+                        return <PatternSpecInput {...{ patternSpecInputsProps, formattedName, patternSpecKey, key }} />
                     }
                     else {
-                        const constraints: DictionaryOf<Constraint> = patternSpecState
-                            .get(PatternSpecStateKeys.CONSTRAINTS)
-                        const options: OptionedConstraint =
-                            constraints[ patternSpecKey ] as OptionedConstraint
+                        const options: OptionedConstraint = propertyAttributes.constraint
 
-                        return <PatternSpecSelect {...{ patternSpecInputsProps, patternSpecKey, key, options }}/>
+                        return <PatternSpecSelect {...{
+                            formattedName,
+                            key,
+                            options,
+                            patternSpecInputsProps,
+                            patternSpecKey,
+                        }}/>
                     }
                 },
             )

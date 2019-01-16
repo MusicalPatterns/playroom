@@ -11,7 +11,7 @@ import { presentPatternSpecKey } from './helpers'
 import { PatternSpecInputStates, PatternSpecSelectProps } from './types'
 
 const PatternSpecSelect: (props: PatternSpecSelectProps) => JSX.Element =
-    ({ patternSpecKey, patternSpecInputsProps, options }: PatternSpecSelectProps): JSX.Element => {
+    ({ formattedName, patternSpecKey, patternSpecInputsProps, options }: PatternSpecSelectProps): JSX.Element => {
         const {
             handlePatternSpecChange,
             handlePatternSpecKeyboardSubmit,
@@ -72,7 +72,7 @@ const PatternSpecSelect: (props: PatternSpecSelectProps) => JSX.Element =
                     // tslint:disable-next-line:no-unsafe-any
                     JSON.parse(submittedPatternSpecValue)
                         .replace(/"/g, '')}</span>
-                <div>{presentPatternSpecKey(patternSpecKey)}</div>
+                <div>{formattedName || presentPatternSpecKey(patternSpecKey)}</div>
                 <select {...{
                     className,
                     id: patternSpecKey,

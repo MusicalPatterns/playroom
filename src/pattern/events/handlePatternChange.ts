@@ -17,43 +17,13 @@ const handlePatternChange: PatternChangeEventHandler =
     async ({ dispatch, patternId, patterns }: PatternChangeEventHandlerParameters): Promise<void> => {
         togglePaused()
 
-        const patternSpecAttributes: PatternSpecAttributes = patterns[ patternId ].specAttributes
-        const initialPatternSpec: PatternSpec = patterns[ patternId ].initialSpec
-
-        const patternSpecPropertyTypesInitialAccumulator: DictionaryOf<PatternSpecPropertyType> = {}
-        const patternSpecPropertyTypes: DictionaryOf<PatternSpecPropertyType> = Object.entries(patternSpecAttributes)
-            .reduce(
-                (
-                    patternSpecPropertyTypesAccumulator: DictionaryOf<PatternSpecPropertyType>,
-                    [ key, val ]: [ string, Maybe<PatternSpecPropertyAttributes> ],
-                ) => ({
-                    ...patternSpecPropertyTypesAccumulator,
-                    [ key ]: val && val.patternSpecPropertyType || PatternSpecPropertyType.RANGED,
-                }),
-                patternSpecPropertyTypesInitialAccumulator,
-            )
-
-        const constraintsInitialAccumulator: DictionaryOf<Constraint> = {}
-        const constraints: DictionaryOf<Constraint> = Object.entries(patternSpecAttributes)
-            .reduce(
-                (
-                    constraintsAccumulator: DictionaryOf<Constraint>,
-                    [ key, val ]: [ string, Maybe<PatternSpecPropertyAttributes> ],
-                ) => ({
-                    ...constraintsAccumulator,
-                    [ key ]: val && val.constraint || [],
-                }),
-                constraintsInitialAccumulator,
-            )
-
-        const stringifiedPatternSpec: StringifiedPatternSpec = stringifyPatternSpec(initialPatternSpec)
+        const stringifiedPatternSpec: StringifiedPatternSpec = stringifyPatternSpec(patterns[ patternId ].initialSpec)
 
         const actions: Action[] = buildResetActions(stringifiedPatternSpec)
             .concat([
                 { type: ActionType.SET_DEFAULT_PATTERN_SPEC, data: stringifiedPatternSpec },
                 { type: ActionType.SET_PATTERN_ID, data: patternId },
-                { type: ActionType.SET_PATTERN_SPEC_PROPERTY_TYPES, data: patternSpecPropertyTypes },
-                { type: ActionType.SET_CONSTRAINTS, data: constraints },
+                { type: ActionType.SET_PATTERN_SPEC_ATTRIBUTES, data: patterns[ patternId ].specAttributes },
             ])
 
         if (window.innerWidth < WIDTH_BELOW_WHICH_PATTERNS_LIST_CLOSES_UPON_PATTERN_SELECTION) {

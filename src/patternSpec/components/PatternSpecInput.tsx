@@ -11,7 +11,7 @@ import { presentPatternSpecKey } from './helpers'
 import { PatternSpecInputProps, PatternSpecInputStates } from './types'
 
 const PatternSpecInput: (patternSpecInputProps: PatternSpecInputProps) => JSX.Element =
-    ({ patternSpecKey, patternSpecInputsProps }: PatternSpecInputProps): JSX.Element => {
+    ({ formattedName, patternSpecKey, patternSpecInputsProps }: PatternSpecInputProps): JSX.Element => {
         const {
             handlePatternSpecChange,
             handlePatternSpecKeyboardSubmit,
@@ -66,7 +66,7 @@ const PatternSpecInput: (patternSpecInputProps: PatternSpecInputProps) => JSX.El
                     className: SecretSelectorsForTest.SECRET_SUBMITTED_PATTERN_SPEC_INPUT,
                     id: patternSpecKey,
                 }}>{submittedPatternSpecValue}</span>
-                <div>{presentPatternSpecKey(patternSpecKey)}</div>
+                <div>{formattedName || presentPatternSpecKey(patternSpecKey)}</div>
                 <input {...{ onChange, onKeyPress, value: patternSpecValue, className, onBlur, id: patternSpecKey }}/>
                 <button {...{ onClick, disabled, value: patternSpecValue, id: patternSpecKey }}>submit</button>
             </div>

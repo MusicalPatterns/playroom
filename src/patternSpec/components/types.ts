@@ -1,4 +1,5 @@
 import { OptionedConstraint } from '@musical-patterns/pattern'
+import { Maybe } from '@musical-patterns/utilities'
 import { PatternSpecInputEventExtractor } from '../events'
 import { ImmutablePatternSpecState } from '../state'
 import { StringifiedPatternSpec } from '../types'
@@ -17,6 +18,7 @@ interface PatternSpecInputsPropsFromDispatch {
 interface PatternSpecInputsProps extends PatternSpecInputsPropsFromState, PatternSpecInputsPropsFromDispatch {}
 
 interface PatternSpecInputProps {
+    formattedName: Maybe<string>,
     patternSpecInputsProps: PatternSpecInputsProps,
     patternSpecKey: string,
 }
