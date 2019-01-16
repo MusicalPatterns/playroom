@@ -1,7 +1,7 @@
 export {
     buildInitialStringifiedPatternSpecInputStates,
-    stringifyPatternSpec,
-    destringifyPatternSpec,
+    stringifySettledPatternSpec,
+    destringifySettledPatternSpec,
     buildResetActions,
 } from './events'
 export {

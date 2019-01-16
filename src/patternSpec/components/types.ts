@@ -1,4 +1,4 @@
-import { PropsFromApp } from '../../root'
+import { DiscretePatternSpecPropertyRange } from '@musical-patterns/pattern'
 import { PatternSpecInputEventExtractor } from '../events'
 import { ImmutablePatternSpecState } from '../state'
 import { StringifiedPatternSpec } from '../types'
@@ -38,6 +38,10 @@ enum PatternSpecInputStates {
     VALID_AND_SUBMITTED = 'valid-and-submitted',
 }
 
+interface PatternSpecSelectProps extends PatternSpecInputProps {
+    options: DiscretePatternSpecPropertyRange,
+}
+
 export {
     PatternSpecInputProps,
     PatternSpecInputsProps,
@@ -47,4 +51,5 @@ export {
     PatternSpecPropsFromDispatch,
     PatternSpecProps,
     PatternSpecInputStates,
+    PatternSpecSelectProps,
 }

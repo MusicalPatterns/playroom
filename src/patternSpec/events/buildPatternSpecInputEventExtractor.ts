@@ -26,6 +26,9 @@ const buildPatternSpecInputEventExtractor: BuildPatternSpecInputEventExtractor =
                 if (keyboardEvent.key !== SUBMIT) {
                     return
                 }
+                else {
+                    event.preventDefault()
+                }
             }
             const patternSpecValue: string = extractValueFromEvent(event)
 

@@ -1,15 +1,15 @@
-import { clickElement, findElement, navigate } from 'puppet-strings'
+import { clickElement, findElement } from 'puppet-strings'
 import { SecretSelectorsForTest } from '../../../src/indexForTest'
 import { testGlobals } from '../../setup'
 import {
-    APP_URL,
     elementExists,
     elementInnerText,
     modify,
-    PATTERN_SPEC_PROPERTY_ONE_KEY,
+    PATTERN_SPEC_CONTINUOUS_PROPERTY_ONE_KEY,
+    refresh,
+    refreshWithTestPatternSelected,
     selectOtherTestPattern,
     sleep,
-    standardTestReset,
 } from '../../support'
 
 const LONG_ENOUGH_FOR_TIME_TO_PASS = 100
@@ -20,7 +20,7 @@ const currentTime = async () => parseInt(await elementInnerText(`#${SecretSelect
 
 describe('time controls', () => {
     it('are disabled if you have not yet selected a pattern', async done => {
-        await navigate(testGlobals.tab, APP_URL)
+        await refresh()
         expect(await elementExists(`#rewind:disabled`))
             .toBeTruthy()
         expect(await elementExists(`#stop:disabled`))
@@ -32,7 +32,7 @@ describe('time controls', () => {
     })
 
     beforeEach(async done => {
-        await standardTestReset()
+        await refreshWithTestPatternSelected()
         done()
     })
 
@@ -106,7 +106,7 @@ describe('time controls', () => {
             await sleep(A_BIT_LONGER)
             const plentyOfTime = await currentTime()
 
-            const input = await findElement(testGlobals.tab, `input#${PATTERN_SPEC_PROPERTY_ONE_KEY}`)
+            const input = await findElement(testGlobals.tab, `input#${PATTERN_SPEC_CONTINUOUS_PROPERTY_ONE_KEY}`)
             await modify(input)
 
             await sleep(LONG_ENOUGH_FOR_TIME_TO_HAVE_BEEN_RESET)

@@ -1,10 +1,11 @@
 import { clickElement, findElement } from 'puppet-strings'
-import { elementExists, elementInnerText, sleep, standardTestReset } from '../../support'
 import { testGlobals } from '../../setup'
+import { elementExists, elementInnerText, refresh, refreshWithTestPatternSelected } from '../../support'
 
 describe('immersive audio', () => {
     it('starts out disabled', async done => {
-        expect(elementExists('#toggle-immersive-audio:disabled'))
+        await refresh()
+        expect(await elementExists('#toggle-immersive-audio:disabled'))
             .toBeTruthy()
 
         done()
@@ -12,7 +13,7 @@ describe('immersive audio', () => {
 
     describe('after selecting a pattern', () => {
         beforeEach(async done => {
-            await standardTestReset()
+            await refreshWithTestPatternSelected()
             done()
         })
 

@@ -1,3 +1,9 @@
+import {
+    DiscretePatternSpecPropertyRange,
+    PatternSpecPropertyRange,
+    PatternSpecPropertyType,
+} from '@musical-patterns/pattern'
+import { DictionaryOf } from '@musical-patterns/utilities'
 import * as React from 'react'
 import { connect } from 'react-redux'
 import { Dispatch } from 'redux'
@@ -11,12 +17,8 @@ import {
 import { PatternSpecStateKeys } from '../state'
 import { StringifiedPatternSpec } from '../types'
 import PatternSpecInput from './PatternSpecInput'
-import {
-    PatternSpecInputProps,
-    PatternSpecInputsProps,
-    PatternSpecInputsPropsFromDispatch,
-    PatternSpecInputsPropsFromState,
-} from './types'
+import PatternSpecSelect from './PatternSpecSelect'
+import { PatternSpecInputsProps, PatternSpecInputsPropsFromDispatch, PatternSpecInputsPropsFromState } from './types'
 
 const mapStateToProps: (state: ImmutableRootState) => PatternSpecInputsPropsFromState =
     (state: ImmutableRootState): PatternSpecInputsPropsFromState => ({
@@ -49,13 +51,24 @@ const PatternSpecInputs: (patternSpecInputsProps: PatternSpecInputsProps) => JSX
         const { patternSpecState }: PatternSpecInputsProps = patternSpecInputsProps
         const displayedPatternSpec: StringifiedPatternSpec = patternSpecState
             .get(PatternSpecStateKeys.DISPLAYED_PATTERN_SPEC)
+        const patternSpecPropertyTypes: DictionaryOf<PatternSpecPropertyType> = patternSpecState
+            .get(PatternSpecStateKeys.PATTERN_SPEC_PROPERTY_TYPES)
+
         const patternSpecInputs: JSX.Element[] = Object.keys(displayedPatternSpec)
             .sort()
             .map(
                 (patternSpecKey: string, key: number): JSX.Element => {
-                    const patternSpecInputProps: PatternSpecInputProps = { patternSpecInputsProps, patternSpecKey }
+                    if (patternSpecPropertyTypes[ patternSpecKey ] === PatternSpecPropertyType.CONTINUOUS) {
+                        return <PatternSpecInput {...{ patternSpecInputsProps, patternSpecKey, key }} />
+                    }
+                    else {
+                        const patternSpecPropertyRanges: DictionaryOf<PatternSpecPropertyRange> = patternSpecState
+                            .get(PatternSpecStateKeys.PATTERN_SPEC_PROPERTY_RANGES)
+                        const options: DiscretePatternSpecPropertyRange =
+                            patternSpecPropertyRanges[ patternSpecKey ] as DiscretePatternSpecPropertyRange
 
-                    return <PatternSpecInput {...{ ...patternSpecInputProps, key }} />
+                        return <PatternSpecSelect {...{ patternSpecInputsProps, patternSpecKey, key, options }}/>
+                    }
                 },
             )
 

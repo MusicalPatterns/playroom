@@ -8,6 +8,7 @@ type PatternSpecEvent = React.SyntheticEvent | React.KeyboardEvent
 interface PatternSpecEventParameters {
     patternSpecKey: string,
     patternSpecState: ImmutablePatternSpecState,
+    select?: boolean,
 }
 
 interface PatternSpecInputEventHandlerParameters extends PatternSpecEventParameters, DispatchAsProp {

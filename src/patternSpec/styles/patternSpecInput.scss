@@ -9,7 +9,7 @@
 
   margin-bottom: $tiny;
 
-  div, input, button {
+  div, input, button, select {
     margin-left: $small;
     min-width: $huge;
   }
@@ -19,7 +19,7 @@
     text-align: right;
   }
 
-  input {
+  input, select {
     padding: 0 $small;
     flex: 4181;
     height: $big;

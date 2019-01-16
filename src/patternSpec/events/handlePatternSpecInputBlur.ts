@@ -10,6 +10,7 @@ const handlePatternSpecInputBlur: PatternSpecInputEventHandler =
             patternSpecValue,
             dispatch,
             patternSpecState,
+            select,
         }: PatternSpecInputEventHandlerParameters = patternSpecHandlerParameters
         const submittedPatternSpec: StringifiedPatternSpec =
             patternSpecState.get(PatternSpecStateKeys.SUBMITTED_PATTERN_SPEC)
@@ -19,7 +20,8 @@ const handlePatternSpecInputBlur: PatternSpecInputEventHandler =
 
         const updatedUnsubmittedInputs: StringifiedPatternSpecInputStates = {
             ...unsubmittedPatternSpecInputs,
-            [ patternSpecKey ]: currentPatternSpecValue !== patternSpecValue,
+            [ patternSpecKey ]:
+            currentPatternSpecValue !== (select ? JSON.stringify(patternSpecValue) : patternSpecValue),
         }
 
         dispatch({ type: ActionType.SET_UNSUBMITTED_PATTERN_SPEC_INPUTS, data: updatedUnsubmittedInputs })

@@ -11,7 +11,9 @@ const handlePatternSpecInputChange: PatternSpecInputEventHandler =
             patternSpecKey,
             patternSpecValue,
             patternSpecState,
+            select,
         }: PatternSpecInputEventHandlerParameters = patternSpecHandlerParameters
+
         const displayedPatternSpec: StringifiedPatternSpec =
             patternSpecState.get(PatternSpecStateKeys.DISPLAYED_PATTERN_SPEC)
         const invalidPatternSpecInputs: StringifiedPatternSpecInputStates =
@@ -23,7 +25,7 @@ const handlePatternSpecInputChange: PatternSpecInputEventHandler =
 
         const updatedStringifiedPatternSpec: StringifiedPatternSpec = {
             ...displayedPatternSpec,
-            [ patternSpecKey ]: patternSpecValue,
+            [ patternSpecKey ]: select ? JSON.stringify(patternSpecValue) : patternSpecValue,
         }
 
         const updatedInvalidInputs: StringifiedPatternSpecInputStates = {
@@ -34,7 +36,8 @@ const handlePatternSpecInputChange: PatternSpecInputEventHandler =
         const currentPatternSpecValue: string = submittedPatternSpec[ patternSpecKey ]
         const updatedDisabledButtons: StringifiedPatternSpecInputStates = {
             ...disabledPatternSpecButtons,
-            [ patternSpecKey ]: currentPatternSpecValue === patternSpecValue,
+            [ patternSpecKey ]:
+            currentPatternSpecValue === (select ? JSON.stringify(patternSpecValue) : patternSpecValue),
         }
 
         const batchedAction: BatchAction = batchActions([

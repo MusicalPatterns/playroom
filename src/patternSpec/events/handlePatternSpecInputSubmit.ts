@@ -11,8 +11,15 @@ const validateValueByThrowingIfUnparsable: (patternSpecValue: string) => void =
     }
 
 const handlePatternSpecInputSubmit: PatternSpecInputEventHandler =
-    async (patternSpecHandlerParameters: PatternSpecInputEventHandlerParameters): Promise<void> => {
-        const { patternSpecKey, patternSpecValue, dispatch, patternSpecState } = patternSpecHandlerParameters
+    async (patternSpecInputEventHandlerParameters: PatternSpecInputEventHandlerParameters): Promise<void> => {
+        const {
+            patternSpecKey,
+            patternSpecValue,
+            dispatch,
+            patternSpecState,
+            select,
+        } = patternSpecInputEventHandlerParameters
+
         const unsubmittedPatternSpecInputs: StringifiedPatternSpecInputStates =
             patternSpecState.get(PatternSpecStateKeys.UNSUBMITTED_PATTERN_SPEC_INPUTS)
         const invalidPatternSpecInputs: StringifiedPatternSpecInputStates =
@@ -24,14 +31,17 @@ const handlePatternSpecInputSubmit: PatternSpecInputEventHandler =
 
         const updatedPatternSpec: StringifiedPatternSpec = {
             ...submittedPatternSpec,
-            [ patternSpecKey ]: patternSpecValue,
+            [ patternSpecKey ]: select ? JSON.stringify(patternSpecValue) : patternSpecValue,
+            // [ patternSpecKey ]: patternSpecValue,
         }
         if (deepEqual(submittedPatternSpec, updatedPatternSpec)) {
             return
         }
 
         try {
-            validateValueByThrowingIfUnparsable(patternSpecValue)
+            if (!select) {
+                validateValueByThrowingIfUnparsable(patternSpecValue)
+            }
 
             const updatedUnsubmittedInputs: StringifiedPatternSpecInputStates = {
                 ...unsubmittedPatternSpecInputs,
