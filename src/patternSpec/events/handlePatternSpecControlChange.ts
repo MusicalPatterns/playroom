@@ -11,7 +11,6 @@ const handlePatternSpecControlChange: PatternSpecControlEventHandler =
             patternSpecKey,
             patternSpecValue,
             patternSpecState,
-            select,
         }: PatternSpecControlEventHandlerParameters = patternSpecControlEventHandlerParameters
 
         const displayedPatternSpec: StringifiedPatternSpec =
@@ -25,7 +24,7 @@ const handlePatternSpecControlChange: PatternSpecControlEventHandler =
 
         const updatedStringifiedPatternSpec: StringifiedPatternSpec = {
             ...displayedPatternSpec,
-            [ patternSpecKey ]: select ? JSON.stringify(patternSpecValue) : patternSpecValue,
+            [ patternSpecKey ]: patternSpecValue,
         }
 
         const updatedInvalidControls: StringifiedPatternSpecControlStates = {
@@ -37,7 +36,7 @@ const handlePatternSpecControlChange: PatternSpecControlEventHandler =
         const updatedDisabledButtons: StringifiedPatternSpecControlStates = {
             ...disabledPatternSpecButtons,
             [ patternSpecKey ]:
-            currentPatternSpecValue === (select ? JSON.stringify(patternSpecValue) : patternSpecValue),
+            currentPatternSpecValue === patternSpecValue,
         }
 
         const batchedAction: BatchAction = batchActions([

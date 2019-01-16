@@ -1,5 +1,6 @@
 import * as React from 'react'
 import { SUBMIT } from './constants'
+import { doubleStringifyIfOptioned } from './doubleStringifyIfOptioned'
 import {
     BuildPatternSpecControlEventExtractor,
     BuildPatternSpecControlEventExtractorParameters,
@@ -19,7 +20,7 @@ const buildPatternSpecControlEventExtractor: BuildPatternSpecControlEventExtract
         const { dispatch, patternSpecControlEventHandler, abortIfNotSubmitting } = buildParameters
 
         return async (parameters: PatternSpecControlEventExtractorParameters): Promise<void> => {
-            const { event, ...otherParameters } = parameters
+            const { event, patternSpecPropertyTypeIsOptioned, ...otherParameters } = parameters
             if (abortIfNotSubmitting) {
                 const keyboardEvent: React.KeyboardEvent = event as React.KeyboardEvent
 
@@ -30,7 +31,9 @@ const buildPatternSpecControlEventExtractor: BuildPatternSpecControlEventExtract
                     event.preventDefault()
                 }
             }
-            const patternSpecValue: string = extractValueFromEvent(event)
+
+            let patternSpecValue: string = extractValueFromEvent(event)
+            patternSpecValue = doubleStringifyIfOptioned(patternSpecValue, patternSpecPropertyTypeIsOptioned)
 
             await patternSpecControlEventHandler({ ...otherParameters, patternSpecValue, dispatch })
         }

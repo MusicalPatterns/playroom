@@ -1,11 +1,8 @@
 import {
     defaultPatternSpecPropertyAttributes,
-    OptionedConstraint,
     PatternSpecAttributes,
     PatternSpecPropertyAttributes,
-    PatternSpecPropertyType,
 } from '@musical-patterns/pattern'
-import { Maybe } from '@musical-patterns/utilities'
 import * as React from 'react'
 import { connect } from 'react-redux'
 import { Dispatch } from 'redux'
@@ -18,8 +15,7 @@ import {
 } from '../events'
 import { PatternSpecStateKeys } from '../state'
 import { StringifiedPatternSpec } from '../types'
-import OptionedPatternSpecControl from './OptionedPatternSpecControl'
-import RangedPatternSpecControl from './RangedPatternSpecControl'
+import PatternSpecControl from './PatternSpecControl'
 import {
     PatternSpecControlsProps,
     PatternSpecControlsPropsFromDispatch,
@@ -64,28 +60,15 @@ const PatternSpecControls: (patternSpecControlsProps: PatternSpecControlsProps) 
             .sort()
             .map(
                 (patternSpecKey: string, key: number): JSX.Element => {
-                    const propertyAttributes: PatternSpecPropertyAttributes =
+                    const patternSpecPropertyAttributes: PatternSpecPropertyAttributes =
                         patternSpecAttributes[ patternSpecKey ] || defaultPatternSpecPropertyAttributes
-                    const formattedName: Maybe<string> = propertyAttributes.formattedName
-                    if (propertyAttributes.patternSpecPropertyType === PatternSpecPropertyType.RANGED) {
-                        return <RangedPatternSpecControl {...{
-                            formattedName,
-                            key,
-                            patternSpecControlsProps,
-                            patternSpecKey,
-                        }} />
-                    }
-                    else {
-                        const options: OptionedConstraint = propertyAttributes.constraint
 
-                        return <OptionedPatternSpecControl {...{
-                            formattedName,
-                            key,
-                            options,
-                            patternSpecControlsProps,
-                            patternSpecKey,
-                        }}/>
-                    }
+                    return <PatternSpecControl {...{
+                        key,
+                        patternSpecControlsProps,
+                        patternSpecKey,
+                        patternSpecPropertyAttributes,
+                    }}/>
                 },
             )
 

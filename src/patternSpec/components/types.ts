@@ -1,6 +1,5 @@
-import { OptionedConstraint } from '@musical-patterns/pattern'
-import { Maybe } from '@musical-patterns/utilities'
-import { PatternSpecControlEventExtractor } from '../events'
+import { OptionedConstraint, PatternSpecPropertyAttributes } from '@musical-patterns/pattern'
+import { PatternSpecControlEventAttacher, PatternSpecControlEventExtractor } from '../events'
 import { ImmutablePatternSpecState } from '../state'
 import { StringifiedPatternSpec } from '../types'
 
@@ -17,10 +16,10 @@ interface PatternSpecControlsPropsFromDispatch {
 
 interface PatternSpecControlsProps extends PatternSpecControlsPropsFromState, PatternSpecControlsPropsFromDispatch {}
 
-interface RangedPatternSpecControlProps {
-    formattedName: Maybe<string>,
+interface PatternSpecControlProps {
     patternSpecControlsProps: PatternSpecControlsProps,
     patternSpecKey: string,
+    patternSpecPropertyAttributes: PatternSpecPropertyAttributes,
 }
 
 interface PatternSpecPropsFromState {
@@ -40,12 +39,21 @@ enum PatternSpecControlStates {
     VALID_AND_SUBMITTED = 'valid-and-submitted',
 }
 
-interface OptionedPatternSpecControlProps extends RangedPatternSpecControlProps {
+interface ControlProps {
+    className: string,
+    onBlur: PatternSpecControlEventAttacher,
+    onChange: PatternSpecControlEventAttacher,
+    onKeyPress: PatternSpecControlEventAttacher,
+    patternSpecKey: string,
+    patternSpecValue: string,
+}
+
+interface OptionedControlProps extends ControlProps {
     options: OptionedConstraint,
 }
 
 export {
-    RangedPatternSpecControlProps,
+    PatternSpecControlProps,
     PatternSpecControlsProps,
     PatternSpecControlsPropsFromDispatch,
     PatternSpecControlsPropsFromState,
@@ -53,5 +61,6 @@ export {
     PatternSpecPropsFromDispatch,
     PatternSpecProps,
     PatternSpecControlStates,
-    OptionedPatternSpecControlProps,
+    ControlProps,
+    OptionedControlProps,
 }

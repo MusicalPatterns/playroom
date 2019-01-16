@@ -3,6 +3,7 @@ import { BatchAction, batchActions } from 'redux-batched-actions'
 import { ActionType } from '../../root'
 import { PatternSpecStateKeys } from '../state'
 import { StringifiedPatternSpec, StringifiedPatternSpecControlStates } from '../types'
+import { doubleStringifyIfOptioned } from './doubleStringifyIfOptioned'
 import { PatternSpecControlEventHandler, PatternSpecControlEventHandlerParameters } from './types'
 
 const validateValueByThrowingIfUnparsable: (patternSpecValue: string) => void =
@@ -17,7 +18,6 @@ const handlePatternSpecControlSubmit: PatternSpecControlEventHandler =
             patternSpecValue,
             dispatch,
             patternSpecState,
-            select,
         } = patternSpecControlEventHandlerParameters
 
         const unsubmittedPatternSpecControls: StringifiedPatternSpecControlStates =
@@ -31,17 +31,14 @@ const handlePatternSpecControlSubmit: PatternSpecControlEventHandler =
 
         const updatedPatternSpec: StringifiedPatternSpec = {
             ...submittedPatternSpec,
-            [ patternSpecKey ]: select ? JSON.stringify(patternSpecValue) : patternSpecValue,
-            // [ patternSpecKey ]: patternSpecValue,
+            [ patternSpecKey ]: patternSpecValue,
         }
         if (deepEqual(submittedPatternSpec, updatedPatternSpec)) {
             return
         }
 
         try {
-            if (!select) {
-                validateValueByThrowingIfUnparsable(patternSpecValue)
-            }
+            validateValueByThrowingIfUnparsable(patternSpecValue)
 
             const updatedUnsubmittedControls: StringifiedPatternSpecControlStates = {
                 ...unsubmittedPatternSpecControls,
