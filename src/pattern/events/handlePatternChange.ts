@@ -6,7 +6,7 @@ import {
     SettledPatternSpec,
 } from '@musical-patterns/pattern'
 import { setTime, togglePaused } from '@musical-patterns/performer'
-import { BEGINNING, DictionaryOf, doAsync } from '@musical-patterns/utilities'
+import { BEGINNING, DictionaryOf, doAsync, Maybe } from '@musical-patterns/utilities'
 import { BatchAction, batchActions } from 'redux-batched-actions'
 import { buildResetActions, StringifiedPatternSpec, stringifySettledPatternSpec } from '../../patternSpec'
 import { Action, ActionType } from '../../root'
@@ -24,10 +24,10 @@ const handlePatternChange: PatternChangeEventHandler =
             .reduce(
                 (
                     patternSpecPropertyTypesAccumulator: DictionaryOf<PatternSpecPropertyType>,
-                    [ key, val ]: [ string, PatternSpecProperty ],
+                    [ key, val ]: [ string, Maybe<PatternSpecProperty> ],
                 ) => ({
                     ...patternSpecPropertyTypesAccumulator,
-                    [ key ]: val.patternSpecPropertyType,
+                    [ key ]: val && val.patternSpecPropertyType || PatternSpecPropertyType.CONTINUOUS,
                 }),
                 patternSpecPropertyTypesInitialAccumulator,
             )
@@ -35,9 +35,9 @@ const handlePatternChange: PatternChangeEventHandler =
         const initialSettledPatternSpecInitialAccumulator: SettledPatternSpec = {}
         const initialSettledPatternSpec: SettledPatternSpec = Object.entries(patternSpec)
             .reduce(
-                (settled: SettledPatternSpec, [ key, val ]: [ string, PatternSpecProperty ]) => ({
+                (settled: SettledPatternSpec, [ key, val ]: [ string, Maybe<PatternSpecProperty> ]) => ({
                     ...settled,
-                    [ key ]: val.initial,
+                    [ key ]: val && val.initial,
                 }),
                 initialSettledPatternSpecInitialAccumulator,
             )
@@ -47,10 +47,10 @@ const handlePatternChange: PatternChangeEventHandler =
             .reduce(
                 (
                     patternSpecPropertyRangesAccumulator: DictionaryOf<PatternSpecPropertyRange>,
-                    [ key, val ]: [ string, PatternSpecProperty ],
+                    [ key, val ]: [ string, Maybe<PatternSpecProperty> ],
                 ) => ({
                     ...patternSpecPropertyRangesAccumulator,
-                    [ key ]: val.patternSpecPropertyRange || [],
+                    [ key ]: val && val.patternSpecPropertyRange || [],
                 }),
                 patternSpecPropertyRangesInitialAccumulator,
             )

@@ -1,5 +1,5 @@
 import { calculatePatternTotalCompiledDuration, compilePattern } from '@musical-patterns/compiler'
-import { PatternSpec } from '@musical-patterns/pattern'
+import { SettledPatternSpec } from '@musical-patterns/pattern'
 import { Note, perform, ThreadSpec } from '@musical-patterns/performer'
 import { Pattern } from '@musical-patterns/registry'
 import { doAsync, logMessageToConsole, Time } from '@musical-patterns/utilities'
@@ -32,15 +32,14 @@ const PatternListener: (patternListenerProps: PatternListenerProps) => JSX.Eleme
             const { debugMode, patternId, patterns, submittedPatternSpec, setTotalDuration } = props
 
             const pattern: Pattern = patterns[ patternId ]
-            const spec: PatternSpec = destringifySettledPatternSpec(submittedPatternSpec)
-            const patternWithSpecApplied: Pattern = { ...pattern, spec }
+            const spec: SettledPatternSpec = destringifySettledPatternSpec(submittedPatternSpec)
 
-            const threadSpecs: ThreadSpec[] = await compilePattern(patternWithSpecApplied)
+            const threadSpecs: ThreadSpec[] = await compilePattern({ ...pattern, spec })
             if (debugMode) {
                 logMessageToConsole('thread specs: ', threadSpecs)
             }
 
-            const totalDuration: Time = await calculatePatternTotalCompiledDuration(patternWithSpecApplied)
+            const totalDuration: Time = await calculatePatternTotalCompiledDuration({ ...pattern, spec })
             setTotalDuration(totalDuration)
 
             await perform(threadSpecs)
