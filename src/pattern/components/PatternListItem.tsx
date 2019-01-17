@@ -9,7 +9,7 @@ const PatternListItem: (props: PatternListItemProps) => JSX.Element =
             month: 'long',
             year: 'numeric',
         })
-        const className: string = patternId === listedPatternId ? 'selected' : ''
+        const className: string = !patternId ? '' : patternId === listedPatternId ? 'selected' : 'not-selected'
 
         return (
             <li {...{ className, id: listedPatternId, onClick }} >
