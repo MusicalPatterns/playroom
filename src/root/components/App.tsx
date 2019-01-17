@@ -1,6 +1,6 @@
 import * as React from 'react'
 import { connect } from 'react-redux'
-import { ImmutablePatternState, PatternsPanel, PatternStateKeys } from '../../pattern'
+import { ImmutablePatternState, PatternPanel, PatternStateKeys } from '../../pattern'
 import { ImmutableRootState, RootStateKeys } from '../state'
 import BottomRow from './BottomRow'
 import FirstRow from './FirstRow'
@@ -26,10 +26,10 @@ const App: React.ComponentType<AppProps> =
 
         return (
             <div {...{ id: 'app' }}>
-                <PatternsPanel {...{ patternId, patterns }}/>
+                <PatternPanel {...{ patternId, patterns }}/>
                 <div {...{ id: 'container' }}>
                     <FirstRow {...{ patternId }} />
-                    {patternId && <SecondRow {...{ patternId, patterns }}/>}
+                    <SecondRow {...{ patternId, patterns }}/>
                     {patternId && <Post {...{ patternId, patterns }}/>}
                     <BottomRow {...{ patternId }} />
                 </div>

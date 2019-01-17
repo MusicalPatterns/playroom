@@ -4,18 +4,18 @@ import { DEFAULT_VIEWPORT_HEIGHT, DEFAULT_VIEWPORT_WIDTH, elementExists, selectT
 
 describe('hamburger', () => {
     it('collapses and expands the left panel', async done => {
-        expect(await elementExists('#patterns-panel.open'))
+        expect(await elementExists('#pattern-panel.open'))
             .toBeTruthy()
 
         const hamburger = await findElement(testGlobals.tab, '#hamburger')
         await clickElement(hamburger)
 
-        expect(await elementExists('#patterns-panel.closed'))
+        expect(await elementExists('#pattern-panel.closed'))
             .toBeTruthy()
 
         await clickElement(hamburger)
 
-        expect(await elementExists('#patterns-panel.open'))
+        expect(await elementExists('#pattern-panel.open'))
             .toBeTruthy()
 
         done()
@@ -24,12 +24,12 @@ describe('hamburger', () => {
     it('collapses the panel when you select a pattern if the viewport is smaller than 1000px wide', async done => {
         await testGlobals.page.setViewport({ width: 800, height: DEFAULT_VIEWPORT_HEIGHT })
 
-        expect(await elementExists('#patterns-panel.open'))
+        expect(await elementExists('#pattern-panel.open'))
             .toBeTruthy()
 
         await selectTestPattern()
 
-        expect(await elementExists('#patterns-panel.closed'))
+        expect(await elementExists('#pattern-panel.closed'))
             .toBeTruthy()
 
         await testGlobals.page.setViewport({ width: DEFAULT_VIEWPORT_WIDTH, height: DEFAULT_VIEWPORT_HEIGHT })

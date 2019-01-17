@@ -1,0 +1,20 @@
+@import '../../sizes';
+
+#pattern-panel-stuff {
+  display: flex;
+  flex-direction: column;
+  height: $huge-area;
+  align-items: flex-end;
+
+  #hamburger {
+    flex: 1;
+  }
+
+  #pattern-list {
+    flex: $phi * $phi * $phi * $phi;
+  }
+
+  #title {
+    flex: $phi;
+  }
+}

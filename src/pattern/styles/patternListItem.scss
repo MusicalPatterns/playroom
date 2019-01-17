@@ -5,9 +5,11 @@
 li {
   padding-bottom: $small;
   color: $grey;
+  width: $small-area;
 
   div:first-child {
     font-size: $medium;
+    line-height: $small;
     @extend .leipziger-antiqua-bold;
   }
 

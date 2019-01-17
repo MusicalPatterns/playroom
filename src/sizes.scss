@@ -25,4 +25,5 @@ $right: 1fr * nth($fibonacci-series, 1 + $fibonacci-series-layout-offset);
 $timeline-offset: -$tiny;
 $toggle-immersive-audio-button-width: 1px * nth($fibonacci-series, 9 + $fibonacci-series-size-offset);
 
-$duration: 0.3s;
+$duration: 0.25s;
+$easeInOutQuint: cubic-bezier(0.86, 0, 0.07, 1)

@@ -7,7 +7,7 @@
 @import './immersiveAudio';
 
 #no-pattern-message {
-  margin: $big 0;
+  padding: $medium;
   font-size: $small;
 }
 
@@ -16,6 +16,7 @@
   align-items: center;
   flex-wrap: wrap;
   justify-content: flex-start;
+  padding: $medium;
 
   #time-controls-container {
     padding-right: $medium;

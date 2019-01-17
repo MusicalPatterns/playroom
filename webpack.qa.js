@@ -1,5 +1,6 @@
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const CopyWebpackPlugin = require('copy-webpack-plugin')
+const FaviconsWebpackPlugin = require('favicons-webpack-plugin')
 const common = require('./webpack.common')
 const merge = require('webpack-merge')
 const path = require('path')
@@ -19,6 +20,7 @@ module.exports = merge(common, {
     plugins: [
         new HtmlWebpackPlugin({
             title: 'Musical Patterns - Playroom QA',
+            meta: { viewport: 'width=device-width' },
         }),
         new CopyWebpackPlugin([
             {
@@ -42,5 +44,6 @@ module.exports = merge(common, {
                 flatten: true,
             },
         ]),
+        new FaviconsWebpackPlugin('./assets/favicon.png'),
     ],
 })

@@ -2,49 +2,55 @@
 @import '../../colors';
 
 .row {
-  flex-grow: 0;
-
   display: flex;
   flex-wrap: wrap;
 
   .left, .right {
-    padding: $big;
     color: $almost-black;
+
+    p, img, h1 {
+      padding: $big;
+    }
   }
 
   .left {
     flex: $phi;
-    text-align: left;
-    background-color: $white;
-    min-width: $big-area - $big - $big;
+    min-width: $huge-area;
 
-    &.closed {
-      flex: 9999;
-    }
+    background-color: $white;
   }
 
   .right {
     flex: 1;
-    text-align: right;
-    background-color: $grey;
-    min-width: $medium-area - $big - $big;
+    min-width: $big-area;
 
-    &:empty {
-      padding: 0 $big;
-    }
+    background-color: $grey;
+
+    text-align: right;
+
+    transition: flex $duration $easeInOutQuint, min-width $duration $easeInOutQuint;
+
+    overflow-x: hidden;
 
     &.closed {
-      min-width: inherit;
+      flex: ((((1 / $phi) / $phi) / $phi) / $phi) / $phi;
+      min-width: 0;
     }
   }
 }
 
 #first-row {
-  min-height: $small-area;
+  min-height: $huge;
 }
 
 #second-row {
   min-height: $medium-area;
+
+  .left {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+  }
 }
 
 #bottom-row {

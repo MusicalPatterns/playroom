@@ -3,11 +3,10 @@
 @import '../../effects';
 
 #time-controls {
-  transition: background $duration ease, color $duration ease, border $duration ease;
+  transition: background $duration $easeInOutQuint, color $duration $easeInOutQuint, border $duration $easeInOutQuint;
 
   display: flex;
   align-items: center;
-  margin: $small 0;
   padding: $tiny $small;
   font-size: $medium;
 
@@ -17,7 +16,7 @@
   color: $almost-white;
 
   button {
-    transition: background $duration ease;
+    transition: background $duration $easeInOutQuint;
     @include no-glow();
 
     height: $medium;

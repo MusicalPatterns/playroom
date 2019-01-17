@@ -13,13 +13,15 @@ const mapStateToProps: (state: ImmutableRootState) => PatternsPanelPropsFromStat
             .get(PatternStateKeys.PATTERNS_PANEL_OPEN),
     })
 
-const PatternsPanel: (props: PatternsPanelProps) => JSX.Element =
+const PatternPanel: (props: PatternsPanelProps) => JSX.Element =
     ({ patternsPanelOpen, patternId, patterns }: PatternsPanelProps): JSX.Element => (
-        <div {...{ id: 'patterns-panel', className: patternsPanelOpen ? 'open' : 'closed' }}>
-            <Hamburger {...{ patternsPanelOpen }}/>
-            <PatternList {...{ patternId, patterns }}/>
-            <Title/>
+        <div {...{ id: 'pattern-panel', className: patternsPanelOpen ? 'open' : 'closed' }}>
+            <div {...{ id: 'pattern-panel-stuff' }}>
+                <Hamburger {...{ patternsPanelOpen }}/>
+                <PatternList {...{ patternId, patterns }}/>
+                <Title/>
+            </div>
         </div>
     )
 
-export default connect(mapStateToProps)(PatternsPanel)
+export default connect(mapStateToProps)(PatternPanel)

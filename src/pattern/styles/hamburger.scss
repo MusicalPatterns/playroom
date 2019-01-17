@@ -5,13 +5,16 @@
 #hamburger {
   background-color: $dark-grey;
   color: $grey;
-  padding: $tiny;
-  width: $big;
-  min-width: $big;
 
-  &:focus {
-    @include no-glow();
-  }
+  display: flex;
+  align-items: flex-end;
+  flex-direction: column;
+  padding: 0;
+
+  box-shadow: $medium $big $big $dark-grey;
+  z-index: 1;
+
+  width: $big-area;
 
   &:hover {
     color: $light-grey;
@@ -20,5 +23,6 @@
   svg {
     width: $big;
     height: $big;
+    padding: $small;
   }
 }

@@ -11,24 +11,20 @@
   display: flex;
   min-height: 100%;
 
-  #patterns-panel {
+  #pattern-panel {
     background-color: $dark-grey;
     color: $grey;
 
-    padding: 0 $big 0 0;
+    overflow-x: hidden;
 
-    min-width: $small-area + $big + $big;
+    transition: flex $duration $easeInOutQuint, min-width $duration $easeInOutQuint;
 
     flex: 1;
+    min-width: $medium-area;
 
     &.closed {
       flex: 0;
       min-width: $huge;
-      padding: 0;
-
-      #title, ul {
-        display: none;
-      }
     }
   }
 

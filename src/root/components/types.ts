@@ -12,6 +12,15 @@ interface PropsFromApp {
     patterns: Patterns,
 }
 
+interface FirstRowProps {
+    patternId?: PatternId,
+}
+
+interface SecondRowProps {
+    patternId?: PatternId,
+    patterns: Patterns,
+}
+
 interface PatternListenerPropsFromState {
     debugMode: boolean,
     submittedPatternSpec: StringifiedPatternSpec,
@@ -23,10 +32,6 @@ interface PatternListenerPropsFromDispatch {
 
 interface PatternListenerProps extends PatternListenerPropsFromState, PatternListenerPropsFromDispatch, PropsFromApp {}
 
-interface FirstRowProps {
-    patternId?: PatternId,
-}
-
 export {
     AppProps,
     PatternListenerPropsFromState,
@@ -34,4 +39,5 @@ export {
     PatternListenerProps,
     PropsFromApp,
     FirstRowProps,
+    SecondRowProps,
 }

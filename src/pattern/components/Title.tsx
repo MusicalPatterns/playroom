@@ -7,9 +7,13 @@ import SymbolSvg from './symbol.svg'
 const Title: () => JSX.Element =
     (): JSX.Element => (
         <div {...{ id: 'title' }}>
-            <SymbolSvg/>
-            <h1>Musical Patterns</h1>
-            <div><a {...{ href: 'https://douglasblumeyer.com', target: '__blank' }}>Douglas Blumeyer</a></div>
+            <div>
+                <SymbolSvg/>
+            </div>
+            <div>
+                <h1>Musical Patterns</h1>
+                <div><a {...{ href: 'https://douglasblumeyer.com', target: '__blank' }}>Douglas Blumeyer</a></div>
+            </div>
         </div>
     )
 

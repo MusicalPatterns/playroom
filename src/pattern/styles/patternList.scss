@@ -1,20 +1,30 @@
 @import '../../sizes.scss';
 
 #pattern-list {
-  margin-top: $medium;
+  margin-right: $huge;
 
   overflow: hidden;
   position: relative;
-  height: $huge-area;
+  width: $medium-area;
 
   ul {
+    direction: rtl;
+
     position: absolute;
     top: 0;
     bottom: 0;
-    left: 0;
-    right: -$medium;
+    right: 0;
+    left: -$medium;
     overflow: auto;
 
+    padding: $huge 0;
+
     list-style: square;
+
+    margin-block-start: 0;
+    margin-block-end: 0;
+    margin-inline-start: 0;
+    margin-inline-end: 0;
+    padding-inline-start: $medium;
   }
 }

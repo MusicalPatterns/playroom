@@ -1,5 +1,5 @@
-import PatternsPanel from './PatternsPanel'
+import PatternPanel from './PatternPanel'
 
 export {
-    PatternsPanel,
+    PatternPanel,
 }

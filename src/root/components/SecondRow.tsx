@@ -1,17 +1,17 @@
 import * as React from 'react'
 import { PatternSpec } from '../../patternSpec'
 import PatternListener from './PatternListener'
-import { PropsFromApp } from './types'
+import { SecondRowProps } from './types'
 
-const SecondRow: (props: PropsFromApp) => JSX.Element =
-    ({ patternId, patterns }: PropsFromApp): JSX.Element => (
+const SecondRow: (props: SecondRowProps) => JSX.Element =
+    ({ patternId, patterns }: SecondRowProps): JSX.Element => (
         <div {...{ className: 'row', id: 'second-row' }} >
             <div {...{ className: 'left' }} >
-                <h1>{patterns[ patternId ].metadata.formattedName}</h1>
+                {patternId && <h1>{patterns[ patternId ].metadata.formattedName}</h1>}
             </div>
-            <div {...{ className: 'right' }} >
-                <PatternSpec/>
-                <PatternListener {...{ patternId, patterns }}/>
+            <div {...{ className: `right${patternId ? '' : ' closed'}` }} >
+                {patternId && <PatternSpec/>}
+                {patternId && <PatternListener {...{ patternId, patterns }}/>}
             </div>
         </div>
     )
