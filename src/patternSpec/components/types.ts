@@ -1,4 +1,9 @@
-import { OptionedConstraint, PatternSpecAttributes, PatternSpecPropertyAttributes } from '@musical-patterns/pattern'
+import {
+    OptionedConstraint,
+    PatternSpecAttributes,
+    PatternSpecPropertyAttributes,
+    RangedConstraint,
+} from '@musical-patterns/pattern'
 import { PatternSpecControlEventAttacher, PatternSpecControlEventExtractor } from '../events'
 import { ImmutablePatternSpecState } from '../state'
 import { StringifiedPatternSpec } from '../types'
@@ -49,7 +54,11 @@ interface ControlProps {
 }
 
 interface OptionedControlProps extends ControlProps {
-    options: OptionedConstraint,
+    constraint: OptionedConstraint,
+}
+
+interface RangedControlProps extends ControlProps {
+    constraint: RangedConstraint,
 }
 
 interface BuildControlsProps {
@@ -69,5 +78,6 @@ export {
     PatternSpecControlStates,
     ControlProps,
     OptionedControlProps,
+    RangedControlProps,
     BuildControlsProps,
 }

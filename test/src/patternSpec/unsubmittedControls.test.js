@@ -21,26 +21,26 @@ describe('unsubmitted controls', () => {
 
     describe('ranged controls', () => {
         it('marks as unsubmitted when you alter their contents but then leave focus without submitting', async done => {
-            const control = await findElement(testGlobals.tab, `input#${PATTERN_SPEC_RANGED_PROPERTY_ONE_KEY}`)
+            const control = await findElement(testGlobals.tab, `input[type=number]#${PATTERN_SPEC_RANGED_PROPERTY_ONE_KEY}`)
             await fillInElement(control, VALID_TEST_MODIFICATION)
 
             await loseFocus()
 
-            expect(await elementExists(`input#${PATTERN_SPEC_RANGED_PROPERTY_ONE_KEY}.${PatternSpecControlStates.UNSUBMITTED}`))
+            expect(await elementExists(`input[type=number]#${PATTERN_SPEC_RANGED_PROPERTY_ONE_KEY}.${PatternSpecControlStates.UNSUBMITTED}`))
                 .toBeTruthy()
 
             done()
         })
 
         it('does not mark as unsubmitted if you fiddle with it but leave it the same as what you have already submitted', async done => {
-            const controlOne = await findElement(testGlobals.tab, `input#${PATTERN_SPEC_RANGED_PROPERTY_ONE_KEY}`)
+            const controlOne = await findElement(testGlobals.tab, `input[type=number]#${PATTERN_SPEC_RANGED_PROPERTY_ONE_KEY}`)
             await fillInElement(controlOne, VALID_TEST_MODIFICATION)
             await clickElement(controlOne)
             await press('Backspace')
 
             await loseFocus()
 
-            expect(await elementExists(`input#${PATTERN_SPEC_RANGED_PROPERTY_ONE_KEY}.${PatternSpecControlStates.VALID_AND_SUBMITTED}`))
+            expect(await elementExists(`input[type=number]#${PATTERN_SPEC_RANGED_PROPERTY_ONE_KEY}.${PatternSpecControlStates.VALID_AND_SUBMITTED}`))
                 .toBeTruthy()
 
             done()

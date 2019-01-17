@@ -104,7 +104,7 @@ describe('time controls', () => {
             await sleep(A_BIT_LONGER)
             const plentyOfTime = await currentTime()
 
-            const input = await findElement(testGlobals.tab, `input#${PATTERN_SPEC_RANGED_PROPERTY_ONE_KEY}`)
+            const input = await findElement(testGlobals.tab, `input[type=number]#${PATTERN_SPEC_RANGED_PROPERTY_ONE_KEY}`)
             await modify(input)
 
             await sleep(LONG_ENOUGH_FOR_TIME_TO_HAVE_BEEN_RESET)

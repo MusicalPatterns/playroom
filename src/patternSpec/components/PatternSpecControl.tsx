@@ -1,4 +1,3 @@
-import { OptionedConstraint, PatternSpecPropertyType } from '@musical-patterns/pattern'
 import * as React from 'react'
 import { SecretSelectorsForTest } from '../../types'
 import {
@@ -8,9 +7,8 @@ import {
 } from '../events'
 import { PatternSpecStateKeys } from '../state'
 import { StringifiedPatternSpec, StringifiedPatternSpecControlStates } from '../types'
+import { buildControl } from './buildControl'
 import { presentPatternSpecKey } from './helpers'
-import OptionedPatternSpecControl from './OptionedPatternSpecControl'
-import RangedPatternSpecControl from './RangedPatternSpecControl'
 import { ControlProps, PatternSpecControlProps, PatternSpecControlStates } from './types'
 
 const PatternSpecControl: (patternSpecControlProps: PatternSpecControlProps) => JSX.Element =
@@ -42,10 +40,7 @@ const PatternSpecControl: (patternSpecControlProps: PatternSpecControlProps) => 
         const disabled: boolean = disabledPatternSpecButtons[ patternSpecKey ]
         const submittedPatternSpecValue: string = submittedPatternSpec[ patternSpecKey ]
 
-        const patternSpecEventParameters: PatternSpecEventParameters = {
-            patternSpecKey,
-            patternSpecState,
-        }
+        const patternSpecEventParameters: PatternSpecEventParameters = { patternSpecKey, patternSpecState }
 
         const onChange: PatternSpecControlEventAttacher = buildPatternSpecControlEventAttacher({
             patternSpecEventExtractor: handlePatternSpecChange,
@@ -67,10 +62,8 @@ const PatternSpecControl: (patternSpecControlProps: PatternSpecControlProps) => 
         const className: string = invalid ?
             PatternSpecControlStates.INVALID :
             unsubmitted ? PatternSpecControlStates.UNSUBMITTED : PatternSpecControlStates.VALID_AND_SUBMITTED
-        const controlProps: ControlProps = { onBlur, onChange, onKeyPress, patternSpecKey, patternSpecValue, className }
-        const control: JSX.Element = patternSpecPropertyType === PatternSpecPropertyType.OPTIONED ?
-            <OptionedPatternSpecControl {...{ ...controlProps, options: constraint as OptionedConstraint }}/> :
-            <RangedPatternSpecControl {...controlProps}/>
+        const controlProps: ControlProps = { className, onBlur, onChange, onKeyPress, patternSpecKey, patternSpecValue }
+        const control: JSX.Element[] = buildControl(patternSpecPropertyType, controlProps, constraint)
 
         return (
             <div {...{ className: 'pattern-spec-control' }}>
@@ -80,13 +73,7 @@ const PatternSpecControl: (patternSpecControlProps: PatternSpecControlProps) => 
                 }}>{submittedPatternSpecValue}</span>
                 <div>{formattedName || presentPatternSpecKey(patternSpecKey)}</div>
                 {control}
-                <button {...{
-                    disabled,
-                    id: patternSpecKey,
-                    onClick,
-                    value: patternSpecValue,
-                }}>submit
-                </button>
+                <button {...{ disabled, id: patternSpecKey, onClick, value: patternSpecValue }}>submit</button>
             </div>
         )
     }

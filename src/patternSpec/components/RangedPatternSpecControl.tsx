@@ -1,9 +1,16 @@
 import * as React from 'react'
-import { ControlProps } from './types'
+import { RangedControlProps } from './types'
 
-const RangedPatternSpecControl: (rangedControlProps: ControlProps) => JSX.Element =
-    (rangedControlProps: ControlProps): JSX.Element => {
-        const { onBlur, onChange, onKeyPress, patternSpecKey, patternSpecValue, className } = rangedControlProps
+const RangedPatternSpecControl: (rangedControlProps: RangedControlProps) => JSX.Element =
+    (rangedControlProps: RangedControlProps): JSX.Element => {
+        const {
+            onBlur,
+            onChange,
+            onKeyPress,
+            patternSpecKey,
+            patternSpecValue,
+            className,
+        } = rangedControlProps
 
         return (
             <input {...{
@@ -12,6 +19,7 @@ const RangedPatternSpecControl: (rangedControlProps: ControlProps) => JSX.Elemen
                 onBlur,
                 onChange,
                 onKeyPress,
+                type: 'number',
                 value: patternSpecValue,
             }}/>
         )

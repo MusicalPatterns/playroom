@@ -10,10 +10,10 @@ const OptionedPatternSpecControl: (optionedControlProps: OptionedControlProps) =
             patternSpecKey,
             patternSpecValue,
             className,
-            options,
+            constraint,
         } = optionedControlProps
 
-        const optionElements: JSX.Element[] = options.map((option: string, key: number): JSX.Element =>
+        const optionElements: JSX.Element[] = constraint.map((option: string, key: number): JSX.Element =>
             <option {...{ key, value: option }}>{option}</option>)
 
         return (

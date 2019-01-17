@@ -23,7 +23,7 @@ describe('submit button', () => {
             expect(await elementExists(`button#${PATTERN_SPEC_RANGED_PROPERTY_ONE_KEY}:disabled`))
                 .toBeTruthy()
 
-            const control = await findElement(testGlobals.tab, `input#${PATTERN_SPEC_RANGED_PROPERTY_ONE_KEY}`)
+            const control = await findElement(testGlobals.tab, `input[type=number]#${PATTERN_SPEC_RANGED_PROPERTY_ONE_KEY}`)
             await fillInElement(control, VALID_TEST_MODIFICATION)
 
             expect(await elementExists(`button#${PATTERN_SPEC_RANGED_PROPERTY_ONE_KEY}:enabled`))
@@ -36,7 +36,7 @@ describe('submit button', () => {
             expect(await elementExists(`button#${PATTERN_SPEC_RANGED_PROPERTY_ONE_KEY}:disabled`))
                 .toBeTruthy()
 
-            const control = await findElement(testGlobals.tab, `input#${PATTERN_SPEC_RANGED_PROPERTY_ONE_KEY}`)
+            const control = await findElement(testGlobals.tab, `input[type=number]#${PATTERN_SPEC_RANGED_PROPERTY_ONE_KEY}`)
             await fillInElement(control, VALID_TEST_MODIFICATION)
 
             expect(await elementExists(`button#${PATTERN_SPEC_RANGED_PROPERTY_ONE_KEY}:enabled`))
@@ -55,7 +55,7 @@ describe('submit button', () => {
             expect(await elementExists(`button#${PATTERN_SPEC_RANGED_PROPERTY_ONE_KEY}:disabled`))
                 .toBeTruthy()
 
-            const control = await findElement(testGlobals.tab, `input#${PATTERN_SPEC_RANGED_PROPERTY_ONE_KEY}`)
+            const control = await findElement(testGlobals.tab, `input[type=number]#${PATTERN_SPEC_RANGED_PROPERTY_ONE_KEY}`)
             await fillInElement(control, VALID_TEST_MODIFICATION)
 
             expect(await elementExists(`button#${PATTERN_SPEC_RANGED_PROPERTY_ONE_KEY}:enabled`))
@@ -74,7 +74,7 @@ describe('submit button', () => {
             expect(await elementExists(`button#${PATTERN_SPEC_RANGED_PROPERTY_ONE_KEY}:disabled`))
                 .toBeTruthy()
 
-            const control = await findElement(testGlobals.tab, `input#${PATTERN_SPEC_RANGED_PROPERTY_ONE_KEY}`)
+            const control = await findElement(testGlobals.tab, `input[type=number]#${PATTERN_SPEC_RANGED_PROPERTY_ONE_KEY}`)
             await fillInElement(control, VALID_TEST_MODIFICATION)
 
             expect(await elementExists(`button#${PATTERN_SPEC_RANGED_PROPERTY_ONE_KEY}:enabled`))

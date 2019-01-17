@@ -27,7 +27,7 @@ describe('submitting pattern spec changes', () => {
 
     describe('ranged controls', () => {
         it('does not immediately submit when you type into a control', async done => {
-            const control = await findElement(testGlobals.tab, `input#${PATTERN_SPEC_RANGED_PROPERTY_ONE_KEY}`)
+            const control = await findElement(testGlobals.tab, `input[type=number]#${PATTERN_SPEC_RANGED_PROPERTY_ONE_KEY}`)
             await fillInElement(control, VALID_TEST_MODIFICATION)
 
             expect(await elementInnerText(`.${SecretSelectorsForTest.SECRET_SUBMITTED_PATTERN_SPEC_CONTROL}#${PATTERN_SPEC_RANGED_PROPERTY_ONE_KEY}`))
@@ -37,7 +37,7 @@ describe('submitting pattern spec changes', () => {
         })
 
         it('submits a control when you press enter', async done => {
-            const control = await findElement(testGlobals.tab, `input#${PATTERN_SPEC_RANGED_PROPERTY_ONE_KEY}`)
+            const control = await findElement(testGlobals.tab, `input[type=number]#${PATTERN_SPEC_RANGED_PROPERTY_ONE_KEY}`)
             await modify(control)
 
             expect(await elementInnerText(`.${SecretSelectorsForTest.SECRET_SUBMITTED_PATTERN_SPEC_CONTROL}#${PATTERN_SPEC_RANGED_PROPERTY_ONE_KEY}`))
@@ -47,7 +47,7 @@ describe('submitting pattern spec changes', () => {
         })
 
         it('submits a control when you press the submit button', async done => {
-            const control = await findElement(testGlobals.tab, `input#${PATTERN_SPEC_RANGED_PROPERTY_ONE_KEY}`)
+            const control = await findElement(testGlobals.tab, `input[type=number]#${PATTERN_SPEC_RANGED_PROPERTY_ONE_KEY}`)
             await fillInElement(control, VALID_TEST_MODIFICATION)
             const button = await findElement(testGlobals.tab, `button#${PATTERN_SPEC_RANGED_PROPERTY_ONE_KEY}`)
             await clickElement(button)
@@ -59,12 +59,12 @@ describe('submitting pattern spec changes', () => {
         })
 
         it('does not submit all the controls when you press enter (only the one you are focused on)', async done => {
-            const controlNotToBeSubmitted = await findElement(testGlobals.tab, `input#${PATTERN_SPEC_RANGED_PROPERTY_ONE_KEY}`)
+            const controlNotToBeSubmitted = await findElement(testGlobals.tab, `input[type=number]#${PATTERN_SPEC_RANGED_PROPERTY_ONE_KEY}`)
             await fillInElement(controlNotToBeSubmitted, VALID_TEST_MODIFICATION)
 
             await testGlobals.page.select(`select#${PATTERN_SPEC_OPTIONED_PROPERTY_ONE_KEY}`, TEST_PATTERN_SPEC_OPTIONED_PROPERTY_ONE_MODIFIED_VALUE)
 
-            const controlToSubmit = await findElement(testGlobals.tab, `input#${PATTERN_SPEC_RANGED_PROPERTY_TWO_KEY}`)
+            const controlToSubmit = await findElement(testGlobals.tab, `input[type=number]#${PATTERN_SPEC_RANGED_PROPERTY_TWO_KEY}`)
             await modify(controlToSubmit)
 
             expect(await elementInnerText(`.${SecretSelectorsForTest.SECRET_SUBMITTED_PATTERN_SPEC_CONTROL}#${PATTERN_SPEC_RANGED_PROPERTY_ONE_KEY}`))
@@ -81,12 +81,12 @@ describe('submitting pattern spec changes', () => {
         })
 
         it('does not submit all the controls when you press a submit button (only the one the button is for)', async done => {
-            const controlNotToBeSubmitted = await findElement(testGlobals.tab, `input#${PATTERN_SPEC_RANGED_PROPERTY_ONE_KEY}`)
+            const controlNotToBeSubmitted = await findElement(testGlobals.tab, `input[type=number]#${PATTERN_SPEC_RANGED_PROPERTY_ONE_KEY}`)
             await fillInElement(controlNotToBeSubmitted, VALID_TEST_MODIFICATION)
 
             await testGlobals.page.select(`select#${PATTERN_SPEC_OPTIONED_PROPERTY_ONE_KEY}`, TEST_PATTERN_SPEC_OPTIONED_PROPERTY_ONE_MODIFIED_VALUE)
 
-            const controlToSubmit = await findElement(testGlobals.tab, `input#${PATTERN_SPEC_RANGED_PROPERTY_TWO_KEY}`)
+            const controlToSubmit = await findElement(testGlobals.tab, `input[type=number]#${PATTERN_SPEC_RANGED_PROPERTY_TWO_KEY}`)
             await fillInElement(controlToSubmit, VALID_TEST_MODIFICATION)
             const button = await findElement(testGlobals.tab, `button#${PATTERN_SPEC_RANGED_PROPERTY_TWO_KEY}`)
             await clickElement(button)
@@ -102,13 +102,13 @@ describe('submitting pattern spec changes', () => {
         })
 
         it('preserves earlier pattern spec changes you have made when you submit a second control', async done => {
-            const previouslySubmittedControl = await findElement(testGlobals.tab, `input#${PATTERN_SPEC_RANGED_PROPERTY_ONE_KEY}`)
+            const previouslySubmittedControl = await findElement(testGlobals.tab, `input[type=number]#${PATTERN_SPEC_RANGED_PROPERTY_ONE_KEY}`)
             await modify(previouslySubmittedControl)
 
             await testGlobals.page.select(`select#${PATTERN_SPEC_OPTIONED_PROPERTY_ONE_KEY}`, TEST_PATTERN_SPEC_OPTIONED_PROPERTY_ONE_MODIFIED_VALUE)
             await submitSelectByPressingEnter()
 
-            const controlUnderTest = await findElement(testGlobals.tab, `input#${PATTERN_SPEC_RANGED_PROPERTY_TWO_KEY}`)
+            const controlUnderTest = await findElement(testGlobals.tab, `input[type=number]#${PATTERN_SPEC_RANGED_PROPERTY_TWO_KEY}`)
             await modify(controlUnderTest)
 
             expect(await elementInnerText(`.${SecretSelectorsForTest.SECRET_SUBMITTED_PATTERN_SPEC_CONTROL}#${PATTERN_SPEC_RANGED_PROPERTY_ONE_KEY}`))
@@ -123,16 +123,16 @@ describe('submitting pattern spec changes', () => {
 
         it('keeps the controls in the same order after submitting a change', async done => {
             let controlIds = await testGlobals.page.evaluate(() =>
-                Array.from(document.querySelectorAll('#pattern-spec-controls input')).map(element => element.id),
+                Array.from(document.querySelectorAll('#pattern-spec-controls input[type=number]')).map(element => element.id),
             )
             expect(controlIds)
                 .toEqual([ PATTERN_SPEC_RANGED_PROPERTY_ONE_KEY, PATTERN_SPEC_RANGED_PROPERTY_TWO_KEY ])
 
-            const control = await findElement(testGlobals.tab, `input#${PATTERN_SPEC_RANGED_PROPERTY_ONE_KEY}`)
+            const control = await findElement(testGlobals.tab, `input[type=number]#${PATTERN_SPEC_RANGED_PROPERTY_ONE_KEY}`)
             await fillInElement(control, VALID_TEST_MODIFICATION)
 
             controlIds = await testGlobals.page.evaluate(() =>
-                Array.from(document.querySelectorAll('#pattern-spec-controls input')).map(element => element.id),
+                Array.from(document.querySelectorAll('#pattern-spec-controls input[type=number]')).map(element => element.id),
             )
             expect(controlIds)
                 .toEqual([ PATTERN_SPEC_RANGED_PROPERTY_ONE_KEY, PATTERN_SPEC_RANGED_PROPERTY_TWO_KEY ])
@@ -173,7 +173,7 @@ describe('submitting pattern spec changes', () => {
         })
 
         it('does not submit all the controls when you press enter (only the one you are focused on)', async done => {
-            const controlNotToBeSubmitted = await findElement(testGlobals.tab, `input#${PATTERN_SPEC_RANGED_PROPERTY_ONE_KEY}`)
+            const controlNotToBeSubmitted = await findElement(testGlobals.tab, `input[type=number]#${PATTERN_SPEC_RANGED_PROPERTY_ONE_KEY}`)
             await fillInElement(controlNotToBeSubmitted, VALID_TEST_MODIFICATION)
 
             await testGlobals.page.select(`select#${PATTERN_SPEC_OPTIONED_PROPERTY_TWO_KEY}`, TEST_PATTERN_SPEC_OPTIONED_PROPERTY_TWO_MODIFIED_VALUE)
@@ -192,7 +192,7 @@ describe('submitting pattern spec changes', () => {
         })
 
         it('does not submit all the controls when you press a submit button (only the one the button is for)', async done => {
-            const controlNotToBeSubmitted = await findElement(testGlobals.tab, `input#${PATTERN_SPEC_RANGED_PROPERTY_ONE_KEY}`)
+            const controlNotToBeSubmitted = await findElement(testGlobals.tab, `input[type=number]#${PATTERN_SPEC_RANGED_PROPERTY_ONE_KEY}`)
             await fillInElement(controlNotToBeSubmitted, VALID_TEST_MODIFICATION)
 
             await testGlobals.page.select(`select#${PATTERN_SPEC_OPTIONED_PROPERTY_TWO_KEY}`, TEST_PATTERN_SPEC_OPTIONED_PROPERTY_TWO_MODIFIED_VALUE)
@@ -212,7 +212,7 @@ describe('submitting pattern spec changes', () => {
         })
 
         it('preserves earlier pattern spec changes you have made when you submit a second control', async done => {
-            const previouslySubmittedControl = await findElement(testGlobals.tab, `input#${PATTERN_SPEC_RANGED_PROPERTY_ONE_KEY}`)
+            const previouslySubmittedControl = await findElement(testGlobals.tab, `input[type=number]#${PATTERN_SPEC_RANGED_PROPERTY_ONE_KEY}`)
             await modify(previouslySubmittedControl)
 
             await testGlobals.page.select(`select#${PATTERN_SPEC_OPTIONED_PROPERTY_ONE_KEY}`, TEST_PATTERN_SPEC_OPTIONED_PROPERTY_ONE_MODIFIED_VALUE)

@@ -18,14 +18,14 @@ describe('invalid controls', () => {
         beforeEach(async done => {
             await refreshWithTestPatternSelected()
 
-            control = await findElement(testGlobals.tab, `input#${PATTERN_SPEC_RANGED_PROPERTY_ONE_KEY}`)
+            control = await findElement(testGlobals.tab, `input[type=number]#${PATTERN_SPEC_RANGED_PROPERTY_ONE_KEY}`)
             await fillInElement(control, BAD_FORMAT_INVALID_TEST_MODIFICATION)
 
             done()
         })
 
         it('does not mark a control as invalid if you only type invalid data but do not submit it; only marks it as unsubmitted', async done => {
-            expect(await elementExists(`input#${PATTERN_SPEC_RANGED_PROPERTY_ONE_KEY}.${PatternSpecControlStates.UNSUBMITTED}`))
+            expect(await elementExists(`input[type=number]#${PATTERN_SPEC_RANGED_PROPERTY_ONE_KEY}.${PatternSpecControlStates.UNSUBMITTED}`))
                 .toBeTruthy()
 
             done()
@@ -40,7 +40,7 @@ describe('invalid controls', () => {
             })
 
             it('marks a control as invalid when you submit invalid data, and it does not crash or attempt to recompile with this invalid data', async done => {
-                expect(await elementExists(`input#${PATTERN_SPEC_RANGED_PROPERTY_ONE_KEY}.${PatternSpecControlStates.INVALID}`))
+                expect(await elementExists(`input[type=number]#${PATTERN_SPEC_RANGED_PROPERTY_ONE_KEY}.${PatternSpecControlStates.INVALID}`))
                     .toBeTruthy()
 
                 expect(await elementInnerText(`.${SecretSelectorsForTest.SECRET_SUBMITTED_PATTERN_SPEC_CONTROL}#${PATTERN_SPEC_RANGED_PROPERTY_ONE_KEY}`))
@@ -50,12 +50,12 @@ describe('invalid controls', () => {
             })
 
             it('resets the control to valid (unsubmitted) state after typing anything into it', async done => {
-                expect(await elementExists(`input#${PATTERN_SPEC_RANGED_PROPERTY_ONE_KEY}.${PatternSpecControlStates.INVALID}`))
+                expect(await elementExists(`input[type=number]#${PATTERN_SPEC_RANGED_PROPERTY_ONE_KEY}.${PatternSpecControlStates.INVALID}`))
                     .toBeTruthy()
 
-                await fillInElement(control, BAD_FORMAT_INVALID_TEST_MODIFICATION)
+                await fillInElement(control, OUT_OF_RANGE_INVALID_TEST_MODIFICATION)
 
-                expect(await elementExists(`input#${PATTERN_SPEC_RANGED_PROPERTY_ONE_KEY}.${PatternSpecControlStates.UNSUBMITTED}`))
+                expect(await elementExists(`input[type=number]#${PATTERN_SPEC_RANGED_PROPERTY_ONE_KEY}.${PatternSpecControlStates.UNSUBMITTED}`))
                     .toBeTruthy()
 
                 done()
@@ -67,14 +67,14 @@ describe('invalid controls', () => {
         beforeEach(async done => {
             await refreshWithTestPatternSelected()
 
-            control = await findElement(testGlobals.tab, `input#${PATTERN_SPEC_RANGED_PROPERTY_ONE_KEY}`)
+            control = await findElement(testGlobals.tab, `input[type=number]#${PATTERN_SPEC_RANGED_PROPERTY_ONE_KEY}`)
             await fillInElement(control, OUT_OF_RANGE_INVALID_TEST_MODIFICATION)
 
             done()
         })
 
         it('does not mark a control as invalid if you only type invalid data but do not submit it; only marks it as unsubmitted', async done => {
-            expect(await elementExists(`input#${PATTERN_SPEC_RANGED_PROPERTY_ONE_KEY}.${PatternSpecControlStates.UNSUBMITTED}`))
+            expect(await elementExists(`input[type=number]#${PATTERN_SPEC_RANGED_PROPERTY_ONE_KEY}.${PatternSpecControlStates.UNSUBMITTED}`))
                 .toBeTruthy()
 
             done()
@@ -89,7 +89,7 @@ describe('invalid controls', () => {
             })
 
             it('marks a control as invalid when you submit invalid data, and it does not crash or attempt to recompile with this invalid data', async done => {
-                expect(await elementExists(`input#${PATTERN_SPEC_RANGED_PROPERTY_ONE_KEY}.${PatternSpecControlStates.INVALID}`))
+                expect(await elementExists(`input[type=number]#${PATTERN_SPEC_RANGED_PROPERTY_ONE_KEY}.${PatternSpecControlStates.INVALID}`))
                     .toBeTruthy()
 
                 expect(await elementInnerText(`.${SecretSelectorsForTest.SECRET_SUBMITTED_PATTERN_SPEC_CONTROL}#${PATTERN_SPEC_RANGED_PROPERTY_ONE_KEY}`))
@@ -99,12 +99,12 @@ describe('invalid controls', () => {
             })
 
             it('resets the control to valid (unsubmitted) state after typing anything into it', async done => {
-                expect(await elementExists(`input#${PATTERN_SPEC_RANGED_PROPERTY_ONE_KEY}.${PatternSpecControlStates.INVALID}`))
+                expect(await elementExists(`input[type=number]#${PATTERN_SPEC_RANGED_PROPERTY_ONE_KEY}.${PatternSpecControlStates.INVALID}`))
                     .toBeTruthy()
 
                 await fillInElement(control, BAD_FORMAT_INVALID_TEST_MODIFICATION)
 
-                expect(await elementExists(`input#${PATTERN_SPEC_RANGED_PROPERTY_ONE_KEY}.${PatternSpecControlStates.UNSUBMITTED}`))
+                expect(await elementExists(`input[type=number]#${PATTERN_SPEC_RANGED_PROPERTY_ONE_KEY}.${PatternSpecControlStates.UNSUBMITTED}`))
                     .toBeTruthy()
 
                 done()
