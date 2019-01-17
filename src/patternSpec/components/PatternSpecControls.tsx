@@ -1,8 +1,4 @@
-import {
-    defaultPatternSpecPropertyAttributes,
-    PatternSpecAttributes,
-    PatternSpecPropertyAttributes,
-} from '@musical-patterns/pattern'
+import { PatternSpecAttributes, StandardPatternSpecProperties } from '@musical-patterns/pattern'
 import * as React from 'react'
 import { connect } from 'react-redux'
 import { Dispatch } from 'redux'
@@ -15,7 +11,7 @@ import {
 } from '../events'
 import { PatternSpecStateKeys } from '../state'
 import { StringifiedPatternSpec } from '../types'
-import PatternSpecControl from './PatternSpecControl'
+import { buildControls } from './buildControls'
 import {
     PatternSpecControlsProps,
     PatternSpecControlsPropsFromDispatch,
@@ -56,25 +52,35 @@ const PatternSpecControls: (patternSpecControlsProps: PatternSpecControlsProps) 
         const patternSpecAttributes: PatternSpecAttributes = patternSpecState
             .get(PatternSpecStateKeys.PATTERN_SPEC_ATTRIBUTES)
 
-        const patternSpecControls: JSX.Element[] = Object.keys(displayedPatternSpec)
-            .sort()
-            .map(
-                (patternSpecKey: string, key: number): JSX.Element => {
-                    const patternSpecPropertyAttributes: PatternSpecPropertyAttributes =
-                        patternSpecAttributes[ patternSpecKey ] || defaultPatternSpecPropertyAttributes
+        const patternSpecKeys: string[] = Object.keys(displayedPatternSpec)
+        const standardPatternSpecKeys: string[] = patternSpecKeys.filter((key: string) =>
+            Object.values(StandardPatternSpecProperties)
+                .includes(key),
+        )
+        const nonstandardPatternSpecKeys: string[] = patternSpecKeys.filter((key: string) =>
+            !Object.values(StandardPatternSpecProperties)
+                .includes(key),
+        )
+        const standardPatternSpecControls: JSX.Element[] = buildControls({
+            patternSpecAttributes,
+            patternSpecControlsProps,
+            patternSpecKeys: standardPatternSpecKeys,
+        })
+        const patternSpecificControls: JSX.Element[] = buildControls({
+            patternSpecAttributes,
+            patternSpecControlsProps,
+            patternSpecKeys: nonstandardPatternSpecKeys,
+        })
 
-                    return <PatternSpecControl {...{
-                        key,
-                        patternSpecControlsProps,
-                        patternSpecKey,
-                        patternSpecPropertyAttributes,
-                    }}/>
-                },
-            )
+        const bothTypesOfControlsPresent: boolean = !!standardPatternSpecKeys.length &&
+            !!nonstandardPatternSpecKeys.length
 
         return (
             <div {...{ id: 'pattern-spec-controls' }}>
-                {patternSpecControls}
+                {bothTypesOfControlsPresent && <div>pattern specific</div>}
+                {patternSpecificControls}
+                {bothTypesOfControlsPresent && <div>standard</div>}
+                {standardPatternSpecControls}
             </div>
         )
     }

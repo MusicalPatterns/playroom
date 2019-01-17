@@ -1,4 +1,4 @@
-import { OptionedConstraint, PatternSpecPropertyAttributes } from '@musical-patterns/pattern'
+import { OptionedConstraint, PatternSpecAttributes, PatternSpecPropertyAttributes } from '@musical-patterns/pattern'
 import { PatternSpecControlEventAttacher, PatternSpecControlEventExtractor } from '../events'
 import { ImmutablePatternSpecState } from '../state'
 import { StringifiedPatternSpec } from '../types'
@@ -52,6 +52,12 @@ interface OptionedControlProps extends ControlProps {
     options: OptionedConstraint,
 }
 
+interface BuildControlsProps {
+    patternSpecAttributes: PatternSpecAttributes,
+    patternSpecControlsProps: PatternSpecControlsProps,
+    patternSpecKeys: string[],
+}
+
 export {
     PatternSpecControlProps,
     PatternSpecControlsProps,
@@ -63,4 +69,5 @@ export {
     PatternSpecControlStates,
     ControlProps,
     OptionedControlProps,
+    BuildControlsProps,
 }
