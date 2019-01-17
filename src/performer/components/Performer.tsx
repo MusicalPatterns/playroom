@@ -11,7 +11,14 @@ const Performer: (props: MaybeDisabled) => JSX.Element =
                 <ToggleImmersiveAudioButton {...{ disabled }}/>
             </div>
             {disabled &&
-            <div {...{ id: 'no-pattern-message' }}>To begin, select a pattern from the list on the left.</div>
+            <div {...{ id: 'no-pattern-message' }}>
+                <div>To begin,</div>
+                <div>select a</div>
+                <div>pattern</div>
+                <div>from the</div>
+                <div>list on</div>
+                <div>the left.</div>
+            </div>
             }
         </div>
     )

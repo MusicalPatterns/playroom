@@ -14,6 +14,7 @@ $small-area: 1px * nth($fibonacci-series, 8 + $fibonacci-series-size-offset);   
 $medium-area: 1px * nth($fibonacci-series, 9 + $fibonacci-series-size-offset);  // 233
 $big-area: 1px * nth($fibonacci-series, 10 + $fibonacci-series-size-offset);    // 377
 $huge-area: 1px * nth($fibonacci-series, 11 + $fibonacci-series-size-offset);   // 610
+$enormous-area: 1px * nth($fibonacci-series, 11 + $fibonacci-series-size-offset);   // 987
 
 $title-min-height: 1px * nth($fibonacci-series, 9 + $fibonacci-series-size-offset);
 

@@ -16,6 +16,9 @@
   .left {
     flex: $phi;
     min-width: $huge-area;
+    @media screen and (max-width: $huge-area) {
+      min-width: $big-area;
+    }
 
     background-color: $white;
   }
@@ -23,6 +26,9 @@
   .right {
     flex: 1;
     min-width: $big-area;
+    @media screen and (max-width: $huge-area) {
+      min-width: $medium-area;
+    }
 
     background-color: $grey;
 

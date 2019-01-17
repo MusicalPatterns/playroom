@@ -7,4 +7,18 @@
 
 #pattern-spec {
   padding: $big;
+
+  max-width: $enormous-area;
+  @media screen and (max-width: $huge-area) {
+    max-width: $big-area;
+  }
+  @media screen and (max-width: $big-area) {
+    max-width: $medium-area;
+  }
+  @media screen and (max-width: $medium-area) {
+    max-width: $small-area;
+  }
+  @media screen and (max-width: $small-area) {
+    max-width: $tiny-area;
+  }
 }
