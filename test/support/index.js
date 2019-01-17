@@ -12,6 +12,7 @@ export {
     refresh,
     refreshWithTestPatternSelected,
     submitSelectByPressingEnter,
+    currentTime,
 } from './control'
 export { startServer, stopServer } from './infrastructure'
 
@@ -42,4 +43,7 @@ export {
     PATTERN_SPEC_OPTIONED_PROPERTY_TWO_KEY,
     DEFAULT_VIEWPORT_HEIGHT,
     DEFAULT_VIEWPORT_WIDTH,
+    LONG_ENOUGH_FOR_TIME_TO_PASS,
+    LONG_ENOUGH_FOR_TIME_TO_HAVE_BEEN_RESET,
+    A_BIT_LONGER,
 } from './constants'

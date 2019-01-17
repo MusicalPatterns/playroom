@@ -2,8 +2,12 @@ import { clickElement, findElement } from 'puppet-strings'
 import { SecretSelectorsForTest } from '../../../src/indexForTest'
 import { testGlobals } from '../../setup'
 import {
+    A_BIT_LONGER,
+    currentTime,
     elementExists,
     elementInnerText,
+    LONG_ENOUGH_FOR_TIME_TO_HAVE_BEEN_RESET,
+    LONG_ENOUGH_FOR_TIME_TO_PASS,
     modify,
     PATTERN_SPEC_RANGED_PROPERTY_ONE_KEY,
     refresh,
@@ -11,12 +15,6 @@ import {
     selectOtherTestPattern,
     sleep,
 } from '../../support'
-
-const LONG_ENOUGH_FOR_TIME_TO_PASS = 100
-const LONG_ENOUGH_FOR_TIME_TO_HAVE_BEEN_RESET = 100
-const A_BIT_LONGER = 1000
-
-const currentTime = async () => parseInt(await elementInnerText(`#${SecretSelectorsForTest.SECRET_TIMER}`))
 
 describe('time controls', () => {
     it('are disabled if you have not yet selected a pattern', async done => {

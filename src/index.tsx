@@ -4,7 +4,7 @@ import * as React from 'react'
 import { render } from 'react-dom'
 import { Provider } from 'react-redux'
 import { BatchAction, batchActions } from 'redux-batched-actions'
-import { buildToggleImmersiveAudioHandler, onPerformerUpdate } from './performer'
+import { buildToggleImmersiveAudioHandler, onPerformerUpdate, setupKeyboard } from './performer'
 import { ActionType, App, store } from './root'
 
 const setupPlayroom: (patterns: Patterns, debugMode?: boolean) => Promise<HTMLDivElement> =
@@ -18,6 +18,7 @@ const setupPlayroom: (patterns: Patterns, debugMode?: boolean) => Promise<HTMLDi
 
         await setupPerformer({ onUpdate: onPerformerUpdate })
         const toggleImmersiveAudioHandler: VoidFunction = buildToggleImmersiveAudioHandler()
+        setupKeyboard()
 
         const batchedAction: BatchAction = batchActions([
             { type: ActionType.SET_PATTERNS, data: patterns },
