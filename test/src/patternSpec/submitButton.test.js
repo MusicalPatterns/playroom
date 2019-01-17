@@ -7,7 +7,7 @@ import {
     press,
     refreshWithTestPatternSelected,
     submitSelectByPressingEnter,
-    TEST_MODIFICATION,
+    VALID_TEST_MODIFICATION,
     TEST_PATTERN_SPEC_OPTIONED_PROPERTY_ONE_INITIAL_VALUE,
     TEST_PATTERN_SPEC_OPTIONED_PROPERTY_ONE_MODIFIED_VALUE,
 } from '../../support'
@@ -24,7 +24,7 @@ describe('submit button', () => {
                 .toBeTruthy()
 
             const control = await findElement(testGlobals.tab, `input#${PATTERN_SPEC_RANGED_PROPERTY_ONE_KEY}`)
-            await fillInElement(control, TEST_MODIFICATION)
+            await fillInElement(control, VALID_TEST_MODIFICATION)
 
             expect(await elementExists(`button#${PATTERN_SPEC_RANGED_PROPERTY_ONE_KEY}:enabled`))
                 .toBeTruthy()
@@ -37,7 +37,7 @@ describe('submit button', () => {
                 .toBeTruthy()
 
             const control = await findElement(testGlobals.tab, `input#${PATTERN_SPEC_RANGED_PROPERTY_ONE_KEY}`)
-            await fillInElement(control, TEST_MODIFICATION)
+            await fillInElement(control, VALID_TEST_MODIFICATION)
 
             expect(await elementExists(`button#${PATTERN_SPEC_RANGED_PROPERTY_ONE_KEY}:enabled`))
                 .toBeTruthy()
@@ -56,7 +56,7 @@ describe('submit button', () => {
                 .toBeTruthy()
 
             const control = await findElement(testGlobals.tab, `input#${PATTERN_SPEC_RANGED_PROPERTY_ONE_KEY}`)
-            await fillInElement(control, TEST_MODIFICATION)
+            await fillInElement(control, VALID_TEST_MODIFICATION)
 
             expect(await elementExists(`button#${PATTERN_SPEC_RANGED_PROPERTY_ONE_KEY}:enabled`))
                 .toBeTruthy()
@@ -75,7 +75,7 @@ describe('submit button', () => {
                 .toBeTruthy()
 
             const control = await findElement(testGlobals.tab, `input#${PATTERN_SPEC_RANGED_PROPERTY_ONE_KEY}`)
-            await fillInElement(control, TEST_MODIFICATION)
+            await fillInElement(control, VALID_TEST_MODIFICATION)
 
             expect(await elementExists(`button#${PATTERN_SPEC_RANGED_PROPERTY_ONE_KEY}:enabled`))
                 .toBeTruthy()

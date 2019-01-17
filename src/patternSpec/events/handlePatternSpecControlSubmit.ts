@@ -1,15 +1,11 @@
+import { PatternSpecAttributes } from '@musical-patterns/pattern'
 import { deepEqual } from '@musical-patterns/utilities'
 import { BatchAction, batchActions } from 'redux-batched-actions'
 import { ActionType } from '../../root'
 import { PatternSpecStateKeys } from '../state'
 import { StringifiedPatternSpec, StringifiedPatternSpecControlStates } from '../types'
-import { doubleStringifyIfOptioned } from './doubleStringifyIfOptioned'
 import { PatternSpecControlEventHandler, PatternSpecControlEventHandlerParameters } from './types'
-
-const validateValueByThrowingIfUnparsable: (patternSpecValue: string) => void =
-    (patternSpecValue: string): void => {
-        JSON.parse(patternSpecValue)
-    }
+import { validate } from './validate'
 
 const handlePatternSpecControlSubmit: PatternSpecControlEventHandler =
     async (patternSpecControlEventHandlerParameters: PatternSpecControlEventHandlerParameters): Promise<void> => {
@@ -28,6 +24,8 @@ const handlePatternSpecControlSubmit: PatternSpecControlEventHandler =
             patternSpecState.get(PatternSpecStateKeys.DISABLED_PATTERN_SPEC_BUTTONS)
         const submittedPatternSpec: StringifiedPatternSpec =
             patternSpecState.get(PatternSpecStateKeys.SUBMITTED_PATTERN_SPEC)
+        const patternSpecAttributes: PatternSpecAttributes =
+            patternSpecState.get(PatternSpecStateKeys.PATTERN_SPEC_ATTRIBUTES)
 
         const updatedPatternSpec: StringifiedPatternSpec = {
             ...submittedPatternSpec,
@@ -37,9 +35,8 @@ const handlePatternSpecControlSubmit: PatternSpecControlEventHandler =
             return
         }
 
-        try {
-            validateValueByThrowingIfUnparsable(patternSpecValue)
-
+        const valid: boolean = validate(patternSpecValue, patternSpecAttributes[ patternSpecKey ])
+        if (valid) {
             const updatedUnsubmittedControls: StringifiedPatternSpecControlStates = {
                 ...unsubmittedPatternSpecControls,
                 [ patternSpecKey ]: false,
@@ -57,7 +54,7 @@ const handlePatternSpecControlSubmit: PatternSpecControlEventHandler =
             ])
             dispatch(batchedAction)
         }
-        catch (e) {
+        else {
             const updatedInvalidControls: StringifiedPatternSpecControlStates = {
                 ...invalidPatternSpecControls,
                 [ patternSpecKey ]: true,

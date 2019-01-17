@@ -40,12 +40,10 @@ const PatternSpecControl: (patternSpecControlProps: PatternSpecControlProps) => 
         const invalid: boolean = invalidPatternSpecControls[ patternSpecKey ]
         const unsubmitted: boolean = unsubmittedPatternSpecControls[ patternSpecKey ]
         const disabled: boolean = disabledPatternSpecButtons[ patternSpecKey ]
-        let submittedPatternSpecValue: string = submittedPatternSpec[ patternSpecKey ]
+        const submittedPatternSpecValue: string = submittedPatternSpec[ patternSpecKey ]
 
-        const patternSpecPropertyTypeIsOptioned: boolean = patternSpecPropertyType === PatternSpecPropertyType.OPTIONED
         const patternSpecEventParameters: PatternSpecEventParameters = {
             patternSpecKey,
-            patternSpecPropertyTypeIsOptioned,
             patternSpecState,
         }
 
@@ -70,16 +68,9 @@ const PatternSpecControl: (patternSpecControlProps: PatternSpecControlProps) => 
             PatternSpecControlStates.INVALID :
             unsubmitted ? PatternSpecControlStates.UNSUBMITTED : PatternSpecControlStates.VALID_AND_SUBMITTED
         const controlProps: ControlProps = { onBlur, onChange, onKeyPress, patternSpecKey, patternSpecValue, className }
-        let control: JSX.Element
-        if (patternSpecPropertyTypeIsOptioned) {
-            // tslint:disable-next-line:no-unsafe-any
-            submittedPatternSpecValue = JSON.parse(submittedPatternSpecValue)
-                .replace(/"/g, '')
-            control = <OptionedPatternSpecControl {...{ ...controlProps, options: constraint as OptionedConstraint }}/>
-        }
-        else {
-            control = <RangedPatternSpecControl {...controlProps}/>
-        }
+        const control: JSX.Element = patternSpecPropertyType === PatternSpecPropertyType.OPTIONED ?
+            <OptionedPatternSpecControl {...{ ...controlProps, options: constraint as OptionedConstraint }}/> :
+            <RangedPatternSpecControl {...controlProps}/>
 
         return (
             <div {...{ className: 'pattern-spec-control' }}>
@@ -89,7 +80,13 @@ const PatternSpecControl: (patternSpecControlProps: PatternSpecControlProps) => 
                 }}>{submittedPatternSpecValue}</span>
                 <div>{formattedName || presentPatternSpecKey(patternSpecKey)}</div>
                 {control}
-                <button {...{ onClick, disabled, value: patternSpecValue, id: patternSpecKey }}>submit</button>
+                <button {...{
+                    disabled,
+                    id: patternSpecKey,
+                    onClick,
+                    value: patternSpecValue,
+                }}>submit
+                </button>
             </div>
         )
     }

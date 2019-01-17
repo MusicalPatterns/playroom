@@ -4,7 +4,7 @@ import { testGlobals } from '../../setup'
 import {
     elementExists,
     elementValue,
-    INVALID_TEST_MODIFICATION,
+    BAD_FORMAT_INVALID_TEST_MODIFICATION,
     loseFocus,
     modify,
     PATTERN_SPEC_RANGED_PROPERTY_ONE_KEY,
@@ -12,7 +12,7 @@ import {
     PATTERN_SPEC_OPTIONED_PROPERTY_ONE_KEY,
     press,
     refreshWithTestPatternSelected,
-    TEST_MODIFICATION,
+    VALID_TEST_MODIFICATION,
     TEST_PATTERN_SPEC_RANGED_PROPERTY_ONE_INITIAL_VALUE,
     TEST_PATTERN_SPEC_RANGED_PROPERTY_TWO_INITIAL_VALUE,
     TEST_PATTERN_SPEC_OPTIONED_PROPERTY_ONE_INITIAL_VALUE,
@@ -71,9 +71,9 @@ describe('reset button', () => {
         await testGlobals.page.select(`select#${PATTERN_SPEC_OPTIONED_PROPERTY_ONE_KEY}`, TEST_PATTERN_SPEC_OPTIONED_PROPERTY_ONE_MODIFIED_VALUE)
 
         expect(await elementValue(`input#${PATTERN_SPEC_RANGED_PROPERTY_ONE_KEY}`))
-            .toBe(`${TEST_PATTERN_SPEC_RANGED_PROPERTY_ONE_INITIAL_VALUE}${TEST_MODIFICATION}`)
+            .toBe(`${TEST_PATTERN_SPEC_RANGED_PROPERTY_ONE_INITIAL_VALUE}${VALID_TEST_MODIFICATION}`)
         expect(await elementValue(`input#${PATTERN_SPEC_RANGED_PROPERTY_TWO_KEY}`))
-            .toBe(`${TEST_PATTERN_SPEC_RANGED_PROPERTY_TWO_INITIAL_VALUE}${TEST_MODIFICATION}`)
+            .toBe(`${TEST_PATTERN_SPEC_RANGED_PROPERTY_TWO_INITIAL_VALUE}${VALID_TEST_MODIFICATION}`)
         expect(await elementValue(`select#${PATTERN_SPEC_OPTIONED_PROPERTY_ONE_KEY}`))
             .toBe(TEST_PATTERN_SPEC_OPTIONED_PROPERTY_ONE_MODIFIED_VALUE)
 
@@ -91,7 +91,7 @@ describe('reset button', () => {
 
     it('if there were any unsubmitted controls, they no longer appear as unsubmitted', async done => {
         const controlToBeUnsubmitted = await findElement(testGlobals.tab, `input#${PATTERN_SPEC_RANGED_PROPERTY_ONE_KEY}`)
-        await fillInElement(controlToBeUnsubmitted, TEST_MODIFICATION)
+        await fillInElement(controlToBeUnsubmitted, VALID_TEST_MODIFICATION)
         await loseFocus()
         expect(await elementExists(`input#${PATTERN_SPEC_RANGED_PROPERTY_ONE_KEY}.${PatternSpecControlStates.UNSUBMITTED}`))
             .toBeTruthy()
@@ -115,7 +115,7 @@ describe('reset button', () => {
 
     it('if there were any invalid controls, they no longer appear as invalid', async done => {
         const controlToBeInvalid = await findElement(testGlobals.tab, `input#${PATTERN_SPEC_RANGED_PROPERTY_ONE_KEY}`)
-        await fillInElement(controlToBeInvalid, INVALID_TEST_MODIFICATION)
+        await fillInElement(controlToBeInvalid, BAD_FORMAT_INVALID_TEST_MODIFICATION)
         const button = await findElement(testGlobals.tab, `button#${PATTERN_SPEC_RANGED_PROPERTY_ONE_KEY}`)
         await clickElement(button)
         expect(await elementExists(`input#${PATTERN_SPEC_RANGED_PROPERTY_ONE_KEY}.${PatternSpecControlStates.INVALID}`))

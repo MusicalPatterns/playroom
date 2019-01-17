@@ -8,7 +8,7 @@ import {
     PATTERN_SPEC_OPTIONED_PROPERTY_ONE_KEY,
     press,
     refreshWithTestPatternSelected,
-    TEST_MODIFICATION,
+    VALID_TEST_MODIFICATION,
     TEST_PATTERN_SPEC_OPTIONED_PROPERTY_ONE_INITIAL_VALUE,
     TEST_PATTERN_SPEC_OPTIONED_PROPERTY_ONE_MODIFIED_VALUE,
 } from '../../support'
@@ -22,7 +22,7 @@ describe('unsubmitted controls', () => {
     describe('ranged controls', () => {
         it('marks as unsubmitted when you alter their contents but then leave focus without submitting', async done => {
             const control = await findElement(testGlobals.tab, `input#${PATTERN_SPEC_RANGED_PROPERTY_ONE_KEY}`)
-            await fillInElement(control, TEST_MODIFICATION)
+            await fillInElement(control, VALID_TEST_MODIFICATION)
 
             await loseFocus()
 
@@ -34,7 +34,7 @@ describe('unsubmitted controls', () => {
 
         it('does not mark as unsubmitted if you fiddle with it but leave it the same as what you have already submitted', async done => {
             const controlOne = await findElement(testGlobals.tab, `input#${PATTERN_SPEC_RANGED_PROPERTY_ONE_KEY}`)
-            await fillInElement(controlOne, TEST_MODIFICATION)
+            await fillInElement(controlOne, VALID_TEST_MODIFICATION)
             await clickElement(controlOne)
             await press('Backspace')
 

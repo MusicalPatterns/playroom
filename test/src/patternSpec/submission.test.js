@@ -10,7 +10,7 @@ import {
     PATTERN_SPEC_OPTIONED_PROPERTY_TWO_KEY,
     refreshWithTestPatternSelected,
     submitSelectByPressingEnter,
-    TEST_MODIFICATION,
+    VALID_TEST_MODIFICATION,
     TEST_PATTERN_SPEC_RANGED_PROPERTY_ONE_INITIAL_VALUE,
     TEST_PATTERN_SPEC_RANGED_PROPERTY_TWO_INITIAL_VALUE,
     TEST_PATTERN_SPEC_OPTIONED_PROPERTY_ONE_INITIAL_VALUE,
@@ -28,7 +28,7 @@ describe('submitting pattern spec changes', () => {
     describe('ranged controls', () => {
         it('does not immediately submit when you type into a control', async done => {
             const control = await findElement(testGlobals.tab, `input#${PATTERN_SPEC_RANGED_PROPERTY_ONE_KEY}`)
-            await fillInElement(control, TEST_MODIFICATION)
+            await fillInElement(control, VALID_TEST_MODIFICATION)
 
             expect(await elementInnerText(`.${SecretSelectorsForTest.SECRET_SUBMITTED_PATTERN_SPEC_CONTROL}#${PATTERN_SPEC_RANGED_PROPERTY_ONE_KEY}`))
                 .toBe(`${TEST_PATTERN_SPEC_RANGED_PROPERTY_ONE_INITIAL_VALUE}`)
@@ -41,26 +41,26 @@ describe('submitting pattern spec changes', () => {
             await modify(control)
 
             expect(await elementInnerText(`.${SecretSelectorsForTest.SECRET_SUBMITTED_PATTERN_SPEC_CONTROL}#${PATTERN_SPEC_RANGED_PROPERTY_ONE_KEY}`))
-                .toBe(`${TEST_PATTERN_SPEC_RANGED_PROPERTY_ONE_INITIAL_VALUE}${TEST_MODIFICATION}`)
+                .toBe(`${TEST_PATTERN_SPEC_RANGED_PROPERTY_ONE_INITIAL_VALUE}${VALID_TEST_MODIFICATION}`)
 
             done()
         })
 
         it('submits a control when you press the submit button', async done => {
             const control = await findElement(testGlobals.tab, `input#${PATTERN_SPEC_RANGED_PROPERTY_ONE_KEY}`)
-            await fillInElement(control, TEST_MODIFICATION)
+            await fillInElement(control, VALID_TEST_MODIFICATION)
             const button = await findElement(testGlobals.tab, `button#${PATTERN_SPEC_RANGED_PROPERTY_ONE_KEY}`)
             await clickElement(button)
 
             expect(await elementInnerText(`.${SecretSelectorsForTest.SECRET_SUBMITTED_PATTERN_SPEC_CONTROL}#${PATTERN_SPEC_RANGED_PROPERTY_ONE_KEY}`))
-                .toBe(`${TEST_PATTERN_SPEC_RANGED_PROPERTY_ONE_INITIAL_VALUE}${TEST_MODIFICATION}`)
+                .toBe(`${TEST_PATTERN_SPEC_RANGED_PROPERTY_ONE_INITIAL_VALUE}${VALID_TEST_MODIFICATION}`)
 
             done()
         })
 
         it('does not submit all the controls when you press enter (only the one you are focused on)', async done => {
             const controlNotToBeSubmitted = await findElement(testGlobals.tab, `input#${PATTERN_SPEC_RANGED_PROPERTY_ONE_KEY}`)
-            await fillInElement(controlNotToBeSubmitted, TEST_MODIFICATION)
+            await fillInElement(controlNotToBeSubmitted, VALID_TEST_MODIFICATION)
 
             await testGlobals.page.select(`select#${PATTERN_SPEC_OPTIONED_PROPERTY_ONE_KEY}`, TEST_PATTERN_SPEC_OPTIONED_PROPERTY_ONE_MODIFIED_VALUE)
 
@@ -73,8 +73,8 @@ describe('submitting pattern spec changes', () => {
                 .toBe(TEST_PATTERN_SPEC_OPTIONED_PROPERTY_ONE_INITIAL_VALUE)
             expect([
                 // due to some race condition in Puppeteer, some commits it's one way, some another...
-                `${TEST_MODIFICATION}${TEST_PATTERN_SPEC_RANGED_PROPERTY_TWO_INITIAL_VALUE}`,
-                `${TEST_PATTERN_SPEC_RANGED_PROPERTY_TWO_INITIAL_VALUE}${TEST_MODIFICATION}`,
+                `${VALID_TEST_MODIFICATION}${TEST_PATTERN_SPEC_RANGED_PROPERTY_TWO_INITIAL_VALUE}`,
+                `${TEST_PATTERN_SPEC_RANGED_PROPERTY_TWO_INITIAL_VALUE}${VALID_TEST_MODIFICATION}`,
             ]).toContain(await elementInnerText(`.${SecretSelectorsForTest.SECRET_SUBMITTED_PATTERN_SPEC_CONTROL}#${PATTERN_SPEC_RANGED_PROPERTY_TWO_KEY}`))
 
             done()
@@ -82,12 +82,12 @@ describe('submitting pattern spec changes', () => {
 
         it('does not submit all the controls when you press a submit button (only the one the button is for)', async done => {
             const controlNotToBeSubmitted = await findElement(testGlobals.tab, `input#${PATTERN_SPEC_RANGED_PROPERTY_ONE_KEY}`)
-            await fillInElement(controlNotToBeSubmitted, TEST_MODIFICATION)
+            await fillInElement(controlNotToBeSubmitted, VALID_TEST_MODIFICATION)
 
             await testGlobals.page.select(`select#${PATTERN_SPEC_OPTIONED_PROPERTY_ONE_KEY}`, TEST_PATTERN_SPEC_OPTIONED_PROPERTY_ONE_MODIFIED_VALUE)
 
             const controlToSubmit = await findElement(testGlobals.tab, `input#${PATTERN_SPEC_RANGED_PROPERTY_TWO_KEY}`)
-            await fillInElement(controlToSubmit, TEST_MODIFICATION)
+            await fillInElement(controlToSubmit, VALID_TEST_MODIFICATION)
             const button = await findElement(testGlobals.tab, `button#${PATTERN_SPEC_RANGED_PROPERTY_TWO_KEY}`)
             await clickElement(button)
 
@@ -96,7 +96,7 @@ describe('submitting pattern spec changes', () => {
             expect(await elementInnerText(`.${SecretSelectorsForTest.SECRET_SUBMITTED_PATTERN_SPEC_CONTROL}#${PATTERN_SPEC_OPTIONED_PROPERTY_ONE_KEY}`))
                 .toBe(TEST_PATTERN_SPEC_OPTIONED_PROPERTY_ONE_INITIAL_VALUE)
             expect(await elementInnerText(`.${SecretSelectorsForTest.SECRET_SUBMITTED_PATTERN_SPEC_CONTROL}#${PATTERN_SPEC_RANGED_PROPERTY_TWO_KEY}`))
-                .toBe(`${TEST_PATTERN_SPEC_RANGED_PROPERTY_TWO_INITIAL_VALUE}${TEST_MODIFICATION}`)
+                .toBe(`${TEST_PATTERN_SPEC_RANGED_PROPERTY_TWO_INITIAL_VALUE}${VALID_TEST_MODIFICATION}`)
 
             done()
         })
@@ -112,11 +112,11 @@ describe('submitting pattern spec changes', () => {
             await modify(controlUnderTest)
 
             expect(await elementInnerText(`.${SecretSelectorsForTest.SECRET_SUBMITTED_PATTERN_SPEC_CONTROL}#${PATTERN_SPEC_RANGED_PROPERTY_ONE_KEY}`))
-                .toBe(`${TEST_PATTERN_SPEC_RANGED_PROPERTY_ONE_INITIAL_VALUE}${TEST_MODIFICATION}`)
+                .toBe(`${TEST_PATTERN_SPEC_RANGED_PROPERTY_ONE_INITIAL_VALUE}${VALID_TEST_MODIFICATION}`)
             expect(await elementInnerText(`.${SecretSelectorsForTest.SECRET_SUBMITTED_PATTERN_SPEC_CONTROL}#${PATTERN_SPEC_OPTIONED_PROPERTY_ONE_KEY}`))
                 .toBe(TEST_PATTERN_SPEC_OPTIONED_PROPERTY_ONE_MODIFIED_VALUE)
             expect(await elementInnerText(`.${SecretSelectorsForTest.SECRET_SUBMITTED_PATTERN_SPEC_CONTROL}#${PATTERN_SPEC_RANGED_PROPERTY_TWO_KEY}`))
-                .toBe(`${TEST_PATTERN_SPEC_RANGED_PROPERTY_TWO_INITIAL_VALUE}${TEST_MODIFICATION}`)
+                .toBe(`${TEST_PATTERN_SPEC_RANGED_PROPERTY_TWO_INITIAL_VALUE}${VALID_TEST_MODIFICATION}`)
 
             done()
         })
@@ -129,7 +129,7 @@ describe('submitting pattern spec changes', () => {
                 .toEqual([ PATTERN_SPEC_RANGED_PROPERTY_ONE_KEY, PATTERN_SPEC_RANGED_PROPERTY_TWO_KEY ])
 
             const control = await findElement(testGlobals.tab, `input#${PATTERN_SPEC_RANGED_PROPERTY_ONE_KEY}`)
-            await fillInElement(control, TEST_MODIFICATION)
+            await fillInElement(control, VALID_TEST_MODIFICATION)
 
             controlIds = await testGlobals.page.evaluate(() =>
                 Array.from(document.querySelectorAll('#pattern-spec-controls input')).map(element => element.id),
@@ -174,7 +174,7 @@ describe('submitting pattern spec changes', () => {
 
         it('does not submit all the controls when you press enter (only the one you are focused on)', async done => {
             const controlNotToBeSubmitted = await findElement(testGlobals.tab, `input#${PATTERN_SPEC_RANGED_PROPERTY_ONE_KEY}`)
-            await fillInElement(controlNotToBeSubmitted, TEST_MODIFICATION)
+            await fillInElement(controlNotToBeSubmitted, VALID_TEST_MODIFICATION)
 
             await testGlobals.page.select(`select#${PATTERN_SPEC_OPTIONED_PROPERTY_TWO_KEY}`, TEST_PATTERN_SPEC_OPTIONED_PROPERTY_TWO_MODIFIED_VALUE)
 
@@ -193,7 +193,7 @@ describe('submitting pattern spec changes', () => {
 
         it('does not submit all the controls when you press a submit button (only the one the button is for)', async done => {
             const controlNotToBeSubmitted = await findElement(testGlobals.tab, `input#${PATTERN_SPEC_RANGED_PROPERTY_ONE_KEY}`)
-            await fillInElement(controlNotToBeSubmitted, TEST_MODIFICATION)
+            await fillInElement(controlNotToBeSubmitted, VALID_TEST_MODIFICATION)
 
             await testGlobals.page.select(`select#${PATTERN_SPEC_OPTIONED_PROPERTY_TWO_KEY}`, TEST_PATTERN_SPEC_OPTIONED_PROPERTY_TWO_MODIFIED_VALUE)
 
@@ -224,7 +224,7 @@ describe('submitting pattern spec changes', () => {
             await clickElement(buttonForSelectUnderTest)
 
             expect(await elementInnerText(`.${SecretSelectorsForTest.SECRET_SUBMITTED_PATTERN_SPEC_CONTROL}#${PATTERN_SPEC_RANGED_PROPERTY_ONE_KEY}`))
-                .toBe(`${TEST_PATTERN_SPEC_RANGED_PROPERTY_ONE_INITIAL_VALUE}${TEST_MODIFICATION}`)
+                .toBe(`${TEST_PATTERN_SPEC_RANGED_PROPERTY_ONE_INITIAL_VALUE}${VALID_TEST_MODIFICATION}`)
             expect(await elementInnerText(`.${SecretSelectorsForTest.SECRET_SUBMITTED_PATTERN_SPEC_CONTROL}#${PATTERN_SPEC_OPTIONED_PROPERTY_ONE_KEY}`))
                 .toBe(TEST_PATTERN_SPEC_OPTIONED_PROPERTY_ONE_MODIFIED_VALUE)
             expect(await elementInnerText(`.${SecretSelectorsForTest.SECRET_SUBMITTED_PATTERN_SPEC_CONTROL}#${PATTERN_SPEC_OPTIONED_PROPERTY_TWO_KEY}`))

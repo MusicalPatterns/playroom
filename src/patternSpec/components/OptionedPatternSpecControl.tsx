@@ -23,8 +23,7 @@ const OptionedPatternSpecControl: (optionedControlProps: OptionedControlProps) =
                 onBlur,
                 onChange,
                 onKeyPress,
-                // tslint:disable-next-line:no-unsafe-any
-                value: JSON.parse(patternSpecValue),
+                value: patternSpecValue,
             }}>{optionElements}</select>
         )
     }

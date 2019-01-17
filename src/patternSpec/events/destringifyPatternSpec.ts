@@ -1,7 +1,19 @@
+// tslint:disable:no-any
+
 import { PatternSpec } from '@musical-patterns/pattern'
 import { StringifiedPatternSpec, StringifiedPatternSpecEntry } from '../types'
 
 const destringifiedPatternSpecAccumulator: PatternSpec = {}
+
+const destringifyIfNecessary: (val: string) => any =
+    (val: string): any => {
+        try {
+            return JSON.parse(val)
+        }
+        catch (e) {
+            return val
+        }
+    }
 
 const destringifyPatternSpec: (stringifiedPatternSpec: StringifiedPatternSpec) => PatternSpec =
     (stringifiedPatternSpec: StringifiedPatternSpec): PatternSpec =>
@@ -11,7 +23,7 @@ const destringifyPatternSpec: (stringifiedPatternSpec: StringifiedPatternSpec) =
                     destringifiedPatternSpec: PatternSpec,
                     [ key, val ]: StringifiedPatternSpecEntry,
                 ): PatternSpec =>
-                    ({ ...destringifiedPatternSpec, [ key ]: JSON.parse(val) }),
+                    ({ ...destringifiedPatternSpec, [ key ]: destringifyIfNecessary(val) }),
                 destringifiedPatternSpecAccumulator,
             )
 

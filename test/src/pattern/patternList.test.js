@@ -5,7 +5,7 @@ import {
     elementExists,
     elementInnerText,
     elementValue,
-    INVALID_TEST_MODIFICATION,
+    BAD_FORMAT_INVALID_TEST_MODIFICATION,
     loseFocus,
     modify,
     OTHER_TEST_PATTERN_SPEC_RANGED_PROPERTY_ONE_INITIAL_VALUE,
@@ -20,7 +20,7 @@ import {
     selectOtherTestPattern,
     selectTestPattern,
     submitSelectByPressingEnter,
-    TEST_MODIFICATION,
+    VALID_TEST_MODIFICATION,
     TEST_PATTERN_ID,
     TEST_PATTERN_SPEC_RANGED_PROPERTY_ONE_INITIAL_VALUE,
     TEST_PATTERN_SPEC_RANGED_PROPERTY_TWO_INITIAL_VALUE,
@@ -77,7 +77,7 @@ describe('pattern list', () => {
 
             it('if there were any unsubmitted controls, they no longer appear as unsubmitted', async done => {
                 const control = await findElement(testGlobals.tab, `input#${PATTERN_SPEC_RANGED_PROPERTY_ONE_KEY}`)
-                await fillInElement(control, TEST_MODIFICATION)
+                await fillInElement(control, VALID_TEST_MODIFICATION)
                 await loseFocus()
                 expect(await elementExists(`input#${PATTERN_SPEC_RANGED_PROPERTY_ONE_KEY}.${PatternSpecControlStates.UNSUBMITTED}`))
                     .toBeTruthy()
@@ -99,7 +99,7 @@ describe('pattern list', () => {
 
             it('if there were any invalid controls, they no longer appear as invalid', async done => {
                 const control = await findElement(testGlobals.tab, `input#${PATTERN_SPEC_RANGED_PROPERTY_ONE_KEY}`)
-                await fillInElement(control, INVALID_TEST_MODIFICATION)
+                await fillInElement(control, BAD_FORMAT_INVALID_TEST_MODIFICATION)
                 const button = await findElement(testGlobals.tab, `button#${PATTERN_SPEC_RANGED_PROPERTY_ONE_KEY}`)
                 await clickElement(button)
                 expect(await elementExists(`input#${PATTERN_SPEC_RANGED_PROPERTY_ONE_KEY}.${PatternSpecControlStates.INVALID}`))
@@ -122,7 +122,7 @@ describe('pattern list', () => {
             await selectTestPattern()
 
             expect(await elementValue(`input#${PATTERN_SPEC_RANGED_PROPERTY_ONE_KEY}`))
-                .toBe(`${TEST_PATTERN_SPEC_RANGED_PROPERTY_ONE_INITIAL_VALUE}${TEST_MODIFICATION}`)
+                .toBe(`${TEST_PATTERN_SPEC_RANGED_PROPERTY_ONE_INITIAL_VALUE}${VALID_TEST_MODIFICATION}`)
             expect(await elementInnerText(`.${SecretSelectorsForTest.SECRET_SUBMITTED_PATTERN_SPEC_CONTROL}#${PATTERN_SPEC_OPTIONED_PROPERTY_ONE_KEY}`))
                 .toBe(TEST_PATTERN_SPEC_OPTIONED_PROPERTY_ONE_MODIFIED_VALUE)
 
