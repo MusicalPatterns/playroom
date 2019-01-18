@@ -1,3 +1,4 @@
+import { Maybe } from '@musical-patterns/utilities'
 import * as React from 'react'
 import { SecretSelectorsForTest } from '../../types'
 import {
@@ -6,7 +7,7 @@ import {
     PatternSpecEventParameters,
 } from '../events'
 import { PatternSpecStateKeys } from '../state'
-import { StringifiedPatternSpec, StringifiedPatternSpecControlStates } from '../types'
+import { InvalidPatternSpecMessages, StringifiedPatternSpec, StringifiedPatternSpecControlStates } from '../types'
 import { buildControl } from './buildControl'
 import { presentPatternSpecKey } from './helpers'
 import { ControlProps, PatternSpecControlProps, PatternSpecControlStates } from './types'
@@ -25,8 +26,8 @@ const PatternSpecControl: (patternSpecControlProps: PatternSpecControlProps) => 
 
         const displayedPatternSpec: StringifiedPatternSpec =
             patternSpecState.get(PatternSpecStateKeys.DISPLAYED_PATTERN_SPEC)
-        const invalidPatternSpecControls: StringifiedPatternSpecControlStates =
-            patternSpecState.get(PatternSpecStateKeys.INVALID_PATTERN_SPEC_CONTROLS)
+        const invalidPatternSpecMessages: InvalidPatternSpecMessages =
+            patternSpecState.get(PatternSpecStateKeys.INVALID_PATTERN_SPEC_MESSAGES)
         const disabledPatternSpecButtons: StringifiedPatternSpecControlStates =
             patternSpecState.get(PatternSpecStateKeys.DISABLED_PATTERN_SPEC_BUTTONS)
         const unsubmittedPatternSpecControls: StringifiedPatternSpecControlStates =
@@ -35,9 +36,9 @@ const PatternSpecControl: (patternSpecControlProps: PatternSpecControlProps) => 
             patternSpecState.get(PatternSpecStateKeys.SUBMITTED_PATTERN_SPEC)
 
         const patternSpecValue: string = displayedPatternSpec[ patternSpecKey ]
-        const invalid: boolean = invalidPatternSpecControls[ patternSpecKey ]
-        const unsubmitted: boolean = unsubmittedPatternSpecControls[ patternSpecKey ]
-        const disabled: boolean = disabledPatternSpecButtons[ patternSpecKey ]
+        const invalidMessage: Maybe<string> = invalidPatternSpecMessages[ patternSpecKey ]
+        const unsubmitted: boolean = !!unsubmittedPatternSpecControls[ patternSpecKey ]
+        const disabled: boolean = !!disabledPatternSpecButtons[ patternSpecKey ]
         const submittedPatternSpecValue: string = submittedPatternSpec[ patternSpecKey ]
 
         const patternSpecEventParameters: PatternSpecEventParameters = { patternSpecKey, patternSpecState }
@@ -59,14 +60,14 @@ const PatternSpecControl: (patternSpecControlProps: PatternSpecControlProps) => 
             patternSpecEventParameters,
         })
 
-        const className: string = invalid ?
+        const className: string = !!invalidMessage ?
             PatternSpecControlStates.INVALID :
             unsubmitted ? PatternSpecControlStates.UNSUBMITTED : PatternSpecControlStates.VALID_AND_SUBMITTED
         const controlProps: ControlProps = { className, onBlur, onChange, onKeyPress, patternSpecKey, patternSpecValue }
         const control: JSX.Element[] = buildControl(patternSpecPropertyType, controlProps, constraint)
 
         return (
-            <div {...{ className: 'pattern-spec-control' }}>
+            <div {...{ className: 'pattern-spec-control', message: invalidMessage }}>
                 <span {...{
                     className: SecretSelectorsForTest.SECRET_SUBMITTED_PATTERN_SPEC_CONTROL,
                     id: patternSpecKey,

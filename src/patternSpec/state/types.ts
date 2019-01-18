@@ -1,12 +1,12 @@
 import { PatternSpecAttributes } from '@musical-patterns/pattern'
 import { TypedMap } from '@musical-patterns/utilities'
-import { StringifiedPatternSpec, StringifiedPatternSpecControlStates } from '../types'
+import { InvalidPatternSpecMessages, StringifiedPatternSpec, StringifiedPatternSpecControlStates } from '../types'
 
 enum PatternSpecStateKeys {
     DEFAULT_PATTERN_SPEC = 'DEFAULT_PATTERN_SPEC',
     DISABLED_PATTERN_SPEC_BUTTONS = 'DISABLED_PATTERN_SPEC_BUTTONS',
     DISPLAYED_PATTERN_SPEC = 'DISPLAYED_PATTERN_SPEC',
-    INVALID_PATTERN_SPEC_CONTROLS = 'INVALID_PATTERN_SPEC_CONTROLS',
+    INVALID_PATTERN_SPEC_MESSAGES = 'INVALID_PATTERN_SPEC_MESSAGES',
     SUBMITTED_PATTERN_SPEC = 'SUBMITTED_PATTERN_SPEC',
     UNSUBMITTED_PATTERN_SPEC_CONTROLS = 'UNSUBMITTED_PATTERN_SPEC_CONTROLS',
     PATTERN_SPEC_ATTRIBUTES = 'PATTERN_SPEC_ATTRIBUTES',
@@ -16,7 +16,7 @@ interface PatternSpecState {
     [ PatternSpecStateKeys.DEFAULT_PATTERN_SPEC ]: StringifiedPatternSpec,
     [ PatternSpecStateKeys.DISABLED_PATTERN_SPEC_BUTTONS ]: StringifiedPatternSpecControlStates,
     [ PatternSpecStateKeys.DISPLAYED_PATTERN_SPEC ]: StringifiedPatternSpec,
-    [ PatternSpecStateKeys.INVALID_PATTERN_SPEC_CONTROLS ]: StringifiedPatternSpecControlStates,
+    [ PatternSpecStateKeys.INVALID_PATTERN_SPEC_MESSAGES ]: InvalidPatternSpecMessages,
     [ PatternSpecStateKeys.SUBMITTED_PATTERN_SPEC ]: StringifiedPatternSpec,
     [ PatternSpecStateKeys.UNSUBMITTED_PATTERN_SPEC_CONTROLS ]: StringifiedPatternSpecControlStates,
     [ PatternSpecStateKeys.PATTERN_SPEC_ATTRIBUTES ]: PatternSpecAttributes,
@@ -24,6 +24,7 @@ interface PatternSpecState {
 
 type PatternSpecStateValueTypes =
     StringifiedPatternSpecControlStates |
+    InvalidPatternSpecMessages |
     StringifiedPatternSpec |
     PatternSpecAttributes
 
@@ -34,7 +35,7 @@ enum PatternSpecStateActionType {
     SET_DISABLED_PATTERN_SPEC_BUTTONS = 'SET_DISABLED_PATTERN_SPEC_BUTTONS',
     SET_SUBMITTED_PATTERN_SPEC = 'SET_SUBMITTED_PATTERN_SPEC',
     SET_DISPLAYED_PATTERN_SPEC = 'SET_DISPLAYED_PATTERN_SPEC',
-    SET_INVALID_PATTERN_SPEC_CONTROLS = 'SET_INVALID_PATTERN_SPEC_CONTROLS',
+    SET_INVALID_PATTERN_SPEC_MESSAGES = 'SET_INVALID_PATTERN_SPEC_MESSAGES',
     SET_UNSUBMITTED_PATTERN_SPEC_CONTROLS = 'SET_UNSUBMITTED_PATTERN_SPEC_CONTROLS',
     SET_PATTERN_SPEC_ATTRIBUTES = 'SET_PATTERN_SPEC_ATTRIBUTES',
 }
@@ -59,9 +60,9 @@ interface SetDisplayedPatternSpec {
     type: PatternSpecStateActionType.SET_DISPLAYED_PATTERN_SPEC,
 }
 
-interface SetInvalidPatternSpecControls {
-    data: StringifiedPatternSpecControlStates,
-    type: PatternSpecStateActionType.SET_INVALID_PATTERN_SPEC_CONTROLS,
+interface SetInvalidPatternSpecMessages {
+    data: InvalidPatternSpecMessages,
+    type: PatternSpecStateActionType.SET_INVALID_PATTERN_SPEC_MESSAGES,
 }
 
 interface SetUnsubmittedPatternSpecControls {
@@ -79,7 +80,7 @@ type PatternSpecStateAction =
     SetDisabledPatternSpecButtons |
     SetSubmittedPatternSpec |
     SetDisplayedPatternSpec |
-    SetInvalidPatternSpecControls |
+    SetInvalidPatternSpecMessages |
     SetUnsubmittedPatternSpecControls |
     SetPatternSpecAttributes
 

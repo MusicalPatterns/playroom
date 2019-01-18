@@ -1,73 +1,78 @@
 import { PatternSpecPropertyAttributes, PatternSpecPropertyType, RangedConstraint } from '@musical-patterns/pattern'
 import { Maybe } from '@musical-patterns/utilities'
 
-const validByMin: (numericValue: number, min: Maybe<number>, excludeMin: boolean) => boolean =
-    (numericValue: number, min: Maybe<number>, excludeMin: boolean): boolean => {
+const validByMin: (numericValue: number, min: Maybe<number>, excludeMin: boolean) => Maybe<string> =
+    (numericValue: number, min: Maybe<number>, excludeMin: boolean): Maybe<string> => {
         if (!min) {
-            return true
+            return undefined
         }
 
         if (excludeMin) {
             if (numericValue <= min) {
-                return false
+                return `must be greater than ${min}`
             }
         }
         else {
             if (numericValue < min) {
-                return false
+                return `must be greater than or equal to ${min}`
             }
         }
 
-        return true
+        return undefined
     }
 
-const validByMax: (numericValue: number, max: Maybe<number>, excludeMax: boolean) => boolean =
-    (numericValue: number, max: Maybe<number>, excludeMax: boolean): boolean => {
+const validByMax: (numericValue: number, max: Maybe<number>, excludeMax: boolean) => Maybe<string> =
+    (numericValue: number, max: Maybe<number>, excludeMax: boolean): Maybe<string> => {
         if (!max) {
-            return true
+            return undefined
         }
 
         if (excludeMax) {
             if (numericValue >= max) {
-                return false
+                return `must be less than ${max}`
             }
         }
         else {
             if (numericValue > max) {
-                return false
+                return `must be less than or equal to ${max}`
             }
         }
 
-        return true
+        return undefined
     }
 
-const validByRangedConstraint: (numericValue: number, constraint: RangedConstraint) => boolean =
-    (numericValue: number, constraint: RangedConstraint): boolean => {
+const validByStep: (numericValue: number, integer: Maybe<boolean>) => Maybe<string> =
+    (numericValue: number, integer: Maybe<boolean>): Maybe<string> => {
+        if (!integer) {
+            return undefined
+        }
+
+        if (!Number.isInteger(numericValue)) {
+            return `must be an integer`
+        }
+
+        return undefined
+    }
+
+const validByRangedConstraint: (numericValue: number, constraint: RangedConstraint) => Maybe<string> =
+    (numericValue: number, constraint: RangedConstraint): Maybe<string> => {
         const { min, max, excludeMin = false, excludeMax = false, integer = false } = constraint
 
-        if (integer && !Number.isInteger(numericValue)) {
-            return false
-        }
-        if (!validByMin(numericValue, min, excludeMin)) {
-            return false
-        }
-        if (!validByMax(numericValue, max, excludeMax)) {
-            return false
-        }
-
-        return true
+        return validByStep(numericValue, integer) ||
+            validByMin(numericValue, min, excludeMin) ||
+            validByMax(numericValue, max, excludeMax)
     }
 
 const validate:
-    (patternSpecValue: string, propertyAttributes: Maybe<PatternSpecPropertyAttributes>) => boolean =
-    (patternSpecValue: string, propertyAttributes: Maybe<PatternSpecPropertyAttributes>): boolean => {
+    (patternSpecValue: string, propertyAttributes: Maybe<PatternSpecPropertyAttributes>) => Maybe<string> =
+    (patternSpecValue: string, propertyAttributes: Maybe<PatternSpecPropertyAttributes>): Maybe<string> => {
         if (!propertyAttributes) {
-            return false
+            return 'error: missing property attributes'
         }
         const { patternSpecPropertyType, constraint } = propertyAttributes
 
         if (patternSpecPropertyType === PatternSpecPropertyType.OPTIONED) {
-            return true
+            return undefined
         }
 
         let numericValue: number
@@ -76,11 +81,11 @@ const validate:
             numericValue = JSON.parse(patternSpecValue)
         }
         catch (e) {
-            return false
+            return 'this property is formatted in a way which cannot be parsed'
         }
 
         if (!constraint) {
-            return true
+            return undefined
         }
 
         return validByRangedConstraint(numericValue, constraint as RangedConstraint)

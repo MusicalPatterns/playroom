@@ -1,0 +1,32 @@
+@import '../../colors';
+@import '../../sizes';
+
+[message] {
+  position: relative;
+}
+
+[message]:after {
+  transition: opacity $duration $easeInOutQuint;
+
+  opacity: 0;
+
+  content: attr(message);
+
+  position: absolute;
+  top: $big;
+  left: 38.2%;
+
+  padding: $tiny;
+
+  background: $invalid;
+
+  font-size: $small;
+
+  border-radius: $border-size;
+
+  pointer-events: none;
+}
+
+[message]:hover:after {
+  opacity: 0.618;
+}

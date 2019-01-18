@@ -1,9 +1,9 @@
 import { PatternSpecAttributes } from '@musical-patterns/pattern'
-import { deepEqual } from '@musical-patterns/utilities'
+import { deepEqual, Maybe } from '@musical-patterns/utilities'
 import { BatchAction, batchActions } from 'redux-batched-actions'
 import { ActionType } from '../../root'
 import { PatternSpecStateKeys } from '../state'
-import { StringifiedPatternSpec, StringifiedPatternSpecControlStates } from '../types'
+import { InvalidPatternSpecMessages, StringifiedPatternSpec, StringifiedPatternSpecControlStates } from '../types'
 import { PatternSpecControlEventHandler, PatternSpecControlEventHandlerParameters } from './types'
 import { validate } from './validate'
 
@@ -18,8 +18,8 @@ const handlePatternSpecControlSubmit: PatternSpecControlEventHandler =
 
         const unsubmittedPatternSpecControls: StringifiedPatternSpecControlStates =
             patternSpecState.get(PatternSpecStateKeys.UNSUBMITTED_PATTERN_SPEC_CONTROLS)
-        const invalidPatternSpecControls: StringifiedPatternSpecControlStates =
-            patternSpecState.get(PatternSpecStateKeys.INVALID_PATTERN_SPEC_CONTROLS)
+        const invalidPatternSpecMessages: InvalidPatternSpecMessages =
+            patternSpecState.get(PatternSpecStateKeys.INVALID_PATTERN_SPEC_MESSAGES)
         const disabledPatternSpecButtons: StringifiedPatternSpecControlStates =
             patternSpecState.get(PatternSpecStateKeys.DISABLED_PATTERN_SPEC_BUTTONS)
         const submittedPatternSpec: StringifiedPatternSpec =
@@ -35,8 +35,8 @@ const handlePatternSpecControlSubmit: PatternSpecControlEventHandler =
             return
         }
 
-        const valid: boolean = validate(patternSpecValue, patternSpecAttributes[ patternSpecKey ])
-        if (valid) {
+        const invalidMessage: Maybe<string> = validate(patternSpecValue, patternSpecAttributes[ patternSpecKey ])
+        if (!invalidMessage) {
             const updatedUnsubmittedControls: StringifiedPatternSpecControlStates = {
                 ...unsubmittedPatternSpecControls,
                 [ patternSpecKey ]: false,
@@ -55,11 +55,11 @@ const handlePatternSpecControlSubmit: PatternSpecControlEventHandler =
             dispatch(batchedAction)
         }
         else {
-            const updatedInvalidControls: StringifiedPatternSpecControlStates = {
-                ...invalidPatternSpecControls,
-                [ patternSpecKey ]: true,
+            const updatedInvalidMessages: InvalidPatternSpecMessages = {
+                ...invalidPatternSpecMessages,
+                [ patternSpecKey ]: invalidMessage,
             }
-            dispatch({ type: ActionType.SET_INVALID_PATTERN_SPEC_CONTROLS, data: updatedInvalidControls })
+            dispatch({ type: ActionType.SET_INVALID_PATTERN_SPEC_MESSAGES, data: updatedInvalidMessages })
         }
     }
 

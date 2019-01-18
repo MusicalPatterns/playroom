@@ -1,7 +1,7 @@
 import { BatchAction, batchActions } from 'redux-batched-actions'
 import { ActionType } from '../../root'
 import { PatternSpecStateKeys } from '../state'
-import { StringifiedPatternSpec, StringifiedPatternSpecControlStates } from '../types'
+import { InvalidPatternSpecMessages, StringifiedPatternSpec, StringifiedPatternSpecControlStates } from '../types'
 import { PatternSpecControlEventHandler, PatternSpecControlEventHandlerParameters } from './types'
 
 const handlePatternSpecControlChange: PatternSpecControlEventHandler =
@@ -15,8 +15,8 @@ const handlePatternSpecControlChange: PatternSpecControlEventHandler =
 
         const displayedPatternSpec: StringifiedPatternSpec =
             patternSpecState.get(PatternSpecStateKeys.DISPLAYED_PATTERN_SPEC)
-        const invalidPatternSpecControls: StringifiedPatternSpecControlStates =
-            patternSpecState.get(PatternSpecStateKeys.INVALID_PATTERN_SPEC_CONTROLS)
+        const invalidPatternSpecMessages: InvalidPatternSpecMessages =
+            patternSpecState.get(PatternSpecStateKeys.INVALID_PATTERN_SPEC_MESSAGES)
         const disabledPatternSpecButtons: StringifiedPatternSpecControlStates =
             patternSpecState.get(PatternSpecStateKeys.DISABLED_PATTERN_SPEC_BUTTONS)
         const submittedPatternSpec: StringifiedPatternSpec =
@@ -27,9 +27,9 @@ const handlePatternSpecControlChange: PatternSpecControlEventHandler =
             [ patternSpecKey ]: patternSpecValue,
         }
 
-        const updatedInvalidControls: StringifiedPatternSpecControlStates = {
-            ...invalidPatternSpecControls,
-            [ patternSpecKey ]: false,
+        const updatedInvalidMessages: InvalidPatternSpecMessages = {
+            ...invalidPatternSpecMessages,
+            [ patternSpecKey ]: undefined,
         }
 
         const currentPatternSpecValue: string = submittedPatternSpec[ patternSpecKey ]
@@ -41,7 +41,7 @@ const handlePatternSpecControlChange: PatternSpecControlEventHandler =
 
         const batchedAction: BatchAction = batchActions([
             { type: ActionType.SET_DISPLAYED_PATTERN_SPEC, data: updatedStringifiedPatternSpec },
-            { type: ActionType.SET_INVALID_PATTERN_SPEC_CONTROLS, data: updatedInvalidControls },
+            { type: ActionType.SET_INVALID_PATTERN_SPEC_MESSAGES, data: updatedInvalidMessages },
             { type: ActionType.SET_DISABLED_PATTERN_SPEC_BUTTONS, data: updatedDisabledButtons },
         ])
         dispatch(batchedAction)
