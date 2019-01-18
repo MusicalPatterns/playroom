@@ -1,4 +1,4 @@
-import { PatternSpecAttributes, StandardPatternSpecProperties } from '@musical-patterns/pattern'
+import { AnyPatternSpecAttributes, StandardPatternSpecProperties } from '@musical-patterns/pattern'
 import * as React from 'react'
 import { connect } from 'react-redux'
 import { Dispatch } from 'redux'
@@ -49,7 +49,7 @@ const PatternSpecControls: (patternSpecControlsProps: PatternSpecControlsProps) 
         const { patternSpecState }: PatternSpecControlsProps = patternSpecControlsProps
         const displayedPatternSpec: StringifiedPatternSpec = patternSpecState
             .get(PatternSpecStateKeys.DISPLAYED_PATTERN_SPEC)
-        const patternSpecAttributes: PatternSpecAttributes = patternSpecState
+        const patternSpecAttributes: AnyPatternSpecAttributes = patternSpecState
             .get(PatternSpecStateKeys.PATTERN_SPEC_ATTRIBUTES)
 
         const patternSpecKeys: string[] = Object.keys(displayedPatternSpec)
@@ -77,9 +77,11 @@ const PatternSpecControls: (patternSpecControlsProps: PatternSpecControlsProps) 
 
         return (
             <div {...{ id: 'pattern-spec-controls' }}>
-                {bothTypesOfControlsPresent && <div>pattern specific</div>}
+                {bothTypesOfControlsPresent &&
+                <div {...{ className: 'pattern-spec-control-section-heading' }}>pattern specific</div>}
                 {patternSpecificControls}
-                {bothTypesOfControlsPresent && <div>standard</div>}
+                {bothTypesOfControlsPresent &&
+                <div {...{ className: 'pattern-spec-control-section-heading' }}>standard</div>}
                 {standardPatternSpecControls}
             </div>
         )

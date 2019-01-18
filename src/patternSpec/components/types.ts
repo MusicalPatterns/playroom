@@ -1,6 +1,6 @@
 import {
+    AnyPatternSpecAttributes,
     OptionedConstraint,
-    PatternSpecAttributes,
     PatternSpecPropertyAttributes,
     RangedConstraint,
 } from '@musical-patterns/pattern'
@@ -62,7 +62,7 @@ interface RangedControlProps extends ControlProps {
 }
 
 interface BuildControlsProps {
-    patternSpecAttributes: PatternSpecAttributes,
+    patternSpecAttributes: AnyPatternSpecAttributes,
     patternSpecControlsProps: PatternSpecControlsProps,
     patternSpecKeys: string[],
 }

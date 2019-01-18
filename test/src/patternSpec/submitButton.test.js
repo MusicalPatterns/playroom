@@ -8,8 +8,8 @@ import {
     refreshWithTestPatternSelected,
     submitSelectByPressingEnter,
     VALID_TEST_MODIFICATION,
-    TEST_PATTERN_SPEC_OPTIONED_PROPERTY_ONE_INITIAL_VALUE,
-    TEST_PATTERN_SPEC_OPTIONED_PROPERTY_ONE_MODIFIED_VALUE,
+    SPEC_CONTROLS_PATTERN_OPTIONED_PROPERTY_ONE_INITIAL_VALUE,
+    SPEC_CONTROLS_PATTERN_OPTIONED_PROPERTY_ONE_MODIFIED_VALUE,
 } from '../../support'
 
 describe('submit button', () => {
@@ -95,7 +95,7 @@ describe('submit button', () => {
             expect(await elementExists(`button#${PATTERN_SPEC_OPTIONED_PROPERTY_ONE_KEY}:disabled`))
                 .toBeTruthy()
 
-            await testGlobals.page.select(`select#${PATTERN_SPEC_OPTIONED_PROPERTY_ONE_KEY}`, TEST_PATTERN_SPEC_OPTIONED_PROPERTY_ONE_MODIFIED_VALUE)
+            await testGlobals.page.select(`select#${PATTERN_SPEC_OPTIONED_PROPERTY_ONE_KEY}`, SPEC_CONTROLS_PATTERN_OPTIONED_PROPERTY_ONE_MODIFIED_VALUE)
 
             expect(await elementExists(`button#${PATTERN_SPEC_OPTIONED_PROPERTY_ONE_KEY}:enabled`))
                 .toBeTruthy()
@@ -107,7 +107,7 @@ describe('submit button', () => {
             expect(await elementExists(`button#${PATTERN_SPEC_OPTIONED_PROPERTY_ONE_KEY}:disabled`))
                 .toBeTruthy()
 
-            await testGlobals.page.select(`select#${PATTERN_SPEC_OPTIONED_PROPERTY_ONE_KEY}`, TEST_PATTERN_SPEC_OPTIONED_PROPERTY_ONE_MODIFIED_VALUE)
+            await testGlobals.page.select(`select#${PATTERN_SPEC_OPTIONED_PROPERTY_ONE_KEY}`, SPEC_CONTROLS_PATTERN_OPTIONED_PROPERTY_ONE_MODIFIED_VALUE)
 
             expect(await elementExists(`button#${PATTERN_SPEC_OPTIONED_PROPERTY_ONE_KEY}:enabled`))
                 .toBeTruthy()
@@ -125,7 +125,7 @@ describe('submit button', () => {
             expect(await elementExists(`button#${PATTERN_SPEC_OPTIONED_PROPERTY_ONE_KEY}:disabled`))
                 .toBeTruthy()
 
-            await testGlobals.page.select(`select#${PATTERN_SPEC_OPTIONED_PROPERTY_ONE_KEY}`, TEST_PATTERN_SPEC_OPTIONED_PROPERTY_ONE_MODIFIED_VALUE)
+            await testGlobals.page.select(`select#${PATTERN_SPEC_OPTIONED_PROPERTY_ONE_KEY}`, SPEC_CONTROLS_PATTERN_OPTIONED_PROPERTY_ONE_MODIFIED_VALUE)
 
             expect(await elementExists(`button#${PATTERN_SPEC_OPTIONED_PROPERTY_ONE_KEY}:enabled`))
                 .toBeTruthy()
@@ -142,12 +142,12 @@ describe('submit button', () => {
             expect(await elementExists(`button#${PATTERN_SPEC_OPTIONED_PROPERTY_ONE_KEY}:disabled`))
                 .toBeTruthy()
 
-            await testGlobals.page.select(`select#${PATTERN_SPEC_OPTIONED_PROPERTY_ONE_KEY}`, TEST_PATTERN_SPEC_OPTIONED_PROPERTY_ONE_MODIFIED_VALUE)
+            await testGlobals.page.select(`select#${PATTERN_SPEC_OPTIONED_PROPERTY_ONE_KEY}`, SPEC_CONTROLS_PATTERN_OPTIONED_PROPERTY_ONE_MODIFIED_VALUE)
 
             expect(await elementExists(`button#${PATTERN_SPEC_OPTIONED_PROPERTY_ONE_KEY}:enabled`))
                 .toBeTruthy()
 
-            await testGlobals.page.select(`select#${PATTERN_SPEC_OPTIONED_PROPERTY_ONE_KEY}`, TEST_PATTERN_SPEC_OPTIONED_PROPERTY_ONE_INITIAL_VALUE)
+            await testGlobals.page.select(`select#${PATTERN_SPEC_OPTIONED_PROPERTY_ONE_KEY}`, SPEC_CONTROLS_PATTERN_OPTIONED_PROPERTY_ONE_INITIAL_VALUE)
 
             expect(await elementExists(`button#${PATTERN_SPEC_OPTIONED_PROPERTY_ONE_KEY}:disabled`))
                 .toBeTruthy()

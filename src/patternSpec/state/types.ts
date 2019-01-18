@@ -1,4 +1,4 @@
-import { PatternSpecAttributes } from '@musical-patterns/pattern'
+import { AnyPatternSpec, AnyPatternSpecAttributes, PatternSpecAttributes } from '@musical-patterns/pattern'
 import { TypedMap } from '@musical-patterns/utilities'
 import { InvalidPatternSpecMessages, StringifiedPatternSpec, StringifiedPatternSpecControlStates } from '../types'
 
@@ -19,14 +19,14 @@ interface PatternSpecState {
     [ PatternSpecStateKeys.INVALID_PATTERN_SPEC_MESSAGES ]: InvalidPatternSpecMessages,
     [ PatternSpecStateKeys.SUBMITTED_PATTERN_SPEC ]: StringifiedPatternSpec,
     [ PatternSpecStateKeys.UNSUBMITTED_PATTERN_SPEC_CONTROLS ]: StringifiedPatternSpecControlStates,
-    [ PatternSpecStateKeys.PATTERN_SPEC_ATTRIBUTES ]: PatternSpecAttributes,
+    [ PatternSpecStateKeys.PATTERN_SPEC_ATTRIBUTES ]: AnyPatternSpecAttributes,
 }
 
 type PatternSpecStateValueTypes =
     StringifiedPatternSpecControlStates |
     InvalidPatternSpecMessages |
     StringifiedPatternSpec |
-    PatternSpecAttributes
+    AnyPatternSpecAttributes
 
 type ImmutablePatternSpecState = TypedMap<PatternSpecStateValueTypes, PatternSpecState>
 
@@ -71,7 +71,7 @@ interface SetUnsubmittedPatternSpecControls {
 }
 
 interface SetPatternSpecAttributes {
-    data: PatternSpecAttributes,
+    data: AnyPatternSpecAttributes,
     type: PatternSpecStateActionType.SET_PATTERN_SPEC_ATTRIBUTES,
 }
 

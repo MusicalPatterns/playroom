@@ -1,4 +1,4 @@
-import { Pattern, PatternId } from '@musical-patterns/registry'
+import { AnyPattern, PatternId } from '@musical-patterns/registry'
 import * as React from 'react'
 import { connect } from 'react-redux'
 import { Dispatch } from 'redux'
@@ -6,8 +6,8 @@ import { handlePatternChange, PatternChangeEventExtractorParameters } from '../e
 import PatternListItem from './PatternListItem'
 import { PatternListProps, PatternListPropsFromDispatch } from './types'
 
-const sortByPublishDate: (entry: [ string, Pattern ], nextEntry: [ string, Pattern ]) => number =
-    ([ _, pattern ]: [ string, Pattern ], [ __, nextPattern ]: [ string, Pattern ]): number => {
+const sortByPublishDate: (entry: [ string, AnyPattern ], nextEntry: [ string, AnyPattern ]) => number =
+    ([ _, pattern ]: [ string, AnyPattern ], [ __, nextPattern ]: [ string, AnyPattern ]): number => {
         if (pattern.metadata.mostRecentPublish < nextPattern.metadata.mostRecentPublish) {
             return -1
         }
@@ -42,7 +42,7 @@ const PatternList: (PatternListProps: PatternListProps) => JSX.Element =
 
         const options: JSX.Element[] = Object.entries(patterns)
             .sort(sortByPublishDate)
-            .map(([ listedPatternId, listedPattern ]: [ string, Pattern ], key: number): JSX.Element => (
+            .map(([ listedPatternId, listedPattern ]: [ string, AnyPattern ], key: number): JSX.Element => (
                 <PatternListItem {...{ key, listedPattern, listedPatternId, onClick, patternId }} />
             ))
 

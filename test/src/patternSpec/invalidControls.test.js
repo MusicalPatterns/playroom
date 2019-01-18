@@ -8,7 +8,7 @@ import {
     OUT_OF_RANGE_INVALID_TEST_MODIFICATION,
     PATTERN_SPEC_RANGED_PROPERTY_ONE_KEY,
     refreshWithTestPatternSelected,
-    TEST_PATTERN_SPEC_RANGED_PROPERTY_ONE_INITIAL_VALUE,
+    SPEC_CONTROLS_PATTERN_RANGED_PROPERTY_ONE_INITIAL_VALUE,
 } from '../../support'
 
 describe('invalid controls', () => {
@@ -44,7 +44,7 @@ describe('invalid controls', () => {
                     .toBeTruthy()
 
                 expect(await elementInnerText(`.${SecretSelectorsForTest.SECRET_SUBMITTED_PATTERN_SPEC_CONTROL}#${PATTERN_SPEC_RANGED_PROPERTY_ONE_KEY}`))
-                    .toBe(`${TEST_PATTERN_SPEC_RANGED_PROPERTY_ONE_INITIAL_VALUE}`)
+                    .toBe(`${SPEC_CONTROLS_PATTERN_RANGED_PROPERTY_ONE_INITIAL_VALUE}`)
 
                 done()
             })
@@ -93,7 +93,7 @@ describe('invalid controls', () => {
                     .toBeTruthy()
 
                 expect(await elementInnerText(`.${SecretSelectorsForTest.SECRET_SUBMITTED_PATTERN_SPEC_CONTROL}#${PATTERN_SPEC_RANGED_PROPERTY_ONE_KEY}`))
-                    .toBe(`${TEST_PATTERN_SPEC_RANGED_PROPERTY_ONE_INITIAL_VALUE}`)
+                    .toBe(`${SPEC_CONTROLS_PATTERN_RANGED_PROPERTY_ONE_INITIAL_VALUE}`)
 
                 done()
             })

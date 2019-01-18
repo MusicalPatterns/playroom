@@ -1,4 +1,4 @@
-import { PatternSpecAttributes } from '@musical-patterns/pattern'
+import { AnyPatternSpecAttributes } from '@musical-patterns/pattern'
 import { deepEqual, Maybe } from '@musical-patterns/utilities'
 import { BatchAction, batchActions } from 'redux-batched-actions'
 import { ActionType } from '../../root'
@@ -24,7 +24,7 @@ const handlePatternSpecControlSubmit: PatternSpecControlEventHandler =
             patternSpecState.get(PatternSpecStateKeys.DISABLED_PATTERN_SPEC_BUTTONS)
         const submittedPatternSpec: StringifiedPatternSpec =
             patternSpecState.get(PatternSpecStateKeys.SUBMITTED_PATTERN_SPEC)
-        const patternSpecAttributes: PatternSpecAttributes =
+        const patternSpecAttributes: AnyPatternSpecAttributes =
             patternSpecState.get(PatternSpecStateKeys.PATTERN_SPEC_ATTRIBUTES)
 
         const updatedPatternSpec: StringifiedPatternSpec = {

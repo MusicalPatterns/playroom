@@ -13,7 +13,7 @@ const Timeline: (props: TimelineProps) => JSX.Element =
     ({ disabled, totalTimeForDisplay, timeForDisplay, timeChangeHandler }: TimelineProps): JSX.Element => (
         <input {...{
             disabled,
-            max: totalTimeForDisplay,
+            max: totalTimeForDisplay || 0,
             min: 0,
             onChange: timeChangeHandler,
             type: 'range',

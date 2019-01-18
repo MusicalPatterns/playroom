@@ -11,9 +11,9 @@ import {
     modify,
     PATTERN_SPEC_RANGED_PROPERTY_ONE_KEY,
     refresh,
-    refreshWithTestPatternSelected,
     selectOtherTestPattern,
     sleep,
+    TIME_CONTROLS_PATTERN_ID,
 } from '../../support'
 
 describe('time controls', () => {
@@ -30,7 +30,8 @@ describe('time controls', () => {
     })
 
     beforeEach(async done => {
-        await refreshWithTestPatternSelected()
+        const testPattern = await findElement(testGlobals.tab, `#${TIME_CONTROLS_PATTERN_ID}`)
+        await clickElement(testPattern)
         done()
     })
 
