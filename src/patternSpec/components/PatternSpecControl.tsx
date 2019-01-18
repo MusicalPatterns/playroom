@@ -66,15 +66,15 @@ const PatternSpecControl: (patternSpecControlProps: PatternSpecControlProps) => 
         const controlProps: ControlProps = { className, onBlur, onChange, onKeyPress, patternSpecKey, patternSpecValue }
         const control: JSX.Element[] = buildControl(patternSpecPropertyType, controlProps, constraint)
 
+        const secretClassName: string = SecretSelectorsForTest.SECRET_SUBMITTED_PATTERN_SPEC_CONTROL
+
         return (
-            <div {...{ className: 'pattern-spec-control', message: invalidMessage }}>
-                <span {...{
-                    className: SecretSelectorsForTest.SECRET_SUBMITTED_PATTERN_SPEC_CONTROL,
-                    id: patternSpecKey,
-                }}>{submittedPatternSpecValue}</span>
+            <div {...{ className: 'pattern-spec-control', id: patternSpecKey }}>
+                <span {...{ className: secretClassName }}>{submittedPatternSpecValue}</span>
                 <div>{formattedName || presentPatternSpecKey(patternSpecKey)}</div>
                 {control}
                 <button {...{ disabled, id: patternSpecKey, onClick, value: patternSpecValue }}>submit</button>
+                {invalidMessage && <div {...{ className: 'invalid-message' }}>{invalidMessage}</div>}
             </div>
         )
     }

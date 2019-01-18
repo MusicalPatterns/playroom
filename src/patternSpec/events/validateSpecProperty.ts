@@ -54,8 +54,12 @@ const validByStep: (numericValue: number, integer: Maybe<boolean>) => Maybe<stri
         return undefined
     }
 
-const validByRangedConstraint: (numericValue: number, constraint: RangedConstraint) => Maybe<string> =
-    (numericValue: number, constraint: RangedConstraint): Maybe<string> => {
+const validByRangedConstraint: (numericValue: number, constraint: Maybe<RangedConstraint>) => Maybe<string> =
+    (numericValue: number, constraint: Maybe<RangedConstraint>): Maybe<string> => {
+        if (!constraint) {
+            return undefined
+        }
+
         const { min, max, excludeMin = false, excludeMax = false, integer = false } = constraint
 
         return validByStep(numericValue, integer) ||
@@ -63,7 +67,7 @@ const validByRangedConstraint: (numericValue: number, constraint: RangedConstrai
             validByMax(numericValue, max, excludeMax)
     }
 
-const validate:
+const validateSpecProperty:
     (patternSpecValue: string, propertyAttributes: Maybe<PatternSpecPropertyAttributes>) => Maybe<string> =
     (patternSpecValue: string, propertyAttributes: Maybe<PatternSpecPropertyAttributes>): Maybe<string> => {
         if (!propertyAttributes) {
@@ -84,13 +88,9 @@ const validate:
             return 'this property is formatted in a way which cannot be parsed'
         }
 
-        if (!constraint) {
-            return undefined
-        }
-
-        return validByRangedConstraint(numericValue, constraint as RangedConstraint)
+        return validByRangedConstraint(numericValue, constraint as Maybe<RangedConstraint>)
     }
 
 export {
-    validate,
+    validateSpecProperty,
 }

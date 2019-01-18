@@ -1,7 +1,8 @@
+import { AnyPatternSpecAttributes, AnyPatternSpecValidationFunction } from '@musical-patterns/pattern'
 import * as React from 'react'
 import { DispatchAsProp } from '../../types'
 import { ImmutablePatternSpecState } from '../state'
-import { StringifiedPatternSpec } from '../types'
+import { InvalidPatternSpecMessages, StringifiedPatternSpec } from '../types'
 
 type PatternSpecEvent = React.SyntheticEvent | React.KeyboardEvent
 
@@ -45,6 +46,18 @@ interface HandleResetParameters extends DispatchAsProp {
     defaultPatternSpec: StringifiedPatternSpec,
 }
 
+interface ValidateSubmittedSpecParameters {
+    patternSpecAttributes: AnyPatternSpecAttributes,
+    patternSpecKey: string,
+    updatedPatternSpec: StringifiedPatternSpec,
+    validationFunction?: AnyPatternSpecValidationFunction,
+}
+
+interface SpecValidationResults {
+    isValid: boolean,
+    updatedInvalidMessages: InvalidPatternSpecMessages,
+}
+
 export {
     PatternSpecEvent,
     PatternSpecEventParameters,
@@ -58,4 +71,6 @@ export {
     BuildPatternSpecControlEventAttacher,
     BuildPatternSpecControlEventAttacherParameters,
     HandleResetParameters,
+    ValidateSubmittedSpecParameters,
+    SpecValidationResults,
 }

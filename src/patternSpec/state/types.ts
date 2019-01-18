@@ -1,5 +1,12 @@
-import { AnyPatternSpec, AnyPatternSpecAttributes, PatternSpecAttributes } from '@musical-patterns/pattern'
-import { TypedMap } from '@musical-patterns/utilities'
+// tslint:disable:max-file-line-count
+
+import {
+    AnyPatternSpec,
+    AnyPatternSpecAttributes,
+    AnyPatternSpecValidationFunction,
+    PatternSpecValidationFunction,
+} from '@musical-patterns/pattern'
+import { Maybe, TypedMap } from '@musical-patterns/utilities'
 import { InvalidPatternSpecMessages, StringifiedPatternSpec, StringifiedPatternSpecControlStates } from '../types'
 
 enum PatternSpecStateKeys {
@@ -10,6 +17,7 @@ enum PatternSpecStateKeys {
     SUBMITTED_PATTERN_SPEC = 'SUBMITTED_PATTERN_SPEC',
     UNSUBMITTED_PATTERN_SPEC_CONTROLS = 'UNSUBMITTED_PATTERN_SPEC_CONTROLS',
     PATTERN_SPEC_ATTRIBUTES = 'PATTERN_SPEC_ATTRIBUTES',
+    VALIDATION_FUNCTION = 'VALIDATION_FUNCTION',
 }
 
 interface PatternSpecState {
@@ -20,13 +28,15 @@ interface PatternSpecState {
     [ PatternSpecStateKeys.SUBMITTED_PATTERN_SPEC ]: StringifiedPatternSpec,
     [ PatternSpecStateKeys.UNSUBMITTED_PATTERN_SPEC_CONTROLS ]: StringifiedPatternSpecControlStates,
     [ PatternSpecStateKeys.PATTERN_SPEC_ATTRIBUTES ]: AnyPatternSpecAttributes,
+    [ PatternSpecStateKeys.VALIDATION_FUNCTION ]: Maybe<AnyPatternSpecValidationFunction>,
 }
 
 type PatternSpecStateValueTypes =
     StringifiedPatternSpecControlStates |
     InvalidPatternSpecMessages |
     StringifiedPatternSpec |
-    AnyPatternSpecAttributes
+    AnyPatternSpecAttributes |
+    Maybe<AnyPatternSpecValidationFunction>
 
 type ImmutablePatternSpecState = TypedMap<PatternSpecStateValueTypes, PatternSpecState>
 
@@ -38,6 +48,7 @@ enum PatternSpecStateActionType {
     SET_INVALID_PATTERN_SPEC_MESSAGES = 'SET_INVALID_PATTERN_SPEC_MESSAGES',
     SET_UNSUBMITTED_PATTERN_SPEC_CONTROLS = 'SET_UNSUBMITTED_PATTERN_SPEC_CONTROLS',
     SET_PATTERN_SPEC_ATTRIBUTES = 'SET_PATTERN_SPEC_ATTRIBUTES',
+    SET_VALIDATION_FUNCTION = 'SET_VALIDATION_FUNCTION',
 }
 
 interface SetDefaultPatternSpec {
@@ -75,6 +86,11 @@ interface SetPatternSpecAttributes {
     type: PatternSpecStateActionType.SET_PATTERN_SPEC_ATTRIBUTES,
 }
 
+interface SetValidationFunction {
+    data: Maybe<AnyPatternSpecValidationFunction>,
+    type: PatternSpecStateActionType.SET_VALIDATION_FUNCTION,
+}
+
 type PatternSpecStateAction =
     SetDefaultPatternSpec |
     SetDisabledPatternSpecButtons |
@@ -82,7 +98,8 @@ type PatternSpecStateAction =
     SetDisplayedPatternSpec |
     SetInvalidPatternSpecMessages |
     SetUnsubmittedPatternSpecControls |
-    SetPatternSpecAttributes
+    SetPatternSpecAttributes |
+    SetValidationFunction
 
 export {
     PatternSpecState,

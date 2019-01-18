@@ -35,6 +35,9 @@ const patternSpecReducer: Reducer<ImmutablePatternSpecState, PatternSpecStateAct
             case PatternSpecStateActionType.SET_PATTERN_SPEC_ATTRIBUTES: {
                 return patternSpecState.set(PatternSpecStateKeys.PATTERN_SPEC_ATTRIBUTES, action.data)
             }
+            case PatternSpecStateActionType.SET_VALIDATION_FUNCTION: {
+                return patternSpecState.set(PatternSpecStateKeys.VALIDATION_FUNCTION, action.data)
+            }
             default: {
                 return patternSpecState
             }

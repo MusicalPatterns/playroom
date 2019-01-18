@@ -4,16 +4,10 @@ import {
     elementExists,
     ONLY_PATTERN_SPECIFIC_SPEC_PATTERN_ID,
     ONLY_STANDARD_SPEC_PATTERN_ID,
-    refresh,
     SPEC_CONTROLS_PATTERN_ID,
 } from '../../support'
 
 describe('standard and pattern-specific control sections', () => {
-    beforeEach(async done => {
-        await refresh()
-        done()
-    })
-
     it('shows sub-headings when both types of controls are present', async done => {
         const testPattern = await findElement(testGlobals.tab, `#${SPEC_CONTROLS_PATTERN_ID}`)
         await clickElement(testPattern)
