@@ -71,7 +71,7 @@ const validateSpecProperty:
     (patternSpecValue: string, propertyAttributes: Maybe<PatternSpecPropertyAttributes>) => Maybe<string> =
     (patternSpecValue: string, propertyAttributes: Maybe<PatternSpecPropertyAttributes>): Maybe<string> => {
         if (!propertyAttributes) {
-            return 'error: missing property attributes'
+            return undefined
         }
         const { patternSpecPropertyType, constraint } = propertyAttributes
 
