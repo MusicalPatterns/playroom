@@ -41,8 +41,22 @@ const validByMax: (numericValue: number, max: Maybe<number>, excludeMax: boolean
         return undefined
     }
 
+    // tslint:disable
+function isInt(value: any) {
+    return !isNaN(value) &&
+    // @ts-ignore
+        parseInt(Number(value)) == value &&
+        !isNaN(parseInt(value, 10));
+}
+
+function isIntBit(value: any) {
+    var x = parseFloat(value);
+    return !isNaN(value) && (x | 0) === x;
+}
+
 const validByStep: (numericValue: number, integer: Maybe<boolean>) => Maybe<string> =
     (numericValue: number, integer: Maybe<boolean>): Maybe<string> => {
+        console.log('what say integer', integer, numericValue, Number.isInteger(numericValue), numericValue % 1 === 0, isInt(numericValue), isIntBit(numericValue))
         if (!integer) {
             return undefined
         }
