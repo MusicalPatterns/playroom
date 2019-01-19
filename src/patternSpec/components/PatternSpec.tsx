@@ -43,7 +43,7 @@ const PatternSpec: (patternSpecProps: PatternSpecProps) => JSX.Element =
         return (
             <div {...{ id: 'pattern-spec' }}>
                 <h3>controls</h3>
-                {presets && <Presets {...{ presets }}/>}
+                {presets && <Presets {...{ presets, submittedPatternSpec }}/>}
                 <PatternSpecControls/>
                 <button {...{ id: 'reset', onClick, disabled }}>reset all</button>
             </div>

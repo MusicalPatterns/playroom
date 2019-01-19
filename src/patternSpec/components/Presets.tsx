@@ -1,3 +1,5 @@
+import { AnyPatternSpec } from '@musical-patterns/pattern'
+import { deepEqual } from '@musical-patterns/utilities'
 import * as React from 'react'
 import { connect } from 'react-redux'
 import { Dispatch } from 'redux'
@@ -11,19 +13,31 @@ const mapDispatchToProps: (dispatch: Dispatch) => PresetsPropsFromDispatch =
     })
 
 const Presets: (props: PresetsProps) => JSX.Element =
-    ({ presetSubmitHandler, presets }: PresetsProps): JSX.Element => {
+    ({ presetSubmitHandler, presets, submittedPatternSpec }: PresetsProps): JSX.Element => {
         const options: JSX.Element[] = Object.keys(presets)
             .map((presetKey: string, key: number): JSX.Element =>
-                <option {...{ key, value: presetKey }}>{presetKey}</option>)
+                <option {...{ key: key + 1, value: presetKey }}>{presetKey}</option>)
+        options.unshift(<option {...{ disabled: true, key: 0 }}/>)
 
         const onChange: EventHandler = (event: React.SyntheticEvent): void => {
             presetSubmitHandler({ presets, event })
         }
 
+        let value: string = ''
+        Object.entries(presets)
+            .forEach(([ presetKey, preset ]: [ string, AnyPatternSpec ]) => {
+                if (deepEqual(preset, submittedPatternSpec)) {
+                    value = presetKey
+                }
+            })
+
         return (
-            <select {...{ id: 'presets', onChange }}>
-                {options}
-            </select>
+            <div {...{ id: 'presets' }}>
+                presets
+                <select {...{ onChange, value }}>
+                    {options}
+                </select>
+            </div>
         )
     }
 

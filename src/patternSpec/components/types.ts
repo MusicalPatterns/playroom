@@ -76,6 +76,7 @@ interface PresetsPropsFromDispatch {
 
 interface PresetsProps extends PresetsPropsFromDispatch {
     presets: DictionaryOf<AnyPatternSpec>,
+    submittedPatternSpec: StringifiedPatternSpec,
 }
 
 export {

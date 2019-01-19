@@ -4,8 +4,12 @@ import { testGlobals } from '../../setup'
 import {
     elementExists,
     elementInnerText,
-    PATTERN_SPEC_OPTIONED_PROPERTY_ONE_KEY, PATTERN_SPEC_OPTIONED_PROPERTY_TWO_KEY,
+    elementValue,
+    PATTERN_SPEC_OPTIONED_PROPERTY_ONE_KEY,
+    PATTERN_SPEC_OPTIONED_PROPERTY_TWO_KEY,
     PRESETS_PATTERN_ID,
+    SPEC_CONTROLS_PATTERN_OPTIONED_PROPERTY_ONE_INITIAL_VALUE,
+    SPEC_CONTROLS_PATTERN_OPTIONED_PROPERTY_ONE_MODIFIED_VALUE,
 } from '../../support'
 import {
     PRESET_ONE_PROPERTY_ONE_VALUE,
@@ -43,22 +47,51 @@ describe('presets', () => {
 
             done()
         })
+
+        it('shows the preset in the dropdown if the current spec matches it', async done => {
+            await testGlobals.page.select(`select#${PATTERN_SPEC_OPTIONED_PROPERTY_ONE_KEY}`, SPEC_CONTROLS_PATTERN_OPTIONED_PROPERTY_ONE_MODIFIED_VALUE)
+            const buttonForSelect = await findElement(testGlobals.tab, `button#${PATTERN_SPEC_OPTIONED_PROPERTY_ONE_KEY}`)
+            await clickElement(buttonForSelect)
+
+            expect(await elementValue('#presets select'))
+                .toBe('presetOne')
+
+            done()
+        })
         
         describe('choosing a preset', () => {
-            it('sets the pattern spec', async done => {
-                await testGlobals.page.select(`select#presets`, 'presetOne')
+            beforeEach(async done => {
+                await testGlobals.page.select(`#presets select`, 'presetOne')
 
+                done()
+            })
+
+            it('sets the pattern spec', async done => {
                 expect(await elementInnerText(`#${PATTERN_SPEC_OPTIONED_PROPERTY_ONE_KEY} .${SecretSelectorsForTest.SECRET_SUBMITTED_PATTERN_SPEC_CONTROL}`))
                     .toBe(PRESET_ONE_PROPERTY_ONE_VALUE)
                 expect(await elementInnerText(`#${PATTERN_SPEC_OPTIONED_PROPERTY_TWO_KEY} .${SecretSelectorsForTest.SECRET_SUBMITTED_PATTERN_SPEC_CONTROL}`))
                     .toBe(PRESET_ONE_PROPERTY_TWO_VALUE)
 
-                await testGlobals.page.select(`select#presets`, 'presetTwo')
+                await testGlobals.page.select(`#presets select`, 'presetTwo')
 
                 expect(await elementInnerText(`#${PATTERN_SPEC_OPTIONED_PROPERTY_ONE_KEY} .${SecretSelectorsForTest.SECRET_SUBMITTED_PATTERN_SPEC_CONTROL}`))
                     .toBe(PRESET_TWO_PROPERTY_ONE_VALUE)
                 expect(await elementInnerText(`#${PATTERN_SPEC_OPTIONED_PROPERTY_TWO_KEY} .${SecretSelectorsForTest.SECRET_SUBMITTED_PATTERN_SPEC_CONTROL}`))
                     .toBe(PRESET_TWO_PROPERTY_TWO_VALUE)
+
+                done()
+            })
+
+            it('stops showing the preset in the dropdown once the current spec no longer matches it', async done => {
+                expect(await elementValue('#presets select'))
+                    .toBe('presetOne')
+
+                await testGlobals.page.select(`select#${PATTERN_SPEC_OPTIONED_PROPERTY_ONE_KEY}`, SPEC_CONTROLS_PATTERN_OPTIONED_PROPERTY_ONE_INITIAL_VALUE)
+                const buttonForSelect = await findElement(testGlobals.tab, `button#${PATTERN_SPEC_OPTIONED_PROPERTY_ONE_KEY}`)
+                await clickElement(buttonForSelect)
+
+                expect(await elementValue('#presets select'))
+                    .toBe('')
 
                 done()
             })

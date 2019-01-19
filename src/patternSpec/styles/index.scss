@@ -2,10 +2,8 @@
 @import './patternSpecControl';
 @import './patternSpecControlSlider';
 @import './invalidMessage';
-
-#reset {
-  margin: $tiny 0;
-}
+@import './reset';
+@import './presets';
 
 #pattern-spec {
   padding: $big;

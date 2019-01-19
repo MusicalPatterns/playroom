@@ -1,0 +1,16 @@
+@import '../../sizes';
+@import '../../colors';
+
+#presets {
+  div, select {
+    margin-left: $small;
+    min-width: $huge;
+    margin-bottom: $small;
+    padding: 0 $small;
+    height: $big;
+
+    border: none;
+    outline: none;
+    border-radius: $border-size;
+  }
+}
