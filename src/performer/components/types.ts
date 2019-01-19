@@ -1,5 +1,4 @@
 import { Time } from '@musical-patterns/utilities'
-import * as React from 'react'
 
 interface MaybeDisabled {
     disabled: boolean,
@@ -33,16 +32,10 @@ interface TimeInMinutesAndSecondsProps extends MaybeDisabled {
     timeForDisplay: number,
 }
 
-interface TimelinePropsFromParent extends MaybeDisabled {
+interface TimelineProps extends MaybeDisabled {
     timeForDisplay: number,
     totalTimeForDisplay: number,
 }
-
-interface TimelinePropsFromDispatch {
-    timeChangeHandler: (event: React.SyntheticEvent) => Promise<void>,
-}
-
-interface TimelineProps extends TimelinePropsFromParent, TimelinePropsFromDispatch {}
 
 export {
     TimeControlsProps,
@@ -52,6 +45,5 @@ export {
     ToggleImmersiveAudioButtonProps,
     TimeInMinutesAndSecondsProps,
     MaybeDisabled,
-    TimelinePropsFromDispatch,
     TimelineProps,
 }

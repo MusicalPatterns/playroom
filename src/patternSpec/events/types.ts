@@ -1,6 +1,7 @@
-import { AnyPatternSpecAttributes, AnyPatternSpecValidationFunction } from '@musical-patterns/pattern'
+import { AnyPatternSpec, AnyPatternSpecAttributes, AnyPatternSpecValidationFunction } from '@musical-patterns/pattern'
+import { DictionaryOf } from '@musical-patterns/utilities'
 import * as React from 'react'
-import { DispatchAsProp } from '../../types'
+import { DispatchAsProp, EventAsProp } from '../../types'
 import { ImmutablePatternSpecState } from '../state'
 import { InvalidPatternSpecMessages, StringifiedPatternSpec } from '../types'
 
@@ -43,7 +44,7 @@ type BuildPatternSpecControlEventAttacher =
     (parameters: BuildPatternSpecControlEventAttacherParameters) => PatternSpecControlEventAttacher
 
 interface HandleResetParameters extends DispatchAsProp {
-    defaultPatternSpec: StringifiedPatternSpec,
+    patternSpec: StringifiedPatternSpec,
 }
 
 interface ValidateSubmittedSpecParameters {
@@ -57,6 +58,12 @@ interface SpecValidationResults {
     isValid: boolean,
     updatedInvalidMessages: InvalidPatternSpecMessages,
 }
+
+interface PresetSubmitHandlerParameters extends EventAsProp {
+    presets: DictionaryOf<AnyPatternSpec>,
+}
+
+type PresetSubmitHandler = (parameters: PresetSubmitHandlerParameters) => void
 
 export {
     PatternSpecEvent,
@@ -73,4 +80,6 @@ export {
     HandleResetParameters,
     ValidateSubmittedSpecParameters,
     SpecValidationResults,
+    PresetSubmitHandler,
+    PresetSubmitHandlerParameters,
 }

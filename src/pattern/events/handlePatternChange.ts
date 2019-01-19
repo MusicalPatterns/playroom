@@ -12,7 +12,7 @@ const handlePatternChange: PatternChangeEventHandler =
         togglePaused()
 
         const specData: AnyPatternSpecData = patterns[ patternId ].specData
-        const initialSpec: AnyPatternSpec = specData.specs.initial
+        const initialSpec: AnyPatternSpec = specData.initial
         const stringifiedPatternSpec: StringifiedPatternSpec = stringifyPatternSpec(initialSpec)
 
         const actions: Action[] = buildResetActions(stringifiedPatternSpec)
@@ -21,6 +21,7 @@ const handlePatternChange: PatternChangeEventHandler =
                 { type: ActionType.SET_PATTERN_ID, data: patternId },
                 { type: ActionType.SET_PATTERN_SPEC_ATTRIBUTES, data: specData.attributes },
                 { type: ActionType.SET_VALIDATION_FUNCTION, data: specData.validationFunction },
+                { type: ActionType.SET_PRESETS, data: specData.presets },
             ])
 
         if (window.innerWidth < WIDTH_BELOW_WHICH_PATTERNS_LIST_CLOSES_UPON_PATTERN_SELECTION) {

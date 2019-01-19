@@ -8,6 +8,7 @@ export { buildInitialStringifiedPatternSpecControlStates } from './buildInitialS
 export { stringifyPatternSpec } from './stringifyPatternSpec'
 export { handleReset } from './handleReset'
 export { buildResetActions } from './resetActions'
+export { buildPresetSubmitHandler } from './handlePresetSubmit'
 
 export {
     BuildPatternSpecControlEventExtractorParameters,
@@ -16,4 +17,5 @@ export {
     PatternSpecEvent,
     PatternSpecEventParameters,
     PatternSpecControlEventAttacher,
+    PresetSubmitHandler,
 } from './types'

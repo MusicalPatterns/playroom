@@ -3,9 +3,9 @@ import { Action } from '../../root'
 import { buildResetActions } from './resetActions'
 import { HandleResetParameters } from './types'
 
-const handleReset: ({ dispatch, defaultPatternSpec }: HandleResetParameters) => void =
-    ({ dispatch, defaultPatternSpec }: HandleResetParameters): void => {
-        const actions: Action[] = buildResetActions(defaultPatternSpec)
+const handleReset: ({ dispatch, patternSpec }: HandleResetParameters) => void =
+    ({ dispatch, patternSpec }: HandleResetParameters): void => {
+        const actions: Action[] = buildResetActions(patternSpec)
         const batchedAction: BatchAction = batchActions(actions)
         dispatch(batchedAction)
     }

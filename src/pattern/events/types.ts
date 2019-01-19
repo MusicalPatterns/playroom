@@ -1,13 +1,11 @@
-import * as React from 'react'
-import { PropsFromApp } from '../../root'
-import { DispatchAsProp } from '../../types'
+import { PropsFromApp, PropsFromAppBeforeSelectingPattern } from '../../root'
+import { DispatchAsProp, EventAsProp } from '../../types'
 
 interface PatternChangeEventHandlerParameters extends PropsFromApp, DispatchAsProp {}
 
 type PatternChangeEventHandler = (parameters: PatternChangeEventHandlerParameters) => Promise<void>
 
-interface PatternChangeEventExtractorParameters extends PropsFromApp {
-    event: React.SyntheticEvent,
+interface PatternChangeEventExtractorParameters extends PropsFromAppBeforeSelectingPattern, EventAsProp {
 }
 
 type PatternChangeEventExtractor = (parameters: PatternChangeEventExtractorParameters) => void

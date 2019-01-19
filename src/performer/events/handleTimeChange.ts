@@ -1,17 +1,17 @@
 import { setTime } from '@musical-patterns/performer'
-import { DECIMAL, to } from '@musical-patterns/utilities'
+import { DECIMAL, Time, to } from '@musical-patterns/utilities'
 import * as React from 'react'
-import { Dispatch } from 'redux'
+import { extractValueFromEvent } from '../../root'
+import { AsyncEventHandler } from '../../types'
 
-const buildTimeChangeHandler: (dispatch: Dispatch) => (event: React.SyntheticEvent) => Promise<void> =
-    (dispatch: Dispatch): (event: React.SyntheticEvent) => Promise<void> =>
-        async (event: React.SyntheticEvent): Promise<void> => {
-            const target: HTMLInputElement = event.currentTarget as HTMLInputElement
-            const value: string = target.value
-
-            await setTime(to.Time(parseInt(value, DECIMAL)))
-        }
+const timeChangeHandler: AsyncEventHandler =
+    async (event: React.SyntheticEvent): Promise<void> => {
+        const time: string = extractValueFromEvent(event)
+        const parsedTime: number = parseInt(time, DECIMAL)
+        const typedTime: Time = to.Time(parsedTime)
+        await setTime(typedTime)
+    }
 
 export {
-    buildTimeChangeHandler,
+    timeChangeHandler,
 }

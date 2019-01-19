@@ -5,4 +5,5 @@ export {
 }
 export {
     PropsFromApp,
+    PropsFromAppBeforeSelectingPattern,
 } from './types'

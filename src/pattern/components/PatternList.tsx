@@ -2,6 +2,7 @@ import { AnyPattern, PatternId } from '@musical-patterns/registry'
 import * as React from 'react'
 import { connect } from 'react-redux'
 import { Dispatch } from 'redux'
+import { EventHandler } from '../../types'
 import { handlePatternChange, PatternChangeEventExtractorParameters } from '../events'
 import PatternListItem from './PatternListItem'
 import { PatternListProps, PatternListPropsFromDispatch } from './types'
@@ -35,7 +36,7 @@ const mapDispatchToProps: (dispatch: Dispatch) => PatternListPropsFromDispatch =
 
 const PatternList: (PatternListProps: PatternListProps) => JSX.Element =
     ({ handlePatternChangeEvent, patternId, patterns }: PatternListProps): JSX.Element => {
-        const onClick: (event: React.SyntheticEvent) => void =
+        const onClick: EventHandler =
             (event: React.SyntheticEvent): void => {
                 handlePatternChangeEvent({ event, patterns, patternId })
             }
@@ -55,5 +56,4 @@ const PatternList: (PatternListProps: PatternListProps) => JSX.Element =
         )
     }
 
-// tslint:disable-next-line:no-any
-export default connect(undefined, mapDispatchToProps)(PatternList as any)
+export default connect(undefined, mapDispatchToProps)(PatternList)

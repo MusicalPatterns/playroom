@@ -12,14 +12,16 @@ interface PropsFromApp {
     patterns: Patterns,
 }
 
+interface PropsFromAppBeforeSelectingPattern {
+    patternId?: PatternId,
+    patterns: Patterns,
+}
+
 interface FirstRowProps {
     patternId?: PatternId,
 }
 
-interface SecondRowProps {
-    patternId?: PatternId,
-    patterns: Patterns,
-}
+type SecondRowProps = PropsFromAppBeforeSelectingPattern
 
 interface PatternListenerPropsFromState {
     debugMode: boolean,
@@ -40,4 +42,5 @@ export {
     PropsFromApp,
     FirstRowProps,
     SecondRowProps,
+    PropsFromAppBeforeSelectingPattern,
 }

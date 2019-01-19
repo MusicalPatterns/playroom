@@ -1,4 +1,5 @@
 import * as React from 'react'
+import { extractValueFromEvent } from '../../root'
 import { SUBMIT } from './constants'
 import {
     BuildPatternSpecControlEventExtractor,
@@ -6,13 +7,6 @@ import {
     PatternSpecControlEventExtractor,
     PatternSpecControlEventExtractorParameters,
 } from './types'
-
-const extractValueFromEvent: (event: React.SyntheticEvent | React.KeyboardEvent) => string =
-    (event: React.SyntheticEvent | React.KeyboardEvent): string => {
-        const target: HTMLInputElement | HTMLButtonElement = event.target as HTMLInputElement | HTMLButtonElement
-
-        return target.value
-    }
 
 const buildPatternSpecControlEventExtractor: BuildPatternSpecControlEventExtractor =
     (buildParameters: BuildPatternSpecControlEventExtractorParameters): PatternSpecControlEventExtractor => {
@@ -32,7 +26,6 @@ const buildPatternSpecControlEventExtractor: BuildPatternSpecControlEventExtract
             }
 
             const patternSpecValue: string = extractValueFromEvent(event)
-
             await patternSpecControlEventHandler({ ...otherParameters, patternSpecValue, dispatch })
         }
     }

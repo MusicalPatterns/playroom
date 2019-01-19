@@ -1,10 +1,12 @@
 import {
+    AnyPatternSpec,
     AnyPatternSpecAttributes,
     OptionedConstraint,
     PatternSpecPropertyAttributes,
     RangedConstraint,
 } from '@musical-patterns/pattern'
-import { PatternSpecControlEventAttacher, PatternSpecControlEventExtractor } from '../events'
+import { DictionaryOf, Maybe } from '@musical-patterns/utilities'
+import { PatternSpecControlEventAttacher, PatternSpecControlEventExtractor, PresetSubmitHandler } from '../events'
 import { ImmutablePatternSpecState } from '../state'
 import { StringifiedPatternSpec } from '../types'
 
@@ -29,6 +31,7 @@ interface PatternSpecControlProps {
 
 interface PatternSpecPropsFromState {
     defaultPatternSpec: StringifiedPatternSpec,
+    presets: Maybe<DictionaryOf<AnyPatternSpec>>,
     submittedPatternSpec: StringifiedPatternSpec,
 }
 
@@ -67,6 +70,14 @@ interface BuildControlsProps {
     patternSpecKeys: string[],
 }
 
+interface PresetsPropsFromDispatch {
+    presetSubmitHandler: PresetSubmitHandler,
+}
+
+interface PresetsProps extends PresetsPropsFromDispatch {
+    presets: DictionaryOf<AnyPatternSpec>,
+}
+
 export {
     PatternSpecControlProps,
     PatternSpecControlsProps,
@@ -80,4 +91,6 @@ export {
     OptionedControlProps,
     RangedControlProps,
     BuildControlsProps,
+    PresetsProps,
+    PresetsPropsFromDispatch,
 }
