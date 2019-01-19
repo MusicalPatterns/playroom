@@ -32,7 +32,7 @@ const RangedPatternSpecControlSlider: (rangedControlProps: RangedControlProps) =
                 onBlur,
                 onChange,
                 onKeyPress,
-                step: constraint && constraint.integer ? PATTERN_SPEC_NON_INTEGER_STEP : 1,
+                step: constraint && constraint.integer ? 1 : PATTERN_SPEC_NON_INTEGER_STEP,
                 type: 'range',
                 value: patternSpecValue,
             }}/>
