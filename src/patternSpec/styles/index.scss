@@ -21,4 +21,8 @@
   @media screen and (max-width: $small-area) {
     max-width: $tiny-area;
   }
+
+  div {
+    margin-bottom: $border-size;
+  }
 }
