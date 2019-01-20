@@ -8,7 +8,6 @@ import {
 import { DictionaryOf, Maybe } from '@musical-patterns/utilities'
 import { PatternSpecControlEventAttacher, PatternSpecControlEventExtractor, PresetSubmitHandler } from '../events'
 import { ImmutablePatternSpecState } from '../state'
-import { StringifiedPatternSpec } from '../types'
 
 interface PatternSpecControlsPropsFromState {
     patternSpecState: ImmutablePatternSpecState,
@@ -30,13 +29,13 @@ interface PatternSpecControlProps {
 }
 
 interface PatternSpecPropsFromState {
-    defaultPatternSpec: StringifiedPatternSpec,
+    defaultPatternSpec: AnyPatternSpec,
     presets: Maybe<DictionaryOf<AnyPatternSpec>>,
-    submittedPatternSpec: StringifiedPatternSpec,
+    submittedPatternSpec: AnyPatternSpec,
 }
 
 interface PatternSpecPropsFromDispatch {
-    resetHandler: (defaultPatternSpecState: StringifiedPatternSpec) => void,
+    resetHandler: (patternSpec: AnyPatternSpec) => void,
 }
 
 interface PatternSpecProps extends PatternSpecPropsFromState, PatternSpecPropsFromDispatch {}
@@ -53,7 +52,7 @@ interface ControlProps {
     onChange: PatternSpecControlEventAttacher,
     onKeyPress: PatternSpecControlEventAttacher,
     patternSpecKey: string,
-    patternSpecValue: string,
+    patternSpecValue: string | number,
 }
 
 interface OptionedControlProps extends ControlProps {
@@ -76,7 +75,7 @@ interface PresetsPropsFromDispatch {
 
 interface PresetsProps extends PresetsPropsFromDispatch {
     presets: DictionaryOf<AnyPatternSpec>,
-    submittedPatternSpec: StringifiedPatternSpec,
+    submittedPatternSpec: AnyPatternSpec,
 }
 
 export {

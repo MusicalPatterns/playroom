@@ -1,7 +1,6 @@
 import { AnyPatternSpecValidationResults } from '@musical-patterns/pattern'
 import { Maybe } from '@musical-patterns/utilities'
 import { InvalidPatternSpecMessages } from '../types'
-import { destringifyPatternSpec } from './destringifyPatternSpec'
 import { SpecValidationResults, ValidateSubmittedSpecParameters } from './types'
 import { validateSpecProperty } from './validateSpecProperty'
 
@@ -23,7 +22,7 @@ const validateSubmittedSpec: (parameters: ValidateSubmittedSpecParameters) => Sp
 
         let customInvalidMessagesBasedOnEntireSpec: AnyPatternSpecValidationResults
         if (validationFunction) {
-            customInvalidMessagesBasedOnEntireSpec = validationFunction(destringifyPatternSpec(updatedPatternSpec))
+            customInvalidMessagesBasedOnEntireSpec = validationFunction(updatedPatternSpec)
         }
 
         const updatedInvalidMessages: InvalidPatternSpecMessages = {

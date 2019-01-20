@@ -25,7 +25,8 @@ const buildPatternSpecControlEventExtractor: BuildPatternSpecControlEventExtract
                 }
             }
 
-            const patternSpecValue: string = extractValueFromEvent(event)
+            const patternSpecValue: string | number = extractValueFromEvent(event)
+
             await patternSpecControlEventHandler({ ...otherParameters, patternSpecValue, dispatch })
         }
     }

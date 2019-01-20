@@ -1,6 +1,6 @@
+import { AnyPatternSpec } from '@musical-patterns/pattern'
 import { PatternId, Patterns } from '@musical-patterns/registry'
 import { Maybe, Time } from '@musical-patterns/utilities'
-import { StringifiedPatternSpec } from '../../patternSpec'
 
 interface AppProps {
     patternId: Maybe<PatternId>,
@@ -25,7 +25,7 @@ type SecondRowProps = PropsFromAppBeforeSelectingPattern
 
 interface PatternListenerPropsFromState {
     debugMode: boolean,
-    submittedPatternSpec: StringifiedPatternSpec,
+    submittedPatternSpec: AnyPatternSpec,
 }
 
 interface PatternListenerPropsFromDispatch {

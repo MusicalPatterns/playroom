@@ -1,7 +1,5 @@
 export {
-    buildInitialStringifiedPatternSpecControlStates,
-    stringifyPatternSpec,
-    destringifyPatternSpec,
+    buildInitialPatternSpecControlStates,
     buildResetActions,
 } from './events'
 export {
@@ -12,8 +10,7 @@ export {
     PatternSpecStateKeys,
 } from './state'
 export {
-    StringifiedPatternSpec,
-    StringifiedPatternSpecControlStates,
+    PatternSpecControlBooleanStates,
 } from './types'
 export {
     PatternSpec,

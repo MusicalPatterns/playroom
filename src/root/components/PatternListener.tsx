@@ -11,7 +11,7 @@ import * as React from 'react'
 import { connect } from 'react-redux'
 import { Dispatch } from 'redux'
 import { PatternStateKeys } from '../../pattern'
-import { destringifyPatternSpec, PatternSpecStateKeys } from '../../patternSpec'
+import { PatternSpecStateKeys } from '../../patternSpec'
 import { ActionType, ImmutableRootState, RootStateKeys } from '../state'
 import { PatternListenerProps, PatternListenerPropsFromDispatch, PatternListenerPropsFromState } from './types'
 
@@ -36,8 +36,7 @@ const PatternListener: (patternListenerProps: PatternListenerProps) => JSX.Eleme
             const { debugMode, patternId, patterns, submittedPatternSpec, setTotalDuration } = props
 
             const pattern: AnyPattern = patterns[ patternId ]
-            const spec: AnyPatternSpec = destringifyPatternSpec(submittedPatternSpec)
-            const compilePatternParameters: CompilePatternParameters = { ...pattern, spec }
+            const compilePatternParameters: CompilePatternParameters = { ...pattern, spec: submittedPatternSpec }
 
             const threadSpecs: ThreadSpec[] = await compilePattern(compilePatternParameters)
             if (debugMode) {

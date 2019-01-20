@@ -2,7 +2,7 @@
 
 import { AnyPatternSpec, AnyPatternSpecAttributes, AnyPatternSpecValidationFunction } from '@musical-patterns/pattern'
 import { DictionaryOf, Maybe, TypedMap } from '@musical-patterns/utilities'
-import { InvalidPatternSpecMessages, StringifiedPatternSpec, StringifiedPatternSpecControlStates } from '../types'
+import { InvalidPatternSpecMessages, PatternSpecControlBooleanStates } from '../types'
 
 enum PatternSpecStateKeys {
     DEFAULT_PATTERN_SPEC = 'DEFAULT_PATTERN_SPEC',
@@ -17,21 +17,21 @@ enum PatternSpecStateKeys {
 }
 
 interface PatternSpecState {
-    [ PatternSpecStateKeys.DEFAULT_PATTERN_SPEC ]: StringifiedPatternSpec,
-    [ PatternSpecStateKeys.DISABLED_PATTERN_SPEC_BUTTONS ]: StringifiedPatternSpecControlStates,
-    [ PatternSpecStateKeys.DISPLAYED_PATTERN_SPEC ]: StringifiedPatternSpec,
+    [ PatternSpecStateKeys.DEFAULT_PATTERN_SPEC ]: AnyPatternSpec,
+    [ PatternSpecStateKeys.DISABLED_PATTERN_SPEC_BUTTONS ]: PatternSpecControlBooleanStates,
+    [ PatternSpecStateKeys.DISPLAYED_PATTERN_SPEC ]: AnyPatternSpec,
     [ PatternSpecStateKeys.INVALID_PATTERN_SPEC_MESSAGES ]: InvalidPatternSpecMessages,
-    [ PatternSpecStateKeys.SUBMITTED_PATTERN_SPEC ]: StringifiedPatternSpec,
-    [ PatternSpecStateKeys.UNSUBMITTED_PATTERN_SPEC_CONTROLS ]: StringifiedPatternSpecControlStates,
+    [ PatternSpecStateKeys.SUBMITTED_PATTERN_SPEC ]: AnyPatternSpec,
+    [ PatternSpecStateKeys.UNSUBMITTED_PATTERN_SPEC_CONTROLS ]: PatternSpecControlBooleanStates,
     [ PatternSpecStateKeys.PATTERN_SPEC_ATTRIBUTES ]: AnyPatternSpecAttributes,
     [ PatternSpecStateKeys.VALIDATION_FUNCTION ]: Maybe<AnyPatternSpecValidationFunction>,
     [ PatternSpecStateKeys.PRESETS ]: Maybe<DictionaryOf<AnyPatternSpec>>,
 }
 
 type PatternSpecStateValueTypes =
-    StringifiedPatternSpecControlStates |
+    PatternSpecControlBooleanStates |
     InvalidPatternSpecMessages |
-    StringifiedPatternSpec |
+    AnyPatternSpec |
     AnyPatternSpecAttributes |
     Maybe<AnyPatternSpecValidationFunction> |
     Maybe<DictionaryOf<AnyPatternSpec>>
@@ -51,22 +51,22 @@ enum PatternSpecStateActionType {
 }
 
 interface SetDefaultPatternSpec {
-    data: StringifiedPatternSpec,
+    data: AnyPatternSpec,
     type: PatternSpecStateActionType.SET_DEFAULT_PATTERN_SPEC,
 }
 
 interface SetDisabledPatternSpecButtons {
-    data: StringifiedPatternSpecControlStates,
+    data: PatternSpecControlBooleanStates,
     type: PatternSpecStateActionType.SET_DISABLED_PATTERN_SPEC_BUTTONS,
 }
 
 interface SetSubmittedPatternSpec {
-    data: StringifiedPatternSpec,
+    data: AnyPatternSpec,
     type: PatternSpecStateActionType.SET_SUBMITTED_PATTERN_SPEC,
 }
 
 interface SetDisplayedPatternSpec {
-    data: StringifiedPatternSpec,
+    data: AnyPatternSpec,
     type: PatternSpecStateActionType.SET_DISPLAYED_PATTERN_SPEC,
 }
 
@@ -76,7 +76,7 @@ interface SetInvalidPatternSpecMessages {
 }
 
 interface SetUnsubmittedPatternSpecControls {
-    data: StringifiedPatternSpecControlStates,
+    data: PatternSpecControlBooleanStates,
     type: PatternSpecStateActionType.SET_UNSUBMITTED_PATTERN_SPEC_CONTROLS,
 }
 

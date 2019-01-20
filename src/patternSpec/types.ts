@@ -1,16 +1,13 @@
 import { DictionaryOf, Maybe } from '@musical-patterns/utilities'
 
-type StringifiedPatternSpec = DictionaryOf<string>
-
-type StringifiedPatternSpecControlStates = DictionaryOf<Maybe<boolean>>
+type PatternSpecControlBooleanStates = DictionaryOf<Maybe<boolean>>
 
 type InvalidPatternSpecMessages = DictionaryOf<Maybe<string>>
 
-type StringifiedPatternSpecEntry = [ string, string ]
+type PatternSpecValue = string | number
 
 export {
-    StringifiedPatternSpec,
-    StringifiedPatternSpecEntry,
-    StringifiedPatternSpecControlStates,
+    PatternSpecControlBooleanStates,
     InvalidPatternSpecMessages,
+    PatternSpecValue,
 }

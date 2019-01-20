@@ -37,7 +37,7 @@
     "@musical-patterns/cli": "^1.0.262",
     "@musical-patterns/compiler": "^1.0.71",
     "@musical-patterns/pattern": "^1.0.105",
-    "@musical-patterns/pattern-playroom-test": "^1.0.79",
+    "@musical-patterns/pattern-playroom-test": "1.0.79",
     "@musical-patterns/performer": "^1.0.132",
     "@musical-patterns/registry": "^1.0.34",
     "@musical-patterns/utilities": "^1.0.149",

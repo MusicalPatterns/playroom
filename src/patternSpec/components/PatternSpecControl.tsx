@@ -1,3 +1,4 @@
+import { AnyPatternSpec } from '@musical-patterns/pattern'
 import { Maybe } from '@musical-patterns/utilities'
 import * as React from 'react'
 import { SecretSelectorsForTest } from '../../types'
@@ -7,7 +8,7 @@ import {
     PatternSpecEventParameters,
 } from '../events'
 import { PatternSpecStateKeys } from '../state'
-import { InvalidPatternSpecMessages, StringifiedPatternSpec, StringifiedPatternSpecControlStates } from '../types'
+import { InvalidPatternSpecMessages, PatternSpecControlBooleanStates, PatternSpecValue } from '../types'
 import { buildControl } from './buildControl'
 import { presentPatternSpecKey } from './helpers'
 import { ControlProps, PatternSpecControlProps, PatternSpecControlStates } from './types'
@@ -24,22 +25,22 @@ const PatternSpecControl: (patternSpecControlProps: PatternSpecControlProps) => 
         } = patternSpecControlsProps
         const { patternSpecPropertyType, constraint, formattedName } = patternSpecPropertyAttributes
 
-        const displayedPatternSpec: StringifiedPatternSpec =
+        const displayedPatternSpec: AnyPatternSpec =
             patternSpecState.get(PatternSpecStateKeys.DISPLAYED_PATTERN_SPEC)
         const invalidPatternSpecMessages: InvalidPatternSpecMessages =
             patternSpecState.get(PatternSpecStateKeys.INVALID_PATTERN_SPEC_MESSAGES)
-        const disabledPatternSpecButtons: StringifiedPatternSpecControlStates =
+        const disabledPatternSpecButtons: PatternSpecControlBooleanStates =
             patternSpecState.get(PatternSpecStateKeys.DISABLED_PATTERN_SPEC_BUTTONS)
-        const unsubmittedPatternSpecControls: StringifiedPatternSpecControlStates =
+        const unsubmittedPatternSpecControls: PatternSpecControlBooleanStates =
             patternSpecState.get(PatternSpecStateKeys.UNSUBMITTED_PATTERN_SPEC_CONTROLS)
-        const submittedPatternSpec: StringifiedPatternSpec =
+        const submittedPatternSpec: AnyPatternSpec =
             patternSpecState.get(PatternSpecStateKeys.SUBMITTED_PATTERN_SPEC)
 
-        const patternSpecValue: string = displayedPatternSpec[ patternSpecKey ]
+        const patternSpecValue: PatternSpecValue = displayedPatternSpec[ patternSpecKey ] as PatternSpecValue
         const invalidMessage: Maybe<string> = invalidPatternSpecMessages[ patternSpecKey ]
         const unsubmitted: boolean = !!unsubmittedPatternSpecControls[ patternSpecKey ]
         const disabled: boolean = !!disabledPatternSpecButtons[ patternSpecKey ]
-        const submittedPatternSpecValue: string = submittedPatternSpec[ patternSpecKey ]
+        const submittedPatternSpecValue: PatternSpecValue = submittedPatternSpec[ patternSpecKey ] as PatternSpecValue
 
         const patternSpecEventParameters: PatternSpecEventParameters = { patternSpecKey, patternSpecState }
 

@@ -1,13 +1,14 @@
+import { AnyPatternSpec } from '@musical-patterns/pattern'
 import { Action, ActionType } from '../../root'
-import { InvalidPatternSpecMessages, StringifiedPatternSpec, StringifiedPatternSpecControlStates } from '../types'
-import { buildInitialStringifiedPatternSpecControlStates } from './buildInitialStringifiedPatternSpecControlStates'
+import { InvalidPatternSpecMessages, PatternSpecControlBooleanStates } from '../types'
+import { buildInitialPatternSpecControlStates } from './buildInitialPatternSpecControlStates'
 
-const buildResetActions: (defaultPatternSpec: StringifiedPatternSpec) => Action[] =
-    (defaultPatternSpec: StringifiedPatternSpec): Action[] => {
-        const initialAllDisabledButtonsPatternSpecState: StringifiedPatternSpecControlStates =
-            buildInitialStringifiedPatternSpecControlStates(defaultPatternSpec, true)
-        const initialNoInvalidOrUnsubmittedControlState: StringifiedPatternSpecControlStates =
-            buildInitialStringifiedPatternSpecControlStates(defaultPatternSpec, undefined)
+const buildResetActions: (defaultPatternSpec: AnyPatternSpec) => Action[] =
+    (defaultPatternSpec: AnyPatternSpec): Action[] => {
+        const initialAllDisabledButtonsPatternSpecState: PatternSpecControlBooleanStates =
+            buildInitialPatternSpecControlStates(defaultPatternSpec, true)
+        const initialNoInvalidOrUnsubmittedControlState: PatternSpecControlBooleanStates =
+            buildInitialPatternSpecControlStates(defaultPatternSpec, undefined)
 
         return [
             { type: ActionType.SET_SUBMITTED_PATTERN_SPEC, data: defaultPatternSpec },

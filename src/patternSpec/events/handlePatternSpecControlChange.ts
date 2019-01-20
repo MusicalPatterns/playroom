@@ -1,7 +1,8 @@
+import { AnyPatternSpec } from '@musical-patterns/pattern'
 import { BatchAction, batchActions } from 'redux-batched-actions'
 import { ActionType } from '../../root'
 import { PatternSpecStateKeys } from '../state'
-import { InvalidPatternSpecMessages, StringifiedPatternSpec, StringifiedPatternSpecControlStates } from '../types'
+import { InvalidPatternSpecMessages, PatternSpecControlBooleanStates, PatternSpecValue } from '../types'
 import { PatternSpecControlEventHandler, PatternSpecControlEventHandlerParameters } from './types'
 
 const handlePatternSpecControlChange: PatternSpecControlEventHandler =
@@ -13,16 +14,16 @@ const handlePatternSpecControlChange: PatternSpecControlEventHandler =
             patternSpecState,
         }: PatternSpecControlEventHandlerParameters = patternSpecControlEventHandlerParameters
 
-        const displayedPatternSpec: StringifiedPatternSpec =
+        const displayedPatternSpec: AnyPatternSpec =
             patternSpecState.get(PatternSpecStateKeys.DISPLAYED_PATTERN_SPEC)
         const invalidPatternSpecMessages: InvalidPatternSpecMessages =
             patternSpecState.get(PatternSpecStateKeys.INVALID_PATTERN_SPEC_MESSAGES)
-        const disabledPatternSpecButtons: StringifiedPatternSpecControlStates =
+        const disabledPatternSpecButtons: PatternSpecControlBooleanStates =
             patternSpecState.get(PatternSpecStateKeys.DISABLED_PATTERN_SPEC_BUTTONS)
-        const submittedPatternSpec: StringifiedPatternSpec =
+        const submittedPatternSpec: AnyPatternSpec =
             patternSpecState.get(PatternSpecStateKeys.SUBMITTED_PATTERN_SPEC)
 
-        const updatedStringifiedPatternSpec: StringifiedPatternSpec = {
+        const updatedPatternSpec: AnyPatternSpec = {
             ...displayedPatternSpec,
             [ patternSpecKey ]: patternSpecValue,
         }
@@ -32,15 +33,15 @@ const handlePatternSpecControlChange: PatternSpecControlEventHandler =
             [ patternSpecKey ]: undefined,
         }
 
-        const currentPatternSpecValue: string = submittedPatternSpec[ patternSpecKey ]
-        const updatedDisabledButtons: StringifiedPatternSpecControlStates = {
+        const currentPatternSpecValue: PatternSpecValue = submittedPatternSpec[ patternSpecKey ] as PatternSpecValue
+        const updatedDisabledButtons: PatternSpecControlBooleanStates = {
             ...disabledPatternSpecButtons,
             [ patternSpecKey ]:
             currentPatternSpecValue === patternSpecValue,
         }
 
         const batchedAction: BatchAction = batchActions([
-            { type: ActionType.SET_DISPLAYED_PATTERN_SPEC, data: updatedStringifiedPatternSpec },
+            { type: ActionType.SET_DISPLAYED_PATTERN_SPEC, data: updatedPatternSpec },
             { type: ActionType.SET_INVALID_PATTERN_SPEC_MESSAGES, data: updatedInvalidMessages },
             { type: ActionType.SET_DISABLED_PATTERN_SPEC_BUTTONS, data: updatedDisabledButtons },
         ])

@@ -1,6 +1,7 @@
+import { AnyPatternSpec } from '@musical-patterns/pattern'
 import { ActionType } from '../../root'
 import { PatternSpecStateKeys } from '../state'
-import { StringifiedPatternSpec, StringifiedPatternSpecControlStates } from '../types'
+import { PatternSpecControlBooleanStates, PatternSpecValue } from '../types'
 import { PatternSpecControlEventHandler, PatternSpecControlEventHandlerParameters } from './types'
 
 const handlePatternSpecControlBlur: PatternSpecControlEventHandler =
@@ -11,13 +12,13 @@ const handlePatternSpecControlBlur: PatternSpecControlEventHandler =
             dispatch,
             patternSpecState,
         }: PatternSpecControlEventHandlerParameters = patternSpecHandlerParameters
-        const submittedPatternSpec: StringifiedPatternSpec =
+        const submittedPatternSpec: AnyPatternSpec =
             patternSpecState.get(PatternSpecStateKeys.SUBMITTED_PATTERN_SPEC)
-        const unsubmittedPatternSpecControls: StringifiedPatternSpecControlStates =
+        const unsubmittedPatternSpecControls: PatternSpecControlBooleanStates =
             patternSpecState.get(PatternSpecStateKeys.UNSUBMITTED_PATTERN_SPEC_CONTROLS)
-        const currentPatternSpecValue: string = submittedPatternSpec[ patternSpecKey ]
+        const currentPatternSpecValue: PatternSpecValue = submittedPatternSpec[ patternSpecKey ] as PatternSpecValue
 
-        const updatedUnsubmittedControls: StringifiedPatternSpecControlStates = {
+        const updatedUnsubmittedControls: PatternSpecControlBooleanStates = {
             ...unsubmittedPatternSpecControls,
             [ patternSpecKey ]:
             currentPatternSpecValue !== patternSpecValue,

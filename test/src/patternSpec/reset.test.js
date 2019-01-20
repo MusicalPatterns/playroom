@@ -18,6 +18,7 @@ import {
     SPEC_CONTROLS_PATTERN_OPTIONED_PROPERTY_ONE_INITIAL_VALUE,
     SPEC_CONTROLS_PATTERN_OPTIONED_PROPERTY_ONE_MODIFIED_VALUE,
 } from '../../support'
+import { sleep } from '../../support/control'
 
 const pushResetButton = async () => {
     const reset = await findElement(testGlobals.tab, '#reset')
@@ -50,12 +51,16 @@ describe('reset button', () => {
         const control = await findElement(testGlobals.tab, `input[type=number]#${PATTERN_SPEC_RANGED_PROPERTY_ONE_KEY}`)
         await modify(control)
 
+        await sleep(2000)
+
         expect(await elementExists(`button#reset:enabled`))
             .toBeTruthy()
 
         await clickElement(control)
         await press('Backspace')
         await press('Enter')
+
+        await sleep(2000)
 
         expect(await elementExists(`button#reset:disabled`))
             .toBeTruthy()

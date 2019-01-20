@@ -3,7 +3,7 @@ import { DictionaryOf } from '@musical-patterns/utilities'
 import * as React from 'react'
 import { DispatchAsProp, EventAsProp } from '../../types'
 import { ImmutablePatternSpecState } from '../state'
-import { InvalidPatternSpecMessages, StringifiedPatternSpec } from '../types'
+import { InvalidPatternSpecMessages } from '../types'
 
 type PatternSpecEvent = React.SyntheticEvent | React.KeyboardEvent
 
@@ -13,7 +13,7 @@ interface PatternSpecEventParameters {
 }
 
 interface PatternSpecControlEventHandlerParameters extends PatternSpecEventParameters, DispatchAsProp {
-    patternSpecValue: string,
+    patternSpecValue: string | number,
 }
 
 type PatternSpecControlEventHandler = (parameters: PatternSpecControlEventHandlerParameters) => Promise<void> | void
@@ -44,13 +44,13 @@ type BuildPatternSpecControlEventAttacher =
     (parameters: BuildPatternSpecControlEventAttacherParameters) => PatternSpecControlEventAttacher
 
 interface HandleResetParameters extends DispatchAsProp {
-    patternSpec: StringifiedPatternSpec,
+    patternSpec: AnyPatternSpec,
 }
 
 interface ValidateSubmittedSpecParameters {
     patternSpecAttributes: AnyPatternSpecAttributes,
     patternSpecKey: string,
-    updatedPatternSpec: StringifiedPatternSpec,
+    updatedPatternSpec: AnyPatternSpec,
     validationFunction?: AnyPatternSpecValidationFunction,
 }
 

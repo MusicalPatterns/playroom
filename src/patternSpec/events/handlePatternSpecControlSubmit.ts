@@ -1,9 +1,9 @@
-import { AnyPatternSpecAttributes, AnyPatternSpecValidationFunction } from '@musical-patterns/pattern'
+import { AnyPatternSpec, AnyPatternSpecAttributes, AnyPatternSpecValidationFunction } from '@musical-patterns/pattern'
 import { deepEqual, Maybe } from '@musical-patterns/utilities'
 import { BatchAction, batchActions } from 'redux-batched-actions'
 import { Action, ActionType } from '../../root'
 import { PatternSpecStateKeys } from '../state'
-import { StringifiedPatternSpec, StringifiedPatternSpecControlStates } from '../types'
+import { PatternSpecControlBooleanStates } from '../types'
 import { PatternSpecControlEventHandler, PatternSpecControlEventHandlerParameters } from './types'
 import { validateSubmittedSpec } from './validateSubmittedSpec'
 
@@ -16,18 +16,18 @@ const handlePatternSpecControlSubmit: PatternSpecControlEventHandler =
             patternSpecState,
         } = patternSpecControlEventHandlerParameters
 
-        const unsubmittedPatternSpecControls: StringifiedPatternSpecControlStates =
+        const unsubmittedPatternSpecControls: PatternSpecControlBooleanStates =
             patternSpecState.get(PatternSpecStateKeys.UNSUBMITTED_PATTERN_SPEC_CONTROLS)
-        const disabledPatternSpecButtons: StringifiedPatternSpecControlStates =
+        const disabledPatternSpecButtons: PatternSpecControlBooleanStates =
             patternSpecState.get(PatternSpecStateKeys.DISABLED_PATTERN_SPEC_BUTTONS)
-        const submittedPatternSpec: StringifiedPatternSpec =
+        const submittedPatternSpec: AnyPatternSpec =
             patternSpecState.get(PatternSpecStateKeys.SUBMITTED_PATTERN_SPEC)
         const patternSpecAttributes: AnyPatternSpecAttributes =
             patternSpecState.get(PatternSpecStateKeys.PATTERN_SPEC_ATTRIBUTES)
         const validationFunction: Maybe<AnyPatternSpecValidationFunction> =
             patternSpecState.get(PatternSpecStateKeys.VALIDATION_FUNCTION)
 
-        const updatedPatternSpec: StringifiedPatternSpec = {
+        const updatedPatternSpec: AnyPatternSpec = {
             ...submittedPatternSpec,
             [ patternSpecKey ]: patternSpecValue,
         }
@@ -47,12 +47,12 @@ const handlePatternSpecControlSubmit: PatternSpecControlEventHandler =
         ]
 
         if (isValid) {
-            const updatedUnsubmittedControls: StringifiedPatternSpecControlStates = {
+            const updatedUnsubmittedControls: PatternSpecControlBooleanStates = {
                 ...unsubmittedPatternSpecControls,
                 [ patternSpecKey ]: false,
             }
 
-            const updatedDisabledButtons: StringifiedPatternSpecControlStates = {
+            const updatedDisabledButtons: PatternSpecControlBooleanStates = {
                 ...disabledPatternSpecButtons,
                 [ patternSpecKey ]: true,
             }
