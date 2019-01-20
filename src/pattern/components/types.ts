@@ -1,4 +1,4 @@
-import { Pattern, PatternId } from '@musical-patterns/registry'
+import { Id, Pattern } from '@musical-patterns/registry'
 import { PropsFromAppBeforeSelectingPattern } from '../../root'
 import { EventHandler } from '../../types'
 import { PatternChangeEventExtractor } from '../events'
@@ -11,10 +11,10 @@ interface PatternListProps extends PropsFromAppBeforeSelectingPattern, PatternLi
 }
 
 interface PatternListItemProps {
+    id?: Id,
+    listedId: string,
     listedPattern: Pattern,
-    listedPatternId: string,
     onClick: EventHandler,
-    patternId?: PatternId,
 }
 
 interface HamburgerPropsFromDispatch {

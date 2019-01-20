@@ -32,9 +32,9 @@ const mapDispatchToProps: (dispatch: Dispatch) => PatternListenerPropsFromDispat
 const PatternListener: (patternListenerProps: PatternListenerProps) => JSX.Element =
     (props: PatternListenerProps): JSX.Element => {
         doAsync(async () => {
-            const { debugMode, patternId, patterns, submittedSpec, setTotalDuration } = props
+            const { debugMode, id, patterns, submittedSpec, setTotalDuration } = props
 
-            const pattern: Pattern = patterns[ patternId ]
+            const pattern: Pattern = patterns[ id ]
             const compilePatternParameters: CompilePatternParameters = { ...pattern, spec: submittedSpec }
 
             const threadSpecs: ThreadSpec[] = await compilePattern(compilePatternParameters)

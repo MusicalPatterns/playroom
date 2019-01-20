@@ -1,23 +1,23 @@
-import { PatternId, Patterns } from '@musical-patterns/registry'
+import { Id, Patterns } from '@musical-patterns/registry'
 import { Maybe, TypedMap } from '@musical-patterns/utilities'
 
 enum PatternStateKeys {
     PATTERNS = 'PATTERNS',
-    PATTERN_ID = 'PATTERN_ID',
+    ID = 'ID',
     DEBUG_MODE = 'DEBUG_MODE',
     PATTERNS_PANEL_OPEN = 'PATTERNS_PANEL_OPEN',
 }
 
 interface PatternState {
     [ PatternStateKeys.PATTERNS ]: Maybe<Patterns>,
-    [ PatternStateKeys.PATTERN_ID ]: Maybe<PatternId>,
+    [ PatternStateKeys.ID ]: Maybe<Id>,
     [ PatternStateKeys.DEBUG_MODE ]: boolean,
     [ PatternStateKeys.PATTERNS_PANEL_OPEN ]: boolean,
 }
 
 type PatternStateValueTypes =
     Maybe<Patterns> |
-    Maybe<PatternId> |
+    Maybe<Id> |
     boolean
 
 type ImmutablePatternState = TypedMap<PatternStateValueTypes, PatternState>
@@ -34,8 +34,8 @@ interface SetPatterns {
     type: PatternStateActionType.SET_PATTERNS,
 }
 
-interface SetPatternId {
-    data: PatternId,
+interface SetId {
+    data: Id,
     type: PatternStateActionType.SET_PATTERN_ID,
 }
 
@@ -51,7 +51,7 @@ interface SetPatternsPanelOpen {
 
 type PatternStateAction =
     SetPatterns |
-    SetPatternId |
+    SetId |
     SetDebugMode |
     SetPatternsPanelOpen
 

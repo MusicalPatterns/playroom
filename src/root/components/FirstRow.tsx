@@ -3,12 +3,12 @@ import { Performer } from '../../performer'
 import { FirstRowProps } from './types'
 
 const FirstRow: (props: FirstRowProps) => JSX.Element =
-    ({ patternId }: FirstRowProps): JSX.Element => (
+    ({ id }: FirstRowProps): JSX.Element => (
         <div {...{ className: 'row', id: 'first-row' }}>
-            <div {...{ className: `left${patternId ? '' : ' closed'}` }} >
-                <Performer {...{ disabled: !patternId }}/>
+            <div {...{ className: `left${id ? '' : ' closed'}` }} >
+                <Performer {...{ disabled: !id }}/>
             </div>
-            <div {...{ className: `right${patternId ? '' : ' closed'}` }} />
+            <div {...{ className: `right${id ? '' : ' closed'}` }} />
         </div>
     )
 

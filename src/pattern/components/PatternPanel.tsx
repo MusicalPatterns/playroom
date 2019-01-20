@@ -14,11 +14,11 @@ const mapStateToProps: (state: ImmutableRootState) => PatternsPanelPropsFromStat
     })
 
 const PatternPanel: (props: PatternsPanelProps) => JSX.Element =
-    ({ patternsPanelOpen, patternId, patterns }: PatternsPanelProps): JSX.Element => (
+    ({ patternsPanelOpen, id, patterns }: PatternsPanelProps): JSX.Element => (
         <div {...{ id: 'pattern-panel', className: patternsPanelOpen ? 'open' : 'closed' }}>
             <div {...{ id: 'pattern-panel-stuff' }}>
                 <Hamburger {...{ patternsPanelOpen }}/>
-                <PatternList {...{ patternId, patterns }}/>
+                <PatternList {...{ id, patterns }}/>
                 <Title/>
             </div>
         </div>

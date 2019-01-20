@@ -13,25 +13,25 @@ const mapStateToProps: (state: ImmutableRootState) => AppProps =
         const patternState: ImmutablePatternState = state.get(RootStateKeys.PATTERN)
 
         return {
-            patternId: patternState.get(PatternStateKeys.PATTERN_ID),
+            id: patternState.get(PatternStateKeys.ID),
             patterns: patternState.get(PatternStateKeys.PATTERNS),
         }
     }
 
 const App: React.ComponentType<AppProps> =
-    ({ patterns, patternId }: AppProps): JSX.Element => {
+    ({ patterns, id }: AppProps): JSX.Element => {
         if (!patterns) {
             return <div/>
         }
 
         return (
             <div {...{ id: 'app' }}>
-                <PatternPanel {...{ patternId, patterns }}/>
+                <PatternPanel {...{ id, patterns }}/>
                 <div {...{ id: 'container' }}>
-                    <FirstRow {...{ patternId }} />
-                    <SecondRow {...{ patternId, patterns }}/>
-                    {patternId && <Post {...{ patternId, patterns }}/>}
-                    <BottomRow {...{ patternId }} />
+                    <FirstRow {...{ id }} />
+                    <SecondRow {...{ id, patterns }}/>
+                    {id && <Post {...{ id, patterns }}/>}
+                    <BottomRow {...{ id }} />
                 </div>
             </div>
         )

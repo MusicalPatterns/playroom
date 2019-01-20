@@ -9,7 +9,7 @@ const patternReducer: Reducer<ImmutablePatternState, PatternStateAction> =
                 return patternsState.set(PatternStateKeys.PATTERNS, action.data)
             }
             case PatternStateActionType.SET_PATTERN_ID: {
-                return patternsState.set(PatternStateKeys.PATTERN_ID, action.data)
+                return patternsState.set(PatternStateKeys.ID, action.data)
             }
             case PatternStateActionType.SET_DEBUG_MODE: {
                 return patternsState.set(PatternStateKeys.DEBUG_MODE, action.data)

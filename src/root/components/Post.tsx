@@ -4,8 +4,8 @@ import * as React from 'react'
 import { PropsFromApp } from './types'
 
 const Post: (postProps: PropsFromApp) => JSX.Element =
-    ({ patterns, patternId }: PropsFromApp): JSX.Element => {
-        const pattern: Pattern = patterns[ patternId ]
+    ({ patterns, id }: PropsFromApp): JSX.Element => {
+        const pattern: Pattern = patterns[ id ]
         const metadata: Metadata = pattern.metadata
 
         return (

@@ -1,4 +1,4 @@
-import { Pattern, PatternId } from '@musical-patterns/registry'
+import { Id, Pattern } from '@musical-patterns/registry'
 import * as React from 'react'
 import { connect } from 'react-redux'
 import { Dispatch } from 'redux'
@@ -22,29 +22,29 @@ const sortByPublishDate: (entry: [ string, Pattern ], nextEntry: [ string, Patte
 const mapDispatchToProps: (dispatch: Dispatch) => PatternListPropsFromDispatch =
     (dispatch: Dispatch): PatternListPropsFromDispatch => ({
         handlePatternChangeEvent: async (parameters: PatternChangeEventExtractorParameters): Promise<void> => {
-            const { event, patterns, patternId } = parameters
+            const { event, patterns, id } = parameters
             const target: HTMLLIElement = event.currentTarget as HTMLLIElement
-            const newPatternId: PatternId = target.id as PatternId
+            const newId: Id = target.id as Id
 
-            if (newPatternId === patternId) {
+            if (newId === id) {
                 return
             }
 
-            await handlePatternChange({ dispatch, patternId: newPatternId, patterns })
+            await handlePatternChange({ dispatch, id: newId, patterns })
         },
     })
 
 const PatternList: (PatternListProps: PatternListProps) => JSX.Element =
-    ({ handlePatternChangeEvent, patternId, patterns }: PatternListProps): JSX.Element => {
+    ({ handlePatternChangeEvent, id, patterns }: PatternListProps): JSX.Element => {
         const onClick: EventHandler =
             (event: React.SyntheticEvent): void => {
-                handlePatternChangeEvent({ event, patterns, patternId })
+                handlePatternChangeEvent({ event, patterns, id })
             }
 
         const options: JSX.Element[] = Object.entries(patterns)
             .sort(sortByPublishDate)
-            .map(([ listedPatternId, listedPattern ]: [ string, Pattern ], key: number): JSX.Element => (
-                <PatternListItem {...{ key, listedPattern, listedPatternId, onClick, patternId }} />
+            .map(([ listedId, listedPattern ]: [ string, Pattern ], key: number): JSX.Element => (
+                <PatternListItem {...{ key, listedPattern, listedId, onClick, id }} />
             ))
 
         return (

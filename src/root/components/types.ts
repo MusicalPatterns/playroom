@@ -1,24 +1,24 @@
 import { Spec } from '@musical-patterns/pattern'
-import { PatternId, Patterns } from '@musical-patterns/registry'
+import { Id, Patterns } from '@musical-patterns/registry'
 import { Maybe, Time } from '@musical-patterns/utilities'
 
 interface AppProps {
-    patternId: Maybe<PatternId>,
+    id: Maybe<Id>,
     patterns: Maybe<Patterns>,
 }
 
 interface PropsFromApp {
-    patternId: PatternId,
+    id: Id,
     patterns: Patterns,
 }
 
 interface PropsFromAppBeforeSelectingPattern {
-    patternId?: PatternId,
+    id?: Id,
     patterns: Patterns,
 }
 
 interface FirstRowProps {
-    patternId?: PatternId,
+    id?: Id,
 }
 
 type SecondRowProps = PropsFromAppBeforeSelectingPattern
