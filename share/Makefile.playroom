@@ -4,7 +4,7 @@ Makefile.playroom:
 build:
 	@musical-patterns-cli build "webpack --config webpack.library.js"
 
-build_local:
+build-local:
 	@musical-patterns-cli build "webpack --config webpack.local.js"
 
 start:
