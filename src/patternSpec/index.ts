@@ -13,7 +13,7 @@ export {
     PatternSpecControlBooleanStates,
 } from './types'
 export {
-    PatternSpec,
+    PatternSpecComponent,
 } from './components'
 
 // tslint:disable-next-line:no-import-side-effect

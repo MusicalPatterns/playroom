@@ -31,7 +31,7 @@ const mapDispatchToProps: (dispatch: Dispatch) => PatternSpecPropsFromDispatch =
         },
     })
 
-const PatternSpec: (patternSpecProps: PatternSpecProps) => JSX.Element =
+const PatternSpecComponent: (patternSpecProps: PatternSpecProps) => JSX.Element =
     (props: PatternSpecProps): JSX.Element => {
         const { defaultPatternSpec, submittedPatternSpec, presets, resetHandler } = props
         const onClick: VoidFunction = (): void => {
@@ -52,4 +52,4 @@ const PatternSpec: (patternSpecProps: PatternSpecProps) => JSX.Element =
         )
     }
 
-export default connect(mapStateToProps, mapDispatchToProps)(PatternSpec)
+export default connect(mapStateToProps, mapDispatchToProps)(PatternSpecComponent)

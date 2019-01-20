@@ -1,5 +1,5 @@
-import PatternSpec from './PatternSpec'
+import PatternSpecComponent from './PatternSpecComponent'
 
 export {
-    PatternSpec,
+    PatternSpecComponent,
 }

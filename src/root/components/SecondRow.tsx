@@ -1,5 +1,5 @@
 import * as React from 'react'
-import { PatternSpec } from '../../patternSpec'
+import { PatternSpecComponent } from '../../patternSpec'
 import PatternListener from './PatternListener'
 import { SecondRowProps } from './types'
 
@@ -10,7 +10,7 @@ const SecondRow: (props: SecondRowProps) => JSX.Element =
                 {patternId && <h1>{patterns[ patternId ].metadata.formattedName}</h1>}
             </div>
             <div {...{ className: `right${patternId ? '' : ' closed'}` }} >
-                {patternId && <PatternSpec/>}
+                {patternId && <PatternSpecComponent/>}
                 {patternId && <PatternListener {...{ patternId, patterns }}/>}
             </div>
         </div>
