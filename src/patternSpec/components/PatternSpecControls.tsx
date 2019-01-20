@@ -1,4 +1,4 @@
-import { AnyPatternSpec, AnyPatternSpecAttributes, StandardPatternSpecProperties } from '@musical-patterns/pattern'
+import { PatternSpec, PatternSpecAttributes, StandardPatternSpecProperties } from '@musical-patterns/pattern'
 import * as React from 'react'
 import { connect } from 'react-redux'
 import { Dispatch } from 'redux'
@@ -46,9 +46,9 @@ const mapDispatchToProps: (dispatch: Dispatch) => PatternSpecControlsPropsFromDi
 const PatternSpecControls: (patternSpecControlsProps: PatternSpecControlsProps) => JSX.Element =
     (patternSpecControlsProps: PatternSpecControlsProps): JSX.Element => {
         const { patternSpecState }: PatternSpecControlsProps = patternSpecControlsProps
-        const displayedPatternSpec: AnyPatternSpec = patternSpecState
+        const displayedPatternSpec: PatternSpec = patternSpecState
             .get(PatternSpecStateKeys.DISPLAYED_PATTERN_SPEC)
-        const patternSpecAttributes: AnyPatternSpecAttributes = patternSpecState
+        const patternSpecAttributes: PatternSpecAttributes = patternSpecState
             .get(PatternSpecStateKeys.PATTERN_SPEC_ATTRIBUTES)
 
         const patternSpecKeys: string[] = Object.keys(displayedPatternSpec)

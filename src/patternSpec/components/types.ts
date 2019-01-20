@@ -1,10 +1,10 @@
 // tslint:disable:max-file-line-count
 
 import {
-    AnyPatternSpec,
-    AnyPatternSpecAttributes,
     Constraint,
     OptionedConstraint,
+    PatternSpec,
+    PatternSpecAttributes,
     PatternSpecPropertyAttributes,
     PatternSpecPropertyType,
     RangedConstraint,
@@ -34,13 +34,13 @@ interface PatternSpecControlProps {
 }
 
 interface PatternSpecPropsFromState {
-    defaultPatternSpec: AnyPatternSpec,
-    presets: Maybe<DictionaryOf<AnyPatternSpec>>,
-    submittedPatternSpec: AnyPatternSpec,
+    defaultPatternSpec: PatternSpec,
+    presets: Maybe<DictionaryOf<PatternSpec>>,
+    submittedPatternSpec: PatternSpec,
 }
 
 interface PatternSpecPropsFromDispatch {
-    resetHandler: (patternSpec: AnyPatternSpec) => void,
+    resetHandler: (patternSpec: PatternSpec) => void,
 }
 
 interface PatternSpecProps extends PatternSpecPropsFromState, PatternSpecPropsFromDispatch {}
@@ -75,7 +75,7 @@ interface ToggledControlProps extends ControlProps {
 }
 
 interface BuildControlsProps {
-    patternSpecAttributes: AnyPatternSpecAttributes,
+    patternSpecAttributes: PatternSpecAttributes,
     patternSpecControlsProps: PatternSpecControlsProps,
     patternSpecKeys: string[],
 }
@@ -85,8 +85,8 @@ interface PresetsPropsFromDispatch {
 }
 
 interface PresetsProps extends PresetsPropsFromDispatch {
-    presets: DictionaryOf<AnyPatternSpec>,
-    submittedPatternSpec: AnyPatternSpec,
+    presets: DictionaryOf<PatternSpec>,
+    submittedPatternSpec: PatternSpec,
 }
 
 interface BuildControlProps {

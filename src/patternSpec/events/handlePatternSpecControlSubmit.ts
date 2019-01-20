@@ -1,4 +1,4 @@
-import { AnyPatternSpec, AnyPatternSpecAttributes, AnyPatternSpecValidationFunction } from '@musical-patterns/pattern'
+import { PatternSpec, PatternSpecAttributes, PatternSpecValidationFunction } from '@musical-patterns/pattern'
 import { deepEqual, Maybe } from '@musical-patterns/utilities'
 import { BatchAction, batchActions } from 'redux-batched-actions'
 import { Action, ActionType } from '../../root'
@@ -20,14 +20,14 @@ const handlePatternSpecControlSubmit: PatternSpecControlEventHandler =
             patternSpecState.get(PatternSpecStateKeys.UNSUBMITTED_PATTERN_SPEC_CONTROLS)
         const disabledPatternSpecButtons: PatternSpecControlBooleanStates =
             patternSpecState.get(PatternSpecStateKeys.DISABLED_PATTERN_SPEC_BUTTONS)
-        const submittedPatternSpec: AnyPatternSpec =
+        const submittedPatternSpec: PatternSpec =
             patternSpecState.get(PatternSpecStateKeys.SUBMITTED_PATTERN_SPEC)
-        const patternSpecAttributes: AnyPatternSpecAttributes =
+        const patternSpecAttributes: PatternSpecAttributes =
             patternSpecState.get(PatternSpecStateKeys.PATTERN_SPEC_ATTRIBUTES)
-        const validationFunction: Maybe<AnyPatternSpecValidationFunction> =
+        const validationFunction: Maybe<PatternSpecValidationFunction> =
             patternSpecState.get(PatternSpecStateKeys.VALIDATION_FUNCTION)
 
-        const updatedPatternSpec: AnyPatternSpec = {
+        const updatedPatternSpec: PatternSpec = {
             ...submittedPatternSpec,
             [ patternSpecKey ]: patternSpecValue,
         }

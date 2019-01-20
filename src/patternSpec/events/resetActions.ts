@@ -1,10 +1,10 @@
-import { AnyPatternSpec } from '@musical-patterns/pattern'
+import { PatternSpec } from '@musical-patterns/pattern'
 import { Action, ActionType } from '../../root'
 import { InvalidPatternSpecMessages, PatternSpecControlBooleanStates } from '../types'
 import { buildInitialPatternSpecControlStates } from './buildInitialPatternSpecControlStates'
 
-const buildResetActions: (defaultPatternSpec: AnyPatternSpec) => Action[] =
-    (defaultPatternSpec: AnyPatternSpec): Action[] => {
+const buildResetActions: (defaultPatternSpec: PatternSpec) => Action[] =
+    (defaultPatternSpec: PatternSpec): Action[] => {
         const initialAllDisabledButtonsPatternSpecState: PatternSpecControlBooleanStates =
             buildInitialPatternSpecControlStates(defaultPatternSpec, true)
         const initialNoInvalidOrUnsubmittedControlState: PatternSpecControlBooleanStates =

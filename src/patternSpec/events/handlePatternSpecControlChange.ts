@@ -1,4 +1,4 @@
-import { AnyPatternSpec } from '@musical-patterns/pattern'
+import { PatternSpec } from '@musical-patterns/pattern'
 import { BatchAction, batchActions } from 'redux-batched-actions'
 import { ActionType } from '../../root'
 import { DomValue } from '../../types'
@@ -15,16 +15,16 @@ const handlePatternSpecControlChange: PatternSpecControlEventHandler =
             patternSpecState,
         }: PatternSpecControlEventHandlerParameters = patternSpecControlEventHandlerParameters
 
-        const displayedPatternSpec: AnyPatternSpec =
+        const displayedPatternSpec: PatternSpec =
             patternSpecState.get(PatternSpecStateKeys.DISPLAYED_PATTERN_SPEC)
         const invalidPatternSpecMessages: InvalidPatternSpecMessages =
             patternSpecState.get(PatternSpecStateKeys.INVALID_PATTERN_SPEC_MESSAGES)
         const disabledPatternSpecButtons: PatternSpecControlBooleanStates =
             patternSpecState.get(PatternSpecStateKeys.DISABLED_PATTERN_SPEC_BUTTONS)
-        const submittedPatternSpec: AnyPatternSpec =
+        const submittedPatternSpec: PatternSpec =
             patternSpecState.get(PatternSpecStateKeys.SUBMITTED_PATTERN_SPEC)
 
-        const updatedPatternSpec: AnyPatternSpec = {
+        const updatedPatternSpec: PatternSpec = {
             ...displayedPatternSpec,
             [ patternSpecKey ]: patternSpecValue,
         }

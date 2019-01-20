@@ -1,4 +1,4 @@
-import { AnyPatternSpec } from '@musical-patterns/pattern'
+import { PatternSpec } from '@musical-patterns/pattern'
 import { Dispatch } from 'redux'
 import { extractValueFromEvent } from '../../root'
 import { handleReset } from './handleReset'
@@ -8,7 +8,7 @@ const buildPresetSubmitHandler: (dispatch: Dispatch) => PresetSubmitHandler =
     (dispatch: Dispatch): PresetSubmitHandler =>
         ({ event, presets }: PresetSubmitHandlerParameters): void => {
             const presetKey: string = extractValueFromEvent(event) as string
-            const patternSpec: AnyPatternSpec = presets[ presetKey ]
+            const patternSpec: PatternSpec = presets[ presetKey ]
 
             handleReset({ dispatch, patternSpec })
         }

@@ -1,10 +1,10 @@
-import { AnyPatternSpec } from '@musical-patterns/pattern'
+import { PatternSpec } from '@musical-patterns/pattern'
 import { Maybe } from '@musical-patterns/utilities'
 import { PatternSpecControlBooleanStates } from '../types'
 
 const buildInitialPatternSpecControlStates:
-    (patternSpec: AnyPatternSpec, state: Maybe<boolean>) => PatternSpecControlBooleanStates =
-    (patternSpec: AnyPatternSpec, state: Maybe<boolean>): PatternSpecControlBooleanStates => {
+    (patternSpec: PatternSpec, state: Maybe<boolean>) => PatternSpecControlBooleanStates =
+    (patternSpec: PatternSpec, state: Maybe<boolean>): PatternSpecControlBooleanStates => {
         const disabledButtonsAccumulator: PatternSpecControlBooleanStates = {}
 
         return Object.keys(patternSpec)

@@ -1,4 +1,4 @@
-import { AnyPatternSpec } from '@musical-patterns/pattern'
+import { PatternSpec } from '@musical-patterns/pattern'
 import { deepEqual } from '@musical-patterns/utilities'
 import * as React from 'react'
 import { connect } from 'react-redux'
@@ -25,7 +25,7 @@ const Presets: (props: PresetsProps) => JSX.Element =
 
         let value: string = ''
         Object.entries(presets)
-            .forEach(([ presetKey, preset ]: [ string, AnyPatternSpec ]) => {
+            .forEach(([ presetKey, preset ]: [ string, PatternSpec ]) => {
                 if (deepEqual(preset, submittedPatternSpec)) {
                     value = presetKey
                 }

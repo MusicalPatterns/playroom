@@ -1,6 +1,6 @@
 // tslint:disable:max-file-line-count
 
-import { AnyPatternSpec, AnyPatternSpecAttributes, AnyPatternSpecValidationFunction } from '@musical-patterns/pattern'
+import { PatternSpec, PatternSpecAttributes, PatternSpecValidationFunction } from '@musical-patterns/pattern'
 import { DictionaryOf, Maybe, TypedMap } from '@musical-patterns/utilities'
 import { InvalidPatternSpecMessages, PatternSpecControlBooleanStates } from '../types'
 
@@ -17,24 +17,24 @@ enum PatternSpecStateKeys {
 }
 
 interface PatternSpecState {
-    [ PatternSpecStateKeys.DEFAULT_PATTERN_SPEC ]: AnyPatternSpec,
+    [ PatternSpecStateKeys.DEFAULT_PATTERN_SPEC ]: PatternSpec,
     [ PatternSpecStateKeys.DISABLED_PATTERN_SPEC_BUTTONS ]: PatternSpecControlBooleanStates,
-    [ PatternSpecStateKeys.DISPLAYED_PATTERN_SPEC ]: AnyPatternSpec,
+    [ PatternSpecStateKeys.DISPLAYED_PATTERN_SPEC ]: PatternSpec,
     [ PatternSpecStateKeys.INVALID_PATTERN_SPEC_MESSAGES ]: InvalidPatternSpecMessages,
-    [ PatternSpecStateKeys.SUBMITTED_PATTERN_SPEC ]: AnyPatternSpec,
+    [ PatternSpecStateKeys.SUBMITTED_PATTERN_SPEC ]: PatternSpec,
     [ PatternSpecStateKeys.UNSUBMITTED_PATTERN_SPEC_CONTROLS ]: PatternSpecControlBooleanStates,
-    [ PatternSpecStateKeys.PATTERN_SPEC_ATTRIBUTES ]: AnyPatternSpecAttributes,
-    [ PatternSpecStateKeys.VALIDATION_FUNCTION ]: Maybe<AnyPatternSpecValidationFunction>,
-    [ PatternSpecStateKeys.PRESETS ]: Maybe<DictionaryOf<AnyPatternSpec>>,
+    [ PatternSpecStateKeys.PATTERN_SPEC_ATTRIBUTES ]: PatternSpecAttributes,
+    [ PatternSpecStateKeys.VALIDATION_FUNCTION ]: Maybe<PatternSpecValidationFunction>,
+    [ PatternSpecStateKeys.PRESETS ]: Maybe<DictionaryOf<PatternSpec>>,
 }
 
 type PatternSpecStateValueTypes =
     PatternSpecControlBooleanStates |
     InvalidPatternSpecMessages |
-    AnyPatternSpec |
-    AnyPatternSpecAttributes |
-    Maybe<AnyPatternSpecValidationFunction> |
-    Maybe<DictionaryOf<AnyPatternSpec>>
+    PatternSpec |
+    PatternSpecAttributes |
+    Maybe<PatternSpecValidationFunction> |
+    Maybe<DictionaryOf<PatternSpec>>
 
 type ImmutablePatternSpecState = TypedMap<PatternSpecStateValueTypes, PatternSpecState>
 
@@ -51,7 +51,7 @@ enum PatternSpecStateActionType {
 }
 
 interface SetDefaultPatternSpec {
-    data: AnyPatternSpec,
+    data: PatternSpec,
     type: PatternSpecStateActionType.SET_DEFAULT_PATTERN_SPEC,
 }
 
@@ -61,12 +61,12 @@ interface SetDisabledPatternSpecButtons {
 }
 
 interface SetSubmittedPatternSpec {
-    data: AnyPatternSpec,
+    data: PatternSpec,
     type: PatternSpecStateActionType.SET_SUBMITTED_PATTERN_SPEC,
 }
 
 interface SetDisplayedPatternSpec {
-    data: AnyPatternSpec,
+    data: PatternSpec,
     type: PatternSpecStateActionType.SET_DISPLAYED_PATTERN_SPEC,
 }
 
@@ -81,17 +81,17 @@ interface SetUnsubmittedPatternSpecControls {
 }
 
 interface SetPatternSpecAttributes {
-    data: AnyPatternSpecAttributes,
+    data: PatternSpecAttributes,
     type: PatternSpecStateActionType.SET_PATTERN_SPEC_ATTRIBUTES,
 }
 
 interface SetValidationFunction {
-    data: Maybe<AnyPatternSpecValidationFunction>,
+    data: Maybe<PatternSpecValidationFunction>,
     type: PatternSpecStateActionType.SET_VALIDATION_FUNCTION,
 }
 
 interface SetPresets {
-    data: Maybe<DictionaryOf<AnyPatternSpec>>,
+    data: Maybe<DictionaryOf<PatternSpec>>,
     type: PatternSpecStateActionType.SET_PRESETS,
 }
 

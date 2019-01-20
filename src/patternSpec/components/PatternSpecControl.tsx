@@ -1,4 +1,4 @@
-import { AnyPatternSpec, PatternSpecPropertyType } from '@musical-patterns/pattern'
+import { PatternSpec, PatternSpecPropertyType } from '@musical-patterns/pattern'
 import { Maybe } from '@musical-patterns/utilities'
 import * as React from 'react'
 import { DomValue, SecretSelectorsForTest } from '../../types'
@@ -25,7 +25,7 @@ const PatternSpecControl: (patternSpecControlProps: PatternSpecControlProps) => 
         } = patternSpecControlsProps
         const { patternSpecPropertyType: propertyType, constraint, formattedName } = patternSpecPropertyAttributes
 
-        const displayedPatternSpec: AnyPatternSpec =
+        const displayedPatternSpec: PatternSpec =
             patternSpecState.get(PatternSpecStateKeys.DISPLAYED_PATTERN_SPEC)
         const invalidPatternSpecMessages: InvalidPatternSpecMessages =
             patternSpecState.get(PatternSpecStateKeys.INVALID_PATTERN_SPEC_MESSAGES)
@@ -33,7 +33,7 @@ const PatternSpecControl: (patternSpecControlProps: PatternSpecControlProps) => 
             patternSpecState.get(PatternSpecStateKeys.DISABLED_PATTERN_SPEC_BUTTONS)
         const unsubmittedPatternSpecControls: PatternSpecControlBooleanStates =
             patternSpecState.get(PatternSpecStateKeys.UNSUBMITTED_PATTERN_SPEC_CONTROLS)
-        const submittedPatternSpec: AnyPatternSpec =
+        const submittedPatternSpec: PatternSpec =
             patternSpecState.get(PatternSpecStateKeys.SUBMITTED_PATTERN_SPEC)
 
         const patternSpecValue: DomValue = displayedPatternSpec[ patternSpecKey ] as DomValue

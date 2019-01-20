@@ -1,4 +1,4 @@
-import { AnyPatternSpec } from '@musical-patterns/pattern'
+import { PatternSpec } from '@musical-patterns/pattern'
 import { deepEqual } from '@musical-patterns/utilities'
 import * as React from 'react'
 import { connect } from 'react-redux'
@@ -26,7 +26,7 @@ const mapStateToProps: (state: ImmutableRootState) => PatternSpecPropsFromState 
 
 const mapDispatchToProps: (dispatch: Dispatch) => PatternSpecPropsFromDispatch =
     (dispatch: Dispatch): PatternSpecPropsFromDispatch => ({
-        resetHandler: (patternSpec: AnyPatternSpec): void => {
+        resetHandler: (patternSpec: PatternSpec): void => {
             handleReset({ dispatch, patternSpec })
         },
     })

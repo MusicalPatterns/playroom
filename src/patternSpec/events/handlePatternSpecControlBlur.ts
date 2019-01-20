@@ -1,4 +1,4 @@
-import { AnyPatternSpec } from '@musical-patterns/pattern'
+import { PatternSpec } from '@musical-patterns/pattern'
 import { ActionType } from '../../root'
 import { DomValue } from '../../types'
 import { PatternSpecStateKeys } from '../state'
@@ -13,7 +13,7 @@ const handlePatternSpecControlBlur: PatternSpecControlEventHandler =
             dispatch,
             patternSpecState,
         }: PatternSpecControlEventHandlerParameters = patternSpecHandlerParameters
-        const submittedPatternSpec: AnyPatternSpec =
+        const submittedPatternSpec: PatternSpec =
             patternSpecState.get(PatternSpecStateKeys.SUBMITTED_PATTERN_SPEC)
         const unsubmittedPatternSpecControls: PatternSpecControlBooleanStates =
             patternSpecState.get(PatternSpecStateKeys.UNSUBMITTED_PATTERN_SPEC_CONTROLS)

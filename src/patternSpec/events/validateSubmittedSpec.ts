@@ -1,4 +1,4 @@
-import { AnyPatternSpecValidationResults } from '@musical-patterns/pattern'
+import { PatternSpecValidationResults } from '@musical-patterns/pattern'
 import { Maybe } from '@musical-patterns/utilities'
 import { InvalidPatternSpecMessages } from '../types'
 import { SpecValidationResults, ValidateSubmittedSpecParameters } from './types'
@@ -20,7 +20,7 @@ const validateSubmittedSpec: (parameters: ValidateSubmittedSpecParameters) => Sp
 
         const standardInvalidMessageForThisProperty: Maybe<string> = reevaluatedInvalidMessages[ patternSpecKey ]
 
-        let customInvalidMessagesBasedOnEntireSpec: AnyPatternSpecValidationResults
+        let customInvalidMessagesBasedOnEntireSpec: PatternSpecValidationResults
         if (validationFunction) {
             customInvalidMessagesBasedOnEntireSpec = validationFunction(updatedPatternSpec)
         }
