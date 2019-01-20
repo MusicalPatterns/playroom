@@ -1,19 +1,20 @@
 import { AnyPatternSpec, AnyPatternSpecAttributes, AnyPatternSpecValidationFunction } from '@musical-patterns/pattern'
 import { DictionaryOf } from '@musical-patterns/utilities'
 import * as React from 'react'
-import { DispatchAsProp, EventAsProp } from '../../types'
+import { DispatchAsProp, DomValue, EventAsProp } from '../../types'
 import { ImmutablePatternSpecState } from '../state'
 import { InvalidPatternSpecMessages } from '../types'
 
 type PatternSpecEvent = React.SyntheticEvent | React.KeyboardEvent
 
 interface PatternSpecEventParameters {
+    isToggle: boolean,
     patternSpecKey: string,
     patternSpecState: ImmutablePatternSpecState,
 }
 
 interface PatternSpecControlEventHandlerParameters extends PatternSpecEventParameters, DispatchAsProp {
-    patternSpecValue: string | number,
+    patternSpecValue: DomValue | boolean,
 }
 
 type PatternSpecControlEventHandler = (parameters: PatternSpecControlEventHandlerParameters) => Promise<void> | void

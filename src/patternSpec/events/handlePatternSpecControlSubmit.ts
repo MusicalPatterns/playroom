@@ -31,6 +31,7 @@ const handlePatternSpecControlSubmit: PatternSpecControlEventHandler =
             ...submittedPatternSpec,
             [ patternSpecKey ]: patternSpecValue,
         }
+
         if (deepEqual(submittedPatternSpec, updatedPatternSpec)) {
             return
         }

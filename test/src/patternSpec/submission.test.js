@@ -17,6 +17,9 @@ import {
     SPEC_CONTROLS_PATTERN_OPTIONED_PROPERTY_ONE_MODIFIED_VALUE,
     SPEC_CONTROLS_PATTERN_OPTIONED_PROPERTY_TWO_INITIAL_VALUE,
     SPEC_CONTROLS_PATTERN_OPTIONED_PROPERTY_TWO_MODIFIED_VALUE,
+    PATTERN_SPEC_TOGGLED_PROPERTY_KEY,
+    SPEC_CONTROLS_PATTERN_TOGGLED_PROPERTY_INITIAL_VALUE,
+    SPEC_CONTROLS_PATTERN_TOGGLED_PROPERTY_MODIFIED_VALUE,
 } from '../../support'
 
 describe('submitting pattern spec changes', () => {
@@ -229,6 +232,30 @@ describe('submitting pattern spec changes', () => {
                 .toBe(SPEC_CONTROLS_PATTERN_OPTIONED_PROPERTY_ONE_MODIFIED_VALUE)
             expect(await elementInnerText(`#${PATTERN_SPEC_OPTIONED_PROPERTY_TWO_KEY} .${SecretSelectorsForTest.SECRET_SUBMITTED_PATTERN_SPEC_CONTROL}`))
                 .toBe(SPEC_CONTROLS_PATTERN_OPTIONED_PROPERTY_TWO_MODIFIED_VALUE)
+
+            done()
+        })
+    })
+
+    describe('toggled controls', () => {
+        it('does not immediately submit when you choose a new value from a control', async done => {
+            const checkbox = await findElement(testGlobals.tab, `input#${PATTERN_SPEC_TOGGLED_PROPERTY_KEY}`)
+            await clickElement(checkbox)
+
+            expect(await elementInnerText(`#${PATTERN_SPEC_TOGGLED_PROPERTY_KEY} .${SecretSelectorsForTest.SECRET_SUBMITTED_PATTERN_SPEC_CONTROL}`))
+                .toBe(JSON.stringify(SPEC_CONTROLS_PATTERN_TOGGLED_PROPERTY_INITIAL_VALUE))
+
+            done()
+        })
+
+        it('submits a control when you press enter', async done => {
+            const checkbox = await findElement(testGlobals.tab, `input#${PATTERN_SPEC_TOGGLED_PROPERTY_KEY}`)
+            await clickElement(checkbox)
+            const buttonForCheckbox = await findElement(testGlobals.tab, `button#${PATTERN_SPEC_TOGGLED_PROPERTY_KEY}`)
+            await clickElement(buttonForCheckbox)
+
+            expect(await elementInnerText(`#${PATTERN_SPEC_TOGGLED_PROPERTY_KEY} .${SecretSelectorsForTest.SECRET_SUBMITTED_PATTERN_SPEC_CONTROL}`))
+                .toBe(JSON.stringify(SPEC_CONTROLS_PATTERN_TOGGLED_PROPERTY_MODIFIED_VALUE))
 
             done()
         })

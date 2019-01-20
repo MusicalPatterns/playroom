@@ -1,16 +1,16 @@
-import { AnyPatternSpec } from '@musical-patterns/pattern'
+import { AnyPatternSpec, PatternSpecPropertyType } from '@musical-patterns/pattern'
 import { Maybe } from '@musical-patterns/utilities'
 import * as React from 'react'
-import { SecretSelectorsForTest } from '../../types'
+import { DomValue, SecretSelectorsForTest } from '../../types'
 import {
     buildPatternSpecControlEventAttacher,
     PatternSpecControlEventAttacher,
     PatternSpecEventParameters,
 } from '../events'
 import { PatternSpecStateKeys } from '../state'
-import { InvalidPatternSpecMessages, PatternSpecControlBooleanStates, PatternSpecValue } from '../types'
+import { InvalidPatternSpecMessages, PatternSpecControlBooleanStates } from '../types'
 import { buildControl } from './buildControl'
-import { presentPatternSpecKey } from './helpers'
+import { presentPatternSpecKey, stringifyIfNecessary } from './helpers'
 import { ControlProps, PatternSpecControlProps, PatternSpecControlStates } from './types'
 
 const PatternSpecControl: (patternSpecControlProps: PatternSpecControlProps) => JSX.Element =
@@ -23,7 +23,7 @@ const PatternSpecControl: (patternSpecControlProps: PatternSpecControlProps) => 
             handlePatternSpecBlur,
             patternSpecState,
         } = patternSpecControlsProps
-        const { patternSpecPropertyType, constraint, formattedName } = patternSpecPropertyAttributes
+        const { patternSpecPropertyType: propertyType, constraint, formattedName } = patternSpecPropertyAttributes
 
         const displayedPatternSpec: AnyPatternSpec =
             patternSpecState.get(PatternSpecStateKeys.DISPLAYED_PATTERN_SPEC)
@@ -36,13 +36,17 @@ const PatternSpecControl: (patternSpecControlProps: PatternSpecControlProps) => 
         const submittedPatternSpec: AnyPatternSpec =
             patternSpecState.get(PatternSpecStateKeys.SUBMITTED_PATTERN_SPEC)
 
-        const patternSpecValue: PatternSpecValue = displayedPatternSpec[ patternSpecKey ] as PatternSpecValue
+        const patternSpecValue: DomValue = displayedPatternSpec[ patternSpecKey ] as DomValue
         const invalidMessage: Maybe<string> = invalidPatternSpecMessages[ patternSpecKey ]
         const unsubmitted: boolean = !!unsubmittedPatternSpecControls[ patternSpecKey ]
         const disabled: boolean = !!disabledPatternSpecButtons[ patternSpecKey ]
-        const submittedPatternSpecValue: PatternSpecValue = submittedPatternSpec[ patternSpecKey ] as PatternSpecValue
+        const submittedPatternSpecValue: DomValue = submittedPatternSpec[ patternSpecKey ] as DomValue
 
-        const patternSpecEventParameters: PatternSpecEventParameters = { patternSpecKey, patternSpecState }
+        const patternSpecEventParameters: PatternSpecEventParameters = {
+            isToggle: propertyType === PatternSpecPropertyType.TOGGLED,
+            patternSpecKey,
+            patternSpecState,
+        }
 
         const onChange: PatternSpecControlEventAttacher = buildPatternSpecControlEventAttacher({
             patternSpecEventExtractor: handlePatternSpecChange,
@@ -65,16 +69,23 @@ const PatternSpecControl: (patternSpecControlProps: PatternSpecControlProps) => 
             PatternSpecControlStates.INVALID :
             unsubmitted ? PatternSpecControlStates.UNSUBMITTED : PatternSpecControlStates.VALID_AND_SUBMITTED
         const controlProps: ControlProps = { className, onBlur, onChange, onKeyPress, patternSpecKey, patternSpecValue }
-        const control: JSX.Element[] = buildControl(patternSpecPropertyType, controlProps, constraint)
+        const control: JSX.Element[] = buildControl({ propertyType, controlProps, constraint })
 
         const secretClassName: string = SecretSelectorsForTest.SECRET_SUBMITTED_PATTERN_SPEC_CONTROL
 
         return (
             <div {...{ className: 'pattern-spec-control', id: patternSpecKey }}>
-                <span {...{ className: secretClassName }}>{submittedPatternSpecValue}</span>
+                <span {...{ className: secretClassName }}>{stringifyIfNecessary(submittedPatternSpecValue)}</span>
                 <div>{formattedName || presentPatternSpecKey(patternSpecKey)}</div>
                 {control}
-                <button {...{ disabled, id: patternSpecKey, onClick, value: patternSpecValue }}>submit</button>
+                <button {...{
+                    checked: patternSpecValue,
+                    disabled,
+                    id: patternSpecKey,
+                    onClick,
+                    value: patternSpecValue,
+                }}>submit
+                </button>
                 {invalidMessage && <div {...{ className: 'invalid-message' }}>{invalidMessage}</div>}
             </div>
         )

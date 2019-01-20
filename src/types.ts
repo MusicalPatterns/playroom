@@ -19,10 +19,13 @@ type EventHandler = (event: React.SyntheticEvent) => void
 
 type AsyncEventHandler = (event: React.SyntheticEvent) => Promise<void>
 
+type DomValue = string | number
+
 export {
     DispatchAsProp,
     SecretSelectorsForTest,
     EventHandler,
     AsyncEventHandler,
     EventAsProp,
+    DomValue,
 }

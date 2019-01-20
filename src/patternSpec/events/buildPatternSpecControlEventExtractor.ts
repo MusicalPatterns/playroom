@@ -1,5 +1,6 @@
 import * as React from 'react'
-import { extractValueFromEvent } from '../../root'
+import { extractCheckedFromEvent, extractValueFromEvent } from '../../root'
+import { DomValue } from '../../types'
 import { SUBMIT } from './constants'
 import {
     BuildPatternSpecControlEventExtractor,
@@ -25,7 +26,9 @@ const buildPatternSpecControlEventExtractor: BuildPatternSpecControlEventExtract
                 }
             }
 
-            const patternSpecValue: string | number = extractValueFromEvent(event)
+            const patternSpecValue: DomValue | boolean = otherParameters.isToggle ?
+                extractCheckedFromEvent(event) :
+                extractValueFromEvent(event)
 
             await patternSpecControlEventHandler({ ...otherParameters, patternSpecValue, dispatch })
         }

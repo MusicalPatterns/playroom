@@ -9,7 +9,7 @@ import {
     submitSelectByPressingEnter,
     VALID_TEST_MODIFICATION,
     SPEC_CONTROLS_PATTERN_OPTIONED_PROPERTY_ONE_INITIAL_VALUE,
-    SPEC_CONTROLS_PATTERN_OPTIONED_PROPERTY_ONE_MODIFIED_VALUE,
+    SPEC_CONTROLS_PATTERN_OPTIONED_PROPERTY_ONE_MODIFIED_VALUE, PATTERN_SPEC_TOGGLED_PROPERTY_KEY,
 } from '../../support'
 
 describe('submit button', () => {
@@ -150,6 +150,76 @@ describe('submit button', () => {
             await testGlobals.page.select(`select#${PATTERN_SPEC_OPTIONED_PROPERTY_ONE_KEY}`, SPEC_CONTROLS_PATTERN_OPTIONED_PROPERTY_ONE_INITIAL_VALUE)
 
             expect(await elementExists(`button#${PATTERN_SPEC_OPTIONED_PROPERTY_ONE_KEY}:disabled`))
+                .toBeTruthy()
+
+            done()
+        })
+    })
+
+    describe('toggled controls', () => {
+        it('enables the submit button for a control after you change it', async done => {
+            expect(await elementExists(`button#${PATTERN_SPEC_TOGGLED_PROPERTY_KEY}:disabled`))
+                .toBeTruthy()
+
+            const checkbox = await findElement(testGlobals.tab, `input#${PATTERN_SPEC_TOGGLED_PROPERTY_KEY}`)
+            await clickElement(checkbox)
+
+            expect(await elementExists(`button#${PATTERN_SPEC_TOGGLED_PROPERTY_KEY}:enabled`))
+                .toBeTruthy()
+
+            done()
+        })
+
+        it('resets the submit button to disabled when you click it', async done => {
+            expect(await elementExists(`button#${PATTERN_SPEC_TOGGLED_PROPERTY_KEY}:disabled`))
+                .toBeTruthy()
+
+            const checkbox = await findElement(testGlobals.tab, `input#${PATTERN_SPEC_TOGGLED_PROPERTY_KEY}`)
+            await clickElement(checkbox)
+
+            expect(await elementExists(`button#${PATTERN_SPEC_TOGGLED_PROPERTY_KEY}:enabled`))
+                .toBeTruthy()
+
+            const button = await findElement(testGlobals.tab, `button#${PATTERN_SPEC_TOGGLED_PROPERTY_KEY}`)
+            await clickElement(button)
+
+            expect(await elementExists(`button#${PATTERN_SPEC_TOGGLED_PROPERTY_KEY}:disabled`))
+                .toBeTruthy()
+
+            done()
+        })
+
+        it('resets the submit button to disabled when you submit its control via the keyboard', async done => {
+            expect(await elementExists(`button#${PATTERN_SPEC_TOGGLED_PROPERTY_KEY}:disabled`))
+                .toBeTruthy()
+
+            const checkbox = await findElement(testGlobals.tab, `input#${PATTERN_SPEC_TOGGLED_PROPERTY_KEY}`)
+            await clickElement(checkbox)
+
+            expect(await elementExists(`button#${PATTERN_SPEC_TOGGLED_PROPERTY_KEY}:enabled`))
+                .toBeTruthy()
+
+            await press('Enter')
+
+            expect(await elementExists(`button#${PATTERN_SPEC_TOGGLED_PROPERTY_KEY}:disabled`))
+                .toBeTruthy()
+
+            done()
+        })
+
+        it('resets the submit button to disabled when you return its control back to what you have already submitted', async done => {
+            expect(await elementExists(`button#${PATTERN_SPEC_TOGGLED_PROPERTY_KEY}:disabled`))
+                .toBeTruthy()
+
+            const checkbox = await findElement(testGlobals.tab, `input#${PATTERN_SPEC_TOGGLED_PROPERTY_KEY}`)
+            await clickElement(checkbox)
+
+            expect(await elementExists(`button#${PATTERN_SPEC_TOGGLED_PROPERTY_KEY}:enabled`))
+                .toBeTruthy()
+
+            await clickElement(checkbox)
+
+            expect(await elementExists(`button#${PATTERN_SPEC_TOGGLED_PROPERTY_KEY}:disabled`))
                 .toBeTruthy()
 
             done()

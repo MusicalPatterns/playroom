@@ -1,11 +1,16 @@
+// tslint:disable:max-file-line-count
+
 import {
     AnyPatternSpec,
     AnyPatternSpecAttributes,
+    Constraint,
     OptionedConstraint,
     PatternSpecPropertyAttributes,
+    PatternSpecPropertyType,
     RangedConstraint,
 } from '@musical-patterns/pattern'
 import { DictionaryOf, Maybe } from '@musical-patterns/utilities'
+import { DomValue } from '../../types'
 import { PatternSpecControlEventAttacher, PatternSpecControlEventExtractor, PresetSubmitHandler } from '../events'
 import { ImmutablePatternSpecState } from '../state'
 
@@ -52,15 +57,21 @@ interface ControlProps {
     onChange: PatternSpecControlEventAttacher,
     onKeyPress: PatternSpecControlEventAttacher,
     patternSpecKey: string,
-    patternSpecValue: string | number,
+    patternSpecValue: DomValue | boolean,
 }
 
 interface OptionedControlProps extends ControlProps {
     constraint: OptionedConstraint,
+    patternSpecValue: DomValue,
 }
 
 interface RangedControlProps extends ControlProps {
     constraint: RangedConstraint,
+    patternSpecValue: DomValue,
+}
+
+interface ToggledControlProps extends ControlProps {
+    patternSpecValue: boolean,
 }
 
 interface BuildControlsProps {
@@ -78,6 +89,12 @@ interface PresetsProps extends PresetsPropsFromDispatch {
     submittedPatternSpec: AnyPatternSpec,
 }
 
+interface BuildControlProps {
+    constraint: Maybe<Constraint>,
+    controlProps: ControlProps,
+    propertyType: PatternSpecPropertyType,
+}
+
 export {
     PatternSpecControlProps,
     PatternSpecControlsProps,
@@ -93,4 +110,6 @@ export {
     BuildControlsProps,
     PresetsProps,
     PresetsPropsFromDispatch,
+    BuildControlProps,
+    ToggledControlProps,
 }

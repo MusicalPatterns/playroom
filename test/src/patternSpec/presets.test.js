@@ -6,7 +6,7 @@ import {
     elementInnerText,
     elementValue,
     PATTERN_SPEC_OPTIONED_PROPERTY_ONE_KEY,
-    PATTERN_SPEC_OPTIONED_PROPERTY_TWO_KEY,
+    PATTERN_SPEC_OPTIONED_PROPERTY_TWO_KEY, PATTERN_SPEC_TOGGLED_PROPERTY_KEY,
     PRESETS_PATTERN_ID,
     SPEC_CONTROLS_PATTERN_OPTIONED_PROPERTY_ONE_INITIAL_VALUE,
     SPEC_CONTROLS_PATTERN_OPTIONED_PROPERTY_ONE_MODIFIED_VALUE,
@@ -52,6 +52,11 @@ describe('presets', () => {
             await testGlobals.page.select(`select#${PATTERN_SPEC_OPTIONED_PROPERTY_ONE_KEY}`, SPEC_CONTROLS_PATTERN_OPTIONED_PROPERTY_ONE_MODIFIED_VALUE)
             const buttonForSelect = await findElement(testGlobals.tab, `button#${PATTERN_SPEC_OPTIONED_PROPERTY_ONE_KEY}`)
             await clickElement(buttonForSelect)
+
+            const checkbox = await findElement(testGlobals.tab, `input#${PATTERN_SPEC_TOGGLED_PROPERTY_KEY}`)
+            await clickElement(checkbox)
+            const buttonForCheckbox = await findElement(testGlobals.tab, `button#${PATTERN_SPEC_TOGGLED_PROPERTY_KEY}`)
+            await clickElement(buttonForCheckbox)
 
             expect(await elementValue('#presets select'))
                 .toBe('presetOne')

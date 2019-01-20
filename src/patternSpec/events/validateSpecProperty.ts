@@ -75,7 +75,8 @@ const validateSpecProperty:
         }
         const { patternSpecPropertyType, constraint } = propertyAttributes
 
-        if (patternSpecPropertyType === PatternSpecPropertyType.OPTIONED) {
+        if (patternSpecPropertyType === PatternSpecPropertyType.OPTIONED ||
+            patternSpecPropertyType === PatternSpecPropertyType.TOGGLED) {
             return undefined
         }
 

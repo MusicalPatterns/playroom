@@ -11,6 +11,7 @@ export {
     PropsFromAppBeforeSelectingPattern,
 } from './components'
 export {
+    extractCheckedFromEvent,
     extractValueFromEvent,
 } from './events'
 

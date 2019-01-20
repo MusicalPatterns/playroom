@@ -7,8 +7,11 @@ const elementExists = selector => evalInTab(testGlobals.tab, [ selector ], `[sel
 
 const elementInnerText = selector => evalInTab(testGlobals.tab, [ selector ], `[selector] = arguments; return document.querySelector(selector).innerText`)
 
+const elementChecked = selector => evalInTab(testGlobals.tab, [ selector ], `[selector] = arguments; return document.querySelector(selector).checked`)
+
 export {
     elementExists,
     elementInnerText,
     elementValue,
+    elementChecked,
 }

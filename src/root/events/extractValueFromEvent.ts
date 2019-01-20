@@ -1,7 +1,8 @@
 import * as React from 'react'
+import { DomValue } from '../../types'
 
-const extractValueFromEvent: (event: React.SyntheticEvent | React.KeyboardEvent) => string | number =
-    (event: React.SyntheticEvent | React.KeyboardEvent): string | number => {
+const extractValueFromEvent: (event: React.SyntheticEvent | React.KeyboardEvent) => DomValue =
+    (event: React.SyntheticEvent | React.KeyboardEvent): DomValue => {
         const target: HTMLInputElement | HTMLButtonElement = event.target as HTMLInputElement | HTMLButtonElement
 
         try {
