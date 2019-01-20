@@ -9,7 +9,7 @@ import {
     LONG_ENOUGH_FOR_TIME_TO_HAVE_BEEN_RESET,
     LONG_ENOUGH_FOR_TIME_TO_PASS,
     modify,
-    PATTERN_SPEC_RANGED_PROPERTY_ONE_KEY,
+    SPEC_RANGED_PROPERTY_ONE_KEY,
     refresh,
     selectOtherTestPattern,
     sleep,
@@ -101,11 +101,11 @@ describe('time controls', () => {
             done()
         })
 
-        it('keeps playing when you select new pattern spec but does not reset time to the beginning', async done => {
+        it('keeps playing when you select new spec but does not reset time to the beginning', async done => {
             await sleep(A_BIT_LONGER)
             const plentyOfTime = await currentTime()
 
-            const input = await findElement(testGlobals.tab, `input[type=number]#${PATTERN_SPEC_RANGED_PROPERTY_ONE_KEY}`)
+            const input = await findElement(testGlobals.tab, `input[type=number]#${SPEC_RANGED_PROPERTY_ONE_KEY}`)
             await modify(input)
 
             await sleep(LONG_ENOUGH_FOR_TIME_TO_HAVE_BEEN_RESET)

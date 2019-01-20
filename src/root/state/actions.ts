@@ -1,10 +1,10 @@
 import { PatternStateActionType } from '../../pattern'
-import { PatternSpecStateActionType } from '../../patternSpec'
 import { PerformerStateActionType } from '../../performer'
+import { SpecStateActionType } from '../../spec'
 
 // tslint:disable-next-line:variable-name typedef
 const ActionType = {
-    ...PatternSpecStateActionType,
+    ...SpecStateActionType,
     ...PerformerStateActionType,
     ...PatternStateActionType,
 }

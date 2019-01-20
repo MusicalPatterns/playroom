@@ -1,4 +1,4 @@
-import { PatternSpec } from '@musical-patterns/pattern'
+import { Spec } from '@musical-patterns/pattern'
 import { PatternId, Patterns } from '@musical-patterns/registry'
 import { Maybe, Time } from '@musical-patterns/utilities'
 
@@ -25,7 +25,7 @@ type SecondRowProps = PropsFromAppBeforeSelectingPattern
 
 interface PatternListenerPropsFromState {
     debugMode: boolean,
-    submittedPatternSpec: PatternSpec,
+    submittedSpec: Spec,
 }
 
 interface PatternListenerPropsFromDispatch {
