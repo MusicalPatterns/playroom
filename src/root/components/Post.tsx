@@ -1,5 +1,4 @@
-import { Metadata } from '@musical-patterns/pattern'
-import { Pattern } from '@musical-patterns/registry'
+import { Metadata, Pattern } from '@musical-patterns/pattern'
 import * as React from 'react'
 import { PropsFromApp } from './types'
 

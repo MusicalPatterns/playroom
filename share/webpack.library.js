@@ -11,7 +11,6 @@ module.exports = merge(common, {
     externals: [
         '@musical-patterns/compiler',
         '@musical-patterns/pattern',
-        '@musical-patterns/registry',
         '@musical-patterns/utilities',
     ],
 })

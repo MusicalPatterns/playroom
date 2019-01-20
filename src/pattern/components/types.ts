@@ -1,4 +1,4 @@
-import { Id, Pattern } from '@musical-patterns/registry'
+import { Id, Pattern } from '@musical-patterns/pattern'
 import { PropsFromAppBeforeSelectingPattern } from '../../root'
 import { EventHandler } from '../../types'
 import { PatternChangeEventExtractor } from '../events'

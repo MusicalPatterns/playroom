@@ -1,5 +1,5 @@
+import { Patterns } from '@musical-patterns/pattern'
 import { OnUpdate, setupPerformer } from '@musical-patterns/performer'
-import { Patterns } from '@musical-patterns/registry'
 import * as React from 'react'
 import { render } from 'react-dom'
 import { Provider } from 'react-redux'

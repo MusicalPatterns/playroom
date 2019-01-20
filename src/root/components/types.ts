@@ -1,5 +1,4 @@
-import { Spec } from '@musical-patterns/pattern'
-import { Id, Patterns } from '@musical-patterns/registry'
+import { Id, Patterns, Spec } from '@musical-patterns/pattern'
 import { Maybe, Time } from '@musical-patterns/utilities'
 
 interface AppProps {

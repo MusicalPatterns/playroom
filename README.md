@@ -20,7 +20,7 @@ These files are:
 
 ```
 import { setupPlayroom } from '@musical-patterns/playroom'
-import { Patterns } from '@musical-patterns/registry'
+import { Patterns } from '@musical-patterns/pattern'
 
 const patterns: Patterns = {
 	// your patterns here

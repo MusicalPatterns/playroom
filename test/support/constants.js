@@ -1,6 +1,5 @@
-import { StandardSpecProperties } from '@musical-patterns/pattern'
+import { Id, StandardSpecProperties } from '@musical-patterns/pattern'
 import { patterns } from '@musical-patterns/pattern-playroom-test'
-import { Id } from '@musical-patterns/registry'
 
 const {
     [ Id.PLAYROOM_TEST_SPEC_CONTROLS ]: playroomTestSpecControls,
