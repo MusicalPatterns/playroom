@@ -4,7 +4,7 @@ import {
     CompilePatternParameters,
 } from '@musical-patterns/compiler'
 import { Pattern } from '@musical-patterns/pattern'
-import { Note, perform, ThreadSpec } from '@musical-patterns/performer'
+import { setThreadSpecs, ThreadSpec } from '@musical-patterns/performer'
 import { doAsync, logMessageToConsole, Time } from '@musical-patterns/utilities'
 import * as React from 'react'
 import { connect } from 'react-redux'
@@ -45,7 +45,7 @@ const PatternListener: (patternListenerProps: PatternListenerProps) => JSX.Eleme
             const totalDuration: Time = await calculatePatternTotalCompiledDuration(compilePatternParameters)
             setTotalDuration(totalDuration)
 
-            await perform(threadSpecs)
+            await setThreadSpecs(threadSpecs)
         })
 
         return <div/>
