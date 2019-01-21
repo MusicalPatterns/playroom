@@ -6,7 +6,7 @@ const path = require('path')
 const { DefinePlugin } = require('webpack')
 
 module.exports = merge(common, {
-    entry: './test/support/infrastructure/entryForTest.js',
+    entry: './test/support/infrastructure/playroom.js',
     devServer: {
         disableHostCheck: true,
         port: PLAYROOM_TEST_PORT,
