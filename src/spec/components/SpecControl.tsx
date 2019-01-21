@@ -1,5 +1,5 @@
 import { Spec, SpecPropertyType } from '@musical-patterns/pattern'
-import { Maybe } from '@musical-patterns/utilities'
+import { camelCaseToLowerCase, Maybe } from '@musical-patterns/utilities'
 import * as React from 'react'
 import { DomValue, SecretSelectorsForTest } from '../../types'
 import {
@@ -10,7 +10,7 @@ import {
 import { SpecStateKeys } from '../state'
 import { InvalidSpecMessages, SpecControlBooleanStates } from '../types'
 import { buildControl } from './buildControl'
-import { presentSpecKey, stringifyIfNecessary } from './helpers'
+import { stringifyIfNecessary } from './helpers'
 import { ControlProps, SpecControlProps, SpecControlStates } from './types'
 
 const SpecControl: (specControlProps: SpecControlProps) => JSX.Element =
@@ -76,7 +76,7 @@ const SpecControl: (specControlProps: SpecControlProps) => JSX.Element =
         return (
             <div {...{ className: 'pattern-spec-control', id: specKey }}>
                 <span {...{ className: secretClassName }}>{stringifyIfNecessary(submittedSpecValue)}</span>
-                <div>{formattedName || presentSpecKey(specKey)}</div>
+                <div>{formattedName || camelCaseToLowerCase(specKey)}</div>
                 {control}
                 <button {...{
                     checked: specValue,
