@@ -1,3 +1,4 @@
+const { PLAYROOM_PORT } = require('@musical-patterns/utilities')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const CopyWebpackPlugin = require('copy-webpack-plugin')
 const FaviconsWebpackPlugin = require('favicons-webpack-plugin')
@@ -10,7 +11,7 @@ module.exports = merge(common, {
     devtool: 'eval-source-map',
     devServer: {
         disableHostCheck: true,
-        port: 8083,
+        port: PLAYROOM_PORT,
         open: true,
     },
     output: {

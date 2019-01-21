@@ -1,5 +1,6 @@
 import { Id, StandardSpecProperties } from '@musical-patterns/pattern'
 import { patterns } from '@musical-patterns/pattern-playroom-test'
+import { PLAYROOM_TEST_PORT } from '@musical-patterns/utilities'
 
 const {
     [ Id.PLAYROOM_TEST_SPEC_CONTROLS ]: playroomTestSpecControls,
@@ -11,7 +12,7 @@ const {
     [ Id.PLAYROOM_TEST_PRESETS ]: playroomTestPresets,
 } = patterns
 
-const APP_URL = 'http://localhost:8081'
+const APP_URL = `http://localhost:${PLAYROOM_TEST_PORT}`
 
 const VALID_TEST_MODIFICATION = '2'
 const OUT_OF_RANGE_INVALID_TEST_MODIFICATION = '3'

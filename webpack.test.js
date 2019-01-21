@@ -1,3 +1,4 @@
+const { PLAYROOM_TEST_PORT } = require('@musical-patterns/utilities')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const common = require('./webpack.common')
 const merge = require('webpack-merge')
@@ -8,7 +9,7 @@ module.exports = merge(common, {
     entry: './test/support/infrastructure/entryForTest.js',
     devServer: {
         disableHostCheck: true,
-        port: 8081,
+        port: PLAYROOM_TEST_PORT,
     },
     output: {
         libraryTarget: 'var',
