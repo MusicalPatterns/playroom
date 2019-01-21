@@ -3,7 +3,7 @@ import { setTime, togglePaused } from '@musical-patterns/performer'
 import { BEGINNING, doAsync } from '@musical-patterns/utilities'
 import { BatchAction, batchActions } from 'redux-batched-actions'
 import { Action, ActionType } from '../../root'
-import { buildResetActions } from '../../spec'
+import { resetActions } from '../../spec'
 import { WIDTH_BELOW_WHICH_PATTERNS_LIST_CLOSES_UPON_PATTERN_SELECTION } from './constants'
 import { PatternChangeEventHandler, PatternChangeEventHandlerParameters } from './types'
 
@@ -14,7 +14,7 @@ const handlePatternChange: PatternChangeEventHandler =
         const specData: SpecData = patterns[ id ].specData
         const initialSpec: Spec = specData.initial
 
-        const actions: Action[] = buildResetActions(initialSpec)
+        const actions: Action[] = resetActions(initialSpec)
             .concat([
                 { type: ActionType.SET_DEFAULT_SPEC, data: initialSpec },
                 { type: ActionType.SET_PATTERN_ID, data: id },

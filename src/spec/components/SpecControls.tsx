@@ -3,19 +3,10 @@ import * as React from 'react'
 import { connect } from 'react-redux'
 import { Dispatch } from 'redux'
 import { ImmutableRootState, RootStateKeys } from '../../root'
-import {
-    buildSpecControlEventExtractor,
-    handleSpecControlBlur,
-    handleSpecControlChange,
-    handleSpecControlSubmit,
-} from '../events'
+import { buildSpecControlChangeHandler } from '../events'
 import { SpecStateKeys } from '../state'
 import { buildControls } from './buildControls'
-import {
-    SpecControlsProps,
-    SpecControlsPropsFromDispatch,
-    SpecControlsPropsFromState,
-} from './types'
+import { SpecControlsProps, SpecControlsPropsFromDispatch, SpecControlsPropsFromState } from './types'
 
 const mapStateToProps: (state: ImmutableRootState) => SpecControlsPropsFromState =
     (state: ImmutableRootState): SpecControlsPropsFromState => ({
@@ -24,23 +15,7 @@ const mapStateToProps: (state: ImmutableRootState) => SpecControlsPropsFromState
 
 const mapDispatchToProps: (dispatch: Dispatch) => SpecControlsPropsFromDispatch =
     (dispatch: Dispatch): SpecControlsPropsFromDispatch => ({
-        handleSpecBlur: buildSpecControlEventExtractor({
-            dispatch,
-            specControlEventHandler: handleSpecControlBlur,
-        }),
-        handleSpecButtonSubmit: buildSpecControlEventExtractor({
-            dispatch,
-            specControlEventHandler: handleSpecControlSubmit,
-        }),
-        handleSpecChange: buildSpecControlEventExtractor({
-            dispatch,
-            specControlEventHandler: handleSpecControlChange,
-        }),
-        handleSpecKeyboardSubmit: buildSpecControlEventExtractor({
-            abortIfNotSubmitting: true,
-            dispatch,
-            specControlEventHandler: handleSpecControlSubmit,
-        }),
+        handleSpecChange: buildSpecControlChangeHandler(dispatch),
     })
 
 const SpecControls: (specControlsProps: SpecControlsProps) => JSX.Element =

@@ -1,11 +1,6 @@
 import { Reducer } from 'redux'
 import { initialSpecState } from './initial'
-import {
-    ImmutableSpecState,
-    SpecStateAction,
-    SpecStateActionType,
-    SpecStateKeys,
-} from './types'
+import { ImmutableSpecState, SpecStateAction, SpecStateActionType, SpecStateKeys } from './types'
 
 const specReducer: Reducer<ImmutableSpecState, SpecStateAction> =
     // tslint:disable-next-line:cyclomatic-complexity
@@ -17,9 +12,6 @@ const specReducer: Reducer<ImmutableSpecState, SpecStateAction> =
             case SpecStateActionType.SET_DEFAULT_SPEC: {
                 return specState.set(SpecStateKeys.DEFAULT_SPEC, action.data)
             }
-            case SpecStateActionType.SET_DISABLED_SPEC_BUTTONS: {
-                return specState.set(SpecStateKeys.DISABLED_SPEC_BUTTONS, action.data)
-            }
             case SpecStateActionType.SET_SUBMITTED_SPEC: {
                 return specState.set(SpecStateKeys.SUBMITTED_SPEC, action.data)
             }
@@ -28,9 +20,6 @@ const specReducer: Reducer<ImmutableSpecState, SpecStateAction> =
             }
             case SpecStateActionType.SET_INVALID_SPEC_MESSAGES: {
                 return specState.set(SpecStateKeys.INVALID_SPEC_MESSAGES, action.data)
-            }
-            case SpecStateActionType.SET_UNSUBMITTED_SPEC_CONTROLS: {
-                return specState.set(SpecStateKeys.UNSUBMITTED_SPEC_CONTROLS, action.data)
             }
             case SpecStateActionType.SET_SPEC_ATTRIBUTES: {
                 return specState.set(SpecStateKeys.SPEC_ATTRIBUTES, action.data)

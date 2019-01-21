@@ -1,4 +1,4 @@
-import { clickElement, findElement } from 'puppet-strings'
+import { clickElement, fillInElement, findElement } from 'puppet-strings'
 import { SecretSelectorsForTest } from '../../../src/indexForTest'
 import { testGlobals } from '../../setup'
 import {
@@ -8,12 +8,12 @@ import {
     elementInnerText,
     LONG_ENOUGH_FOR_TIME_TO_HAVE_BEEN_RESET,
     LONG_ENOUGH_FOR_TIME_TO_PASS,
-    modify,
-    SPEC_RANGED_PROPERTY_ONE_KEY,
     refresh,
     selectOtherTestPattern,
     sleep,
+    SPEC_RANGED_PROPERTY_ONE_KEY,
     TIME_CONTROLS_PATTERN_ID,
+    VALID_TEST_MODIFICATION,
 } from '../../support'
 
 describe('time controls', () => {
@@ -106,7 +106,7 @@ describe('time controls', () => {
             const plentyOfTime = await currentTime()
 
             const input = await findElement(testGlobals.tab, `input[type=number]#${SPEC_RANGED_PROPERTY_ONE_KEY}`)
-            await modify(input)
+            await fillInElement(input, VALID_TEST_MODIFICATION)
 
             await sleep(LONG_ENOUGH_FOR_TIME_TO_HAVE_BEEN_RESET)
             let timeAfterResetting = await currentTime()

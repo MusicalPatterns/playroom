@@ -1,6 +1,5 @@
 export {
-    buildInitialSpecControlStates,
-    buildResetActions,
+    resetActions,
 } from './events'
 export {
     SpecStateActionType,
@@ -9,9 +8,6 @@ export {
     SpecStateAction,
     SpecStateKeys,
 } from './state'
-export {
-    SpecControlBooleanStates,
-} from './types'
 export {
     SpecComponent,
 } from './components'

@@ -3,31 +3,14 @@ import * as React from 'react'
 import { OptionedControlProps } from './types'
 
 const OptionedSpecControl: (optionedControlProps: OptionedControlProps) => JSX.Element =
-    (optionedControlProps: OptionedControlProps): JSX.Element => {
-        const {
-            onBlur,
-            onChange,
-            onKeyPress,
-            specKey,
-            specValue,
-            className,
-            constraint,
-        } = optionedControlProps
-
+    ({ onChange, specKey, specValue, className, constraint }: OptionedControlProps): JSX.Element => {
         const optionElements: JSX.Element[] = constraint.map(
             (option: OptionedConstraintOption, key: number): JSX.Element =>
                 <option {...{ key, value: option.key }}>{option.formattedName}</option>,
         )
 
         return (
-            <select {...{
-                className,
-                id: specKey,
-                onBlur,
-                onChange,
-                onKeyPress,
-                value: specValue,
-            }}>{optionElements}</select>
+            <select {...{ className, id: specKey, onChange, value: specValue }}>{optionElements}</select>
         )
     }
 

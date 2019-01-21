@@ -1,5 +1,6 @@
 import { RangedConstraint, SpecPropertyAttributes, SpecPropertyType } from '@musical-patterns/pattern'
 import { Maybe } from '@musical-patterns/utilities'
+import { DomValue } from '../../../types'
 
 const validByMin: (numericValue: number, min: Maybe<number>, excludeMin: boolean) => Maybe<string> =
     (numericValue: number, min: Maybe<number>, excludeMin: boolean): Maybe<string> => {
@@ -68,8 +69,8 @@ const validByRangedConstraint: (numericValue: number, constraint: Maybe<RangedCo
     }
 
 const validateSpecProperty:
-    (specValue: string, propertyAttributes: Maybe<SpecPropertyAttributes>) => Maybe<string> =
-    (specValue: string, propertyAttributes: Maybe<SpecPropertyAttributes>): Maybe<string> => {
+    (specValue: DomValue | boolean, propertyAttributes: Maybe<SpecPropertyAttributes>) => Maybe<string> =
+    (specValue: DomValue | boolean, propertyAttributes: Maybe<SpecPropertyAttributes>): Maybe<string> => {
         if (!propertyAttributes) {
             return undefined
         }
@@ -82,6 +83,7 @@ const validateSpecProperty:
 
         let numericValue: number
         try {
+            // @ts-ignore
             // tslint:disable-next-line:no-unsafe-any
             numericValue = JSON.parse(specValue)
         }

@@ -1,9 +1,8 @@
-import { clickElement, findElement } from 'puppet-strings'
-import { testGlobals } from '../../setup'
 import {
     A_BIT_LONGER,
     currentTime,
-    elementExists, LONG_ENOUGH_FOR_TIME_TO_HAVE_BEEN_RESET,
+    elementExists,
+    LONG_ENOUGH_FOR_TIME_TO_HAVE_BEEN_RESET,
     LONG_ENOUGH_FOR_TIME_TO_PASS,
     press,
     refreshWithTestPatternSelected,

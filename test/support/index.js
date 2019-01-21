@@ -7,12 +7,10 @@ export {
     elementValue,
     elementChecked,
     press,
-    modify,
     reset,
     loseFocus,
     refresh,
     refreshWithTestPatternSelected,
-    submitSelectByPressingEnter,
     currentTime,
 } from './control'
 export { startServer, stopServer } from './infrastructure'

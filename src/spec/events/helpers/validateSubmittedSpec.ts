@@ -1,15 +1,15 @@
 import { SpecValidationResults } from '@musical-patterns/pattern'
 import { Maybe } from '@musical-patterns/utilities'
-import { InvalidSpecMessages } from '../types'
-import { SpecValidationResult, ValidateSubmittedSpecParameters } from './types'
+import { InvalidSpecMessages } from '../../types'
+import { SpecValidationResult, ValidateSubmittedSpecParameters } from '../types'
 import { validateSpecProperty } from './validateSpecProperty'
 
 const validateSubmittedSpec: (parameters: ValidateSubmittedSpecParameters) => SpecValidationResult =
     (parameters: ValidateSubmittedSpecParameters): SpecValidationResult => {
-        const { updatedSpec, specAttributes, validationFunction, specKey } = parameters
+        const { updatedDisplayedSpec, specAttributes, validationFunction, specKey } = parameters
 
         const invalidMessageAccumulator: InvalidSpecMessages = {}
-        const reevaluatedInvalidMessages: InvalidSpecMessages = Object.entries(updatedSpec)
+        const reevaluatedInvalidMessages: InvalidSpecMessages = Object.entries(updatedDisplayedSpec)
             .reduce(
                 (accumulator: InvalidSpecMessages, [ key, val ]: [ string, string ]) => ({
                     ...accumulator,
@@ -22,7 +22,7 @@ const validateSubmittedSpec: (parameters: ValidateSubmittedSpecParameters) => Sp
 
         let customInvalidMessagesBasedOnEntireSpec: SpecValidationResults
         if (validationFunction) {
-            customInvalidMessagesBasedOnEntireSpec = validationFunction(updatedSpec)
+            customInvalidMessagesBasedOnEntireSpec = validationFunction(updatedDisplayedSpec)
         }
 
         const updatedInvalidMessages: InvalidSpecMessages = {

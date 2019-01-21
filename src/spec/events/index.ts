@@ -1,19 +1,11 @@
-export { handleSpecControlBlur } from './handleSpecControlBlur'
-export { handleSpecControlChange } from './handleSpecControlChange'
-export { handleSpecControlSubmit } from './handleSpecControlSubmit'
-export { buildSpecControlEventExtractor } from './buildSpecControlEventExtractor'
-export { buildSpecControlEventAttacher } from './buildSpecControlEventAttacher'
-export { buildInitialSpecControlStates } from './buildInitialSpecControlStates'
+export { buildSpecControlChangeHandler } from './handleSpecControlChange'
 export { handleReset } from './handleReset'
-export { buildResetActions } from './resetActions'
-export { buildPresetSubmitHandler } from './handlePresetSubmit'
+export { buildPresetChangeHandler } from './handlePresetChange'
 
+export { resetActions } from './helpers'
 export {
-    BuildSpecControlEventExtractorParameters,
-    BuildSpecControlEventExtractor,
-    SpecControlEventExtractor,
-    SpecEvent,
-    SpecEventParameters,
-    SpecControlEventAttacher,
-    PresetSubmitHandler,
+    BuildSpecControlChangeHandler,
+    SpecControlChangeHandler,
+    SpecChangeEventParameters,
+    PresetChangeHandler,
 } from './types'

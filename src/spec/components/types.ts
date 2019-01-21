@@ -10,8 +10,8 @@ import {
     SpecPropertyType,
 } from '@musical-patterns/pattern'
 import { DictionaryOf, Maybe } from '@musical-patterns/utilities'
-import { DomValue } from '../../types'
-import { PresetSubmitHandler, SpecControlEventAttacher, SpecControlEventExtractor } from '../events'
+import { DomValue, EventHandler } from '../../types'
+import { PresetChangeHandler, SpecControlChangeHandler } from '../events'
 import { ImmutableSpecState } from '../state'
 
 interface SpecControlsPropsFromState {
@@ -19,10 +19,7 @@ interface SpecControlsPropsFromState {
 }
 
 interface SpecControlsPropsFromDispatch {
-    handleSpecBlur: SpecControlEventExtractor,
-    handleSpecButtonSubmit: SpecControlEventExtractor,
-    handleSpecChange: SpecControlEventExtractor,
-    handleSpecKeyboardSubmit: SpecControlEventExtractor,
+    handleSpecChange: SpecControlChangeHandler,
 }
 
 interface SpecControlsProps extends SpecControlsPropsFromState, SpecControlsPropsFromDispatch {}
@@ -47,15 +44,12 @@ interface SpecProps extends SpecPropsFromState, SpecPropsFromDispatch {}
 
 enum SpecControlStates {
     INVALID = 'invalid',
-    UNSUBMITTED = 'unsubmitted',
-    VALID_AND_SUBMITTED = 'valid-and-submitted',
+    VALID = 'valid',
 }
 
 interface ControlProps {
     className: string,
-    onBlur: SpecControlEventAttacher,
-    onChange: SpecControlEventAttacher,
-    onKeyPress: SpecControlEventAttacher,
+    onChange: EventHandler,
     specKey: string,
     specValue: DomValue | boolean,
 }
@@ -81,7 +75,7 @@ interface BuildControlsProps {
 }
 
 interface PresetsPropsFromDispatch {
-    presetSubmitHandler: PresetSubmitHandler,
+    presetChangeHandler: PresetChangeHandler,
 }
 
 interface PresetsProps extends PresetsPropsFromDispatch {

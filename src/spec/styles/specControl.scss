@@ -9,7 +9,7 @@
 
   margin-bottom: $border-size;
 
-  div, input, button, select {
+  div, input, select {
     margin-left: $small;
     min-width: $huge;
     margin-bottom: $border-size;
@@ -36,13 +36,5 @@
     &.invalid {
       @include glow($invalid);
     }
-
-    &.unsubmitted {
-      @include glow($unsubmitted);
-    }
-  }
-
-  button {
-    flex: 2584;
   }
 }

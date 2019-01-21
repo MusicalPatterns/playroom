@@ -3,7 +3,7 @@ import { DomValue } from '../../types'
 
 const extractValueFromEvent: (event: React.SyntheticEvent | React.KeyboardEvent) => DomValue =
     (event: React.SyntheticEvent | React.KeyboardEvent): DomValue => {
-        const target: HTMLInputElement | HTMLButtonElement = event.target as HTMLInputElement | HTMLButtonElement
+        const target: HTMLInputElement = event.target as HTMLInputElement
 
         try {
             // tslint:disable-next-line:no-unsafe-any
