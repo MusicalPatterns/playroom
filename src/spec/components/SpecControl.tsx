@@ -1,28 +1,28 @@
-import { Spec, SpecPropertyType } from '@musical-patterns/pattern'
-import { camelCaseToLowerCase, Maybe } from '@musical-patterns/utilities'
+import { SpecPropertyType } from '@musical-patterns/pattern'
+import { camelCaseToLowerCase } from '@musical-patterns/utilities'
 import * as React from 'react'
-import { DomValue, EventHandler, SecretSelectorsForTest } from '../../types'
+import { EventHandler, SecretSelectorsForTest } from '../../types'
 import { SpecChangeEventParameters } from '../events'
-import { SpecStateKeys } from '../state'
-import { InvalidSpecMessages } from '../types'
 import { buildControl } from './buildControl'
-import { stringifyIfNecessary } from './helpers'
+import { specControlId, stringifyIfNecessary } from './helpers'
 import { ControlProps, SpecControlProps, SpecControlStates } from './types'
 
 const SpecControl: (specControlProps: SpecControlProps) => JSX.Element =
-    ({ specKey, specControlsProps, specPropertyAttributes }: SpecControlProps): JSX.Element => {
+    (specControlProps: SpecControlProps): JSX.Element => {
+        const {
+            arrayedPropertyIndex,
+            invalidMessage,
+            secretSubmittedSpecValue,
+            specKey,
+            specValue,
+            specControlsProps,
+            specPropertyAttributes,
+        } = specControlProps
         const { handleSpecChange, specState } = specControlsProps
         const { specPropertyType: propertyType, constraint, formattedName } = specPropertyAttributes
 
-        const displayedSpec: Spec = specState.get(SpecStateKeys.DISPLAYED_SPEC)
-        const invalidSpecMessages: InvalidSpecMessages = specState.get(SpecStateKeys.INVALID_SPEC_MESSAGES)
-        const submittedSpec: Spec = specState.get(SpecStateKeys.SUBMITTED_SPEC)
-
-        const specValue: DomValue = displayedSpec[ specKey ] as DomValue
-        const submittedSpecValue: DomValue = submittedSpec[ specKey ] as DomValue
-        const invalidMessage: Maybe<string> = invalidSpecMessages[ specKey ]
-
         const specChangeEventParameters: SpecChangeEventParameters = {
+            arrayedPropertyIndex,
             isToggle: propertyType === SpecPropertyType.TOGGLED,
             specKey,
             specState,
@@ -31,16 +31,19 @@ const SpecControl: (specControlProps: SpecControlProps) => JSX.Element =
             handleSpecChange({ ...specChangeEventParameters, event })
         }
 
+        const isNotAnArrayedProperty: boolean = arrayedPropertyIndex === undefined
+        const id: string = specControlId({ isNotAnArrayedProperty, arrayedPropertyIndex, specKey })
+
         const className: string = !!invalidMessage ? SpecControlStates.INVALID : SpecControlStates.VALID
-        const controlProps: ControlProps = { className, onChange, specKey, specValue }
+        const controlProps: ControlProps = { className, onChange, id, specValue }
         const control: JSX.Element[] = buildControl({ propertyType, controlProps, constraint })
 
         const secretClassName: string = SecretSelectorsForTest.SECRET_SUBMITTED_SPEC_CONTROL
 
         return (
-            <div {...{ className: 'pattern-spec-control', id: specKey }}>
-                <span {...{ className: secretClassName }}>{stringifyIfNecessary(submittedSpecValue)}</span>
-                <div>{formattedName || camelCaseToLowerCase(specKey)}</div>
+            <div {...{ className: 'pattern-spec-control', id }}>
+                <span {...{ className: secretClassName }}>{stringifyIfNecessary(secretSubmittedSpecValue)}</span>
+                {isNotAnArrayedProperty && <div>{formattedName || camelCaseToLowerCase(specKey)}</div>}
                 {control}
                 {invalidMessage && <div {...{ className: 'invalid-message' }}>{invalidMessage}</div>}
             </div>

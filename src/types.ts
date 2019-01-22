@@ -21,6 +21,10 @@ type AsyncEventHandler = (event: React.SyntheticEvent) => Promise<void>
 
 type DomValue = string | number
 
+type DomValueOrChecked = DomValue | boolean
+
+type SpecValue = DomValueOrChecked | DomValueOrChecked[]
+
 export {
     DispatchAsProp,
     SecretSelectorsForTest,
@@ -28,4 +32,6 @@ export {
     AsyncEventHandler,
     EventAsProp,
     DomValue,
+    DomValueOrChecked,
+    SpecValue,
 }

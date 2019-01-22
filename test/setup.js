@@ -1,3 +1,4 @@
+import { logMessageToConsole } from '@musical-patterns/utilities'
 import { closeBrowser, openChrome, openTab } from 'puppet-strings'
 import { APP_URL, DEFAULT_VIEWPORT_HEIGHT, DEFAULT_VIEWPORT_WIDTH, startServer, stopServer } from './support'
 
@@ -13,7 +14,7 @@ beforeAll(async done => {
         testGlobals.browser = await openChrome({ headless: true }, { timeout: PUPPETEER_TIMEOUT })
     }
     catch (e) {
-        console.log('Could not open the browser in time.', e)
+        logMessageToConsole('Could not open the browser in time.', e)
         fail('Could not open the browser in time. Please increase your Puppeteer timeout.')
         throw (e)
     }
@@ -22,7 +23,7 @@ beforeAll(async done => {
         testGlobals.tab = await openTab(testGlobals.browser, APP_URL, { timeout: PUPPETEER_TIMEOUT })
     }
     catch (e) {
-        console.log('Could not open the tab in time.', e)
+        logMessageToConsole('Could not open the tab in time.', e)
         fail('Could not open the tab in time. Please increase your Puppeteer timeout.')
         throw (e)
     }
@@ -32,7 +33,7 @@ beforeAll(async done => {
         await testGlobals.page.setViewport({ width: DEFAULT_VIEWPORT_WIDTH, height: DEFAULT_VIEWPORT_HEIGHT })
     }
     catch (e) {
-        console.log('Could not set up the page in time', e)
+        logMessageToConsole('Could not set up the page in time', e)
         fail('Could not set up the page in time. Please increase your Puppeteer timeout.')
         throw (e)
     }

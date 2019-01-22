@@ -4,15 +4,20 @@ import { testGlobals } from '../../setup'
 import {
     BAD_FORMAT_INVALID_TEST_MODIFICATION,
     elementExists,
-    elementInnerText, elementValue,
+    elementInnerText,
+    elementValue,
     loseFocus,
     OUT_OF_RANGE_INVALID_TEST_MODIFICATION,
     press,
-    refreshWithTestPatternSelected, SPEC_CONTROLS_PATTERN_OPTIONED_PROPERTY_ONE_MODIFIED_VALUE,
+    refreshWithTestPatternSelected,
+    SPEC_ARRAYED_PROPERTY_KEY,
+    SPEC_CONTROLS_PATTERN_OPTIONED_PROPERTY_ONE_MODIFIED_VALUE,
     SPEC_CONTROLS_PATTERN_RANGED_PROPERTY_ONE_INITIAL_VALUE,
-    SPEC_CONTROLS_PATTERN_RANGED_PROPERTY_ONE_MAX_VALUE, SPEC_OPTIONED_PROPERTY_ONE_KEY,
+    SPEC_CONTROLS_PATTERN_RANGED_PROPERTY_ONE_MAX_VALUE,
+    SPEC_OPTIONED_PROPERTY_ONE_KEY,
     SPEC_RANGED_PROPERTY_ONE_KEY,
-    SPEC_RANGED_PROPERTY_TWO_KEY, VALID_TEST_MODIFICATION,
+    SPEC_RANGED_PROPERTY_TWO_KEY,
+    VALID_TEST_MODIFICATION,
     VALIDATION_PATTERN_ID,
 } from '../../support'
 
@@ -185,6 +190,28 @@ describe('invalid controls', () => {
             expect(await elementExists(`input[type=number]#${SPEC_RANGED_PROPERTY_ONE_KEY}.${SpecControlStates.INVALID}`))
                 .toBeTruthy()
             expect(await elementExists(`input[type=number]#${SPEC_RANGED_PROPERTY_TWO_KEY}.${SpecControlStates.INVALID}`))
+                .toBeTruthy()
+
+            done()
+        })
+    })
+
+    describe('arrayed controls', () => {
+        it('only marks the specific element which is invalid', async done => {
+            await refreshWithTestPatternSelected()
+
+            const control = await findElement(testGlobals.tab, `input[type=number]#${SPEC_ARRAYED_PROPERTY_KEY}-2`)
+            await fillInElement(control, BAD_FORMAT_INVALID_TEST_MODIFICATION)
+
+            expect(await elementExists(`input[type=number]#${SPEC_ARRAYED_PROPERTY_KEY}-0.${SpecControlStates.VALID}`))
+                .toBeTruthy()
+            expect(await elementExists(`input[type=number]#${SPEC_ARRAYED_PROPERTY_KEY}-1.${SpecControlStates.VALID}`))
+                .toBeTruthy()
+            expect(await elementExists(`input[type=number]#${SPEC_ARRAYED_PROPERTY_KEY}-2.${SpecControlStates.INVALID}`))
+                .toBeTruthy()
+            expect(await elementExists(`input[type=number]#${SPEC_ARRAYED_PROPERTY_KEY}-3.${SpecControlStates.VALID}`))
+                .toBeTruthy()
+            expect(await elementExists(`input[type=number]#${SPEC_ARRAYED_PROPERTY_KEY}-4.${SpecControlStates.VALID}`))
                 .toBeTruthy()
 
             done()

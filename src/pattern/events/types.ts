@@ -5,8 +5,7 @@ interface PatternChangeEventHandlerParameters extends PropsFromApp, DispatchAsPr
 
 type PatternChangeEventHandler = (parameters: PatternChangeEventHandlerParameters) => Promise<void>
 
-interface PatternChangeEventExtractorParameters extends PropsFromAppBeforeSelectingPattern, EventAsProp {
-}
+interface PatternChangeEventExtractorParameters extends PropsFromAppBeforeSelectingPattern, EventAsProp {}
 
 type PatternChangeEventExtractor = (parameters: PatternChangeEventExtractorParameters) => void
 

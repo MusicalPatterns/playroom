@@ -1,7 +1,16 @@
-import { DictionaryOf, Maybe } from '@musical-patterns/utilities'
+import { DictionaryOf } from '@musical-patterns/utilities'
 
-type InvalidSpecMessages = DictionaryOf<Maybe<string>>
+type SingularPropertyInvalidSpecMessage = string | undefined
+
+type ArrayedPropertyInvalidSpecMessage = SingularPropertyInvalidSpecMessage[] | undefined
+
+type InvalidSpecMessage = SingularPropertyInvalidSpecMessage | ArrayedPropertyInvalidSpecMessage
+
+type InvalidSpecMessages = DictionaryOf<InvalidSpecMessage>
 
 export {
+    InvalidSpecMessage,
+    SingularPropertyInvalidSpecMessage,
+    ArrayedPropertyInvalidSpecMessage,
     InvalidSpecMessages,
 }

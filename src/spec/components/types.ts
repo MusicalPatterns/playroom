@@ -9,10 +9,11 @@ import {
     SpecPropertyAttributes,
     SpecPropertyType,
 } from '@musical-patterns/pattern'
-import { DictionaryOf, Maybe } from '@musical-patterns/utilities'
-import { DomValue, EventHandler } from '../../types'
+import { DictionaryOf, Index, Maybe } from '@musical-patterns/utilities'
+import { DomValue, DomValueOrChecked, EventAsProp, EventHandler } from '../../types'
 import { PresetChangeHandler, SpecControlChangeHandler } from '../events'
 import { ImmutableSpecState } from '../state'
+import { SingularPropertyInvalidSpecMessage } from '../types'
 
 interface SpecControlsPropsFromState {
     specState: ImmutableSpecState,
@@ -25,9 +26,13 @@ interface SpecControlsPropsFromDispatch {
 interface SpecControlsProps extends SpecControlsPropsFromState, SpecControlsPropsFromDispatch {}
 
 interface SpecControlProps {
+    arrayedPropertyIndex?: Index,
+    invalidMessage: SingularPropertyInvalidSpecMessage,
+    secretSubmittedSpecValue: DomValueOrChecked,
     specControlsProps: SpecControlsProps,
     specKey: string,
     specPropertyAttributes: SpecPropertyAttributes,
+    specValue: DomValueOrChecked,
 }
 
 interface SpecPropsFromState {
@@ -49,9 +54,9 @@ enum SpecControlStates {
 
 interface ControlProps {
     className: string,
+    id: string,
     onChange: EventHandler,
-    specKey: string,
-    specValue: DomValue | boolean,
+    specValue: DomValueOrChecked,
 }
 
 interface OptionedControlProps extends ControlProps {
@@ -89,6 +94,32 @@ interface BuildControlProps {
     propertyType: SpecPropertyType,
 }
 
+interface AddOrRemoveButtonPropsFromParent {
+    displayedSpec: Spec,
+    specKey: string,
+}
+
+interface AddOrRemoveButtonPropsFromDispatch {
+    handleAddOrRemove: (parameters: HandleAddOrRemoveParameters) => void,
+}
+
+interface AddOrRemoveButtonProps extends AddOrRemoveButtonPropsFromDispatch, AddOrRemoveButtonPropsFromParent {}
+
+interface HandleAddOrRemoveParameters extends EventAsProp, AddOrRemoveButtonPropsFromParent {}
+
+interface AddOrRemoveButtonPropsFromParent {
+    displayedSpec: Spec,
+    specKey: string,
+}
+
+interface AddOrRemoveButtonPropsFromDispatch {
+    handleAddOrRemove: (parameters: HandleAddOrRemoveParameters) => void,
+}
+
+interface AddOrRemoveButtonProps extends AddOrRemoveButtonPropsFromDispatch, AddOrRemoveButtonPropsFromParent {}
+
+interface HandleAddOrRemoveParameters extends EventAsProp, AddOrRemoveButtonPropsFromParent {}
+
 export {
     SpecControlProps,
     SpecControlsProps,
@@ -106,4 +137,8 @@ export {
     PresetsPropsFromDispatch,
     BuildControlProps,
     ToggledControlProps,
+    AddOrRemoveButtonPropsFromParent,
+    HandleAddOrRemoveParameters,
+    AddOrRemoveButtonPropsFromDispatch,
+    AddOrRemoveButtonProps,
 }

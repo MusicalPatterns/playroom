@@ -7,8 +7,7 @@ interface PatternListPropsFromDispatch {
     handlePatternChangeEvent: PatternChangeEventExtractor,
 }
 
-interface PatternListProps extends PropsFromAppBeforeSelectingPattern, PatternListPropsFromDispatch {
-}
+interface PatternListProps extends PropsFromAppBeforeSelectingPattern, PatternListPropsFromDispatch {}
 
 interface PatternListItemProps {
     id?: Id,

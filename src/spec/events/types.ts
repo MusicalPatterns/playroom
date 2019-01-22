@@ -1,11 +1,13 @@
 import { Spec, SpecAttributes, SpecValidationFunction } from '@musical-patterns/pattern'
-import { DictionaryOf } from '@musical-patterns/utilities'
+import { DictionaryOf, Index } from '@musical-patterns/utilities'
 import { Dispatch } from 'redux'
-import { DispatchAsProp, DomValue, EventAsProp } from '../../types'
+import { DispatchAsProp, EventAsProp } from '../../types'
+import { AddOrRemoveButtonPropsFromParent } from '../components'
 import { ImmutableSpecState } from '../state'
 import { InvalidSpecMessages } from '../types'
 
 interface SpecChangeEventParameters {
+    arrayedPropertyIndex?: Index,
     isToggle: boolean,
     specKey: string,
     specState: ImmutableSpecState,
@@ -39,6 +41,9 @@ interface PresetChangeHandlerParameters extends EventAsProp {
 
 type PresetChangeHandler = (parameters: PresetChangeHandlerParameters) => void
 
+interface HandleArrayedPropertyAddOrRemoveParameters extends EventAsProp, DispatchAsProp,
+    AddOrRemoveButtonPropsFromParent {}
+
 export {
     SpecChangeEventParameters,
     SpecControlChangeHandler,
@@ -49,4 +54,5 @@ export {
     SpecValidationResult,
     PresetChangeHandler,
     PresetChangeHandlerParameters,
+    HandleArrayedPropertyAddOrRemoveParameters,
 }

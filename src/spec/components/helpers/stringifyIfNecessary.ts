@@ -1,7 +1,7 @@
-import { DomValue } from '../../../types'
+import { DomValueOrChecked } from '../../../types'
 
-const stringifyIfNecessary: (value: DomValue | boolean) => string =
-    (value: DomValue | boolean): string =>
+const stringifyIfNecessary: (value: DomValueOrChecked) => string =
+    (value: DomValueOrChecked): string =>
         typeof value === 'string' ? value : JSON.stringify(value)
 
 export {

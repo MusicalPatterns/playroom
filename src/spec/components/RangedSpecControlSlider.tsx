@@ -5,21 +5,19 @@ import { RangedControlProps } from './types'
 
 const minAndMaxPropsFromConstraint: (constraint: RangedConstraint) => { max: number, min: number } =
     (constraint: RangedConstraint): { max: number, min: number } => ({
-        max: constraint && constraint.max || DEFAULT_SPEC_BOUND,
-        min: constraint && constraint.min || -DEFAULT_SPEC_BOUND,
+        max: constraint && constraint.max !== undefined ? constraint.max : DEFAULT_SPEC_BOUND,
+        min: constraint && constraint.min !== undefined ? constraint.min : -DEFAULT_SPEC_BOUND,
     })
 
 const RangedSpecControlSlider: (rangedControlProps: RangedControlProps) => JSX.Element =
-    (rangedControlProps: RangedControlProps): JSX.Element => {
-        const { constraint, onChange, specKey, specValue, className } = rangedControlProps
-
+    ({ constraint, onChange, id, specValue, className }: RangedControlProps): JSX.Element => {
         const { min, max } = minAndMaxPropsFromConstraint(constraint)
         const step: number = constraint && constraint.integer ? 1 : SPEC_NON_INTEGER_STEP
 
         return (
             <input {...{
                 className,
-                id: specKey,
+                id,
                 max,
                 min,
                 onChange,

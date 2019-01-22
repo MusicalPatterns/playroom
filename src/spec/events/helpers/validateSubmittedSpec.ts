@@ -1,6 +1,6 @@
 import { SpecValidationResults } from '@musical-patterns/pattern'
-import { Maybe } from '@musical-patterns/utilities'
-import { InvalidSpecMessages } from '../../types'
+import { SpecValue } from '../../../types'
+import { InvalidSpecMessage, InvalidSpecMessages } from '../../types'
 import { SpecValidationResult, ValidateSubmittedSpecParameters } from '../types'
 import { validateSpecProperty } from './validateSpecProperty'
 
@@ -11,14 +11,15 @@ const validateSubmittedSpec: (parameters: ValidateSubmittedSpecParameters) => Sp
         const invalidMessageAccumulator: InvalidSpecMessages = {}
         const reevaluatedInvalidMessages: InvalidSpecMessages = Object.entries(updatedDisplayedSpec)
             .reduce(
-                (accumulator: InvalidSpecMessages, [ key, val ]: [ string, string ]) => ({
+                (accumulator: InvalidSpecMessages, [ key, val ]: [ string, SpecValue ]) => ({
                     ...accumulator,
                     [ key ]: validateSpecProperty(val, specAttributes[ key ]),
                 }),
                 invalidMessageAccumulator,
             )
 
-        const standardInvalidMessageForThisProperty: Maybe<string> = reevaluatedInvalidMessages[ specKey ]
+        const standardInvalidMessageForThisProperty: InvalidSpecMessage =
+            reevaluatedInvalidMessages[ specKey ]
 
         let customInvalidMessagesBasedOnEntireSpec: SpecValidationResults
         if (validationFunction) {

@@ -1,0 +1,12 @@
+@import '../../sizes';
+
+.add, .remove {
+  margin-left: $small;
+  margin-bottom: $border-size;
+}
+
+.arrayed-control {
+  div {
+    font-size: $small;
+  }
+}

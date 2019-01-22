@@ -3,22 +3,28 @@ import { Maybe } from '@musical-patterns/utilities'
 import { Dispatch } from 'redux'
 import { batchActions } from 'redux-batched-actions'
 import { Action, ActionType, extractCheckedFromEvent, extractValueFromEvent } from '../../root'
-import { DomValue } from '../../types'
+import { DomValueOrChecked, SpecValue } from '../../types'
 import { SpecStateKeys } from '../state'
-import { validateSubmittedSpec } from './helpers'
+import { mergeEventValueIntoSpecValue, validateSubmittedSpec } from './helpers'
 import { BuildSpecControlChangeHandler, SpecControlChangeHandler, SpecControlChangeHandlerParameters } from './types'
 
 const buildSpecControlChangeHandler: BuildSpecControlChangeHandler =
     (dispatch: Dispatch): SpecControlChangeHandler =>
         async (parameters: SpecControlChangeHandlerParameters): Promise<void> => {
-            const { event, isToggle, specKey, specState } = parameters
+            const { arrayedPropertyIndex, event, isToggle, specKey, specState } = parameters
 
-            const specValue: DomValue | boolean = isToggle ?
+            const eventValue: DomValueOrChecked = isToggle ?
                 extractCheckedFromEvent(event) :
                 extractValueFromEvent(event)
 
-            const submittedSpec: Spec = specState.get(SpecStateKeys.SUBMITTED_SPEC)
             const displayedSpec: Spec = specState.get(SpecStateKeys.DISPLAYED_SPEC)
+
+            let specValue: SpecValue = eventValue
+            if (arrayedPropertyIndex !== undefined) {
+                specValue = mergeEventValueIntoSpecValue({ eventValue, arrayedPropertyIndex, displayedSpec, specKey })
+            }
+
+            const submittedSpec: Spec = specState.get(SpecStateKeys.SUBMITTED_SPEC)
             const specAttributes: SpecAttributes = specState.get(SpecStateKeys.SPEC_ATTRIBUTES)
             const validationFunction: Maybe<SpecValidationFunction> = specState.get(SpecStateKeys.VALIDATION_FUNCTION)
 
