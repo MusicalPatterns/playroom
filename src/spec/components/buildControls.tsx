@@ -1,10 +1,11 @@
 import { defaultSpecPropertyAttributes, Spec, SpecPropertyAttributes } from '@musical-patterns/pattern'
 import { camelCaseToLowerCase, to } from '@musical-patterns/utilities'
 import * as React from 'react'
-import { DomValueOrChecked, SpecValue } from '../../types'
+import { DomValueOrChecked, SecretSelectorsForTest, SpecValue } from '../../types'
 import { SpecStateKeys } from '../state'
 import { ArrayedPropertyInvalidSpecMessage, InvalidSpecMessages, SingularPropertyInvalidSpecMessage } from '../types'
 import AddButton from './AddButton'
+import { stringifyIfNecessary } from './helpers'
 import RemoveButton from './RemoveButton'
 import SpecControl from './SpecControl'
 import { BuildControlsProps } from './types'
@@ -55,6 +56,9 @@ const buildControls: (props: BuildControlsProps) => JSX.Element[] =
 
                         return (
                             <div {...{ key, id: specKey, className: 'arrayed-control' }}>
+                                <span {...{ className: SecretSelectorsForTest.SECRET_SUBMITTED_SPEC_CONTROL }}>
+                                    {stringifyIfNecessary(submittedSpecValueArray)}
+                                </span>
                                 <div>{specPropertyAttributes.formattedName || camelCaseToLowerCase(specKey)}</div>
                                 {controls}
                                 <AddButton {...{ specKey, displayedSpec }}/>

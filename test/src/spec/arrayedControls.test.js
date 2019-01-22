@@ -170,6 +170,19 @@ describe('arrayed controls', () => {
             done()
         })
 
+        it('removing the element immediately submits the change to the array', async done => {
+            expect(await elementInnerText(`#${SPEC_ARRAYED_PROPERTY_KEY} .${SecretSelectorsForTest.SECRET_SUBMITTED_SPEC_CONTROL}`))
+                .toBe(JSON.stringify(SPEC_CONTROLS_PATTERN_ARRAYED_PROPERTY_INITIAL_VALUE))
+
+            const removeButton = await findElement(testGlobals.tab, `#${SPEC_ARRAYED_PROPERTY_KEY} .remove`)
+            await clickElement(removeButton)
+
+            expect(await elementInnerText(`#${SPEC_ARRAYED_PROPERTY_KEY} .${SecretSelectorsForTest.SECRET_SUBMITTED_SPEC_CONTROL}`))
+                .toBe(JSON.stringify(SPEC_CONTROLS_PATTERN_ARRAYED_PROPERTY_INITIAL_VALUE.slice(0, SPEC_CONTROLS_PATTERN_ARRAYED_PROPERTY_INITIAL_VALUE.length - 1)))
+
+            done()
+        })
+
         it('disables the remove button when there are no elements left in the array', async done => {
             const removeButton = await findElement(testGlobals.tab, `#${SPEC_ARRAYED_PROPERTY_KEY} .remove`)
             await clickElement(removeButton)

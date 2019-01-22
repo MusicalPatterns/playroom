@@ -1,5 +1,6 @@
 import { Spec } from '@musical-patterns/pattern'
 import { apply, from, INITIAL, to } from '@musical-patterns/utilities'
+import { batchActions } from 'redux-batched-actions'
 import { ActionType } from '../../root'
 import { DomValueOrChecked } from '../../types'
 import { HandleArrayedPropertyAddOrRemoveParameters } from './types'
@@ -14,7 +15,10 @@ const handleArrayedPropertyElementRemove: (parameters: HandleArrayedPropertyAddO
             [ specKey ]: updatedArrayedSpecValue,
         }
 
-        dispatch({ type: ActionType.SET_DISPLAYED_SPEC, data: updatedSpec })
+        dispatch(batchActions([
+            { type: ActionType.SET_DISPLAYED_SPEC, data: updatedSpec },
+            { type: ActionType.SET_SUBMITTED_SPEC, data: updatedSpec },
+        ]))
     }
 
 export {
