@@ -216,5 +216,25 @@ describe('invalid controls', () => {
 
             done()
         })
+
+        it('runs validation when removing an element', async done => {
+            await refreshWithTestPatternSelected()
+            const testPattern = await findElement(testGlobals.tab, `#${VALIDATION_PATTERN_ID}`)
+            await clickElement(testPattern)
+
+            const removeButton = await findElement(testGlobals.tab, `#${SPEC_ARRAYED_PROPERTY_KEY} .remove`)
+            await clickElement(removeButton)
+
+            expect(await elementInnerText(`#${SPEC_ARRAYED_PROPERTY_KEY}-0 .invalid-message`))
+                .toBe('arrays can only be odd in length, duoy')
+            expect(await elementInnerText(`#${SPEC_ARRAYED_PROPERTY_KEY}-1 .invalid-message`))
+                .toBe('arrays can only be odd in length, duoy')
+            expect(await elementInnerText(`#${SPEC_ARRAYED_PROPERTY_KEY}-2 .invalid-message`))
+                .toBe('arrays can only be odd in length, duoy')
+            expect(await elementInnerText(`#${SPEC_ARRAYED_PROPERTY_KEY}-3 .invalid-message`))
+                .toBe('arrays can only be odd in length, duoy')
+
+            done()
+        })
     })
 })

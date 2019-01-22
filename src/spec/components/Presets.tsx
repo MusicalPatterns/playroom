@@ -3,9 +3,19 @@ import { deepEqual } from '@musical-patterns/utilities'
 import * as React from 'react'
 import { connect } from 'react-redux'
 import { Dispatch } from 'redux'
+import { ImmutableRootState, RootStateKeys } from '../../root'
 import { EventHandler } from '../../types'
 import { buildPresetChangeHandler } from '../events'
-import { PresetsProps, PresetsPropsFromDispatch } from './types'
+import { SpecStateKeys } from '../state'
+import { PresetsProps, PresetsPropsFromDispatch, PresetsPropsFromState } from './types'
+
+const mapStateToProps: (state: ImmutableRootState) => PresetsPropsFromState =
+    (state: ImmutableRootState): PresetsPropsFromState => ({
+        presets: state.get(RootStateKeys.SPEC)
+            .get(SpecStateKeys.PRESETS),
+        submittedSpec: state.get(RootStateKeys.SPEC)
+            .get(SpecStateKeys.SUBMITTED_SPEC),
+    })
 
 const mapDispatchToProps: (dispatch: Dispatch) => PresetsPropsFromDispatch =
     (dispatch: Dispatch): PresetsPropsFromDispatch => ({
@@ -14,6 +24,10 @@ const mapDispatchToProps: (dispatch: Dispatch) => PresetsPropsFromDispatch =
 
 const Presets: (props: PresetsProps) => JSX.Element =
     ({ presetChangeHandler, presets, submittedSpec }: PresetsProps): JSX.Element => {
+        if (!presets) {
+            return <div/>
+        }
+
         const options: JSX.Element[] = Object.keys(presets)
             .map((presetKey: string, key: number): JSX.Element =>
                 <option {...{ key: key + 1, value: presetKey }}>{presetKey}</option>)
@@ -41,4 +55,4 @@ const Presets: (props: PresetsProps) => JSX.Element =
         )
     }
 
-export default connect(undefined, mapDispatchToProps)(Presets)
+export default connect(mapStateToProps, mapDispatchToProps)(Presets)

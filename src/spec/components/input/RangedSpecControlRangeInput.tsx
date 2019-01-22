@@ -1,7 +1,7 @@
 import { RangedConstraint } from '@musical-patterns/pattern'
 import * as React from 'react'
-import { DEFAULT_SPEC_BOUND, SPEC_NON_INTEGER_STEP } from '../constants'
-import { RangedControlProps } from './types'
+import { DEFAULT_SPEC_BOUND, SPEC_NON_INTEGER_STEP } from './constants'
+import { RangedInputProps } from './types'
 
 const minAndMaxPropsFromConstraint: (constraint: RangedConstraint) => { max: number, min: number } =
     (constraint: RangedConstraint): { max: number, min: number } => ({
@@ -9,8 +9,8 @@ const minAndMaxPropsFromConstraint: (constraint: RangedConstraint) => { max: num
         min: constraint && constraint.min !== undefined ? constraint.min : -DEFAULT_SPEC_BOUND,
     })
 
-const RangedSpecControlSlider: (rangedControlProps: RangedControlProps) => JSX.Element =
-    ({ constraint, onChange, id, specValue, className }: RangedControlProps): JSX.Element => {
+const RangedSpecControlRangeInput: (rangedInputProps: RangedInputProps) => JSX.Element =
+    ({ constraint, onChange, id, specValue, className }: RangedInputProps): JSX.Element => {
         const { min, max } = minAndMaxPropsFromConstraint(constraint)
         const step: number = constraint && constraint.integer ? 1 : SPEC_NON_INTEGER_STEP
 
@@ -28,4 +28,4 @@ const RangedSpecControlSlider: (rangedControlProps: RangedControlProps) => JSX.E
         )
     }
 
-export default RangedSpecControlSlider
+export default RangedSpecControlRangeInput

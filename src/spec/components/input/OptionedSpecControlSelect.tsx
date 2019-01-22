@@ -1,9 +1,9 @@
 import { OptionedConstraintOption } from '@musical-patterns/pattern'
 import * as React from 'react'
-import { OptionedControlProps } from './types'
+import { OptionedInputProps } from './types'
 
-const OptionedSpecControl: (optionedControlProps: OptionedControlProps) => JSX.Element =
-    ({ onChange, id, specValue, className, constraint }: OptionedControlProps): JSX.Element => {
+const OptionedSpecControlSelect: (optionedInputProps: OptionedInputProps) => JSX.Element =
+    ({ onChange, id, specValue, className, constraint }: OptionedInputProps): JSX.Element => {
         const optionElements: JSX.Element[] = constraint.map(
             (option: OptionedConstraintOption, key: number): JSX.Element =>
                 <option {...{ key, value: option.key }}>{option.formattedName}</option>,
@@ -14,4 +14,4 @@ const OptionedSpecControl: (optionedControlProps: OptionedControlProps) => JSX.E
         )
     }
 
-export default OptionedSpecControl
+export default OptionedSpecControlSelect

@@ -6,4 +6,4 @@ export {
 
 export {
     AddOrRemoveButtonPropsFromParent,
-} from './types'
+} from './arrayed'

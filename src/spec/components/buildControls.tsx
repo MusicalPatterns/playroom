@@ -1,12 +1,9 @@
 import { defaultSpecPropertyAttributes, Spec, SpecPropertyAttributes } from '@musical-patterns/pattern'
-import { camelCaseToLowerCase, to } from '@musical-patterns/utilities'
 import * as React from 'react'
-import { DomValueOrChecked, SecretSelectorsForTest, SpecValue } from '../../types'
+import { DomValueOrChecked, SpecValue } from '../../types'
 import { SpecStateKeys } from '../state'
-import { ArrayedPropertyInvalidSpecMessage, InvalidSpecMessages, SingularPropertyInvalidSpecMessage } from '../types'
-import AddButton from './AddButton'
-import { stringifyIfNecessary } from './helpers'
-import RemoveButton from './RemoveButton'
+import { InvalidSpecMessages, SingularPropertyInvalidSpecMessage } from '../types'
+import { ArrayedSpecControl } from './arrayed'
 import SpecControl from './SpecControl'
 import { BuildControlsProps } from './types'
 
@@ -28,57 +25,27 @@ const buildControls: (props: BuildControlsProps) => JSX.Element[] =
                     const displayedSpecValue: SpecValue = displayedSpec[ specKey ] as SpecValue
 
                     if (specPropertyAttributes.isArray) {
-                        const displayedSpecValueArray: DomValueOrChecked[] = displayedSpecValue as DomValueOrChecked[]
-                        const submittedSpecValueArray: DomValueOrChecked[] = submittedSpecValue as DomValueOrChecked[]
-                        const controls: JSX.Element[] = displayedSpecValueArray.map(
-                            (value: DomValueOrChecked, index: number): JSX.Element => {
-                                let invalidMessage: SingularPropertyInvalidSpecMessage
-                                if (invalidSpecMessages[ specKey ]) {
-                                    const invalidMessagesArray: ArrayedPropertyInvalidSpecMessage =
-                                        invalidSpecMessages[ specKey ] as ArrayedPropertyInvalidSpecMessage
-                                    invalidMessage = invalidMessagesArray && invalidMessagesArray[ index ]
-                                }
-
-                                return (
-                                    <SpecControl {...{
-                                        arrayedPropertyIndex: to.Index(index),
-                                        invalidMessage,
-                                        key: index,
-                                        secretSubmittedSpecValue: submittedSpecValueArray[ index ],
-                                        specControlsProps,
-                                        specKey,
-                                        specPropertyAttributes,
-                                        specValue: value,
-                                    }}/>
-                                )
-                            },
-                        )
-
-                        return (
-                            <div {...{ key, id: specKey, className: 'arrayed-control' }}>
-                                <span {...{ className: SecretSelectorsForTest.SECRET_SUBMITTED_SPEC_CONTROL }}>
-                                    {stringifyIfNecessary(submittedSpecValueArray)}
-                                </span>
-                                <div>{specPropertyAttributes.formattedName || camelCaseToLowerCase(specKey)}</div>
-                                {controls}
-                                <AddButton {...{ specKey, displayedSpec }}/>
-                                <RemoveButton {...{ specKey, displayedSpec }}/>
-                            </div>
-                        )
+                        return <ArrayedSpecControl {...{
+                            displayedSpecValue,
+                            invalidSpecMessages,
+                            key,
+                            specControlsProps,
+                            specKey,
+                            specPropertyAttributes,
+                            specState,
+                            submittedSpecValue,
+                        }}/>
                     }
-                    else {
-                        return (
-                            <SpecControl {...{
-                                invalidMessage: invalidSpecMessages[ specKey ] as SingularPropertyInvalidSpecMessage,
-                                key,
-                                secretSubmittedSpecValue: submittedSpecValue as DomValueOrChecked,
-                                specControlsProps,
-                                specKey,
-                                specPropertyAttributes,
-                                specValue: displayedSpecValue as DomValueOrChecked,
-                            }}/>
-                        )
-                    }
+
+                    return <SpecControl {...{
+                        invalidMessage: invalidSpecMessages[ specKey ] as SingularPropertyInvalidSpecMessage,
+                        key,
+                        secretSubmittedSpecValue: submittedSpecValue as DomValueOrChecked,
+                        specControlsProps,
+                        specKey,
+                        specPropertyAttributes,
+                        specValue: displayedSpecValue as DomValueOrChecked,
+                    }}/>
                 },
             )
 

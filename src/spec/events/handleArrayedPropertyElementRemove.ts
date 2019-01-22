@@ -1,24 +1,22 @@
 import { Spec } from '@musical-patterns/pattern'
 import { apply, from, INITIAL, to } from '@musical-patterns/utilities'
 import { batchActions } from 'redux-batched-actions'
-import { ActionType } from '../../root'
+import { Action } from '../../root'
 import { DomValueOrChecked } from '../../types'
+import { SpecStateKeys } from '../state'
 import { HandleArrayedPropertyAddOrRemoveParameters } from './types'
+import { buildAttemptSubmitActions } from './validation'
 
 const handleArrayedPropertyElementRemove: (parameters: HandleArrayedPropertyAddOrRemoveParameters) => void =
-    ({ dispatch, event, specKey, displayedSpec }: HandleArrayedPropertyAddOrRemoveParameters): void => {
+    ({ dispatch, event, specKey, specState }: HandleArrayedPropertyAddOrRemoveParameters): void => {
+        const displayedSpec: Spec = specState.get(SpecStateKeys.DISPLAYED_SPEC)
         const arrayedSpecValue: DomValueOrChecked[] = displayedSpec[ specKey ] as DomValueOrChecked[]
         const updatedArrayedSpecValue: DomValueOrChecked[] =
             arrayedSpecValue.slice(from.Index(INITIAL), apply.Offset(arrayedSpecValue.length, to.Offset(-1)))
-        const updatedSpec: Spec = {
-            ...displayedSpec,
-            [ specKey ]: updatedArrayedSpecValue,
-        }
 
-        dispatch(batchActions([
-            { type: ActionType.SET_DISPLAYED_SPEC, data: updatedSpec },
-            { type: ActionType.SET_SUBMITTED_SPEC, data: updatedSpec },
-        ]))
+        const actions: Action[] = buildAttemptSubmitActions({ specState, specKey, specValue: updatedArrayedSpecValue })
+
+        dispatch(batchActions(actions))
     }
 
 export {

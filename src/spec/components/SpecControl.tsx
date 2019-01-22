@@ -3,9 +3,9 @@ import { camelCaseToLowerCase } from '@musical-patterns/utilities'
 import * as React from 'react'
 import { EventHandler, SecretSelectorsForTest } from '../../types'
 import { SpecChangeEventParameters } from '../events'
-import { buildControl } from './buildControl'
 import { specControlId, stringifyIfNecessary } from './helpers'
-import { ControlProps, SpecControlProps, SpecControlStates } from './types'
+import { buildInputElements, InputProps } from './input'
+import { SpecControlProps, SpecControlStates } from './types'
 
 const SpecControl: (specControlProps: SpecControlProps) => JSX.Element =
     (specControlProps: SpecControlProps): JSX.Element => {
@@ -35,8 +35,8 @@ const SpecControl: (specControlProps: SpecControlProps) => JSX.Element =
         const id: string = specControlId({ isNotAnArrayedProperty, arrayedPropertyIndex, specKey })
 
         const className: string = !!invalidMessage ? SpecControlStates.INVALID : SpecControlStates.VALID
-        const controlProps: ControlProps = { className, onChange, id, specValue }
-        const control: JSX.Element[] = buildControl({ propertyType, controlProps, constraint })
+        const inputProps: InputProps = { className, onChange, id, specValue }
+        const inputElements: JSX.Element[] = buildInputElements({ propertyType, inputProps, constraint })
 
         const secretClassName: string = SecretSelectorsForTest.SECRET_SUBMITTED_SPEC_CONTROL
 
@@ -44,7 +44,7 @@ const SpecControl: (specControlProps: SpecControlProps) => JSX.Element =
             <div {...{ className: 'pattern-spec-control', id }}>
                 <span {...{ className: secretClassName }}>{stringifyIfNecessary(secretSubmittedSpecValue)}</span>
                 {isNotAnArrayedProperty && <div>{formattedName || camelCaseToLowerCase(specKey)}</div>}
-                {control}
+                {inputElements}
                 {invalidMessage && <div {...{ className: 'invalid-message' }}>{invalidMessage}</div>}
             </div>
         )
