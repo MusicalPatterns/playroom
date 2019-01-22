@@ -10,10 +10,10 @@ import { PatternListProps, PatternListPropsFromDispatch } from './types'
 const sortByPublishDate: (entry: [ string, Pattern ], nextEntry: [ string, Pattern ]) => number =
     ([ _, pattern ]: [ string, Pattern ], [ __, nextPattern ]: [ string, Pattern ]): number => {
         if (pattern.metadata.mostRecentPublish < nextPattern.metadata.mostRecentPublish) {
-            return -1
+            return 1
         }
         if (pattern.metadata.mostRecentPublish > nextPattern.metadata.mostRecentPublish) {
-            return 1
+            return -1
         }
 
         return 0
