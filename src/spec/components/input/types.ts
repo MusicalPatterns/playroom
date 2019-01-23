@@ -1,5 +1,4 @@
-import { Constraint, OptionedConstraint, RangedConstraint, SpecPropertyType } from '@musical-patterns/pattern'
-import { Maybe } from '@musical-patterns/utilities'
+import { OptionedConstraint, RangedConstraint, SpecPropertyAttributes } from '@musical-patterns/pattern'
 import { DomValue, DomValueOrChecked, EventHandler } from '../../../types'
 
 interface InputProps {
@@ -15,7 +14,7 @@ interface OptionedInputProps extends InputProps {
 }
 
 interface RangedInputProps extends InputProps {
-    constraint: RangedConstraint,
+    constraint?: RangedConstraint,
     specValue: DomValue,
 }
 
@@ -24,9 +23,8 @@ interface ToggledInputProps extends InputProps {
 }
 
 interface BuildInputProps {
-    constraint: Maybe<Constraint>,
     inputProps: InputProps,
-    propertyType: SpecPropertyType,
+    specPropertyAttributes: SpecPropertyAttributes,
 }
 
 export {

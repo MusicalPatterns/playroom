@@ -1,14 +1,15 @@
-import { OptionedConstraint, RangedConstraint, SpecPropertyType } from '@musical-patterns/pattern'
+import { OptionedConstraint, SpecPropertyType } from '@musical-patterns/pattern'
 import * as React from 'react'
+import { buildRangedInputElements } from './buildRangedInputElements'
 import OptionedSpecControlSelect from './OptionedSpecControlSelect'
-import RangedSpecControlNumberInput from './RangedSpecControlNumberInput'
-import RangedSpecControlRangeInput from './RangedSpecControlRangeInput'
 import ToggledSpecControlCheckboxInput from './ToggledSpecControlCheckboxInput'
-import { BuildInputProps, OptionedInputProps, RangedInputProps, ToggledInputProps } from './types'
+import { BuildInputProps, OptionedInputProps, ToggledInputProps } from './types'
 
 const buildInputElements: (buildInputProps: BuildInputProps) => JSX.Element[] =
-    ({ propertyType, inputProps, constraint }: BuildInputProps): JSX.Element[] => {
-        switch (propertyType) {
+    (buildInputProps: BuildInputProps): JSX.Element[] => {
+        const { specPropertyAttributes, inputProps } = buildInputProps
+        const { specPropertyType, constraint } = specPropertyAttributes
+        switch (specPropertyType) {
             case SpecPropertyType.OPTIONED: {
                 return [
                     <OptionedSpecControlSelect {...{
@@ -19,18 +20,7 @@ const buildInputElements: (buildInputProps: BuildInputProps) => JSX.Element[] =
                 ]
             }
             case SpecPropertyType.RANGED: {
-                return [
-                    <RangedSpecControlNumberInput {...{
-                        ...inputProps as RangedInputProps,
-                        constraint: constraint as RangedConstraint,
-                        key: 0,
-                    }}/>,
-                    <RangedSpecControlRangeInput {...{
-                        ...inputProps as RangedInputProps,
-                        constraint: constraint as RangedConstraint,
-                        key: 1,
-                    }}/>,
-                ]
+                return buildRangedInputElements(buildInputProps)
             }
             case SpecPropertyType.TOGGLED: {
                 return [

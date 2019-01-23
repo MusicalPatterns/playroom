@@ -19,11 +19,11 @@ const SpecControl: (specControlProps: SpecControlProps) => JSX.Element =
             specPropertyAttributes,
         } = specControlProps
         const { handleSpecChange, specState } = specControlsProps
-        const { specPropertyType: propertyType, constraint, formattedName } = specPropertyAttributes
+        const { specPropertyType, formattedName } = specPropertyAttributes
 
         const specChangeEventParameters: SpecChangeEventParameters = {
             arrayedPropertyIndex,
-            isToggle: propertyType === SpecPropertyType.TOGGLED,
+            isToggle: specPropertyType === SpecPropertyType.TOGGLED,
             specKey,
             specState,
         }
@@ -36,7 +36,7 @@ const SpecControl: (specControlProps: SpecControlProps) => JSX.Element =
 
         const className: string = !!invalidMessage ? SpecControlStates.INVALID : SpecControlStates.VALID
         const inputProps: InputProps = { className, onChange, id, specValue }
-        const inputElements: JSX.Element[] = buildInputElements({ propertyType, inputProps, constraint })
+        const inputElements: JSX.Element[] = buildInputElements({ specPropertyAttributes, inputProps })
 
         const secretClassName: string = SecretSelectorsForTest.SECRET_SUBMITTED_SPEC_CONTROL
 

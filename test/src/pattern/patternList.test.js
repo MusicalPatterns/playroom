@@ -6,10 +6,10 @@ import {
     elementExists,
     elementInnerText,
     elementValue,
-    POST_SPEC_OPTIONED_PROPERTY_ONE_INITIAL_VALUE,
-    POST_SPEC_OPTIONED_PROPERTY_TWO_INITIAL_VALUE,
-    POST_SPEC_RANGED_PROPERTY_ONE_INITIAL_VALUE,
-    POST_SPEC_RANGED_PROPERTY_TWO_INITIAL_VALUE,
+    POST_PATTERN_OPTIONED_PROPERTY_ONE_INITIAL_VALUE,
+    POST_PATTERN_OPTIONED_PROPERTY_TWO_INITIAL_VALUE,
+    POST_PATTERN_RANGED_PROPERTY_ONE_INITIAL_VALUE,
+    POST_PATTERN_RANGED_PROPERTY_TWO_INITIAL_VALUE,
     refreshWithTestPatternSelected,
     selectOtherTestPattern,
     selectTestPattern,
@@ -49,25 +49,25 @@ describe('pattern list', () => {
     describe('making a selection from the pattern list', () => {
         describe('when it is a different pattern than the current selection', () => {
             it('changes the spec to the new pattern\'s defaults', async done => {
-                expect(await elementValue(`input[type=number]#${SPEC_RANGED_PROPERTY_ONE_KEY}`))
+                expect(await elementInnerText(`#${SPEC_RANGED_PROPERTY_ONE_KEY} .${SecretSelectorsForTest.SECRET_SUBMITTED_SPEC_CONTROL}`))
                     .toBe(`${SPEC_CONTROLS_PATTERN_RANGED_PROPERTY_ONE_INITIAL_VALUE}`)
-                expect(await elementValue(`input[type=number]#${SPEC_RANGED_PROPERTY_TWO_KEY}`))
+                expect(await elementInnerText(`#${SPEC_RANGED_PROPERTY_TWO_KEY} .${SecretSelectorsForTest.SECRET_SUBMITTED_SPEC_CONTROL}`))
                     .toBe(`${SPEC_CONTROLS_PATTERN_RANGED_PROPERTY_TWO_INITIAL_VALUE}`)
-                expect(await elementValue(`select#${SPEC_OPTIONED_PROPERTY_ONE_KEY}`))
+                expect(await elementInnerText(`#${SPEC_OPTIONED_PROPERTY_ONE_KEY} .${SecretSelectorsForTest.SECRET_SUBMITTED_SPEC_CONTROL}`))
                     .toBe(`${SPEC_CONTROLS_PATTERN_OPTIONED_PROPERTY_ONE_INITIAL_VALUE}`)
-                expect(await elementValue(`select#${SPEC_OPTIONED_PROPERTY_TWO_KEY}`))
+                expect(await elementInnerText(`#${SPEC_OPTIONED_PROPERTY_TWO_KEY} .${SecretSelectorsForTest.SECRET_SUBMITTED_SPEC_CONTROL}`))
                     .toBe(`${SPEC_CONTROLS_PATTERN_OPTIONED_PROPERTY_TWO_INITIAL_VALUE}`)
 
                 await selectOtherTestPattern()
 
-                expect(await elementValue(`input[type=number]#${SPEC_RANGED_PROPERTY_ONE_KEY}`))
-                    .toBe(`${POST_SPEC_RANGED_PROPERTY_ONE_INITIAL_VALUE}`)
-                expect(await elementValue(`input[type=number]#${SPEC_RANGED_PROPERTY_TWO_KEY}`))
-                    .toBe(`${POST_SPEC_RANGED_PROPERTY_TWO_INITIAL_VALUE}`)
-                expect(await elementValue(`select#${SPEC_OPTIONED_PROPERTY_ONE_KEY}`))
-                    .toBe(`${POST_SPEC_OPTIONED_PROPERTY_ONE_INITIAL_VALUE}`)
-                expect(await elementValue(`select#${SPEC_OPTIONED_PROPERTY_TWO_KEY}`))
-                    .toBe(`${POST_SPEC_OPTIONED_PROPERTY_TWO_INITIAL_VALUE}`)
+                expect(await elementInnerText(`#${SPEC_RANGED_PROPERTY_ONE_KEY} .${SecretSelectorsForTest.SECRET_SUBMITTED_SPEC_CONTROL}`))
+                    .toBe(`${POST_PATTERN_RANGED_PROPERTY_ONE_INITIAL_VALUE}`)
+                expect(await elementInnerText(`#${SPEC_RANGED_PROPERTY_TWO_KEY} .${SecretSelectorsForTest.SECRET_SUBMITTED_SPEC_CONTROL}`))
+                    .toBe(`${POST_PATTERN_RANGED_PROPERTY_TWO_INITIAL_VALUE}`)
+                expect(await elementInnerText(`#${SPEC_OPTIONED_PROPERTY_ONE_KEY} .${SecretSelectorsForTest.SECRET_SUBMITTED_SPEC_CONTROL}`))
+                    .toBe(`${POST_PATTERN_OPTIONED_PROPERTY_ONE_INITIAL_VALUE}`)
+                expect(await elementInnerText(`#${SPEC_OPTIONED_PROPERTY_TWO_KEY} .${SecretSelectorsForTest.SECRET_SUBMITTED_SPEC_CONTROL}`))
+                    .toBe(`${POST_PATTERN_OPTIONED_PROPERTY_TWO_INITIAL_VALUE}`)
 
                 done()
             })
