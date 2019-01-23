@@ -9,20 +9,20 @@ const buildRangedInputElements: (parameters: BuildInputProps) => JSX.Element[] =
         const { constraint, hideInput } = specPropertyAttributes as RangedSpecPropertyAttributes
         const inputElements: JSX.Element[] = []
 
-        if (hideInput !== RangedInputType.NUMBER) {
-            inputElements.push(
-                <RangedSpecControlNumberInput {...{
-                    ...inputProps as RangedInputProps,
-                    key: 0,
-                }}/>,
-            )
-        }
         if (hideInput !== RangedInputType.RANGE) {
             inputElements.push(
                 <RangedSpecControlRangeInput {...{
                     ...inputProps as RangedInputProps,
                     constraint,
                     key: 1,
+                }}/>,
+            )
+        }
+        if (hideInput !== RangedInputType.NUMBER) {
+            inputElements.push(
+                <RangedSpecControlNumberInput {...{
+                    ...inputProps as RangedInputProps,
+                    key: 0,
                 }}/>,
             )
         }

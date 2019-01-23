@@ -3,11 +3,12 @@ import { camelCaseToLowerCase } from '@musical-patterns/utilities'
 import * as React from 'react'
 import { EventHandler, SecretSelectorsForTest } from '../../types'
 import { SpecChangeEventParameters } from '../events'
-import { specControlId, stringifyIfNecessary } from './helpers'
+import { specControlId, stringifyIfNecessary, validityClassName } from './helpers'
 import { buildInputElements, InputProps } from './input'
-import { SpecControlProps, SpecControlStates } from './types'
+import { SpecControlProps } from './types'
 
 const SpecControl: (specControlProps: SpecControlProps) => JSX.Element =
+    // tslint:disable-next-line:cyclomatic-complexity
     (specControlProps: SpecControlProps): JSX.Element => {
         const {
             arrayedPropertyIndex,
@@ -19,7 +20,7 @@ const SpecControl: (specControlProps: SpecControlProps) => JSX.Element =
             specPropertyAttributes,
         } = specControlProps
         const { handleSpecChange, specState } = specControlsProps
-        const { specPropertyType, formattedName } = specPropertyAttributes
+        const { description, specPropertyType, formattedName, units } = specPropertyAttributes
 
         const specChangeEventParameters: SpecChangeEventParameters = {
             arrayedPropertyIndex,
@@ -34,7 +35,7 @@ const SpecControl: (specControlProps: SpecControlProps) => JSX.Element =
         const isNotAnArrayedProperty: boolean = arrayedPropertyIndex === undefined
         const id: string = specControlId({ isNotAnArrayedProperty, arrayedPropertyIndex, specKey })
 
-        const className: string = !!invalidMessage ? SpecControlStates.INVALID : SpecControlStates.VALID
+        const className: string = validityClassName(invalidMessage)
         const inputProps: InputProps = { className, onChange, id, specValue }
         const inputElements: JSX.Element[] = buildInputElements({ specPropertyAttributes, inputProps })
 
@@ -45,6 +46,8 @@ const SpecControl: (specControlProps: SpecControlProps) => JSX.Element =
                 <span {...{ className: secretClassName }}>{stringifyIfNecessary(secretSubmittedSpecValue)}</span>
                 {isNotAnArrayedProperty && <div>{formattedName || camelCaseToLowerCase(specKey)}</div>}
                 {inputElements}
+                {units && <div {...{ className: 'units' }}>{units}</div>}
+                {description && <div {...{ className: 'description' }}>{description}</div>}
                 {invalidMessage && <div {...{ className: 'invalid-message' }}>{invalidMessage}</div>}
             </div>
         )

@@ -45,4 +45,15 @@
     min-width: $big;
     margin: 0 0 0 $small;
   }
+
+  .units {
+    flex: 0;
+    min-width: $medium;
+    margin: 0;
+  }
+
+  .description {
+    flex: nth($fibonacci-series, 20);
+    font-style: italic;
+  }
 }
