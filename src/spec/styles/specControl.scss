@@ -16,14 +16,14 @@
   }
 
   div {
-    flex: 6765;
+    flex: nth($fibonacci-series, 20);
     text-align: right;
     font-size: $small;
   }
 
   input, select {
     padding: 0 $small;
-    flex: 4181;
+    flex: nth($fibonacci-series, 19);
     height: $big;
 
     border: none;
@@ -37,5 +37,12 @@
     &.invalid {
       @include glow($invalid);
     }
+  }
+
+  input[type=checkbox] {
+    cursor: pointer;
+    flex: 0;
+    min-width: $big;
+    margin: 0 0 0 $small;
   }
 }
