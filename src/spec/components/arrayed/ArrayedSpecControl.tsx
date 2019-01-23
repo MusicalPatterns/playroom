@@ -51,8 +51,10 @@ const ArrayedSpecControl: (props: ArrayedSpecControlProps) => JSX.Element =
                 </span>
                 <div>{specPropertyAttributes.formattedName || camelCaseToLowerCase(specKey)}</div>
                 {controls}
-                <AddButton {...{ specKey, specState }}/>
-                <RemoveButton {...{ specKey, specState }}/>
+                <div>
+                    <AddButton {...{ specKey, specState }}/>
+                    <RemoveButton {...{ specKey, specState }}/>
+                </div>
             </div>
         )
     }

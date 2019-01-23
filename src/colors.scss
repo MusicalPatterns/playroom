@@ -1,23 +1,23 @@
 $grey: #888888;
 
 $red: #ff0000;
-$yellow: #ffff00;
-$green: #00ff00;
-$teal: #00ffff;
+$yellow: #ffcc00;
+$green: #ccff00;
+$teal: #00ccff;
 $blue: #0000ff;
 $violet: #ff00ff;
 
 $black: #000000;
 $white: #ffffff;
 
-$almost-black: mix($black, mix($red, $grey, 100%), 85%);
+$almost-black: mix($black, mix($red, $grey, 100%), 90%);
 
 $darker-grey: mix($black, mix($yellow, $grey, 100% / 16), 70%);
 $dark-grey: mix($white, mix($green, $grey, 100% / 64), 50%);
 $light-grey: mix($white, mix($teal, $grey, 100% / 16), 70%);
 
 $lighter-grey: mix($white, mix($blue, $grey, 100% / 4), 85%);
-$almost-white: mix($white, mix($violet, $grey, 100%), 97.5%);
+$almost-white: mix($white, mix($violet, $grey, 100%), 96.75%);
 
 $invalid: #ddbbaa;
 $focus: #aabbdd;

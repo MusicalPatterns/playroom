@@ -6,7 +6,7 @@
 }
 
 .arrayed-control {
-  div {
-    font-size: $small;
-  }
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: column;
 }
