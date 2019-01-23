@@ -26,6 +26,7 @@ const handlePatternChange: PatternChangeEventHandler =
         if (window.innerWidth < WIDTH_BELOW_WHICH_PATTERNS_LIST_CLOSES_UPON_PATTERN_SELECTION) {
             actions.push({ type: ActionType.SET_PATTERNS_PANEL_OPEN, data: false })
         }
+        window.scrollTo(0, 0)
 
         const batchedAction: BatchAction = batchActions(actions)
         dispatch(batchedAction)
