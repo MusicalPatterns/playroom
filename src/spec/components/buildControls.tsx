@@ -1,4 +1,5 @@
 import { defaultSpecPropertyAttributes, Spec, SpecPropertyAttributes } from '@musical-patterns/pattern'
+import { ARBITRARILY_LARGE_NUMBER } from '@musical-patterns/utilities'
 import * as React from 'react'
 import { DomValueOrChecked, SpecValue } from '../../types'
 import { SpecStateKeys } from '../state'
@@ -10,7 +11,12 @@ import { BuildControlsProps } from './types'
 const buildControls: (props: BuildControlsProps) => JSX.Element[] =
     ({ specKeys, specAttributes, specControlsProps }: BuildControlsProps): JSX.Element[] =>
         specKeys
-            .sort()
+            .sort((specKey: string, nextSpecKey: string): number => {
+                const order: number = specAttributes[ specKey ].order || ARBITRARILY_LARGE_NUMBER
+                const nextOrder: number = specAttributes[ nextSpecKey ].order || ARBITRARILY_LARGE_NUMBER
+
+                return order < nextOrder ? -1 : 1
+            })
             .map(
                 (specKey: string, key: number): JSX.Element => {
                     const specPropertyAttributes: SpecPropertyAttributes =

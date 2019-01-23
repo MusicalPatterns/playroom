@@ -1,4 +1,4 @@
-import { Spec, SpecAttributes, SpecValidationFunction } from '@musical-patterns/pattern'
+import { Preset, Spec, SpecAttributes, SpecValidationFunction } from '@musical-patterns/pattern'
 import { DictionaryOf, Maybe, TypedMap } from '@musical-patterns/utilities'
 import { InvalidSpecMessages } from '../types'
 
@@ -19,7 +19,7 @@ interface SpecState {
     [ SpecStateKeys.SUBMITTED_SPEC ]: Spec,
     [ SpecStateKeys.SPEC_ATTRIBUTES ]: SpecAttributes,
     [ SpecStateKeys.VALIDATION_FUNCTION ]: Maybe<SpecValidationFunction>,
-    [ SpecStateKeys.PRESETS ]: Maybe<DictionaryOf<Spec>>,
+    [ SpecStateKeys.PRESETS ]: Maybe<DictionaryOf<Preset>>,
 }
 
 type SpecStateValueTypes =
@@ -27,7 +27,7 @@ type SpecStateValueTypes =
     Spec |
     SpecAttributes |
     Maybe<SpecValidationFunction> |
-    Maybe<DictionaryOf<Spec>>
+    Maybe<DictionaryOf<Preset>>
 
 type ImmutableSpecState = TypedMap<SpecStateValueTypes, SpecState>
 
@@ -72,7 +72,7 @@ interface SetValidationFunction {
 }
 
 interface SetPresets {
-    data: Maybe<DictionaryOf<Spec>>,
+    data: Maybe<DictionaryOf<Preset>>,
     type: SpecStateActionType.SET_PRESETS,
 }
 

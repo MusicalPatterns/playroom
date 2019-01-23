@@ -1,0 +1,38 @@
+import { Pattern } from '@musical-patterns/pattern'
+import { ARBITRARILY_LARGE_NUMBER } from '@musical-patterns/utilities'
+
+const sortByOrder: (pattern: Pattern, nextPattern: Pattern) => number =
+    (pattern: Pattern, nextPattern: Pattern): number => {
+        const first: number = pattern.metadata.order || ARBITRARILY_LARGE_NUMBER
+        const second: number = nextPattern.metadata.order || ARBITRARILY_LARGE_NUMBER
+
+        if (first < second) {
+            return -1
+        }
+        else if (first > second) {
+            return 1
+        }
+        else {
+            return 0
+        }
+    }
+
+const sortByPublishDate: (pattern: Pattern, nextPattern: Pattern) => number =
+    (pattern: Pattern, nextPattern: Pattern): number => {
+        if (pattern.metadata.originalPublish < nextPattern.metadata.originalPublish) {
+            return 1
+        }
+        if (pattern.metadata.originalPublish > nextPattern.metadata.originalPublish) {
+            return -1
+        }
+
+        return 0
+    }
+
+const sortByOrderOrPublishDate: (entry: [ string, Pattern ], nextEntry: [ string, Pattern ]) => number =
+    ([ _, pattern ]: [ string, Pattern ], [ __, nextPattern ]: [ string, Pattern ]): number =>
+        sortByOrder(pattern, nextPattern) || sortByPublishDate(pattern, nextPattern)
+
+export {
+    sortByOrderOrPublishDate,
+}

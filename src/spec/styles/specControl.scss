@@ -46,9 +46,4 @@
     min-width: $medium;
     margin: 0;
   }
-
-  .description {
-    flex: nth($fibonacci-series, 20);
-    font-style: italic;
-  }
 }

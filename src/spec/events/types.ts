@@ -1,4 +1,4 @@
-import { Spec, SpecAttributes, SpecValidationFunction } from '@musical-patterns/pattern'
+import { Preset, Spec, SpecAttributes, SpecValidationFunction } from '@musical-patterns/pattern'
 import { DictionaryOf, Index } from '@musical-patterns/utilities'
 import { Dispatch } from 'redux'
 import { DispatchAsProp, EventAsProp } from '../../types'
@@ -36,7 +36,7 @@ interface SpecValidationResult {
 }
 
 interface PresetChangeHandlerParameters extends EventAsProp {
-    presets: DictionaryOf<Spec>,
+    presets: DictionaryOf<Preset>,
 }
 
 type PresetChangeHandler = (parameters: PresetChangeHandlerParameters) => void

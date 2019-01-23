@@ -1,5 +1,5 @@
-import { Spec } from '@musical-patterns/pattern'
-import { deepEqual } from '@musical-patterns/utilities'
+import { Preset } from '@musical-patterns/pattern'
+import { ARBITRARILY_LARGE_NUMBER, camelCaseToLowerCase, deepEqual } from '@musical-patterns/utilities'
 import * as React from 'react'
 import { connect } from 'react-redux'
 import { Dispatch } from 'redux'
@@ -28,27 +28,33 @@ const Presets: (props: PresetsProps) => JSX.Element =
             return <div/>
         }
 
-        const options: JSX.Element[] = Object.keys(presets)
-            .map((presetKey: string, key: number): JSX.Element =>
-                <option {...{ key: key + 1, value: presetKey }}>{presetKey}</option>)
+        let selectValue: string = ''
+        const options: JSX.Element[] = Object.entries(presets)
+            .sort(([ _, preset ]: [ string, Preset ], [ __, nextPreset ]: [ string, Preset ]): number => {
+                const order: number = preset.order || ARBITRARILY_LARGE_NUMBER
+                const nextOrder: number = nextPreset.order || ARBITRARILY_LARGE_NUMBER
+
+                return order < nextOrder ? -1 : 1
+            })
+            .map(([ presetKey, preset ]: [ string, Preset ], key: number): JSX.Element => {
+                const { description, formattedName, spec } = preset
+                if (deepEqual(spec, submittedSpec)) {
+                    selectValue = presetKey
+                }
+                const displayName: string = formattedName || camelCaseToLowerCase(presetKey)
+
+                return <option {...{ key: key + 1, value: presetKey, title: description }}>{displayName}</option>
+            })
         options.unshift(<option {...{ disabled: true, key: 0 }}/>)
 
         const onChange: EventHandler = (event: React.SyntheticEvent): void => {
             presetChangeHandler({ presets, event })
         }
 
-        let value: string = ''
-        Object.entries(presets)
-            .forEach(([ presetKey, preset ]: [ string, Spec ]) => {
-                if (deepEqual(preset, submittedSpec)) {
-                    value = presetKey
-                }
-            })
-
         return (
             <div {...{ id: 'presets' }}>
                 presets
-                <select {...{ onChange, value }}>
+                <select {...{ onChange, value: selectValue }}>
                     {options}
                 </select>
             </div>

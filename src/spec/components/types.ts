@@ -1,4 +1,4 @@
-import { Spec, SpecAttributes, SpecPropertyAttributes } from '@musical-patterns/pattern'
+import { Preset, Spec, SpecAttributes, SpecPropertyAttributes } from '@musical-patterns/pattern'
 import { DictionaryOf, Index, Maybe } from '@musical-patterns/utilities'
 import { DomValueOrChecked } from '../../types'
 import { PresetChangeHandler, SpecControlChangeHandler } from '../events'
@@ -48,7 +48,7 @@ interface BuildControlsProps {
 }
 
 interface PresetsPropsFromState {
-    presets: Maybe<DictionaryOf<Spec>>,
+    presets: Maybe<DictionaryOf<Preset>>,
     submittedSpec: Spec,
 }
 

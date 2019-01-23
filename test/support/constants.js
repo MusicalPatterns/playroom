@@ -62,10 +62,12 @@ const ONLY_STANDARD_SPEC_PATTERN_ID = playroomTestOnlyStandardSpec.id
 const VALIDATION_PATTERN_ID = playroomTestValidation.id
 
 const PRESETS_PATTERN_ID = playroomTestPresets.id
-const PRESET_ONE_PROPERTY_ONE_VALUE = playroomTestPresets.specData.presets.presetOne[ SPEC_OPTIONED_PROPERTY_ONE_KEY ]
-const PRESET_ONE_PROPERTY_TWO_VALUE = playroomTestPresets.specData.presets.presetOne[ SPEC_OPTIONED_PROPERTY_TWO_KEY ]
-const PRESET_TWO_PROPERTY_ONE_VALUE = playroomTestPresets.specData.presets.presetTwo[ SPEC_OPTIONED_PROPERTY_ONE_KEY ]
-const PRESET_TWO_PROPERTY_TWO_VALUE = playroomTestPresets.specData.presets.presetTwo[ SPEC_OPTIONED_PROPERTY_TWO_KEY ]
+const PRESET_ONE_NAME = 'presetOne'
+const PRESET_TWO_NAME = 'presetTwo'
+const PRESET_ONE_PROPERTY_ONE_VALUE = playroomTestPresets.specData.presets.presetOne.spec[ SPEC_OPTIONED_PROPERTY_ONE_KEY ]
+const PRESET_ONE_PROPERTY_TWO_VALUE = playroomTestPresets.specData.presets.presetOne.spec[ SPEC_OPTIONED_PROPERTY_TWO_KEY ]
+const PRESET_TWO_PROPERTY_ONE_VALUE = playroomTestPresets.specData.presets.presetTwo.spec[ SPEC_OPTIONED_PROPERTY_ONE_KEY ]
+const PRESET_TWO_PROPERTY_TWO_VALUE = playroomTestPresets.specData.presets.presetTwo.spec[ SPEC_OPTIONED_PROPERTY_TWO_KEY ]
 
 export {
     APP_URL,
@@ -112,4 +114,6 @@ export {
     PRESET_ONE_PROPERTY_TWO_VALUE,
     PRESET_TWO_PROPERTY_ONE_VALUE,
     PRESET_TWO_PROPERTY_TWO_VALUE,
+    PRESET_ONE_NAME,
+    PRESET_TWO_NAME,
 }

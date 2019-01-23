@@ -4,20 +4,9 @@ import { connect } from 'react-redux'
 import { Dispatch } from 'redux'
 import { EventHandler } from '../../types'
 import { handlePatternChange, PatternChangeEventExtractorParameters } from '../events'
+import { sortByOrderOrPublishDate } from './helpers'
 import PatternListItem from './PatternListItem'
 import { PatternListProps, PatternListPropsFromDispatch } from './types'
-
-const sortByPublishDate: (entry: [ string, Pattern ], nextEntry: [ string, Pattern ]) => number =
-    ([ _, pattern ]: [ string, Pattern ], [ __, nextPattern ]: [ string, Pattern ]): number => {
-        if (pattern.metadata.mostRecentPublish < nextPattern.metadata.mostRecentPublish) {
-            return 1
-        }
-        if (pattern.metadata.mostRecentPublish > nextPattern.metadata.mostRecentPublish) {
-            return -1
-        }
-
-        return 0
-    }
 
 const mapDispatchToProps: (dispatch: Dispatch) => PatternListPropsFromDispatch =
     (dispatch: Dispatch): PatternListPropsFromDispatch => ({
@@ -42,7 +31,7 @@ const PatternList: (PatternListProps: PatternListProps) => JSX.Element =
             }
 
         const options: JSX.Element[] = Object.entries(patterns)
-            .sort(sortByPublishDate)
+            .sort(sortByOrderOrPublishDate)
             .map(([ listedId, listedPattern ]: [ string, Pattern ], key: number): JSX.Element => (
                 <PatternListItem {...{ key, listedPattern, listedId, onClick, id }} />
             ))

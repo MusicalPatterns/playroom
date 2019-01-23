@@ -4,7 +4,7 @@ import { testGlobals } from '../../setup'
 import {
     elementExists,
     elementInnerText,
-    elementValue,
+    elementValue, PRESET_ONE_NAME, PRESET_TWO_NAME,
     PRESETS_PATTERN_ID,
     SPEC_CONTROLS_PATTERN_OPTIONED_PROPERTY_ONE_INITIAL_VALUE,
     SPEC_CONTROLS_PATTERN_OPTIONED_PROPERTY_ONE_MODIFIED_VALUE,
@@ -63,7 +63,7 @@ describe('presets', () => {
 
         describe('choosing a preset', () => {
             beforeEach(async done => {
-                await testGlobals.page.select(`#presets select`, 'presetOne')
+                await testGlobals.page.select(`#presets select`, PRESET_ONE_NAME)
 
                 done()
             })
@@ -74,7 +74,7 @@ describe('presets', () => {
                 expect(await elementInnerText(`#${SPEC_OPTIONED_PROPERTY_TWO_KEY} .${SecretSelectorsForTest.SECRET_SUBMITTED_SPEC_CONTROL}`))
                     .toBe(PRESET_ONE_PROPERTY_TWO_VALUE)
 
-                await testGlobals.page.select(`#presets select`, 'presetTwo')
+                await testGlobals.page.select(`#presets select`, PRESET_TWO_NAME)
 
                 expect(await elementInnerText(`#${SPEC_OPTIONED_PROPERTY_ONE_KEY} .${SecretSelectorsForTest.SECRET_SUBMITTED_SPEC_CONTROL}`))
                     .toBe(PRESET_TWO_PROPERTY_ONE_VALUE)
