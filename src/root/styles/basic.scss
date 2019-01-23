@@ -14,7 +14,7 @@ button {
 
   &:disabled {
     cursor: inherit;
-    color: $grey;
+    color: $dark-grey;
   }
 
   &:focus {
@@ -22,8 +22,8 @@ button {
   }
 
   &:hover:enabled {
-    background-color: $almost-white;
-    color: $dark-grey;
+    background-color: $lighter-grey;
+    color: $darker-grey;
   }
 }
 
@@ -37,6 +37,6 @@ a {
   font-family: inherit;
 
   &:hover {
-    color: $almost-white;
+    color: $lighter-grey;
   }
 }

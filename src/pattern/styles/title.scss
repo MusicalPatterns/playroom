@@ -9,12 +9,12 @@
 
   text-align: center;
 
-  background: $dark-grey;
+  background: $darker-grey;
 
   display: flex;
   align-items: center;
 
-  box-shadow: $medium -34px $big $dark-grey;
+  box-shadow: $medium -34px $big $darker-grey;
   z-index: 1;
 
   & > div:first-child {
@@ -49,11 +49,11 @@
     text-align: center;
 
     h1 {
-      line-height: $medium;
+      line-height: 28px;
       font-size: $big;
       width: $small-area;
       text-align: center;
-      margin-bottom: $tiny;
+      margin-bottom: 0;
       color: $light-grey;
     }
   }

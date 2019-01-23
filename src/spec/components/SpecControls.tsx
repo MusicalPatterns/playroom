@@ -50,12 +50,12 @@ const SpecControls: (specControlsProps: SpecControlsProps) => JSX.Element =
             !!nonstandardSpecKeys.length
 
         return (
-            <div {...{ id: 'pattern-spec-controls' }}>
+            <div {...{ id: 'spec-controls' }}>
                 {bothTypesOfControlsPresent &&
-                <div {...{ className: 'pattern-spec-control-section-heading' }}>pattern particular</div>}
+                <div {...{ className: 'spec-control-section-heading' }}>pattern particular</div>}
                 {patternParticularControls}
                 {bothTypesOfControlsPresent &&
-                <div {...{ className: 'pattern-spec-control-section-heading' }}>standard</div>}
+                <div {...{ className: 'spec-control-section-heading' }}>standard</div>}
                 {standardSpecControls}
             </div>
         )

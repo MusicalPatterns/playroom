@@ -1,0 +1,20 @@
+@import '../../sizes.scss';
+@import '../../colors.scss';
+
+input[type=checkbox] {
+  cursor: pointer;
+  flex: 0;
+  min-width: $big;
+  margin: 0 0 0 $small;
+  opacity: 0;
+}
+
+.spec-control {
+  svg.fa-check-square, svg.fa-square {
+    width: $big;
+    height: $big;
+    position: absolute;
+    right: 0;
+    pointer-events: none;
+  }
+}

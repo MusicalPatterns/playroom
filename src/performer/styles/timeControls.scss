@@ -11,9 +11,9 @@
   font-size: $medium;
 
   border-radius: $border-size;
-  border: $border-size solid $dark-grey;
+  border: $border-size solid $darker-grey;
   background: $almost-black;
-  color: $almost-white;
+  color: $lighter-grey;
 
   button {
     transition: background $duration $easeInOutQuint;
@@ -27,7 +27,7 @@
     padding: 0;
 
     &:disabled {
-      background: $almost-white;
+      background: $lighter-grey;
     }
 
     svg {
@@ -43,16 +43,16 @@
   }
 
   path {
-    color: $almost-white;
+    color: $lighter-grey;
 
     &:hover {
-      color: $white;
+      color: $almost-white;
     }
   }
 
   &.disabled {
     border: $border-size solid $light-grey;
-    background: $almost-white;
+    background: $lighter-grey;
     color: $light-grey;
 
     path {

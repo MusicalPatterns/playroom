@@ -4,11 +4,11 @@
 
 li {
   padding-bottom: $small;
-  color: $base-color;
+  color: $grey;
   width: $small-area;
 
   div:first-child {
-    color: $grey;
+    color: $dark-grey;
     font-size: $medium;
     line-height: $small;
     @extend .leipziger-antiqua-bold;
@@ -23,23 +23,23 @@ li {
     color: $light-grey !important;
 
     div:first-child {
-      color: $almost-white !important;
+      color: $lighter-grey !important;
     }
   }
 
   &.selected {
-    color: $almost-white;
+    color: $lighter-grey;
 
     div:first-child {
-      color: $white;
+      color: $almost-white;
     }
   }
 
   &.not-selected {
-    color: $base-color;
+    color: $grey;
 
     div:first-child {
-      color: $base-color;
+      color: $grey;
     }
   }
 }

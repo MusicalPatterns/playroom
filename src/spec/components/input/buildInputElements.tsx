@@ -1,3 +1,5 @@
+import { faCheckSquare, faSquare } from '@fortawesome/free-solid-svg-icons'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { OptionedConstraint, SpecPropertyType } from '@musical-patterns/pattern'
 import * as React from 'react'
 import { buildRangedInputElements } from './buildRangedInputElements'
@@ -28,6 +30,7 @@ const buildInputElements: (buildInputProps: BuildInputProps) => JSX.Element[] =
                         ...inputProps as ToggledInputProps,
                         key: 0,
                     }}/>,
+                    <FontAwesomeIcon {...{ key: 1, icon: inputProps.specValue ? faCheckSquare : faSquare }}/>,
                 ]
             }
             default:

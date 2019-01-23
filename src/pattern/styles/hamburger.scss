@@ -3,15 +3,15 @@
 @import '../../effects';
 
 #hamburger {
-  background-color: $dark-grey;
-  color: $grey;
+  background-color: $darker-grey;
+  color: $dark-grey;
 
   display: flex;
   align-items: flex-end;
   flex-direction: column;
   padding: 0;
 
-  box-shadow: $medium $big $big $dark-grey;
+  box-shadow: $medium $big $big $darker-grey;
   z-index: 1;
 
   width: $big-area;

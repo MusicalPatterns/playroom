@@ -12,7 +12,7 @@ describe('standard and pattern-particular control sections', () => {
         const testPattern = await findElement(testGlobals.tab, `#${SPEC_CONTROLS_PATTERN_ID}`)
         await clickElement(testPattern)
 
-        expect(await elementExists('.pattern-spec-control-section-heading'))
+        expect(await elementExists('.spec-control-section-heading'))
             .toBeTruthy()
 
         done()
@@ -22,7 +22,7 @@ describe('standard and pattern-particular control sections', () => {
         const testPattern = await findElement(testGlobals.tab, `#${ONLY_STANDARD_SPEC_PATTERN_ID}`)
         await clickElement(testPattern)
 
-        expect(await elementExists('.pattern-spec-control-section-heading'))
+        expect(await elementExists('.spec-control-section-heading'))
             .toBeFalsy()
 
         done()
@@ -32,7 +32,7 @@ describe('standard and pattern-particular control sections', () => {
         const testPattern = await findElement(testGlobals.tab, `#${ONLY_PATTERN_PARTICULAR_SPEC_PATTERN_ID}`)
         await clickElement(testPattern)
 
-        expect(await elementExists('.pattern-spec-control-section-heading'))
+        expect(await elementExists('.spec-control-section-heading'))
             .toBeFalsy()
 
         done()

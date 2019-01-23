@@ -57,7 +57,7 @@ describe('submitting spec changes', () => {
 
         it('keeps the controls in the same order after making a change', async done => {
             let controlIds = await testGlobals.page.evaluate(() =>
-                Array.from(document.querySelectorAll('#pattern-spec-controls input[type=number]')).map(element => element.id),
+                Array.from(document.querySelectorAll('#spec-controls input[type=number]')).map(element => element.id),
             )
             expect(controlIds)
                 .toEqual([
@@ -74,7 +74,7 @@ describe('submitting spec changes', () => {
             await fillInElement(control, VALID_TEST_MODIFICATION)
 
             controlIds = await testGlobals.page.evaluate(() =>
-                Array.from(document.querySelectorAll('#pattern-spec-controls input[type=number]')).map(element => element.id),
+                Array.from(document.querySelectorAll('#spec-controls input[type=number]')).map(element => element.id),
             )
             expect(controlIds)
                 .toEqual([

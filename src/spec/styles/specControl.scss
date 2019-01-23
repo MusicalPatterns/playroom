@@ -2,7 +2,7 @@
 @import '../../sizes';
 @import '../../effects';
 
-.pattern-spec-control {
+.spec-control {
   display: flex;
   align-items: center;
   flex-wrap: wrap;
@@ -22,6 +22,8 @@
   }
 
   input, select {
+    background: $almost-white;
+
     padding: 0 $small;
     flex: nth($fibonacci-series, 19);
     height: $big;
@@ -37,13 +39,6 @@
     &.invalid {
       @include glow($invalid);
     }
-  }
-
-  input[type=checkbox] {
-    cursor: pointer;
-    flex: 0;
-    min-width: $big;
-    margin: 0 0 0 $small;
   }
 
   .units {

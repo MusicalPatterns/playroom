@@ -42,7 +42,7 @@ const SpecControl: (specControlProps: SpecControlProps) => JSX.Element =
         const secretClassName: string = SecretSelectorsForTest.SECRET_SUBMITTED_SPEC_CONTROL
 
         return (
-            <div {...{ className: 'pattern-spec-control', id }}>
+            <div {...{ className: 'spec-control', id }}>
                 <span {...{ className: secretClassName }}>{stringifyIfNecessary(secretSubmittedSpecValue)}</span>
                 {isNotAnArrayedProperty && <div>{formattedName || camelCaseToLowerCase(specKey)}</div>}
                 {inputElements}
