@@ -4,7 +4,7 @@ import * as React from 'react'
 import { EventHandler, SecretSelectorsForTest } from '../../types'
 import { SpecChangeEventParameters } from '../events'
 import { specControlId, stringifyIfNecessary, validityClassName } from './helpers'
-import { buildInputElements, InputProps } from './input'
+import { Input, InputProps } from './input'
 import { SingularSpecControlProps } from './types'
 
 const SingularSpecControl: (specControlProps: SingularSpecControlProps) => JSX.Element =
@@ -37,7 +37,6 @@ const SingularSpecControl: (specControlProps: SingularSpecControlProps) => JSX.E
 
         const className: string = validityClassName(invalidMessage)
         const inputProps: InputProps = { className, onChange, id, specValue: displayedSpecValue }
-        const inputElements: JSX.Element[] = buildInputElements({ specPropertyAttributes, inputProps })
 
         const secretClassName: string = SecretSelectorsForTest.SECRET_SUBMITTED_SPEC_CONTROL
 
@@ -45,7 +44,7 @@ const SingularSpecControl: (specControlProps: SingularSpecControlProps) => JSX.E
             <div {...{ className: 'spec-control', id, title: description }}>
                 <span {...{ className: secretClassName }}>{stringifyIfNecessary(submittedSpecValue)}</span>
                 {isNotAnArrayedProperty && <div>{formattedName || camelCaseToLowerCase(specKey)}</div>}
-                {inputElements}
+                <Input {...{ specPropertyAttributes, inputProps }}/>
                 {units && <div {...{ className: 'units' }}>{units}</div>}
                 {invalidMessage && <div {...{ className: 'invalid-message' }}>{invalidMessage}</div>}
             </div>

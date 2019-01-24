@@ -1,4 +1,6 @@
-export { buildInputElements } from './buildInputElements'
+import Input from './Input'
+
+export { Input }
 
 export {
     InputProps,

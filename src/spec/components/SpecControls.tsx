@@ -1,4 +1,4 @@
-import { Spec, SpecAttributes, StandardSpecProperties } from '@musical-patterns/pattern'
+import { defaultSpecPropertyAttributes, Spec, SpecAttributes, StandardSpecProperties } from '@musical-patterns/pattern'
 import * as React from 'react'
 import { connect } from 'react-redux'
 import { Dispatch } from 'redux'
@@ -35,7 +35,12 @@ const SpecControls: (specControlsProps: SpecControlsProps) => JSX.Element =
             .sort(buildSortSpecControls(specAttributes))
             .map(
                 (specKey: string, key: number): JSX.Element =>
-                    <SpecControl {...{ key, specKey, specAttributes, specControlsProps }} />,
+                    <SpecControl {...{
+                        key,
+                        specControlsProps,
+                        specKey,
+                        specPropertyAttributes: specAttributes[ specKey ] || defaultSpecPropertyAttributes,
+                    }} />,
             )
         const patternParticularControls: JSX.Element[] = Object.keys(displayedSpec)
             .filter((key: string) =>
@@ -45,7 +50,12 @@ const SpecControls: (specControlsProps: SpecControlsProps) => JSX.Element =
             .sort(buildSortSpecControls(specAttributes))
             .map(
                 (specKey: string, key: number): JSX.Element =>
-                    <SpecControl {...{ key, specKey, specAttributes, specControlsProps }} />,
+                    <SpecControl {...{
+                        key,
+                        specControlsProps,
+                        specKey,
+                        specPropertyAttributes: specAttributes[ specKey ] || defaultSpecPropertyAttributes,
+                    }} />,
             )
 
         const bothTypesOfControlsPresent: boolean = !!standardSpecControls.length &&

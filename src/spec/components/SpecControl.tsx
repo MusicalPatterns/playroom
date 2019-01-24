@@ -1,16 +1,14 @@
-import { defaultSpecPropertyAttributes, Spec, SpecPropertyAttributes } from '@musical-patterns/pattern'
+import { Spec } from '@musical-patterns/pattern'
 import * as React from 'react'
 import { DomValueOrChecked, SpecValue } from '../../types'
 import { SpecStateKeys } from '../state'
 import { InvalidSpecMessages, SingularPropertyInvalidSpecMessage } from '../types'
 import { ArrayedSpecControl } from './arrayed'
 import SingularSpecControl from './SingularSpecControl'
+import { SpecControlProps } from './types'
 
-const SpecControl: (specControlProps: any) => JSX.Element =
-    ({ specAttributes, specKey, specControlsProps }: any): JSX.Element => {
-        const specPropertyAttributes: SpecPropertyAttributes =
-            specAttributes[ specKey ] || defaultSpecPropertyAttributes
-
+const SpecControl: (specControlProps: SpecControlProps) => JSX.Element =
+    ({ specPropertyAttributes, specKey, specControlsProps }: SpecControlProps): JSX.Element => {
         const { specState } = specControlsProps
         const displayedSpec: Spec = specState.get(SpecStateKeys.DISPLAYED_SPEC)
         const invalidMessages: InvalidSpecMessages = specState.get(SpecStateKeys.INVALID_SPEC_MESSAGES)
