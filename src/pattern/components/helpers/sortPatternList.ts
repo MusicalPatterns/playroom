@@ -3,8 +3,10 @@ import { ARBITRARILY_LARGE_NUMBER } from '@musical-patterns/utilities'
 
 const sortByOrder: (pattern: Pattern, nextPattern: Pattern) => number =
     (pattern: Pattern, nextPattern: Pattern): number => {
-        const first: number = pattern.metadata.order || ARBITRARILY_LARGE_NUMBER
-        const second: number = nextPattern.metadata.order || ARBITRARILY_LARGE_NUMBER
+        const first: number =
+            pattern.metadata.order === undefined ? ARBITRARILY_LARGE_NUMBER : pattern.metadata.order
+        const second: number =
+            nextPattern.metadata.order === undefined ? ARBITRARILY_LARGE_NUMBER : nextPattern.metadata.order
 
         if (first < second) {
             return -1

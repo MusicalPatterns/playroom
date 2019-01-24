@@ -1,5 +1,5 @@
 import { defaultSpecPropertyAttributes, Spec, SpecPropertyAttributes } from '@musical-patterns/pattern'
-import { ARBITRARILY_LARGE_NUMBER } from '@musical-patterns/utilities'
+import { ARBITRARILY_LARGE_NUMBER, Maybe } from '@musical-patterns/utilities'
 import * as React from 'react'
 import { DomValueOrChecked, SpecValue } from '../../types'
 import { SpecStateKeys } from '../state'
@@ -12,10 +12,13 @@ const buildControls: (props: BuildControlsProps) => JSX.Element[] =
     ({ specKeys, specAttributes, specControlsProps }: BuildControlsProps): JSX.Element[] =>
         specKeys
             .sort((specKey: string, nextSpecKey: string): number => {
-                const order: number = specAttributes[ specKey ].order || ARBITRARILY_LARGE_NUMBER
-                const nextOrder: number = specAttributes[ nextSpecKey ].order || ARBITRARILY_LARGE_NUMBER
+                const order: Maybe<number> = specAttributes[ specKey ].order
+                const sortOrder: number = order === undefined ? ARBITRARILY_LARGE_NUMBER : order
 
-                return order < nextOrder ? -1 : 1
+                const nextOrder: Maybe<number> = specAttributes[ nextSpecKey ].order
+                const nextSortOrder: number = nextOrder === undefined ? ARBITRARILY_LARGE_NUMBER : nextOrder
+
+                return sortOrder < nextSortOrder ? -1 : 1
             })
             .map(
                 (specKey: string, key: number): JSX.Element => {

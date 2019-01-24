@@ -31,8 +31,8 @@ const Presets: (props: PresetsProps) => JSX.Element =
         let selectValue: string = ''
         const options: JSX.Element[] = Object.entries(presets)
             .sort(([ _, preset ]: [ string, Preset ], [ __, nextPreset ]: [ string, Preset ]): number => {
-                const order: number = preset.order || ARBITRARILY_LARGE_NUMBER
-                const nextOrder: number = nextPreset.order || ARBITRARILY_LARGE_NUMBER
+                const order: number = preset.order === undefined ? ARBITRARILY_LARGE_NUMBER : preset.order
+                const nextOrder: number = nextPreset.order === undefined ? ARBITRARILY_LARGE_NUMBER : nextPreset.order
 
                 return order < nextOrder ? -1 : 1
             })

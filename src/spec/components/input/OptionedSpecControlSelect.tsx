@@ -7,8 +7,8 @@ const OptionedSpecControlSelect: (optionedInputProps: OptionedInputProps) => JSX
     ({ onChange, id, specValue, className, constraint }: OptionedInputProps): JSX.Element => {
         const optionElements: JSX.Element[] = constraint
             .sort((option: OptionedConstraintOption, nextOption: OptionedConstraintOption): number => {
-                const order: number = option.order || ARBITRARILY_LARGE_NUMBER
-                const nextOrder: number = nextOption.order || ARBITRARILY_LARGE_NUMBER
+                const order: number = option.order === undefined ? ARBITRARILY_LARGE_NUMBER : option.order
+                const nextOrder: number = nextOption.order === undefined ? ARBITRARILY_LARGE_NUMBER : nextOption.order
 
                 return order < nextOrder ? -1 : 1
             })
