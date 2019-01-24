@@ -1,55 +1,43 @@
-import { SpecPropertyType } from '@musical-patterns/pattern'
-import { camelCaseToLowerCase } from '@musical-patterns/utilities'
+import { defaultSpecPropertyAttributes, Spec, SpecPropertyAttributes } from '@musical-patterns/pattern'
 import * as React from 'react'
-import { EventHandler, SecretSelectorsForTest } from '../../types'
-import { SpecChangeEventParameters } from '../events'
-import { specControlId, stringifyIfNecessary, validityClassName } from './helpers'
-import { buildInputElements, InputProps } from './input'
-import { SingularSpecControlProps } from './types'
+import { DomValueOrChecked, SpecValue } from '../../types'
+import { SpecStateKeys } from '../state'
+import { InvalidSpecMessages, SingularPropertyInvalidSpecMessage } from '../types'
+import { ArrayedSpecControl } from './arrayed'
+import SingularSpecControl from './SingularSpecControl'
 
-const SpecControl: (specControlProps: SingularSpecControlProps) => JSX.Element =
-    // tslint:disable-next-line:cyclomatic-complexity
-    (specControlProps: SingularSpecControlProps): JSX.Element => {
-        const {
-            arrayedPropertyIndex,
-            displayedSpecValue,
-            invalidMessage,
-            submittedSpecValue,
-            specKey,
+const SpecControl: (specControlProps: any) => JSX.Element =
+    ({ specAttributes, specKey, specControlsProps }: any): JSX.Element => {
+        const specPropertyAttributes: SpecPropertyAttributes =
+            specAttributes[ specKey ] || defaultSpecPropertyAttributes
+
+        const { specState } = specControlsProps
+        const displayedSpec: Spec = specState.get(SpecStateKeys.DISPLAYED_SPEC)
+        const invalidMessages: InvalidSpecMessages = specState.get(SpecStateKeys.INVALID_SPEC_MESSAGES)
+        const submittedSpec: Spec = specState.get(SpecStateKeys.SUBMITTED_SPEC)
+
+        const submittedSpecValue: SpecValue = submittedSpec[ specKey ] as SpecValue
+        const displayedSpecValue: SpecValue = displayedSpec[ specKey ] as SpecValue
+
+        if (specPropertyAttributes.isArray) {
+            return <ArrayedSpecControl {...{
+                displayedSpecValues: displayedSpecValue as DomValueOrChecked[],
+                invalidMessages,
+                specControlsProps,
+                specKey,
+                specPropertyAttributes,
+                submittedSpecValues: submittedSpecValue as DomValueOrChecked[],
+            }}/>
+        }
+
+        return <SingularSpecControl {...{
+            displayedSpecValue: displayedSpecValue as DomValueOrChecked,
+            invalidMessage: invalidMessages[ specKey ] as SingularPropertyInvalidSpecMessage,
             specControlsProps,
-            specPropertyAttributes,
-        } = specControlProps
-        const { handleSpecChange, specState } = specControlsProps
-        const { description, specPropertyType, formattedName, units } = specPropertyAttributes
-
-        const specChangeEventParameters: SpecChangeEventParameters = {
-            arrayedPropertyIndex,
-            isToggle: specPropertyType === SpecPropertyType.TOGGLED,
             specKey,
-            specState,
-        }
-        const onChange: EventHandler = (event: React.SyntheticEvent): void => {
-            handleSpecChange({ ...specChangeEventParameters, event })
-        }
-
-        const isNotAnArrayedProperty: boolean = arrayedPropertyIndex === undefined
-        const id: string = specControlId({ isNotAnArrayedProperty, arrayedPropertyIndex, specKey })
-
-        const className: string = validityClassName(invalidMessage)
-        const inputProps: InputProps = { className, onChange, id, specValue: displayedSpecValue }
-        const inputElements: JSX.Element[] = buildInputElements({ specPropertyAttributes, inputProps })
-
-        const secretClassName: string = SecretSelectorsForTest.SECRET_SUBMITTED_SPEC_CONTROL
-
-        return (
-            <div {...{ className: 'spec-control', id, title: description }}>
-                <span {...{ className: secretClassName }}>{stringifyIfNecessary(submittedSpecValue)}</span>
-                {isNotAnArrayedProperty && <div>{formattedName || camelCaseToLowerCase(specKey)}</div>}
-                {inputElements}
-                {units && <div {...{ className: 'units' }}>{units}</div>}
-                {invalidMessage && <div {...{ className: 'invalid-message' }}>{invalidMessage}</div>}
-            </div>
-        )
+            specPropertyAttributes,
+            submittedSpecValue: submittedSpecValue as DomValueOrChecked,
+        }}/>
     }
 
 export default SpecControl

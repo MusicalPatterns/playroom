@@ -3,7 +3,7 @@ import * as React from 'react'
 import { DomValueOrChecked, SecretSelectorsForTest } from '../../../types'
 import { InvalidSpecMessage } from '../../types'
 import { stringifyIfNecessary } from '../helpers'
-import SpecControl from '../SpecControl'
+import SingularSpecControl from '../SingularSpecControl'
 import AddButton from './AddButton'
 import RemoveButton from './RemoveButton'
 import { ArrayedSpecControlProps } from './types'
@@ -27,7 +27,7 @@ const ArrayedSpecControl: (props: ArrayedSpecControlProps) => JSX.Element =
                 }
 
                 return (
-                    <SpecControl {...{
+                    <SingularSpecControl {...{
                         arrayedPropertyIndex: to.Index(index),
                         displayedSpecValue: value,
                         invalidMessage,

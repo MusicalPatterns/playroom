@@ -5,7 +5,8 @@ import { Dispatch } from 'redux'
 import { ImmutableRootState, RootStateKeys } from '../../root'
 import { buildSpecControlChangeHandler } from '../events'
 import { SpecStateKeys } from '../state'
-import { buildControls } from './buildControls'
+import { buildSortSpecControls } from './helpers'
+import SpecControl from './SpecControl'
 import { SpecControlsProps, SpecControlsPropsFromDispatch, SpecControlsPropsFromState } from './types'
 
 const mapStateToProps: (state: ImmutableRootState) => SpecControlsPropsFromState =
@@ -26,28 +27,29 @@ const SpecControls: (specControlsProps: SpecControlsProps) => JSX.Element =
         const specAttributes: SpecAttributes = specState
             .get(SpecStateKeys.SPEC_ATTRIBUTES)
 
-        const specKeys: string[] = Object.keys(displayedSpec)
-        const standardSpecKeys: string[] = specKeys.filter((key: string) =>
-            Object.values(StandardSpecProperties)
-                .includes(key),
-        )
-        const nonstandardSpecKeys: string[] = specKeys.filter((key: string) =>
-            !Object.values(StandardSpecProperties)
-                .includes(key),
-        )
-        const standardSpecControls: JSX.Element[] = buildControls({
-            specAttributes,
-            specControlsProps,
-            specKeys: standardSpecKeys,
-        })
-        const patternParticularControls: JSX.Element[] = buildControls({
-            specAttributes,
-            specControlsProps,
-            specKeys: nonstandardSpecKeys,
-        })
+        const standardSpecControls: JSX.Element[] = Object.keys(displayedSpec)
+            .filter((key: string) =>
+                Object.values(StandardSpecProperties)
+                    .includes(key),
+            )
+            .sort(buildSortSpecControls(specAttributes))
+            .map(
+                (specKey: string, key: number): JSX.Element =>
+                    <SpecControl {...{ key, specKey, specAttributes, specControlsProps }} />,
+            )
+        const patternParticularControls: JSX.Element[] = Object.keys(displayedSpec)
+            .filter((key: string) =>
+                !Object.values(StandardSpecProperties)
+                    .includes(key),
+            )
+            .sort(buildSortSpecControls(specAttributes))
+            .map(
+                (specKey: string, key: number): JSX.Element =>
+                    <SpecControl {...{ key, specKey, specAttributes, specControlsProps }} />,
+            )
 
-        const bothTypesOfControlsPresent: boolean = !!standardSpecKeys.length &&
-            !!nonstandardSpecKeys.length
+        const bothTypesOfControlsPresent: boolean = !!standardSpecControls.length &&
+            !!patternParticularControls.length
 
         return (
             <div {...{ id: 'spec-controls' }}>
