@@ -1,7 +1,7 @@
 import { Spec } from '@musical-patterns/pattern'
 import { Dispatch } from 'redux'
 import { batchActions } from 'redux-batched-actions'
-import { Action, extractCheckedFromEvent, extractValueFromEvent } from '../../root'
+import { Action, extractValueFromEvent } from '../../root'
 import { DomValueOrChecked, SpecValue } from '../../types'
 import { SpecStateKeys } from '../state'
 import { mergeEventValueIntoSpecValue } from './helpers'
@@ -11,11 +11,9 @@ import { buildAttemptSubmitActions } from './validation'
 const buildSpecControlChangeHandler: BuildSpecControlChangeHandler =
     (dispatch: Dispatch): SpecControlChangeHandler =>
         async (parameters: SpecControlChangeHandlerParameters): Promise<void> => {
-            const { arrayedPropertyIndex, event, isToggle, specKey, specState } = parameters
+            const { arrayedPropertyIndex, event, specKey, specState } = parameters
 
-            const eventValue: DomValueOrChecked = isToggle ?
-                extractCheckedFromEvent(event) :
-                extractValueFromEvent(event)
+            const eventValue: DomValueOrChecked = extractValueFromEvent(event)
 
             const displayedSpec: Spec = specState.get(SpecStateKeys.DISPLAYED_SPEC)
 

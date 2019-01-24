@@ -1,4 +1,3 @@
-import { SpecPropertyType } from '@musical-patterns/pattern'
 import { camelCaseToLowerCase } from '@musical-patterns/utilities'
 import * as React from 'react'
 import { EventHandler, SecretSelectorsForTest } from '../../types'
@@ -20,14 +19,10 @@ const SingularSpecControl: (specControlProps: SingularSpecControlProps) => JSX.E
             specPropertyAttributes,
         } = specControlProps
         const { handleSpecChange, specState } = specControlsProps
-        const { description, specPropertyType, formattedName, units } = specPropertyAttributes
+        const { description, formattedName, units } = specPropertyAttributes
 
-        const specChangeEventParameters: SpecChangeEventParameters = {
-            arrayedPropertyIndex,
-            isToggle: specPropertyType === SpecPropertyType.TOGGLED,
-            specKey,
-            specState,
-        }
+        const specChangeEventParameters: SpecChangeEventParameters = { arrayedPropertyIndex, specKey, specState }
+
         const onChange: EventHandler = (event: React.SyntheticEvent): void => {
             handleSpecChange({ ...specChangeEventParameters, event })
         }

@@ -1,16 +1,22 @@
 import * as React from 'react'
-import { DomValue } from '../../types'
+import { DomValueOrChecked } from '../../types'
 
-const extractValueFromEvent: (event: React.SyntheticEvent | React.KeyboardEvent) => DomValue =
-    (event: React.SyntheticEvent | React.KeyboardEvent): DomValue => {
+const isCheckbox: (target: HTMLInputElement) => boolean =
+    (target: HTMLInputElement): boolean =>
+        target.value === 'on'
+
+const extractValueFromEvent: (event: React.SyntheticEvent) => DomValueOrChecked =
+    (event: React.SyntheticEvent): DomValueOrChecked => {
         const target: HTMLInputElement = event.target as HTMLInputElement
+        const value: DomValueOrChecked = isCheckbox(target) ? target.checked : target.value
 
         try {
+            // @ts-ignore
             // tslint:disable-next-line:no-unsafe-any
-            return JSON.parse(target.value) as number
+            return JSON.parse(value)
         }
         catch (e) {
-            return target.value
+            return value
         }
     }
 

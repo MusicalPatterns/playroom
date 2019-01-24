@@ -8,7 +8,6 @@ import { InvalidSpecMessages } from '../types'
 
 interface SpecChangeEventParameters {
     arrayedPropertyIndex?: Index,
-    isToggle: boolean,
     specKey: string,
     specState: ImmutableSpecState,
 }
