@@ -1,8 +1,0 @@
-Makefile.playroom
-src/playroom.ts
-webpack.common.js
-webpack.lab.js
-webpack.local.js
-webpack.pattern.js
-webpack.browser.js
-webpack.library.js
