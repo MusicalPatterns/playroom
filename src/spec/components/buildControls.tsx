@@ -27,7 +27,7 @@ const buildControls: (props: BuildControlsProps) => JSX.Element[] =
 
                     const { specState } = specControlsProps
                     const displayedSpec: Spec = specState.get(SpecStateKeys.DISPLAYED_SPEC)
-                    const invalidSpecMessages: InvalidSpecMessages = specState.get(SpecStateKeys.INVALID_SPEC_MESSAGES)
+                    const invalidMessages: InvalidSpecMessages = specState.get(SpecStateKeys.INVALID_SPEC_MESSAGES)
                     const submittedSpec: Spec = specState.get(SpecStateKeys.SUBMITTED_SPEC)
 
                     const submittedSpecValue: SpecValue = submittedSpec[ specKey ] as SpecValue
@@ -35,25 +35,24 @@ const buildControls: (props: BuildControlsProps) => JSX.Element[] =
 
                     if (specPropertyAttributes.isArray) {
                         return <ArrayedSpecControl {...{
-                            displayedSpecValue,
-                            invalidSpecMessages,
+                            displayedSpecValues: displayedSpecValue as DomValueOrChecked[],
+                            invalidMessages,
                             key,
                             specControlsProps,
                             specKey,
                             specPropertyAttributes,
-                            specState,
-                            submittedSpecValue,
+                            submittedSpecValues: submittedSpecValue as DomValueOrChecked[],
                         }}/>
                     }
 
                     return <SpecControl {...{
-                        invalidMessage: invalidSpecMessages[ specKey ] as SingularPropertyInvalidSpecMessage,
+                        displayedSpecValue: displayedSpecValue as DomValueOrChecked,
+                        invalidMessage: invalidMessages[ specKey ] as SingularPropertyInvalidSpecMessage,
                         key,
-                        secretSubmittedSpecValue: submittedSpecValue as DomValueOrChecked,
                         specControlsProps,
                         specKey,
                         specPropertyAttributes,
-                        specValue: displayedSpecValue as DomValueOrChecked,
+                        submittedSpecValue: submittedSpecValue as DomValueOrChecked,
                     }}/>
                 },
             )

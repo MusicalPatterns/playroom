@@ -5,17 +5,17 @@ import { EventHandler, SecretSelectorsForTest } from '../../types'
 import { SpecChangeEventParameters } from '../events'
 import { specControlId, stringifyIfNecessary, validityClassName } from './helpers'
 import { buildInputElements, InputProps } from './input'
-import { SpecControlProps } from './types'
+import { SingularSpecControlProps } from './types'
 
-const SpecControl: (specControlProps: SpecControlProps) => JSX.Element =
+const SpecControl: (specControlProps: SingularSpecControlProps) => JSX.Element =
     // tslint:disable-next-line:cyclomatic-complexity
-    (specControlProps: SpecControlProps): JSX.Element => {
+    (specControlProps: SingularSpecControlProps): JSX.Element => {
         const {
             arrayedPropertyIndex,
+            displayedSpecValue,
             invalidMessage,
-            secretSubmittedSpecValue,
+            submittedSpecValue,
             specKey,
-            specValue,
             specControlsProps,
             specPropertyAttributes,
         } = specControlProps
@@ -36,14 +36,14 @@ const SpecControl: (specControlProps: SpecControlProps) => JSX.Element =
         const id: string = specControlId({ isNotAnArrayedProperty, arrayedPropertyIndex, specKey })
 
         const className: string = validityClassName(invalidMessage)
-        const inputProps: InputProps = { className, onChange, id, specValue }
+        const inputProps: InputProps = { className, onChange, id, specValue: displayedSpecValue }
         const inputElements: JSX.Element[] = buildInputElements({ specPropertyAttributes, inputProps })
 
         const secretClassName: string = SecretSelectorsForTest.SECRET_SUBMITTED_SPEC_CONTROL
 
         return (
             <div {...{ className: 'spec-control', id, title: description }}>
-                <span {...{ className: secretClassName }}>{stringifyIfNecessary(secretSubmittedSpecValue)}</span>
+                <span {...{ className: secretClassName }}>{stringifyIfNecessary(submittedSpecValue)}</span>
                 {isNotAnArrayedProperty && <div>{formattedName || camelCaseToLowerCase(specKey)}</div>}
                 {inputElements}
                 {units && <div {...{ className: 'units' }}>{units}</div>}

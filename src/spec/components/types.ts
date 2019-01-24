@@ -21,13 +21,16 @@ interface SpecControlsPropsFromDispatch {
 interface SpecControlsProps extends SpecControlsPropsFromState, SpecControlsPropsFromDispatch {}
 
 interface SpecControlProps {
-    arrayedPropertyIndex?: Index,
-    invalidMessage: SingularPropertyInvalidSpecMessage,
-    secretSubmittedSpecValue: DomValueOrChecked,
     specControlsProps: SpecControlsProps,
     specKey: string,
     specPropertyAttributes: SpecPropertyAttributes,
-    specValue: DomValueOrChecked,
+}
+
+interface SingularSpecControlProps extends SpecControlProps {
+    arrayedPropertyIndex?: Index,
+    displayedSpecValue: DomValueOrChecked,
+    invalidMessage: SingularPropertyInvalidSpecMessage,
+    submittedSpecValue: DomValueOrChecked,
 }
 
 interface ResetPropsFromState {
@@ -61,6 +64,7 @@ interface PresetsProps extends PresetsPropsFromState, PresetsPropsFromDispatch {
 export {
     SpecControlStates,
     SpecControlProps,
+    SingularSpecControlProps,
     SpecControlsProps,
     SpecControlsPropsFromDispatch,
     SpecControlsPropsFromState,

@@ -11,20 +11,17 @@ import { ArrayedSpecControlProps } from './types'
 const ArrayedSpecControl: (props: ArrayedSpecControlProps) => JSX.Element =
     (props: ArrayedSpecControlProps): JSX.Element => {
         const {
-            displayedSpecValue,
-            submittedSpecValue,
-            invalidSpecMessages,
+            displayedSpecValues,
+            submittedSpecValues,
+            invalidMessages,
             specKey,
             specControlsProps,
             specPropertyAttributes,
-            specState,
         } = props
 
-        const displayedSpecValueArray: DomValueOrChecked[] = displayedSpecValue as DomValueOrChecked[]
-        const submittedSpecValueArray: DomValueOrChecked[] = submittedSpecValue as DomValueOrChecked[]
-        const controls: JSX.Element[] = displayedSpecValueArray.map(
+        const controls: JSX.Element[] = displayedSpecValues.map(
             (value: DomValueOrChecked, index: number): JSX.Element => {
-                let invalidMessage: InvalidSpecMessage = invalidSpecMessages[ specKey ]
+                let invalidMessage: InvalidSpecMessage = invalidMessages[ specKey ]
                 if (invalidMessage && invalidMessage instanceof Array) {
                     invalidMessage = invalidMessage[ index ]
                 }
@@ -32,13 +29,13 @@ const ArrayedSpecControl: (props: ArrayedSpecControlProps) => JSX.Element =
                 return (
                     <SpecControl {...{
                         arrayedPropertyIndex: to.Index(index),
+                        displayedSpecValue: value,
                         invalidMessage,
                         key: index,
-                        secretSubmittedSpecValue: submittedSpecValueArray[ index ],
                         specControlsProps,
                         specKey,
                         specPropertyAttributes,
-                        specValue: value,
+                        submittedSpecValue: submittedSpecValues[ index ],
                     }}/>
                 )
             },
@@ -47,13 +44,13 @@ const ArrayedSpecControl: (props: ArrayedSpecControlProps) => JSX.Element =
         return (
             <div {...{ id: specKey, className: 'arrayed-control' }}>
                 <span {...{ className: SecretSelectorsForTest.SECRET_SUBMITTED_SPEC_CONTROL }}>
-                    {stringifyIfNecessary(submittedSpecValueArray)}
+                    {stringifyIfNecessary(submittedSpecValues)}
                 </span>
                 <div>{specPropertyAttributes.formattedName || camelCaseToLowerCase(specKey)}</div>
                 {controls}
                 <div>
-                    <AddButton {...{ specKey, specState }}/>
-                    <RemoveButton {...{ specKey, specState }}/>
+                    <AddButton {...{ specKey, specState: specControlsProps.specState }}/>
+                    <RemoveButton {...{ specKey, specState: specControlsProps.specState }}/>
                 </div>
             </div>
         )
