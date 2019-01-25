@@ -3,3 +3,6 @@ Makefile.playroom:
 
 start:
 	@musical-patterns-playroom
+
+match-config:
+	@bash ./node_modules/@musical-patterns/playroom/bin/match-config.sh && musical-patterns-cli match-config
