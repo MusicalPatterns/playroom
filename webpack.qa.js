@@ -29,21 +29,6 @@ module.exports = merge(common, {
                 to: path.join(__dirname, './test-qa'),
                 flatten: true,
             },
-            {
-                from: 'node_modules/@musical-patterns/pattern-playroom-test/dist/*.jpg',
-                to: path.join(__dirname, './test-qa'),
-                flatten: true,
-            },
-            {
-                from: 'node_modules/@musical-patterns/pattern-playroom-test/dist/*.png',
-                to: path.join(__dirname, './test-qa'),
-                flatten: true,
-            },
-            {
-                from: 'node_modules/@musical-patterns/pattern-playroom-test/dist/*.svg',
-                to: path.join(__dirname, './test-qa'),
-                flatten: true,
-            },
         ]),
         new FaviconsWebpackPlugin('./assets/favicon.png'),
     ],
