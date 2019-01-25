@@ -1,13 +1,12 @@
-import { evalInTab } from 'puppet-strings'
 import { testGlobals } from '../../setup'
 
-const elementValue = selector => evalInTab(testGlobals.tab, [ selector ], `[selector] = arguments; return document.querySelector(selector).value`)
+const elementValue = selector => testGlobals.page.evaluate(selector => document.querySelector(selector).value, selector)
 
-const elementExists = selector => evalInTab(testGlobals.tab, [ selector ], `[selector] = arguments; return !!document.querySelector(selector)`)
+const elementExists = selector => testGlobals.page.evaluate(selector => !!document.querySelector(selector), selector)
 
-const elementInnerText = selector => evalInTab(testGlobals.tab, [ selector ], `[selector] = arguments; return document.querySelector(selector).innerText`)
+const elementInnerText = selector => testGlobals.page.evaluate(selector => document.querySelector(selector).innerText, selector)
 
-const elementChecked = selector => evalInTab(testGlobals.tab, [ selector ], `[selector] = arguments; return document.querySelector(selector).checked`)
+const elementChecked = selector => testGlobals.page.evaluate(selector => document.querySelector(selector).checked, selector)
 
 export {
     elementExists,
