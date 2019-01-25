@@ -3,6 +3,8 @@
 export CLI_DIR=../../../node_modules/@musical-patterns/cli
 
 . ${CLI_DIR}/bin/sharing/share_files.sh
-. ${CLI_DIR}/bin/sharing/run_only_if_not_self_installing.sh
 
-run_only_if_not_self_installing share_files
+CHECK_TO_MAKE_SURE_I_AM_RUNNING_AS_PART_OF_ANOTHER_MODULE_S_INSTALL=../../../node_modules/@musical-patterns/cli
+if [[ -d "${CHECK_TO_MAKE_SURE_I_AM_RUNNING_AS_PART_OF_ANOTHER_MODULE_S_INSTALL}" ]] ; then
+	share_files_and_special_treatment_shared_files
+fi

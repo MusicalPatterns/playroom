@@ -5,7 +5,7 @@ import {
 } from '@musical-patterns/compiler'
 import { Pattern } from '@musical-patterns/pattern'
 import { setThreadSpecs, ThreadSpec } from '@musical-patterns/performer'
-import { doAsync, logMessageToConsole, Time } from '@musical-patterns/utilities'
+import { doAsync, logMessageToConsole, Maybe, Time } from '@musical-patterns/utilities'
 import * as React from 'react'
 import { connect } from 'react-redux'
 import { Dispatch } from 'redux'
@@ -34,7 +34,11 @@ const PatternListener: (patternListenerProps: PatternListenerProps) => JSX.Eleme
         doAsync(async () => {
             const { debugMode, id, patterns, submittedSpec, setTotalDuration } = props
 
-            const pattern: Pattern = patterns[ id ]
+            const pattern: Maybe<Pattern> = patterns[ id ]
+            if (!pattern) {
+                return
+            }
+
             const compilePatternParameters: CompilePatternParameters = { ...pattern, spec: submittedSpec }
 
             const threadSpecs: ThreadSpec[] = await compilePattern(compilePatternParameters)

@@ -1,6 +1,6 @@
-import { Spec, SpecData } from '@musical-patterns/pattern'
+import { Pattern, Spec, SpecData } from '@musical-patterns/pattern'
 import { setTime, togglePaused } from '@musical-patterns/performer'
-import { BEGINNING, doAsync } from '@musical-patterns/utilities'
+import { BEGINNING, doAsync, Maybe } from '@musical-patterns/utilities'
 import { BatchAction, batchActions } from 'redux-batched-actions'
 import { Action, ActionType } from '../../root'
 import { resetActions } from '../../spec'
@@ -11,7 +11,12 @@ const handlePatternChange: PatternChangeEventHandler =
     async ({ dispatch, id, patterns }: PatternChangeEventHandlerParameters): Promise<void> => {
         togglePaused()
 
-        const specData: SpecData = patterns[ id ].specData
+        const pattern: Maybe<Pattern> = patterns[ id ]
+        if (!pattern) {
+            return
+        }
+
+        const specData: SpecData = pattern.specData
         const initialSpec: Spec = specData.initial
 
         const actions: Action[] = resetActions(initialSpec)
