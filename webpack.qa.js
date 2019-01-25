@@ -1,6 +1,5 @@
 const { PLAYROOM_PORT } = require('@musical-patterns/utilities')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
-const CopyWebpackPlugin = require('copy-webpack-plugin')
 const FaviconsWebpackPlugin = require('favicons-webpack-plugin')
 const common = require('./webpack.common')
 const merge = require('webpack-merge')
@@ -23,13 +22,6 @@ module.exports = merge(common, {
             title: 'Musical Patterns - Playroom QA',
             meta: { viewport: 'width=device-width' },
         }),
-        new CopyWebpackPlugin([
-            {
-                from: 'node_modules/@musical-patterns/performer/dist/*.wav',
-                to: path.join(__dirname, './test-qa'),
-                flatten: true,
-            },
-        ]),
         new FaviconsWebpackPlugin('./assets/favicon.png'),
     ],
 })
