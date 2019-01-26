@@ -15,6 +15,10 @@ export {
     currentTime,
     totalDuration,
     findElement,
+    simulateDesktopViewport,
+    simulateMobileViewport,
+    selectOption,
+    elementIds,
 } from './control'
 export { startServer, stopServer } from './server'
 

@@ -1,11 +1,10 @@
 // tslint:disable:no-any
 
-import { page, testGlobals } from '../../setup'
-import { SPEC_ARRAYED_PROPERTY_KEY } from '../constants'
+import { page } from '../../setup'
 
 const elementValue: (selector: string) => Promise<any> =
     async (selector: string): Promise<any> =>
-        testGlobals.page.evaluate(
+        page.evaluate(
             (slctr: string) =>
                 // @ts-ignore
                 // tslint:disable-next-line:no-unsafe-any
@@ -15,7 +14,7 @@ const elementValue: (selector: string) => Promise<any> =
 
 const elementExists: (selector: string) => Promise<boolean> =
     async (selector: string): Promise<boolean> =>
-        testGlobals.page.evaluate(
+        page.evaluate(
             (slctr: string) =>
                 !!document.querySelector(slctr),
             selector,
@@ -23,7 +22,7 @@ const elementExists: (selector: string) => Promise<boolean> =
 
 const elementInnerText: (selector: string) => Promise<string> =
     async (selector: string): Promise<string> =>
-        testGlobals.page.evaluate(
+        page.evaluate(
             (slctr: string) =>
                 // @ts-ignore
                 // tslint:disable-next-line:no-unsafe-any
@@ -33,7 +32,7 @@ const elementInnerText: (selector: string) => Promise<string> =
 
 const elementChecked: (selector: string) => Promise<boolean> =
     async (selector: string): Promise<boolean> =>
-        testGlobals.page.evaluate(
+        page.evaluate(
             (slctr: string) =>
                 // @ts-ignore
                 // tslint:disable-next-line:no-unsafe-any
@@ -43,9 +42,19 @@ const elementChecked: (selector: string) => Promise<boolean> =
 
 const elementCount: (selector: string) => Promise<number> =
     async (selector: string): Promise<number> =>
-        testGlobals.page.evaluate(
+        page.evaluate(
             (slctr: string) =>
                 document.querySelectorAll(slctr).length,
+            selector,
+        )
+
+const elementIds: (selector: string) => Promise<string[]> =
+    async (selector: string): Promise<string[]> =>
+        page.evaluate(
+            (slctr: string) =>
+                // tslint:disable-next-line:no-unsafe-any
+                Array.from(document.querySelectorAll(slctr))
+                    .map((element: Element) => element.id),
             selector,
         )
 
@@ -55,4 +64,5 @@ export {
     elementValue,
     elementChecked,
     elementCount,
+    elementIds,
 }

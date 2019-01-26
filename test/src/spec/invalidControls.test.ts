@@ -1,6 +1,5 @@
 import { ElementHandle } from 'puppeteer'
 import { SecretSelectorsForTest, SpecControlStates } from '../../../src/indexForTest'
-import { page } from '../../setup'
 import {
     BAD_FORMAT_INVALID_TEST_MODIFICATION,
     elementExists,
@@ -11,6 +10,7 @@ import {
     OUT_OF_RANGE_INVALID_TEST_MODIFICATION,
     press,
     refreshWithTestPatternSelected,
+    selectOption,
     SPEC_ARRAYED_PROPERTY_KEY,
     SPEC_CONTROLS_PATTERN_OPTIONED_PROPERTY_ONE_MODIFIED_VALUE,
     SPEC_CONTROLS_PATTERN_RANGED_PROPERTY_ONE_INITIAL_VALUE,
@@ -187,7 +187,7 @@ describe('invalid controls', () => {
         })
 
         it('preserves the invalid states if you make a change to another control', async (done: DoneFn) => {
-            await page.select(`select#${SPEC_OPTIONED_PROPERTY_ONE_KEY}`, SPEC_CONTROLS_PATTERN_OPTIONED_PROPERTY_ONE_MODIFIED_VALUE)
+            await selectOption(`select#${SPEC_OPTIONED_PROPERTY_ONE_KEY}`, SPEC_CONTROLS_PATTERN_OPTIONED_PROPERTY_ONE_MODIFIED_VALUE)
 
             expect(await elementExists(`input[type=number]#${SPEC_RANGED_PROPERTY_ONE_KEY}.${SpecControlStates.INVALID}`))
                 .toBeTruthy()

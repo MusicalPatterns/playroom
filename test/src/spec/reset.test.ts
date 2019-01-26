@@ -1,6 +1,5 @@
 import { ElementHandle } from 'puppeteer'
 import { SpecControlStates } from '../../../src/indexForTest'
-import { page } from '../../setup'
 import {
     BAD_FORMAT_INVALID_TEST_MODIFICATION,
     elementChecked,
@@ -10,6 +9,7 @@ import {
     press,
     refreshWithTestPatternSelected,
     reset,
+    selectOption,
     SPEC_CONTROLS_PATTERN_OPTIONED_PROPERTY_ONE_INITIAL_VALUE,
     SPEC_CONTROLS_PATTERN_OPTIONED_PROPERTY_ONE_MODIFIED_VALUE,
     SPEC_CONTROLS_PATTERN_RANGED_PROPERTY_ONE_INITIAL_VALUE,
@@ -67,7 +67,7 @@ describe('reset button', () => {
         await controlOne.type(VALID_TEST_MODIFICATION)
         const controlTwo: ElementHandle = await findElement(`input[type=number]#${SPEC_RANGED_PROPERTY_TWO_KEY}`)
         await controlTwo.type(VALID_TEST_MODIFICATION)
-        await page.select(`select#${SPEC_OPTIONED_PROPERTY_ONE_KEY}`, SPEC_CONTROLS_PATTERN_OPTIONED_PROPERTY_ONE_MODIFIED_VALUE)
+        await selectOption(`select#${SPEC_OPTIONED_PROPERTY_ONE_KEY}`, SPEC_CONTROLS_PATTERN_OPTIONED_PROPERTY_ONE_MODIFIED_VALUE)
         const checkbox: ElementHandle = await findElement(`input#${SPEC_TOGGLED_PROPERTY_KEY}`)
         await checkbox.click()
 

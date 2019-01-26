@@ -4,7 +4,6 @@ import { APP_URL, DEFAULT_VIEWPORT_HEIGHT, DEFAULT_VIEWPORT_WIDTH, startServer, 
 const PUPPETEER_TIMEOUT: number = 1000000
 jasmine.DEFAULT_TIMEOUT_INTERVAL = 10000
 
-let testGlobals: { page: puppeteer.Page }
 let browser: puppeteer.Browser
 let page: puppeteer.Page
 
@@ -15,7 +14,6 @@ beforeAll(
         browser = await puppeteer.launch({ headless: true, timeout: PUPPETEER_TIMEOUT })
         page = await browser.newPage()
 
-        testGlobals = { page }
         await page.setViewport({ width: DEFAULT_VIEWPORT_WIDTH, height: DEFAULT_VIEWPORT_HEIGHT })
         await page.goto(APP_URL, { timeout: PUPPETEER_TIMEOUT })
 
@@ -36,6 +34,5 @@ afterAll(
 )
 
 export {
-    testGlobals,
     page,
 }

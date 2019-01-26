@@ -2,9 +2,11 @@ import { ElementHandle } from 'puppeteer'
 import { SecretSelectorsForTest } from '../../../src/indexForTest'
 import { page } from '../../setup'
 import {
+    elementIds,
     elementInnerText,
     findElement,
     refreshWithTestPatternSelected,
+    selectOption,
     SPEC_ARRAYED_PROPERTY_KEY,
     SPEC_CONTROLS_PATTERN_ARRAYED_PROPERTY_INITIAL_VALUE,
     SPEC_CONTROLS_PATTERN_OPTIONED_PROPERTY_ONE_MODIFIED_VALUE,
@@ -42,7 +44,7 @@ describe('submitting spec changes', () => {
             const previouslySubmittedControl: ElementHandle = await findElement(`input[type=number]#${SPEC_RANGED_PROPERTY_ONE_KEY}`)
             await previouslySubmittedControl.type(VALID_TEST_MODIFICATION)
 
-            await page.select(`select#${SPEC_OPTIONED_PROPERTY_ONE_KEY}`, SPEC_CONTROLS_PATTERN_OPTIONED_PROPERTY_ONE_MODIFIED_VALUE)
+            await selectOption(`select#${SPEC_OPTIONED_PROPERTY_ONE_KEY}`, SPEC_CONTROLS_PATTERN_OPTIONED_PROPERTY_ONE_MODIFIED_VALUE)
 
             const controlUnderTest: ElementHandle = await findElement(`input[type=number]#${SPEC_RANGED_PROPERTY_TWO_KEY}`)
             await controlUnderTest.type(VALID_TEST_MODIFICATION)
@@ -58,11 +60,7 @@ describe('submitting spec changes', () => {
         })
 
         it('keeps the controls in the same order after making a change', async (done: DoneFn) => {
-            let controlIds: string[] = await page.evaluate(() =>
-                // tslint:disable-next-line:no-unsafe-any
-                Array.from(document.querySelectorAll('#spec-controls input[type=number]'))
-                    .map((element: Element) => element.id),
-            )
+            let controlIds: string[] = await elementIds('#spec-controls input[type=number]')
             expect(controlIds)
                 .toEqual([
                     `${SPEC_ARRAYED_PROPERTY_KEY}-0`,
@@ -77,11 +75,7 @@ describe('submitting spec changes', () => {
             const control: ElementHandle = await findElement(`input[type=number]#${SPEC_RANGED_PROPERTY_ONE_KEY}`)
             await control.type(VALID_TEST_MODIFICATION)
 
-            controlIds = await page.evaluate(() =>
-                // tslint:disable-next-line:no-unsafe-any
-                Array.from(document.querySelectorAll('#spec-controls input[type=number]'))
-                    .map((element: Element) => element.id),
-            )
+            controlIds = await elementIds('#spec-controls input[type=number]')
             expect(controlIds)
                 .toEqual([
                     `${SPEC_ARRAYED_PROPERTY_KEY}-0`,
@@ -99,7 +93,7 @@ describe('submitting spec changes', () => {
 
     describe('optioned controls', () => {
         it('immediately submits a control when you choose a new value', async (done: DoneFn) => {
-            await page.select(`select#${SPEC_OPTIONED_PROPERTY_ONE_KEY}`, SPEC_CONTROLS_PATTERN_OPTIONED_PROPERTY_ONE_MODIFIED_VALUE)
+            await selectOption(`select#${SPEC_OPTIONED_PROPERTY_ONE_KEY}`, SPEC_CONTROLS_PATTERN_OPTIONED_PROPERTY_ONE_MODIFIED_VALUE)
 
             expect(await elementInnerText(`#${SPEC_OPTIONED_PROPERTY_ONE_KEY} .${SecretSelectorsForTest.SECRET_SUBMITTED_SPEC_CONTROL}`))
                 .toBe(SPEC_CONTROLS_PATTERN_OPTIONED_PROPERTY_ONE_MODIFIED_VALUE)
@@ -111,9 +105,9 @@ describe('submitting spec changes', () => {
             const previouslySubmittedControl: ElementHandle = await findElement(`input[type=number]#${SPEC_RANGED_PROPERTY_ONE_KEY}`)
             await previouslySubmittedControl.type(VALID_TEST_MODIFICATION)
 
-            await page.select(`select#${SPEC_OPTIONED_PROPERTY_ONE_KEY}`, SPEC_CONTROLS_PATTERN_OPTIONED_PROPERTY_ONE_MODIFIED_VALUE)
+            await selectOption(`select#${SPEC_OPTIONED_PROPERTY_ONE_KEY}`, SPEC_CONTROLS_PATTERN_OPTIONED_PROPERTY_ONE_MODIFIED_VALUE)
 
-            await page.select(`select#${SPEC_OPTIONED_PROPERTY_TWO_KEY}`, SPEC_CONTROLS_PATTERN_OPTIONED_PROPERTY_TWO_MODIFIED_VALUE)
+            await selectOption(`select#${SPEC_OPTIONED_PROPERTY_TWO_KEY}`, SPEC_CONTROLS_PATTERN_OPTIONED_PROPERTY_TWO_MODIFIED_VALUE)
 
             expect(await elementInnerText(`#${SPEC_RANGED_PROPERTY_ONE_KEY} .${SecretSelectorsForTest.SECRET_SUBMITTED_SPEC_CONTROL}`))
                 .toBe(`${SPEC_CONTROLS_PATTERN_RANGED_PROPERTY_ONE_INITIAL_VALUE}${VALID_TEST_MODIFICATION}`)

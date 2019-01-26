@@ -1,6 +1,5 @@
 import { ElementHandle } from 'puppeteer'
 import { SecretSelectorsForTest, SpecControlStates } from '../../../src/indexForTest'
-import { page } from '../../setup'
 import {
     BAD_FORMAT_INVALID_TEST_MODIFICATION,
     elementExists,
@@ -11,7 +10,7 @@ import {
     POST_PATTERN_OPTIONED_PROPERTY_TWO_INITIAL_VALUE,
     POST_PATTERN_RANGED_PROPERTY_ONE_INITIAL_VALUE,
     POST_PATTERN_RANGED_PROPERTY_TWO_INITIAL_VALUE,
-    refreshWithTestPatternSelected,
+    refreshWithTestPatternSelected, selectOption,
     selectOtherTestPattern,
     selectTestPattern,
     SPEC_CONTROLS_PATTERN_ID,
@@ -92,7 +91,7 @@ describe('pattern list', () => {
             const input: ElementHandle = await findElement(`input[type=number]#${SPEC_RANGED_PROPERTY_ONE_KEY}`)
             await input.type(VALID_TEST_MODIFICATION)
 
-            await page.select(`select#${SPEC_OPTIONED_PROPERTY_ONE_KEY}`, SPEC_CONTROLS_PATTERN_OPTIONED_PROPERTY_ONE_MODIFIED_VALUE)
+            await selectOption(`select#${SPEC_OPTIONED_PROPERTY_ONE_KEY}`, SPEC_CONTROLS_PATTERN_OPTIONED_PROPERTY_ONE_MODIFIED_VALUE)
 
             await selectTestPattern()
 
