@@ -1,5 +1,3 @@
-import { elementCount } from './control/checkElement'
-
 export {
     sleep,
     selectOtherTestPattern,
@@ -18,8 +16,7 @@ export {
     totalDuration,
     findElement,
 } from './control'
-// @ts-ignore
-export { startServer, stopServer } from './infrastructure'
+export { startServer, stopServer } from './server'
 
 export {
     APP_URL,

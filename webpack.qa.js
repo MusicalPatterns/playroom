@@ -6,7 +6,7 @@ const merge = require('webpack-merge')
 const path = require('path')
 
 module.exports = merge(common, {
-    entry: './test/support/infrastructure/playroom.js',
+    entry: './src/playroom.ts',
     devtool: 'eval-source-map',
     devServer: {
         disableHostCheck: true,
