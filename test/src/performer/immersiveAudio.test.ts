@@ -1,9 +1,8 @@
-import { clickElement, findElement } from 'puppet-strings'
-import { testGlobals } from '../../setup'
-import { elementExists, elementInnerText, refresh, refreshWithTestPatternSelected } from '../../support'
+import { ElementHandle } from 'puppeteer'
+import { elementExists, elementInnerText, findElement, refresh, refreshWithTestPatternSelected } from '../../support'
 
 describe('immersive audio', () => {
-    it('starts out disabled', async done => {
+    it('starts out disabled', async (done: DoneFn) => {
         await refresh()
         expect(await elementExists('#toggle-immersive-audio:disabled'))
             .toBeTruthy()
@@ -12,21 +11,21 @@ describe('immersive audio', () => {
     })
 
     describe('after selecting a pattern', () => {
-        beforeEach(async done => {
+        beforeEach(async (done: DoneFn) => {
             await refreshWithTestPatternSelected()
             done()
         })
 
-        it('starts outside of immersive audio', async done => {
+        it('starts outside of immersive audio', async (done: DoneFn) => {
             expect(await elementInnerText('#toggle-immersive-audio'))
                 .toBe('enter immersive audio')
 
             done()
         })
 
-        it('changes the button to exit after entering', async done => {
-            const toggleImmersiveAudioButton = await findElement(testGlobals.tab, '#toggle-immersive-audio')
-            await clickElement(toggleImmersiveAudioButton)
+        it('changes the button to exit after entering', async (done: DoneFn) => {
+            const toggleImmersiveAudioButton: ElementHandle = await findElement('#toggle-immersive-audio')
+            await toggleImmersiveAudioButton.click()
 
             expect(await elementInnerText('#toggle-immersive-audio'))
                 .toBe('exit immersive audio')

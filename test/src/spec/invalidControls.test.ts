@@ -1,11 +1,12 @@
-import { clickElement, fillInElement, findElement } from 'puppet-strings'
+import { ElementHandle } from 'puppeteer'
 import { SecretSelectorsForTest, SpecControlStates } from '../../../src/indexForTest'
-import { testGlobals } from '../../setup'
+import { page } from '../../setup'
 import {
     BAD_FORMAT_INVALID_TEST_MODIFICATION,
     elementExists,
     elementInnerText,
     elementValue,
+    findElement,
     loseFocus,
     OUT_OF_RANGE_INVALID_TEST_MODIFICATION,
     press,
@@ -22,19 +23,19 @@ import {
 } from '../../support'
 
 describe('invalid controls', () => {
-    let control
+    let control: ElementHandle
 
     describe('bad format', () => {
-        beforeEach(async done => {
+        beforeEach(async (done: DoneFn) => {
             await refreshWithTestPatternSelected()
 
-            control = await findElement(testGlobals.tab, `input[type=number]#${SPEC_RANGED_PROPERTY_ONE_KEY}`)
-            await fillInElement(control, BAD_FORMAT_INVALID_TEST_MODIFICATION)
+            control = await findElement(`input[type=number]#${SPEC_RANGED_PROPERTY_ONE_KEY}`)
+            await control.type(BAD_FORMAT_INVALID_TEST_MODIFICATION)
 
             done()
         })
 
-        it('marks as invalid, and it does not crash or attempt to recompile with this invalid data', async done => {
+        it('marks as invalid, and it does not crash or attempt to recompile with this invalid data', async (done: DoneFn) => {
             expect(await elementExists(`input[type=number]#${SPEC_RANGED_PROPERTY_ONE_KEY}.${SpecControlStates.INVALID}`))
                 .toBeTruthy()
 
@@ -44,18 +45,19 @@ describe('invalid controls', () => {
             done()
         })
 
-        it('shows an invalid message', async done => {
+        it('shows an invalid message', async (done: DoneFn) => {
             expect(await elementInnerText(`#${SPEC_RANGED_PROPERTY_ONE_KEY} .invalid-message`))
                 .toBe('this property is formatted in a way which cannot be parsed')
 
             done()
         })
 
-        it('resets the control to valid after typing something valid into it', async done => {
+        it('resets the control to valid after typing something valid into it', async (done: DoneFn) => {
             expect(await elementExists(`input[type=number]#${SPEC_RANGED_PROPERTY_ONE_KEY}.${SpecControlStates.INVALID}`))
                 .toBeTruthy()
 
-            await fillInElement(control, `${SPEC_CONTROLS_PATTERN_RANGED_PROPERTY_ONE_INITIAL_VALUE}`)
+            await control.click()
+            await press('Backspace')
 
             expect(await elementExists(`input[type=number]#${SPEC_RANGED_PROPERTY_ONE_KEY}.${SpecControlStates.VALID}`))
                 .toBeTruthy()
@@ -63,9 +65,9 @@ describe('invalid controls', () => {
             done()
         })
 
-        it('preserves the invalid state and displayed value if you make a change to another control', async done => {
-            control = await findElement(testGlobals.tab, `input[type=number]#${SPEC_RANGED_PROPERTY_TWO_KEY}`)
-            await fillInElement(control, VALID_TEST_MODIFICATION)
+        it('preserves the invalid state and displayed value if you make a change to another control', async (done: DoneFn) => {
+            control = await findElement(`input[type=number]#${SPEC_RANGED_PROPERTY_TWO_KEY}`)
+            await control.type(VALID_TEST_MODIFICATION)
 
             expect(await elementExists(`input[type=number]#${SPEC_RANGED_PROPERTY_ONE_KEY}.${SpecControlStates.INVALID}`))
                 .toBeTruthy()
@@ -77,16 +79,16 @@ describe('invalid controls', () => {
     })
 
     describe('out of range', () => {
-        beforeEach(async done => {
+        beforeEach(async (done: DoneFn) => {
             await refreshWithTestPatternSelected()
 
-            control = await findElement(testGlobals.tab, `input[type=number]#${SPEC_RANGED_PROPERTY_ONE_KEY}`)
-            await fillInElement(control, OUT_OF_RANGE_INVALID_TEST_MODIFICATION)
+            control = await findElement(`input[type=number]#${SPEC_RANGED_PROPERTY_ONE_KEY}`)
+            await control.type(OUT_OF_RANGE_INVALID_TEST_MODIFICATION)
 
             done()
         })
 
-        it('marks as invalid, and it does not crash or attempt to recompile with this invalid data', async done => {
+        it('marks as invalid, and it does not crash or attempt to recompile with this invalid data', async (done: DoneFn) => {
             expect(await elementExists(`input[type=number]#${SPEC_RANGED_PROPERTY_ONE_KEY}.${SpecControlStates.INVALID}`))
                 .toBeTruthy()
 
@@ -96,18 +98,18 @@ describe('invalid controls', () => {
             done()
         })
 
-        it('shows an invalid message', async done => {
+        it('shows an invalid message', async (done: DoneFn) => {
             expect(await elementInnerText(`#${SPEC_RANGED_PROPERTY_ONE_KEY} .invalid-message`))
                 .toBe(`must be less than or equal to ${SPEC_CONTROLS_PATTERN_RANGED_PROPERTY_ONE_MAX_VALUE}`)
 
             done()
         })
 
-        it('resets the control to valid after typing something valid into it', async done => {
+        it('resets the control to valid after typing something valid into it', async (done: DoneFn) => {
             expect(await elementExists(`input[type=number]#${SPEC_RANGED_PROPERTY_ONE_KEY}.${SpecControlStates.INVALID}`))
                 .toBeTruthy()
 
-            await clickElement(control)
+            await control.click()
             await press('Backspace')
 
             expect(await elementExists(`input[type=number]#${SPEC_RANGED_PROPERTY_ONE_KEY}.${SpecControlStates.VALID}`))
@@ -116,9 +118,9 @@ describe('invalid controls', () => {
             done()
         })
 
-        it('preserves the invalid state if you make a change to another control', async done => {
-            control = await findElement(testGlobals.tab, `input[type=number]#${SPEC_RANGED_PROPERTY_TWO_KEY}`)
-            await fillInElement(control, VALID_TEST_MODIFICATION)
+        it('preserves the invalid state if you make a change to another control', async (done: DoneFn) => {
+            control = await findElement(`input[type=number]#${SPEC_RANGED_PROPERTY_TWO_KEY}`)
+            await control.type(VALID_TEST_MODIFICATION)
 
             expect(await elementExists(`input[type=number]#${SPEC_RANGED_PROPERTY_ONE_KEY}.${SpecControlStates.INVALID}`))
                 .toBeTruthy()
@@ -130,14 +132,14 @@ describe('invalid controls', () => {
     })
 
     describe('custom validity', () => {
-        let lastStillValidValue
-        beforeEach(async done => {
+        let lastStillValidValue: string
+        beforeEach(async (done: DoneFn) => {
             await refreshWithTestPatternSelected()
-            const testPattern = await findElement(testGlobals.tab, `#${VALIDATION_PATTERN_ID}`)
-            await clickElement(testPattern)
+            const testPattern: ElementHandle = await findElement(`#${VALIDATION_PATTERN_ID}`)
+            await testPattern.click()
 
-            control = await findElement(testGlobals.tab, `input[type=number]#${SPEC_RANGED_PROPERTY_TWO_KEY}`)
-            await clickElement(control)
+            control = await findElement(`input[type=number]#${SPEC_RANGED_PROPERTY_TWO_KEY}`)
+            await control.click()
             await press('Backspace')
             lastStillValidValue = await elementInnerText(`#${SPEC_RANGED_PROPERTY_TWO_KEY} .${SecretSelectorsForTest.SECRET_SUBMITTED_SPEC_CONTROL}`)
             await press('Backspace')
@@ -146,7 +148,7 @@ describe('invalid controls', () => {
             done()
         })
 
-        it('marks all involved controls as invalid, and it does not crash or attempt to recompile with the new data that caused the invalidity', async done => {
+        it('marks all involved controls as invalid, and it does not crash or attempt to recompile with the new data that caused the invalidity', async (done: DoneFn) => {
             expect(await elementExists(`input[type=number]#${SPEC_RANGED_PROPERTY_TWO_KEY}.${SpecControlStates.INVALID}`))
                 .toBeTruthy()
             expect(await elementExists(`input[type=number]#${SPEC_RANGED_PROPERTY_ONE_KEY}.${SpecControlStates.INVALID}`))
@@ -158,7 +160,7 @@ describe('invalid controls', () => {
             done()
         })
 
-        it('shows invalid messages for all involved controls', async done => {
+        it('shows invalid messages for all involved controls', async (done: DoneFn) => {
             expect(await elementInnerText(`#${SPEC_RANGED_PROPERTY_TWO_KEY} .invalid-message`))
                 .toBe('pitch must be more than duration, obvs')
             expect(await elementInnerText(`#${SPEC_RANGED_PROPERTY_ONE_KEY} .invalid-message`))
@@ -167,14 +169,14 @@ describe('invalid controls', () => {
             done()
         })
 
-        it('resets all involved controls to valid state after typing a fix', async done => {
+        it('resets all involved controls to valid state after typing a fix', async (done: DoneFn) => {
             expect(await elementExists(`input[type=number]#${SPEC_RANGED_PROPERTY_ONE_KEY}.${SpecControlStates.INVALID}`))
                 .toBeTruthy()
             expect(await elementExists(`input[type=number]#${SPEC_RANGED_PROPERTY_TWO_KEY}.${SpecControlStates.INVALID}`))
                 .toBeTruthy()
 
-            const ANYTHING_VALID_BUT_DIFFERENT_THAN_THE_INITIAL = '87'
-            await fillInElement(control, ANYTHING_VALID_BUT_DIFFERENT_THAN_THE_INITIAL)
+            const ANYTHING_VALID_BUT_DIFFERENT_THAN_THE_INITIAL: string = '87'
+            await control.type(ANYTHING_VALID_BUT_DIFFERENT_THAN_THE_INITIAL)
 
             expect(await elementExists(`input[type=number]#${SPEC_RANGED_PROPERTY_ONE_KEY}.${SpecControlStates.VALID}`))
                 .toBeTruthy()
@@ -184,8 +186,8 @@ describe('invalid controls', () => {
             done()
         })
 
-        it('preserves the invalid states if you make a change to another control', async done => {
-            await testGlobals.page.select(`select#${SPEC_OPTIONED_PROPERTY_ONE_KEY}`, SPEC_CONTROLS_PATTERN_OPTIONED_PROPERTY_ONE_MODIFIED_VALUE)
+        it('preserves the invalid states if you make a change to another control', async (done: DoneFn) => {
+            await page.select(`select#${SPEC_OPTIONED_PROPERTY_ONE_KEY}`, SPEC_CONTROLS_PATTERN_OPTIONED_PROPERTY_ONE_MODIFIED_VALUE)
 
             expect(await elementExists(`input[type=number]#${SPEC_RANGED_PROPERTY_ONE_KEY}.${SpecControlStates.INVALID}`))
                 .toBeTruthy()
@@ -197,11 +199,11 @@ describe('invalid controls', () => {
     })
 
     describe('arrayed controls', () => {
-        it('only marks the specific element which is invalid', async done => {
+        it('only marks the specific element which is invalid', async (done: DoneFn) => {
             await refreshWithTestPatternSelected()
 
-            const control = await findElement(testGlobals.tab, `input[type=number]#${SPEC_ARRAYED_PROPERTY_KEY}-2`)
-            await fillInElement(control, BAD_FORMAT_INVALID_TEST_MODIFICATION)
+            control = await findElement(`input[type=number]#${SPEC_ARRAYED_PROPERTY_KEY}-2`)
+            await control.type(BAD_FORMAT_INVALID_TEST_MODIFICATION)
 
             expect(await elementExists(`input[type=number]#${SPEC_ARRAYED_PROPERTY_KEY}-0.${SpecControlStates.VALID}`))
                 .toBeTruthy()
@@ -217,13 +219,13 @@ describe('invalid controls', () => {
             done()
         })
 
-        it('runs validation when removing an element', async done => {
+        it('runs validation when removing an element', async (done: DoneFn) => {
             await refreshWithTestPatternSelected()
-            const testPattern = await findElement(testGlobals.tab, `#${VALIDATION_PATTERN_ID}`)
-            await clickElement(testPattern)
+            const testPattern: ElementHandle = await findElement(`#${VALIDATION_PATTERN_ID}`)
+            await testPattern.click()
 
-            const removeButton = await findElement(testGlobals.tab, `#${SPEC_ARRAYED_PROPERTY_KEY} .remove`)
-            await clickElement(removeButton)
+            const removeButton: ElementHandle = await findElement(`#${SPEC_ARRAYED_PROPERTY_KEY} .remove`)
+            await removeButton.click()
 
             expect(await elementInnerText(`#${SPEC_ARRAYED_PROPERTY_KEY}-0 .invalid-message`))
                 .toBe('arrays can only be odd in length, duoy')

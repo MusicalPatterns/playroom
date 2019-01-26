@@ -1,8 +1,9 @@
-import { clickElement, fillInElement, findElement } from 'puppet-strings'
+import { ElementHandle } from 'puppeteer'
 import { SecretSelectorsForTest } from '../../../src/indexForTest'
-import { testGlobals } from '../../setup'
+import { page } from '../../setup'
 import {
     elementInnerText,
+    findElement,
     refreshWithTestPatternSelected,
     SPEC_ARRAYED_PROPERTY_KEY,
     SPEC_CONTROLS_PATTERN_ARRAYED_PROPERTY_INITIAL_VALUE,
@@ -19,16 +20,17 @@ import {
     VALID_TEST_MODIFICATION,
 } from '../../support'
 
+// tslint:disable-next-line:no-type-definitions-outside-types-modules
 describe('submitting spec changes', () => {
-    beforeEach(async done => {
+    beforeEach(async (done: DoneFn) => {
         await refreshWithTestPatternSelected()
         done()
     })
 
     describe('ranged controls', () => {
-        it('submits a control when you type into it', async done => {
-            const control = await findElement(testGlobals.tab, `input[type=number]#${SPEC_RANGED_PROPERTY_ONE_KEY}`)
-            await fillInElement(control, VALID_TEST_MODIFICATION)
+        it('submits a control when you type into it', async (done: DoneFn) => {
+            const control: ElementHandle = await findElement(`input[type=number]#${SPEC_RANGED_PROPERTY_ONE_KEY}`)
+            await control.type(VALID_TEST_MODIFICATION)
 
             expect(await elementInnerText(`#${SPEC_RANGED_PROPERTY_ONE_KEY} .${SecretSelectorsForTest.SECRET_SUBMITTED_SPEC_CONTROL}`))
                 .toBe(`${SPEC_CONTROLS_PATTERN_RANGED_PROPERTY_ONE_INITIAL_VALUE}${VALID_TEST_MODIFICATION}`)
@@ -36,14 +38,14 @@ describe('submitting spec changes', () => {
             done()
         })
 
-        it('preserves earlier spec changes you have made when you change a second control', async done => {
-            const previouslySubmittedControl = await findElement(testGlobals.tab, `input[type=number]#${SPEC_RANGED_PROPERTY_ONE_KEY}`)
-            await fillInElement(previouslySubmittedControl, VALID_TEST_MODIFICATION)
+        it('preserves earlier spec changes you have made when you change a second control', async (done: DoneFn) => {
+            const previouslySubmittedControl: ElementHandle = await findElement(`input[type=number]#${SPEC_RANGED_PROPERTY_ONE_KEY}`)
+            await previouslySubmittedControl.type(VALID_TEST_MODIFICATION)
 
-            await testGlobals.page.select(`select#${SPEC_OPTIONED_PROPERTY_ONE_KEY}`, SPEC_CONTROLS_PATTERN_OPTIONED_PROPERTY_ONE_MODIFIED_VALUE)
+            await page.select(`select#${SPEC_OPTIONED_PROPERTY_ONE_KEY}`, SPEC_CONTROLS_PATTERN_OPTIONED_PROPERTY_ONE_MODIFIED_VALUE)
 
-            const controlUnderTest = await findElement(testGlobals.tab, `input[type=number]#${SPEC_RANGED_PROPERTY_TWO_KEY}`)
-            await fillInElement(controlUnderTest, VALID_TEST_MODIFICATION)
+            const controlUnderTest: ElementHandle = await findElement(`input[type=number]#${SPEC_RANGED_PROPERTY_TWO_KEY}`)
+            await controlUnderTest.type(VALID_TEST_MODIFICATION)
 
             expect(await elementInnerText(`#${SPEC_RANGED_PROPERTY_ONE_KEY} .${SecretSelectorsForTest.SECRET_SUBMITTED_SPEC_CONTROL}`))
                 .toBe(`${SPEC_CONTROLS_PATTERN_RANGED_PROPERTY_ONE_INITIAL_VALUE}${VALID_TEST_MODIFICATION}`)
@@ -55,9 +57,11 @@ describe('submitting spec changes', () => {
             done()
         })
 
-        it('keeps the controls in the same order after making a change', async done => {
-            let controlIds = await testGlobals.page.evaluate(() =>
-                Array.from(document.querySelectorAll('#spec-controls input[type=number]')).map(element => element.id),
+        it('keeps the controls in the same order after making a change', async (done: DoneFn) => {
+            let controlIds: string[] = await page.evaluate(() =>
+                // tslint:disable-next-line:no-unsafe-any
+                Array.from(document.querySelectorAll('#spec-controls input[type=number]'))
+                    .map((element: Element) => element.id),
             )
             expect(controlIds)
                 .toEqual([
@@ -70,11 +74,13 @@ describe('submitting spec changes', () => {
                     SPEC_RANGED_PROPERTY_TWO_KEY,
                 ])
 
-            const control = await findElement(testGlobals.tab, `input[type=number]#${SPEC_RANGED_PROPERTY_ONE_KEY}`)
-            await fillInElement(control, VALID_TEST_MODIFICATION)
+            const control: ElementHandle = await findElement(`input[type=number]#${SPEC_RANGED_PROPERTY_ONE_KEY}`)
+            await control.type(VALID_TEST_MODIFICATION)
 
-            controlIds = await testGlobals.page.evaluate(() =>
-                Array.from(document.querySelectorAll('#spec-controls input[type=number]')).map(element => element.id),
+            controlIds = await page.evaluate(() =>
+                // tslint:disable-next-line:no-unsafe-any
+                Array.from(document.querySelectorAll('#spec-controls input[type=number]'))
+                    .map((element: Element) => element.id),
             )
             expect(controlIds)
                 .toEqual([
@@ -92,8 +98,8 @@ describe('submitting spec changes', () => {
     })
 
     describe('optioned controls', () => {
-        it('immediately submits a control when you choose a new value', async done => {
-            await testGlobals.page.select(`select#${SPEC_OPTIONED_PROPERTY_ONE_KEY}`, SPEC_CONTROLS_PATTERN_OPTIONED_PROPERTY_ONE_MODIFIED_VALUE)
+        it('immediately submits a control when you choose a new value', async (done: DoneFn) => {
+            await page.select(`select#${SPEC_OPTIONED_PROPERTY_ONE_KEY}`, SPEC_CONTROLS_PATTERN_OPTIONED_PROPERTY_ONE_MODIFIED_VALUE)
 
             expect(await elementInnerText(`#${SPEC_OPTIONED_PROPERTY_ONE_KEY} .${SecretSelectorsForTest.SECRET_SUBMITTED_SPEC_CONTROL}`))
                 .toBe(SPEC_CONTROLS_PATTERN_OPTIONED_PROPERTY_ONE_MODIFIED_VALUE)
@@ -101,13 +107,13 @@ describe('submitting spec changes', () => {
             done()
         })
 
-        it('preserves earlier spec changes you have made when you change a second control', async done => {
-            const previouslySubmittedControl = await findElement(testGlobals.tab, `input[type=number]#${SPEC_RANGED_PROPERTY_ONE_KEY}`)
-            await fillInElement(previouslySubmittedControl, VALID_TEST_MODIFICATION)
+        it('preserves earlier spec changes you have made when you change a second control', async (done: DoneFn) => {
+            const previouslySubmittedControl: ElementHandle = await findElement(`input[type=number]#${SPEC_RANGED_PROPERTY_ONE_KEY}`)
+            await previouslySubmittedControl.type(VALID_TEST_MODIFICATION)
 
-            await testGlobals.page.select(`select#${SPEC_OPTIONED_PROPERTY_ONE_KEY}`, SPEC_CONTROLS_PATTERN_OPTIONED_PROPERTY_ONE_MODIFIED_VALUE)
+            await page.select(`select#${SPEC_OPTIONED_PROPERTY_ONE_KEY}`, SPEC_CONTROLS_PATTERN_OPTIONED_PROPERTY_ONE_MODIFIED_VALUE)
 
-            await testGlobals.page.select(`select#${SPEC_OPTIONED_PROPERTY_TWO_KEY}`, SPEC_CONTROLS_PATTERN_OPTIONED_PROPERTY_TWO_MODIFIED_VALUE)
+            await page.select(`select#${SPEC_OPTIONED_PROPERTY_TWO_KEY}`, SPEC_CONTROLS_PATTERN_OPTIONED_PROPERTY_TWO_MODIFIED_VALUE)
 
             expect(await elementInnerText(`#${SPEC_RANGED_PROPERTY_ONE_KEY} .${SecretSelectorsForTest.SECRET_SUBMITTED_SPEC_CONTROL}`))
                 .toBe(`${SPEC_CONTROLS_PATTERN_RANGED_PROPERTY_ONE_INITIAL_VALUE}${VALID_TEST_MODIFICATION}`)
@@ -121,9 +127,9 @@ describe('submitting spec changes', () => {
     })
 
     describe('toggled controls', () => {
-        it('immediately submits when you choose a new value from a control', async done => {
-            const checkbox = await findElement(testGlobals.tab, `input#${SPEC_TOGGLED_PROPERTY_KEY}`)
-            await clickElement(checkbox)
+        it('immediately submits when you choose a new value from a control', async (done: DoneFn) => {
+            const checkbox: ElementHandle = await findElement(`input#${SPEC_TOGGLED_PROPERTY_KEY}`)
+            await checkbox.click()
 
             expect(await elementInnerText(`#${SPEC_TOGGLED_PROPERTY_KEY} .${SecretSelectorsForTest.SECRET_SUBMITTED_SPEC_CONTROL}`))
                 .toBe(`${SPEC_CONTROLS_PATTERN_TOGGLED_PROPERTY_MODIFIED_VALUE}`)
@@ -133,9 +139,9 @@ describe('submitting spec changes', () => {
     })
 
     describe('arrayed controls', () => {
-        it('only submits the element you are working on, not the others in the array', async done => {
-            const control = await findElement(testGlobals.tab, `input[type=number]#${SPEC_ARRAYED_PROPERTY_KEY}-2`)
-            await fillInElement(control, VALID_TEST_MODIFICATION)
+        it('only submits the element you are working on, not the others in the array', async (done: DoneFn) => {
+            const control: ElementHandle = await findElement(`input[type=number]#${SPEC_ARRAYED_PROPERTY_KEY}-2`)
+            await control.type(VALID_TEST_MODIFICATION)
 
             expect(await elementInnerText(`#${SPEC_ARRAYED_PROPERTY_KEY}-0 .${SecretSelectorsForTest.SECRET_SUBMITTED_SPEC_CONTROL}`))
                 .toBe(`${SPEC_CONTROLS_PATTERN_ARRAYED_PROPERTY_INITIAL_VALUE[ 0 ]}`)

@@ -1,13 +1,15 @@
-import { clickElement, fillInElement, findElement } from 'puppet-strings'
+import { ElementHandle } from 'puppeteer'
 import { SpecControlStates } from '../../../src/indexForTest'
-import { testGlobals } from '../../setup'
+import { page } from '../../setup'
 import {
     BAD_FORMAT_INVALID_TEST_MODIFICATION,
     elementChecked,
     elementExists,
     elementValue,
+    findElement,
     press,
     refreshWithTestPatternSelected,
+    reset,
     SPEC_CONTROLS_PATTERN_OPTIONED_PROPERTY_ONE_INITIAL_VALUE,
     SPEC_CONTROLS_PATTERN_OPTIONED_PROPERTY_ONE_MODIFIED_VALUE,
     SPEC_CONTROLS_PATTERN_RANGED_PROPERTY_ONE_INITIAL_VALUE,
@@ -21,26 +23,21 @@ import {
     VALID_TEST_MODIFICATION,
 } from '../../support'
 
-const pushResetButton = async () => {
-    const reset = await findElement(testGlobals.tab, '#reset')
-    await clickElement(reset)
-}
-
 describe('reset button', () => {
-    beforeEach(async done => {
+    beforeEach(async (done: DoneFn) => {
         await refreshWithTestPatternSelected()
         done()
     })
 
-    it('reset button is disabled initially', async done => {
+    it('reset button is disabled initially', async (done: DoneFn) => {
         expect(await elementExists(`button#reset:disabled`))
             .toBeTruthy()
         done()
     })
 
-    it('reset button is enabled when any control is altered', async done => {
-        const control = await findElement(testGlobals.tab, `input[type=number]#${SPEC_RANGED_PROPERTY_ONE_KEY}`)
-        await fillInElement(control, VALID_TEST_MODIFICATION)
+    it('reset button is enabled when any control is altered', async (done: DoneFn) => {
+        const control: ElementHandle = await findElement(`input[type=number]#${SPEC_RANGED_PROPERTY_ONE_KEY}`)
+        await control.type(VALID_TEST_MODIFICATION)
 
         expect(await elementExists(`button#reset:enabled`))
             .toBeTruthy()
@@ -48,14 +45,14 @@ describe('reset button', () => {
         done()
     })
 
-    it('reset button is disabled when the control is altered back to the defaults', async done => {
-        const control = await findElement(testGlobals.tab, `input[type=number]#${SPEC_RANGED_PROPERTY_ONE_KEY}`)
-        await fillInElement(control, VALID_TEST_MODIFICATION)
+    it('reset button is disabled when the control is altered back to the defaults', async (done: DoneFn) => {
+        const control: ElementHandle = await findElement(`input[type=number]#${SPEC_RANGED_PROPERTY_ONE_KEY}`)
+        await control.type(VALID_TEST_MODIFICATION)
 
         expect(await elementExists(`button#reset:enabled`))
             .toBeTruthy()
 
-        await clickElement(control)
+        await control.click()
         await press('Backspace')
         await press('Enter')
 
@@ -65,14 +62,14 @@ describe('reset button', () => {
         done()
     })
 
-    it('resets the spec to the pattern\'s defaults', async done => {
-        const controlOne = await findElement(testGlobals.tab, `input[type=number]#${SPEC_RANGED_PROPERTY_ONE_KEY}`)
-        await fillInElement(controlOne, VALID_TEST_MODIFICATION)
-        const controlTwo = await findElement(testGlobals.tab, `input[type=number]#${SPEC_RANGED_PROPERTY_TWO_KEY}`)
-        await fillInElement(controlTwo, VALID_TEST_MODIFICATION)
-        await testGlobals.page.select(`select#${SPEC_OPTIONED_PROPERTY_ONE_KEY}`, SPEC_CONTROLS_PATTERN_OPTIONED_PROPERTY_ONE_MODIFIED_VALUE)
-        const checkbox = await findElement(testGlobals.tab, `input#${SPEC_TOGGLED_PROPERTY_KEY}`)
-        await clickElement(checkbox)
+    it('resets the spec to the pattern\'s defaults', async (done: DoneFn) => {
+        const controlOne: ElementHandle = await findElement(`input[type=number]#${SPEC_RANGED_PROPERTY_ONE_KEY}`)
+        await controlOne.type(VALID_TEST_MODIFICATION)
+        const controlTwo: ElementHandle = await findElement(`input[type=number]#${SPEC_RANGED_PROPERTY_TWO_KEY}`)
+        await controlTwo.type(VALID_TEST_MODIFICATION)
+        await page.select(`select#${SPEC_OPTIONED_PROPERTY_ONE_KEY}`, SPEC_CONTROLS_PATTERN_OPTIONED_PROPERTY_ONE_MODIFIED_VALUE)
+        const checkbox: ElementHandle = await findElement(`input#${SPEC_TOGGLED_PROPERTY_KEY}`)
+        await checkbox.click()
 
         expect(await elementValue(`input[type=number]#${SPEC_RANGED_PROPERTY_ONE_KEY}`))
             .toBe(`${SPEC_CONTROLS_PATTERN_RANGED_PROPERTY_ONE_INITIAL_VALUE}${VALID_TEST_MODIFICATION}`)
@@ -83,7 +80,7 @@ describe('reset button', () => {
         expect(await elementChecked(`input#${SPEC_TOGGLED_PROPERTY_KEY}`))
             .toBe(SPEC_CONTROLS_PATTERN_TOGGLED_PROPERTY_MODIFIED_VALUE)
 
-        await pushResetButton()
+        await reset()
 
         expect(await elementValue(`input[type=number]#${SPEC_RANGED_PROPERTY_ONE_KEY}`))
             .toBe(`${SPEC_CONTROLS_PATTERN_RANGED_PROPERTY_ONE_INITIAL_VALUE}`)
@@ -97,15 +94,15 @@ describe('reset button', () => {
         done()
     })
 
-    it('if there were any invalid controls, they no longer appear as invalid', async done => {
-        const controlToBeInvalid = await findElement(testGlobals.tab, `input[type=number]#${SPEC_RANGED_PROPERTY_ONE_KEY}`)
-        await fillInElement(controlToBeInvalid, BAD_FORMAT_INVALID_TEST_MODIFICATION)
+    it('if there were any invalid controls, they no longer appear as invalid', async (done: DoneFn) => {
+        const controlToBeInvalid: ElementHandle = await findElement(`input[type=number]#${SPEC_RANGED_PROPERTY_ONE_KEY}`)
+        await controlToBeInvalid.type(BAD_FORMAT_INVALID_TEST_MODIFICATION)
         expect(await elementExists(`input[type=number]#${SPEC_RANGED_PROPERTY_ONE_KEY}.${SpecControlStates.INVALID}`))
             .toBeTruthy()
 
-        const inputToBeChangedSuchThatResetButtonIsEnabled = await findElement(testGlobals.tab, `input[type=number]#${SPEC_RANGED_PROPERTY_TWO_KEY}`)
-        await fillInElement(inputToBeChangedSuchThatResetButtonIsEnabled, VALID_TEST_MODIFICATION)
-        await pushResetButton()
+        const inputToBeChangedSuchThatResetButtonIsEnabled: ElementHandle = await findElement(`input[type=number]#${SPEC_RANGED_PROPERTY_TWO_KEY}`)
+        await inputToBeChangedSuchThatResetButtonIsEnabled.type(VALID_TEST_MODIFICATION)
+        await reset()
 
         expect(await elementExists(`input[type=number]#${SPEC_RANGED_PROPERTY_ONE_KEY}.${SpecControlStates.VALID}`))
             .toBeTruthy()

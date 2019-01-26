@@ -1,33 +1,34 @@
-import { clickElement, findElement } from 'puppet-strings'
-import { SecretSelectorsForTest } from '../../../src/types'
-import { testGlobals } from '../../setup'
+import { ElementHandle } from 'puppeteer'
+import { SecretSelectorsForTest } from '../../../src/indexForTest'
+import { page } from '../../setup'
 import {
     elementExists,
     elementInnerText,
-    elementValue, PRESET_ONE_NAME, PRESET_TWO_NAME,
+    elementValue,
+    findElement,
+    PRESET_ONE_NAME,
+    PRESET_ONE_PROPERTY_ONE_VALUE,
+    PRESET_ONE_PROPERTY_TWO_VALUE,
+    PRESET_TWO_NAME,
+    PRESET_TWO_PROPERTY_ONE_VALUE,
+    PRESET_TWO_PROPERTY_TWO_VALUE,
     PRESETS_PATTERN_ID,
+    refreshWithTestPatternSelected,
     SPEC_CONTROLS_PATTERN_OPTIONED_PROPERTY_ONE_INITIAL_VALUE,
     SPEC_CONTROLS_PATTERN_OPTIONED_PROPERTY_ONE_MODIFIED_VALUE,
     SPEC_OPTIONED_PROPERTY_ONE_KEY,
     SPEC_OPTIONED_PROPERTY_TWO_KEY,
     SPEC_TOGGLED_PROPERTY_KEY,
 } from '../../support'
-import {
-    PRESET_ONE_PROPERTY_ONE_VALUE,
-    PRESET_ONE_PROPERTY_TWO_VALUE,
-    PRESET_TWO_PROPERTY_ONE_VALUE,
-    PRESET_TWO_PROPERTY_TWO_VALUE,
-} from '../../support/constants'
-import { refreshWithTestPatternSelected } from '../../support/control'
 
 describe('presets', () => {
-    beforeEach(async done => {
+    beforeEach(async (done: DoneFn) => {
         await refreshWithTestPatternSelected()
 
         done()
     })
 
-    it('does not show presets if the pattern has none', async done => {
+    it('does not show presets if the pattern has none', async (done: DoneFn) => {
         expect(await elementExists('#presets'))
             .toBeFalsy()
 
@@ -35,25 +36,25 @@ describe('presets', () => {
     })
 
     describe('when the pattern has presets', () => {
-        beforeEach(async done => {
-            const testPattern = await findElement(testGlobals.tab, `#${PRESETS_PATTERN_ID}`)
-            await clickElement(testPattern)
+        beforeEach(async (done: DoneFn) => {
+            const testPattern: ElementHandle = await findElement(`#${PRESETS_PATTERN_ID}`)
+            await testPattern.click()
 
             done()
         })
 
-        it('shows them', async done => {
+        it('shows them', async (done: DoneFn) => {
             expect(await elementExists('#presets'))
                 .toBeTruthy()
 
             done()
         })
 
-        it('shows the preset in the dropdown if the current spec matches it', async done => {
-            await testGlobals.page.select(`select#${SPEC_OPTIONED_PROPERTY_ONE_KEY}`, SPEC_CONTROLS_PATTERN_OPTIONED_PROPERTY_ONE_MODIFIED_VALUE)
+        it('shows the preset in the dropdown if the current spec matches it', async (done: DoneFn) => {
+            await page.select(`select#${SPEC_OPTIONED_PROPERTY_ONE_KEY}`, SPEC_CONTROLS_PATTERN_OPTIONED_PROPERTY_ONE_MODIFIED_VALUE)
 
-            const checkbox = await findElement(testGlobals.tab, `input#${SPEC_TOGGLED_PROPERTY_KEY}`)
-            await clickElement(checkbox)
+            const checkbox: ElementHandle = await findElement(`input#${SPEC_TOGGLED_PROPERTY_KEY}`)
+            await checkbox.click()
 
             expect(await elementValue('#presets select'))
                 .toBe('presetOne')
@@ -62,19 +63,19 @@ describe('presets', () => {
         })
 
         describe('choosing a preset', () => {
-            beforeEach(async done => {
-                await testGlobals.page.select(`#presets select`, PRESET_ONE_NAME)
+            beforeEach(async (done: DoneFn) => {
+                await page.select(`#presets select`, PRESET_ONE_NAME)
 
                 done()
             })
 
-            it('sets the spec', async done => {
+            it('sets the spec', async (done: DoneFn) => {
                 expect(await elementInnerText(`#${SPEC_OPTIONED_PROPERTY_ONE_KEY} .${SecretSelectorsForTest.SECRET_SUBMITTED_SPEC_CONTROL}`))
                     .toBe(PRESET_ONE_PROPERTY_ONE_VALUE)
                 expect(await elementInnerText(`#${SPEC_OPTIONED_PROPERTY_TWO_KEY} .${SecretSelectorsForTest.SECRET_SUBMITTED_SPEC_CONTROL}`))
                     .toBe(PRESET_ONE_PROPERTY_TWO_VALUE)
 
-                await testGlobals.page.select(`#presets select`, PRESET_TWO_NAME)
+                await page.select(`#presets select`, PRESET_TWO_NAME)
 
                 expect(await elementInnerText(`#${SPEC_OPTIONED_PROPERTY_ONE_KEY} .${SecretSelectorsForTest.SECRET_SUBMITTED_SPEC_CONTROL}`))
                     .toBe(PRESET_TWO_PROPERTY_ONE_VALUE)
@@ -84,11 +85,11 @@ describe('presets', () => {
                 done()
             })
 
-            it('stops showing the preset in the dropdown once the current spec no longer matches it', async done => {
+            it('stops showing the preset in the dropdown once the current spec no longer matches it', async (done: DoneFn) => {
                 expect(await elementValue('#presets select'))
                     .toBe('presetOne')
 
-                await testGlobals.page.select(`select#${SPEC_OPTIONED_PROPERTY_ONE_KEY}`, SPEC_CONTROLS_PATTERN_OPTIONED_PROPERTY_ONE_INITIAL_VALUE)
+                await page.select(`select#${SPEC_OPTIONED_PROPERTY_ONE_KEY}`, SPEC_CONTROLS_PATTERN_OPTIONED_PROPERTY_ONE_INITIAL_VALUE)
 
                 expect(await elementValue('#presets select'))
                     .toBe('')

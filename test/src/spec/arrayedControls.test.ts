@@ -1,11 +1,10 @@
-import { clickElement, findElement } from 'puppet-strings'
-import { fillInElement } from 'puppet-strings/index'
-import { SpecControlStates } from '../../../src/spec/components/types'
-import { SecretSelectorsForTest } from '../../../src/types'
-import { testGlobals } from '../../setup'
+import { ElementHandle } from 'puppeteer'
+import { SecretSelectorsForTest, SpecControlStates } from '../../../src/indexForTest'
 import {
+    elementCount,
     elementExists,
     elementInnerText,
+    findElement,
     refreshWithTestPatternSelected,
     SPEC_ARRAYED_PROPERTY_KEY,
     SPEC_CONTROLS_PATTERN_ARRAYED_PROPERTY_INITIAL_VALUE,
@@ -13,38 +12,31 @@ import {
 } from '../../support'
 
 describe('arrayed controls', () => {
-    beforeEach(async done => {
+    beforeEach(async (done: DoneFn) => {
         await refreshWithTestPatternSelected()
         done()
     })
 
     describe('adding', () => {
-        it('clicking the add button displays a new blank element at the end of the array', async done => {
-            const originalArrayedPropertyElementCount = await testGlobals.page.evaluate(
-                SPEC_ARRAYED_PROPERTY_KEY =>
-                    Array.from(document.querySelectorAll(`#${SPEC_ARRAYED_PROPERTY_KEY} input[type=number]`)).length,
-                SPEC_ARRAYED_PROPERTY_KEY,
-            )
+        it('clicking the add button displays a new blank element at the end of the array', async (done: DoneFn) => {
+            const originalArrayedPropertyElementCount: number = await elementCount(`#${SPEC_ARRAYED_PROPERTY_KEY} input[type=number]`)
 
-            const addButton = await findElement(testGlobals.tab, `#${SPEC_ARRAYED_PROPERTY_KEY} .add`)
-            await clickElement(addButton)
+            const addButton: ElementHandle = await findElement(`#${SPEC_ARRAYED_PROPERTY_KEY} .add`)
+            await addButton.click()
 
-            const updatedArrayedPropertyElementCount = await testGlobals.page.evaluate(
-                SPEC_ARRAYED_PROPERTY_KEY =>
-                    Array.from(document.querySelectorAll(`#${SPEC_ARRAYED_PROPERTY_KEY} input[type=number]`)).length,
-                SPEC_ARRAYED_PROPERTY_KEY,
-            )
+            const updatedArrayedPropertyElementCount: number = await elementCount(`#${SPEC_ARRAYED_PROPERTY_KEY} input[type=number]`)
 
-            expect(updatedArrayedPropertyElementCount).toBe(originalArrayedPropertyElementCount + 1)
+            expect(updatedArrayedPropertyElementCount)
+                .toBe(originalArrayedPropertyElementCount + 1)
             expect(await elementExists(`#${SPEC_ARRAYED_PROPERTY_KEY}-5`))
                 .toBeTruthy()
 
             done()
         })
 
-        it('does not submit the new element until you add something valid to it', async done => {
-            const addButton = await findElement(testGlobals.tab, `#${SPEC_ARRAYED_PROPERTY_KEY} .add`)
-            await clickElement(addButton)
+        it('does not submit the new element until you add something valid to it', async (done: DoneFn) => {
+            const addButton: ElementHandle = await findElement(`#${SPEC_ARRAYED_PROPERTY_KEY} .add`)
+            await addButton.click()
 
             expect(await elementInnerText(`#${SPEC_ARRAYED_PROPERTY_KEY}-0 .${SecretSelectorsForTest.SECRET_SUBMITTED_SPEC_CONTROL}`))
                 .toBe(`${SPEC_CONTROLS_PATTERN_ARRAYED_PROPERTY_INITIAL_VALUE[ 0 ]}`)
@@ -59,8 +51,8 @@ describe('arrayed controls', () => {
             expect(await elementInnerText(`#${SPEC_ARRAYED_PROPERTY_KEY}-5 .${SecretSelectorsForTest.SECRET_SUBMITTED_SPEC_CONTROL}`))
                 .toBe('')
 
-            const newControl = await findElement(testGlobals.tab, `#${SPEC_ARRAYED_PROPERTY_KEY}-5 input[type=number]`)
-            await fillInElement(newControl, VALID_TEST_MODIFICATION)
+            const newControl: ElementHandle = await findElement(`#${SPEC_ARRAYED_PROPERTY_KEY}-5 input[type=number]`)
+            await newControl.type(VALID_TEST_MODIFICATION)
 
             expect(await elementInnerText(`#${SPEC_ARRAYED_PROPERTY_KEY}-5 .${SecretSelectorsForTest.SECRET_SUBMITTED_SPEC_CONTROL}`))
                 .toBe(VALID_TEST_MODIFICATION)
@@ -68,10 +60,10 @@ describe('arrayed controls', () => {
             done()
         })
 
-        it('lets you add two new fields at once', async done => {
-            const addButton = await findElement(testGlobals.tab, `#${SPEC_ARRAYED_PROPERTY_KEY} .add`)
-            await clickElement(addButton)
-            await clickElement(addButton)
+        it('lets you add two new fields at once', async (done: DoneFn) => {
+            const addButton: ElementHandle = await findElement(`#${SPEC_ARRAYED_PROPERTY_KEY} .add`)
+            await addButton.click()
+            await addButton.click()
 
             expect(await elementInnerText(`#${SPEC_ARRAYED_PROPERTY_KEY}-5 .${SecretSelectorsForTest.SECRET_SUBMITTED_SPEC_CONTROL}`))
                 .toBe('')
@@ -81,13 +73,13 @@ describe('arrayed controls', () => {
             done()
         })
 
-        it('after adding two fields at once, if you modify the second one, the first new field stays around, marked as invalid, and your modification is not submitted at first, until you modify the other one, then both are submitted at once', async done => {
-            const addButton = await findElement(testGlobals.tab, `#${SPEC_ARRAYED_PROPERTY_KEY} .add`)
-            await clickElement(addButton)
-            await clickElement(addButton)
+        it('after adding two fields at once, if you modify the second one, the first new field stays around, marked as invalid, and your modification is not submitted at first, until you modify the other one, then both are submitted at once', async (done: DoneFn) => {
+            const addButton: ElementHandle = await findElement(`#${SPEC_ARRAYED_PROPERTY_KEY} .add`)
+            await addButton.click()
+            await addButton.click()
 
-            const newControl = await findElement(testGlobals.tab, `input[type=number]#${SPEC_ARRAYED_PROPERTY_KEY}-6`)
-            await fillInElement(newControl, VALID_TEST_MODIFICATION)
+            const newControl: ElementHandle = await findElement(`input[type=number]#${SPEC_ARRAYED_PROPERTY_KEY}-6`)
+            await newControl.type(VALID_TEST_MODIFICATION)
 
             expect(await elementExists(`input[type=number]#${SPEC_ARRAYED_PROPERTY_KEY}-5.${SpecControlStates.INVALID}`))
                 .toBeTruthy()
@@ -98,8 +90,8 @@ describe('arrayed controls', () => {
             expect(await elementInnerText(`#${SPEC_ARRAYED_PROPERTY_KEY}-6 .${SecretSelectorsForTest.SECRET_SUBMITTED_SPEC_CONTROL}`))
                 .toBe('')
 
-            const otherNewControl = await findElement(testGlobals.tab, `input[type=number]#${SPEC_ARRAYED_PROPERTY_KEY}-5`)
-            await fillInElement(otherNewControl, VALID_TEST_MODIFICATION)
+            const otherNewControl: ElementHandle = await findElement(`input[type=number]#${SPEC_ARRAYED_PROPERTY_KEY}-5`)
+            await otherNewControl.type(VALID_TEST_MODIFICATION)
 
             expect(await elementExists(`input[type=number]#${SPEC_ARRAYED_PROPERTY_KEY}-5.${SpecControlStates.VALID}`))
                 .toBeTruthy()
@@ -113,13 +105,13 @@ describe('arrayed controls', () => {
             done()
         })
 
-        it('after adding two fields at once, if you modify the first one, the second new field stays around, marked as invalid, and your modification is not submitted at first, until you modify the other one, then both are submitted at once', async done => {
-            const addButton = await findElement(testGlobals.tab, `#${SPEC_ARRAYED_PROPERTY_KEY} .add`)
-            await clickElement(addButton)
-            await clickElement(addButton)
+        it('after adding two fields at once, if you modify the first one, the second new field stays around, marked as invalid, and your modification is not submitted at first, until you modify the other one, then both are submitted at once', async (done: DoneFn) => {
+            const addButton: ElementHandle = await findElement(`#${SPEC_ARRAYED_PROPERTY_KEY} .add`)
+            await addButton.click()
+            await addButton.click()
 
-            const newControl = await findElement(testGlobals.tab, `input[type=number]#${SPEC_ARRAYED_PROPERTY_KEY}-5`)
-            await fillInElement(newControl, VALID_TEST_MODIFICATION)
+            const newControl: ElementHandle = await findElement(`input[type=number]#${SPEC_ARRAYED_PROPERTY_KEY}-5`)
+            await newControl.type(VALID_TEST_MODIFICATION)
 
             expect(await elementExists(`input[type=number]#${SPEC_ARRAYED_PROPERTY_KEY}-5.${SpecControlStates.VALID}`))
                 .toBeTruthy()
@@ -130,8 +122,8 @@ describe('arrayed controls', () => {
             expect(await elementInnerText(`#${SPEC_ARRAYED_PROPERTY_KEY}-6 .${SecretSelectorsForTest.SECRET_SUBMITTED_SPEC_CONTROL}`))
                 .toBe('')
 
-            const otherNewControl = await findElement(testGlobals.tab, `input[type=number]#${SPEC_ARRAYED_PROPERTY_KEY}-6`)
-            await fillInElement(otherNewControl, VALID_TEST_MODIFICATION)
+            const otherNewControl: ElementHandle = await findElement(`input[type=number]#${SPEC_ARRAYED_PROPERTY_KEY}-6`)
+            await otherNewControl.type(VALID_TEST_MODIFICATION)
 
             expect(await elementExists(`input[type=number]#${SPEC_ARRAYED_PROPERTY_KEY}-5.${SpecControlStates.VALID}`))
                 .toBeTruthy()
@@ -147,35 +139,28 @@ describe('arrayed controls', () => {
     })
 
     describe('removing', () => {
-        it('clicking the remove button removes the last element from the array', async done => {
-            const originalArrayedPropertyElementCount = await testGlobals.page.evaluate(
-                SPEC_ARRAYED_PROPERTY_KEY =>
-                    Array.from(document.querySelectorAll(`#${SPEC_ARRAYED_PROPERTY_KEY} input[type=number]`)).length,
-                SPEC_ARRAYED_PROPERTY_KEY,
-            )
+        it('clicking the remove button removes the last element from the array', async (done: DoneFn) => {
+            const originalArrayedPropertyElementCount: number = await elementCount(`#${SPEC_ARRAYED_PROPERTY_KEY} input[type=number]`)
 
-            const removeButton = await findElement(testGlobals.tab, `#${SPEC_ARRAYED_PROPERTY_KEY} .remove`)
-            await clickElement(removeButton)
+            const removeButton: ElementHandle = await findElement(`#${SPEC_ARRAYED_PROPERTY_KEY} .remove`)
+            await removeButton.click()
 
-            const updatedArrayedPropertyElementCount = await testGlobals.page.evaluate(
-                SPEC_ARRAYED_PROPERTY_KEY =>
-                    Array.from(document.querySelectorAll(`#${SPEC_ARRAYED_PROPERTY_KEY} input[type=number]`)).length,
-                SPEC_ARRAYED_PROPERTY_KEY,
-            )
+            const updatedArrayedPropertyElementCount: number = await elementCount(`#${SPEC_ARRAYED_PROPERTY_KEY} input[type=number]`)
 
-            expect(updatedArrayedPropertyElementCount).toBe(originalArrayedPropertyElementCount - 1)
+            expect(updatedArrayedPropertyElementCount)
+                .toBe(originalArrayedPropertyElementCount - 1)
             expect(await elementExists(`#${SPEC_ARRAYED_PROPERTY_KEY}-4`))
                 .toBeFalsy()
 
             done()
         })
 
-        it('removing the element immediately submits the change to the array', async done => {
+        it('removing the element immediately submits the change to the array', async (done: DoneFn) => {
             expect(await elementInnerText(`#${SPEC_ARRAYED_PROPERTY_KEY} .${SecretSelectorsForTest.SECRET_SUBMITTED_SPEC_CONTROL}`))
                 .toBe(JSON.stringify(SPEC_CONTROLS_PATTERN_ARRAYED_PROPERTY_INITIAL_VALUE))
 
-            const removeButton = await findElement(testGlobals.tab, `#${SPEC_ARRAYED_PROPERTY_KEY} .remove`)
-            await clickElement(removeButton)
+            const removeButton: ElementHandle = await findElement(`#${SPEC_ARRAYED_PROPERTY_KEY} .remove`)
+            await removeButton.click()
 
             expect(await elementInnerText(`#${SPEC_ARRAYED_PROPERTY_KEY} .${SecretSelectorsForTest.SECRET_SUBMITTED_SPEC_CONTROL}`))
                 .toBe(JSON.stringify(SPEC_CONTROLS_PATTERN_ARRAYED_PROPERTY_INITIAL_VALUE.slice(0, SPEC_CONTROLS_PATTERN_ARRAYED_PROPERTY_INITIAL_VALUE.length - 1)))
@@ -183,13 +168,13 @@ describe('arrayed controls', () => {
             done()
         })
 
-        it('disables the remove button when there are no elements left in the array', async done => {
-            const removeButton = await findElement(testGlobals.tab, `#${SPEC_ARRAYED_PROPERTY_KEY} .remove`)
-            await clickElement(removeButton)
-            await clickElement(removeButton)
-            await clickElement(removeButton)
-            await clickElement(removeButton)
-            await clickElement(removeButton)
+        it('disables the remove button when there are no elements left in the array', async (done: DoneFn) => {
+            const removeButton: ElementHandle = await findElement(`#${SPEC_ARRAYED_PROPERTY_KEY} .remove`)
+            await removeButton.click()
+            await removeButton.click()
+            await removeButton.click()
+            await removeButton.click()
+            await removeButton.click()
 
             expect(await elementExists(`#${SPEC_ARRAYED_PROPERTY_KEY} .remove:disabled`))
                 .toBeTruthy()

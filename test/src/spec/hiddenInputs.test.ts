@@ -1,10 +1,14 @@
-import { clickElement, findElement } from 'puppet-strings'
-import { testGlobals } from '../../setup'
-import { POST_PATTERN_ID, SPEC_RANGED_PROPERTY_TWO_KEY } from '../../support'
-import { elementExists, refreshWithTestPatternSelected } from '../../support/control'
+import { ElementHandle } from 'puppeteer'
+import {
+    elementExists,
+    findElement,
+    POST_PATTERN_ID,
+    refreshWithTestPatternSelected,
+    SPEC_RANGED_PROPERTY_TWO_KEY,
+} from '../../support'
 
 describe('hidden inputs', () => {
-    it('can hide the range input', async done => {
+    it('can hide the range input', async (done: DoneFn) => {
         await refreshWithTestPatternSelected()
 
         expect(await elementExists(`input[type=number]#${SPEC_RANGED_PROPERTY_TWO_KEY}`))
@@ -15,10 +19,10 @@ describe('hidden inputs', () => {
         done()
     })
 
-    it('can hide the number input', async done => {
+    it('can hide the number input', async (done: DoneFn) => {
         await refreshWithTestPatternSelected()
-        const otherTestPattern = await findElement(testGlobals.tab, `#${POST_PATTERN_ID}`)
-        await clickElement(otherTestPattern)
+        const otherTestPattern: ElementHandle = await findElement(`#${POST_PATTERN_ID}`)
+        await otherTestPattern.click()
 
         expect(await elementExists(`input[type=number]#${SPEC_RANGED_PROPERTY_TWO_KEY}`))
             .toBeFalsy()

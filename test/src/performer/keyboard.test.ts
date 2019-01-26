@@ -1,3 +1,4 @@
+import { from, Millisecond, to } from '@musical-patterns/utilities'
 import {
     A_BIT_LONGER,
     currentTime,
@@ -10,14 +11,14 @@ import {
 } from '../../support'
 
 describe('keyboard controls', () => {
-    beforeEach(async done => {
+    beforeEach(async (done: DoneFn) => {
         await refreshWithTestPatternSelected()
         done()
     })
 
-    it('start off paused', async done => {
+    it('start off paused', async (done: DoneFn) => {
         await sleep(LONG_ENOUGH_FOR_TIME_TO_PASS)
-        let initialTime = await currentTime()
+        const initialTime: Millisecond = await currentTime()
         await sleep(LONG_ENOUGH_FOR_TIME_TO_PASS)
         expect(await currentTime())
             .toBe(initialTime)
@@ -26,35 +27,35 @@ describe('keyboard controls', () => {
     })
 
     describe('after pressing space bar', () => {
-        beforeEach(async done => {
+        beforeEach(async (done: DoneFn) => {
             if (await elementExists('#play')) {
                 await press('Space')
             }
             done()
         })
 
-        afterEach(async done => {
+        afterEach(async (done: DoneFn) => {
             if (await elementExists('#pause')) {
                 await press('Space')
             }
             done()
         })
 
-        it('begins incrementing the time', async done => {
-            const initialTime = await currentTime()
+        it('begins incrementing the time', async (done: DoneFn) => {
+            const initialTime: Millisecond = await currentTime()
             await sleep(LONG_ENOUGH_FOR_TIME_TO_PASS)
             expect(await currentTime())
-                .toBeGreaterThan(initialTime)
+                .toBeGreaterThan(from.Millisecond(initialTime))
 
             done()
         })
 
-        it('pauses the music when you press space bar', async done => {
+        it('pauses the music when you press space bar', async (done: DoneFn) => {
             await sleep(LONG_ENOUGH_FOR_TIME_TO_PASS)
 
             await press('Space')
 
-            const pausedTime = await currentTime()
+            const pausedTime: Millisecond = await currentTime()
             await sleep(LONG_ENOUGH_FOR_TIME_TO_PASS)
             expect(await currentTime())
                 .toBe(pausedTime)
@@ -62,37 +63,37 @@ describe('keyboard controls', () => {
             done()
         })
 
-        it('resets the time to the beginning and stops playing when you press escape key', async done => {
+        it('resets the time to the beginning and stops playing when you press escape key', async (done: DoneFn) => {
             await sleep(LONG_ENOUGH_FOR_TIME_TO_PASS)
 
             await press('Escape')
 
             await sleep(LONG_ENOUGH_FOR_TIME_TO_HAVE_BEEN_RESET)
-            let timeAfterResetting = await currentTime()
+            const timeAfterResetting: Millisecond = await currentTime()
             expect(timeAfterResetting)
-                .toBe(0)
+                .toBe(to.Millisecond(0))
 
             await sleep(LONG_ENOUGH_FOR_TIME_TO_PASS)
             expect(await currentTime())
-                .toBe(0)
+                .toBe(to.Millisecond(0))
 
             done()
         })
 
-        it('pressing home key sets time to the beginning but keeps playing', async done => {
+        it('pressing home key sets time to the beginning but keeps playing', async (done: DoneFn) => {
             await sleep(A_BIT_LONGER)
-            const plentyOfTime = await currentTime()
+            const plentyOfTime: Millisecond = await currentTime()
 
             await press('Home')
 
             await sleep(LONG_ENOUGH_FOR_TIME_TO_HAVE_BEEN_RESET)
-            let timeAfterResetting = await currentTime()
+            const timeAfterResetting: Millisecond = await currentTime()
             expect(timeAfterResetting)
-                .toBeLessThan(plentyOfTime)
+                .toBeLessThan(from.Millisecond(plentyOfTime))
 
             await sleep(LONG_ENOUGH_FOR_TIME_TO_PASS)
             expect(await currentTime())
-                .toBeGreaterThan(timeAfterResetting)
+                .toBeGreaterThan(from.Millisecond(timeAfterResetting))
 
             done()
         })

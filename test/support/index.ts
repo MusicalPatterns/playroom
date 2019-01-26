@@ -1,7 +1,10 @@
+import { elementCount } from './control/checkElement'
+
 export {
     sleep,
     selectOtherTestPattern,
     selectTestPattern,
+    elementCount,
     elementExists,
     elementInnerText,
     elementValue,
@@ -12,7 +15,10 @@ export {
     refresh,
     refreshWithTestPatternSelected,
     currentTime,
+    totalDuration,
+    findElement,
 } from './control'
+// @ts-ignore
 export { startServer, stopServer } from './infrastructure'
 
 export {
@@ -58,4 +64,8 @@ export {
     PRESETS_PATTERN_ID,
     PRESET_ONE_NAME,
     PRESET_TWO_NAME,
+    PRESET_ONE_PROPERTY_ONE_VALUE,
+    PRESET_ONE_PROPERTY_TWO_VALUE,
+    PRESET_TWO_PROPERTY_ONE_VALUE,
+    PRESET_TWO_PROPERTY_TWO_VALUE,
 } from './constants'
