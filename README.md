@@ -14,7 +14,6 @@ These files are:
 - webpack.qa.js
 - webpack.local.js
 - webpack.prod.js
-- webpack.lab.js
 
 ## usage
 
