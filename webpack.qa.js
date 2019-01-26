@@ -3,7 +3,6 @@ const HtmlWebpackPlugin = require('html-webpack-plugin')
 const FaviconsWebpackPlugin = require('favicons-webpack-plugin')
 const common = require('./webpack.common')
 const merge = require('webpack-merge')
-const path = require('path')
 
 module.exports = merge(common, {
     entry: './src/playroom.ts',
@@ -11,10 +10,6 @@ module.exports = merge(common, {
     devServer: {
         port: PLAYROOM_PORT,
         open: true,
-    },
-    output: {
-        libraryTarget: 'var',
-        path: path.join(__dirname, './test-qa'),
     },
     plugins: [
         new HtmlWebpackPlugin({
