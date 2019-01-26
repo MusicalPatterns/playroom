@@ -11,7 +11,7 @@ These files are:
 - Makefile.playroom
 - src/playroom.ts
 - webpack.common.js
-- webpack.pattern.js
+- webpack.qa.js
 - webpack.local.js
 - webpack.prod.js
 - webpack.lab.js
