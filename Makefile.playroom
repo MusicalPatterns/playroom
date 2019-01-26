@@ -7,7 +7,7 @@ build:
 build-local:
 	@webpack --config webpack.dev.js
 
-start_test:
+start-test:
 	@webpack-dev-server --config webpack.test.js --color
 
 start:

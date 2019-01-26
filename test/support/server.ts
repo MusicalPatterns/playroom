@@ -5,7 +5,7 @@ let server: childProcess.ChildProcess
 
 const startServer: () => Promise<void> =
     async (): Promise<void> => {
-        server = childProcess.exec('make start_test')
+        server = childProcess.exec('make start-test')
 
         return new Promise((resolve: VoidFunction): void => {
             server.stdout.on('data', (data: string) => {
