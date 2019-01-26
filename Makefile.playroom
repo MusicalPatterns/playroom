@@ -2,13 +2,13 @@ Makefile.playroom:
 	@:
 
 build:
-	@musical-patterns-cli build "webpack --config webpack.prod.js"
+	@musical-patterns-cli build "webpack --config webpack.library.js"
 
 build-dev:
 	@webpack --config webpack.dev.js
 
 start-test:
-	@webpack-dev-server --config webpack.test.js --color
+	@webpack-dev-server --config webpack.test.js
 
 start:
-	@webpack-dev-server --config webpack.qa.js --color
+	@webpack-dev-server --config webpack.browser.js
