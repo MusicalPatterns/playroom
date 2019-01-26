@@ -18,6 +18,7 @@ bash.exe.stackdump
 .idea/misc.xml
 .idea/watcherTasks.xml
 .travis.yml
+LICENSE
 Makefile
 test/jasmine.js
 test/mockDom.ts
