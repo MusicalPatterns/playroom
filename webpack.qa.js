@@ -9,7 +9,6 @@ module.exports = merge(common, {
     entry: './src/playroom.ts',
     devtool: 'eval-source-map',
     devServer: {
-        disableHostCheck: true,
         port: PLAYROOM_PORT,
         open: true,
     },
