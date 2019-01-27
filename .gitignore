@@ -28,6 +28,7 @@ tsconfig.library.json
 tsconfig.node.json
 tslint.json
 webpack.browser.js
+webpack.deploy.js
 webpack.dev.js
 webpack.library.js
 webpack.local.js
