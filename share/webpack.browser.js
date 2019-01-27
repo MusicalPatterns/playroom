@@ -9,7 +9,7 @@ module.exports = {
         port: PLAYROOM_PORT,
     },
     plugins: [
-        new FaviconsWebpackPlugin('./node_modules/@musical-patterns/playroom/assets/favicon.png'),
+        new FaviconsWebpackPlugin('./node_modules/@musical-patterns/cli/assets/favicon.png'),
         new HtmlWebpackPlugin({
             title: 'Musical Patterns',
             meta: { viewport: 'width=device-width' },
