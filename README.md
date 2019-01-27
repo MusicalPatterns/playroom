@@ -18,6 +18,7 @@ These files are:
 - webpack.qa.js
 - webpack.local.js
 - webpack.publish.js
+- webpack.port.js
 
 ## usage
 
