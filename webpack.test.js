@@ -12,7 +12,7 @@ module.exports = merge(common, dev, {
     },
     plugins: [
         new HtmlWebpackPlugin({
-            title: 'Musical Patterns - Playroom Test',
+            title: 'Musical Patterns',
         }),
         new DefinePlugin({
             'process.env.NODE_ENV': JSON.stringify('test'),
