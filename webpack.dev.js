@@ -1,6 +1,4 @@
-const common = require('./webpack.common')
-const merge = require('webpack-merge')
-
-module.exports = merge(common, {
+module.exports = {
     devtool: 'eval-source-map',
-})
+    mode: 'development',
+}

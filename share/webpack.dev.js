@@ -1,7 +1,4 @@
-const library = require('./webpack.library')
-const merge = require('webpack-merge')
-
-module.exports = merge(library, {
-    mode: 'development',
+module.exports = {
     devtool: 'eval-source-map',
-})
+    mode: 'development',
+}

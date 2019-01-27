@@ -1,6 +1,8 @@
-const common = require('./webpack.common')
-const merge = require('webpack-merge')
-
-module.exports = merge(common, {
-    mode: 'production',
-})
+module.exports = {
+    entry: './src/index.tsx',
+    output: {
+        filename: 'index.js',
+        library: 'playroom',
+        libraryTarget: 'umd',
+    },
+}

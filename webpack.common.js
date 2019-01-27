@@ -1,16 +1,14 @@
 module.exports = {
-    entry: './src/index.tsx',
-    mode: 'development',
     module: {
         rules: [
-            {
-                test: /\.svg$/,
-                use: 'svg-react-loader',
-            },
             {
                 test: /\.tsx?$/,
                 loader: 'awesome-typescript-loader',
                 exclude: /test/,
+            },
+            {
+                test: /\.svg$/,
+                use: 'svg-react-loader',
             },
             {
                 test: /\.scss$/,
@@ -28,10 +26,5 @@ module.exports = {
     },
     resolve: {
         extensions: [ '.ts', '.tsx', '.js', '.json', '.scss', '.svg' ],
-    },
-    output: {
-        filename: 'index.js',
-        library: 'playroom',
-        libraryTarget: 'umd',
     },
 }

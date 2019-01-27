@@ -1,9 +1,5 @@
-const common = require('./webpack.common')
-const merge = require('webpack-merge')
-
-module.exports = merge(common, {
+module.exports = {
     entry: './src/index.ts',
-    mode: 'production',
     output: {
         filename: 'index.js',
         library: 'pattern',
@@ -14,4 +10,4 @@ module.exports = merge(common, {
         '@musical-patterns/pattern',
         '@musical-patterns/utilities',
     ],
-})
+}
