@@ -11,13 +11,6 @@ These files are:
 - Makefile.playroom
 - src/start.ts
 - webpack.common.js
-- webpack.browser.js
-- webpack.dev.js
-- webpack.prod.js
-- webpack.library.js
-- webpack.qa.js
-- webpack.local.js
-- webpack.publish.js
 - webpack.port.js
 
 ## usage

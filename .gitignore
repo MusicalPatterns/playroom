@@ -27,3 +27,10 @@ tsconfig.json
 tsconfig.library.json
 tsconfig.node.json
 tslint.json
+webpack.browser.js
+webpack.dev.js
+webpack.library.js
+webpack.local.js
+webpack.prod.js
+webpack.publish.js
+webpack.qa.js
