@@ -1,6 +1,6 @@
 import { Patterns } from '@musical-patterns/pattern'
 import { setupPerformer } from '@musical-patterns/performer'
-import * as React from 'react'
+import { createElement } from 'react'
 import { render } from 'react-dom'
 import { Provider } from 'react-redux'
 import { BatchAction, batchActions } from 'redux-batched-actions'
@@ -12,9 +12,9 @@ const setupPlayroom: (patterns: Patterns, debugMode?: boolean) => Promise<HTMLDi
         const root: HTMLDivElement = document.createElement('div')
         root.id = 'root'
 
-        store.subscribe(() => render(<Provider store={store}><App/></Provider>, root))
+        store.subscribe(() => render(createElement(Provider, { store }, createElement(App)), root))
 
-        render(<Provider store={store}><App/></Provider>, root)
+        render(createElement(Provider, { store }, createElement(App)), root)
 
         await setupPerformer({ onUpdate: onPerformerUpdate })
         const toggleImmersiveAudioHandler: VoidFunction = buildToggleImmersiveAudioHandler()

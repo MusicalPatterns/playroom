@@ -1,8 +1,12 @@
 module.exports = {
-    entry: './src/index.tsx',
+    entry: './src/index.ts',
     output: {
         filename: 'index.js',
-        library: 'playroom',
         libraryTarget: 'umd',
     },
+    externals: [
+        '@musical-patterns/compiler',
+        '@musical-patterns/pattern',
+        '@musical-patterns/utilities',
+    ],
 }
