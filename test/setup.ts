@@ -1,7 +1,8 @@
+import { logMessageToConsole } from '@musical-patterns/utilities'
 import * as puppeteer from 'puppeteer'
 import { APP_URL, DEFAULT_VIEWPORT_HEIGHT, DEFAULT_VIEWPORT_WIDTH, startServer, stopServer } from './support'
 
-const PUPPETEER_TIMEOUT: number = 100000
+const PUPPETEER_TIMEOUT: number = 20000
 jasmine.DEFAULT_TIMEOUT_INTERVAL = 10000
 
 let browser: puppeteer.Browser
@@ -9,13 +10,23 @@ let page: puppeteer.Page
 
 beforeAll(
     async (done: DoneFn) => {
-        await startServer()
+        try {
+            const t0: number = performance.now()
+            await startServer()
+            const t1: number = performance.now()
+            logMessageToConsole(`Starting the test server took ${Math.round(t1 - t0)} milliseconds.`)
 
-        browser = await puppeteer.launch({ headless: true, timeout: PUPPETEER_TIMEOUT })
-        page = await browser.newPage()
-
-        await page.setViewport({ width: DEFAULT_VIEWPORT_WIDTH, height: DEFAULT_VIEWPORT_HEIGHT })
-        await page.goto(APP_URL, { timeout: PUPPETEER_TIMEOUT })
+            const t2: number = performance.now()
+            browser = await puppeteer.launch({ headless: true, timeout: PUPPETEER_TIMEOUT })
+            page = await browser.newPage()
+            await page.setViewport({ width: DEFAULT_VIEWPORT_WIDTH, height: DEFAULT_VIEWPORT_HEIGHT })
+            await page.goto(APP_URL, { timeout: PUPPETEER_TIMEOUT })
+            const t3: number = performance.now()
+            logMessageToConsole(`Starting puppeteer took ${Math.round(t3 - t2)} milliseconds.`)
+        }
+        catch (e) {
+            logMessageToConsole('Error in setup: ', e)
+        }
 
         done()
     },
@@ -24,10 +35,14 @@ beforeAll(
 
 afterAll(
     async (done: DoneFn) => {
-        if (browser) {
+        try {
             await browser.close()
+            await stopServer()
         }
-        await stopServer()
+        catch (e) {
+            logMessageToConsole('Error in setdown: ', e)
+        }
+
         done()
     },
     PUPPETEER_TIMEOUT,
