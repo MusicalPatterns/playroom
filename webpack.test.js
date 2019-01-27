@@ -6,7 +6,7 @@ const merge = require('webpack-merge')
 const { DefinePlugin } = require('webpack')
 
 module.exports = merge(common, dev, {
-    entry: './src/playroom.ts',
+    entry: './src/start.ts',
     devServer: {
         port: PLAYROOM_TEST_PORT,
     },

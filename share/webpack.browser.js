@@ -3,7 +3,7 @@ const HtmlWebpackPlugin = require('html-webpack-plugin')
 const { PLAYROOM_PORT } = require('@musical-patterns/utilities')
 
 module.exports = {
-    entry: './src/playroom.ts',
+    entry: './src/start.ts',
     devServer: {
         open: true,
         port: PLAYROOM_PORT,
