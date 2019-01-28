@@ -7,7 +7,6 @@ const elementValue: (selector: string) => Promise<any> =
         page.evaluate(
             (slctr: string) =>
                 // @ts-ignore
-                // tslint:disable-next-line:no-unsafe-any
                 document.querySelector(slctr).value,
             selector,
         )
@@ -25,7 +24,6 @@ const elementInnerText: (selector: string) => Promise<string> =
         page.evaluate(
             (slctr: string) =>
                 // @ts-ignore
-                // tslint:disable-next-line:no-unsafe-any
                 document.querySelector(slctr).innerText,
             selector,
         )
@@ -35,7 +33,6 @@ const elementChecked: (selector: string) => Promise<boolean> =
         page.evaluate(
             (slctr: string) =>
                 // @ts-ignore
-                // tslint:disable-next-line:no-unsafe-any
                 document.querySelector(slctr).checked,
             selector,
         )
@@ -52,7 +49,6 @@ const elementIds: (selector: string) => Promise<string[]> =
     async (selector: string): Promise<string[]> =>
         page.evaluate(
             (slctr: string) =>
-                // tslint:disable-next-line:no-unsafe-any
                 Array.from(document.querySelectorAll(slctr))
                     .map((element: Element) => element.id),
             selector,

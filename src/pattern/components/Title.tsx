@@ -1,5 +1,3 @@
-// tslint:disable:no-unsafe-any
-
 import * as React from 'react'
 // @ts-ignore
 import SymbolSvg from './symbol.svg'

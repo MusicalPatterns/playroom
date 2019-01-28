@@ -26,7 +26,6 @@ const validateSpecProperty:
         let numericValue: number
         try {
             // @ts-ignore
-            // tslint:disable-next-line:no-unsafe-any
             numericValue = JSON.parse(specValue)
         }
         catch (e) {

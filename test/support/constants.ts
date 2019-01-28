@@ -1,5 +1,3 @@
-// tslint:disable:no-unsafe-any
-
 import {
     Id,
     OptionedConstraint,

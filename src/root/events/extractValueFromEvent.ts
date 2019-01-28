@@ -12,7 +12,6 @@ const extractValueFromEvent: (event: React.SyntheticEvent) => DomValueOrChecked 
 
         try {
             // @ts-ignore
-            // tslint:disable-next-line:no-unsafe-any
             return JSON.parse(value)
         }
         catch (e) {
