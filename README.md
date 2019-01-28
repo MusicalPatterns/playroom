@@ -8,7 +8,6 @@ Similar to the `@musical-patterns/cli` repo, upon installation, copies playroom 
 
 These files are:
 
-- Makefile.playroom
 - src/start.ts
 - webpack.common.js
 - webpack.port.js
