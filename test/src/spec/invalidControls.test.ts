@@ -227,14 +227,15 @@ describe('invalid controls', () => {
             const removeButton: ElementHandle = await findElement(`#${SPEC_ARRAYED_PROPERTY_KEY} .remove`)
             await removeButton.click()
 
+            const expectedInvalidMessage: string = 'arrays can only be odd in length, duoy'
             expect(await elementInnerText(`#${SPEC_ARRAYED_PROPERTY_KEY}-0 .invalid-message`))
-                .toBe('arrays can only be odd in length, duoy')
+                .toBe(expectedInvalidMessage)
             expect(await elementInnerText(`#${SPEC_ARRAYED_PROPERTY_KEY}-1 .invalid-message`))
-                .toBe('arrays can only be odd in length, duoy')
+                .toBe(expectedInvalidMessage)
             expect(await elementInnerText(`#${SPEC_ARRAYED_PROPERTY_KEY}-2 .invalid-message`))
-                .toBe('arrays can only be odd in length, duoy')
+                .toBe(expectedInvalidMessage)
             expect(await elementInnerText(`#${SPEC_ARRAYED_PROPERTY_KEY}-3 .invalid-message`))
-                .toBe('arrays can only be odd in length, duoy')
+                .toBe(expectedInvalidMessage)
 
             done()
         })

@@ -6,6 +6,7 @@ import { OptionedInputProps } from './types'
 const OptionedSpecControlSelect: (optionedInputProps: OptionedInputProps) => JSX.Element =
     ({ onChange, id, specValue, className, constraint }: OptionedInputProps): JSX.Element => {
         const optionElements: JSX.Element[] = constraint
+        // tslint:disable-next-line:no-misleading-array-reverse
             .sort((option: OptionedConstraintOption, nextOption: OptionedConstraintOption): number => {
                 const order: number = option.order === undefined ? ARBITRARILY_LARGE_NUMBER : option.order
                 const nextOrder: number = nextOption.order === undefined ? ARBITRARILY_LARGE_NUMBER : nextOption.order

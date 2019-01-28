@@ -21,6 +21,8 @@ import {
     SPEC_TOGGLED_PROPERTY_KEY,
 } from '../../support'
 
+const PRESETS_SELECT: string = '#presets select'
+
 describe('presets', () => {
     beforeEach(async (done: DoneFn) => {
         await refreshWithTestPatternSelected()
@@ -56,7 +58,7 @@ describe('presets', () => {
             const checkbox: ElementHandle = await findElement(`input#${SPEC_TOGGLED_PROPERTY_KEY}`)
             await checkbox.click()
 
-            expect(await elementValue('#presets select'))
+            expect(await elementValue(PRESETS_SELECT))
                 .toBe('presetOne')
 
             done()
@@ -86,12 +88,12 @@ describe('presets', () => {
             })
 
             it('stops showing the preset in the dropdown once the current spec no longer matches it', async (done: DoneFn) => {
-                expect(await elementValue('#presets select'))
+                expect(await elementValue(PRESETS_SELECT))
                     .toBe('presetOne')
 
                 await selectOption(`select#${SPEC_OPTIONED_PROPERTY_ONE_KEY}`, SPEC_CONTROLS_PATTERN_OPTIONED_PROPERTY_ONE_INITIAL_VALUE)
 
-                expect(await elementValue('#presets select'))
+                expect(await elementValue(PRESETS_SELECT))
                     .toBe('')
 
                 done()

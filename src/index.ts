@@ -7,6 +7,7 @@ import { BatchAction, batchActions } from 'redux-batched-actions'
 import { buildToggleImmersiveAudioHandler, onPerformerUpdate, setupKeyboard } from './performer'
 import { ActionType, App, store } from './root'
 
+// tslint:disable-next-line:bool-param-default
 const setupPlayroom: (patterns: Patterns, debugMode?: boolean) => Promise<HTMLDivElement> =
     async (patterns: Patterns, debugMode: boolean = false): Promise<HTMLDivElement> => {
         const root: HTMLDivElement = document.createElement('div')
