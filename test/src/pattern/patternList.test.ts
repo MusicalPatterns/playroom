@@ -47,7 +47,7 @@ describe('pattern list', () => {
 
     describe('making a selection from the pattern list', () => {
         describe('when it is a different pattern than the current selection', () => {
-            it('changes the spec to the new pattern\'s defaults', async (done: DoneFn) => {
+            it('changes the spec to the new pattern\'s initial', async (done: DoneFn) => {
                 expect(await elementInnerText(`#${SPEC_RANGED_PROPERTY_ONE_KEY} .${SecretSelectorsForTest.SECRET_SUBMITTED_SPEC_CONTROL}`))
                     .toBe(`${SPEC_CONTROLS_PATTERN_RANGED_PROPERTY_ONE_INITIAL_VALUE}`)
                 expect(await elementInnerText(`#${SPEC_RANGED_PROPERTY_TWO_KEY} .${SecretSelectorsForTest.SECRET_SUBMITTED_SPEC_CONTROL}`))

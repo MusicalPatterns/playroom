@@ -10,8 +10,8 @@ import { ResetProps, ResetPropsFromDispatch, ResetPropsFromState } from './types
 
 const mapStateToProps: (state: ImmutableRootState) => ResetPropsFromState =
     (state: ImmutableRootState): ResetPropsFromState => ({
-        defaultSpec: state.get(RootStateKeys.SPEC)
-            .get(SpecStateKeys.DEFAULT_SPEC),
+        initialSpec: state.get(RootStateKeys.SPEC)
+            .get(SpecStateKeys.INITIAL_SPEC),
         submittedSpec: state.get(RootStateKeys.SPEC)
             .get(SpecStateKeys.SUBMITTED_SPEC),
     })
@@ -24,12 +24,12 @@ const mapDispatchToProps: (dispatch: Dispatch) => ResetPropsFromDispatch =
     })
 
 const Reset: (props: ResetProps) => JSX.Element =
-    ({ resetHandler, submittedSpec, defaultSpec }: ResetProps): JSX.Element => {
+    ({ resetHandler, submittedSpec, initialSpec }: ResetProps): JSX.Element => {
         const onClick: VoidFunction = (): void => {
-            resetHandler(defaultSpec)
+            resetHandler(initialSpec)
         }
 
-        const disabled: boolean = deepEqual(submittedSpec, defaultSpec)
+        const disabled: boolean = deepEqual(submittedSpec, initialSpec)
 
         return (
             <button {...{ id: 'reset', onClick, disabled }}>reset all</button>

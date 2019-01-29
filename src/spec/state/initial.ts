@@ -3,7 +3,7 @@ import { typedMap } from '@musical-patterns/utilities'
 import { ImmutableSpecState, SpecStateKeys } from './types'
 
 const initialSpecState: ImmutableSpecState = typedMap({
-    [ SpecStateKeys.DEFAULT_SPEC ]: {},
+    [ SpecStateKeys.INITIAL_SPEC ]: {},
     [ SpecStateKeys.DISPLAYED_SPEC ]: {},
     [ SpecStateKeys.INVALID_SPEC_MESSAGES ]: {},
     [ SpecStateKeys.SUBMITTED_SPEC ]: {},

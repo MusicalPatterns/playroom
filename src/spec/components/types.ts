@@ -34,7 +34,7 @@ interface SingularSpecControlProps extends SpecControlProps {
 }
 
 interface ResetPropsFromState {
-    defaultSpec: Spec,
+    initialSpec: Spec,
     submittedSpec: Spec,
 }
 
@@ -43,12 +43,6 @@ interface ResetPropsFromDispatch {
 }
 
 interface ResetProps extends ResetPropsFromState, ResetPropsFromDispatch {}
-
-interface BuildControlsProps {
-    specAttributes: SpecAttributes,
-    specControlsProps: SpecControlsProps,
-    specKeys: string[],
-}
 
 interface PresetsPropsFromState {
     presets: Maybe<DictionaryOf<Preset>>,
@@ -68,7 +62,6 @@ export {
     SpecControlsProps,
     SpecControlsPropsFromDispatch,
     SpecControlsPropsFromState,
-    BuildControlsProps,
     ResetPropsFromState,
     ResetPropsFromDispatch,
     ResetProps,

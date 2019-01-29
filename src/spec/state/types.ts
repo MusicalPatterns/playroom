@@ -3,7 +3,7 @@ import { DictionaryOf, Maybe, TypedMap } from '@musical-patterns/utilities'
 import { InvalidSpecMessages } from '../types'
 
 enum SpecStateKeys {
-    DEFAULT_SPEC = 'DEFAULT_SPEC',
+    INITIAL_SPEC = 'INITIAL_SPEC',
     DISPLAYED_SPEC = 'DISPLAYED_SPEC',
     INVALID_SPEC_MESSAGES = 'INVALID_SPEC_MESSAGES',
     SUBMITTED_SPEC = 'SUBMITTED_SPEC',
@@ -13,7 +13,7 @@ enum SpecStateKeys {
 }
 
 interface SpecState {
-    [ SpecStateKeys.DEFAULT_SPEC ]: Spec,
+    [ SpecStateKeys.INITIAL_SPEC ]: Spec,
     [ SpecStateKeys.DISPLAYED_SPEC ]: Spec,
     [ SpecStateKeys.INVALID_SPEC_MESSAGES ]: InvalidSpecMessages,
     [ SpecStateKeys.SUBMITTED_SPEC ]: Spec,
@@ -32,7 +32,7 @@ type SpecStateValueTypes =
 type ImmutableSpecState = TypedMap<SpecStateValueTypes, SpecState>
 
 enum SpecStateActionType {
-    SET_DEFAULT_SPEC = 'SET_DEFAULT_SPEC',
+    SET_INITIAL_SPEC = 'SET_INITIAL_SPEC',
     SET_SUBMITTED_SPEC = 'SET_SUBMITTED_SPEC',
     SET_DISPLAYED_SPEC = 'SET_DISPLAYED_SPEC',
     SET_INVALID_SPEC_MESSAGES = 'SET_INVALID_SPEC_MESSAGES',
@@ -41,9 +41,9 @@ enum SpecStateActionType {
     SET_PRESETS = 'SET_PRESETS',
 }
 
-interface SetDefaultSpec {
+interface SetInitialSpec {
     data: Spec,
-    type: SpecStateActionType.SET_DEFAULT_SPEC,
+    type: SpecStateActionType.SET_INITIAL_SPEC,
 }
 
 interface SetSubmittedSpec {
@@ -77,7 +77,7 @@ interface SetPresets {
 }
 
 type SpecStateAction =
-    SetDefaultSpec |
+    SetInitialSpec |
     SetSubmittedSpec |
     SetDisplayedSpec |
     SetInvalidSpecMessages |
