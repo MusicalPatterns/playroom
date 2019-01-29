@@ -2,7 +2,7 @@ import { logMessageToConsole } from '@musical-patterns/utilities'
 import * as puppeteer from 'puppeteer'
 import { APP_URL, DEFAULT_VIEWPORT_HEIGHT, DEFAULT_VIEWPORT_WIDTH, startServer, stopServer } from './support'
 
-const PUPPETEER_TIMEOUT: number = 20000
+const PUPPETEER_TIMEOUT: number = 100000
 jasmine.DEFAULT_TIMEOUT_INTERVAL = 10000
 
 let browser: puppeteer.Browser
