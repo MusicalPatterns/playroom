@@ -1,6 +1,6 @@
 import { logMessageToConsole } from '@musical-patterns/utilities'
 import * as puppeteer from 'puppeteer'
-import { APP_URL, DEFAULT_VIEWPORT_HEIGHT, DEFAULT_VIEWPORT_WIDTH, startServer, stopServer } from './support'
+import { APP_URL, DESKTOP_VIEWPORT_HEIGHT, DESKTOP_VIEWPORT_WIDTH, startServer, stopServer } from './support'
 
 const PUPPETEER_TIMEOUT: number = 100000
 jasmine.DEFAULT_TIMEOUT_INTERVAL = 10000
@@ -19,7 +19,7 @@ beforeAll(
             const t2: number = performance.now()
             browser = await puppeteer.launch({ headless: true, timeout: PUPPETEER_TIMEOUT })
             page = await browser.newPage()
-            await page.setViewport({ width: DEFAULT_VIEWPORT_WIDTH, height: DEFAULT_VIEWPORT_HEIGHT })
+            await page.setViewport({ width: DESKTOP_VIEWPORT_WIDTH, height: DESKTOP_VIEWPORT_HEIGHT })
             await page.goto(APP_URL, { timeout: PUPPETEER_TIMEOUT })
             const t3: number = performance.now()
             logMessageToConsole(`Starting puppeteer took ${Math.round(t3 - t2)} milliseconds.`)
