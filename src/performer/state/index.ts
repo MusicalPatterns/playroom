@@ -1,8 +1,8 @@
 export { performerReducer } from './reducer'
 
 export {
-    PerformerStateActionType,
     ImmutablePerformerState,
-    PerformerStateKeys,
     PerformerStateAction,
+    PerformerStateActionType,
+    PerformerStateKeys,
 } from './types'

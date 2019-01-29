@@ -1,8 +1,8 @@
 export { patternReducer } from './reducer'
 
 export {
+    ImmutablePatternState,
     PatternStateAction,
     PatternStateActionType,
-    ImmutablePatternState,
     PatternStateKeys,
 } from './types'

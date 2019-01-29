@@ -1,8 +1,8 @@
 import { standardSpecAttributes } from '@musical-patterns/pattern'
 import { typedMap } from '@musical-patterns/utilities'
-import { ImmutableSpecState, SpecStateKeys } from './types'
+import { ImmutableSpecState, SpecState, SpecStateKeys } from './types'
 
-const initialSpecState: ImmutableSpecState = typedMap({
+const initialSpecState: ImmutableSpecState = typedMap<SpecState>({
     [ SpecStateKeys.INITIAL_SPEC ]: {},
     [ SpecStateKeys.DISPLAYED_SPEC ]: {},
     [ SpecStateKeys.INVALID_SPEC_MESSAGES ]: {},

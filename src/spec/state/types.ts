@@ -22,14 +22,7 @@ interface SpecState {
     [ SpecStateKeys.PRESETS ]: Maybe<DictionaryOf<Preset>>,
 }
 
-type SpecStateValueTypes =
-    InvalidSpecMessages |
-    Spec |
-    SpecAttributes |
-    Maybe<SpecValidationFunction> |
-    Maybe<DictionaryOf<Preset>>
-
-type ImmutableSpecState = TypedMap<SpecStateValueTypes, SpecState>
+type ImmutableSpecState = TypedMap<SpecState>
 
 enum SpecStateActionType {
     SET_INITIAL_SPEC = 'SET_INITIAL_SPEC',

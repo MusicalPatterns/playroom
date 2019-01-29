@@ -77,12 +77,7 @@ interface PerformerState {
     [ PerformerStateKeys.IMMERSIVE_AUDIO ]: boolean,
 }
 
-type PerformerStateValueTypes =
-    Time |
-    boolean |
-    VoidFunction
-
-type ImmutablePerformerState = TypedMap<PerformerStateValueTypes, PerformerState>
+type ImmutablePerformerState = TypedMap<PerformerState>
 
 export {
     ImmutablePerformerState,

@@ -1,9 +1,8 @@
 export { specReducer } from './reducer'
 
 export {
-    SpecState,
     ImmutableSpecState,
-    SpecStateKeys,
-    SpecStateActionType,
     SpecStateAction,
+    SpecStateActionType,
+    SpecStateKeys,
 } from './types'

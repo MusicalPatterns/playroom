@@ -15,12 +15,7 @@ interface PatternState {
     [ PatternStateKeys.PATTERNS_PANEL_OPEN ]: boolean,
 }
 
-type PatternStateValueTypes =
-    Maybe<Patterns> |
-    Maybe<Id> |
-    boolean
-
-type ImmutablePatternState = TypedMap<PatternStateValueTypes, PatternState>
+type ImmutablePatternState = TypedMap<PatternState>
 
 enum PatternStateActionType {
     SET_PATTERNS = 'SET_PATTERNS',
@@ -60,4 +55,5 @@ export {
     ImmutablePatternState,
     PatternStateAction,
     PatternStateActionType,
+    PatternState,
 }

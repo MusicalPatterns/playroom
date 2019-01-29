@@ -20,12 +20,7 @@ interface RootState {
     [ RootStateKeys.PATTERN ]: ImmutablePatternState,
 }
 
-type ImmutableRootState = TypedMap<RootStateValueTypes, RootState>
-
-type RootStateValueTypes =
-    ImmutableSpecState |
-    ImmutablePerformerState |
-    ImmutablePatternState
+type ImmutableRootState = TypedMap<RootState>
 
 export {
     ImmutableRootState,
