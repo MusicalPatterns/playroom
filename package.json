@@ -1,14 +1,11 @@
 {
   "name": "@musical-patterns/playroom",
-  "version": "1.0.200",
+  "version": "1.0.201",
   "main": "dist/index.js",
   "typings": "dist/index.d.ts",
   "repository": {
     "type": "git",
     "url": "https://github.com/MusicalPatterns/playroom.git"
-  },
-  "scripts": {
-    "postinstall": "bash ./bin/postinstall.sh"
   },
   "license": "MIT",
   "dependencies": {
@@ -20,15 +17,15 @@
     "url-loader": "^1.1.2"
   },
   "devDependencies": {
-    "@fortawesome/fontawesome-svg-core": "^1.2.12",
+    "@fortawesome/fontawesome-svg-core": "^1.2.13",
     "@fortawesome/free-solid-svg-icons": "^5.6.3",
     "@fortawesome/react-fontawesome": "^0.1.4",
-    "@musical-patterns/cli": "^1.0.365",
-    "@musical-patterns/compiler": "^1.0.79",
-    "@musical-patterns/pattern": "^1.0.133",
+    "@musical-patterns/cli": "^1.0.372",
+    "@musical-patterns/compiler": "^1.0.82",
+    "@musical-patterns/pattern": "^1.0.135",
     "@musical-patterns/pattern-playroom-test": "^1.0.113",
-    "@musical-patterns/performer": "^1.0.158",
-    "@musical-patterns/utilities": "^1.0.186",
+    "@musical-patterns/performer": "^1.0.163",
+    "@musical-patterns/utilities": "^1.0.188",
     "@types/node": "^10.12.18",
     "@types/ps-tree": "^1.1.0",
     "@types/puppeteer": "^1.11.2",

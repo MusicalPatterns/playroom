@@ -4,11 +4,6 @@ module.exports = {
     module: {
         rules: [
             {
-                test: /\.tsx?$/,
-                loader: 'awesome-typescript-loader',
-                exclude: /test\//,
-            },
-            {
                 test: /\.html$/,
                 loader: 'html-loader',
             },
@@ -19,7 +14,7 @@ module.exports = {
         ],
     },
     resolve: {
-        extensions: [ '.ts', '.tsx', '.js', '.json' ],
+        extensions: [ '.tsx', '.js', '.json' ],
     },
     plugins: [
         new DefinePlugin({

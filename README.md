@@ -9,7 +9,7 @@ Similar to the `@musical-patterns/cli` repo, upon installation, copies playroom 
 These files are:
 
 - src/start.ts
-- webpack.common.js
+- webpack.self.js
 - webpack.port.js
 
 ## usage

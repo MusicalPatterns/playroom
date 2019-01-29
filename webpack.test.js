@@ -2,10 +2,11 @@ const { PLAYROOM_TEST_PORT } = require('@musical-patterns/utilities')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const common = require('./webpack.common')
 const dev = require('./webpack.dev')
+const self = require('./webpack.self')
 const merge = require('webpack-merge')
 const { DefinePlugin } = require('webpack')
 
-module.exports = merge(common, dev, {
+module.exports = merge(self, common, dev, {
     entry: './src/start.ts',
     devServer: {
         port: PLAYROOM_TEST_PORT,
