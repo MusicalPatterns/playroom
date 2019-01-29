@@ -1,5 +1,6 @@
 import * as React from 'react'
 import { connect } from 'react-redux'
+import { ENTER, EXIT, IMMERSIVE_AUDIO } from '../../copy'
 import { ImmutableRootState, RootStateKeys } from '../../root'
 import { ImmutablePerformerState, PerformerStateKeys } from '../state'
 import { ToggleImmersiveAudioButtonProps, ToggleImmersiveAudioButtonPropsFromState } from './types'
@@ -37,7 +38,7 @@ const ToggleImmersiveAudioButton: (props: ToggleImmersiveAudioButtonProps) => JS
                 onClick: toggleImmersiveAudioHandler,
                 title: immersiveAudioUnvailable ? 'Your system does not support VR.' : '',
             }}>
-                {immersiveAudio ? 'exit' : 'enter'} immersive audio
+                {immersiveAudio ? EXIT : ENTER} {IMMERSIVE_AUDIO}
             </button>
         )
     }

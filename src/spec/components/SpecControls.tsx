@@ -2,6 +2,7 @@ import { defaultSpecPropertyAttributes, Spec, SpecAttributes, StandardSpecProper
 import * as React from 'react'
 import { connect } from 'react-redux'
 import { Dispatch } from 'redux'
+import { PATTERN_PARTICULAR, STANDARD } from '../../copy'
 import { ImmutableRootState, RootStateKeys } from '../../root'
 import { buildSpecControlChangeHandler } from '../events'
 import { SpecStateKeys } from '../state'
@@ -64,10 +65,10 @@ const SpecControls: (specControlsProps: SpecControlsProps) => JSX.Element =
         return (
             <div {...{ id: 'spec-controls' }}>
                 {bothTypesOfControlsPresent &&
-                <div {...{ className: 'spec-control-section-heading' }}>pattern particular</div>}
+                <div {...{ className: 'spec-control-section-heading' }}>{PATTERN_PARTICULAR}</div>}
                 {patternParticularControls}
                 {bothTypesOfControlsPresent &&
-                <div {...{ className: 'spec-control-section-heading' }}>standard</div>}
+                <div {...{ className: 'spec-control-section-heading' }}>{STANDARD}</div>}
                 {standardSpecControls}
             </div>
         )

@@ -1,4 +1,5 @@
 import * as React from 'react'
+import { TO_BEGIN_MESSAGE } from '../../copy'
 import TimeControls from './TimeControls'
 import ToggleImmersiveAudioButton from './ToggleImmersiveAudioButton'
 import { MaybeDisabled } from './types'
@@ -12,12 +13,7 @@ const Performer: (props: MaybeDisabled) => JSX.Element =
             </div>
             {disabled &&
             <div {...{ id: 'no-pattern-message' }}>
-                <div>To begin,</div>
-                <div>select a</div>
-                <div>pattern</div>
-                <div>from the</div>
-                <div>list on</div>
-                <div>the left.</div>
+                {TO_BEGIN_MESSAGE}
             </div>
             }
         </div>

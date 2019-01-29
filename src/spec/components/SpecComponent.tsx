@@ -1,4 +1,5 @@
 import * as React from 'react'
+import { CONTROLS } from '../../copy'
 import Presets from './Presets'
 import Reset from './Reset'
 import SpecControls from './SpecControls'
@@ -6,7 +7,7 @@ import SpecControls from './SpecControls'
 const SpecComponent: () => JSX.Element =
     (): JSX.Element => (
         <div {...{ id: 'pattern-spec' }}>
-            <h3>controls</h3>
+            <h3>{CONTROLS}</h3>
             <Presets/>
             <hr/>
             <SpecControls/>

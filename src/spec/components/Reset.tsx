@@ -3,6 +3,7 @@ import { deepEqual } from '@musical-patterns/utilities'
 import * as React from 'react'
 import { connect } from 'react-redux'
 import { Dispatch } from 'redux'
+import { RESET_ALL } from '../../copy'
 import { ImmutableRootState, RootStateKeys } from '../../root'
 import { handleReset } from '../events'
 import { SpecStateKeys } from '../state'
@@ -32,7 +33,7 @@ const Reset: (props: ResetProps) => JSX.Element =
         const disabled: boolean = deepEqual(submittedSpec, initialSpec)
 
         return (
-            <button {...{ id: 'reset', onClick, disabled }}>reset all</button>
+            <button {...{ id: 'reset', onClick, disabled }}>{RESET_ALL}</button>
         )
     }
 
