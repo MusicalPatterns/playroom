@@ -8,7 +8,7 @@ import {
     StandardSpecProperties,
 } from '@musical-patterns/pattern'
 import { patterns } from '@musical-patterns/pattern-playroom-test'
-import { DictionaryOf, Millisecond, PLAYROOM_TEST_PORT, to } from '@musical-patterns/utilities'
+import { DictionaryOf, Milliseconds, PLAYROOM_TEST_PORT, to } from '@musical-patterns/utilities'
 
 const {
     [ Id.PLAYROOM_TEST_SPEC_CONTROLS ]: playroomTestSpecControls,
@@ -67,9 +67,9 @@ const DESKTOP_VIEWPORT_HEIGHT: number = 800
 const MOBILE_VIEWPORT_WIDTH: number = 800
 const MOBILE_VIEWPORT_HEIGHT: number = 800
 
-const LONG_ENOUGH_FOR_TIME_TO_PASS: Millisecond = to.Millisecond(100)
-const LONG_ENOUGH_FOR_TIME_TO_HAVE_BEEN_RESET: Millisecond = to.Millisecond(100)
-const A_BIT_LONGER: Millisecond = to.Millisecond(1000)
+const LONG_ENOUGH_FOR_TIME_TO_PASS: Milliseconds = to.Milliseconds(100)
+const LONG_ENOUGH_FOR_TIME_TO_HAVE_BEEN_RESET: Milliseconds = to.Milliseconds(100)
+const A_BIT_LONGER: Milliseconds = to.Milliseconds(1000)
 
 const TIME_CONTROLS_PATTERN_ID: Id = playroomTestTimeControls.id
 

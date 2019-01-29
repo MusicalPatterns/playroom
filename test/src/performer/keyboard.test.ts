@@ -1,4 +1,4 @@
-import { from, Millisecond, to } from '@musical-patterns/utilities'
+import { from, Milliseconds, to } from '@musical-patterns/utilities'
 import {
     A_BIT_LONGER,
     currentTime,
@@ -18,7 +18,7 @@ describe('keyboard controls', () => {
 
     it('start off paused', async (done: DoneFn) => {
         await sleep(LONG_ENOUGH_FOR_TIME_TO_PASS)
-        const initialTime: Millisecond = await currentTime()
+        const initialTime: Milliseconds = await currentTime()
         await sleep(LONG_ENOUGH_FOR_TIME_TO_PASS)
         expect(await currentTime())
             .toBe(initialTime)
@@ -42,10 +42,10 @@ describe('keyboard controls', () => {
         })
 
         it('begins incrementing the time', async (done: DoneFn) => {
-            const initialTime: Millisecond = await currentTime()
+            const initialTime: Milliseconds = await currentTime()
             await sleep(LONG_ENOUGH_FOR_TIME_TO_PASS)
             expect(await currentTime())
-                .toBeGreaterThan(from.Millisecond(initialTime))
+                .toBeGreaterThan(from.Milliseconds(initialTime))
 
             done()
         })
@@ -55,7 +55,7 @@ describe('keyboard controls', () => {
 
             await press('Space')
 
-            const pausedTime: Millisecond = await currentTime()
+            const pausedTime: Milliseconds = await currentTime()
             await sleep(LONG_ENOUGH_FOR_TIME_TO_PASS)
             expect(await currentTime())
                 .toBe(pausedTime)
@@ -69,31 +69,31 @@ describe('keyboard controls', () => {
             await press('Escape')
 
             await sleep(LONG_ENOUGH_FOR_TIME_TO_HAVE_BEEN_RESET)
-            const timeAfterResetting: Millisecond = await currentTime()
+            const timeAfterResetting: Milliseconds = await currentTime()
             expect(timeAfterResetting)
-                .toBe(to.Millisecond(0))
+                .toBe(to.Milliseconds(0))
 
             await sleep(LONG_ENOUGH_FOR_TIME_TO_PASS)
             expect(await currentTime())
-                .toBe(to.Millisecond(0))
+                .toBe(to.Milliseconds(0))
 
             done()
         })
 
         it('pressing home key sets time to the beginning but keeps playing', async (done: DoneFn) => {
             await sleep(A_BIT_LONGER)
-            const plentyOfTime: Millisecond = await currentTime()
+            const plentyOfTime: Milliseconds = await currentTime()
 
             await press('Home')
 
             await sleep(LONG_ENOUGH_FOR_TIME_TO_HAVE_BEEN_RESET)
-            const timeAfterResetting: Millisecond = await currentTime()
+            const timeAfterResetting: Milliseconds = await currentTime()
             expect(timeAfterResetting)
-                .toBeLessThan(from.Millisecond(plentyOfTime))
+                .toBeLessThan(from.Milliseconds(plentyOfTime))
 
             await sleep(LONG_ENOUGH_FOR_TIME_TO_PASS)
             expect(await currentTime())
-                .toBeGreaterThan(from.Millisecond(timeAfterResetting))
+                .toBeGreaterThan(from.Milliseconds(timeAfterResetting))
 
             done()
         })

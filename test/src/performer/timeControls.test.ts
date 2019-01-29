@@ -1,4 +1,4 @@
-import { from, Millisecond, to } from '@musical-patterns/utilities'
+import { from, Milliseconds, to } from '@musical-patterns/utilities'
 import { ElementHandle } from 'puppeteer'
 import {
     A_BIT_LONGER,
@@ -37,7 +37,7 @@ describe('time controls', () => {
 
     it('start off paused', async (done: DoneFn) => {
         await sleep(LONG_ENOUGH_FOR_TIME_TO_PASS)
-        const initialTime: Millisecond = await currentTime()
+        const initialTime: Milliseconds = await currentTime()
         await sleep(LONG_ENOUGH_FOR_TIME_TO_PASS)
         expect(await currentTime())
             .toBe(initialTime)
@@ -61,10 +61,10 @@ describe('time controls', () => {
         })
 
         it('begins incrementing the time', async (done: DoneFn) => {
-            const initialTime: Millisecond = await currentTime()
+            const initialTime: Milliseconds = await currentTime()
             await sleep(LONG_ENOUGH_FOR_TIME_TO_PASS)
             expect(await currentTime())
-                .toBeGreaterThan(from.Millisecond(initialTime))
+                .toBeGreaterThan(from.Milliseconds(initialTime))
 
             done()
         })
@@ -75,7 +75,7 @@ describe('time controls', () => {
             const pause: ElementHandle = await findElement('#pause')
             await pause.click()
 
-            const pausedTime: Millisecond = await currentTime()
+            const pausedTime: Milliseconds = await currentTime()
             await sleep(LONG_ENOUGH_FOR_TIME_TO_PASS)
             expect(await currentTime())
                 .toBe(pausedTime)
@@ -85,37 +85,37 @@ describe('time controls', () => {
 
         it('resets the time to the beginning but keeps playing when you select a new pattern', async (done: DoneFn) => {
             await sleep(A_BIT_LONGER)
-            const plentyOfTime: Millisecond = await currentTime()
+            const plentyOfTime: Milliseconds = await currentTime()
 
             await selectOtherTestPattern()
 
             await sleep(LONG_ENOUGH_FOR_TIME_TO_HAVE_BEEN_RESET)
-            const timeAfterResetting: Millisecond = await currentTime()
+            const timeAfterResetting: Milliseconds = await currentTime()
             expect(timeAfterResetting)
-                .toBeLessThan(from.Millisecond(plentyOfTime))
+                .toBeLessThan(from.Milliseconds(plentyOfTime))
 
             await sleep(LONG_ENOUGH_FOR_TIME_TO_PASS)
             expect(await currentTime())
-                .toBeGreaterThan(from.Millisecond(timeAfterResetting))
+                .toBeGreaterThan(from.Milliseconds(timeAfterResetting))
 
             done()
         })
 
         it('keeps playing when you select new spec but does not reset time to the beginning', async (done: DoneFn) => {
             await sleep(A_BIT_LONGER)
-            const plentyOfTime: Millisecond = await currentTime()
+            const plentyOfTime: Milliseconds = await currentTime()
 
             const input: ElementHandle = await findElement(`input[type=number]#${SPEC_RANGED_PROPERTY_ONE_KEY}`)
             await input.type(VALID_TEST_MODIFICATION)
 
             await sleep(LONG_ENOUGH_FOR_TIME_TO_HAVE_BEEN_RESET)
-            const timeAfterResetting: Millisecond = await currentTime()
+            const timeAfterResetting: Milliseconds = await currentTime()
             expect(timeAfterResetting)
-                .toBeGreaterThan(from.Millisecond(plentyOfTime))
+                .toBeGreaterThan(from.Milliseconds(plentyOfTime))
 
             await sleep(LONG_ENOUGH_FOR_TIME_TO_PASS)
             expect(await currentTime())
-                .toBeGreaterThan(from.Millisecond(timeAfterResetting))
+                .toBeGreaterThan(from.Milliseconds(timeAfterResetting))
 
             done()
         })
@@ -127,48 +127,48 @@ describe('time controls', () => {
             await stop.click()
 
             await sleep(LONG_ENOUGH_FOR_TIME_TO_HAVE_BEEN_RESET)
-            const timeAfterResetting: Millisecond = await currentTime()
+            const timeAfterResetting: Milliseconds = await currentTime()
             expect(timeAfterResetting)
-                .toBe(to.Millisecond(0))
+                .toBe(to.Milliseconds(0))
 
             await sleep(LONG_ENOUGH_FOR_TIME_TO_PASS)
             expect(await currentTime())
-                .toBe(to.Millisecond(0))
+                .toBe(to.Milliseconds(0))
 
             done()
         })
 
         it('wraps time back around to the beginning', async (done: DoneFn) => {
-            const initialTime: Millisecond = await currentTime()
+            const initialTime: Milliseconds = await currentTime()
 
-            const totalTime: Millisecond = await totalDuration()
-            await sleep(to.Millisecond(from.Millisecond(totalTime) - from.Millisecond(LONG_ENOUGH_FOR_TIME_TO_PASS)))
-            const beforeWrappingTime: Millisecond = await currentTime()
+            const totalTime: Milliseconds = await totalDuration()
+            await sleep(to.Milliseconds(from.Milliseconds(totalTime) - from.Milliseconds(LONG_ENOUGH_FOR_TIME_TO_PASS)))
+            const beforeWrappingTime: Milliseconds = await currentTime()
             expect(beforeWrappingTime)
-                .toBeGreaterThan(from.Millisecond(initialTime))
+                .toBeGreaterThan(from.Milliseconds(initialTime))
 
-            await sleep(to.Millisecond(from.Millisecond(LONG_ENOUGH_FOR_TIME_TO_PASS) + from.Millisecond(LONG_ENOUGH_FOR_TIME_TO_PASS)))
+            await sleep(to.Milliseconds(from.Milliseconds(LONG_ENOUGH_FOR_TIME_TO_PASS) + from.Milliseconds(LONG_ENOUGH_FOR_TIME_TO_PASS)))
             expect(await currentTime())
-                .toBeLessThan(from.Millisecond(beforeWrappingTime))
+                .toBeLessThan(from.Milliseconds(beforeWrappingTime))
 
             done()
         })
 
         it('pressing rewind sets time to the beginning but keeps playing', async (done: DoneFn) => {
             await sleep(A_BIT_LONGER)
-            const plentyOfTime: Millisecond = await currentTime()
+            const plentyOfTime: Milliseconds = await currentTime()
 
             const rewind: ElementHandle = await findElement('#rewind')
             await rewind.click()
 
             await sleep(LONG_ENOUGH_FOR_TIME_TO_HAVE_BEEN_RESET)
-            const timeAfterResetting: Millisecond = await currentTime()
+            const timeAfterResetting: Milliseconds = await currentTime()
             expect(timeAfterResetting)
-                .toBeLessThan(from.Millisecond(plentyOfTime))
+                .toBeLessThan(from.Milliseconds(plentyOfTime))
 
             await sleep(LONG_ENOUGH_FOR_TIME_TO_PASS)
             expect(await currentTime())
-                .toBeGreaterThan(from.Millisecond(timeAfterResetting))
+                .toBeGreaterThan(from.Milliseconds(timeAfterResetting))
 
             done()
         })
