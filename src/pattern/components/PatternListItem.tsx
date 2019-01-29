@@ -12,7 +12,7 @@ const PatternListItem: (props: PatternListItemProps) => JSX.Element =
             <li {...{ className, id: listedId, onClick }} >
                 <div>{formattedName || constantCaseToUpperCase(listedId)}</div>
                 <div>{musicalIdeaIllustrated}</div>
-                <div>{formatDate(mostRecentPublish)} - {formatDate(originalPublish)}</div>
+                <div>{formatDate(originalPublish)} - {formatDate(mostRecentPublish)}</div>
             </li>
         )
     }
