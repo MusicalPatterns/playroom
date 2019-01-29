@@ -20,6 +20,6 @@ module.exports = {
         ]
     },
     resolve: {
-        extensions: [ '.js', '.tsx', '.json', '.scss', '.svg' ],
+        extensions: [ '.scss', '.svg' ],
     },
 }
