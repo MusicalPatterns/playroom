@@ -1,7 +1,7 @@
-@import '../../sizes';
+@import './sizes';
 
 #second-row {
-  min-height: $medium-area;
+  min-height: $second-row-height;
 
   .left {
     display: flex;

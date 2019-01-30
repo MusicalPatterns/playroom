@@ -1,11 +1,11 @@
 import { ElementHandle } from 'puppeteer'
-import { elementExists, elementInnerText, findElement, refresh, refreshWithTestPatternSelected } from '../../support'
+import { elementExists, elementInnerText, findElement, refreshPage, refreshWithTestPatternSelected } from '../../support'
 
 const IMMERSIVE_AUDIO_TOGGLE: string = '#toggle-immersive-audio'
 
 describe('immersive audio', () => {
     it('starts out disabled', async (done: DoneFn) => {
-        await refresh()
+        await refreshPage()
         expect(await elementExists('#toggle-immersive-audio:disabled'))
             .toBeTruthy()
 

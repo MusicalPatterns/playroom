@@ -1,7 +1,8 @@
 @import '../../sizes';
+@import './sizes';
 
 #no-pattern-message {
-  padding: $medium;
-  font-size: $small;
-  width: $huge;
+  padding: $main-panel-spacing;
+  font-size: $detail-text-size;
+  width: $no-pattern-message-width;
 }

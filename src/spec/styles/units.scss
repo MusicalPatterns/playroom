@@ -1,7 +1,7 @@
-@import '../../sizes';
+@import './sizes';
 
 .units {
   flex: 0 !important;
-  min-width: $medium !important;
+  min-width: $units-size !important;
   margin: 0 !important;
 }

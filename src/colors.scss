@@ -1,25 +1,22 @@
-$grey: #888888;
+@import './baseColors';
 
-$red: #ff0000;
-$yellow: #ffcc00;
-$green: #ccff00;
-$teal: #00ccff;
-$blue: #0000ff;
-$violet: #ff00ff;
+$text-color: $darker-grey;
+$text-hover: $dark-grey;
 
-$spectrum: ($red, $yellow, $green, $teal, $blue, $violet);
+$button-background: $light-grey;
+$button-background-hover: $lighter-grey;
 
-$black: #000000;
-$white: #ffffff;
+$invalid-color: $some-random-orange-red;
+$focus-color: $some-random-green-blue;
 
-$almost-black: mix($black, mix(nth($spectrum, 1), $grey, 100%), 90%);
+$side-panel-background: $dark-grey;
+$side-panel-color: $grey;
+$side-panel-color-with-emphasis: $light-grey;
+$side-panel-hover: $light-grey;
+$side-panel-hover-with-emphasis: $lighter-grey;
+$side-panel-selected: $lighter-grey;
+$side-panel-selected-with-emphasis: $almost-white;
 
-$dark-grey: mix($black, mix(nth($spectrum, 2), $grey, 100% / 16), 50%);
-$grey: mix($white, mix(nth($spectrum, 3), $grey, 100% / 27), 0%);
-$light-grey: mix($white, mix(nth($spectrum, 4), $grey, 100% / 16), 50%);
+$left-panel-background: $almost-white;
 
-$lighter-grey: mix($white, mix(nth($spectrum, 5), $grey, 100% / 4), 85%);
-$almost-white: mix($white, mix(nth($spectrum, 6), $grey, 100%), 96.75%);
-
-$invalid: #ddbbaa;
-$focus: #aabbdd;
+$right-panel-background: $grey;

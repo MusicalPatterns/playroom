@@ -1,64 +1,64 @@
-@import '../../../colors';
+@import '../colors';
 
 .ranged-spec-control-range-input {
-  background: $lighter-grey !important;
+  background: $control-background !important;
 
   &:hover {
     transition: none;
-    background: $almost-white !important;
+    background: $control-background-hover !important;
   }
 
   &::-webkit-slider-runnable-track {
-    background: $grey !important;
+    background: $spec-control-track !important;
   }
 
   &::-moz-range-track {
-    background: $grey !important;
+    background: $spec-control-track !important;
   }
 
   &::-ms-track {
-    background: $grey !important;
+    background: $spec-control-track !important;
   }
 
   &:hover::-webkit-slider-runnable-track {
     transition: none;
-    background: $light-grey !important;
+    background: $spec-control-track-hover !important;
   }
 
   &:hover::-moz-range-track {
     transition: none;
-    background: $light-grey !important;
+    background: $spec-control-track-hover !important;
   }
 
   &:hover::-ms-track {
     transition: none;
-    background: $light-grey !important;
+    background: $spec-control-track-hover !important;
   }
 
   &::-webkit-slider-thumb {
-    background: $almost-black !important;
+    background: $spec-control-thumb-and-checkbox !important;
   }
 
   &::-moz-range-thumb {
-    background: $almost-black !important;
+    background: $spec-control-thumb-and-checkbox !important;
   }
 
   &::-ms-thumb {
-    background: $almost-black !important;
+    background: $spec-control-thumb-and-checkbox !important;
   }
 
   &:hover::-webkit-slider-thumb {
     transition: none;
-    background: $dark-grey !important;
+    background: $spec-control-thumb-and-checkbox-hover !important;
   }
 
   &:hover::-moz-range-thumb {
     transition: none;
-    background: $dark-grey !important;
+    background: $spec-control-thumb-and-checkbox-hover !important;
   }
 
   &:hover::-ms-thumb {
     transition: none;
-    background: $dark-grey !important;
+    background: $spec-control-thumb-and-checkbox-hover !important;
   }
 }

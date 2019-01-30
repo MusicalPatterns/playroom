@@ -1,41 +1,43 @@
+@import '../../colors';
 @import '../../fonts';
 @import '../../sizes';
+@import './proportions';
+@import './sizes';
 
 #title {
-  height: $small-area;
-  width: $medium-area;
+  flex: $title-proportion;
 
-  margin-right: $huge;
+  height: $title-height;
+  width: $title-width;
+  margin-right: $side-panel-width-closed;
 
   text-align: center;
-
-  background: $dark-grey;
 
   display: flex;
   align-items: center;
 
-  box-shadow: $medium -34px $big $dark-grey;
+  box-shadow: $pattern-list-fade-horizontal-offset $pattern-list-fade-vertical-offset-for-bottom $pattern-list-fade-size $side-panel-background;
   z-index: 1;
 
   & > div:first-child {
-    flex: 1;
+    flex: $title-symbol-proportion;
 
     display: flex;
     flex-direction: column;
     align-items: flex-end;
 
     svg {
-      width: $medium;
-      height: $medium;
+      width: $musical-patterns-symbol-size;
+      height: $musical-patterns-symbol-size;
 
       polygon {
-        fill: $light-grey;
+        fill: $side-panel-color-with-emphasis;
       }
     }
   }
 
   & > div {
-    flex: $phi;
+    flex: $title-text-proportion;
 
     display: flex;
     flex-direction: column;
@@ -43,18 +45,28 @@
 
     div {
       @extend .leipziger-antiqua-regular;
-      font-size: $small;
+      font-size: $detail-text-size;
     }
 
     text-align: center;
 
     h1 {
-      line-height: 28px;
-      font-size: $big;
-      width: $small-area;
+      line-height: $title-line-height;
+      font-size: $title-text-size;
+      width: $pattern-list-item-width;
       text-align: center;
       margin-bottom: 0;
-      color: $light-grey;
+      color: $side-panel-color-with-emphasis;
+    }
+  }
+
+  a {
+    color: inherit;
+    text-decoration: inherit;
+    font-family: inherit;
+
+    &:hover {
+      color: $side-panel-hover-with-emphasis;
     }
   }
 }

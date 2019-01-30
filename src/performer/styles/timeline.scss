@@ -1,90 +1,90 @@
-@import '../../colors';
-@import '../../sizes';
+@import './colors';
+@import '../../effects';
 
 #timeline {
-  transition: background $duration $easeInOutQuint;
+  @include animate(background);
 
-  background: $almost-black;
+  background: $time-controls-background;
 
   &:disabled {
-    background: $lighter-grey;
+    background: $time-controls-background-disabled;
   }
 
   &::-webkit-slider-runnable-track {
-    background: $dark-grey;
+    background: $time-controls-border-and-track;
   }
 
   &:disabled::-webkit-slider-runnable-track {
-    background: $light-grey;
+    background: $time-controls-border-and-track-disabled;
   }
 
   &:enabled:hover::-webkit-slider-runnable-track {
-    transition: none;
-    background: $grey;
+    @include no-animate();
+    background: $time-controls-border-and-track-hover;
   }
 
   &::-moz-range-track {
-    background: $dark-grey;
+    background: $time-controls-border-and-track;
   }
 
   &:disabled::-moz-range-track {
-    background: $light-grey;
+    background: $time-controls-border-and-track-disabled;
   }
 
   &:enabled:hover::-moz-range-track {
-    transition: none;
-    background: $grey;
+    @include no-animate();
+    background: $time-controls-border-and-track-hover;
   }
 
   &::-ms-track {
-    background: $dark-grey;
+    background: $time-controls-border-and-track;
   }
 
   &:disabled::-ms-track {
-    background: $light-grey;
+    background: $time-controls-border-and-track-disabled;
   }
 
   &:enabled:hover::-ms-track {
-    transition: none;
-    background: $grey;
+    @include no-animate();
+    background: $time-controls-border-and-track-hover;
   }
 
   &::-webkit-slider-thumb {
-    background: $grey;
+    background: $time-controls-thumb;
   }
 
   &:disabled::-webkit-slider-thumb {
-    background: $light-grey;
+    background: $time-controls-thumb-disabled;
   }
 
   &:enabled:hover::-webkit-slider-thumb {
-    transition: none;
-    background: $light-grey;
+    @include no-animate();
+    background: $time-controls-thumb-hover;
   }
 
   &::-moz-range-thumb {
-    background: $grey;
+    background: $time-controls-thumb;
   }
 
   &:disabled::-moz-range-thumb {
-    background: $light-grey;
+    background: $time-controls-thumb-disabled;
   }
 
   &:enabled:hover::-moz-range-thumb {
-    transition: none;
-    background: $light-grey;
+    @include no-animate();
+    background: $time-controls-thumb-hover;
   }
 
   &::-ms-thumb {
-    background: $grey;
+    background: $time-controls-thumb;
   }
 
   &:disabled::-ms-thumb {
-    background: $light-grey;
+    background: $time-controls-thumb-disabled;
   }
 
   &:enabled:hover::-ms-thumb {
-    transition: none;
-    background: $light-grey;
+    @include no-animate();
+    background: $time-controls-thumb-hover;
   }
 }

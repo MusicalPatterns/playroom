@@ -1,6 +1,8 @@
 @import '../../colors';
-@import '../../sizes';
 @import '../../effects';
+@import './colors';
+@import './proportions';
+@import './sizes';
 
 .singular-spec-control {
   display: flex;
@@ -9,45 +11,44 @@
 
   position: relative;
 
-  margin-bottom: $border-size;
+  margin-bottom: $spec-panel-bottom-spacing;
 
   div, input, select {
-    margin-left: $small;
-    min-width: $huge;
-    margin-bottom: $border-size;
+    margin-left: $spec-controls-horizontal-spacing;
+    min-width: $control-width;
+    margin-bottom: $spec-panel-bottom-spacing;
   }
 
   div {
-    flex: nth($fibonacci-series, 20);
+    flex: $spec-control-name-proportion;
     text-align: right;
-    font-size: $small;
+    font-size: $detail-text-size;
   }
 
   input, select {
-    background: $lighter-grey;
+    background: $control-background;
+    &:hover {
+      background: $control-background-hover;
+    }
 
-    padding: 0 $small;
-    flex: nth($fibonacci-series, 19);
-    height: $big;
+    padding: 0 $spec-controls-horizontal-spacing;
+    flex: $spec-control-input-proportion;
+    height: $control-height;
 
     border: none;
     outline: none;
     border-radius: $border-size;
 
     &::selection {
-      background: $focus;
+      background: $focus-color;
     }
 
     &.invalid {
-      @include glow($invalid);
-    }
-
-    &:hover {
-      background: $almost-white;
+      @include glow($invalid-color);
     }
   }
 
   &:hover .invalid-message {
-    opacity: 0.618;
+    opacity: $invalid-message-opacity;
   }
 }

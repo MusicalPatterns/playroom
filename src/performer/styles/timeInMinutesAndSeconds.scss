@@ -1,21 +1,22 @@
-@import '../../sizes';
+@import './sizes';
 
 #time-in-minutes-and-seconds {
   padding-right: 0;
-  width: $huge;
+  width: $time-in-minutes-and-seconds-width;
 
   div {
     padding-right: 0;
     display: inline-block;
-    width: $tiny;
+    width: $time-colon-width;
+    text-align: right;
   }
 
   div:first-child {
-    width: $small;
+    width: $minutes-or-seconds-width;
   }
 
   div:last-child {
-    width: $medium;
+    width: $minutes-or-seconds-width;
   }
 
   &.disabled {

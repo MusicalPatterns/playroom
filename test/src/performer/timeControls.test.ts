@@ -7,7 +7,7 @@ import {
     findElement,
     LONG_ENOUGH_FOR_TIME_TO_HAVE_BEEN_RESET,
     LONG_ENOUGH_FOR_TIME_TO_PASS,
-    refresh,
+    refreshPage,
     selectOtherTestPattern,
     sleep,
     SPEC_RANGED_PROPERTY_ONE_KEY,
@@ -18,7 +18,7 @@ import {
 
 describe('time controls', () => {
     it('are disabled if you have not yet selected a pattern', async (done: DoneFn) => {
-        await refresh()
+        await refreshPage()
         expect(await elementExists(`#rewind:disabled`))
             .toBeTruthy()
         expect(await elementExists(`#stop:disabled`))

@@ -1,6 +1,6 @@
 export { sleep } from './sleep'
 export { selectTestPattern, selectOtherTestPattern }from './selectTestPattern'
-export { refreshWithTestPatternSelected, refresh }from './refresh'
+export { refreshWithTestPatternSelected, refreshPage }from './refresh'
 export { elementIds, elementCount, elementExists, elementInnerText, elementValue, elementChecked } from './checkElement'
 export { press } from './keyboard'
 export { reset } from './reset'

@@ -1,0 +1,29 @@
+@import './colors';
+@import './sizes';
+@import './effects';
+
+button {
+  cursor: pointer;
+  background: $button-background;
+  border: none;
+  outline: none;
+  color: $text-color;
+
+  border-radius: $border-size;
+  height: $control-height;
+  min-width: $control-width;
+
+  &:disabled {
+    cursor: inherit;
+    color: $grey;
+  }
+
+  &:focus {
+    @include glow($focus-color);
+  }
+
+  &:hover:enabled {
+    background-color: $button-background-hover;
+    color: $text-hover;
+  }
+}

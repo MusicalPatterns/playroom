@@ -1,13 +1,13 @@
 @import '../../sizes';
-@import '../../colors';
+@import './sizes';
 
 #presets {
   div, select {
-    margin-left: $small;
-    min-width: $huge;
-    margin-bottom: $border-size;
-    padding: 0 $small;
-    height: $big;
+    margin-left: $presets-spacing;
+    min-width: $control-width;
+    margin-bottom: $spec-panel-bottom-spacing;
+    padding: 0 $presets-spacing;
+    height: $control-height;
 
     border: none;
     outline: none;

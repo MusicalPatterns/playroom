@@ -1,20 +1,8 @@
-@import '../../sizes';
+@import './sizes';
 
 #pattern-panel {
   display: flex;
   flex-direction: column;
-  height: $huge-area;
+  height: $pattern-panel-height;
   align-items: flex-end;
-
-  #hamburger {
-    flex: 1;
-  }
-
-  #pattern-list {
-    flex: $phi * $phi * $phi * $phi;
-  }
-
-  #title {
-    flex: $phi;
-  }
 }

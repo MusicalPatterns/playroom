@@ -10,7 +10,7 @@ export {
     press,
     reset,
     loseFocus,
-    refresh,
+    refreshPage,
     refreshWithTestPatternSelected,
     currentTime,
     totalDuration,

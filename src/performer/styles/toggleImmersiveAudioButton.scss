@@ -1,6 +1,6 @@
-@import '../../sizes.scss';
+@import './sizes';
 
 #toggle-immersive-audio {
-  margin: $tiny 0;
+  margin: $main-panel-spacing 0;
   width: $toggle-immersive-audio-button-width;
 }

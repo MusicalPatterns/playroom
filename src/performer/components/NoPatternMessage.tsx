@@ -4,7 +4,7 @@ import { MaybeDisabled } from './types'
 
 const NoPatternMessage: (props: MaybeDisabled) => JSX.Element =
     ({ disabled }: MaybeDisabled): JSX.Element => {
-        if (disabled) {
+        if (!disabled) {
             return <div/>
         }
 

@@ -3,7 +3,7 @@ import { page } from '../../setup'
 import { APP_URL } from '../constants'
 import { selectOtherTestPattern, selectTestPattern } from './selectTestPattern'
 
-const refresh: () => Promise<Response | null> =
+const refreshPage: () => Promise<Response | null> =
     async (): Promise<Response | null> =>
         page.goto(APP_URL)
 
@@ -14,6 +14,6 @@ const refreshWithTestPatternSelected: () => Promise<void> =
     }
 
 export {
-    refresh,
+    refreshPage,
     refreshWithTestPatternSelected,
 }

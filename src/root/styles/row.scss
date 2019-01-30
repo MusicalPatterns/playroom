@@ -1,45 +1,48 @@
-@import '../../sizes';
 @import '../../colors';
+@import '../../effects';
+@import '../../sizes';
+@import './proportions';
+@import './sizes';
 
 .row {
   display: flex;
   flex-wrap: wrap;
 
   .left, .right {
-    color: $almost-black;
+    color: $text-color;
 
     p, img, h1 {
-      padding: $big;
+      padding: $main-panel-spacing;
     }
   }
 
   .left {
-    flex: $phi;
-    min-width: $huge-area;
-    @media screen and (max-width: $huge-area) {
-      min-width: $big-area;
+    flex: $left-proportion;
+    min-width: $left-min-width;
+    @media screen and (max-width: $mobile-size) {
+      min-width: $left-min-width-mobile;
     }
 
-    background-color: $almost-white;
+    background-color: $left-panel-background;
   }
 
   .right {
-    flex: 1;
-    min-width: $big-area;
-    @media screen and (max-width: $huge-area) {
-      min-width: $medium-area;
+    flex: $right-proportion;
+    min-width: $right-min-width;
+    @media screen and (max-width: $mobile-size) {
+      min-width: $right-min-width-mobile;
     }
 
-    background-color: $grey;
+    background-color: $right-panel-background;
 
     text-align: right;
 
-    transition: flex $duration $easeInOutQuint, min-width $duration $easeInOutQuint;
+    @include animate(flex, min-width);
 
     overflow-x: hidden;
 
     &.closed {
-      flex: ((((1 / $phi) / $phi) / $phi) / $phi) / $phi;
+      flex: $right-proportion-closed;
       min-width: 0;
     }
   }

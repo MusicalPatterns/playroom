@@ -1,22 +1,23 @@
-@import '../../../sizes.scss';
-@import '../../../colors.scss';
+@import '../../../sizes';
+@import '../colors';
 
 .toggled-spec-control-checkbox-input {
-  min-width: $big !important;
-  width: $big !important;
-  max-width: $big !important;
+  min-width: $control-height !important;
+  width: $control-height !important;
+  max-width: $control-height !important;
 
   input[type=checkbox] {
     cursor: pointer;
     flex: 0;
-    min-width: $big;
+    min-width: $control-height;
     margin: 0;
     opacity: 0;
   }
 
   svg.fa-check-square, svg.fa-square {
-    width: $big;
-    height: $big;
+    color: $spec-control-thumb-and-checkbox;
+    width: $control-height;
+    height: $control-height;
     position: absolute;
     right: 0;
     top: 0;
@@ -25,7 +26,7 @@
 
   &:hover {
     svg.fa-check-square, svg.fa-square {
-      color: $dark-grey;
+      color: $spec-control-thumb-and-checkbox-hover;
     }
   }
 }

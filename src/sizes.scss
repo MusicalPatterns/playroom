@@ -1,30 +1,27 @@
-$fibonacci-series: (1, 1, 2, 3, 5, 8, 13, 21, 34, 55, 89, 144, 233, 377, 610, 987, 1597, 2584, 4181, 6765);
-$fibonacci-series-size-offset: 4;
-$phi: 1.618;
+@import './baseSizes';
 
-$line-size: 1px * nth($fibonacci-series, 0 + $fibonacci-series-size-offset); // 3
-$border-size: 1px * nth($fibonacci-series, 1 + $fibonacci-series-size-offset); // 5
-$tiny: 1px * nth($fibonacci-series, 2 + $fibonacci-series-size-offset); // 8
-$small: 1px * nth($fibonacci-series, 3 + $fibonacci-series-size-offset); // 13
-$medium: 1px * nth($fibonacci-series, 4 + $fibonacci-series-size-offset); // 21
-$big: 1px * nth($fibonacci-series, 5 + $fibonacci-series-size-offset); // 34
-$huge: 1px * nth($fibonacci-series, 6 + $fibonacci-series-size-offset); // 55
-$tiny-area: 1px * nth($fibonacci-series, 7 + $fibonacci-series-size-offset); // 89
-$small-area: 1px * nth($fibonacci-series, 8 + $fibonacci-series-size-offset); // 144
-$medium-area: 1px * nth($fibonacci-series, 9 + $fibonacci-series-size-offset); // 233
-$big-area: 1px * nth($fibonacci-series, 10 + $fibonacci-series-size-offset); // 377
-$huge-area: 1px * nth($fibonacci-series, 11 + $fibonacci-series-size-offset); // 610
-$enormous-area: 1px * nth($fibonacci-series, 11 + $fibonacci-series-size-offset); // 987
+$detail-text-size: $medium;
+$important-text-size: $big;
+$title-text-size: $huge;
 
-$title-min-height: 1px * nth($fibonacci-series, 9 + $fibonacci-series-size-offset);
+$box-shadow-size: $eency-weency;
+$border-size: $tiny;
 
-$fibonacci-series-layout-offset: 14;
-$left: 1fr * nth($fibonacci-series, 0 + $fibonacci-series-layout-offset);
-$center: 1fr * nth($fibonacci-series, 2 + $fibonacci-series-layout-offset);
-$right: 1fr * nth($fibonacci-series, 1 + $fibonacci-series-layout-offset);
+$track-width: $tiny;
+$thumb-width: $tiny;
+$thumb-height: $big;
+$timeline-offset: -$small;
 
-$timeline-offset: -$tiny;
-$toggle-immersive-audio-button-width: 1px * nth($fibonacci-series, 9 + $fibonacci-series-size-offset);
+$control-height: $huge;
+$control-width: $enormous;
 
-$duration: 0.25s;
-$easeInOutQuint: cubic-bezier(0.86, 0, 0.07, 1)
+$side-panel-width: $big-area;
+$side-panel-min-width: $medium-area;
+$side-panel-width-closed: $enormous;
+
+$main-panel-spacing: $big;
+
+$mobile-size: $huge-area;
+$little-mobile-size: $big-area;
+$littler-mobile-size: $medium-area;
+$littlest-mobile-size: $small-area;

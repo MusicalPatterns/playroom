@@ -1,19 +1,21 @@
-@import '../../sizes';
 @import '../../colors';
+@import '../../effects';
+@import '../../sizes';
+@import './proportions';
 
 #side-panel {
-  background-color: $dark-grey;
-  color: $grey;
+  background-color: $side-panel-background;
+  color: $side-panel-color;
 
   overflow-x: hidden;
 
-  transition: flex $duration $easeInOutQuint, min-width $duration $easeInOutQuint;
+  @include animate(flex, min-width);
 
-  flex: 1;
-  min-width: $medium-area;
+  flex: $side-panel-proportion;
+  min-width: $side-panel-min-width;
 
   &.closed {
     flex: 0;
-    min-width: $huge;
+    min-width: $side-panel-width-closed;
   }
 }

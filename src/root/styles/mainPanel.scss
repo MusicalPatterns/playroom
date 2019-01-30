@@ -1,7 +1,7 @@
-@import '../../sizes';
+@import './proportions';
 
 #main-panel {
-  flex: $phi + $phi + 1;
+  flex: $main-panel-proportion;
 
   display: flex;
   flex-direction: column;

@@ -1,5 +1,5 @@
 import { Pattern } from '@musical-patterns/pattern'
-import { Maybe } from '@musical-patterns/utilities'
+import { constantCaseToUpperCase, Maybe } from '@musical-patterns/utilities'
 import * as React from 'react'
 import { SpecPanel } from '../../spec'
 import PatternListener from './PatternListener'
@@ -20,7 +20,7 @@ const SecondRow: (props: SecondRowProps) => JSX.Element =
         return (
             <div {...{ className: 'row', id: 'second-row' }} >
                 <div {...{ className: 'left' }} >
-                    <h1>{maybePattern && maybePattern.metadata.formattedName}</h1>
+                    <h1>{maybePattern && maybePattern.metadata.formattedName || constantCaseToUpperCase(id)}</h1>
                 </div>
                 <div {...{ className: 'right' }} >
                     <SpecPanel/>

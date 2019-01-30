@@ -1,12 +1,25 @@
 @import './sizes';
 
 @mixin glow($color) {
-  box-shadow: 0 0 $line-size $line-size $color;
-  -webkit-box-shadow: 0 0 $line-size $line-size $color;
+  box-shadow: 0 0 $box-shadow-size $box-shadow-size $color;
+  -webkit-box-shadow: 0 0 $box-shadow-size $box-shadow-size $color;
   -webkit-appearance: none;
 }
 
 @mixin no-glow() {
   box-shadow: none;
   -webkit-box-shadow: none;
+}
+
+@mixin animate($properties...) {
+  $transition: ();
+  @each $property in $properties {
+    $transition: append($transition, $property 0.25s cubic-bezier(0.86, 0, 0.07, 1), comma);
+  }
+
+  transition: $transition;
+}
+
+@mixin no-animate() {
+  transition: none;
 }
