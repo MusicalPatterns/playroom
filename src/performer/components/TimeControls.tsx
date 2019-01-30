@@ -1,24 +1,14 @@
 import { faFastBackward, faPause, faPlay, faStop, IconDefinition } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { DictionaryOf, from, Time } from '@musical-patterns/utilities'
 import * as React from 'react'
 import { connect } from 'react-redux'
 import { Dispatch } from 'redux'
 import { ImmutableRootState, RootStateKeys } from '../../root'
-import { SecretSelectorsForTest } from '../../types'
 import { buildStopHandler, buildTogglePausedHandler, handleRewind } from '../events'
 import { ImmutablePerformerState, PerformerStateKeys } from '../state'
 import TimeInMinutesAndSeconds from './TimeInMinutesAndSeconds'
 import Timeline from './Timeline'
 import { TimeControlsProps, TimeControlsPropsFromDispatch, TimeControlsPropsFromState } from './types'
-
-const formatTimesForDisplay: (times: DictionaryOf<Time>) => DictionaryOf<number> =
-    ({ totalDuration, time }: DictionaryOf<Time>): DictionaryOf<number> => {
-        const totalTimeForDisplay: number = Math.round(from.Time(totalDuration)) || 0
-        const timeForDisplay: number = Math.round(from.Time(time)) % totalTimeForDisplay || 0
-
-        return { totalTimeForDisplay, timeForDisplay }
-    }
 
 const mapStateToProps: (state: ImmutableRootState) => TimeControlsPropsFromState =
     (state: ImmutableRootState): TimeControlsPropsFromState => {
@@ -26,8 +16,6 @@ const mapStateToProps: (state: ImmutableRootState) => TimeControlsPropsFromState
 
         return {
             paused: performerState.get(PerformerStateKeys.PAUSED),
-            time: performerState.get(PerformerStateKeys.TIME),
-            totalDuration: performerState.get(PerformerStateKeys.TOTAL_DURATION),
         }
     }
 
@@ -46,31 +34,26 @@ const TimeControls: (timeControlsProps: TimeControlsProps) => JSX.Element =
             togglePausedHandler,
             stopHandler,
             paused,
-            time,
-            totalDuration,
+            timeForDisplay,
+            totalTimeForDisplay,
         } = props
+
         const controlId: string = paused ? 'play' : 'pause'
         const icon: IconDefinition = paused ? faPlay : faPause
 
-        const { timeForDisplay, totalTimeForDisplay } = formatTimesForDisplay({ totalDuration, time })
-
         return (
-            <div {...{ id: 'time-controls-container' }}>
-                <div {...{ id: 'time-controls', className: disabled ? 'disabled' : '' }}>
-                    <button {...{ id: 'rewind', onClick: rewindHandler, disabled }}>
-                        <FontAwesomeIcon {...{ icon: faFastBackward }}/>
-                    </button>
-                    <button {...{ id: 'stop', onClick: stopHandler, disabled }}>
-                        <FontAwesomeIcon {...{ icon: faStop }}/>
-                    </button>
-                    <button {...{ id: controlId, onClick: togglePausedHandler, disabled }}>
-                        <FontAwesomeIcon {...{ icon }}/>
-                    </button>
-                    <Timeline {...{ disabled, timeForDisplay, totalTimeForDisplay }} />
-                    <TimeInMinutesAndSeconds {...{ disabled, timeForDisplay }}/>
-                </div>
-                <div {...{ id: SecretSelectorsForTest.SECRET_TIMER }}>{timeForDisplay}</div>
-                <div {...{ id: SecretSelectorsForTest.SECRET_TOTAL_DURATION }}>{totalTimeForDisplay}</div>
+            <div {...{ id: 'time-controls', className: disabled ? 'disabled' : '' }}>
+                <button {...{ id: 'rewind', onClick: rewindHandler, disabled }}>
+                    <FontAwesomeIcon {...{ icon: faFastBackward }}/>
+                </button>
+                <button {...{ id: 'stop', onClick: stopHandler, disabled }}>
+                    <FontAwesomeIcon {...{ icon: faStop }}/>
+                </button>
+                <button {...{ id: controlId, onClick: togglePausedHandler, disabled }}>
+                    <FontAwesomeIcon {...{ icon }}/>
+                </button>
+                <Timeline {...{ disabled, timeForDisplay, totalTimeForDisplay }} />
+                <TimeInMinutesAndSeconds {...{ disabled, timeForDisplay }}/>
             </div>
         )
     }

@@ -1,25 +1,7 @@
-@import '../../colors';
-@import '../../sizes';
-@import '../../effects';
-@import './timeline';
-@import './timeInMinutesAndSeconds';
+@import './noPatternMessage';
+@import './performer';
 @import './timeControls';
-@import './immersiveAudio';
-
-#no-pattern-message {
-  padding: $medium;
-  font-size: $small;
-  width: $huge;
-}
-
-#performer {
-  display: flex;
-  align-items: center;
-  flex-wrap: wrap;
-  justify-content: flex-start;
-  padding: $medium;
-
-  #time-controls-container {
-    padding-right: $medium;
-  }
-}
+@import './timeControlsPanel';
+@import './timeInMinutesAndSeconds';
+@import './timeline';
+@import './toggleImmersiveAudioButton';

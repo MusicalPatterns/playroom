@@ -1,0 +1,11 @@
+@import '../../sizes';
+
+#second-row {
+  min-height: $medium-area;
+
+  .left {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+  }
+}

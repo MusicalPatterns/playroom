@@ -5,14 +5,14 @@ enum PatternStateKeys {
     PATTERNS = 'PATTERNS',
     ID = 'ID',
     DEBUG_MODE = 'DEBUG_MODE',
-    PATTERNS_PANEL_OPEN = 'PATTERNS_PANEL_OPEN',
+    SIDE_PANEL_OPEN = 'SIDE_PANEL_OPEN',
 }
 
 interface PatternState {
     [ PatternStateKeys.PATTERNS ]: Maybe<Patterns>,
     [ PatternStateKeys.ID ]: Maybe<Id>,
     [ PatternStateKeys.DEBUG_MODE ]: boolean,
-    [ PatternStateKeys.PATTERNS_PANEL_OPEN ]: boolean,
+    [ PatternStateKeys.SIDE_PANEL_OPEN ]: boolean,
 }
 
 type ImmutablePatternState = TypedMap<PatternState>
@@ -21,7 +21,7 @@ enum PatternStateActionType {
     SET_PATTERNS = 'SET_PATTERNS',
     SET_PATTERN_ID = 'SET_PATTERN_ID',
     SET_DEBUG_MODE = 'SET_DEBUG_MODE',
-    SET_PATTERNS_PANEL_OPEN = 'SET_PATTERNS_PANEL_OPEN',
+    SET_SIDE_PANEL_OPEN = 'SET_SIDE_PANEL_OPEN',
 }
 
 interface SetPatterns {
@@ -39,16 +39,16 @@ interface SetDebugMode {
     type: PatternStateActionType.SET_DEBUG_MODE,
 }
 
-interface SetPatternsPanelOpen {
+interface SetSidePanelOpen {
     data: boolean,
-    type: PatternStateActionType.SET_PATTERNS_PANEL_OPEN,
+    type: PatternStateActionType.SET_SIDE_PANEL_OPEN,
 }
 
 type PatternStateAction =
     SetPatterns |
     SetId |
     SetDebugMode |
-    SetPatternsPanelOpen
+    SetSidePanelOpen
 
 export {
     PatternStateKeys,

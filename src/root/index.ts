@@ -9,6 +9,7 @@ export {
     App,
     PropsFromApp,
     PropsFromAppBeforeSelectingPattern,
+    SidePanelPropsFromState,
 } from './components'
 export {
     extractValueFromEvent,

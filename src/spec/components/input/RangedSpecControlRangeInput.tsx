@@ -17,7 +17,7 @@ const RangedSpecControlRangeInput: (rangedInputProps: RangedInputProps) => JSX.E
 
         return (
             <input {...{
-                className,
+                className: `ranged-spec-control-range-input ${className}`,
                 id,
                 max,
                 min,

@@ -33,6 +33,12 @@ interface PatternListenerPropsFromDispatch {
 
 interface PatternListenerProps extends PatternListenerPropsFromState, PatternListenerPropsFromDispatch, PropsFromApp {}
 
+interface SidePanelPropsFromState {
+    sidePanelOpen: boolean,
+}
+
+interface SidePanelProps extends PropsFromAppBeforeSelectingPattern, SidePanelPropsFromState {}
+
 export {
     AppProps,
     PatternListenerPropsFromState,
@@ -42,4 +48,6 @@ export {
     FirstRowProps,
     SecondRowProps,
     PropsFromAppBeforeSelectingPattern,
+    SidePanelPropsFromState,
+    SidePanelProps,
 }

@@ -4,7 +4,9 @@ import { EventHandler, SecretSelectorsForTest } from '../../types'
 import { SpecChangeEventParameters } from '../events'
 import { specControlId, stringifyIfNecessary, validityClassName } from './helpers'
 import { Input, InputProps } from './input'
+import InvalidMessage from './InvalidMessage'
 import { SingularSpecControlProps } from './types'
+import Units from './Units'
 
 const SingularSpecControl: (specControlProps: SingularSpecControlProps) => JSX.Element =
     // tslint:disable-next-line:cyclomatic-complexity
@@ -36,12 +38,12 @@ const SingularSpecControl: (specControlProps: SingularSpecControlProps) => JSX.E
         const secretClassName: string = SecretSelectorsForTest.SECRET_SUBMITTED_SPEC_CONTROL
 
         return (
-            <div {...{ className: 'spec-control', id, title: description }}>
+            <div {...{ className: 'singular-spec-control', id, title: description }}>
                 <span {...{ className: secretClassName }}>{stringifyIfNecessary(submittedSpecValue)}</span>
                 {isNotAnArrayedProperty && <div>{formattedName || camelCaseToLowerCase(specKey)}</div>}
                 <Input {...{ specPropertyAttributes, inputProps }}/>
-                {units && <div {...{ className: 'units' }}>{units}</div>}
-                {invalidMessage && <div {...{ className: 'invalid-message' }}>{invalidMessage}</div>}
+                {units && <Units {...{ units }}/>}
+                {invalidMessage && <InvalidMessage {...{ invalidMessage }}/>}
             </div>
         )
     }

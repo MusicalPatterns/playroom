@@ -1,7 +1,7 @@
-@import '../../sizes.scss';
-@import '../../colors.scss';
+@import '../../../sizes.scss';
+@import '../../../colors.scss';
 
-.toggled-input {
+.toggled-spec-control-checkbox-input {
   min-width: $big !important;
   width: $big !important;
   max-width: $big !important;

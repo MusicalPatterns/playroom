@@ -60,7 +60,7 @@ describe('submitting spec changes', () => {
         })
 
         it('keeps the controls in the same order after making a change', async (done: DoneFn) => {
-            let controlIds: string[] = await elementIds('#spec-controls input[type=number]')
+            let controlIds: string[] = await elementIds('#spec-panel input[type=number]')
             expect(controlIds)
                 .toEqual([
                     `${SPEC_ARRAYED_PROPERTY_KEY}-0`,
@@ -75,7 +75,7 @@ describe('submitting spec changes', () => {
             const control: ElementHandle = await findElement(`input[type=number]#${SPEC_RANGED_PROPERTY_ONE_KEY}`)
             await control.type(VALID_TEST_MODIFICATION)
 
-            controlIds = await elementIds('#spec-controls input[type=number]')
+            controlIds = await elementIds('#spec-panel input[type=number]')
             expect(controlIds)
                 .toEqual([
                     `${SPEC_ARRAYED_PROPERTY_KEY}-0`,

@@ -10,7 +10,7 @@ interface PatternChangeEventExtractorParameters extends PropsFromAppBeforeSelect
 type PatternChangeEventExtractor = (parameters: PatternChangeEventExtractorParameters) => void
 
 interface HandleHamburgerParameters extends DispatchAsProp {
-    patternsPanelOpen: boolean,
+    sidePanelOpen: boolean,
 }
 
 export {

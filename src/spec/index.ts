@@ -9,7 +9,7 @@ export {
     SpecStateKeys,
 } from './state'
 export {
-    SpecComponent,
+    SpecPanel,
 } from './components'
 
 // tslint:disable-next-line:no-import-side-effect

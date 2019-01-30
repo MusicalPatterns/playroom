@@ -4,9 +4,9 @@ import Presets from './Presets'
 import Reset from './Reset'
 import SpecControls from './SpecControls'
 
-const SpecComponent: () => JSX.Element =
+const SpecPanel: () => JSX.Element =
     (): JSX.Element => (
-        <div {...{ id: 'pattern-spec' }}>
+        <div {...{ id: 'spec-panel' }}>
             <h3>{CONTROLS}</h3>
             <Presets/>
             <hr/>
@@ -16,4 +16,4 @@ const SpecComponent: () => JSX.Element =
         </div>
     )
 
-export default SpecComponent
+export default SpecPanel

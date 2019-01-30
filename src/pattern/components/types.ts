@@ -17,20 +17,14 @@ interface PatternListItemProps {
 }
 
 interface HamburgerPropsFromDispatch {
-    hamburgerHandler: (patternsPanelOpen: boolean) => void,
+    hamburgerHandler: (sidePanelOpen: boolean) => void,
 }
 
 interface HamburgerPropsFromParent {
-    patternsPanelOpen: boolean,
+    sidePanelOpen: boolean,
 }
 
 interface HamburgerProps extends HamburgerPropsFromDispatch, HamburgerPropsFromParent {}
-
-interface PatternsPanelPropsFromState {
-    patternsPanelOpen: boolean,
-}
-
-interface PatternsPanelProps extends PropsFromAppBeforeSelectingPattern, PatternsPanelPropsFromState {}
 
 export {
     PatternListPropsFromDispatch,
@@ -38,6 +32,4 @@ export {
     PatternListItemProps,
     HamburgerPropsFromDispatch,
     HamburgerProps,
-    PatternsPanelPropsFromState,
-    PatternsPanelProps,
 }

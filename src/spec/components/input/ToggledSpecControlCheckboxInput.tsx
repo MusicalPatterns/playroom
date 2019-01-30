@@ -5,7 +5,7 @@ import { ToggledInputProps } from './types'
 
 const ToggledSpecControlCheckboxInput: (toggledControlProps: ToggledInputProps) => JSX.Element =
     ({ onChange, id, specValue, className }: ToggledInputProps): JSX.Element => (
-        <div {...{ className: 'toggled-input' }}>
+        <div {...{ className: 'toggled-spec-control-checkbox-input' }}>
             <input {...{ checked: specValue, className, id, onChange, type: 'checkbox' }}/>
             <FontAwesomeIcon {...{ key: 1, icon: specValue ? faCheckSquare : faSquare }}/>
         </div>

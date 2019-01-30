@@ -1,7 +1,7 @@
 import { Pattern } from '@musical-patterns/pattern'
 import { Maybe } from '@musical-patterns/utilities'
 import * as React from 'react'
-import { SpecComponent } from '../../spec'
+import { SpecPanel } from '../../spec'
 import PatternListener from './PatternListener'
 import { SecondRowProps } from './types'
 
@@ -23,7 +23,7 @@ const SecondRow: (props: SecondRowProps) => JSX.Element =
                     <h1>{maybePattern && maybePattern.metadata.formattedName}</h1>
                 </div>
                 <div {...{ className: 'right' }} >
-                    <SpecComponent/>
+                    <SpecPanel/>
                     <PatternListener {...{ id, patterns }}/>
                 </div>
             </div>

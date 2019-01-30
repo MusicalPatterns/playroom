@@ -64,11 +64,9 @@ const SpecControls: (specControlsProps: SpecControlsProps) => JSX.Element =
 
         return (
             <div {...{ id: 'spec-controls' }}>
-                {bothTypesOfControlsPresent &&
-                <div {...{ className: 'spec-control-section-heading' }}>{PATTERN_PARTICULAR}</div>}
+                {bothTypesOfControlsPresent && <h3>{PATTERN_PARTICULAR}</h3>}
                 {patternParticularControls}
-                {bothTypesOfControlsPresent &&
-                <div {...{ className: 'spec-control-section-heading' }}>{STANDARD}</div>}
+                {bothTypesOfControlsPresent && <h3>{STANDARD}</h3>}
                 {standardSpecControls}
             </div>
         )

@@ -1,32 +1,8 @@
-@import '../../sizes';
-@import './specControl';
-@import './inputRange';
-@import './inputCheckbox';
+@import './arrayed';
+@import './input';
 @import './invalidMessage';
-@import './reset';
 @import './presets';
-@import './arrayedControls';
-@import './sectionHeading';
-@import './inputElements';
-
-#pattern-spec {
-  padding: $big;
-
-  max-width: $enormous-area;
-  @media screen and (max-width: $huge-area) {
-    max-width: $big-area;
-  }
-  @media screen and (max-width: $big-area) {
-    max-width: $medium-area;
-  }
-  @media screen and (max-width: $medium-area) {
-    max-width: $small-area;
-  }
-  @media screen and (max-width: $small-area) {
-    max-width: $tiny-area;
-  }
-
-  div {
-    margin-bottom: $border-size;
-  }
-}
+@import './reset';
+@import './singularSpecControl';
+@import './specPanel';
+@import './units';

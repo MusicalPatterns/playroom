@@ -1,4 +1,4 @@
-import { Preset, Spec, SpecAttributes, SpecPropertyAttributes } from '@musical-patterns/pattern'
+import { Preset, Spec, SpecPropertyAttributes } from '@musical-patterns/pattern'
 import { DictionaryOf, Index, Maybe } from '@musical-patterns/utilities'
 import { DomValueOrChecked } from '../../types'
 import { PresetChangeHandler, SpecControlChangeHandler } from '../events'
@@ -55,6 +55,14 @@ interface PresetsPropsFromDispatch {
 
 interface PresetsProps extends PresetsPropsFromState, PresetsPropsFromDispatch {}
 
+interface InvalidMessageProps {
+    invalidMessage: string,
+}
+
+interface UnitsProps {
+    units: string,
+}
+
 export {
     SpecControlStates,
     SpecControlProps,
@@ -68,4 +76,6 @@ export {
     PresetsPropsFromState,
     PresetsPropsFromDispatch,
     PresetsProps,
+    InvalidMessageProps,
+    UnitsProps,
 }

@@ -1,0 +1,8 @@
+@import '../../sizes';
+
+#main-panel {
+  flex: $phi + $phi + 1;
+
+  display: flex;
+  flex-direction: column;
+}

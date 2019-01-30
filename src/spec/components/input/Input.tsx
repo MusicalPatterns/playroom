@@ -67,7 +67,7 @@ const Input: (buildInputProps: BuildInputProps) => JSX.Element =
         }
 
         return (
-            <div {...{ className: 'input-elements' }}>
+            <div {...{ className: 'input' }}>
                 {elements}
             </div>
         )

@@ -1,33 +1,26 @@
 @import '../../colors';
 @import '../../sizes';
 
-.spec-control {
-  position: relative;
+.invalid-message {
+  transition: opacity $duration $easeInOutQuint;
 
-  .invalid-message {
-    transition: opacity $duration $easeInOutQuint;
+  opacity: 0;
+  z-index: 1;
 
-    opacity: 0;
-    z-index: 1;
+  content: attr(message);
 
-    content: attr(message);
+  position: absolute;
+  top: $big;
+  left: 38.2%;
 
-    position: absolute;
-    top: $big;
-    left: 38.2%;
+  padding: $tiny;
 
-    padding: $tiny;
+  background: $invalid;
 
-    background: $invalid;
+  font-size: $small;
 
-    font-size: $small;
+  border-radius: $border-size;
 
-    border-radius: $border-size;
-
-    pointer-events: none;
-  }
-
-  &:hover .invalid-message {
-    opacity: 0.618;
-  }
+  pointer-events: none;
 }
+

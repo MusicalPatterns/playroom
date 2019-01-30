@@ -1,7 +1,7 @@
-import SpecComponent from './SpecComponent'
+import SpecPanel from './SpecPanel'
 
 export {
-    SpecComponent,
+    SpecPanel,
 }
 
 export {

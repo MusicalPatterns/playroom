@@ -1,5 +1,5 @@
-import Performer from './Performer'
+import PerformerPanel from './PerformerPanel'
 
 export {
-    Performer,
+    PerformerPanel,
 }

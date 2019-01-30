@@ -1,11 +1,11 @@
-@import '../../sizes';
+@import '../../../sizes';
 
 .add, .remove {
   margin-left: $small;
   margin-bottom: $border-size;
 }
 
-.arrayed-control {
+.arrayed-spec-control {
   display: flex;
   flex-wrap: wrap;
   flex-direction: column;

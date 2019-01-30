@@ -6,4 +6,5 @@ export {
 export {
     PropsFromApp,
     PropsFromAppBeforeSelectingPattern,
+    SidePanelPropsFromState,
 } from './types'

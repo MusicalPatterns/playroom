@@ -1,0 +1,19 @@
+@import '../../sizes';
+@import '../../colors';
+
+#side-panel {
+  background-color: $dark-grey;
+  color: $grey;
+
+  overflow-x: hidden;
+
+  transition: flex $duration $easeInOutQuint, min-width $duration $easeInOutQuint;
+
+  flex: 1;
+  min-width: $medium-area;
+
+  &.closed {
+    flex: 0;
+    min-width: $huge;
+  }
+}

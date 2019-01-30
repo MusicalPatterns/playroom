@@ -7,7 +7,7 @@ import {
     SPEC_CONTROLS_PATTERN_ID,
 } from '../../support'
 
-const SECTION_HEADING: string = '.spec-control-section-heading'
+const SECTION_HEADING: string = '#spec-controls h3'
 
 describe('standard and pattern-particular control sections', () => {
     it('shows sub-headings when both types of controls are present', async (done: DoneFn) => {

@@ -1,11 +1,12 @@
 import * as React from 'react'
 import { timeChangeHandler } from '../events'
-import { TimelineProps } from './types'
+import { TimeControlsPropsFromParent } from './types'
 
-const Timeline: (props: TimelineProps) => JSX.Element =
-    ({ disabled, totalTimeForDisplay, timeForDisplay }: TimelineProps): JSX.Element => (
+const Timeline: (props: TimeControlsPropsFromParent) => JSX.Element =
+    ({ disabled, totalTimeForDisplay, timeForDisplay }: TimeControlsPropsFromParent): JSX.Element => (
         <input {...{
             disabled,
+            id: 'timeline',
             max: totalTimeForDisplay || 0,
             min: 0,
             onChange: timeChangeHandler,

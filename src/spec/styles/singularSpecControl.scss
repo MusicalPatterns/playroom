@@ -2,10 +2,12 @@
 @import '../../sizes';
 @import '../../effects';
 
-.spec-control {
+.singular-spec-control {
   display: flex;
   align-items: center;
   flex-wrap: wrap;
+
+  position: relative;
 
   margin-bottom: $border-size;
 
@@ -45,9 +47,7 @@
     }
   }
 
-  .units {
-    flex: 0;
-    min-width: $medium;
-    margin: 0;
+  &:hover .invalid-message {
+    opacity: 0.618;
   }
 }

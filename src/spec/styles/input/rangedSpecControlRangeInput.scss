@@ -1,0 +1,64 @@
+@import '../../../colors';
+
+.ranged-spec-control-range-input {
+  background: $lighter-grey !important;
+
+  &:hover {
+    transition: none;
+    background: $almost-white !important;
+  }
+
+  &::-webkit-slider-runnable-track {
+    background: $grey !important;
+  }
+
+  &::-moz-range-track {
+    background: $grey !important;
+  }
+
+  &::-ms-track {
+    background: $grey !important;
+  }
+
+  &:hover::-webkit-slider-runnable-track {
+    transition: none;
+    background: $light-grey !important;
+  }
+
+  &:hover::-moz-range-track {
+    transition: none;
+    background: $light-grey !important;
+  }
+
+  &:hover::-ms-track {
+    transition: none;
+    background: $light-grey !important;
+  }
+
+  &::-webkit-slider-thumb {
+    background: $almost-black !important;
+  }
+
+  &::-moz-range-thumb {
+    background: $almost-black !important;
+  }
+
+  &::-ms-thumb {
+    background: $almost-black !important;
+  }
+
+  &:hover::-webkit-slider-thumb {
+    transition: none;
+    background: $dark-grey !important;
+  }
+
+  &:hover::-moz-range-thumb {
+    transition: none;
+    background: $dark-grey !important;
+  }
+
+  &:hover::-ms-thumb {
+    transition: none;
+    background: $dark-grey !important;
+  }
+}

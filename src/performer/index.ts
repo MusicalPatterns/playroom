@@ -5,7 +5,7 @@ export {
     PerformerStateAction,
 } from './state'
 export {
-    Performer,
+    PerformerPanel,
 } from './components'
 export {
     onPerformerUpdate,

@@ -44,22 +44,3 @@
     }
   }
 }
-
-#first-row {
-  min-height: $huge;
-}
-
-#second-row {
-  min-height: $medium-area;
-
-  .left {
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-end;
-  }
-}
-
-#bottom-row {
-  flex-grow: 1;
-  align-items: stretch;
-}

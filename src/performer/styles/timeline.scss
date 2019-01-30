@@ -1,134 +1,90 @@
 @import '../../colors';
 @import '../../sizes';
 
-input[type=range] {
+#timeline {
   transition: background $duration $easeInOutQuint;
 
-  -webkit-appearance: none;
-  border: none;
-  outline: none;
   background: $almost-black;
-  cursor: pointer;
 
   &:disabled {
     background: $lighter-grey;
-    cursor: inherit;
   }
-}
 
-input[type=range]::-webkit-slider-runnable-track {
-  transition: background $duration $easeInOutQuint;
+  &::-webkit-slider-runnable-track {
+    background: $dark-grey;
+  }
 
-  background: $dark-grey;
-  border-radius: $border-size;
-  height: $border-size;
-}
+  &:disabled::-webkit-slider-runnable-track {
+    background: $light-grey;
+  }
 
-input[type=range]:disabled::-webkit-slider-runnable-track {
-  background: $light-grey;
-}
+  &:enabled:hover::-webkit-slider-runnable-track {
+    transition: none;
+    background: $grey;
+  }
 
-input[type=range]:enabled:hover::-webkit-slider-runnable-track {
-  transition: none;
-  background: $grey;
-}
+  &::-moz-range-track {
+    background: $dark-grey;
+  }
 
-input[type=range]::-moz-range-track {
-  transition: background $duration $easeInOutQuint;
+  &:disabled::-moz-range-track {
+    background: $light-grey;
+  }
 
-  background: $dark-grey;
-  border-radius: $border-size;
-  height: $border-size;
-}
+  &:enabled:hover::-moz-range-track {
+    transition: none;
+    background: $grey;
+  }
 
-input[type=range]:disabled::-moz-range-track {
-  background: $light-grey;
-}
+  &::-ms-track {
+    background: $dark-grey;
+  }
 
-input[type=range]:enabled:hover::-moz-range-track {
-  transition: none;
-  background: $grey;
-}
+  &:disabled::-ms-track {
+    background: $light-grey;
+  }
 
-input[type=range]::-ms-track {
-  transition: background $duration $easeInOutQuint;
+  &:enabled:hover::-ms-track {
+    transition: none;
+    background: $grey;
+  }
 
-  background: $dark-grey;
-  border-radius: $border-size;
-  height: $border-size;
-}
+  &::-webkit-slider-thumb {
+    background: $grey;
+  }
 
-input[type=range]:disabled::-ms-track {
-  background: $light-grey;
-}
+  &:disabled::-webkit-slider-thumb {
+    background: $light-grey;
+  }
 
-input[type=range]:enabled:hover::-ms-track {
-  transition: none;
-  background: $grey;
-}
+  &:enabled:hover::-webkit-slider-thumb {
+    transition: none;
+    background: $light-grey;
+  }
 
-input[type=range]::-webkit-slider-thumb {
-  transition: background $duration $easeInOutQuint;
+  &::-moz-range-thumb {
+    background: $grey;
+  }
 
-  -webkit-appearance: none;
-  border: none;
-  border-radius: $border-size;
-  height: $medium;
-  width: $border-size;
-  background: $grey;
-  margin-top: $timeline-offset;
-}
+  &:disabled::-moz-range-thumb {
+    background: $light-grey;
+  }
 
-input[type=range]:disabled::-webkit-slider-thumb {
-  cursor: inherit;
-  background: $light-grey;
-}
+  &:enabled:hover::-moz-range-thumb {
+    transition: none;
+    background: $light-grey;
+  }
 
-input[type=range]:enabled:hover::-webkit-slider-thumb {
-  transition: none;
-  background: $light-grey;
-}
+  &::-ms-thumb {
+    background: $grey;
+  }
 
-input[type=range]::-moz-range-thumb {
-  transition: background $duration $easeInOutQuint;
+  &:disabled::-ms-thumb {
+    background: $light-grey;
+  }
 
-  -webkit-appearance: none;
-  border: none;
-  border-radius: $border-size;
-  height: $medium;
-  width: $border-size;
-  background: $grey;
-  margin-top: $timeline-offset;
-}
-
-input[type=range]:disabled::-moz-range-thumb {
-  cursor: inherit;
-  background: $light-grey;
-}
-
-input[type=range]:enabled:hover::-moz-range-thumb {
-  transition: none;
-  background: $light-grey;
-}
-
-input[type=range]::-ms-thumb {
-  transition: background $duration $easeInOutQuint;
-
-  -webkit-appearance: none;
-  border: none;
-  border-radius: $border-size;
-  height: $medium;
-  width: $border-size;
-  background: $grey;
-  margin-top: $timeline-offset;
-}
-
-input[type=range]:disabled::-ms-thumb {
-  cursor: inherit;
-  background: $light-grey;
-}
-
-input[type=range]:enabled:hover::-ms-thumb {
-  transition: none;
-  background: $light-grey;
+  &:enabled:hover::-ms-thumb {
+    transition: none;
+    background: $light-grey;
+  }
 }

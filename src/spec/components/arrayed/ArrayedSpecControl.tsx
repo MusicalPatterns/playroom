@@ -42,7 +42,7 @@ const ArrayedSpecControl: (props: ArrayedSpecControlProps) => JSX.Element =
         )
 
         return (
-            <div {...{ id: specKey, className: 'arrayed-control' }}>
+            <div {...{ id: specKey, className: 'arrayed-spec-control' }}>
                 <span {...{ className: SecretSelectorsForTest.SECRET_SUBMITTED_SPEC_CONTROL }}>
                     {stringifyIfNecessary(submittedSpecValues)}
                 </span>
