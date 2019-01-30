@@ -39,7 +39,6 @@ const PatternList: (PatternListProps: PatternListProps) => JSX.Element =
             }
         })
         const options: JSX.Element[] = patternEntries
-        // tslint:disable-next-line:no-misleading-array-reverse
             .sort(sortByOrderOrPublishDate)
             .map(([ listedId, listedPattern ]: [ string, Pattern ], key: number): JSX.Element => (
                 <PatternListItem {...{ key, listedPattern, listedId, onClick, id }} />
