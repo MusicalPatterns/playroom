@@ -59,7 +59,6 @@ const Input: (buildInputProps: BuildInputProps) => JSX.Element =
                         ...inputProps as ToggledInputProps,
                         key: 0,
                     }}/>,
-                    <FontAwesomeIcon {...{ key: 1, icon: inputProps.specValue ? faCheckSquare : faSquare }}/>,
                 ]
                 break
             }

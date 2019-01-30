@@ -22,7 +22,7 @@
   }
 
   input, select {
-    background: $almost-white;
+    background: $lighter-grey;
 
     padding: 0 $small;
     flex: nth($fibonacci-series, 19);
@@ -38,6 +38,10 @@
 
     &.invalid {
       @include glow($invalid);
+    }
+
+    &:hover {
+      background: $almost-white;
     }
   }
 

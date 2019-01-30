@@ -1,20 +1,31 @@
 @import '../../sizes.scss';
 @import '../../colors.scss';
 
-input[type=checkbox] {
-  cursor: pointer;
-  flex: 0;
-  min-width: $big;
-  margin: 0 0 0 $small;
-  opacity: 0;
-}
+.toggled-input {
+  min-width: $big !important;
+  width: $big !important;
+  max-width: $big !important;
 
-.spec-control {
+  input[type=checkbox] {
+    cursor: pointer;
+    flex: 0;
+    min-width: $big;
+    margin: 0;
+    opacity: 0;
+  }
+
   svg.fa-check-square, svg.fa-square {
     width: $big;
     height: $big;
     position: absolute;
     right: 0;
+    top: 0;
     pointer-events: none;
+  }
+
+  &:hover {
+    svg.fa-check-square, svg.fa-square {
+      color: $dark-grey;
+    }
   }
 }

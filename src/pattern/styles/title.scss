@@ -9,12 +9,12 @@
 
   text-align: center;
 
-  background: $darker-grey;
+  background: $dark-grey;
 
   display: flex;
   align-items: center;
 
-  box-shadow: $medium -34px $big $darker-grey;
+  box-shadow: $medium -34px $big $dark-grey;
   z-index: 1;
 
   & > div:first-child {

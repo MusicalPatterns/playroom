@@ -8,16 +8,18 @@ input[type=range] {
   border: none;
   outline: none;
   background: $almost-black;
+  cursor: pointer;
 
   &:disabled {
     background: $lighter-grey;
+    cursor: inherit;
   }
 }
 
 input[type=range]::-webkit-slider-runnable-track {
   transition: background $duration $easeInOutQuint;
 
-  background: $darker-grey;
+  background: $dark-grey;
   border-radius: $border-size;
   height: $border-size;
 }
@@ -26,10 +28,15 @@ input[type=range]:disabled::-webkit-slider-runnable-track {
   background: $light-grey;
 }
 
+input[type=range]:enabled:hover::-webkit-slider-runnable-track {
+  transition: none;
+  background: $grey;
+}
+
 input[type=range]::-moz-range-track {
   transition: background $duration $easeInOutQuint;
 
-  background: $darker-grey;
+  background: $dark-grey;
   border-radius: $border-size;
   height: $border-size;
 }
@@ -38,16 +45,26 @@ input[type=range]:disabled::-moz-range-track {
   background: $light-grey;
 }
 
+input[type=range]:enabled:hover::-moz-range-track {
+  transition: none;
+  background: $grey;
+}
+
 input[type=range]::-ms-track {
   transition: background $duration $easeInOutQuint;
 
-  background: $darker-grey;
+  background: $dark-grey;
   border-radius: $border-size;
   height: $border-size;
 }
 
 input[type=range]:disabled::-ms-track {
   background: $light-grey;
+}
+
+input[type=range]:enabled:hover::-ms-track {
+  transition: none;
+  background: $grey;
 }
 
 input[type=range]::-webkit-slider-thumb {
@@ -58,13 +75,17 @@ input[type=range]::-webkit-slider-thumb {
   border-radius: $border-size;
   height: $medium;
   width: $border-size;
-  background: $dark-grey;
+  background: $grey;
   margin-top: $timeline-offset;
-  cursor: pointer;
 }
 
 input[type=range]:disabled::-webkit-slider-thumb {
   cursor: inherit;
+  background: $light-grey;
+}
+
+input[type=range]:enabled:hover::-webkit-slider-thumb {
+  transition: none;
   background: $light-grey;
 }
 
@@ -76,13 +97,17 @@ input[type=range]::-moz-range-thumb {
   border-radius: $border-size;
   height: $medium;
   width: $border-size;
-  background: $dark-grey;
+  background: $grey;
   margin-top: $timeline-offset;
-  cursor: pointer;
 }
 
 input[type=range]:disabled::-moz-range-thumb {
   cursor: inherit;
+  background: $light-grey;
+}
+
+input[type=range]:enabled:hover::-moz-range-thumb {
+  transition: none;
   background: $light-grey;
 }
 
@@ -94,12 +119,16 @@ input[type=range]::-ms-thumb {
   border-radius: $border-size;
   height: $medium;
   width: $border-size;
-  background: $dark-grey;
+  background: $grey;
   margin-top: $timeline-offset;
-  cursor: pointer;
 }
 
 input[type=range]:disabled::-ms-thumb {
   cursor: inherit;
+  background: $light-grey;
+}
+
+input[type=range]:enabled:hover::-ms-thumb {
+  transition: none;
   background: $light-grey;
 }
