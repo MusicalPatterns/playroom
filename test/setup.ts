@@ -17,7 +17,7 @@ beforeAll(
             logMessageToConsole(`Starting the test server took ${Math.round(t1 - t0)} milliseconds.`)
 
             const t2: number = performance.now()
-            browser = await puppeteer.launch({ headless: true, timeout: PUPPETEER_TIMEOUT })
+            browser = await puppeteer.launch({ headless: !process.env.headful, timeout: PUPPETEER_TIMEOUT })
             page = await browser.newPage()
             await page.setViewport({ width: DESKTOP_VIEWPORT_WIDTH, height: DESKTOP_VIEWPORT_HEIGHT })
             await page.goto(APP_URL, { timeout: PUPPETEER_TIMEOUT })
