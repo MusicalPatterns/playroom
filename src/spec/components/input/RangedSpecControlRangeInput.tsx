@@ -11,13 +11,13 @@ const minAndMaxPropsFromConstraint: (constraint: Maybe<RangedConstraint>) => { m
     })
 
 const RangedSpecControlRangeInput: (rangedInputProps: RangedInputProps) => JSX.Element =
-    ({ constraint, onChange, id, specValue, className }: RangedInputProps): JSX.Element => {
+    ({ constraint, onChange, id, specValue, validityClass }: RangedInputProps): JSX.Element => {
         const { min, max } = minAndMaxPropsFromConstraint(constraint)
         const step: number = constraint && constraint.integer ? 1 : SPEC_NON_INTEGER_STEP
 
         return (
             <input {...{
-                className: `ranged-spec-control-range-input ${className}`,
+                className: `ranged-spec-control-range-input ${validityClass}`,
                 id,
                 max,
                 min,

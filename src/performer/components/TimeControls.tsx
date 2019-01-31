@@ -40,9 +40,10 @@ const TimeControls: (timeControlsProps: TimeControlsProps) => JSX.Element =
 
         const controlId: string = paused ? 'play' : 'pause'
         const icon: IconDefinition = paused ? faPlay : faPause
+        const disabledClass: string = disabled ? 'disabled' : ''
 
         return (
-            <div {...{ id: 'time-controls', className: disabled ? 'disabled' : '' }}>
+            <div {...{ id: 'time-controls', className: disabledClass }}>
                 <button {...{ id: 'rewind', onClick: rewindHandler, disabled }}>
                     <FontAwesomeIcon {...{ icon: faFastBackward }}/>
                 </button>

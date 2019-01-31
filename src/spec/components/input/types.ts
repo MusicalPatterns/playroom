@@ -2,10 +2,10 @@ import { OptionedConstraint, RangedConstraint, SpecPropertyAttributes } from '@m
 import { DomValue, DomValueOrChecked, EventHandler } from '../../../types'
 
 interface InputProps {
-    className: string,
     id: string,
     onChange: EventHandler,
     specValue: DomValueOrChecked,
+    validityClass: string,
 }
 
 interface OptionedInputProps extends InputProps {

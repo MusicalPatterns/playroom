@@ -1,4 +1,4 @@
 export { stringifyIfNecessary } from './stringifyIfNecessary'
 export { specControlId } from './specControlId'
-export { validityClassName } from './validityClassName'
+export { getValidityClass } from './validityClass'
 export { buildSortSpecControls } from './sortSpecControls'

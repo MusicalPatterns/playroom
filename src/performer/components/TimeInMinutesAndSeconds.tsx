@@ -13,8 +13,10 @@ const TimeInMinutesAndSeconds: (props: TimeInMinutesAndSecondsProps) => JSX.Elem
             timeSecondsPart = `0${timeSecondsPart}`
         }
 
+        const disabledClass: string = disabled ? 'disabled' : ''
+
         return (
-            <div {...{ id: 'time-in-minutes-and-seconds', className: disabled ? 'disabled' : '' }}>
+            <div {...{ id: 'time-in-minutes-and-seconds', className: disabledClass }}>
                 <div>{disabled ? '-' : timeMinutesPart}</div>
                 <div>:</div>
                 <div>{disabled ? '--' : timeSecondsPart}</div>

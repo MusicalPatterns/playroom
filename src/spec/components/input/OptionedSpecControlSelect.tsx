@@ -4,7 +4,7 @@ import * as React from 'react'
 import { OptionedInputProps } from './types'
 
 const OptionedSpecControlSelect: (optionedInputProps: OptionedInputProps) => JSX.Element =
-    ({ onChange, id, specValue, className, constraint }: OptionedInputProps): JSX.Element => {
+    ({ onChange, id, specValue, validityClass, constraint }: OptionedInputProps): JSX.Element => {
         const optionElements: JSX.Element[] = constraint
             .sort((option: OptionedConstraintOption, nextOption: OptionedConstraintOption): number => {
                 const order: number = option.order === undefined ? ARBITRARILY_LARGE_NUMBER : option.order
@@ -23,7 +23,7 @@ const OptionedSpecControlSelect: (optionedInputProps: OptionedInputProps) => JSX
             })
 
         return (
-            <select {...{ className, id, onChange, value: specValue }}>{optionElements}</select>
+            <select {...{ className: validityClass, id, onChange, value: specValue }}>{optionElements}</select>
         )
     }
 
