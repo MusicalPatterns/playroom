@@ -6,9 +6,9 @@
 
 #hamburger {
   flex: $hamburger-proportion;
-
   background-color: $side-panel-background;
   color: $side-panel-color;
+
   &:hover {
     color: $side-panel-hover;
   }
@@ -16,10 +16,8 @@
   display: flex;
   align-items: flex-end;
   flex-direction: column;
-
   padding: 0;
   width: $side-panel-width;
-
   box-shadow: $pattern-list-fade-horizontal-offset $pattern-list-fade-vertical-offset-for-top $pattern-list-fade-size $side-panel-background;
   z-index: 1;
 

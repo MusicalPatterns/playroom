@@ -10,85 +10,87 @@ input[type=range] {
   outline: none;
   cursor: pointer;
 
+  &::-webkit-slider-runnable-track {
+    @include animate(background);
+
+    border-radius: $border-size;
+    height: $track-width;
+  }
+
+  &::-moz-range-track {
+    @include animate(background);
+
+    border-radius: $border-size;
+    height: $track-width;
+  }
+
+  &::-ms-track {
+    @include animate(background);
+
+    border-radius: $border-size;
+    height: $track-width;
+  }
+
+  &::-webkit-slider-thumb {
+    @include animate(background);
+
+    -webkit-appearance: none;
+    border: none;
+    border-radius: $border-size;
+    height: $thumb-height;
+    width: $thumb-width;
+    margin-top: $timeline-offset;
+  }
+
+  &::-moz-range-thumb {
+    @include animate(background);
+
+    -webkit-appearance: none;
+    border: none;
+    border-radius: $border-size;
+    height: $thumb-height;
+    width: $thumb-width;
+    margin-top: $timeline-offset;
+  }
+
+  &::-ms-thumb {
+    @include animate(background);
+
+    -webkit-appearance: none;
+    border: none;
+    border-radius: $border-size;
+    height: $thumb-height;
+    width: $thumb-width;
+    margin-top: $timeline-offset;
+  }
+
   &:disabled {
     cursor: inherit;
   }
-}
 
-input[type=range]::-webkit-slider-runnable-track {
-  @include animate(background);
+  &:enabled:hover {
+    &::-webkit-slider-runnable-track {
+      @include no-animate();
+    }
 
-  border-radius: $border-size;
-  height: $track-width;
-}
+    &::-moz-range-track {
+      @include no-animate();
+    }
 
-input[type=range]:enabled:hover::-webkit-slider-runnable-track {
-  @include no-animate();
-}
+    &::-ms-track {
+      @include no-animate();
+    }
 
-input[type=range]::-moz-range-track {
-  @include animate(background);
+    &::-webkit-slider-thumb {
+      @include no-animate();
+    }
 
-  border-radius: $border-size;
-  height: $track-width;
-}
+    &::-moz-range-thumb {
+      @include no-animate();
+    }
 
-input[type=range]:enabled:hover::-moz-range-track {
-  @include no-animate();
-}
-
-input[type=range]::-ms-track {
-  @include animate(background);
-
-  border-radius: $border-size;
-  height: $track-width;
-}
-
-input[type=range]:enabled:hover::-ms-track {
-  @include no-animate();
-}
-
-input[type=range]::-webkit-slider-thumb {
-  @include animate(background);
-
-  -webkit-appearance: none;
-  border: none;
-  border-radius: $border-size;
-  height: $thumb-height;
-  width: $thumb-width;
-  margin-top: $timeline-offset;
-}
-
-input[type=range]:enabled:hover::-webkit-slider-thumb {
-  @include no-animate();
-}
-
-input[type=range]::-moz-range-thumb {
-  @include animate(background);
-
-  -webkit-appearance: none;
-  border: none;
-  border-radius: $border-size;
-  height: $thumb-height;
-  width: $thumb-width;
-  margin-top: $timeline-offset;
-}
-
-input[type=range]:enabled:hover::-moz-range-thumb {
-  @include no-animate();
-}
-
-input[type=range]::-ms-thumb {
-  @include animate(background);
-
-  -webkit-appearance: none;
-  border: none;
-  border-radius: $border-size;
-  height: $thumb-height;
-  width: $thumb-width;
-  margin-top: $timeline-offset;
-}
-
-input[type=range]:enabled:hover::-ms-thumb {
-  @include no-animate();
+    &::-ms-thumb {
+      @include no-animate();
+    }
+  }
 }

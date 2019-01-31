@@ -8,10 +8,13 @@
   display: flex;
   flex-wrap: wrap;
 
-  .left, .right {
+  .left,
+  .right {
     color: $text-color;
 
-    p, img, h1 {
+    p,
+    img,
+    h1 {
       padding: $main-panel-spacing;
     }
   }
@@ -19,6 +22,7 @@
   .left {
     flex: $left-proportion;
     min-width: $left-min-width;
+
     @media screen and (max-width: $mobile-size) {
       min-width: $left-min-width-mobile;
     }
@@ -29,12 +33,12 @@
   .right {
     flex: $right-proportion;
     min-width: $right-min-width;
+
     @media screen and (max-width: $mobile-size) {
       min-width: $right-min-width-mobile;
     }
 
     background-color: $right-panel-background;
-
     text-align: right;
 
     @include animate(flex, min-width);

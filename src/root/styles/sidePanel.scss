@@ -6,7 +6,6 @@
 #side-panel {
   background-color: $side-panel-background;
   color: $side-panel-color;
-
   overflow-x: hidden;
 
   @include animate(flex, min-width);

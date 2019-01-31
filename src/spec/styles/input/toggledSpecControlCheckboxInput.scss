@@ -14,7 +14,8 @@
     opacity: 0;
   }
 
-  svg.fa-check-square, svg.fa-square {
+  svg.fa-check-square,
+  svg.fa-square {
     color: $spec-control-thumb-and-checkbox;
     width: $control-height;
     height: $control-height;
@@ -25,7 +26,8 @@
   }
 
   &:hover {
-    svg.fa-check-square, svg.fa-square {
+    svg.fa-check-square,
+    svg.fa-square {
       color: $spec-control-thumb-and-checkbox-hover;
     }
   }

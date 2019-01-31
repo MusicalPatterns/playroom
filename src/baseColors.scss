@@ -1,16 +1,16 @@
-$base-grey: #888888;
+$base-grey: #888;
 
-$red: #ff0000;
-$yellow: #ffcc00;
-$green: #ccff00;
-$teal: #00ccff;
-$blue: #0000ff;
-$violet: #ff00ff;
+$red: #f00;
+$yellow: #fc0;
+$green: #cf0;
+$teal: #0cf;
+$blue: #00f;
+$violet: #f0f;
 
 $spectrum: ($red, $yellow, $green, $teal, $blue, $violet);
 
-$black: #000000;
-$white: #ffffff;
+$black: #000;
+$white: #fff;
 
 $almost-black: mix($black, mix(nth($spectrum, 6), $base-grey, 100%), 96.75%);
 $darker-grey: mix($black, mix(nth($spectrum, 1), $base-grey, 100% / 4), 87.25%);
@@ -20,5 +20,5 @@ $light-grey: mix($white, mix(nth($spectrum, 4), $base-grey, 100% / 16), 66.666%)
 $lighter-grey: mix($white, mix(nth($spectrum, 5), $base-grey, 100% / 4), 87.25%);
 $almost-white: mix($white, mix(nth($spectrum, 6), $base-grey, 100%), 96.75%);
 
-$some-random-orange-red: #ddbbaa;
-$some-random-green-blue: #aabbdd;
+$some-random-orange-red: #dbaa;
+$some-random-green-blue: #abd;

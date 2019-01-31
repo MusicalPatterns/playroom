@@ -1,6 +1,7 @@
 @import '../sizes';
 
-.add, .remove {
+.add,
+.remove {
   margin-left: $spec-controls-horizontal-spacing;
   margin-bottom: $spec-panel-bottom-spacing;
 }

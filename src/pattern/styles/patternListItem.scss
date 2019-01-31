@@ -7,14 +7,15 @@ li {
   padding-bottom: $pattern-list-item-spacing;
   width: $pattern-list-item-width;
 
-  div:first-child {
-    font-size: $important-text-size;
-    line-height: $important-text-size;
-    @extend .leipziger-antiqua-bold;
-  }
-
   div {
     font-size: $detail-text-size;
+
+    &:first-child {
+      font-size: $important-text-size;
+      line-height: $important-text-size;
+
+      @extend .leipziger-antiqua-bold;
+    }
   }
 
   &:hover {

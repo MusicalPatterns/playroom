@@ -6,45 +6,24 @@
 
 #title {
   flex: $title-proportion;
-
   height: $title-height;
   width: $title-width;
   margin-right: $side-panel-width-closed;
-
   text-align: center;
-
   display: flex;
   align-items: center;
-
   box-shadow: $pattern-list-fade-horizontal-offset $pattern-list-fade-vertical-offset-for-bottom $pattern-list-fade-size $side-panel-background;
   z-index: 1;
 
-  & > div:first-child {
-    flex: $title-symbol-proportion;
-
-    display: flex;
-    flex-direction: column;
-    align-items: flex-end;
-
-    svg {
-      width: $musical-patterns-symbol-size;
-      height: $musical-patterns-symbol-size;
-
-      polygon {
-        fill: $side-panel-color-with-emphasis;
-      }
-    }
-  }
-
   & > div {
     flex: $title-text-proportion;
-
     display: flex;
     flex-direction: column;
     align-items: center;
 
     div {
       @extend .leipziger-antiqua-regular;
+
       font-size: $detail-text-size;
     }
 
@@ -57,6 +36,22 @@
       text-align: center;
       margin-bottom: 0;
       color: $side-panel-color-with-emphasis;
+    }
+  }
+
+  & > div:first-child {
+    flex: $title-symbol-proportion;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+
+    svg {
+      width: $musical-patterns-symbol-size;
+      height: $musical-patterns-symbol-size;
+
+      polygon {
+        fill: $side-panel-color-with-emphasis;
+      }
     }
   }
 

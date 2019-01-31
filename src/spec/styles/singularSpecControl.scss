@@ -8,12 +8,12 @@
   display: flex;
   align-items: center;
   flex-wrap: wrap;
-
   position: relative;
-
   margin-bottom: $spec-panel-bottom-spacing;
 
-  div, input, select {
+  div,
+  input,
+  select {
     margin-left: $spec-controls-horizontal-spacing;
     min-width: $control-width;
     margin-bottom: $spec-panel-bottom-spacing;
@@ -25,8 +25,10 @@
     font-size: $detail-text-size;
   }
 
-  input, select {
+  input,
+  select {
     background: $control-background;
+
     &:hover {
       background: $control-background-hover;
     }
@@ -34,7 +36,6 @@
     padding: 0 $spec-controls-horizontal-spacing;
     flex: $spec-control-input-proportion;
     height: $control-height;
-
     border: none;
     outline: none;
     border-radius: $border-size;

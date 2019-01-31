@@ -3,11 +3,6 @@
 .ranged-spec-control-range-input {
   background: $control-background !important;
 
-  &:hover {
-    transition: none;
-    background: $control-background-hover !important;
-  }
-
   &::-webkit-slider-runnable-track {
     background: $spec-control-track !important;
   }
@@ -18,21 +13,6 @@
 
   &::-ms-track {
     background: $spec-control-track !important;
-  }
-
-  &:hover::-webkit-slider-runnable-track {
-    transition: none;
-    background: $spec-control-track-hover !important;
-  }
-
-  &:hover::-moz-range-track {
-    transition: none;
-    background: $spec-control-track-hover !important;
-  }
-
-  &:hover::-ms-track {
-    transition: none;
-    background: $spec-control-track-hover !important;
   }
 
   &::-webkit-slider-thumb {
@@ -47,18 +27,38 @@
     background: $spec-control-thumb-and-checkbox !important;
   }
 
-  &:hover::-webkit-slider-thumb {
+  &:hover:enabled {
     transition: none;
-    background: $spec-control-thumb-and-checkbox-hover !important;
-  }
+    background: $control-background-hover !important;
 
-  &:hover::-moz-range-thumb {
-    transition: none;
-    background: $spec-control-thumb-and-checkbox-hover !important;
-  }
+    &::-webkit-slider-runnable-track {
+      transition: none;
+      background: $spec-control-track-hover !important;
+    }
 
-  &:hover::-ms-thumb {
-    transition: none;
-    background: $spec-control-thumb-and-checkbox-hover !important;
+    &::-moz-range-track {
+      transition: none;
+      background: $spec-control-track-hover !important;
+    }
+
+    &::-ms-track {
+      transition: none;
+      background: $spec-control-track-hover !important;
+    }
+
+    &::-webkit-slider-thumb {
+      transition: none;
+      background: $spec-control-thumb-and-checkbox-hover !important;
+    }
+
+    &::-moz-range-thumb {
+      transition: none;
+      background: $spec-control-thumb-and-checkbox-hover !important;
+    }
+
+    &::-ms-thumb {
+      transition: none;
+      background: $spec-control-thumb-and-checkbox-hover !important;
+    }
   }
 }
