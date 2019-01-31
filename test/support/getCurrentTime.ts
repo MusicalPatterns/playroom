@@ -1,5 +1,5 @@
 import { DECIMAL, Milliseconds, to } from '@musical-patterns/utilities'
-import { SecretSelectorsForTest } from '../../../src/indexForTest'
+import { SecretSelectorsForTest } from '../../src/indexForTest'
 import { elementInnerText } from './checkElement'
 
 const currentTime: () => Promise<Milliseconds> =

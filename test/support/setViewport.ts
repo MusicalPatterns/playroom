@@ -1,10 +1,10 @@
-import { page } from '../../setup'
+import { page } from '../setup'
 import {
     DESKTOP_VIEWPORT_HEIGHT,
     DESKTOP_VIEWPORT_WIDTH,
     MOBILE_VIEWPORT_HEIGHT,
     MOBILE_VIEWPORT_WIDTH,
-} from '../constants'
+} from './constants'
 
 const simulateMobileViewport: () => Promise<void> =
     async (): Promise<void> =>

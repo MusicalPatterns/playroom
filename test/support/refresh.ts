@@ -1,6 +1,6 @@
 import { Response } from 'puppeteer'
-import { page } from '../../setup'
-import { APP_URL } from '../constants'
+import { page } from '../setup'
+import { APP_URL } from './constants'
 import { selectOtherTestPattern, selectTestPattern } from './selectTestPattern'
 
 const refreshPage: () => Promise<Response | null> =

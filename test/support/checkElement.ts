@@ -1,6 +1,6 @@
 // tslint:disable:no-any
 
-import { page } from '../../setup'
+import { page } from '../setup'
 
 const elementValue: (selector: string) => Promise<any> =
     async (selector: string): Promise<any> =>

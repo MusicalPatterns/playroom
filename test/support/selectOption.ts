@@ -1,4 +1,4 @@
-import { page } from '../../setup'
+import { page } from '../setup'
 
 const selectOption: (selectSelector: string, optionValue: string) => Promise<string[]> =
     async (selectSelector: string, optionValue: string): Promise<string[]> =>

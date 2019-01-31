@@ -10,7 +10,6 @@ These files are:
 
 - src/start.ts
 - webpack.self.js
-- webpack.port.js
 
 ## usage
 

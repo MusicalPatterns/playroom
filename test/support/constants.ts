@@ -8,7 +8,9 @@ import {
     StandardSpecProperties,
 } from '@musical-patterns/pattern'
 import { patterns } from '@musical-patterns/pattern-playroom-test'
-import { DictionaryOf, Milliseconds, PLAYROOM_TEST_PORT, to } from '@musical-patterns/utilities'
+import { DictionaryOf, Milliseconds, to } from '@musical-patterns/utilities'
+// @ts-ignore
+import { port } from '../../webpack.port'
 
 const {
     [ Id.PLAYROOM_TEST_SPEC_CONTROLS ]: playroomTestSpecControls,
@@ -20,7 +22,7 @@ const {
     [ Id.PLAYROOM_TEST_PRESETS ]: playroomTestPresets,
 } = patterns as { [key in Id]: Pattern }
 
-const APP_URL: string = `http://localhost:${PLAYROOM_TEST_PORT}`
+const APP_URL: string = `http://localhost:${port}`
 
 const VALID_TEST_MODIFICATION: string = '2'
 const OUT_OF_RANGE_INVALID_TEST_MODIFICATION: string = '3'

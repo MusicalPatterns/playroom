@@ -1,5 +1,5 @@
 import { ElementHandle } from 'puppeteer'
-import { page } from '../../setup'
+import { page } from '../setup'
 
 const findElement: (selector: string) => Promise<ElementHandle> =
     async (selector: string): Promise<ElementHandle> =>

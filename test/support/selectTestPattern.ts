@@ -1,5 +1,5 @@
 import { ElementHandle } from 'puppeteer'
-import { POST_PATTERN_ID, SPEC_CONTROLS_PATTERN_ID } from '../constants'
+import { POST_PATTERN_ID, SPEC_CONTROLS_PATTERN_ID } from './constants'
 import { findElement } from './findElement'
 
 const selectTestPattern: () => Promise<void> =

@@ -1,6 +1,5 @@
 import { ElementHandle } from 'puppeteer'
 import { SecretSelectorsForTest } from '../../../src/indexForTest'
-import { page } from '../../setup'
 import {
     elementIds,
     elementInnerText,
