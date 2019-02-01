@@ -7,11 +7,8 @@
 #hamburger {
   flex: $hamburger-proportion;
   background-color: $side-panel-background;
-  color: $side-panel-color;
 
-  &:hover {
-    color: $side-panel-hover;
-  }
+  @include hoverable-color($side-panel-color);
 
   display: flex;
   align-items: flex-end;

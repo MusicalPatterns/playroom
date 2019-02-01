@@ -1,10 +1,10 @@
 @import '../../baseColors';
 
-$control-background: $lighter-grey;
-$control-background-hover: $almost-white;
+$control-background: nth($greys, 6);
+$control-background-hover: nth($greys, 7);
 
-$spec-control-track: $grey;
-$spec-control-thumb-and-checkbox: $darker-grey;
+$spec-control-track: nth($greys, 4);
+$spec-control-thumb-and-checkbox: nth($greys, 2);
 
-$spec-control-track-hover: $light-grey;
-$spec-control-thumb-and-checkbox-hover: $dark-grey;
+$spec-control-track-hover: nth($greys, 5);
+$spec-control-thumb-and-checkbox-hover: nth($greys, 3);

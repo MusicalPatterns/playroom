@@ -1,16 +1,14 @@
 @import '../../baseColors';
 
-$time-controls-hover: $almost-white;
+$time-controls-color: nth($greys, 6);
+$time-controls-background: nth($greys, 2);
+$time-controls-border-and-track: nth($greys, 3);
+$time-controls-thumb: nth($greys, 4);
 
-$time-controls-color: $lighter-grey;
-$time-controls-background: $darker-grey;
-$time-controls-border-and-track: $dark-grey;
-$time-controls-thumb: $grey;
+$time-controls-color-disabled: nth($greys, 5);
+$time-controls-background-disabled: nth($greys, 6);
+$time-controls-border-and-track-disabled: nth($greys, 5);
+$time-controls-thumb-disabled: nth($greys, 5);
 
-$time-controls-color-disabled: $light-grey;
-$time-controls-background-disabled: $lighter-grey;
-$time-controls-border-and-track-disabled: $light-grey;
-$time-controls-thumb-disabled: $light-grey;
-
-$time-controls-border-and-track-hover: $grey;
-$time-controls-thumb-hover: $light-grey;
+$time-controls-border-and-track-hover: nth($greys, 4);
+$time-controls-thumb-hover: nth($greys, 5);

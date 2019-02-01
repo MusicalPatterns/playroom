@@ -27,11 +27,7 @@
 
   input,
   select {
-    background: $control-background;
-
-    &:hover {
-      background: $control-background-hover;
-    }
+    @include hoverable-background($control-background);
 
     padding: 0 $spec-controls-horizontal-spacing;
     flex: $spec-control-input-proportion;

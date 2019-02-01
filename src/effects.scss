@@ -1,4 +1,39 @@
 @import './sizes';
+@import './baseColors';
+
+@mixin hoverable-color($some-grey) {
+  $i: 1;
+  $grey-index: 1;
+
+  @for $i from 1 through length($greys) - 1 {
+    @if $some-grey == nth($greys, $i) {
+      $grey-index: $i;
+    }
+  }
+
+  color: nth($greys, $grey-index);
+
+  &:hover:not([disabled]) {
+    color: nth($greys, $grey-index + 1);
+  }
+}
+
+@mixin hoverable-background($some-grey) {
+  $i: 1;
+  $grey-index: 1;
+
+  @for $i from 1 through length($greys) - 1 {
+    @if $some-grey == nth($greys, $i) {
+      $grey-index: $i;
+    }
+  }
+
+  background-color: nth($greys, $grey-index);
+
+  &:hover:not([disabled]) {
+    background-color: nth($greys, $grey-index + 1);
+  }
+}
 
 @mixin glow($color) {
   box-shadow: 0 0 $box-shadow-size $box-shadow-size $color;
