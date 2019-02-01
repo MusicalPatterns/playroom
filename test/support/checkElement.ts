@@ -13,6 +13,7 @@ const elementValue: (selector: string) => Promise<any> =
 
 const elementExists: (selector: string) => Promise<boolean> =
     async (selector: string): Promise<boolean> =>
+        // @ts-ignore
         page.evaluate(
             (slctr: string) =>
                 !!document.querySelector(slctr),
@@ -21,6 +22,7 @@ const elementExists: (selector: string) => Promise<boolean> =
 
 const elementInnerText: (selector: string) => Promise<string> =
     async (selector: string): Promise<string> =>
+        // @ts-ignore
         page.evaluate(
             (slctr: string) =>
                 // @ts-ignore
@@ -30,6 +32,7 @@ const elementInnerText: (selector: string) => Promise<string> =
 
 const elementChecked: (selector: string) => Promise<boolean> =
     async (selector: string): Promise<boolean> =>
+        // @ts-ignore
         page.evaluate(
             (slctr: string) =>
                 // @ts-ignore
@@ -39,6 +42,7 @@ const elementChecked: (selector: string) => Promise<boolean> =
 
 const elementCount: (selector: string) => Promise<number> =
     async (selector: string): Promise<number> =>
+        // @ts-ignore
         page.evaluate(
             (slctr: string) =>
                 document.querySelectorAll(slctr).length,
@@ -47,6 +51,7 @@ const elementCount: (selector: string) => Promise<number> =
 
 const elementIds: (selector: string) => Promise<string[]> =
     async (selector: string): Promise<string[]> =>
+        // @ts-ignore
         page.evaluate(
             (slctr: string) =>
                 Array.from(document.querySelectorAll(slctr))
