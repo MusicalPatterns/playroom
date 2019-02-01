@@ -17,7 +17,7 @@ const SpecControl: (specControlProps: SpecControlProps) => JSX.Element =
         const submittedSpecValue: SpecValue = submittedSpec[ specKey ] as SpecValue
         const displayedSpecValue: SpecValue = displayedSpec[ specKey ] as SpecValue
 
-        if (specPropertyAttributes.isArray) {
+        if (specPropertyAttributes.isArrayed) {
             return <ArrayedSpecControl {...{
                 displayedSpecValues: displayedSpecValue as DomValueOrChecked[],
                 invalidMessages,

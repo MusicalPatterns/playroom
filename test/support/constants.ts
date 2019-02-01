@@ -33,7 +33,7 @@ const SPEC_RANGED_PROPERTY_TWO_KEY: string = StandardSpecProperties.BASE_FREQUEN
 const SPEC_OPTIONED_PROPERTY_ONE_KEY: string = 'optionedPropertyOne'
 const SPEC_OPTIONED_PROPERTY_TWO_KEY: string = 'optionedPropertyTwo'
 const SPEC_TOGGLED_PROPERTY_KEY: string = 'toggledProperty'
-const SPEC_ARRAYED_PROPERTY_KEY: string = 'arrayOfRangedProperty'
+const SPEC_ARRAYED_PROPERTY_KEY: string = 'arrayedProperty'
 
 const SPEC_CONTROLS_PATTERN_ID: Id = playroomTestSpecControls.id
 const SPEC_CONTROLS_PATTERN_TITLE: string = playroomTestSpecControls.metadata.formattedName as string
