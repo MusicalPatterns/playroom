@@ -1,13 +1,15 @@
-import { PropsFromApp, PropsFromAppBeforeSelectingPattern } from '../../root'
+import { PropsFromAppBeforeSelectingPattern } from '../../root'
 import { DispatchAsProp, EventAsProp } from '../../types'
 
-interface PatternChangeEventHandlerParameters extends PropsFromApp, DispatchAsProp {}
+interface PatternChangeEventHandlerParameters extends DispatchAsProp {
+    patternChangeEventParameters: PatternChangeEventParameters,
+}
 
 type PatternChangeEventHandler = (parameters: PatternChangeEventHandlerParameters) => Promise<void>
 
-interface PatternChangeEventExtractorParameters extends PropsFromAppBeforeSelectingPattern, EventAsProp {}
+interface PatternChangeEventParameters extends PropsFromAppBeforeSelectingPattern, EventAsProp {}
 
-type PatternChangeEventExtractor = (parameters: PatternChangeEventExtractorParameters) => void
+type PatternChangeEventExtractor = (parameters: PatternChangeEventParameters) => void
 
 interface HandleHamburgerParameters extends DispatchAsProp {
     sidePanelOpen: boolean,
@@ -15,7 +17,7 @@ interface HandleHamburgerParameters extends DispatchAsProp {
 
 export {
     PatternChangeEventExtractor,
-    PatternChangeEventExtractorParameters,
+    PatternChangeEventParameters,
     PatternChangeEventHandler,
     PatternChangeEventHandlerParameters,
     HandleHamburgerParameters,

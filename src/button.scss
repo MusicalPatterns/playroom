@@ -11,7 +11,6 @@ button {
   min-width: $control-width;
 
   @include hoverable-color($text-color);
-
   @include hoverable-background($button-background);
 
   &:disabled {

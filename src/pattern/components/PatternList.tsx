@@ -1,26 +1,18 @@
-import { Id, Pattern } from '@musical-patterns/pattern'
+import { Pattern } from '@musical-patterns/pattern'
 import { Maybe } from '@musical-patterns/utilities'
 import * as React from 'react'
 import { connect } from 'react-redux'
 import { Dispatch } from 'redux'
 import { EventHandler } from '../../types'
-import { handlePatternChange, PatternChangeEventExtractorParameters } from '../events'
+import { handlePatternChange, PatternChangeEventParameters } from '../events'
 import { sortByOrderOrPublishDate } from './helpers'
 import PatternListItem from './PatternListItem'
 import { PatternListProps, PatternListPropsFromDispatch } from './types'
 
 const mapDispatchToProps: (dispatch: Dispatch) => PatternListPropsFromDispatch =
     (dispatch: Dispatch): PatternListPropsFromDispatch => ({
-        handlePatternChangeEvent: async (parameters: PatternChangeEventExtractorParameters): Promise<void> => {
-            const { event, patterns, id } = parameters
-            const target: HTMLLIElement = event.currentTarget as HTMLLIElement
-            const newId: Id = target.id as Id
-
-            if (newId === id) {
-                return
-            }
-
-            await handlePatternChange({ dispatch, id: newId, patterns })
+        handlePatternChangeEvent: async (patternChangeEventParameters: PatternChangeEventParameters): Promise<void> => {
+            await handlePatternChange({ dispatch, patternChangeEventParameters })
         },
     })
 

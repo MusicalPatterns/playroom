@@ -25,7 +25,7 @@ describe('immersive audio', () => {
             done()
         })
 
-        it('changes the button to exit after entering', async (done: DoneFn) => {
+        xit('changes the button to exit after entering', async (done: DoneFn) => {
             const toggleImmersiveAudioButton: ElementHandle = await findElement(IMMERSIVE_AUDIO_TOGGLE)
             await toggleImmersiveAudioButton.click()
 

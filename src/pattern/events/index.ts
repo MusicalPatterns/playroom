@@ -1,6 +1,6 @@
 export { handlePatternChange } from './handlePatternChange'
 export { handleHamburger } from './handleHamburger'
 export {
-    PatternChangeEventExtractorParameters,
+    PatternChangeEventParameters,
     PatternChangeEventExtractor,
 } from './types'
