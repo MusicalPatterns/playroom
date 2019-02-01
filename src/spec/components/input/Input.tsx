@@ -38,7 +38,7 @@ const Input: (buildInputProps: BuildInputProps) => JSX.Element =
                 const { hideInput } = specPropertyAttributes as RangedSpecPropertyAttributes
                 const rangedConstraint: RangedConstraint = constraint as RangedConstraint
                 const { min, max } = minAndMaxPropsFromConstraint(rangedConstraint)
-                const step: number = rangedConstraint.integer ? 1 : SPEC_NON_INTEGER_STEP
+                const step: number = rangedConstraint && rangedConstraint.integer ? 1 : SPEC_NON_INTEGER_STEP
 
                 if (hideInput !== RangedInputType.RANGE) {
                     elements.push(
