@@ -100,7 +100,7 @@ describe('invalid controls', () => {
 
         it('shows an invalid message', async (done: DoneFn) => {
             expect(await elementInnerText(`#${SPEC_RANGED_PROPERTY_ONE_KEY} .invalid-message`))
-                .toBe(`must be less than or equal to ${SPEC_CONTROLS_PATTERN_RANGED_PROPERTY_ONE_MAX_VALUE}`)
+                .toBe(`must be less than ${SPEC_CONTROLS_PATTERN_RANGED_PROPERTY_ONE_MAX_VALUE}`)
 
             done()
         })

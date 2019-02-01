@@ -8,6 +8,8 @@ import {
     SpecPropertyType,
 } from '@musical-patterns/pattern'
 import * as React from 'react'
+import { minAndMaxPropsFromConstraint } from '../helpers'
+import { SPEC_NON_INTEGER_STEP } from './constants'
 import OptionedSpecControlSelect from './OptionedSpecControlSelect'
 import RangedSpecControlNumberInput from './RangedSpecControlNumberInput'
 import RangedSpecControlRangeInput from './RangedSpecControlRangeInput'
@@ -34,12 +36,18 @@ const Input: (buildInputProps: BuildInputProps) => JSX.Element =
             }
             case SpecPropertyType.RANGED: {
                 const { hideInput } = specPropertyAttributes as RangedSpecPropertyAttributes
+                const rangedConstraint: RangedConstraint = constraint as RangedConstraint
+                const { min, max } = minAndMaxPropsFromConstraint(rangedConstraint)
+                const step: number = rangedConstraint.integer ? 1 : SPEC_NON_INTEGER_STEP
+
                 if (hideInput !== RangedInputType.RANGE) {
                     elements.push(
                         <RangedSpecControlRangeInput {...{
                             ...inputProps as RangedInputProps,
-                            constraint: constraint as RangedConstraint,
                             key: 1,
+                            max,
+                            min,
+                            step,
                         }}/>,
                     )
                 }
@@ -48,6 +56,9 @@ const Input: (buildInputProps: BuildInputProps) => JSX.Element =
                         <RangedSpecControlNumberInput {...{
                             ...inputProps as RangedInputProps,
                             key: 0,
+                            max,
+                            min,
+                            step,
                         }}/>,
                     )
                 }

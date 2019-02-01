@@ -1,4 +1,4 @@
-import { OptionedConstraint, RangedConstraint, SpecPropertyAttributes } from '@musical-patterns/pattern'
+import { OptionedConstraint, SpecPropertyAttributes } from '@musical-patterns/pattern'
 import { DomValue, DomValueOrChecked, EventHandler } from '../../../types'
 
 interface InputProps {
@@ -14,8 +14,10 @@ interface OptionedInputProps extends InputProps {
 }
 
 interface RangedInputProps extends InputProps {
-    constraint?: RangedConstraint,
+    max: number,
+    min: number,
     specValue: DomValue,
+    step: number,
 }
 
 interface ToggledInputProps extends InputProps {
