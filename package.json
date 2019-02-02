@@ -24,7 +24,7 @@
     "@musical-patterns/compiler": "^1.0.82",
     "@musical-patterns/pattern": "^1.0.142",
     "@musical-patterns/pattern-playroom-test": "^1.0.119",
-    "@musical-patterns/performer": "^1.0.169",
+    "@musical-patterns/performer": "^1.0.170",
     "@musical-patterns/utilities": "^1.0.188",
     "@types/node": "^10.12.21",
     "@types/react": "^16.7.22",

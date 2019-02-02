@@ -5,13 +5,14 @@ import {
 } from '@musical-patterns/compiler'
 import { Pattern } from '@musical-patterns/pattern'
 import { setThreadSpecs, ThreadSpec } from '@musical-patterns/performer'
-import { doAsync, logMessageToConsole, Maybe, Time } from '@musical-patterns/utilities'
+import { doAsync, Maybe, Time } from '@musical-patterns/utilities'
 import * as React from 'react'
 import { connect } from 'react-redux'
 import { Dispatch } from 'redux'
 import { PatternStateKeys } from '../../pattern'
 import { SpecStateKeys } from '../../spec'
 import { ActionType, ImmutableRootState, RootStateKeys } from '../state'
+import { logDebugInfo } from './helpers'
 import { PatternListenerProps, PatternListenerPropsFromDispatch, PatternListenerPropsFromState } from './types'
 
 const mapStateToProps: (state: ImmutableRootState) => PatternListenerPropsFromState =
@@ -43,7 +44,7 @@ const PatternListener: (patternListenerProps: PatternListenerProps) => JSX.Eleme
 
             const threadSpecs: ThreadSpec[] = await compilePattern(compilePatternParameters)
             if (debugMode) {
-                logMessageToConsole('thread specs: ', threadSpecs)
+                await logDebugInfo(compilePatternParameters)
             }
 
             const totalDuration: Time = await calculatePatternTotalCompiledDuration(compilePatternParameters)
