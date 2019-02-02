@@ -1,6 +1,6 @@
 import { RangedConstraint } from '@musical-patterns/pattern'
 import { apply, Maybe } from '@musical-patterns/utilities'
-import { DEFAULT_SPEC_BOUND, OFFSET_TO_EXCLUDE_MIN_OR_MAX } from './constants'
+import { DEFAULT_SPEC_BOUND, OFFSET_TO_EXCLUDE_MAX, OFFSET_TO_EXCLUDE_MIN } from './constants'
 
 const minAndMaxPropsFromConstraint: (constraint: Maybe<RangedConstraint>) => { max: number, min: number } =
     (constraint: Maybe<RangedConstraint>): { max: number, min: number } => {
@@ -12,8 +12,8 @@ const minAndMaxPropsFromConstraint: (constraint: Maybe<RangedConstraint>) => { m
         } = constraint || {}
 
         return {
-            max: excludeMax ? apply.Offset(max, -OFFSET_TO_EXCLUDE_MIN_OR_MAX) : max,
-            min: excludeMin ? apply.Offset(min, OFFSET_TO_EXCLUDE_MIN_OR_MAX) : min,
+            max: excludeMax ? apply.Offset(max, OFFSET_TO_EXCLUDE_MAX) : max,
+            min: excludeMin ? apply.Offset(min, OFFSET_TO_EXCLUDE_MIN) : min,
         }
     }
 

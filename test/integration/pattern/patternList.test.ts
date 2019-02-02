@@ -66,8 +66,6 @@ describe('pattern list', () => {
             expect(patternTitle)
                 .toBe('Playroom Test Spec Controls')
 
-            await sleep(3000)
-
             done()
         })
 
