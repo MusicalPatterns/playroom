@@ -41,16 +41,15 @@ const PatternListener: (patternListenerProps: PatternListenerProps) => JSX.Eleme
             }
 
             const compilePatternParameters: CompilePatternParameters = { ...pattern, spec: submittedSpec }
-
             const threadSpecs: ThreadSpec[] = await compilePattern(compilePatternParameters)
-            if (debugMode) {
-                await logDebugInfo(compilePatternParameters)
-            }
-
             const totalDuration: Time = await calculatePatternTotalCompiledDuration(compilePatternParameters)
             setTotalDuration(totalDuration)
 
             await setThreadSpecs(threadSpecs)
+
+            if (debugMode) {
+                await logDebugInfo(compilePatternParameters)
+            }
         })
 
         return <div/>
