@@ -22,8 +22,8 @@ const mapStateToProps: (state: ImmutableRootState) => TimeControlsPropsFromState
 const mapDispatchToProps: (dispatch: Dispatch) => TimeControlsPropsFromDispatch =
     (dispatch: Dispatch): TimeControlsPropsFromDispatch => ({
         rewindHandler: handleRewind,
-        stopHandler: buildStopHandler(dispatch),
-        togglePausedHandler: buildTogglePausedHandler(dispatch),
+        stopHandler: buildStopHandler({ dispatch }),
+        togglePausedHandler: buildTogglePausedHandler({ dispatch }),
     })
 
 const TimeControls: (timeControlsProps: TimeControlsProps) => JSX.Element =

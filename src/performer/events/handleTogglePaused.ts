@@ -1,9 +1,9 @@
 import { togglePaused } from '@musical-patterns/performer'
-import { Dispatch } from 'redux'
 import { ActionType } from '../../root'
+import { DispatchAsProp } from '../../types'
 
-const buildTogglePausedHandler: (dispatch: Dispatch) => VoidFunction =
-    (dispatch: Dispatch): VoidFunction =>
+const buildTogglePausedHandler: (parameters: DispatchAsProp) => VoidFunction =
+    ({ dispatch }: DispatchAsProp): VoidFunction =>
         (): void => {
             dispatch({ type: ActionType.TOGGLE_PAUSED })
             togglePaused()

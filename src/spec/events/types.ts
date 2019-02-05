@@ -16,7 +16,7 @@ interface SpecControlChangeHandlerParameters extends SpecChangeEventParameters, 
 
 type SpecControlChangeHandler = (parameters: SpecControlChangeHandlerParameters) => void
 
-type BuildSpecControlChangeHandler = (dispatch: Dispatch) => SpecControlChangeHandler
+type BuildSpecControlChangeHandler = (parameters: DispatchAsProp) => SpecControlChangeHandler
 
 interface HandleResetParameters extends DispatchAsProp {
     spec: Spec,

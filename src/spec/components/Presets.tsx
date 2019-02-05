@@ -19,7 +19,7 @@ const mapStateToProps: (state: ImmutableRootState) => PresetsPropsFromState =
 
 const mapDispatchToProps: (dispatch: Dispatch) => PresetsPropsFromDispatch =
     (dispatch: Dispatch): PresetsPropsFromDispatch => ({
-        presetChangeHandler: buildPresetChangeHandler(dispatch),
+        presetChangeHandler: buildPresetChangeHandler({ dispatch }),
     })
 
 const Presets: (props: PresetsProps) => JSX.Element =

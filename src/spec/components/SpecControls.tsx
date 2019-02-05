@@ -17,7 +17,7 @@ const mapStateToProps: (state: ImmutableRootState) => SpecControlsPropsFromState
 
 const mapDispatchToProps: (dispatch: Dispatch) => SpecControlsPropsFromDispatch =
     (dispatch: Dispatch): SpecControlsPropsFromDispatch => ({
-        handleSpecChange: buildSpecControlChangeHandler(dispatch),
+        handleSpecChange: buildSpecControlChangeHandler({ dispatch }),
     })
 
 const SpecControls: (specControlsProps: SpecControlsProps) => JSX.Element =
