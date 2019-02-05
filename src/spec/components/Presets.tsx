@@ -1,5 +1,5 @@
 import { Preset } from '@musical-patterns/pattern'
-import { ARBITRARILY_LARGE_NUMBER, camelCaseToLowerCase, deepEqual } from '@musical-patterns/utilities'
+import { ARBITRARILY_LARGE_NUMBER, camelCaseToLowerCase, deepEqual, entries } from '@musical-patterns/utilities'
 import * as React from 'react'
 import { connect } from 'react-redux'
 import { Dispatch } from 'redux'
@@ -29,7 +29,7 @@ const Presets: (props: PresetsProps) => JSX.Element =
         }
 
         let selectValue: string = ''
-        const options: JSX.Element[] = Object.entries(presets)
+        const options: JSX.Element[] = entries<string, Preset>(presets)
             .sort(([ _, preset ]: [ string, Preset ], [ __, nextPreset ]: [ string, Preset ]): number => {
                 const order: number = preset.order === undefined ? ARBITRARILY_LARGE_NUMBER : preset.order
                 const nextOrder: number = nextPreset.order === undefined ? ARBITRARILY_LARGE_NUMBER : nextPreset.order

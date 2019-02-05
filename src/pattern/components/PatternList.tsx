@@ -1,5 +1,5 @@
-import { Pattern } from '@musical-patterns/pattern'
-import { Maybe } from '@musical-patterns/utilities'
+import { Id, Pattern } from '@musical-patterns/pattern'
+import { entries, Maybe } from '@musical-patterns/utilities'
 import * as React from 'react'
 import { connect } from 'react-redux'
 import { Dispatch } from 'redux'
@@ -23,9 +23,9 @@ const PatternList: (PatternListProps: PatternListProps) => JSX.Element =
                 handlePatternChangeEvent({ event, patterns, id })
             }
 
-        const maybePatternEntries: Array<[ string, Maybe<Pattern> ]> = Object.entries(patterns)
-        const patternEntries: Array<[ string, Pattern ]> = []
-        maybePatternEntries.forEach(([ maybeId, maybePattern ]: [ string, Maybe<Pattern> ]): void => {
+        const maybePatternEntries: Array<[ Id, Maybe<Pattern> ]> = entries<Id, Maybe<Pattern>>(patterns)
+        const patternEntries: Array<[ Id, Pattern ]> = []
+        maybePatternEntries.forEach(([ maybeId, maybePattern ]: [ Id, Maybe<Pattern> ]): void => {
             if (maybePattern) {
                 patternEntries.push([ maybeId, maybePattern ])
             }

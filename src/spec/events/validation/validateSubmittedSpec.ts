@@ -1,4 +1,5 @@
 import { SpecValidationResults } from '@musical-patterns/pattern'
+import { entries } from '@musical-patterns/utilities'
 import { SpecValue } from '../../../types'
 import { InvalidSpecMessage, InvalidSpecMessages } from '../../types'
 import { SpecValidationResult, ValidateSubmittedSpecParameters } from '../types'
@@ -9,11 +10,12 @@ const validateSubmittedSpec: (parameters: ValidateSubmittedSpecParameters) => Sp
         const { updatedDisplayedSpec, specAttributes, validationFunction, specKey } = parameters
 
         const invalidMessageAccumulator: InvalidSpecMessages = {}
-        const reevaluatedInvalidMessages: InvalidSpecMessages = Object.entries(updatedDisplayedSpec)
+        const reevaluatedInvalidMessages: InvalidSpecMessages = entries(updatedDisplayedSpec)
             .reduce(
-                (accumulator: InvalidSpecMessages, [ key, val ]: [ string, SpecValue ]) => ({
+                // tslint:disable-next-line no-any
+                (accumulator: InvalidSpecMessages, [ key, val ]: [ string, any ]) => ({
                     ...accumulator,
-                    [ key ]: validateSpecProperty(val, specAttributes[ key ]),
+                    [ key ]: validateSpecProperty(val as SpecValue, specAttributes[ key ]),
                 }),
                 invalidMessageAccumulator,
             )

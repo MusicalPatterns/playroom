@@ -1,4 +1,5 @@
 import { defaultSpecPropertyAttributes, Spec, SpecAttributes, StandardSpecProperties } from '@musical-patterns/pattern'
+import { keys } from '@musical-patterns/utilities'
 import * as React from 'react'
 import { connect } from 'react-redux'
 import { Dispatch } from 'redux'
@@ -28,7 +29,7 @@ const SpecControls: (specControlsProps: SpecControlsProps) => JSX.Element =
         const specAttributes: SpecAttributes = specState
             .get(SpecStateKeys.SPEC_ATTRIBUTES)
 
-        const standardSpecControls: JSX.Element[] = Object.keys(displayedSpec)
+        const standardSpecControls: JSX.Element[] = keys(displayedSpec)
             .filter((key: string) =>
                 Object.values(StandardSpecProperties)
                     .includes(key),
@@ -43,7 +44,7 @@ const SpecControls: (specControlsProps: SpecControlsProps) => JSX.Element =
                         specPropertyAttributes: specAttributes[ specKey ] || defaultSpecPropertyAttributes,
                     }} />,
             )
-        const patternParticularControls: JSX.Element[] = Object.keys(displayedSpec)
+        const patternParticularControls: JSX.Element[] = keys(displayedSpec)
             .filter((key: string) =>
                 !Object.values(StandardSpecProperties)
                     .includes(key),
