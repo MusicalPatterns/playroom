@@ -12,7 +12,7 @@ const clickTimeControl: (timeControlName: string) => boolean =
 
 const onKeyDown: (event: KeyboardEvent) => Promise<void> =
     async (event: KeyboardEvent): Promise<void> => {
-        // tslint:disable-next-line:deprecation
+        // tslint:disable-next-line deprecation
         switch (event.keyCode) {
             case KeyCodes.SPACE:
                 event.preventDefault()

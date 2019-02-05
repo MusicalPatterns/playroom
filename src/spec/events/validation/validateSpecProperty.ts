@@ -7,7 +7,7 @@ import { validByRangedConstraint } from './validByRangedConstraint'
 
 const validateSpecProperty:
     (specValue: SpecValue, propertyAttributes: Maybe<SpecPropertyAttributes>) => InvalidSpecMessage =
-    // tslint:disable-next-line:cyclomatic-complexity
+    // tslint:disable-next-line cyclomatic-complexity
     (specValue: SpecValue, propertyAttributes: Maybe<SpecPropertyAttributes>): InvalidSpecMessage => {
         if (!propertyAttributes) {
             return undefined

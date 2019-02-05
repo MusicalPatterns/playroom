@@ -17,7 +17,7 @@ import ToggledSpecControlCheckboxInput from './ToggledSpecControlCheckboxInput'
 import { BuildInputProps, OptionedInputProps, RangedInputProps, ToggledInputProps } from './types'
 
 const Input: (buildInputProps: BuildInputProps) => JSX.Element =
-    // tslint:disable-next-line:cyclomatic-complexity
+    // tslint:disable-next-line cyclomatic-complexity
     (buildInputProps: BuildInputProps): JSX.Element => {
         const { specPropertyAttributes, inputProps } = buildInputProps
         const { specPropertyType, constraint } = specPropertyAttributes

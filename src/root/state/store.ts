@@ -1,4 +1,4 @@
-// tslint:disable:no-any
+// tslint:disable no-any
 
 import { Map } from 'immutable'
 import { applyMiddleware, compose, createStore, Reducer, Store } from 'redux'

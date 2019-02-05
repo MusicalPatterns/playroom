@@ -9,7 +9,7 @@ import { SingularSpecControlProps } from './types'
 import Units from './Units'
 
 const SingularSpecControl: (specControlProps: SingularSpecControlProps) => JSX.Element =
-    // tslint:disable-next-line:cyclomatic-complexity
+    // tslint:disable-next-line cyclomatic-complexity
     (specControlProps: SingularSpecControlProps): JSX.Element => {
         const {
             arrayedPropertyIndex,

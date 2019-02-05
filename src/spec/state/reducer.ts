@@ -3,7 +3,7 @@ import { initialSpecState } from './initial'
 import { ImmutableSpecState, SpecStateAction, SpecStateActionType, SpecStateKeys } from './types'
 
 const specReducer: Reducer<ImmutableSpecState, SpecStateAction> =
-    // tslint:disable-next-line:cyclomatic-complexity
+    // tslint:disable-next-line cyclomatic-complexity
     (
         specState: ImmutableSpecState = initialSpecState,
         action: SpecStateAction,

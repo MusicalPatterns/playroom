@@ -1,4 +1,4 @@
-// tslint:disable:no-magic-numbers
+// tslint:disable no-magic-numbers
 
 const SPEC_NON_INTEGER_STEP: number = 0.1
 

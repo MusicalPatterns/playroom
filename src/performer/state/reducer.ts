@@ -3,7 +3,7 @@ import { initialPerformerState } from './initial'
 import { ImmutablePerformerState, PerformerStateAction, PerformerStateActionType, PerformerStateKeys } from './types'
 
 const performerReducer: Reducer<ImmutablePerformerState, PerformerStateAction> =
-    // tslint:disable-next-line:cyclomatic-complexity
+    // tslint:disable-next-line cyclomatic-complexity
     (
         performerState: ImmutablePerformerState = initialPerformerState,
         action: PerformerStateAction,

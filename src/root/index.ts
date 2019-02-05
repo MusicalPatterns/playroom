@@ -15,5 +15,5 @@ export {
     extractValueFromEvent,
 } from './events'
 
-// tslint:disable-next-line:no-import-side-effect
+// tslint:disable-next-line no-import-side-effect
 import './styles'
