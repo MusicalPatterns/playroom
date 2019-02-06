@@ -15,7 +15,7 @@
   flex-direction: column;
   padding: 0;
   width: $side-panel-width;
-  box-shadow: $pattern-list-fade-horizontal-offset $pattern-list-fade-vertical-offset-for-top $pattern-list-fade-size $side-panel-background;
+  box-shadow: $pattern-list-fade-horizontal-translation $pattern-list-fade-vertical-translation-for-top $pattern-list-fade-size $side-panel-background;
   z-index: 1;
 
   svg {

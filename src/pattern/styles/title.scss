@@ -12,7 +12,7 @@
   text-align: center;
   display: flex;
   align-items: center;
-  box-shadow: $pattern-list-fade-horizontal-offset $pattern-list-fade-vertical-offset-for-bottom $pattern-list-fade-size $side-panel-background;
+  box-shadow: $pattern-list-fade-horizontal-translation $pattern-list-fade-vertical-translation-for-bottom $pattern-list-fade-size $side-panel-background;
   z-index: 1;
 
   & > div {

@@ -1,6 +1,6 @@
 @import '../../baseProportions';
 
-$invalid-message-horizontal-offset-percentage: 100% * (1 - ($phi - 1));
+$invalid-message-horizontal-translation-percentage: 100% * (1 - ($phi - 1));
 $invalid-message-opacity: $phi - 1;
 
 $spec-control-name-proportion: $phi;

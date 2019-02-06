@@ -7,12 +7,12 @@ $pattern-panel-height: $huge-area;
 $pattern-list-width: $medium-area;
 $pattern-list-item-width: $small-area;
 
-$pattern-list-scroll-bar-hiding-offset: -$big;
+$pattern-list-scroll-bar-hiding-translation: -$big;
 $pattern-list-spacing-to-keep-the-top-and-bottom-elements-out-of-the-shadow: $huge;
 
-$pattern-list-fade-horizontal-offset: $big;
-$pattern-list-fade-vertical-offset-for-bottom: -$huge;
-$pattern-list-fade-vertical-offset-for-top: $huge;
+$pattern-list-fade-horizontal-translation: $big;
+$pattern-list-fade-vertical-translation-for-bottom: -$huge;
+$pattern-list-fade-vertical-translation-for-top: $huge;
 $pattern-list-fade-size: $big;
 
 $pattern-list-item-spacing: $medium;

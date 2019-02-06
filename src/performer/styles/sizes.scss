@@ -1,6 +1,6 @@
 @import '../../baseSizes';
 
-$toggle-immersive-audio-button-width: 1px * nth($fibonacci-series, 9 + $fibonacci-series-size-offset);
+$toggle-immersive-audio-button-width: 1px * nth($fibonacci-series, 9 + $fibonacci-series-size-translation);
 
 $time-controls-vertical-spacing: $small;
 $time-controls-horizontal-spacing: $medium;

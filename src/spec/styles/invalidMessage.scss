@@ -10,8 +10,8 @@
   z-index: 1;
   content: attr(message);
   position: absolute;
-  top: $invalid-message-vertical-offset;
-  left: $invalid-message-horizontal-offset-percentage;
+  top: $invalid-message-vertical-translation;
+  left: $invalid-message-horizontal-translation-percentage;
   padding: $invalid-message-spacing;
   background: $invalid-color;
   font-size: $detail-text-size;
