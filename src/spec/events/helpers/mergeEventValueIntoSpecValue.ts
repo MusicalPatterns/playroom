@@ -8,10 +8,10 @@ const mergeEventValueIntoSpecValue: (parameters: MergeEventValueIntoSpecValuePar
 
         const specValue: DomValueOrChecked[] = deepClone(displayedSpec[ specKey ]) as DomValueOrChecked[]
 
-        while (specValue.length < from.Index(arrayedPropertyIndex)) {
+        while (specValue.length < from.Ordinal(arrayedPropertyIndex)) {
             specValue.push('')
         }
-        specValue[ from.Index(arrayedPropertyIndex) ] = eventValue
+        specValue[ from.Ordinal(arrayedPropertyIndex) ] = eventValue
 
         return specValue
     }

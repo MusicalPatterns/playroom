@@ -28,7 +28,7 @@ const ArrayedSpecControl: (props: ArrayedSpecControlProps) => JSX.Element =
 
                 return (
                     <SingularSpecControl {...{
-                        arrayedPropertyIndex: to.Index(index),
+                        arrayedPropertyIndex: to.Ordinal(index),
                         displayedSpecValue: value,
                         invalidMessage,
                         key: index,

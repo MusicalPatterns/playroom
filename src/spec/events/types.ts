@@ -1,5 +1,5 @@
 import { Preset, Spec, SpecAttributes, SpecValidationFunction } from '@musical-patterns/pattern'
-import { DictionaryOf, Index } from '@musical-patterns/utilities'
+import { DictionaryOf, Ordinal } from '@musical-patterns/utilities'
 import { Dispatch } from 'redux'
 import { DispatchAsProp, EventAsProp } from '../../types'
 import { AddOrRemoveButtonPropsFromParent } from '../components'
@@ -7,7 +7,7 @@ import { ImmutableSpecState } from '../state'
 import { InvalidSpecMessages } from '../types'
 
 interface SpecChangeEventParameters {
-    arrayedPropertyIndex?: Index,
+    arrayedPropertyIndex?: Ordinal,
     specKey: string,
     specState: ImmutableSpecState,
 }

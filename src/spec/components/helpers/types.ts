@@ -1,7 +1,7 @@
-import { Index, Maybe } from '@musical-patterns/utilities'
+import { Maybe, Ordinal } from '@musical-patterns/utilities'
 
 interface SpecControlIdParameters {
-    arrayedPropertyIndex: Maybe<Index>,
+    arrayedPropertyIndex: Maybe<Ordinal>,
     isNotAnArrayedProperty: boolean,
     specKey: string,
 }

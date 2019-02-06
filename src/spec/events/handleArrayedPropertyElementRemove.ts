@@ -11,8 +11,10 @@ const handleArrayedPropertyElementRemove: (parameters: HandleArrayedPropertyAddO
     ({ dispatch, event, specKey, specState }: HandleArrayedPropertyAddOrRemoveParameters): void => {
         const displayedSpec: Spec = specState.get(SpecStateKeys.DISPLAYED_SPEC)
         const arrayedSpecValue: DomValueOrChecked[] = displayedSpec[ specKey ] as DomValueOrChecked[]
-        const updatedArrayedSpecValue: DomValueOrChecked[] =
-            arrayedSpecValue.slice(from.Index(INITIAL), apply.Offset(arrayedSpecValue.length, to.Offset(-1)))
+        const updatedArrayedSpecValue: DomValueOrChecked[] = arrayedSpecValue.slice(
+            from.Ordinal(INITIAL),
+            apply.Translation(arrayedSpecValue.length, to.Translation(-1)),
+        )
 
         const actions: Action[] = buildAttemptSubmitActions({ specState, specKey, specValue: updatedArrayedSpecValue })
 
