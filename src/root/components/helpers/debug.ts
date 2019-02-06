@@ -4,7 +4,7 @@ import {
     CompilePatternParameters,
 } from '@musical-patterns/compiler'
 import { Note, ThreadSpec } from '@musical-patterns/performer'
-import { from, logMessageToConsole, Time, to } from '@musical-patterns/utilities'
+import { logMessageToConsole, sum, Time, to } from '@musical-patterns/utilities'
 
 const logDebugInfo: (compilePatternParameters: CompilePatternParameters) => Promise<void> =
     async (compilePatternParameters: CompilePatternParameters): Promise<void> => {
@@ -15,7 +15,7 @@ const logDebugInfo: (compilePatternParameters: CompilePatternParameters) => Prom
             threadSpecs.map((threadSpec: ThreadSpec): Time =>
                 threadSpec.notes ? threadSpec.notes.reduce(
                     (accumulator: Time, note: Note): Time =>
-                        to.Time(from.Time(accumulator) + from.Time(note.duration)),
+                        sum(accumulator, note.duration),
                     to.Time(0),
                 ) : to.Time(0)),
         )

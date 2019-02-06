@@ -1,4 +1,4 @@
-import { from, Milliseconds, to } from '@musical-patterns/utilities'
+import { difference, from, Milliseconds, sum, to } from '@musical-patterns/utilities'
 import { ElementHandle } from 'puppeteer'
 import {
     A_BIT_LONGER,
@@ -142,12 +142,12 @@ describe('time controls', () => {
             const initialTime: Milliseconds = await currentTime()
 
             const totalTime: Milliseconds = await totalDuration()
-            await sleep(to.Milliseconds(from.Milliseconds(totalTime) - from.Milliseconds(LONG_ENOUGH_FOR_TIME_TO_PASS)))
+            await sleep(difference(totalTime, LONG_ENOUGH_FOR_TIME_TO_PASS))
             const beforeWrappingTime: Milliseconds = await currentTime()
             expect(beforeWrappingTime)
                 .toBeGreaterThan(from.Milliseconds(initialTime))
 
-            await sleep(to.Milliseconds(from.Milliseconds(LONG_ENOUGH_FOR_TIME_TO_PASS) + from.Milliseconds(LONG_ENOUGH_FOR_TIME_TO_PASS)))
+            await sleep(sum(LONG_ENOUGH_FOR_TIME_TO_PASS, LONG_ENOUGH_FOR_TIME_TO_PASS))
             expect(await currentTime())
                 .toBeLessThan(from.Milliseconds(beforeWrappingTime))
 
