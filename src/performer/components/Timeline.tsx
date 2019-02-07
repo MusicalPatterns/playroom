@@ -1,3 +1,4 @@
+import { from } from '@musical-patterns/utilities'
 import * as React from 'react'
 import { timeChangeHandler } from '../events'
 import { TimeControlsPropsFromParent } from './types'
@@ -7,11 +8,11 @@ const Timeline: (props: TimeControlsPropsFromParent) => JSX.Element =
         <input {...{
             disabled,
             id: 'timeline',
-            max: totalTimeForDisplay || 0,
+            max: from.Time(totalTimeForDisplay || 0),
             min: 0,
             onChange: timeChangeHandler,
             type: 'range',
-            value: timeForDisplay,
+            value: from.Time(timeForDisplay || 0),
         }}/>
     )
 

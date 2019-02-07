@@ -1,5 +1,5 @@
 import { OptionedConstraintOption } from '@musical-patterns/pattern'
-import { ARBITRARILY_LARGE_NUMBER, constantCaseToUpperCase } from '@musical-patterns/utilities'
+import { ARBITRARILY_LARGE_NUMBER, constantCaseToUpperCase, negative } from '@musical-patterns/utilities'
 import * as React from 'react'
 import { OptionedInputProps } from './types'
 
@@ -10,7 +10,7 @@ const OptionedSpecControlSelect: (optionedInputProps: OptionedInputProps) => JSX
                 const order: number = option.order === undefined ? ARBITRARILY_LARGE_NUMBER : option.order
                 const nextOrder: number = nextOption.order === undefined ? ARBITRARILY_LARGE_NUMBER : nextOption.order
 
-                return order < nextOrder ? -1 : 1
+                return order < nextOrder ? negative(1) : 1
             })
             .map((option: OptionedConstraintOption, index: number): JSX.Element => {
                 const { key, description, formattedName } = option

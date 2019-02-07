@@ -1,5 +1,5 @@
 import { Pattern } from '@musical-patterns/pattern'
-import { ARBITRARILY_LARGE_NUMBER } from '@musical-patterns/utilities'
+import { ARBITRARILY_LARGE_NUMBER, negative } from '@musical-patterns/utilities'
 
 const sortByOrder: (pattern: Pattern, nextPattern: Pattern) => number =
     (pattern: Pattern, nextPattern: Pattern): number => {
@@ -9,7 +9,7 @@ const sortByOrder: (pattern: Pattern, nextPattern: Pattern) => number =
             nextPattern.metadata.order === undefined ? ARBITRARILY_LARGE_NUMBER : nextPattern.metadata.order
 
         if (first < second) {
-            return -1
+            return negative(1)
         }
         else if (first > second) {
             return 1
@@ -25,7 +25,7 @@ const sortByPublishDate: (pattern: Pattern, nextPattern: Pattern) => number =
             return 1
         }
         if (pattern.metadata.originalPublish > nextPattern.metadata.originalPublish) {
-            return -1
+            return negative(1)
         }
 
         return 0

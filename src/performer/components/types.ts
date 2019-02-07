@@ -22,8 +22,8 @@ interface TimeControlsPropsFromDispatch {
 }
 
 interface TimeControlsPropsFromParent extends MaybeDisabled {
-    timeForDisplay: number,
-    totalTimeForDisplay: number,
+    timeForDisplay: Time,
+    totalTimeForDisplay: Time,
 }
 
 interface TimeControlsProps extends TimeControlsPropsFromState,
@@ -41,7 +41,7 @@ interface ToggleImmersiveAudioButtonProps extends MaybeDisabled,
     ToggleImmersiveAudioButtonPropsFromState {}
 
 interface TimeInMinutesAndSecondsProps extends MaybeDisabled {
-    timeForDisplay: number,
+    timeForDisplay: Time,
 }
 
 export {

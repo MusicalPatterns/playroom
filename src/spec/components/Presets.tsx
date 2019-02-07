@@ -1,5 +1,12 @@
 import { Preset } from '@musical-patterns/pattern'
-import { ARBITRARILY_LARGE_NUMBER, camelCaseToLowerCase, deepEqual, entries } from '@musical-patterns/utilities'
+import {
+    ARBITRARILY_LARGE_NUMBER,
+    camelCaseToLowerCase,
+    deepEqual,
+    entries,
+    negative,
+    sum,
+} from '@musical-patterns/utilities'
 import * as React from 'react'
 import { connect } from 'react-redux'
 import { Dispatch } from 'redux'
@@ -34,7 +41,7 @@ const Presets: (props: PresetsProps) => JSX.Element =
                 const order: number = preset.order === undefined ? ARBITRARILY_LARGE_NUMBER : preset.order
                 const nextOrder: number = nextPreset.order === undefined ? ARBITRARILY_LARGE_NUMBER : nextPreset.order
 
-                return order < nextOrder ? -1 : 1
+                return order < nextOrder ? negative(1) : 1
             })
             .map(([ presetKey, preset ]: [ string, Preset ], key: number): JSX.Element => {
                 const { description, formattedName, spec } = preset
@@ -43,7 +50,7 @@ const Presets: (props: PresetsProps) => JSX.Element =
                 }
                 const displayName: string = formattedName || camelCaseToLowerCase(presetKey)
 
-                return <option {...{ key: key + 1, value: presetKey, title: description }}>{displayName}</option>
+                return <option {...{ key: sum(key, 1), value: presetKey, title: description }}>{displayName}</option>
             })
         options.unshift(<option {...{ disabled: true, key: 0 }}/>)
 

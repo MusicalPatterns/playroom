@@ -1,4 +1,4 @@
-import { DictionaryOf, from, Time } from '@musical-patterns/utilities'
+import { DictionaryOf, modulus, round, Time, to } from '@musical-patterns/utilities'
 import * as React from 'react'
 import { connect } from 'react-redux'
 import { ImmutableRootState, RootStateKeys } from '../../root'
@@ -7,10 +7,10 @@ import { ImmutablePerformerState, PerformerStateKeys } from '../state'
 import TimeControls from './TimeControls'
 import { TimeControlsContainerProps, TimeControlsContainerPropsFromState } from './types'
 
-const formatTimesForDisplay: (times: DictionaryOf<Time>) => DictionaryOf<number> =
-    ({ totalDuration, time }: DictionaryOf<Time>): DictionaryOf<number> => {
-        const totalTimeForDisplay: number = Math.round(from.Time(totalDuration)) || 0
-        const timeForDisplay: number = Math.round(from.Time(time)) % totalTimeForDisplay || 0
+const formatTimesForDisplay: (times: DictionaryOf<Time>) => DictionaryOf<Time> =
+    ({ totalDuration, time }: DictionaryOf<Time>): DictionaryOf<Time> => {
+        const totalTimeForDisplay: Time = round(totalDuration) || to.Time(0)
+        const timeForDisplay: Time = round(modulus(time, totalTimeForDisplay)) || to.Time(0)
 
         return { totalTimeForDisplay, timeForDisplay }
     }

@@ -1,5 +1,5 @@
 import { SpecAttributes } from '@musical-patterns/pattern'
-import { ARBITRARILY_LARGE_NUMBER, Maybe } from '@musical-patterns/utilities'
+import { ARBITRARILY_LARGE_NUMBER, Maybe, negative } from '@musical-patterns/utilities'
 
 const buildSortSpecControls: (specAttributes: SpecAttributes) => (specKey: string, nextSpecKey: string) => number =
     (specAttributes: SpecAttributes): (specKey: string, nextSpecKey: string) => number =>
@@ -10,7 +10,7 @@ const buildSortSpecControls: (specAttributes: SpecAttributes) => (specKey: strin
             const nextOrder: Maybe<number> = specAttributes[ nextSpecKey ].order
             const nextSortOrder: number = nextOrder === undefined ? ARBITRARILY_LARGE_NUMBER : nextOrder
 
-            return sortOrder < nextSortOrder ? -1 : 1
+            return sortOrder < nextSortOrder ? negative(1) : 1
         }
 
 export {

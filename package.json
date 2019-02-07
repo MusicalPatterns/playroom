@@ -1,6 +1,6 @@
 {
   "name": "@musical-patterns/playroom",
-  "version": "1.0.223",
+  "version": "1.0.224",
   "main": "dist/index.js",
   "typings": "dist/index.d.ts",
   "repository": {
@@ -25,7 +25,7 @@
     "@musical-patterns/pattern": "^1.0.153",
     "@musical-patterns/pattern-playroom-test": "^1.0.123",
     "@musical-patterns/performer": "^1.0.176",
-    "@musical-patterns/utilities": "^1.0.217",
+    "@musical-patterns/utilities": "^1.0.222",
     "@types/node": "^10.12.21",
     "@types/react": "^16.7.22",
     "@types/react-dom": "^16.0.9",
