@@ -1,4 +1,4 @@
-import { camelCaseToLowerCase, to } from '@musical-patterns/utilities'
+import { apply, camelCaseToLowerCase, from, map, Ordinal } from '@musical-patterns/utilities'
 import * as React from 'react'
 import { DomValueOrChecked, SecretSelectorsForTest } from '../../../types'
 import { InvalidSpecMessage } from '../../types'
@@ -19,23 +19,24 @@ const ArrayedSpecControl: (props: ArrayedSpecControlProps) => JSX.Element =
             specPropertyAttributes,
         } = props
 
-        const controls: JSX.Element[] = displayedSpecValues.map(
-            (value: DomValueOrChecked, index: number): JSX.Element => {
+        const controls: JSX.Element[] = map(
+            displayedSpecValues,
+            (value: DomValueOrChecked, index: Ordinal): JSX.Element => {
                 let invalidMessage: InvalidSpecMessage = invalidMessages[ specKey ]
                 if (invalidMessage && invalidMessage instanceof Array) {
-                    invalidMessage = invalidMessage[ index ]
+                    invalidMessage = apply.Ordinal(invalidMessage, index)
                 }
 
                 return (
                     <SingularSpecControl {...{
-                        arrayedPropertyIndex: to.Ordinal(index),
+                        arrayedPropertyIndex: index,
                         displayedSpecValue: value,
                         invalidMessage,
-                        key: index,
+                        key: from.Ordinal(index),
                         specControlsProps,
                         specKey,
                         specPropertyAttributes,
-                        submittedSpecValue: submittedSpecValues[ index ],
+                        submittedSpecValue: apply.Ordinal(submittedSpecValues, index),
                     }}/>
                 )
             },

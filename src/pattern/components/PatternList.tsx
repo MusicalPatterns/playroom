@@ -1,5 +1,5 @@
 import { Id, Pattern } from '@musical-patterns/pattern'
-import { entries, Maybe } from '@musical-patterns/utilities'
+import { entries, from, map, Ordinal } from '@musical-patterns/utilities'
 import * as React from 'react'
 import { connect } from 'react-redux'
 import { Dispatch } from 'redux'
@@ -23,17 +23,11 @@ const PatternList: (PatternListProps: PatternListProps) => JSX.Element =
                 handlePatternChangeEvent({ event, patterns, id })
             }
 
-        const maybePatternEntries: Array<[ Id, Maybe<Pattern> ]> = entries<Id, Maybe<Pattern>>(patterns)
-        const patternEntries: Array<[ Id, Pattern ]> = []
-        maybePatternEntries.forEach(([ maybeId, maybePattern ]: [ Id, Maybe<Pattern> ]): void => {
-            if (maybePattern) {
-                patternEntries.push([ maybeId, maybePattern ])
-            }
-        })
-        const options: JSX.Element[] = patternEntries
-            .sort(sortByOrderOrPublishDate)
-            .map(([ listedId, listedPattern ]: [ string, Pattern ], key: number): JSX.Element => (
-                <PatternListItem {...{ key, listedPattern, listedId, onClick, id }} />
+        const options: JSX.Element[] = map(
+            entries(patterns as { [key in Id]: Pattern })
+                .sort(sortByOrderOrPublishDate),
+            ([ listedId, listedPattern ]: [ string, Pattern ], index: Ordinal): JSX.Element => (
+                <PatternListItem {...{ key: from.Ordinal(index), listedPattern, listedId, onClick, id }} />
             ))
 
         return (

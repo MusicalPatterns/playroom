@@ -4,8 +4,12 @@ import {
     camelCaseToLowerCase,
     deepEqual,
     entries,
+    from,
+    map,
     negative,
+    Ordinal,
     sum,
+    translateFromZeroIndexedToOneIndexed,
 } from '@musical-patterns/utilities'
 import * as React from 'react'
 import { connect } from 'react-redux'
@@ -36,21 +40,25 @@ const Presets: (props: PresetsProps) => JSX.Element =
         }
 
         let selectValue: string = ''
-        const options: JSX.Element[] = entries<string, Preset>(presets)
-            .sort(([ _, preset ]: [ string, Preset ], [ __, nextPreset ]: [ string, Preset ]): number => {
-                const order: number = preset.order === undefined ? ARBITRARILY_LARGE_NUMBER : preset.order
-                const nextOrder: number = nextPreset.order === undefined ? ARBITRARILY_LARGE_NUMBER : nextPreset.order
+        const options: JSX.Element[] = map(
+            entries<string, Preset>(presets)
+                .sort(([ _, preset ]: [ string, Preset ], [ __, nextPreset ]: [ string, Preset ]): number => {
+                    const order: number = preset.order === undefined ? ARBITRARILY_LARGE_NUMBER : preset.order
+                    const nextOrder: number = nextPreset.order === undefined ?
+                        ARBITRARILY_LARGE_NUMBER :
+                        nextPreset.order
 
-                return order < nextOrder ? negative(1) : 1
-            })
-            .map(([ presetKey, preset ]: [ string, Preset ], key: number): JSX.Element => {
+                    return order < nextOrder ? negative(1) : 1
+                }),
+            ([ presetKey, preset ]: [ string, Preset ], index: Ordinal): JSX.Element => {
                 const { description, formattedName, spec } = preset
                 if (deepEqual(spec, submittedSpec)) {
                     selectValue = presetKey
                 }
                 const displayName: string = formattedName || camelCaseToLowerCase(presetKey)
+                const key: number = from.Ordinal(translateFromZeroIndexedToOneIndexed(index))
 
-                return <option {...{ key: sum(key, 1), value: presetKey, title: description }}>{displayName}</option>
+                return <option {...{ key, value: presetKey, title: description }}>{displayName}</option>
             })
         options.unshift(<option {...{ disabled: true, key: 0 }}/>)
 
