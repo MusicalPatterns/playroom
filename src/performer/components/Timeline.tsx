@@ -4,15 +4,15 @@ import { timeChangeHandler } from '../events'
 import { TimeControlsPropsFromParent } from './types'
 
 const Timeline: (props: TimeControlsPropsFromParent) => JSX.Element =
-    ({ disabled, totalTimeForDisplay, timeForDisplay }: TimeControlsPropsFromParent): JSX.Element => (
+    ({ disabled, patternDurationForDisplay, timePositionForDisplay }: TimeControlsPropsFromParent): JSX.Element => (
         <input {...{
             disabled,
             id: 'timeline',
-            max: from.Time(totalTimeForDisplay || 0),
+            max: from.Ms(patternDurationForDisplay || 0),
             min: 0,
             onChange: timeChangeHandler,
             type: 'range',
-            value: from.Time(timeForDisplay || 0),
+            value: from.Ms(timePositionForDisplay || 0),
         }}/>
     )
 

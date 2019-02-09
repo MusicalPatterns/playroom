@@ -34,8 +34,8 @@ const TimeControls: (timeControlsProps: TimeControlsProps) => JSX.Element =
             togglePausedHandler,
             stopHandler,
             paused,
-            timeForDisplay,
-            totalTimeForDisplay,
+            timePositionForDisplay,
+            patternDurationForDisplay,
         } = props
 
         const controlId: string = paused ? 'play' : 'pause'
@@ -53,8 +53,8 @@ const TimeControls: (timeControlsProps: TimeControlsProps) => JSX.Element =
                 <button {...{ id: controlId, onClick: togglePausedHandler, disabled }}>
                     <FontAwesomeIcon {...{ icon }}/>
                 </button>
-                <Timeline {...{ disabled, timeForDisplay, totalTimeForDisplay }} />
-                <TimeInMinutesAndSeconds {...{ disabled, timeForDisplay }}/>
+                <Timeline {...{ disabled, timePositionForDisplay, patternDurationForDisplay }} />
+                <TimeInMinutesAndSeconds {...{ disabled, timePositionForDisplay }}/>
             </div>
         )
     }

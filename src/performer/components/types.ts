@@ -1,12 +1,12 @@
-import { Time } from '@musical-patterns/utilities'
+import { Ms } from '@musical-patterns/utilities'
 
 interface MaybeDisabled {
     disabled: boolean,
 }
 
 interface TimeControlsContainerPropsFromState {
-    time: Time,
-    totalDuration: Time,
+    patternDuration: Ms,
+    timePosition: Ms,
 }
 
 interface TimeControlsContainerProps extends TimeControlsContainerPropsFromState, MaybeDisabled {}
@@ -22,8 +22,8 @@ interface TimeControlsPropsFromDispatch {
 }
 
 interface TimeControlsPropsFromParent extends MaybeDisabled {
-    timeForDisplay: Time,
-    totalTimeForDisplay: Time,
+    patternDurationForDisplay: Ms,
+    timePositionForDisplay: Ms,
 }
 
 interface TimeControlsProps extends TimeControlsPropsFromState,
@@ -41,7 +41,7 @@ interface ToggleImmersiveAudioButtonProps extends MaybeDisabled,
     ToggleImmersiveAudioButtonPropsFromState {}
 
 interface TimeInMinutesAndSecondsProps extends MaybeDisabled {
-    timeForDisplay: Time,
+    timePositionForDisplay: Ms,
 }
 
 export {

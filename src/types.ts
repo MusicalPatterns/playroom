@@ -4,7 +4,7 @@ import { Dispatch } from 'redux'
 enum SecretSelectorsForTest {
     SECRET_SUBMITTED_SPEC_CONTROL = 'secret-submitted-spec-control',
     SECRET_TIMER = 'secret-timer',
-    SECRET_TOTAL_DURATION = 'secret-total-duration',
+    SECRET_PATTERN_DURATION = 'secret-pattern-duration',
 }
 
 interface DispatchAsProp {

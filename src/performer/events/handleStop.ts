@@ -10,7 +10,7 @@ const buildStopHandler: (parameters: DispatchAsProp) => () => Promise<void> =
             await stop()
             const batchedAction: BatchAction = batchActions([
                 { type: ActionType.SET_PAUSED, data: true },
-                { type: ActionType.SET_TIME, data: BEGINNING },
+                { type: ActionType.SET_TIME_POSITION, data: BEGINNING },
             ])
             dispatch(batchedAction)
         }

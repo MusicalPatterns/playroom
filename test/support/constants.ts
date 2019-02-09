@@ -8,7 +8,7 @@ import {
     StandardSpecProperties,
 } from '@musical-patterns/pattern'
 import { patterns } from '@musical-patterns/pattern-playroom-test'
-import { DictionaryOf, Milliseconds, to } from '@musical-patterns/utilities'
+import { DictionaryOf, Ms, to } from '@musical-patterns/utilities'
 // @ts-ignore
 import { port } from '../../webpack.port'
 
@@ -69,9 +69,9 @@ const DESKTOP_VIEWPORT_HEIGHT: number = 800
 const MOBILE_VIEWPORT_WIDTH: number = 800
 const MOBILE_VIEWPORT_HEIGHT: number = 800
 
-const LONG_ENOUGH_FOR_TIME_TO_PASS: Milliseconds = to.Milliseconds(100)
-const LONG_ENOUGH_FOR_TIME_TO_HAVE_BEEN_RESET: Milliseconds = to.Milliseconds(100)
-const A_BIT_LONGER: Milliseconds = to.Milliseconds(1000)
+const LONG_ENOUGH_FOR_TIME_TO_PASS: Ms = to.Ms(100)
+const LONG_ENOUGH_FOR_TIME_TO_HAVE_BEEN_RESET: Ms = to.Ms(100)
+const A_BIT_LONGER: Ms = to.Ms(1000)
 
 const TIME_CONTROLS_PATTERN_ID: Id = playroomTestTimeControls.id
 

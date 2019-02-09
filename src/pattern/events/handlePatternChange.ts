@@ -1,5 +1,5 @@
 import { Id, Pattern, Spec, SpecData } from '@musical-patterns/pattern'
-import { setTime, togglePaused } from '@musical-patterns/performer'
+import { setTimePosition, togglePaused } from '@musical-patterns/performer'
 import { BEGINNING, doAsync, Maybe } from '@musical-patterns/utilities'
 import { BatchAction, batchActions } from 'redux-batched-actions'
 import { Action, ActionType } from '../../root'
@@ -47,7 +47,7 @@ const handlePatternChange: PatternChangeEventHandler =
         togglePaused()
 
         doAsync(async () => {
-            await setTime(BEGINNING)
+            await setTimePosition(BEGINNING)
         })
     }
 

@@ -1,5 +1,5 @@
 import { Id, Patterns, Spec } from '@musical-patterns/pattern'
-import { Maybe, Time } from '@musical-patterns/utilities'
+import { Maybe, Ms } from '@musical-patterns/utilities'
 
 interface AppProps {
     id: Maybe<Id>,
@@ -28,7 +28,7 @@ interface PatternListenerPropsFromState {
 }
 
 interface PatternListenerPropsFromDispatch {
-    setTotalDuration: (totalDuration: Time) => void,
+    setTotalDuration: (patternDuration: Ms) => void,
 }
 
 interface PatternListenerProps extends PatternListenerPropsFromState, PatternListenerPropsFromDispatch, PropsFromApp {}

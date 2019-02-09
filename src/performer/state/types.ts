@@ -1,8 +1,8 @@
-import { Time, TypedMap } from '@musical-patterns/utilities'
+import { Ms, TypedMap } from '@musical-patterns/utilities'
 
 enum PerformerStateActionType {
-    SET_TIME = 'SET_TIME',
-    SET_TOTAL_DURATION = 'SET_TOTAL_DURATION',
+    SET_TIME_POSITION = 'SET_TIME_POSITION',
+    SET_PATTERN_DURATION = 'SET_PATTERN_DURATION',
     TOGGLE_PAUSED = 'TOGGLE_PAUSED',
     SET_PAUSED = 'SET_PAUSED',
     SET_TOGGLE_IMMERSIVE_AUDIO_HANDLER = 'SET_TOGGLE_IMMERSIVE_AUDIO_HANDLER',
@@ -20,14 +20,14 @@ interface SetPaused {
     type: PerformerStateActionType.SET_PAUSED,
 }
 
-interface SetTime {
-    data: Time,
-    type: PerformerStateActionType.SET_TIME,
+interface SetTimePosition {
+    data: Ms,
+    type: PerformerStateActionType.SET_TIME_POSITION,
 }
 
 interface SetTotalDuration {
-    data: Time,
-    type: PerformerStateActionType.SET_TOTAL_DURATION,
+    data: Ms,
+    type: PerformerStateActionType.SET_PATTERN_DURATION,
 }
 
 interface SetToggleImmersiveAudioHandler {
@@ -50,7 +50,7 @@ interface ToggleImmersiveAudio {
 type PerformerStateAction =
     TogglePaused |
     SetPaused |
-    SetTime |
+    SetTimePosition |
     SetTotalDuration |
     SetToggleImmersiveAudioHandler |
     SetImmersiveAudioReady |
@@ -58,8 +58,8 @@ type PerformerStateAction =
     ToggleImmersiveAudio
 
 enum PerformerStateKeys {
-    TIME = 'time',
-    TOTAL_DURATION = 'totalDuration',
+    TIME_POSITION = 'timePosition',
+    PATTERN_DURATION = 'patternDuration',
     PAUSED = 'paused',
     TOGGLE_IMMERSIVE_AUDIO_HANDLER = 'toggleImmersiveAudioHandler',
     IMMERSIVE_AUDIO_READY = 'immersiveAudioReady',
@@ -68,8 +68,8 @@ enum PerformerStateKeys {
 }
 
 interface PerformerState {
-    [ PerformerStateKeys.TIME ]: Time,
-    [ PerformerStateKeys.TOTAL_DURATION ]: Time,
+    [ PerformerStateKeys.TIME_POSITION ]: Ms,
+    [ PerformerStateKeys.PATTERN_DURATION ]: Ms,
     [ PerformerStateKeys.PAUSED ]: boolean,
     [ PerformerStateKeys.TOGGLE_IMMERSIVE_AUDIO_HANDLER ]: VoidFunction,
     [ PerformerStateKeys.IMMERSIVE_AUDIO_READY ]: boolean,

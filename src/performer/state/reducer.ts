@@ -18,11 +18,11 @@ const performerReducer: Reducer<ImmutablePerformerState, PerformerStateAction> =
             case PerformerStateActionType.SET_PAUSED: {
                 return performerState.set(PerformerStateKeys.PAUSED, action.data)
             }
-            case PerformerStateActionType.SET_TIME: {
-                return performerState.set(PerformerStateKeys.TIME, action.data)
+            case PerformerStateActionType.SET_TIME_POSITION: {
+                return performerState.set(PerformerStateKeys.TIME_POSITION, action.data)
             }
-            case PerformerStateActionType.SET_TOTAL_DURATION: {
-                return performerState.set(PerformerStateKeys.TOTAL_DURATION, action.data)
+            case PerformerStateActionType.SET_PATTERN_DURATION: {
+                return performerState.set(PerformerStateKeys.PATTERN_DURATION, action.data)
             }
             case PerformerStateActionType.SET_TOGGLE_IMMERSIVE_AUDIO_HANDLER: {
                 return performerState.set(PerformerStateKeys.TOGGLE_IMMERSIVE_AUDIO_HANDLER, action.data)

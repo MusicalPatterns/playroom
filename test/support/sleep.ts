@@ -1,9 +1,9 @@
-import { from, Milliseconds } from '@musical-patterns/utilities'
+import { from, Ms } from '@musical-patterns/utilities'
 
-const sleep: (ms: Milliseconds) => Promise<void> =
-    async (ms: Milliseconds): Promise<void> =>
+const sleep: (ms: Ms) => Promise<void> =
+    async (ms: Ms): Promise<void> =>
         new Promise((resolve: VoidFunction): void => {
-            setTimeout(resolve, from.Milliseconds(ms))
+            setTimeout(resolve, from.Ms(ms))
         })
 
 export {

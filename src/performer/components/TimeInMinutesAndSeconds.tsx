@@ -11,8 +11,8 @@ import * as React from 'react'
 import { TimeInMinutesAndSecondsProps } from './types'
 
 const TimeInMinutesAndSeconds: (props: TimeInMinutesAndSecondsProps) => JSX.Element =
-    ({ disabled, timeForDisplay }: TimeInMinutesAndSecondsProps): JSX.Element => {
-        const totalSeconds: number = round(quotient(from.Time(timeForDisplay), MILLISECONDS_PER_SECOND))
+    ({ disabled, timePositionForDisplay }: TimeInMinutesAndSecondsProps): JSX.Element => {
+        const totalSeconds: number = round(quotient(from.Ms(timePositionForDisplay), MILLISECONDS_PER_SECOND))
         const timeMinutesPart: string = floor(quotient(totalSeconds, SECONDS_PER_MINUTE))
             .toString()
         let timeSecondsPart: string = modulus(totalSeconds, SECONDS_PER_MINUTE)
