@@ -12,10 +12,11 @@ import { TimeInMinutesAndSecondsProps } from './types'
 
 const TimeInMinutesAndSeconds: (props: TimeInMinutesAndSecondsProps) => JSX.Element =
     ({ disabled, timePositionForDisplay }: TimeInMinutesAndSecondsProps): JSX.Element => {
-        const totalSeconds: number = round(quotient(from.Ms(timePositionForDisplay), MILLISECONDS_PER_SECOND))
-        const timeMinutesPart: string = floor(quotient(totalSeconds, SECONDS_PER_MINUTE))
+        const totalSeconds: number =
+            round(quotient(from.Ms(timePositionForDisplay), from.Cardinal(MILLISECONDS_PER_SECOND)))
+        const timeMinutesPart: string = floor(quotient(totalSeconds, from.Cardinal(SECONDS_PER_MINUTE)))
             .toString()
-        let timeSecondsPart: string = modulus(totalSeconds, SECONDS_PER_MINUTE)
+        let timeSecondsPart: string = modulus(totalSeconds, from.Cardinal(SECONDS_PER_MINUTE))
             .toString()
         if (timeSecondsPart.length === 1) {
             timeSecondsPart = `0${timeSecondsPart}`
