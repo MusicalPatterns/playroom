@@ -1,4 +1,4 @@
-@import '../../baseProportions';
+@import '../../baseStyles';
 
 $invalid-message-horizontal-translation-percentage: 100% * (1 - ($phi - 1));
 $invalid-message-opacity: $phi - 1;
