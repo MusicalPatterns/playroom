@@ -7,6 +7,7 @@ import {
     SpecAttributes,
     StandardSpecProperties,
 } from '@musical-patterns/pattern'
+// @ts-ignore
 import { patterns } from '@musical-patterns/pattern-playroom-test'
 import { DictionaryOf, Ms, to } from '@musical-patterns/utilities'
 // @ts-ignore
