@@ -1,5 +1,5 @@
 import { RangedConstraint } from '@musical-patterns/pattern'
-import { apply, Maybe } from '@musical-patterns/utilities'
+import { apply, Maybe, negative } from '@musical-patterns/utilities'
 import { DEFAULT_SPEC_BOUND, TRANSLATION_TO_EXCLUDE_MAX, TRANSLATION_TO_EXCLUDE_MIN } from './constants'
 
 const minAndMaxPropsFromConstraint: (constraint: Maybe<RangedConstraint>) => { max: number, min: number } =
@@ -8,7 +8,7 @@ const minAndMaxPropsFromConstraint: (constraint: Maybe<RangedConstraint>) => { m
             excludeMax = false,
             excludeMin = false,
             max = DEFAULT_SPEC_BOUND,
-            min = DEFAULT_SPEC_BOUND,
+            min = negative(DEFAULT_SPEC_BOUND),
         } = constraint || {}
 
         return {
