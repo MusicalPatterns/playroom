@@ -8,7 +8,7 @@ const minAndMaxPropsFromConstraint: (constraint: Maybe<RangedConstraint>) => { m
             excludeMax = false,
             excludeMin = false,
             max = DEFAULT_SPEC_BOUND,
-            min = negative(DEFAULT_SPEC_BOUND),
+            min = DEFAULT_SPEC_BOUND,
         } = constraint || {}
 
         return {
