@@ -1,4 +1,3 @@
-// @ts-ignore
 import { patterns } from '@musical-patterns/pattern-playroom-test'
 import { setupPlayroom } from './index'
 
