@@ -1,4 +1,4 @@
-import { difference, from, Ms, sum } from '@musical-patterns/utilities'
+import { difference, from, Ms, sleep, sum } from '@musical-patterns/utilities'
 import { ElementHandle } from 'puppeteer'
 import {
     A_BIT_LONGER,
@@ -13,7 +13,6 @@ import {
     patternDuration,
     refreshPage,
     selectOtherTestPattern,
-    sleep,
     SPEC_RANGED_PROPERTY_ONE_KEY,
     TIME_CONTROLS_PATTERN_ID,
     VALID_TEST_MODIFICATION,

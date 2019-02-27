@@ -1,6 +1,6 @@
 import { ElementHandle } from 'puppeteer'
 import { POST_PATTERN_ID, SPEC_CONTROLS_PATTERN_ID } from './constants'
-import { findElement } from './findElement'
+import { findElement } from './generic'
 
 const selectTestPattern: () => Promise<void> =
     async (): Promise<void> => {

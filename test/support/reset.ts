@@ -1,5 +1,5 @@
 import { ElementHandle } from 'puppeteer'
-import { findElement } from './findElement'
+import { findElement } from './generic'
 
 const reset: () => Promise<void> =
     async (): Promise<void> => {

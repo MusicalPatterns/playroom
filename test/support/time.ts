@@ -1,8 +1,7 @@
-import { DECIMAL, from, Ms, to } from '@musical-patterns/utilities'
+import { DECIMAL, from, Ms, sleep, to } from '@musical-patterns/utilities'
 import { SecretSelectorsForTest } from '../../src/indexForTest'
-import { elementInnerText } from './checkElement'
 import { LONG_ENOUGH_FOR_TIME_TO_HAVE_BEEN_RESET, LONG_ENOUGH_FOR_TIME_TO_PASS } from './constants'
-import { sleep } from './sleep'
+import { elementInnerText } from './generic'
 
 const isPaused: () => Promise<void> =
     async (): Promise<void> => {

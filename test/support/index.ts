@@ -1,14 +1,21 @@
-export { sleep } from './sleep'
 export { selectTestPattern, selectOtherTestPattern }from './selectTestPattern'
 export { refreshWithTestPatternSelected, refreshPage }from './refresh'
-export { elementIds, elementCount, elementExists, elementInnerText, elementValue, elementChecked } from './checkElement'
-export { press } from './keyboard'
 export { reset } from './reset'
-export { loseFocus } from './loseFocus'
 export { currentTime, patternDuration, isPlaying, isPaused, hasBeenReset } from './time'
-export { findElement } from './findElement'
-export { simulateDesktopViewport, simulateMobileViewport } from './setViewport'
-export { selectOption } from './selectOption'
+export {
+    selectOption,
+    elementIds,
+    elementCount,
+    elementExists,
+    elementInnerText,
+    elementValue,
+    elementChecked,
+    press,
+    loseFocus,
+    findElement,
+    simulateDesktopViewport,
+    simulateMobileViewport,
+} from './generic'
 
 export {
     APP_URL,
@@ -41,8 +48,6 @@ export {
     SPEC_OPTIONED_PROPERTY_TWO_KEY,
     SPEC_TOGGLED_PROPERTY_KEY,
     SPEC_ARRAYED_PROPERTY_KEY,
-    DESKTOP_VIEWPORT_HEIGHT,
-    DESKTOP_VIEWPORT_WIDTH,
     LONG_ENOUGH_FOR_TIME_TO_PASS,
     LONG_ENOUGH_FOR_TIME_TO_HAVE_BEEN_RESET,
     A_BIT_LONGER,

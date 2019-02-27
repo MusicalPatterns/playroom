@@ -1,4 +1,4 @@
-import { Ms } from '@musical-patterns/utilities'
+import { Ms, sleep } from '@musical-patterns/utilities'
 import {
     A_BIT_LONGER,
     currentTime,
@@ -8,7 +8,6 @@ import {
     isPlaying,
     press,
     refreshWithTestPatternSelected,
-    sleep,
 } from '../../support'
 
 describe('keyboard controls', () => {
