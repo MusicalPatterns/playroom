@@ -8,7 +8,7 @@ import {
 } from '../../support'
 
 describe('hidden inputs', () => {
-    it('can hide the range input', async (done: DoneFn) => {
+    it('some controls hide the range input', async (done: DoneFn) => {
         await refreshWithTestPatternSelected()
 
         expect(await elementExists(`input[type=number]#${SPEC_RANGED_PROPERTY_TWO_KEY}`))
@@ -19,7 +19,7 @@ describe('hidden inputs', () => {
         done()
     })
 
-    it('can hide the number input', async (done: DoneFn) => {
+    it('some controls hide the number input', async (done: DoneFn) => {
         await refreshWithTestPatternSelected()
         const otherTestPattern: ElementHandle = await findElement(`#${POST_PATTERN_ID}`)
         await otherTestPattern.click()

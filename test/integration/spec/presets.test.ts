@@ -8,9 +8,7 @@ import {
     PRESET_ONE_NAME,
     PRESET_ONE_PROPERTY_ONE_VALUE,
     PRESET_ONE_PROPERTY_TWO_VALUE,
-    PRESET_TWO_NAME,
-    PRESET_TWO_PROPERTY_ONE_VALUE,
-    PRESET_TWO_PROPERTY_TWO_VALUE,
+    PRESET_TWO_NAME, PRESET_TWO_PROPERTY_ONE_VALUE, PRESET_TWO_PROPERTY_TWO_VALUE,
     PRESETS_PATTERN_ID,
     refreshWithTestPatternSelected,
     selectOption,
@@ -22,6 +20,63 @@ import {
 } from '../../support'
 
 const PRESETS_SELECT: string = '#presets select'
+
+const selectPresetPattern: () => Promise<void> =
+    async (): Promise<void> => {
+        const testPattern: ElementHandle = await findElement(`#${PRESETS_PATTERN_ID}`)
+        await testPattern.click()
+    }
+
+const bringSpecIntoConformityWithThePreset: () => Promise<void> =
+    async (): Promise<void> => {
+        await selectOption(`select#${SPEC_OPTIONED_PROPERTY_ONE_KEY}`, SPEC_CONTROLS_PATTERN_OPTIONED_PROPERTY_ONE_MODIFIED_VALUE)
+
+        const checkbox: ElementHandle = await findElement(`input#${SPEC_TOGGLED_PROPERTY_KEY}`)
+        await checkbox.click()
+    }
+
+const currentSpecMatchesThePresetAndThusItIsDisplayedInThePresetsDropdown: () => Promise<void> =
+    async (): Promise<void> => {
+        expect(await elementValue(PRESETS_SELECT))
+            .toBe('presetOne')
+    }
+
+const currentSpecMatchesNoPresetsAndThusThePresetsDropdownDisplaysNothing: () => Promise<void> =
+    async (): Promise<void> => {
+        expect(await elementValue(PRESETS_SELECT))
+            .toBe('')
+    }
+
+const breakConformityWithThePreset: () => Promise<void> =
+    async (): Promise<void> => {
+        await selectOption(`select#${SPEC_OPTIONED_PROPERTY_ONE_KEY}`, SPEC_CONTROLS_PATTERN_OPTIONED_PROPERTY_ONE_INITIAL_VALUE)
+    }
+
+const selectAPreset: () => Promise<void> =
+    async (): Promise<void> => {
+        await selectOption(`#presets select`, PRESET_ONE_NAME)
+    }
+
+const selectADifferentPreset: () => Promise<void> =
+    async (): Promise<void> => {
+        await selectOption(`#presets select`, PRESET_TWO_NAME)
+    }
+
+const specIsInConformityWithThePreset: () => Promise<void> =
+    async (): Promise<void> => {
+        expect(await elementInnerText(`#${SPEC_OPTIONED_PROPERTY_ONE_KEY} .${SecretSelectorsForTest.SECRET_SUBMITTED_SPEC_CONTROL}`))
+            .toBe(PRESET_ONE_PROPERTY_ONE_VALUE)
+        expect(await elementInnerText(`#${SPEC_OPTIONED_PROPERTY_TWO_KEY} .${SecretSelectorsForTest.SECRET_SUBMITTED_SPEC_CONTROL}`))
+            .toBe(PRESET_ONE_PROPERTY_TWO_VALUE)
+    }
+
+const specIsInConformityWithTheDifferentPreset: () => Promise<void> =
+    async (): Promise<void> => {
+        expect(await elementInnerText(`#${SPEC_OPTIONED_PROPERTY_ONE_KEY} .${SecretSelectorsForTest.SECRET_SUBMITTED_SPEC_CONTROL}`))
+            .toBe(PRESET_TWO_PROPERTY_ONE_VALUE)
+        expect(await elementInnerText(`#${SPEC_OPTIONED_PROPERTY_TWO_KEY} .${SecretSelectorsForTest.SECRET_SUBMITTED_SPEC_CONTROL}`))
+            .toBe(PRESET_TWO_PROPERTY_TWO_VALUE)
+    }
 
 describe('presets', () => {
     beforeEach(async (done: DoneFn) => {
@@ -39,8 +94,7 @@ describe('presets', () => {
 
     describe('when the pattern has presets', () => {
         beforeEach(async (done: DoneFn) => {
-            const testPattern: ElementHandle = await findElement(`#${PRESETS_PATTERN_ID}`)
-            await testPattern.click()
+            await selectPresetPattern()
 
             done()
         })
@@ -52,49 +106,34 @@ describe('presets', () => {
             done()
         })
 
-        it('shows the preset in the dropdown if the current spec matches it', async (done: DoneFn) => {
-            await selectOption(`select#${SPEC_OPTIONED_PROPERTY_ONE_KEY}`, SPEC_CONTROLS_PATTERN_OPTIONED_PROPERTY_ONE_MODIFIED_VALUE)
-
-            const checkbox: ElementHandle = await findElement(`input#${SPEC_TOGGLED_PROPERTY_KEY}`)
-            await checkbox.click()
-
-            expect(await elementValue(PRESETS_SELECT))
-                .toBe('presetOne')
+        it('displays the preset in the dropdown input whenever the current spec is a match for it', async (done: DoneFn) => {
+            await bringSpecIntoConformityWithThePreset()
+            await currentSpecMatchesThePresetAndThusItIsDisplayedInThePresetsDropdown()
 
             done()
         })
 
         describe('choosing a preset', () => {
             beforeEach(async (done: DoneFn) => {
-                await selectOption(`#presets select`, PRESET_ONE_NAME)
+                await selectAPreset()
 
                 done()
             })
 
             it('sets the spec', async (done: DoneFn) => {
-                expect(await elementInnerText(`#${SPEC_OPTIONED_PROPERTY_ONE_KEY} .${SecretSelectorsForTest.SECRET_SUBMITTED_SPEC_CONTROL}`))
-                    .toBe(PRESET_ONE_PROPERTY_ONE_VALUE)
-                expect(await elementInnerText(`#${SPEC_OPTIONED_PROPERTY_TWO_KEY} .${SecretSelectorsForTest.SECRET_SUBMITTED_SPEC_CONTROL}`))
-                    .toBe(PRESET_ONE_PROPERTY_TWO_VALUE)
+                await specIsInConformityWithThePreset()
 
-                await selectOption(`#presets select`, PRESET_TWO_NAME)
-
-                expect(await elementInnerText(`#${SPEC_OPTIONED_PROPERTY_ONE_KEY} .${SecretSelectorsForTest.SECRET_SUBMITTED_SPEC_CONTROL}`))
-                    .toBe(PRESET_TWO_PROPERTY_ONE_VALUE)
-                expect(await elementInnerText(`#${SPEC_OPTIONED_PROPERTY_TWO_KEY} .${SecretSelectorsForTest.SECRET_SUBMITTED_SPEC_CONTROL}`))
-                    .toBe(PRESET_TWO_PROPERTY_TWO_VALUE)
+                await selectADifferentPreset()
+                await specIsInConformityWithTheDifferentPreset()
 
                 done()
             })
 
             it('stops showing the preset in the dropdown once the current spec no longer matches it', async (done: DoneFn) => {
-                expect(await elementValue(PRESETS_SELECT))
-                    .toBe('presetOne')
+                await currentSpecMatchesThePresetAndThusItIsDisplayedInThePresetsDropdown()
 
-                await selectOption(`select#${SPEC_OPTIONED_PROPERTY_ONE_KEY}`, SPEC_CONTROLS_PATTERN_OPTIONED_PROPERTY_ONE_INITIAL_VALUE)
-
-                expect(await elementValue(PRESETS_SELECT))
-                    .toBe('')
+                await breakConformityWithThePreset()
+                await currentSpecMatchesNoPresetsAndThusThePresetsDropdownDisplaysNothing()
 
                 done()
             })

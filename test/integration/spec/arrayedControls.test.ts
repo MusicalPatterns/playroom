@@ -11,6 +11,134 @@ import {
     VALID_TEST_MODIFICATION,
 } from '../../support'
 
+const clickAdd: () => Promise<void> =
+    async (): Promise<void> => {
+        const addButton: ElementHandle = await findElement(`#${SPEC_ARRAYED_PROPERTY_KEY} .add`)
+        await addButton.click()
+    }
+
+const clickRemove: () => Promise<void> =
+    async (): Promise<void> => {
+        const removeButton: ElementHandle = await findElement(`#${SPEC_ARRAYED_PROPERTY_KEY} .remove`)
+        await removeButton.click()
+    }
+
+const thereIsAnAdditionalField: (originalFieldCount: number) => Promise<void> =
+    async (originalFieldCount: number): Promise<void> => {
+        const updatedFieldCount: number = await elementCount(`#${SPEC_ARRAYED_PROPERTY_KEY} input[type=number]`)
+        expect(updatedFieldCount)
+            .toBe(originalFieldCount + 1)
+    }
+
+const thereIsOneLessField: (originalFieldCount: number) => Promise<void> =
+    async (originalFieldCount: number): Promise<void> => {
+        const updatedFieldCount: number = await elementCount(`#${SPEC_ARRAYED_PROPERTY_KEY} input[type=number]`)
+        expect(updatedFieldCount)
+            .toBe(originalFieldCount - 1)
+    }
+
+const andItHasTheNextIdAfterTheOthers: () => Promise<void> =
+    async (): Promise<void> => {
+        expect(await elementExists(`#${SPEC_ARRAYED_PROPERTY_KEY}-5`))
+            .toBeTruthy()
+    }
+
+const andTheIdThatIsMissingWasTheLastId: () => Promise<void> =
+    async (): Promise<void> => {
+        expect(await elementExists(`#${SPEC_ARRAYED_PROPERTY_KEY}-4`))
+            .toBeFalsy()
+    }
+
+const newFieldExistsButHasNotBeenSubmitted: () => Promise<void> =
+    async (): Promise<void> => {
+        expect(await elementInnerText(`#${SPEC_ARRAYED_PROPERTY_KEY}-5 .${SecretSelectorsForTest.SECRET_SUBMITTED_SPEC_CONTROL}`))
+            .toBe('')
+    }
+
+const andTheOtherNewFieldExistsButHasNotBeenSubmitted: () => Promise<void> =
+    async (): Promise<void> => {
+        expect(await elementInnerText(`#${SPEC_ARRAYED_PROPERTY_KEY}-6 .${SecretSelectorsForTest.SECRET_SUBMITTED_SPEC_CONTROL}`))
+            .toBe('')
+    }
+
+const modifyNewField: () => Promise<void> =
+    async (): Promise<void> => {
+        const newControl: ElementHandle = await findElement(`#${SPEC_ARRAYED_PROPERTY_KEY}-5 input[type=number]`)
+        await newControl.type(VALID_TEST_MODIFICATION)
+    }
+
+const newFieldHasBeenSubmitted: () => Promise<void> =
+    async (): Promise<void> => {
+        expect(await elementInnerText(`#${SPEC_ARRAYED_PROPERTY_KEY}-5 .${SecretSelectorsForTest.SECRET_SUBMITTED_SPEC_CONTROL}`))
+            .toBe(VALID_TEST_MODIFICATION)
+    }
+
+const modifyTheFirstOfTheTwoNewFields: () => Promise<void> =
+    async (): Promise<void> => {
+        await modifyNewField()
+    }
+
+const modifyTheSecondOfTheTwoNewFields: () => Promise<void> =
+    async (): Promise<void> => {
+        const newField: ElementHandle = await findElement(`#${SPEC_ARRAYED_PROPERTY_KEY}-6 input[type=number]`)
+        await newField.type(VALID_TEST_MODIFICATION)
+    }
+
+const theSecondOfTheTwoNewFieldsTheOneYouModifiedIsValidWhileTheFirstOfTheTwoNewFieldsIsBrieflyInvalid: () => Promise<void> =
+    async (): Promise<void> => {
+        expect(await elementExists(`input[type=number]#${SPEC_ARRAYED_PROPERTY_KEY}-5.${SpecControlStates.INVALID}`))
+            .toBeTruthy()
+        expect(await elementExists(`input[type=number]#${SPEC_ARRAYED_PROPERTY_KEY}-6.${SpecControlStates.VALID}`))
+            .toBeTruthy()
+    }
+
+const theFirstOfTheTwoNewFieldsTheOneYouModifiedIsValidWhileTheSecondOfTheTwoNewFieldsIsBrieflyInvalid: () => Promise<void> =
+    async (): Promise<void> => {
+        expect(await elementExists(`input[type=number]#${SPEC_ARRAYED_PROPERTY_KEY}-5.${SpecControlStates.VALID}`))
+            .toBeTruthy()
+        expect(await elementExists(`input[type=number]#${SPEC_ARRAYED_PROPERTY_KEY}-6.${SpecControlStates.INVALID}`))
+            .toBeTruthy()
+    }
+
+const bothNewFieldsAreValidAndSubmitted: () => Promise<void> =
+    async (): Promise<void> => {
+        expect(await elementExists(`input[type=number]#${SPEC_ARRAYED_PROPERTY_KEY}-5.${SpecControlStates.VALID}`))
+            .toBeTruthy()
+        expect(await elementExists(`input[type=number]#${SPEC_ARRAYED_PROPERTY_KEY}-6.${SpecControlStates.VALID}`))
+            .toBeTruthy()
+        expect(await elementInnerText(`#${SPEC_ARRAYED_PROPERTY_KEY}-5 .${SecretSelectorsForTest.SECRET_SUBMITTED_SPEC_CONTROL}`))
+            .toBe(VALID_TEST_MODIFICATION)
+        expect(await elementInnerText(`#${SPEC_ARRAYED_PROPERTY_KEY}-6 .${SecretSelectorsForTest.SECRET_SUBMITTED_SPEC_CONTROL}`))
+            .toBe(VALID_TEST_MODIFICATION)
+    }
+
+const theSubmittedValueForTheArrayedControlAsAWholeIsInItsInitialState: () => Promise<void> =
+    async (): Promise<void> => {
+        expect(await elementInnerText(`#${SPEC_ARRAYED_PROPERTY_KEY} .${SecretSelectorsForTest.SECRET_SUBMITTED_SPEC_CONTROL}`))
+            .toBe(JSON.stringify(SPEC_CONTROLS_PATTERN_ARRAYED_PROPERTY_INITIAL_VALUE))
+    }
+
+const theSubmittedValueForTheArrayedControlAsAWholeIsInItsInitialStateJustWithItsLastElementGone: () => Promise<void> =
+    async (): Promise<void> => {
+        expect(await elementInnerText(`#${SPEC_ARRAYED_PROPERTY_KEY} .${SecretSelectorsForTest.SECRET_SUBMITTED_SPEC_CONTROL}`))
+            .toBe(JSON.stringify(SPEC_CONTROLS_PATTERN_ARRAYED_PROPERTY_INITIAL_VALUE.slice(0, SPEC_CONTROLS_PATTERN_ARRAYED_PROPERTY_INITIAL_VALUE.length - 1)))
+    }
+
+const removeAllTheFields: () => Promise<void> =
+    async (): Promise<void> => {
+        await clickRemove()
+        await clickRemove()
+        await clickRemove()
+        await clickRemove()
+        await clickRemove()
+    }
+
+const removeIsDisabled: () => Promise<void> =
+    async (): Promise<void> => {
+        expect(await elementExists(`#${SPEC_ARRAYED_PROPERTY_KEY} .remove:disabled`))
+            .toBeTruthy()
+    }
+
 describe('arrayed controls', () => {
     beforeEach(async (done: DoneFn) => {
         await refreshWithTestPatternSelected()
@@ -18,166 +146,90 @@ describe('arrayed controls', () => {
     })
 
     describe('adding', () => {
-        it('clicking the add button displays a new blank element at the end of the array', async (done: DoneFn) => {
-            const originalArrayedPropertyElementCount: number = await elementCount(`#${SPEC_ARRAYED_PROPERTY_KEY} input[type=number]`)
+        it('clicking the add button displays a new blank field at the end of the arrayed control', async (done: DoneFn) => {
+            const originalFieldCount: number = await elementCount(`#${SPEC_ARRAYED_PROPERTY_KEY} input[type=number]`)
 
-            const addButton: ElementHandle = await findElement(`#${SPEC_ARRAYED_PROPERTY_KEY} .add`)
-            await addButton.click()
-
-            const updatedArrayedPropertyElementCount: number = await elementCount(`#${SPEC_ARRAYED_PROPERTY_KEY} input[type=number]`)
-
-            expect(updatedArrayedPropertyElementCount)
-                .toBe(originalArrayedPropertyElementCount + 1)
-            expect(await elementExists(`#${SPEC_ARRAYED_PROPERTY_KEY}-5`))
-                .toBeTruthy()
+            await clickAdd()
+            await thereIsAnAdditionalField(originalFieldCount)
+            await andItHasTheNextIdAfterTheOthers()
 
             done()
         })
 
-        it('does not submit the new element until you add something valid to it', async (done: DoneFn) => {
-            const addButton: ElementHandle = await findElement(`#${SPEC_ARRAYED_PROPERTY_KEY} .add`)
-            await addButton.click()
+        it('does not submit the new field until you add something valid to it', async (done: DoneFn) => {
+            await clickAdd()
+            await newFieldExistsButHasNotBeenSubmitted()
 
-            expect(await elementInnerText(`#${SPEC_ARRAYED_PROPERTY_KEY}-0 .${SecretSelectorsForTest.SECRET_SUBMITTED_SPEC_CONTROL}`))
-                .toBe(`${SPEC_CONTROLS_PATTERN_ARRAYED_PROPERTY_INITIAL_VALUE[ 0 ]}`)
-            expect(await elementInnerText(`#${SPEC_ARRAYED_PROPERTY_KEY}-1 .${SecretSelectorsForTest.SECRET_SUBMITTED_SPEC_CONTROL}`))
-                .toBe(`${SPEC_CONTROLS_PATTERN_ARRAYED_PROPERTY_INITIAL_VALUE[ 1 ]}`)
-            expect(await elementInnerText(`#${SPEC_ARRAYED_PROPERTY_KEY}-2 .${SecretSelectorsForTest.SECRET_SUBMITTED_SPEC_CONTROL}`))
-                .toBe(`${SPEC_CONTROLS_PATTERN_ARRAYED_PROPERTY_INITIAL_VALUE[ 2 ]}`)
-            expect(await elementInnerText(`#${SPEC_ARRAYED_PROPERTY_KEY}-3 .${SecretSelectorsForTest.SECRET_SUBMITTED_SPEC_CONTROL}`))
-                .toBe(`${SPEC_CONTROLS_PATTERN_ARRAYED_PROPERTY_INITIAL_VALUE[ 3 ]}`)
-            expect(await elementInnerText(`#${SPEC_ARRAYED_PROPERTY_KEY}-4 .${SecretSelectorsForTest.SECRET_SUBMITTED_SPEC_CONTROL}`))
-                .toBe(`${SPEC_CONTROLS_PATTERN_ARRAYED_PROPERTY_INITIAL_VALUE[ 4 ]}`)
-            expect(await elementInnerText(`#${SPEC_ARRAYED_PROPERTY_KEY}-5 .${SecretSelectorsForTest.SECRET_SUBMITTED_SPEC_CONTROL}`))
-                .toBe('')
-
-            const newControl: ElementHandle = await findElement(`#${SPEC_ARRAYED_PROPERTY_KEY}-5 input[type=number]`)
-            await newControl.type(VALID_TEST_MODIFICATION)
-
-            expect(await elementInnerText(`#${SPEC_ARRAYED_PROPERTY_KEY}-5 .${SecretSelectorsForTest.SECRET_SUBMITTED_SPEC_CONTROL}`))
-                .toBe(VALID_TEST_MODIFICATION)
+            await modifyNewField()
+            await newFieldHasBeenSubmitted()
 
             done()
         })
 
-        it('lets you add two new fields at once', async (done: DoneFn) => {
-            const addButton: ElementHandle = await findElement(`#${SPEC_ARRAYED_PROPERTY_KEY} .add`)
-            await addButton.click()
-            await addButton.click()
+        describe('adding two fields at once', () => {
+            beforeEach(async (done: DoneFn) => {
+                await clickAdd()
+                await clickAdd()
 
-            expect(await elementInnerText(`#${SPEC_ARRAYED_PROPERTY_KEY}-5 .${SecretSelectorsForTest.SECRET_SUBMITTED_SPEC_CONTROL}`))
-                .toBe('')
-            expect(await elementInnerText(`#${SPEC_ARRAYED_PROPERTY_KEY}-6 .${SecretSelectorsForTest.SECRET_SUBMITTED_SPEC_CONTROL}`))
-                .toBe('')
+                done()
+            })
 
-            done()
-        })
+            it('lets you do it', async (done: DoneFn) => {
+                await newFieldExistsButHasNotBeenSubmitted()
+                await andTheOtherNewFieldExistsButHasNotBeenSubmitted()
 
-        it('after adding two fields at once, if you modify the second one, the first new field stays around, marked as invalid, and your modification is not submitted at first, until you modify the other one, then both are submitted at once', async (done: DoneFn) => {
-            const addButton: ElementHandle = await findElement(`#${SPEC_ARRAYED_PROPERTY_KEY} .add`)
-            await addButton.click()
-            await addButton.click()
+                done()
+            })
 
-            const newControl: ElementHandle = await findElement(`input[type=number]#${SPEC_ARRAYED_PROPERTY_KEY}-6`)
-            await newControl.type(VALID_TEST_MODIFICATION)
+            it('lets you modify the first new field before you modify the first', async (done: DoneFn) => {
+                await modifyTheSecondOfTheTwoNewFields()
+                await theSecondOfTheTwoNewFieldsTheOneYouModifiedIsValidWhileTheFirstOfTheTwoNewFieldsIsBrieflyInvalid()
+                await newFieldExistsButHasNotBeenSubmitted()
+                await andTheOtherNewFieldExistsButHasNotBeenSubmitted()
 
-            expect(await elementExists(`input[type=number]#${SPEC_ARRAYED_PROPERTY_KEY}-5.${SpecControlStates.INVALID}`))
-                .toBeTruthy()
-            expect(await elementExists(`input[type=number]#${SPEC_ARRAYED_PROPERTY_KEY}-6.${SpecControlStates.VALID}`))
-                .toBeTruthy()
-            expect(await elementInnerText(`#${SPEC_ARRAYED_PROPERTY_KEY}-5 .${SecretSelectorsForTest.SECRET_SUBMITTED_SPEC_CONTROL}`))
-                .toBe('')
-            expect(await elementInnerText(`#${SPEC_ARRAYED_PROPERTY_KEY}-6 .${SecretSelectorsForTest.SECRET_SUBMITTED_SPEC_CONTROL}`))
-                .toBe('')
+                await modifyTheFirstOfTheTwoNewFields()
+                await bothNewFieldsAreValidAndSubmitted()
 
-            const otherNewControl: ElementHandle = await findElement(`input[type=number]#${SPEC_ARRAYED_PROPERTY_KEY}-5`)
-            await otherNewControl.type(VALID_TEST_MODIFICATION)
+                done()
+            })
 
-            expect(await elementExists(`input[type=number]#${SPEC_ARRAYED_PROPERTY_KEY}-5.${SpecControlStates.VALID}`))
-                .toBeTruthy()
-            expect(await elementExists(`input[type=number]#${SPEC_ARRAYED_PROPERTY_KEY}-6.${SpecControlStates.VALID}`))
-                .toBeTruthy()
-            expect(await elementInnerText(`#${SPEC_ARRAYED_PROPERTY_KEY}-5 .${SecretSelectorsForTest.SECRET_SUBMITTED_SPEC_CONTROL}`))
-                .toBe(VALID_TEST_MODIFICATION)
-            expect(await elementInnerText(`#${SPEC_ARRAYED_PROPERTY_KEY}-6 .${SecretSelectorsForTest.SECRET_SUBMITTED_SPEC_CONTROL}`))
-                .toBe(VALID_TEST_MODIFICATION)
+            it('lets you modify the first new field before you modify the second', async (done: DoneFn) => {
+                await modifyTheFirstOfTheTwoNewFields()
+                await theFirstOfTheTwoNewFieldsTheOneYouModifiedIsValidWhileTheSecondOfTheTwoNewFieldsIsBrieflyInvalid()
+                await newFieldExistsButHasNotBeenSubmitted()
+                await andTheOtherNewFieldExistsButHasNotBeenSubmitted()
 
-            done()
-        })
+                await modifyTheSecondOfTheTwoNewFields()
+                await bothNewFieldsAreValidAndSubmitted()
 
-        it('after adding two fields at once, if you modify the first one, the second new field stays around, marked as invalid, and your modification is not submitted at first, until you modify the other one, then both are submitted at once', async (done: DoneFn) => {
-            const addButton: ElementHandle = await findElement(`#${SPEC_ARRAYED_PROPERTY_KEY} .add`)
-            await addButton.click()
-            await addButton.click()
-
-            const newControl: ElementHandle = await findElement(`input[type=number]#${SPEC_ARRAYED_PROPERTY_KEY}-5`)
-            await newControl.type(VALID_TEST_MODIFICATION)
-
-            expect(await elementExists(`input[type=number]#${SPEC_ARRAYED_PROPERTY_KEY}-5.${SpecControlStates.VALID}`))
-                .toBeTruthy()
-            expect(await elementExists(`input[type=number]#${SPEC_ARRAYED_PROPERTY_KEY}-6.${SpecControlStates.INVALID}`))
-                .toBeTruthy()
-            expect(await elementInnerText(`#${SPEC_ARRAYED_PROPERTY_KEY}-5 .${SecretSelectorsForTest.SECRET_SUBMITTED_SPEC_CONTROL}`))
-                .toBe('')
-            expect(await elementInnerText(`#${SPEC_ARRAYED_PROPERTY_KEY}-6 .${SecretSelectorsForTest.SECRET_SUBMITTED_SPEC_CONTROL}`))
-                .toBe('')
-
-            const otherNewControl: ElementHandle = await findElement(`input[type=number]#${SPEC_ARRAYED_PROPERTY_KEY}-6`)
-            await otherNewControl.type(VALID_TEST_MODIFICATION)
-
-            expect(await elementExists(`input[type=number]#${SPEC_ARRAYED_PROPERTY_KEY}-5.${SpecControlStates.VALID}`))
-                .toBeTruthy()
-            expect(await elementExists(`input[type=number]#${SPEC_ARRAYED_PROPERTY_KEY}-6.${SpecControlStates.VALID}`))
-                .toBeTruthy()
-            expect(await elementInnerText(`#${SPEC_ARRAYED_PROPERTY_KEY}-5 .${SecretSelectorsForTest.SECRET_SUBMITTED_SPEC_CONTROL}`))
-                .toBe(VALID_TEST_MODIFICATION)
-            expect(await elementInnerText(`#${SPEC_ARRAYED_PROPERTY_KEY}-6 .${SecretSelectorsForTest.SECRET_SUBMITTED_SPEC_CONTROL}`))
-                .toBe(VALID_TEST_MODIFICATION)
-
-            done()
+                done()
+            })
         })
     })
 
     describe('removing', () => {
-        it('clicking the remove button removes the last element from the array', async (done: DoneFn) => {
-            const originalArrayedPropertyElementCount: number = await elementCount(`#${SPEC_ARRAYED_PROPERTY_KEY} input[type=number]`)
+        it('clicking the remove button removes the last field from the arrayed control', async (done: DoneFn) => {
+            const originalFieldCount: number = await elementCount(`#${SPEC_ARRAYED_PROPERTY_KEY} input[type=number]`)
 
-            const removeButton: ElementHandle = await findElement(`#${SPEC_ARRAYED_PROPERTY_KEY} .remove`)
-            await removeButton.click()
-
-            const updatedArrayedPropertyElementCount: number = await elementCount(`#${SPEC_ARRAYED_PROPERTY_KEY} input[type=number]`)
-
-            expect(updatedArrayedPropertyElementCount)
-                .toBe(originalArrayedPropertyElementCount - 1)
-            expect(await elementExists(`#${SPEC_ARRAYED_PROPERTY_KEY}-4`))
-                .toBeFalsy()
+            await clickRemove()
+            await thereIsOneLessField(originalFieldCount)
+            await andTheIdThatIsMissingWasTheLastId()
 
             done()
         })
 
-        it('removing the element immediately submits the change to the array', async (done: DoneFn) => {
-            expect(await elementInnerText(`#${SPEC_ARRAYED_PROPERTY_KEY} .${SecretSelectorsForTest.SECRET_SUBMITTED_SPEC_CONTROL}`))
-                .toBe(JSON.stringify(SPEC_CONTROLS_PATTERN_ARRAYED_PROPERTY_INITIAL_VALUE))
+        it('removing the field immediately submits the change to the arrayed control', async (done: DoneFn) => {
+            await theSubmittedValueForTheArrayedControlAsAWholeIsInItsInitialState()
 
-            const removeButton: ElementHandle = await findElement(`#${SPEC_ARRAYED_PROPERTY_KEY} .remove`)
-            await removeButton.click()
-
-            expect(await elementInnerText(`#${SPEC_ARRAYED_PROPERTY_KEY} .${SecretSelectorsForTest.SECRET_SUBMITTED_SPEC_CONTROL}`))
-                .toBe(JSON.stringify(SPEC_CONTROLS_PATTERN_ARRAYED_PROPERTY_INITIAL_VALUE.slice(0, SPEC_CONTROLS_PATTERN_ARRAYED_PROPERTY_INITIAL_VALUE.length - 1)))
+            await clickRemove()
+            await theSubmittedValueForTheArrayedControlAsAWholeIsInItsInitialStateJustWithItsLastElementGone()
 
             done()
         })
 
-        it('disables the remove button when there are no elements left in the array', async (done: DoneFn) => {
-            const removeButton: ElementHandle = await findElement(`#${SPEC_ARRAYED_PROPERTY_KEY} .remove`)
-            await removeButton.click()
-            await removeButton.click()
-            await removeButton.click()
-            await removeButton.click()
-            await removeButton.click()
-
-            expect(await elementExists(`#${SPEC_ARRAYED_PROPERTY_KEY} .remove:disabled`))
-                .toBeTruthy()
+        it('disables the remove button when there are no fields left in the arrayed control', async (done: DoneFn) => {
+            await removeAllTheFields()
+            await removeIsDisabled()
 
             done()
         })

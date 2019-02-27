@@ -5,7 +5,7 @@ export { elementIds, elementCount, elementExists, elementInnerText, elementValue
 export { press } from './keyboard'
 export { reset } from './reset'
 export { loseFocus } from './loseFocus'
-export { currentTime, patternDuration } from './getCurrentTime'
+export { currentTime, patternDuration, isPlaying, isPaused, hasBeenReset } from './time'
 export { findElement } from './findElement'
 export { simulateDesktopViewport, simulateMobileViewport } from './setViewport'
 export { selectOption } from './selectOption'
