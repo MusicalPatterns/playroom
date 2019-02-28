@@ -1,0 +1,24 @@
+@import './sizes';
+@import '../../colors';
+
+#spec-panel-header {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  align-items: center;
+
+  button {
+    background-color: $right-panel-background;
+
+    @include no-glow();
+
+    height: $spec-panel-caret-size;
+    min-width: $spec-panel-caret-size;
+
+    svg.fa-caret-down,
+    svg.fa-caret-right {
+      width: $spec-panel-caret-size;
+      height: $spec-panel-caret-size;
+    }
+  }
+}

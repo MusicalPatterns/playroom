@@ -2,15 +2,20 @@ import { ElementHandle } from 'puppeteer'
 import {
     elementExists,
     findElement,
+    openSpecControlsIfNotOpen,
     POST_PATTERN_ID,
-    refreshWithTestPatternSelected,
     SPEC_RANGED_PROPERTY_TWO_KEY,
+    toggleToOtherPatternThenBackToTestPattern,
 } from '../../support'
 
 describe('hidden inputs', () => {
-    it('some controls hide the range input', async (done: DoneFn) => {
-        await refreshWithTestPatternSelected()
+    beforeEach(async (done: DoneFn) => {
+        await toggleToOtherPatternThenBackToTestPattern()
+        await openSpecControlsIfNotOpen()
+        done()
+    })
 
+    it('some controls hide the range input', async (done: DoneFn) => {
         expect(await elementExists(`input[type=number]#${SPEC_RANGED_PROPERTY_TWO_KEY}`))
             .toBeTruthy()
         expect(await elementExists(`input[type=range]#${SPEC_RANGED_PROPERTY_TWO_KEY}`))
@@ -20,7 +25,6 @@ describe('hidden inputs', () => {
     })
 
     it('some controls hide the number input', async (done: DoneFn) => {
-        await refreshWithTestPatternSelected()
         const otherTestPattern: ElementHandle = await findElement(`#${POST_PATTERN_ID}`)
         await otherTestPattern.click()
 

@@ -4,7 +4,7 @@ import {
     elementIds,
     elementInnerText,
     findElement,
-    refreshWithTestPatternSelected,
+    openSpecControlsIfNotOpen,
     selectOption,
     SPEC_ARRAYED_PROPERTY_KEY,
     SPEC_CONTROLS_PATTERN_ARRAYED_PROPERTY_INITIAL_VALUE,
@@ -18,6 +18,7 @@ import {
     SPEC_RANGED_PROPERTY_ONE_KEY,
     SPEC_RANGED_PROPERTY_TWO_KEY,
     SPEC_TOGGLED_PROPERTY_KEY,
+    toggleToOtherPatternThenBackToTestPattern,
     VALID_TEST_MODIFICATION,
 } from '../../support'
 
@@ -110,7 +111,8 @@ const controlsAreInOrder: () => Promise<void> =
 // tslint:disable-next-line no-type-definitions-outside-types-modules
 describe('submitting spec changes', () => {
     beforeEach(async (done: DoneFn) => {
-        await refreshWithTestPatternSelected()
+        await toggleToOtherPatternThenBackToTestPattern()
+        await openSpecControlsIfNotOpen()
         done()
     })
 

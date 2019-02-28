@@ -1,13 +1,15 @@
-import { Response } from 'puppeteer'
 import { page } from '../setup'
 import { APP_URL } from './constants'
+import { simulateDesktopViewport } from './generic'
 import { selectOtherTestPattern, selectTestPattern } from './selectTestPattern'
 
-const refreshPage: () => Promise<Response | null> =
-    async (): Promise<Response | null> =>
-        page.goto(APP_URL)
+const refreshPage: () => Promise<void> =
+    async (): Promise<void> => {
+        await page.goto(APP_URL)
+        await simulateDesktopViewport()
+    }
 
-const refreshWithTestPatternSelected: () => Promise<void> =
+const toggleToOtherPatternThenBackToTestPattern: () => Promise<void> =
     async (): Promise<void> => {
         await selectOtherTestPattern()
         await selectTestPattern()
@@ -15,5 +17,5 @@ const refreshWithTestPatternSelected: () => Promise<void> =
 
 export {
     refreshPage,
-    refreshWithTestPatternSelected,
+    toggleToOtherPatternThenBackToTestPattern,
 }

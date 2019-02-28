@@ -5,9 +5,10 @@ import {
     elementExists,
     elementInnerText,
     findElement,
-    refreshWithTestPatternSelected,
+    openSpecControlsIfNotOpen,
     SPEC_ARRAYED_PROPERTY_KEY,
     SPEC_CONTROLS_PATTERN_ARRAYED_PROPERTY_INITIAL_VALUE,
+    toggleToOtherPatternThenBackToTestPattern,
     VALID_TEST_MODIFICATION,
 } from '../../support'
 
@@ -141,7 +142,8 @@ const removeIsDisabled: () => Promise<void> =
 
 describe('arrayed controls', () => {
     beforeEach(async (done: DoneFn) => {
-        await refreshWithTestPatternSelected()
+        await toggleToOtherPatternThenBackToTestPattern()
+        await openSpecControlsIfNotOpen()
         done()
     })
 

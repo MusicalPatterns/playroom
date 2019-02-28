@@ -21,24 +21,24 @@ const elementValue: (selector: string) => Promise<any> =
     async (selector: string): Promise<any> =>
         utilitiesElementValue(page, selector)
 
-const elementExists: (selector: string) => Promise<any> =
-    async (selector: string): Promise<any> =>
+const elementExists: (selector: string) => Promise<boolean> =
+    async (selector: string): Promise<boolean> =>
         utilitiesElementExists(page, selector)
 
-const elementInnerText: (selector: string) => Promise<any> =
-    async (selector: string): Promise<any> =>
+const elementInnerText: (selector: string) => Promise<string> =
+    async (selector: string): Promise<string> =>
         utilitiesElementInnerText(page, selector)
 
-const elementChecked: (selector: string) => Promise<any> =
-    async (selector: string): Promise<any> =>
+const elementChecked: (selector: string) => Promise<boolean> =
+    async (selector: string): Promise<boolean> =>
         utilitiesElementChecked(page, selector)
 
-const elementCount: (selector: string) => Promise<any> =
-    async (selector: string): Promise<any> =>
+const elementCount: (selector: string) => Promise<number> =
+    async (selector: string): Promise<number> =>
         utilitiesElementCount(page, selector)
 
-const elementIds: (selector: string) => Promise<any> =
-    async (selector: string): Promise<any> =>
+const elementIds: (selector: string) => Promise<string[]> =
+    async (selector: string): Promise<string[]> =>
         utilitiesElementIds(page, selector)
 
 const findElement: (selector: string) => Promise<ElementHandle> =

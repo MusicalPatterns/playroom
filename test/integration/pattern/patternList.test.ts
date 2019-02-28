@@ -6,12 +6,12 @@ import {
     elementInnerText,
     elementValue,
     findElement,
+    openSpecControlsIfNotOpen,
     POST_PATTERN_OPTIONED_PROPERTY_ONE_INITIAL_VALUE,
     POST_PATTERN_OPTIONED_PROPERTY_TWO_INITIAL_VALUE,
     POST_PATTERN_RANGED_PROPERTY_ONE_INITIAL_VALUE,
     POST_PATTERN_RANGED_PROPERTY_TWO_INITIAL_VALUE,
     refreshPage,
-    refreshWithTestPatternSelected,
     selectOption,
     selectOtherTestPattern,
     selectTestPattern,
@@ -25,6 +25,7 @@ import {
     SPEC_OPTIONED_PROPERTY_TWO_KEY,
     SPEC_RANGED_PROPERTY_ONE_KEY,
     SPEC_RANGED_PROPERTY_TWO_KEY,
+    toggleToOtherPatternThenBackToTestPattern,
     VALID_TEST_MODIFICATION,
 } from '../../support'
 
@@ -104,7 +105,8 @@ describe('pattern list', () => {
 
     describe('after selecting a pattern', () => {
         beforeEach(async (done: DoneFn) => {
-            await refreshWithTestPatternSelected()
+            await toggleToOtherPatternThenBackToTestPattern()
+            await openSpecControlsIfNotOpen()
             done()
         })
 

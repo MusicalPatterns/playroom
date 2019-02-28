@@ -30,6 +30,9 @@ const specReducer: Reducer<ImmutableSpecState, SpecStateAction> =
             case SpecStateActionType.SET_PRESETS: {
                 return specState.set(SpecStateKeys.PRESETS, action.data)
             }
+            case SpecStateActionType.TOGGLE_SPEC_PANEL_OPEN: {
+                return specState.set(SpecStateKeys.SPEC_PANEL_OPEN, !specState.get(SpecStateKeys.SPEC_PANEL_OPEN))
+            }
             default: {
                 return specState
             }

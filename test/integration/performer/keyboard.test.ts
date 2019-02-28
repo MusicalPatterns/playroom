@@ -7,12 +7,12 @@ import {
     isPaused,
     isPlaying,
     press,
-    refreshWithTestPatternSelected,
+    toggleToOtherPatternThenBackToTestPattern,
 } from '../../support'
 
 describe('keyboard controls', () => {
     beforeEach(async (done: DoneFn) => {
-        await refreshWithTestPatternSelected()
+        await toggleToOtherPatternThenBackToTestPattern()
         done()
     })
 

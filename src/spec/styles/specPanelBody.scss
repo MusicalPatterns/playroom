@@ -1,0 +1,16 @@
+@import '../../effects';
+@import './sizes';
+
+#spec-panel-body {
+  @include animate(max-height);
+
+  overflow: hidden;
+
+  &.open {
+    max-height: $spec-panel-max-height-for-animation;
+  }
+
+  &.closed {
+    max-height: 0;
+  }
+}

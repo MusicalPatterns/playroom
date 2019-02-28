@@ -10,6 +10,7 @@ enum SpecStateKeys {
     SPEC_ATTRIBUTES = 'SPEC_ATTRIBUTES',
     VALIDATION_FUNCTION = 'VALIDATION_FUNCTION',
     PRESETS = 'PRESETS',
+    SPEC_PANEL_OPEN = 'SPEC_PANEL_OPEN',
 }
 
 interface SpecState {
@@ -20,6 +21,7 @@ interface SpecState {
     [ SpecStateKeys.SPEC_ATTRIBUTES ]: SpecAttributes,
     [ SpecStateKeys.VALIDATION_FUNCTION ]: Maybe<SpecValidationFunction>,
     [ SpecStateKeys.PRESETS ]: Maybe<DictionaryOf<Preset>>,
+    [ SpecStateKeys.SPEC_PANEL_OPEN ]: boolean,
 }
 
 type ImmutableSpecState = TypedMap<SpecState>
@@ -32,6 +34,7 @@ enum SpecStateActionType {
     SET_SPEC_ATTRIBUTES = 'SET_SPEC_ATTRIBUTES',
     SET_VALIDATION_FUNCTION = 'SET_VALIDATION_FUNCTION',
     SET_PRESETS = 'SET_PRESETS',
+    TOGGLE_SPEC_PANEL_OPEN = 'TOGGLE_SPEC_PANEL_OPEN',
 }
 
 interface SetInitialSpec {
@@ -69,6 +72,10 @@ interface SetPresets {
     type: SpecStateActionType.SET_PRESETS,
 }
 
+interface ToggleSpecPanelOpen {
+    type: SpecStateActionType.TOGGLE_SPEC_PANEL_OPEN,
+}
+
 type SpecStateAction =
     SetInitialSpec |
     SetSubmittedSpec |
@@ -76,7 +83,8 @@ type SpecStateAction =
     SetInvalidSpecMessages |
     SetSpecAttributes |
     SetValidationFunction |
-    SetPresets
+    SetPresets |
+    ToggleSpecPanelOpen
 
 export {
     SpecState,

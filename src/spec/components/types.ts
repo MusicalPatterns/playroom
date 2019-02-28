@@ -63,6 +63,16 @@ interface UnitsProps {
     units: string,
 }
 
+interface SpecPanelOpenAsProp {
+    specPanelOpen: boolean,
+}
+
+interface SpecPanelHeaderPropsFromDispatch {
+    handleCaretClick: VoidFunction,
+}
+
+interface SpecPanelHeaderProps extends SpecPanelOpenAsProp, SpecPanelHeaderPropsFromDispatch {}
+
 export {
     SpecControlStates,
     SpecControlProps,
@@ -78,4 +88,7 @@ export {
     PresetsProps,
     InvalidMessageProps,
     UnitsProps,
+    SpecPanelOpenAsProp,
+    SpecPanelHeaderPropsFromDispatch,
+    SpecPanelHeaderProps,
 }

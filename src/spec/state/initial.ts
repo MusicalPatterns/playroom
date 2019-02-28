@@ -10,6 +10,7 @@ const initialSpecState: ImmutableSpecState = typedMap<SpecState>({
     [ SpecStateKeys.SPEC_ATTRIBUTES ]: standardSpecAttributes,
     [ SpecStateKeys.VALIDATION_FUNCTION ]: undefined,
     [ SpecStateKeys.PRESETS ]: undefined,
+    [ SpecStateKeys.SPEC_PANEL_OPEN ]: false,
 })
 
 export {

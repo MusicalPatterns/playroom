@@ -1,6 +1,7 @@
 export { selectTestPattern, selectOtherTestPattern }from './selectTestPattern'
-export { refreshWithTestPatternSelected, refreshPage }from './refresh'
+export { toggleToOtherPatternThenBackToTestPattern, refreshPage }from './refresh'
 export { reset } from './reset'
+export { openSpecControlsIfNotOpen } from './caret'
 export { currentTime, patternDuration, isPlaying, isPaused, hasBeenReset } from './time'
 export {
     selectOption,
