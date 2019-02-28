@@ -1,5 +1,11 @@
 import { ElementHandle } from 'puppeteer'
-import { elementExists, elementInnerText, findElement, refreshPage, refreshWithTestPatternSelected } from '../../support'
+import {
+    elementExists,
+    elementInnerText,
+    findElement,
+    refreshPage,
+    refreshWithTestPatternSelected,
+} from '../../support'
 
 const IMMERSIVE_AUDIO_TOGGLE: string = '#toggle-immersive-audio'
 

@@ -8,7 +8,6 @@ import {
     map,
     negative,
     Ordinal,
-    sum,
     translateFromZeroIndexedToOneIndexed,
 } from '@musical-patterns/utilities'
 import * as React from 'react'

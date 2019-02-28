@@ -1,6 +1,5 @@
 import { Preset, Spec, SpecAttributes, SpecValidationFunction } from '@musical-patterns/pattern'
 import { DictionaryOf, Ordinal } from '@musical-patterns/utilities'
-import { Dispatch } from 'redux'
 import { DispatchAsProp, EventAsProp } from '../../types'
 import { AddOrRemoveButtonPropsFromParent } from '../components'
 import { ImmutableSpecState } from '../state'
