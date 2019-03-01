@@ -9,6 +9,7 @@ import {
     openSpecControlsIfNotOpen,
     press,
     reset,
+    resetSpecByTogglingToOtherPatternThenBackToTestPattern,
     selectOption,
     SPEC_CONTROLS_PATTERN_OPTIONED_PROPERTY_ONE_INITIAL_VALUE,
     SPEC_CONTROLS_PATTERN_OPTIONED_PROPERTY_ONE_MODIFIED_VALUE,
@@ -20,7 +21,6 @@ import {
     SPEC_RANGED_PROPERTY_ONE_KEY,
     SPEC_RANGED_PROPERTY_TWO_KEY,
     SPEC_TOGGLED_PROPERTY_KEY,
-    toggleToOtherPatternThenBackToTestPattern,
     VALID_TEST_MODIFICATION,
 } from '../../support'
 
@@ -107,7 +107,7 @@ const controlIsBackToValid: () => Promise<void> =
 
 describe('reset button', () => {
     beforeEach(async (done: DoneFn) => {
-        await toggleToOtherPatternThenBackToTestPattern()
+        await resetSpecByTogglingToOtherPatternThenBackToTestPattern()
         await openSpecControlsIfNotOpen()
         done()
     })

@@ -6,7 +6,7 @@ import { BuildAttemptSubmitActionsParameters } from './types'
 import { validateSubmittedSpec } from './validateSubmittedSpec'
 
 const buildAttemptSubmitActions: (parameters: BuildAttemptSubmitActionsParameters) => Action[] =
-    ({ specState, specKey, specValue }: BuildAttemptSubmitActionsParameters): Action[] => {
+    ({ specState, specKey, specValue, suppressInvalidMessages }: BuildAttemptSubmitActionsParameters): Action[] => {
         const displayedSpec: Spec = specState.get(SpecStateKeys.DISPLAYED_SPEC)
         const submittedSpec: Spec = specState.get(SpecStateKeys.SUBMITTED_SPEC)
         const specAttributes: SpecAttributes = specState.get(SpecStateKeys.SPEC_ATTRIBUTES)
@@ -24,8 +24,11 @@ const buildAttemptSubmitActions: (parameters: BuildAttemptSubmitActionsParameter
 
         const actions: Action[] = [
             { type: ActionType.SET_DISPLAYED_SPEC, data: updatedDisplayedSpec },
-            { type: ActionType.SET_INVALID_SPEC_MESSAGES, data: updatedInvalidMessages },
         ]
+
+        if (!suppressInvalidMessages) {
+            actions.push({ type: ActionType.SET_INVALID_SPEC_MESSAGES, data: updatedInvalidMessages })
+        }
 
         if (isValid) {
             actions.push({ type: ActionType.SET_SUBMITTED_SPEC, data: updatedSubmittedSpec })

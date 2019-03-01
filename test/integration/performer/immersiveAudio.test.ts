@@ -4,7 +4,7 @@ import {
     elementInnerText,
     findElement,
     refreshPage,
-    toggleToOtherPatternThenBackToTestPattern,
+    resetSpecByTogglingToOtherPatternThenBackToTestPattern,
 } from '../../support'
 
 const IMMERSIVE_AUDIO_TOGGLE: string = '#toggle-immersive-audio'
@@ -20,7 +20,7 @@ describe('immersive audio', () => {
 
     describe('after selecting a pattern', () => {
         beforeEach(async (done: DoneFn) => {
-            await toggleToOtherPatternThenBackToTestPattern()
+            await resetSpecByTogglingToOtherPatternThenBackToTestPattern()
             done()
         })
 

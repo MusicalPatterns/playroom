@@ -5,6 +5,7 @@ interface BuildAttemptSubmitActionsParameters {
     specKey: string,
     specState: ImmutableSpecState,
     specValue: SpecValue,
+    suppressInvalidMessages?: boolean,
 }
 
 export {

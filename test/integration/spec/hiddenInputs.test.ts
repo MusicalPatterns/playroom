@@ -4,13 +4,13 @@ import {
     findElement,
     openSpecControlsIfNotOpen,
     POST_PATTERN_ID,
+    resetSpecByTogglingToOtherPatternThenBackToTestPattern,
     SPEC_RANGED_PROPERTY_TWO_KEY,
-    toggleToOtherPatternThenBackToTestPattern,
 } from '../../support'
 
 describe('hidden inputs', () => {
     beforeEach(async (done: DoneFn) => {
-        await toggleToOtherPatternThenBackToTestPattern()
+        await resetSpecByTogglingToOtherPatternThenBackToTestPattern()
         await openSpecControlsIfNotOpen()
         done()
     })

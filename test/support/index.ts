@@ -1,5 +1,5 @@
 export { selectTestPattern, selectOtherTestPattern }from './selectTestPattern'
-export { toggleToOtherPatternThenBackToTestPattern, refreshPage }from './refresh'
+export { resetSpecByTogglingToOtherPatternThenBackToTestPattern, refreshPage }from './refresh'
 export { reset } from './reset'
 export { openSpecControlsIfNotOpen } from './caret'
 export { currentTime, patternDuration, isPlaying, isPaused, hasBeenReset } from './time'
@@ -32,6 +32,8 @@ export {
     SPEC_CONTROLS_PATTERN_TOGGLED_PROPERTY_INITIAL_VALUE,
     SPEC_CONTROLS_PATTERN_TOGGLED_PROPERTY_MODIFIED_VALUE,
     SPEC_CONTROLS_PATTERN_ARRAYED_PROPERTY_INITIAL_VALUE,
+    SPEC_CONTROLS_PATTERN_ARRAYED_PROPERTY_WITH_INITIAL_ELEMENT_VALUE_INITIAL_VALUE,
+    SPEC_CONTROLS_PATTERN_ARRAYED_PROPERTY_WITH_INITIAL_ELEMENT_VALUE_INITIAL_ELEMENT_VALUE,
     POST_PATTERN_ID,
     POST_PATTERN_TITLE,
     POST_PATTERN_RANGED_PROPERTY_TWO_INITIAL_VALUE,
@@ -49,6 +51,7 @@ export {
     SPEC_OPTIONED_PROPERTY_TWO_KEY,
     SPEC_TOGGLED_PROPERTY_KEY,
     SPEC_ARRAYED_PROPERTY_KEY,
+    SPEC_ARRAYED_PROPERTY_WITH_INITIAL_ELEMENT_VALUE_KEY,
     LONG_ENOUGH_FOR_TIME_TO_PASS,
     LONG_ENOUGH_FOR_TIME_TO_HAVE_BEEN_RESET,
     A_BIT_LONGER,

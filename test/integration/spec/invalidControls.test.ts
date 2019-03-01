@@ -12,6 +12,7 @@ import {
     openSpecControlsIfNotOpen,
     OUT_OF_RANGE_INVALID_TEST_MODIFICATION,
     press,
+    resetSpecByTogglingToOtherPatternThenBackToTestPattern,
     selectOption,
     SPEC_ARRAYED_PROPERTY_KEY,
     SPEC_CONTROLS_PATTERN_OPTIONED_PROPERTY_ONE_MODIFIED_VALUE,
@@ -20,7 +21,6 @@ import {
     SPEC_OPTIONED_PROPERTY_ONE_KEY,
     SPEC_RANGED_PROPERTY_ONE_KEY,
     SPEC_RANGED_PROPERTY_TWO_KEY,
-    toggleToOtherPatternThenBackToTestPattern,
     VALID_TEST_MODIFICATION,
     VALIDATION_PATTERN_ID,
 } from '../../support'
@@ -109,7 +109,7 @@ describe('invalid controls', () => {
 
     const selectCustomValidationPattern: () => Promise<void> =
         async (): Promise<void> => {
-            await toggleToOtherPatternThenBackToTestPattern()
+            await resetSpecByTogglingToOtherPatternThenBackToTestPattern()
             const testPattern: ElementHandle = await findElement(`#${VALIDATION_PATTERN_ID}`)
             await testPattern.click()
         }
@@ -190,7 +190,7 @@ describe('invalid controls', () => {
 
     describe('bad format', () => {
         beforeEach(async (done: DoneFn) => {
-            await toggleToOtherPatternThenBackToTestPattern()
+            await resetSpecByTogglingToOtherPatternThenBackToTestPattern()
             await openSpecControlsIfNotOpen()
             await modifyControlToBeBadlyFormatted()
 
@@ -241,7 +241,7 @@ describe('invalid controls', () => {
 
     describe('out of range', () => {
         beforeEach(async (done: DoneFn) => {
-            await toggleToOtherPatternThenBackToTestPattern()
+            await resetSpecByTogglingToOtherPatternThenBackToTestPattern()
             await modifyControlToBeOutOfRange()
 
             done()
@@ -291,7 +291,7 @@ describe('invalid controls', () => {
 
     describe('arrayed controls', () => {
         beforeEach(async (done: DoneFn) => {
-            await toggleToOtherPatternThenBackToTestPattern()
+            await resetSpecByTogglingToOtherPatternThenBackToTestPattern()
             await invalidateJustOneFieldOfAnArrayedControl()
 
             done()

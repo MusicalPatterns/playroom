@@ -5,8 +5,10 @@ import {
     elementInnerText,
     findElement,
     openSpecControlsIfNotOpen,
+    resetSpecByTogglingToOtherPatternThenBackToTestPattern,
     selectOption,
     SPEC_ARRAYED_PROPERTY_KEY,
+    SPEC_ARRAYED_PROPERTY_WITH_INITIAL_ELEMENT_VALUE_KEY,
     SPEC_CONTROLS_PATTERN_ARRAYED_PROPERTY_INITIAL_VALUE,
     SPEC_CONTROLS_PATTERN_OPTIONED_PROPERTY_ONE_MODIFIED_VALUE,
     SPEC_CONTROLS_PATTERN_OPTIONED_PROPERTY_TWO_MODIFIED_VALUE,
@@ -18,7 +20,6 @@ import {
     SPEC_RANGED_PROPERTY_ONE_KEY,
     SPEC_RANGED_PROPERTY_TWO_KEY,
     SPEC_TOGGLED_PROPERTY_KEY,
-    toggleToOtherPatternThenBackToTestPattern,
     VALID_TEST_MODIFICATION,
 } from '../../support'
 
@@ -103,6 +104,9 @@ const controlsAreInOrder: () => Promise<void> =
                 `${SPEC_ARRAYED_PROPERTY_KEY}-2`,
                 `${SPEC_ARRAYED_PROPERTY_KEY}-3`,
                 `${SPEC_ARRAYED_PROPERTY_KEY}-4`,
+                `${SPEC_ARRAYED_PROPERTY_WITH_INITIAL_ELEMENT_VALUE_KEY}-0`,
+                `${SPEC_ARRAYED_PROPERTY_WITH_INITIAL_ELEMENT_VALUE_KEY}-1`,
+                `${SPEC_ARRAYED_PROPERTY_WITH_INITIAL_ELEMENT_VALUE_KEY}-2`,
                 SPEC_RANGED_PROPERTY_ONE_KEY,
                 SPEC_RANGED_PROPERTY_TWO_KEY,
             ])
@@ -111,7 +115,7 @@ const controlsAreInOrder: () => Promise<void> =
 // tslint:disable-next-line no-type-definitions-outside-types-modules
 describe('submitting spec changes', () => {
     beforeEach(async (done: DoneFn) => {
-        await toggleToOtherPatternThenBackToTestPattern()
+        await resetSpecByTogglingToOtherPatternThenBackToTestPattern()
         await openSpecControlsIfNotOpen()
         done()
     })

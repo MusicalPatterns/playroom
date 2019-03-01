@@ -1,9 +1,9 @@
-import { elementExists, openSpecControlsIfNotOpen, refreshPage, toggleToOtherPatternThenBackToTestPattern } from '../../support'
+import { elementExists, openSpecControlsIfNotOpen, refreshPage, resetSpecByTogglingToOtherPatternThenBackToTestPattern } from '../../support'
 
 describe('expanding and collapsing spec controls', () => {
     beforeEach(async (done: DoneFn) => {
         await refreshPage()
-        await toggleToOtherPatternThenBackToTestPattern()
+        await resetSpecByTogglingToOtherPatternThenBackToTestPattern()
         done()
     })
 

@@ -13,13 +13,13 @@ import {
     PRESET_TWO_PROPERTY_ONE_VALUE,
     PRESET_TWO_PROPERTY_TWO_VALUE,
     PRESETS_PATTERN_ID,
+    resetSpecByTogglingToOtherPatternThenBackToTestPattern,
     selectOption,
     SPEC_CONTROLS_PATTERN_OPTIONED_PROPERTY_ONE_INITIAL_VALUE,
     SPEC_CONTROLS_PATTERN_OPTIONED_PROPERTY_ONE_MODIFIED_VALUE,
     SPEC_OPTIONED_PROPERTY_ONE_KEY,
     SPEC_OPTIONED_PROPERTY_TWO_KEY,
     SPEC_TOGGLED_PROPERTY_KEY,
-    toggleToOtherPatternThenBackToTestPattern,
 } from '../../support'
 
 const PRESETS_SELECT: string = '#presets select'
@@ -83,7 +83,7 @@ const specIsInConformityWithTheDifferentPreset: () => Promise<void> =
 
 describe('presets', () => {
     beforeEach(async (done: DoneFn) => {
-        await toggleToOtherPatternThenBackToTestPattern()
+        await resetSpecByTogglingToOtherPatternThenBackToTestPattern()
         await openSpecControlsIfNotOpen()
 
         done()

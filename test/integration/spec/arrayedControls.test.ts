@@ -6,15 +6,25 @@ import {
     elementInnerText,
     findElement,
     openSpecControlsIfNotOpen,
+    refreshPage,
+    resetSpecByTogglingToOtherPatternThenBackToTestPattern,
     SPEC_ARRAYED_PROPERTY_KEY,
+    SPEC_ARRAYED_PROPERTY_WITH_INITIAL_ELEMENT_VALUE_KEY,
     SPEC_CONTROLS_PATTERN_ARRAYED_PROPERTY_INITIAL_VALUE,
-    toggleToOtherPatternThenBackToTestPattern,
+    SPEC_CONTROLS_PATTERN_ARRAYED_PROPERTY_WITH_INITIAL_ELEMENT_VALUE_INITIAL_ELEMENT_VALUE,
+    SPEC_CONTROLS_PATTERN_ARRAYED_PROPERTY_WITH_INITIAL_ELEMENT_VALUE_INITIAL_VALUE,
     VALID_TEST_MODIFICATION,
 } from '../../support'
 
 const clickAdd: () => Promise<void> =
     async (): Promise<void> => {
         const addButton: ElementHandle = await findElement(`#${SPEC_ARRAYED_PROPERTY_KEY} .add`)
+        await addButton.click()
+    }
+
+const clickAddForTheArrayedControlWithTheInitialElementValue: () => Promise<void> =
+    async (): Promise<void> => {
+        const addButton: ElementHandle = await findElement(`#${SPEC_ARRAYED_PROPERTY_WITH_INITIAL_ELEMENT_VALUE_KEY} .add`)
         await addButton.click()
     }
 
@@ -31,6 +41,13 @@ const thereIsAnAdditionalField: (originalFieldCount: number) => Promise<void> =
             .toBe(originalFieldCount + 1)
     }
 
+const thereIsAnAdditionalFieldForTheArrayedControlWithTheInitialElementValue: (originalFieldCount: number) => Promise<void> =
+    async (originalFieldCount: number): Promise<void> => {
+        const updatedFieldCount: number = await elementCount(`#${SPEC_ARRAYED_PROPERTY_WITH_INITIAL_ELEMENT_VALUE_KEY} input[type=number]`)
+        expect(updatedFieldCount)
+            .toBe(originalFieldCount + 1)
+    }
+
 const thereIsOneLessField: (originalFieldCount: number) => Promise<void> =
     async (originalFieldCount: number): Promise<void> => {
         const updatedFieldCount: number = await elementCount(`#${SPEC_ARRAYED_PROPERTY_KEY} input[type=number]`)
@@ -41,6 +58,12 @@ const thereIsOneLessField: (originalFieldCount: number) => Promise<void> =
 const andItHasTheNextIdAfterTheOthers: () => Promise<void> =
     async (): Promise<void> => {
         expect(await elementExists(`#${SPEC_ARRAYED_PROPERTY_KEY}-5`))
+            .toBeTruthy()
+    }
+
+const andItHasTheNextIdAfterTheOthersForTheArrayedControlWithTheInitialElementValue: () => Promise<void> =
+    async (): Promise<void> => {
+        expect(await elementExists(`#${SPEC_ARRAYED_PROPERTY_WITH_INITIAL_ELEMENT_VALUE_KEY}-3`))
             .toBeTruthy()
     }
 
@@ -113,10 +136,22 @@ const bothNewFieldsAreValidAndSubmitted: () => Promise<void> =
             .toBe(VALID_TEST_MODIFICATION)
     }
 
+const theSubmittedValueForTheArrayedControlWithTheInitialElementValueAsAWholeIsInItsInitialState: () => Promise<void> =
+    async (): Promise<void> => {
+        expect(await elementInnerText(`#${SPEC_ARRAYED_PROPERTY_WITH_INITIAL_ELEMENT_VALUE_KEY} .${SecretSelectorsForTest.SECRET_SUBMITTED_SPEC_CONTROL}`))
+            .toBe(JSON.stringify(SPEC_CONTROLS_PATTERN_ARRAYED_PROPERTY_WITH_INITIAL_ELEMENT_VALUE_INITIAL_VALUE))
+    }
+
 const theSubmittedValueForTheArrayedControlAsAWholeIsInItsInitialState: () => Promise<void> =
     async (): Promise<void> => {
         expect(await elementInnerText(`#${SPEC_ARRAYED_PROPERTY_KEY} .${SecretSelectorsForTest.SECRET_SUBMITTED_SPEC_CONTROL}`))
             .toBe(JSON.stringify(SPEC_CONTROLS_PATTERN_ARRAYED_PROPERTY_INITIAL_VALUE))
+    }
+
+const theSubmittedValueForTheArrayedControlWithTheInitialElementValueAsAWholeHasANewElementAtTheEndAndItHasTheInitialElementValue: () => Promise<void> =
+    async (): Promise<void> => {
+        expect(await elementInnerText(`#${SPEC_ARRAYED_PROPERTY_WITH_INITIAL_ELEMENT_VALUE_KEY} .${SecretSelectorsForTest.SECRET_SUBMITTED_SPEC_CONTROL}`))
+            .toBe(JSON.stringify(SPEC_CONTROLS_PATTERN_ARRAYED_PROPERTY_WITH_INITIAL_ELEMENT_VALUE_INITIAL_VALUE.concat([ SPEC_CONTROLS_PATTERN_ARRAYED_PROPERTY_WITH_INITIAL_ELEMENT_VALUE_INITIAL_ELEMENT_VALUE ])))
     }
 
 const theSubmittedValueForTheArrayedControlAsAWholeIsInItsInitialStateJustWithItsLastElementGone: () => Promise<void> =
@@ -140,69 +175,105 @@ const removeIsDisabled: () => Promise<void> =
             .toBeTruthy()
     }
 
+const invalidMessagesAreNotShown: () => Promise<void> =
+    async (): Promise<void> => {
+        expect(await elementExists(`#${SPEC_ARRAYED_PROPERTY_KEY} .invalid-message`))
+            .toBeFalsy()
+    }
+
 describe('arrayed controls', () => {
     beforeEach(async (done: DoneFn) => {
-        await toggleToOtherPatternThenBackToTestPattern()
+        await refreshPage()
+        await resetSpecByTogglingToOtherPatternThenBackToTestPattern()
         await openSpecControlsIfNotOpen()
         done()
     })
 
     describe('adding', () => {
-        it('clicking the add button displays a new blank field at the end of the arrayed control', async (done: DoneFn) => {
-            const originalFieldCount: number = await elementCount(`#${SPEC_ARRAYED_PROPERTY_KEY} input[type=number]`)
+        describe('for arrayed controls with no initial element value', () => {
+            it('clicking the add button displays a new blank field at the end of the arrayed control', async (done: DoneFn) => {
+                const originalFieldCount: number = await elementCount(`#${SPEC_ARRAYED_PROPERTY_KEY} input[type=number]`)
 
-            await clickAdd()
-            await thereIsAnAdditionalField(originalFieldCount)
-            await andItHasTheNextIdAfterTheOthers()
+                await clickAdd()
+                await thereIsAnAdditionalField(originalFieldCount)
+                await andItHasTheNextIdAfterTheOthers()
 
-            done()
+                done()
+            })
+
+            it('does not submit the new field until you add something valid to it', async (done: DoneFn) => {
+                await clickAdd()
+                await newFieldExistsButHasNotBeenSubmitted()
+
+                await modifyNewField()
+                await newFieldHasBeenSubmitted()
+
+                done()
+            })
+
+            describe('adding two fields at once', () => {
+                beforeEach(async (done: DoneFn) => {
+                    await clickAdd()
+                    await clickAdd()
+
+                    done()
+                })
+
+                it('lets you do it', async (done: DoneFn) => {
+                    await newFieldExistsButHasNotBeenSubmitted()
+                    await andTheOtherNewFieldExistsButHasNotBeenSubmitted()
+
+                    done()
+                })
+
+                it('does not show invalid messages right away', async (done: DoneFn) => {
+                    await invalidMessagesAreNotShown()
+
+                    done()
+                })
+
+                it('lets you modify the first new field before you modify the first', async (done: DoneFn) => {
+                    await modifyTheSecondOfTheTwoNewFields()
+                    await theSecondOfTheTwoNewFieldsTheOneYouModifiedIsValidWhileTheFirstOfTheTwoNewFieldsIsBrieflyInvalid()
+                    await newFieldExistsButHasNotBeenSubmitted()
+                    await andTheOtherNewFieldExistsButHasNotBeenSubmitted()
+
+                    await modifyTheFirstOfTheTwoNewFields()
+                    await bothNewFieldsAreValidAndSubmitted()
+
+                    done()
+                })
+
+                it('lets you modify the first new field before you modify the second', async (done: DoneFn) => {
+                    await modifyTheFirstOfTheTwoNewFields()
+                    await theFirstOfTheTwoNewFieldsTheOneYouModifiedIsValidWhileTheSecondOfTheTwoNewFieldsIsBrieflyInvalid()
+                    await newFieldExistsButHasNotBeenSubmitted()
+                    await andTheOtherNewFieldExistsButHasNotBeenSubmitted()
+
+                    await modifyTheSecondOfTheTwoNewFields()
+                    await bothNewFieldsAreValidAndSubmitted()
+
+                    done()
+                })
+            })
         })
 
-        it('does not submit the new field until you add something valid to it', async (done: DoneFn) => {
-            await clickAdd()
-            await newFieldExistsButHasNotBeenSubmitted()
+        describe('for arrayed controls with an initial element value', () => {
+            it('clicking the add button displays a new field at the end of the arrayed control with that initial value', async (done: DoneFn) => {
+                const originalFieldCount: number = await elementCount(`#${SPEC_ARRAYED_PROPERTY_WITH_INITIAL_ELEMENT_VALUE_KEY} input[type=number]`)
 
-            await modifyNewField()
-            await newFieldHasBeenSubmitted()
-
-            done()
-        })
-
-        describe('adding two fields at once', () => {
-            beforeEach(async (done: DoneFn) => {
-                await clickAdd()
-                await clickAdd()
+                await clickAddForTheArrayedControlWithTheInitialElementValue()
+                await thereIsAnAdditionalFieldForTheArrayedControlWithTheInitialElementValue(originalFieldCount)
+                await andItHasTheNextIdAfterTheOthersForTheArrayedControlWithTheInitialElementValue()
 
                 done()
             })
 
-            it('lets you do it', async (done: DoneFn) => {
-                await newFieldExistsButHasNotBeenSubmitted()
-                await andTheOtherNewFieldExistsButHasNotBeenSubmitted()
+            it('immediately submits the arrayed control with the new element with the initial value added to the end', async (done: DoneFn) => {
+                await theSubmittedValueForTheArrayedControlWithTheInitialElementValueAsAWholeIsInItsInitialState()
 
-                done()
-            })
-
-            it('lets you modify the first new field before you modify the first', async (done: DoneFn) => {
-                await modifyTheSecondOfTheTwoNewFields()
-                await theSecondOfTheTwoNewFieldsTheOneYouModifiedIsValidWhileTheFirstOfTheTwoNewFieldsIsBrieflyInvalid()
-                await newFieldExistsButHasNotBeenSubmitted()
-                await andTheOtherNewFieldExistsButHasNotBeenSubmitted()
-
-                await modifyTheFirstOfTheTwoNewFields()
-                await bothNewFieldsAreValidAndSubmitted()
-
-                done()
-            })
-
-            it('lets you modify the first new field before you modify the second', async (done: DoneFn) => {
-                await modifyTheFirstOfTheTwoNewFields()
-                await theFirstOfTheTwoNewFieldsTheOneYouModifiedIsValidWhileTheSecondOfTheTwoNewFieldsIsBrieflyInvalid()
-                await newFieldExistsButHasNotBeenSubmitted()
-                await andTheOtherNewFieldExistsButHasNotBeenSubmitted()
-
-                await modifyTheSecondOfTheTwoNewFields()
-                await bothNewFieldsAreValidAndSubmitted()
+                await clickAddForTheArrayedControlWithTheInitialElementValue()
+                await theSubmittedValueForTheArrayedControlWithTheInitialElementValueAsAWholeHasANewElementAtTheEndAndItHasTheInitialElementValue()
 
                 done()
             })
