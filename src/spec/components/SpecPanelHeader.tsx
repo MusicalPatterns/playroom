@@ -4,7 +4,8 @@ import * as React from 'react'
 import { connect } from 'react-redux'
 import { Dispatch } from 'redux'
 import { CONTROLS } from '../../copy'
-import { ActionType, ImmutableRootState, RootStateKeys } from '../../root'
+import { ImmutableRootState, RootStateKeys } from '../../root'
+import { buildCaretClickHandler } from '../events'
 import { SpecStateKeys } from '../state'
 import { SpecPanelHeaderProps, SpecPanelHeaderPropsFromDispatch, SpecPanelOpenAsProp } from './types'
 
@@ -16,9 +17,7 @@ const mapStateToProps: (state: ImmutableRootState) => SpecPanelOpenAsProp =
 
 const mapDispatchToProps: (dispatch: Dispatch) => SpecPanelHeaderPropsFromDispatch =
     (dispatch: Dispatch): SpecPanelHeaderPropsFromDispatch => ({
-        handleCaretClick: (): void => {
-            dispatch({ type: ActionType.TOGGLE_SPEC_PANEL_OPEN })
-        },
+        handleCaretClick: buildCaretClickHandler({ dispatch }),
     })
 
 const SpecPanelHeader: (props: SpecPanelHeaderProps) => JSX.Element =

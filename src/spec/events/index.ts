@@ -3,6 +3,7 @@ export { handleReset } from './handleReset'
 export { buildPresetChangeHandler } from './handlePresetChange'
 export { handleArrayedPropertyElementAdd } from './handleArrayedPropertyElementAdd'
 export { handleArrayedPropertyElementRemove } from './handleArrayedPropertyElementRemove'
+export { buildCaretClickHandler } from './handleCaretClick'
 
 export { resetActions } from './helpers'
 export {
