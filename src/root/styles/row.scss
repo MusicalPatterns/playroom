@@ -13,10 +13,8 @@
     color: $text-color;
 
     p,
-    img,
-    h1,
-    h3 {
-      padding: $main-panel-spacing;
+    img {
+      padding: $main-panel-paragraph-spacing $main-panel-horizontal-spacing;
     }
   }
 
@@ -29,6 +27,12 @@
     }
 
     background-color: $left-panel-background;
+
+    h1,
+    h2,
+    h3 {
+      padding: $main-panel-spacing $main-panel-horizontal-spacing;
+    }
   }
 
   .right {
