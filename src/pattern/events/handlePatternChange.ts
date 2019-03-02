@@ -4,7 +4,7 @@ import { BEGINNING, doAsync, Maybe } from '@musical-patterns/utilities'
 import { BatchAction, batchActions } from 'redux-batched-actions'
 import { Action, ActionType } from '../../root'
 import { resetActions } from '../../spec'
-import { WIDTH_BELOW_WHICH_PATTERNS_LIST_CLOSES_UPON_PATTERN_SELECTION } from './constants'
+import { adjustWindowActionsWithSideEffects } from './helpers'
 import { PatternChangeEventHandler, PatternChangeEventHandlerParameters } from './types'
 
 const handlePatternChange: PatternChangeEventHandler =
@@ -36,11 +36,7 @@ const handlePatternChange: PatternChangeEventHandler =
                 { type: ActionType.SET_PRESETS, data: specData.presets },
                 { type: ActionType.SET_PAGE, data: undefined },
             ])
-
-        if (window.innerWidth < WIDTH_BELOW_WHICH_PATTERNS_LIST_CLOSES_UPON_PATTERN_SELECTION) {
-            actions.push({ type: ActionType.SET_SIDE_PANEL_OPEN, data: false })
-        }
-        window.scrollTo(0, 0)
+            .concat(adjustWindowActionsWithSideEffects())
 
         const batchedAction: BatchAction = batchActions(actions)
         dispatch(batchedAction)

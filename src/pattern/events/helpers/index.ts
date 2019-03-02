@@ -1,0 +1,1 @@
+export { adjustWindowActionsWithSideEffects } from './adjustWindowActions'
