@@ -1,6 +1,6 @@
 import { stop } from '@musical-patterns/performer'
-import { BEGINNING } from '@musical-patterns/utilities'
 import { BatchAction, batchActions } from 'redux-batched-actions'
+import { stopActions } from '../../performer'
 import { Action, ActionType } from '../../root'
 import { DispatchAsProp } from '../../types'
 import { Page } from '../types'
@@ -12,9 +12,8 @@ const buildTitleClickHandler: (parameters: DispatchAsProp) => VoidFunction =
             await stop()
 
             const actions: Action[] = adjustWindowActionsWithSideEffects()
+                .concat(stopActions())
                 .concat([
-                    { type: ActionType.SET_PAUSED, data: true },
-                    { type: ActionType.SET_TIME_POSITION, data: BEGINNING },
                     { type: ActionType.SET_PAGE, data: Page.ABOUT },
                     { type: ActionType.SET_SUBMITTED_SPEC, data: {} },
                     { type: ActionType.SET_DISPLAYED_SPEC, data: {} },

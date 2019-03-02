@@ -12,6 +12,9 @@ export {
     buildToggleImmersiveAudioHandler,
     setupKeyboard,
 } from './setup'
+export {
+    stopActions,
+} from './events'
 
 // tslint:disable-next-line no-import-side-effect
 import './styles'
