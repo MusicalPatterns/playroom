@@ -9,7 +9,7 @@ export {
     PatternPanel,
 } from './components'
 export {
-    Page,
+    PageName,
 } from './types'
 
 // tslint:disable-next-line no-import-side-effect

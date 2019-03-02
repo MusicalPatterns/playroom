@@ -3,7 +3,7 @@ import { BatchAction, batchActions } from 'redux-batched-actions'
 import { stopActions } from '../../performer'
 import { Action, ActionType } from '../../root'
 import { DispatchAsProp } from '../../types'
-import { Page } from '../types'
+import { PageName } from '../types'
 import { adjustWindowActionsWithSideEffects } from './helpers'
 
 const buildTitleClickHandler: (parameters: DispatchAsProp) => VoidFunction =
@@ -14,7 +14,7 @@ const buildTitleClickHandler: (parameters: DispatchAsProp) => VoidFunction =
             const actions: Action[] = adjustWindowActionsWithSideEffects()
                 .concat(stopActions())
                 .concat([
-                    { type: ActionType.SET_PAGE, data: Page.ABOUT },
+                    { type: ActionType.SET_PAGE_NAME, data: PageName.ABOUT },
                     { type: ActionType.SET_SUBMITTED_SPEC, data: {} },
                     { type: ActionType.SET_DISPLAYED_SPEC, data: {} },
                     { type: ActionType.SET_INVALID_SPEC_MESSAGES, data: {} },

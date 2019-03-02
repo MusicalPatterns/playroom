@@ -1,7 +1,7 @@
-enum Page {
+enum PageName {
     ABOUT = 'ABOUT',
 }
 
 export {
-    Page,
+    PageName,
 }

@@ -6,8 +6,8 @@ import PatternListener from './PatternListener'
 import { SecondRowProps } from './types'
 
 const SecondRow: (props: SecondRowProps) => JSX.Element =
-    ({ id, page, patterns }: SecondRowProps): JSX.Element => {
-        if (page || !id) {
+    ({ id, pageName, patterns }: SecondRowProps): JSX.Element => {
+        if (pageName || !id) {
             return (
                 <div {...{ className: 'row closed', id: 'second-row' }} >
                     <div {...{ className: 'left' }} />

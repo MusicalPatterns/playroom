@@ -1,5 +1,5 @@
 import { Maybe, Ms } from '@musical-patterns/utilities'
-import { Page } from '../../pattern'
+import { PageName } from '../../pattern'
 
 interface MaybeDisabled {
     disabled: boolean,
@@ -46,7 +46,7 @@ interface TimeInMinutesAndSecondsProps extends MaybeDisabled {
 }
 
 interface PerformerPanelProps extends MaybeDisabled {
-    page: Maybe<Page>,
+    pageName: Maybe<PageName>,
 }
 
 export {

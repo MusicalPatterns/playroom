@@ -4,8 +4,8 @@ import Performer from './Performer'
 import { PerformerPanelProps } from './types'
 
 const PerformerPanel: (props: PerformerPanelProps) => JSX.Element =
-    ({ disabled, page }: PerformerPanelProps): JSX.Element => (
-        <div {...{ id: 'performer-panel', className: !page ? 'open' : 'closed' }}>
+    ({ disabled, pageName }: PerformerPanelProps): JSX.Element => (
+        <div {...{ id: 'performer-panel', className: !pageName ? 'open' : 'closed' }}>
             <Performer {...{ disabled }} />
             <NoPatternMessage {...{ disabled }}/>
         </div>

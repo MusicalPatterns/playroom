@@ -1,13 +1,13 @@
 // tslint:disable
 
 import * as React from 'react'
-import { Page } from '../../pattern'
+import { PageName } from '../../pattern'
 import { PageProps } from './types'
 
-const PageComponent: (props: PageProps) => JSX.Element =
-    ({ page }: PageProps): JSX.Element => {
-        switch (page) {
-            case Page.ABOUT:
+const Page: (props: PageProps) => JSX.Element =
+    ({ pageName }: PageProps): JSX.Element => {
+        switch (pageName) {
+            case PageName.ABOUT:
                 return (
                     <div {...{ className: 'row' }}>
                         <div {...{ className: 'left' }}>
@@ -176,4 +176,4 @@ const PageComponent: (props: PageProps) => JSX.Element =
         }
     }
 
-export default PageComponent
+export default Page

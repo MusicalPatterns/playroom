@@ -1,10 +1,10 @@
 import { Id, Patterns, Spec } from '@musical-patterns/pattern'
 import { Maybe, Ms } from '@musical-patterns/utilities'
-import { Page } from '../../pattern'
+import { PageName } from '../../pattern'
 
 interface AppProps {
     id: Maybe<Id>,
-    page: Maybe<Page>,
+    pageName: Maybe<PageName>,
     patterns: Maybe<Patterns>,
 }
 
@@ -15,13 +15,13 @@ interface PropsFromApp {
 
 interface PropsFromAppBeforeSelectingPattern {
     id?: Id,
-    page?: Page,
+    pageName?: PageName,
     patterns: Patterns,
 }
 
 interface FirstRowProps {
     id?: Id,
-    page?: Page,
+    pageName?: PageName,
 }
 
 type SecondRowProps = PropsFromAppBeforeSelectingPattern
@@ -44,7 +44,7 @@ interface SidePanelPropsFromState {
 interface SidePanelProps extends PropsFromAppBeforeSelectingPattern, SidePanelPropsFromState {}
 
 interface PageProps {
-    page: Page,
+    pageName: PageName,
 }
 
 export {
