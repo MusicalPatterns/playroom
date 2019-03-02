@@ -1,4 +1,4 @@
-import { PanelProps } from '../../root'
+import { MainPanelProps } from '../../root'
 import { DispatchAsProp, EventAsProp } from '../../types'
 
 interface PatternChangeEventHandlerParameters extends DispatchAsProp {
@@ -7,7 +7,7 @@ interface PatternChangeEventHandlerParameters extends DispatchAsProp {
 
 type PatternChangeEventHandler = (parameters: PatternChangeEventHandlerParameters) => Promise<void>
 
-interface PatternChangeEventParameters extends PanelProps, EventAsProp {}
+interface PatternChangeEventParameters extends MainPanelProps, EventAsProp {}
 
 type PatternChangeEventExtractor = (parameters: PatternChangeEventParameters) => void
 

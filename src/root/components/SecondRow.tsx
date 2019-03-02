@@ -3,10 +3,10 @@ import { constantCaseToUpperCase, Maybe } from '@musical-patterns/utilities'
 import * as React from 'react'
 import { SpecPanel } from '../../spec'
 import PatternListener from './PatternListener'
-import { SecondRowProps } from './types'
+import { PropsFromAppBeforeSelectingPattern } from './types'
 
-const SecondRow: (props: SecondRowProps) => JSX.Element =
-    ({ id, pageName, patterns }: SecondRowProps): JSX.Element => {
+const SecondRow: (props: PropsFromAppBeforeSelectingPattern) => JSX.Element =
+    ({ id, pageName, patterns }: PropsFromAppBeforeSelectingPattern): JSX.Element => {
         if (pageName || !id) {
             return (
                 <div {...{ className: 'row closed', id: 'second-row' }} >

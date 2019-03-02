@@ -11,9 +11,9 @@ const mapStateToProps: (state: ImmutableRootState) => SidePanelPropsFromState =
     })
 
 const SidePanel: (props: SidePanelProps) => JSX.Element =
-    ({ sidePanelOpen, id, patterns, rightPanelOpen }: SidePanelProps): JSX.Element => (
+    ({ sidePanelOpen, id, patterns }: SidePanelProps): JSX.Element => (
         <div {...{ id: 'side-panel', className: sidePanelOpen ? 'open' : 'closed' }}>
-            <PatternPanel {...{ id, patterns, rightPanelOpen }}/>
+            <PatternPanel {...{ id, patterns }}/>
         </div>
     )
 

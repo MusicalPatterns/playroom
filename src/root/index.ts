@@ -10,7 +10,7 @@ export {
     PropsFromApp,
     PropsFromAppBeforeSelectingPattern,
     SidePanelPropsFromState,
-    PanelProps,
+    MainPanelProps,
 } from './components'
 export {
     extractValueFromEvent,

@@ -6,7 +6,6 @@ interface AppProps {
     id: Maybe<Id>,
     pageName: Maybe<PageName>,
     patterns: Maybe<Patterns>,
-    rightPanelOpen: boolean,
 }
 
 interface PropsFromApp {
@@ -20,16 +19,10 @@ interface PropsFromAppBeforeSelectingPattern {
     patterns: Patterns,
 }
 
-interface PanelProps extends PropsFromAppBeforeSelectingPattern {
-    rightPanelOpen: boolean,
-}
-
 interface FirstRowProps {
     id?: Id,
     pageName?: PageName,
 }
-
-type SecondRowProps = PropsFromAppBeforeSelectingPattern
 
 interface PatternListenerPropsFromState {
     debugMode: boolean,
@@ -46,11 +39,17 @@ interface SidePanelPropsFromState {
     sidePanelOpen: boolean,
 }
 
-interface SidePanelProps extends PanelProps, SidePanelPropsFromState {}
+interface SidePanelProps extends PropsFromAppBeforeSelectingPattern, SidePanelPropsFromState {}
 
 interface PageProps {
     pageName: PageName,
 }
+
+interface MainPanelPropsFromState {
+    rightPanelOpen: boolean,
+}
+
+interface MainPanelProps extends PropsFromAppBeforeSelectingPattern, MainPanelPropsFromState {}
 
 export {
     AppProps,
@@ -59,10 +58,10 @@ export {
     PatternListenerProps,
     PropsFromApp,
     FirstRowProps,
-    SecondRowProps,
     PropsFromAppBeforeSelectingPattern,
     SidePanelPropsFromState,
     SidePanelProps,
     PageProps,
-    PanelProps,
+    MainPanelPropsFromState,
+    MainPanelProps,
 }

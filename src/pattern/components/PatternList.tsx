@@ -3,11 +3,19 @@ import { entries, from, map, Ordinal } from '@musical-patterns/utilities'
 import * as React from 'react'
 import { connect } from 'react-redux'
 import { Dispatch } from 'redux'
+import { ImmutableRootState, RootStateKeys } from '../../root'
 import { EventHandler } from '../../types'
 import { handlePatternChange, PatternChangeEventParameters } from '../events'
+import { PatternStateKeys } from '../state'
 import { sortByOrderOrPublishDate } from './helpers'
 import PatternListItem from './PatternListItem'
-import { PatternListProps, PatternListPropsFromDispatch } from './types'
+import { PatternListProps, PatternListPropsFromDispatch, PatternListPropsFromState } from './types'
+
+const mapStateToProps: (state: ImmutableRootState) => PatternListPropsFromState =
+    (state: ImmutableRootState): PatternListPropsFromState => ({
+        rightPanelOpen: state.get(RootStateKeys.PATTERN)
+            .get(PatternStateKeys.RIGHT_PANEL_OPEN),
+    })
 
 const mapDispatchToProps: (dispatch: Dispatch) => PatternListPropsFromDispatch =
     (dispatch: Dispatch): PatternListPropsFromDispatch => ({
@@ -39,4 +47,4 @@ const PatternList: (PatternListProps: PatternListProps) => JSX.Element =
         )
     }
 
-export default connect(undefined, mapDispatchToProps)(PatternList)
+export default connect(mapStateToProps, mapDispatchToProps)(PatternList)
