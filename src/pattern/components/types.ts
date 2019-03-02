@@ -1,6 +1,6 @@
 import { Id, Pattern } from '@musical-patterns/pattern'
 import { PropsFromAppBeforeSelectingPattern } from '../../root'
-import { EventHandler } from '../../types'
+import { WithClickHandler } from '../../types'
 import { PatternChangeEventExtractor } from '../events'
 
 interface PatternListPropsFromDispatch {
@@ -9,11 +9,10 @@ interface PatternListPropsFromDispatch {
 
 interface PatternListProps extends PropsFromAppBeforeSelectingPattern, PatternListPropsFromDispatch {}
 
-interface PatternListItemProps {
+interface PatternListItemProps extends WithClickHandler {
     id?: Id,
-    listedId: string,
+    listedId: Id,
     listedPattern: Pattern,
-    onClick: EventHandler,
 }
 
 interface HamburgerPropsFromDispatch {

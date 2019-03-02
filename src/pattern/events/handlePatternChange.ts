@@ -17,12 +17,12 @@ const handlePatternChange: PatternChangeEventHandler =
             return
         }
 
-        togglePaused()
-
         const pattern: Maybe<Pattern> = patterns[ newId ]
         if (!pattern) {
             return
         }
+
+        togglePaused()
 
         const specData: SpecData = pattern.specData
         const initialSpec: Spec = specData.initial
@@ -34,6 +34,7 @@ const handlePatternChange: PatternChangeEventHandler =
                 { type: ActionType.SET_SPEC_ATTRIBUTES, data: specData.attributes },
                 { type: ActionType.SET_VALIDATION_FUNCTION, data: specData.validationFunction },
                 { type: ActionType.SET_PRESETS, data: specData.presets },
+                { type: ActionType.SET_PAGE, data: undefined },
             ])
 
         if (window.innerWidth < WIDTH_BELOW_WHICH_PATTERNS_LIST_CLOSES_UPON_PATTERN_SELECTION) {

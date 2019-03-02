@@ -36,6 +36,11 @@
       text-align: center;
       margin-bottom: 0;
       color: $side-panel-color-with-emphasis;
+      cursor: pointer;
+
+      &:hover {
+        color: $side-panel-hover-with-emphasis;
+      }
     }
   }
 
@@ -48,9 +53,14 @@
     svg {
       width: $musical-patterns-symbol-size;
       height: $musical-patterns-symbol-size;
+      cursor: pointer;
 
       polygon {
         fill: $side-panel-color-with-emphasis;
+
+        &:hover {
+          color: $side-panel-hover-with-emphasis;
+        }
       }
     }
   }

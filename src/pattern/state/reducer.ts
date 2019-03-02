@@ -3,6 +3,7 @@ import { initialPatternState } from './initial'
 import { ImmutablePatternState, PatternStateAction, PatternStateActionType, PatternStateKeys } from './types'
 
 const patternReducer: Reducer<ImmutablePatternState, PatternStateAction> =
+    // tslint:disable-next-line cyclomatic-complexity
     (patternsState: ImmutablePatternState = initialPatternState, action: PatternStateAction): ImmutablePatternState => {
         switch (action.type) {
             case PatternStateActionType.SET_PATTERNS: {
@@ -16,6 +17,9 @@ const patternReducer: Reducer<ImmutablePatternState, PatternStateAction> =
             }
             case PatternStateActionType.SET_SIDE_PANEL_OPEN: {
                 return patternsState.set(PatternStateKeys.SIDE_PANEL_OPEN, action.data)
+            }
+            case PatternStateActionType.SET_PAGE: {
+                return patternsState.set(PatternStateKeys.PAGE, action.data)
             }
 
             default: {

@@ -1,26 +1,18 @@
 import { ElementHandle } from 'puppeteer'
 import {
-    elementExists,
     findElement,
     refreshPage,
     selectTestPattern,
+    sidePanelIs,
     simulateDesktopViewport,
     simulateMobileViewport,
 } from '../../support'
-
-const sidePanelIs: (openOrClosed: string) => Promise<void> =
-    async (openOrClosed: string): Promise<void> => {
-        expect(await elementExists(`${SIDE_PANEL}.${openOrClosed}`))
-            .toBeTruthy()
-    }
 
 const clickHamburger: () => Promise<void> =
     async (): Promise<void> => {
         const hamburger: ElementHandle = await findElement('#hamburger')
         await hamburger.click()
     }
-
-const SIDE_PANEL: string = '#side-panel'
 
 describe('side panel', () => {
     beforeEach(async (done: DoneFn) => {

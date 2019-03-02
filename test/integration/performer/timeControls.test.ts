@@ -65,6 +65,12 @@ const playJustLongEnoughMoreToWrapAround: () => Promise<void> =
         await sleep(sum(LONG_ENOUGH_FOR_TIME_TO_PASS, LONG_ENOUGH_FOR_TIME_TO_PASS))
     }
 
+const navigateToAboutPage: () => Promise<void> =
+    async (): Promise<void> => {
+        const title: ElementHandle = await findElement('#title h1')
+        await title.click()
+    }
+
 describe('time controls', () => {
     it('are disabled if you have not yet selected a pattern', async (done: DoneFn) => {
         await refreshPage()
@@ -74,6 +80,7 @@ describe('time controls', () => {
     })
 
     beforeEach(async (done: DoneFn) => {
+        await refreshPage()
         await selectTimeControlsPattern()
         done()
     })
@@ -128,6 +135,16 @@ describe('time controls', () => {
             await modifySpec()
             await isAfter(timeOfModifyingSpec)
             await isPlaying()
+
+            done()
+        })
+
+        it('resets the time to the beginning and stops when you navigate to the about page', async (done: DoneFn) => {
+            await sleep(A_BIT_LONGER)
+            await navigateToAboutPage()
+
+            await hasBeenReset()
+            await isPaused()
 
             done()
         })

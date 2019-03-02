@@ -17,6 +17,10 @@ interface EventAsProp {
 
 type EventHandler = (event: React.SyntheticEvent) => void
 
+interface WithClickHandler {
+    onClick: EventHandler,
+}
+
 type AsyncEventHandler = (event: React.SyntheticEvent) => Promise<void>
 
 type DomValue = string | number
@@ -34,4 +38,5 @@ export {
     DomValue,
     DomValueOrChecked,
     SpecValue,
+    WithClickHandler,
 }

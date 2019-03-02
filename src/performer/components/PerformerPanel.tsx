@@ -1,11 +1,11 @@
 import * as React from 'react'
 import NoPatternMessage from './NoPatternMessage'
 import Performer from './Performer'
-import { MaybeDisabled } from './types'
+import { PerformerPanelProps } from './types'
 
-const PerformerPanel: (props: MaybeDisabled) => JSX.Element =
-    ({ disabled }: MaybeDisabled): JSX.Element => (
-        <div {...{ id: 'performer-panel' }}>
+const PerformerPanel: (props: PerformerPanelProps) => JSX.Element =
+    ({ disabled, page }: PerformerPanelProps): JSX.Element => (
+        <div {...{ id: 'performer-panel', className: !page ? 'open' : 'closed' }}>
             <Performer {...{ disabled }} />
             <NoPatternMessage {...{ disabled }}/>
         </div>

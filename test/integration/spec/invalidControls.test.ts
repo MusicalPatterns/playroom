@@ -8,7 +8,6 @@ import {
     elementInnerText,
     elementValue,
     findElement,
-    loseFocus,
     openSpecControlsIfNotOpen,
     OUT_OF_RANGE_INVALID_TEST_MODIFICATION,
     press,
@@ -121,7 +120,8 @@ describe('invalid controls', () => {
             await press('Backspace')
             lastStillValidValue = await elementInnerText(`#${SPEC_RANGED_PROPERTY_TWO_KEY} .${SecretSelectorsForTest.SECRET_SUBMITTED_SPEC_CONTROL}`)
             await press('Backspace')
-            await loseFocus()
+            const anythingElse: ElementHandle = await findElement('#first-row .right')
+            await anythingElse.click()
         }
 
     const theSubmittedValueIsTheLastStillValidValue: () => Promise<void> =

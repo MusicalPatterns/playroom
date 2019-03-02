@@ -1,4 +1,5 @@
-import { Ms } from '@musical-patterns/utilities'
+import { Maybe, Ms } from '@musical-patterns/utilities'
+import { Page } from '../../pattern'
 
 interface MaybeDisabled {
     disabled: boolean,
@@ -44,6 +45,10 @@ interface TimeInMinutesAndSecondsProps extends MaybeDisabled {
     timePositionForDisplay: Ms,
 }
 
+interface PerformerPanelProps extends MaybeDisabled {
+    page: Maybe<Page>,
+}
+
 export {
     TimeControlsContainerPropsFromState,
     TimeControlsPropsFromParent,
@@ -55,4 +60,5 @@ export {
     ToggleImmersiveAudioButtonProps,
     TimeInMinutesAndSecondsProps,
     MaybeDisabled,
+    PerformerPanelProps,
 }

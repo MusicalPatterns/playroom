@@ -36,7 +36,7 @@ const ArrayedSpecControl: (props: ArrayedSpecControlProps) => JSX.Element =
                         specControlsProps,
                         specKey,
                         specPropertyAttributes,
-                        submittedSpecValue: apply.Ordinal(submittedSpecValues, index),
+                        submittedSpecValue: submittedSpecValues && apply.Ordinal(submittedSpecValues, index),
                     }}/>
                 )
             },

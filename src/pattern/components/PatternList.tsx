@@ -26,7 +26,7 @@ const PatternList: (PatternListProps: PatternListProps) => JSX.Element =
         const options: JSX.Element[] = map(
             entries(patterns as { [key in Id]: Pattern })
                 .sort(sortByOrderOrPublishDate),
-            ([ listedId, listedPattern ]: [ string, Pattern ], index: Ordinal): JSX.Element => (
+            ([ listedId, listedPattern ]: [ Id, Pattern ], index: Ordinal): JSX.Element => (
                 <PatternListItem {...{ key: from.Ordinal(index), listedPattern, listedId, onClick, id }} />
             ))
 

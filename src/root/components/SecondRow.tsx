@@ -6,19 +6,20 @@ import PatternListener from './PatternListener'
 import { SecondRowProps } from './types'
 
 const SecondRow: (props: SecondRowProps) => JSX.Element =
-    ({ id, patterns }: SecondRowProps): JSX.Element => {
-        if (!id) {
+    ({ id, page, patterns }: SecondRowProps): JSX.Element => {
+        if (page || !id) {
             return (
-                <div {...{ className: 'row', id: 'second-row' }} >
+                <div {...{ className: 'row closed', id: 'second-row' }} >
                     <div {...{ className: 'left' }} />
-                    <div {...{ className: 'right closed' }} />
+                    <div {...{ className: 'right closed' }} >
+                    </div>
                 </div>
             )
         }
         const maybePattern: Maybe<Pattern> = patterns[ id ]
 
         return (
-            <div {...{ className: 'row', id: 'second-row' }} >
+            <div {...{ className: 'row open', id: 'second-row' }} >
                 <div {...{ className: 'left' }} >
                     <h1>{maybePattern && maybePattern.metadata.formattedName || constantCaseToUpperCase(id)}</h1>
                 </div>
