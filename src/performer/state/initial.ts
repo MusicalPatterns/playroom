@@ -9,6 +9,7 @@ const initialPerformerState: ImmutablePerformerState = typedMap({
     [ PerformerStateKeys.IMMERSIVE_AUDIO_READY ]: false,
     [ PerformerStateKeys.IMMERSIVE_AUDIO_UNAVAILABLE ]: false,
     [ PerformerStateKeys.IMMERSIVE_AUDIO ]: false,
+    [ PerformerStateKeys.PERFORMER_DISABLED ]: true,
 })
 
 export {

@@ -9,6 +9,7 @@ enum PerformerStateActionType {
     SET_IMMERSIVE_AUDIO_READY = 'SET_IMMERSIVE_AUDIO_READY',
     SET_IMMERSIVE_AUDIO_UNAVAILABLE = 'SET_IMMERSIVE_AUDIO_UNAVAILABLE',
     TOGGLE_IMMERSIVE_AUDIO = 'TOGGLE_IMMERSIVE_AUDIO',
+    SET_PERFORMER_DISABLED = 'SET_PERFORMER_DISABLED',
 }
 
 interface TogglePaused {
@@ -47,6 +48,11 @@ interface ToggleImmersiveAudio {
     type: PerformerStateActionType.TOGGLE_IMMERSIVE_AUDIO,
 }
 
+interface SetPerformerDisabled {
+    data: boolean,
+    type: PerformerStateActionType.SET_PERFORMER_DISABLED,
+}
+
 type PerformerStateAction =
     TogglePaused |
     SetPaused |
@@ -55,7 +61,8 @@ type PerformerStateAction =
     SetToggleImmersiveAudioHandler |
     SetImmersiveAudioReady |
     SetImmersiveAudioUnavailable |
-    ToggleImmersiveAudio
+    ToggleImmersiveAudio |
+    SetPerformerDisabled
 
 enum PerformerStateKeys {
     TIME_POSITION = 'timePosition',
@@ -65,6 +72,7 @@ enum PerformerStateKeys {
     IMMERSIVE_AUDIO_READY = 'immersiveAudioReady',
     IMMERSIVE_AUDIO_UNAVAILABLE = 'immersiveAudioUnavailable',
     IMMERSIVE_AUDIO = 'immersiveAudio',
+    PERFORMER_DISABLED = 'performerDisabled',
 }
 
 interface PerformerState {
@@ -75,6 +83,7 @@ interface PerformerState {
     [ PerformerStateKeys.IMMERSIVE_AUDIO_READY ]: boolean,
     [ PerformerStateKeys.IMMERSIVE_AUDIO_UNAVAILABLE ]: boolean,
     [ PerformerStateKeys.IMMERSIVE_AUDIO ]: boolean,
+    [ PerformerStateKeys.PERFORMER_DISABLED ]: boolean,
 }
 
 type ImmutablePerformerState = TypedMap<PerformerState>

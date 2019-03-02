@@ -35,6 +35,7 @@ const handlePatternChange: PatternChangeEventHandler =
                 { type: ActionType.SET_VALIDATION_FUNCTION, data: specData.validationFunction },
                 { type: ActionType.SET_PRESETS, data: specData.presets },
                 { type: ActionType.SET_PAGE_NAME, data: undefined },
+                { type: ActionType.SET_PERFORMER_DISABLED, data: false },
             ])
             .concat(adjustWindowActionsWithSideEffects())
 

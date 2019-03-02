@@ -33,6 +33,9 @@ const performerReducer: Reducer<ImmutablePerformerState, PerformerStateAction> =
             case PerformerStateActionType.SET_IMMERSIVE_AUDIO_UNAVAILABLE: {
                 return performerState.set(PerformerStateKeys.IMMERSIVE_AUDIO_UNAVAILABLE, true)
             }
+            case PerformerStateActionType.SET_PERFORMER_DISABLED: {
+                return performerState.set(PerformerStateKeys.PERFORMER_DISABLED, action.data)
+            }
             case PerformerStateActionType.TOGGLE_IMMERSIVE_AUDIO: {
                 return performerState.set(
                     PerformerStateKeys.IMMERSIVE_AUDIO,

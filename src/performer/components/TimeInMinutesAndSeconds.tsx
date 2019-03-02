@@ -8,10 +8,30 @@ import {
     SECONDS_PER_MINUTE,
 } from '@musical-patterns/utilities'
 import * as React from 'react'
-import { TimeInMinutesAndSecondsProps } from './types'
+import { connect } from 'react-redux'
+import { ImmutableRootState, RootStateKeys } from '../../root'
+import { ImmutablePerformerState, PerformerStateKeys } from '../state'
+import { formatTimesForDisplay } from './helpers'
+import { TimelineProps } from './types'
 
-const TimeInMinutesAndSeconds: (props: TimeInMinutesAndSecondsProps) => JSX.Element =
-    ({ disabled, timePositionForDisplay }: TimeInMinutesAndSecondsProps): JSX.Element => {
+const mapStateToProps: (state: ImmutableRootState) => TimelineProps =
+    (state: ImmutableRootState): TimelineProps => {
+        const performerState: ImmutablePerformerState = state.get(RootStateKeys.PERFORMER)
+
+        return {
+            disabled: performerState.get(PerformerStateKeys.PERFORMER_DISABLED),
+            patternDuration: performerState.get(PerformerStateKeys.PATTERN_DURATION),
+            timePosition: performerState.get(PerformerStateKeys.TIME_POSITION),
+        }
+    }
+
+const TimeInMinutesAndSeconds: (props: TimelineProps) => JSX.Element =
+    ({ disabled, patternDuration, timePosition }: TimelineProps): JSX.Element => {
+        const { timePositionForDisplay } = formatTimesForDisplay({
+            patternDuration,
+            timePosition,
+        })
+
         const totalSeconds: number =
             round(quotient(from.Ms(timePositionForDisplay), from.Cardinal(MILLISECONDS_PER_SECOND)))
         const timeMinutesPart: string = floor(quotient(totalSeconds, from.Cardinal(SECONDS_PER_MINUTE)))
@@ -33,4 +53,4 @@ const TimeInMinutesAndSeconds: (props: TimeInMinutesAndSecondsProps) => JSX.Elem
         )
     }
 
-export default TimeInMinutesAndSeconds
+export default connect(mapStateToProps)(TimeInMinutesAndSeconds)

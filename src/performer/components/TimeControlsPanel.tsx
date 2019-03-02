@@ -1,22 +1,14 @@
-import { DictionaryOf, modulus, Ms, round, to } from '@musical-patterns/utilities'
 import * as React from 'react'
 import { connect } from 'react-redux'
 import { ImmutableRootState, RootStateKeys } from '../../root'
 import { SecretSelectorsForTest } from '../../types'
 import { ImmutablePerformerState, PerformerStateKeys } from '../state'
+import { formatTimesForDisplay } from './helpers'
 import TimeControls from './TimeControls'
-import { TimeControlsContainerProps, TimeControlsContainerPropsFromState } from './types'
+import { TimeControlsPanelProps } from './types'
 
-const formatTimesForDisplay: (times: DictionaryOf<Ms>) => DictionaryOf<Ms> =
-    ({ patternDuration, timePosition }: DictionaryOf<Ms>): DictionaryOf<Ms> => {
-        const patternDurationForDisplay: Ms = round(patternDuration) || to.Ms(0)
-        const timePositionForDisplay: Ms = round(modulus(timePosition, patternDurationForDisplay)) || to.Ms(0)
-
-        return { patternDurationForDisplay, timePositionForDisplay }
-    }
-
-const mapStateToProps: (state: ImmutableRootState) => TimeControlsContainerPropsFromState =
-    (state: ImmutableRootState): TimeControlsContainerPropsFromState => {
+const mapStateToProps: (state: ImmutableRootState) => TimeControlsPanelProps =
+    (state: ImmutableRootState): TimeControlsPanelProps => {
         const performerState: ImmutablePerformerState = state.get(RootStateKeys.PERFORMER)
 
         return {
@@ -25,9 +17,9 @@ const mapStateToProps: (state: ImmutableRootState) => TimeControlsContainerProps
         }
     }
 
-const TimeControlsPanel: (timeControlsProps: TimeControlsContainerProps) => JSX.Element =
-    (props: TimeControlsContainerProps): JSX.Element => {
-        const { disabled, timePosition, patternDuration } = props
+const TimeControlsPanel: (timeControlsProps: TimeControlsPanelProps) => JSX.Element =
+    (props: TimeControlsPanelProps): JSX.Element => {
+        const { timePosition, patternDuration } = props
 
         const { timePositionForDisplay, patternDurationForDisplay } = formatTimesForDisplay({
             patternDuration,
@@ -36,7 +28,7 @@ const TimeControlsPanel: (timeControlsProps: TimeControlsContainerProps) => JSX.
 
         return (
             <div {...{ id: 'time-controls-panel' }}>
-                <TimeControls {...{ disabled, timePositionForDisplay, patternDurationForDisplay }}/>
+                <TimeControls/>
                 <div {...{ id: SecretSelectorsForTest.SECRET_TIMER }}>{timePositionForDisplay}</div>
                 <div {...{ id: SecretSelectorsForTest.SECRET_PATTERN_DURATION }}>{patternDurationForDisplay}</div>
             </div>

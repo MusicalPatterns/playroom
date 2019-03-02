@@ -23,6 +23,7 @@ const handleTitleClick: TitleClickEventHandler =
                 { type: ActionType.SET_SPEC_ATTRIBUTES, data: undefined },
                 { type: ActionType.SET_VALIDATION_FUNCTION, data: undefined },
                 { type: ActionType.SET_PRESETS, data: undefined },
+                { type: ActionType.SET_PERFORMER_DISABLED, data: true },
             ])
 
         const batchedAction: BatchAction = batchActions(actions)

@@ -15,6 +15,7 @@ const mapStateToProps: (state: ImmutableRootState) => TimeControlsPropsFromState
         const performerState: ImmutablePerformerState = state.get(RootStateKeys.PERFORMER)
 
         return {
+            disabled: performerState.get(PerformerStateKeys.PERFORMER_DISABLED),
             paused: performerState.get(PerformerStateKeys.PAUSED),
         }
     }
@@ -27,17 +28,7 @@ const mapDispatchToProps: (dispatch: Dispatch) => TimeControlsPropsFromDispatch 
     })
 
 const TimeControls: (timeControlsProps: TimeControlsProps) => JSX.Element =
-    (props: TimeControlsProps): JSX.Element => {
-        const {
-            disabled,
-            rewindHandler,
-            togglePausedHandler,
-            stopHandler,
-            paused,
-            timePositionForDisplay,
-            patternDurationForDisplay,
-        } = props
-
+    ({ disabled, rewindHandler, togglePausedHandler, stopHandler, paused }: TimeControlsProps): JSX.Element => {
         const controlId: string = paused ? 'play' : 'pause'
         const icon: IconDefinition = paused ? faPlay : faPause
         const disabledClass: string = disabled ? 'disabled' : ''
@@ -53,8 +44,8 @@ const TimeControls: (timeControlsProps: TimeControlsProps) => JSX.Element =
                 <button {...{ id: controlId, onClick: togglePausedHandler, disabled }}>
                     <FontAwesomeIcon {...{ icon }}/>
                 </button>
-                <Timeline {...{ disabled, timePositionForDisplay, patternDurationForDisplay }} />
-                <TimeInMinutesAndSeconds {...{ disabled, timePositionForDisplay }}/>
+                <Timeline/>
+                <TimeInMinutesAndSeconds/>
             </div>
         )
     }

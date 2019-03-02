@@ -5,14 +5,13 @@ interface MaybeDisabled {
     disabled: boolean,
 }
 
-interface TimeControlsContainerPropsFromState {
+interface TimeControlsPanelProps {
     patternDuration: Ms,
     timePosition: Ms,
 }
 
-interface TimeControlsContainerProps extends TimeControlsContainerPropsFromState, MaybeDisabled {}
-
 interface TimeControlsPropsFromState {
+    disabled: boolean,
     paused: boolean,
 }
 
@@ -22,16 +21,10 @@ interface TimeControlsPropsFromDispatch {
     togglePausedHandler: VoidFunction,
 }
 
-interface TimeControlsPropsFromParent extends MaybeDisabled {
-    patternDurationForDisplay: Ms,
-    timePositionForDisplay: Ms,
-}
-
-interface TimeControlsProps extends TimeControlsPropsFromState,
-    TimeControlsPropsFromDispatch,
-    TimeControlsPropsFromParent {}
+interface TimeControlsProps extends TimeControlsPropsFromState, TimeControlsPropsFromDispatch {}
 
 interface ToggleImmersiveAudioButtonPropsFromState {
+    disabled: boolean,
     immersiveAudio: boolean,
     immersiveAudioReady: boolean,
     immersiveAudioUnvailable: boolean,
@@ -41,24 +34,24 @@ interface ToggleImmersiveAudioButtonPropsFromState {
 interface ToggleImmersiveAudioButtonProps extends MaybeDisabled,
     ToggleImmersiveAudioButtonPropsFromState {}
 
-interface TimeInMinutesAndSecondsProps extends MaybeDisabled {
-    timePositionForDisplay: Ms,
-}
-
-interface PerformerPanelProps extends MaybeDisabled {
+interface PerformerPanelProps {
     pageName: Maybe<PageName>,
 }
 
+interface TimelineProps {
+    disabled: boolean,
+    patternDuration: Ms,
+    timePosition: Ms,
+}
+
 export {
-    TimeControlsContainerPropsFromState,
-    TimeControlsPropsFromParent,
-    TimeControlsContainerProps,
+    TimeControlsPanelProps,
     TimeControlsProps,
     TimeControlsPropsFromDispatch,
     TimeControlsPropsFromState,
     ToggleImmersiveAudioButtonPropsFromState,
     ToggleImmersiveAudioButtonProps,
-    TimeInMinutesAndSecondsProps,
     MaybeDisabled,
     PerformerPanelProps,
+    TimelineProps,
 }
