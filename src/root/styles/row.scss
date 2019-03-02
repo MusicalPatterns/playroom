@@ -1,5 +1,4 @@
 @import '../../colors';
-@import '../../effects';
 @import '../../sizes';
 @import './proportions';
 @import './sizes';
@@ -36,23 +35,7 @@
   }
 
   .right {
-    flex: $right-proportion;
-    min-width: $right-min-width;
-
-    @media screen and (max-width: $mobile-size) {
-      min-width: $right-min-width-mobile;
-    }
-
     background-color: $right-panel-background;
     text-align: right;
-
-    @include animate(flex, min-width);
-
-    overflow-x: hidden;
-
-    &.closed {
-      flex: $right-proportion-closed;
-      min-width: 0;
-    }
   }
 }

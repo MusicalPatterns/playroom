@@ -14,19 +14,20 @@ const mapStateToProps: (state: ImmutableRootState) => AppProps =
             id: patternState.get(PatternStateKeys.ID),
             pageName: patternState.get(PatternStateKeys.PAGE_NAME),
             patterns: patternState.get(PatternStateKeys.PATTERNS),
+            rightPanelOpen: patternState.get(PatternStateKeys.RIGHT_PANEL_OPEN),
         }
     }
 
 const App: React.ComponentType<AppProps> =
-    ({ patterns, pageName, id }: AppProps): JSX.Element => {
+    ({ patterns, pageName, id, rightPanelOpen }: AppProps): JSX.Element => {
         if (!patterns) {
             return <div/>
         }
 
         return (
             <div {...{ id: 'app' }}>
-                <SidePanel {...{ id, patterns }}/>
-                <MainPanel {...{ id, pageName, patterns }}/>
+                <SidePanel {...{ id, patterns, rightPanelOpen }}/>
+                <MainPanel {...{ id, pageName, patterns, rightPanelOpen }}/>
             </div>
         )
     }

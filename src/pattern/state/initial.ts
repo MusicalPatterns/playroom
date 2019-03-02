@@ -6,6 +6,7 @@ const initialPatternState: ImmutablePatternState = typedMap<PatternState>({
     [ PatternStateKeys.ID ]: undefined,
     [ PatternStateKeys.DEBUG_MODE ]: false,
     [ PatternStateKeys.SIDE_PANEL_OPEN ]: true,
+    [ PatternStateKeys.RIGHT_PANEL_OPEN ]: false,
     [ PatternStateKeys.PAGE_NAME ]: undefined,
 })
 

@@ -27,7 +27,7 @@ const Page: (props: PageProps) => JSX.Element =
                                 other illusions and ambiguities.
                             </p>
                             <h3>
-                                test-driven composition
+                                Test-driven composition
                             </h3>
                             <p>
                                 For this project I have followed a software development practice called test-driven
@@ -52,7 +52,7 @@ const Page: (props: PageProps) => JSX.Element =
                                 heretofore unobtainable levels of complexity.
                             </p>
                             <h3>
-                                a new aesthetic
+                                A new aesthetic
                             </h3>
                             <p>
                                 I learned TDD on the job as a software engineer, but having spent some time now applying
@@ -113,7 +113,7 @@ const Page: (props: PageProps) => JSX.Element =
                                 section about TDD</a>, so maybe it's not too far on the horizon.
                             </p>
                             <h3>
-                                statement of purpose
+                                Statement of purpose
                             </h3>
                             <p>
                                 One of my goals with this project was to consolidate my musical work under a single
@@ -140,7 +140,7 @@ const Page: (props: PageProps) => JSX.Element =
                                 interested: douglas.blumeyer@gmail.com
                             </p>
                             <h3>
-                                the past and future
+                                The past and future
                             </h3>
                             <p>
                                 <a {...{ href: 'https://www.dropbox.com/s/kqd5emgc41b1ap4/Fun%20Musical%20Ideas%20-%20v1.0%20-%20July%202014.pdf?dl=0' }}>Several
@@ -163,7 +163,7 @@ const Page: (props: PageProps) => JSX.Element =
                                 Douglas Blumeyer, March 2019
                             </p>
                         </div>
-                        <div {...{ className: 'right closed' }}/>
+                        <div {...{ className: 'right' }}/>
                     </div>
                 )
             default:

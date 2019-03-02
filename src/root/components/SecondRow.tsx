@@ -11,7 +11,7 @@ const SecondRow: (props: SecondRowProps) => JSX.Element =
             return (
                 <div {...{ className: 'row closed', id: 'second-row' }} >
                     <div {...{ className: 'left' }} />
-                    <div {...{ className: 'right closed' }} >
+                    <div {...{ className: 'right' }} >
                     </div>
                 </div>
             )

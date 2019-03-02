@@ -1,3 +1,5 @@
+// tslint:disable no-magic-numbers
+
 import {
     Id,
     OptionedConstraint,

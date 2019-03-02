@@ -5,10 +5,10 @@ import { FirstRowProps } from './types'
 const FirstRow: (props: FirstRowProps) => JSX.Element =
     ({ id, pageName }: FirstRowProps): JSX.Element => (
         <div {...{ className: `row ${!pageName ? 'open' : 'closed'}`, id: 'first-row' }}>
-            <div {...{ className: `left ${id ? 'open' : 'closed'}` }} >
+            <div {...{ className: 'left' }} >
                 <PerformerPanel {...{ disabled: !id, pageName }}/>
             </div>
-            <div {...{ className: `right ${id ? 'open' : 'closed'}` }} />
+            <div {...{ className: 'right' }} />
         </div>
     )
 

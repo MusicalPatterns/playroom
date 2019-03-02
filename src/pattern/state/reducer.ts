@@ -18,6 +18,9 @@ const patternReducer: Reducer<ImmutablePatternState, PatternStateAction> =
             case PatternStateActionType.SET_SIDE_PANEL_OPEN: {
                 return patternsState.set(PatternStateKeys.SIDE_PANEL_OPEN, action.data)
             }
+            case PatternStateActionType.SET_RIGHT_PANEL_OPEN: {
+                return patternsState.set(PatternStateKeys.RIGHT_PANEL_OPEN, action.data)
+            }
             case PatternStateActionType.SET_PAGE_NAME: {
                 return patternsState.set(PatternStateKeys.PAGE_NAME, action.data)
             }

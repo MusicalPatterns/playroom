@@ -1,11 +1,10 @@
 import * as React from 'react'
-import { FirstRowProps } from './types'
 
-const BottomRow: (props: FirstRowProps) => JSX.Element =
-    ({ id }: FirstRowProps): JSX.Element => (
+const BottomRow: () => JSX.Element =
+    (): JSX.Element => (
         <div {...{ className: 'row', id: 'bottom-row' }} >
-            <div {...{ className: `left ${id ? 'open' : 'closed'}` }} />
-            <div {...{ className: `right ${id ? 'open' : 'closed'}` }} />
+            <div {...{ className: 'left' }} />
+            <div {...{ className: 'right' }} />
         </div>
     )
 

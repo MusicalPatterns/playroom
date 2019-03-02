@@ -58,6 +58,14 @@ describe('about page', () => {
         done()
     })
 
+    it('hides the right panel', async (done: DoneFn) => {
+        await selectAboutPage()
+        expect(await elementExists('#main-panel.right-panel-closed'))
+            .toBeTruthy()
+
+        done()
+    })
+
     it('no longer shows the about page after you select a pattern from the list', async (done: DoneFn) => {
         await selectAboutPage()
 

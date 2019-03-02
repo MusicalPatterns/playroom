@@ -117,6 +117,13 @@ describe('pattern list', () => {
             done()
         })
 
+        it('opens the right panel', async (done: DoneFn) => {
+            expect(await elementExists('#main-panel.right-panel-open'))
+                .toBeTruthy()
+
+            done()
+        })
+
         it('shows a header for the pattern after you select it', async (done: DoneFn) => {
             const patternTitle: string = await elementInnerText('#second-row h1')
 
