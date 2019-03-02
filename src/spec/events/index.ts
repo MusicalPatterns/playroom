@@ -1,9 +1,9 @@
-export { buildSpecControlChangeHandler } from './handleSpecControlChange'
-export { handleReset } from './handleReset'
-export { buildPresetChangeHandler } from './handlePresetChange'
-export { handleArrayedPropertyElementAdd } from './handleArrayedPropertyElementAdd'
-export { handleArrayedPropertyElementRemove } from './handleArrayedPropertyElementRemove'
-export { buildCaretClickHandler } from './handleCaretClick'
+export { buildSpecControlChangeHandler } from './specControlChange'
+export { handleReset } from './reset'
+export { buildPresetChangeHandler } from './presetChange'
+export { handleArrayedPropertyElementAdd } from './addArrayedPropertyElement'
+export { handleArrayedPropertyElementRemove } from './removeArrayedPropertyElement'
+export { buildCaretClickHandler } from './expandAndCollapse'
 
 export { resetActions } from './helpers'
 export {

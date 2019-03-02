@@ -1,6 +1,6 @@
-export { handlePatternChange } from './handlePatternChange'
-export { handleHamburger } from './handleHamburger'
-export { buildTitleClickHandler } from './handleTitleClick'
+export { handlePatternChange } from './patternChange'
+export { handleHamburger } from './hamburger'
+export { buildTitleClickHandler } from './titleClick'
 
 export {
     PatternChangeEventParameters,

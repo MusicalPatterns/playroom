@@ -1,7 +1,7 @@
 import { Preset, Spec } from '@musical-patterns/pattern'
 import { extractValueFromEvent } from '../../root'
 import { DispatchAsProp } from '../../types'
-import { handleReset } from './handleReset'
+import { handleReset } from './reset'
 import { PresetChangeHandler, PresetChangeHandlerParameters } from './types'
 
 const buildPresetChangeHandler: (parameters: DispatchAsProp) => PresetChangeHandler =
