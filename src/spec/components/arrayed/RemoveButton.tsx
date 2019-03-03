@@ -6,7 +6,7 @@ import { connect } from 'react-redux'
 import { Dispatch } from 'redux'
 import { DomValueOrChecked, EventHandler } from '../../../types'
 import { handleArrayedPropertyElementRemove } from '../../events'
-import { SpecStateKeys } from '../../state'
+import { SpecStateKey } from '../../state'
 import { AddOrRemoveButtonProps, AddOrRemoveButtonPropsFromDispatch, HandleAddOrRemoveParameters } from './types'
 
 const mapDispatchToProps: (dispatch: Dispatch) => AddOrRemoveButtonPropsFromDispatch =
@@ -22,7 +22,7 @@ const RemoveButton: React.ComponentType<AddOrRemoveButtonProps> =
             handleAddOrRemove({ event, specKey, specState })
         }
 
-        const displayedSpec: Spec = specState.get(SpecStateKeys.DISPLAYED_SPEC)
+        const displayedSpec: Spec = specState.get(SpecStateKey.DISPLAYED_SPEC)
         const arrayedSpecValue: DomValueOrChecked[] = displayedSpec[ specKey ] as DomValueOrChecked[]
         const disabled: boolean = !arrayedSpecValue.length
 

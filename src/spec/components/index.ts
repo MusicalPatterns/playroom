@@ -7,3 +7,6 @@ export {
 export {
     AddOrRemoveButtonPropsFromParent,
 } from './arrayed'
+export {
+    SpecPanelOpenAsProp,
+} from './types'

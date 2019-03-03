@@ -1,7 +1,7 @@
 import * as React from 'react'
 import { connect } from 'react-redux'
-import { ImmutableRootState, RootStateKeys } from '../../root'
-import { SpecStateKeys } from '../state'
+import { ImmutableRootState, RootStateKey } from '../../root'
+import { SpecStateKey } from '../state'
 import Presets from './Presets'
 import Reset from './Reset'
 import SpecControls from './SpecControls'
@@ -9,8 +9,8 @@ import { SpecPanelOpenAsProp } from './types'
 
 const mapStateToProps: (state: ImmutableRootState) => SpecPanelOpenAsProp =
     (state: ImmutableRootState): SpecPanelOpenAsProp => ({
-        specPanelOpen: state.get(RootStateKeys.SPEC)
-            .get(SpecStateKeys.SPEC_PANEL_OPEN),
+        specPanelOpen: state.get(RootStateKey.SPEC)
+            .get(SpecStateKey.SPEC_PANEL_OPEN),
     })
 
 const SpecPanelBody: React.ComponentType<SpecPanelOpenAsProp> =

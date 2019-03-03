@@ -3,10 +3,10 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import * as React from 'react'
 import { connect } from 'react-redux'
 import { Dispatch } from 'redux'
-import { ImmutableRootState, RootStateKeys } from '../../root'
+import { ImmutableRootState, RootStateKey } from '../../root'
 import { SecretSelectorsForTest } from '../../types'
-import { buildStopHandler, buildTogglePausedHandler, handleRewind } from '../events'
-import { ImmutablePerformerState, PerformerStateKeys } from '../state'
+import { buildPauseHandler, buildPlayHandler, buildStopHandler, handleRewind } from '../events'
+import { ImmutablePerformerState, PerformerStateKey } from '../state'
 import { formatTimesForDisplay } from './helpers'
 import TimeInMinutesAndSeconds from './TimeInMinutesAndSeconds'
 import Timeline from './Timeline'
@@ -14,21 +14,22 @@ import { TimeControlsProps, TimeControlsPropsFromDispatch, TimeControlsPropsFrom
 
 const mapStateToProps: (state: ImmutableRootState) => TimeControlsPropsFromState =
     (state: ImmutableRootState): TimeControlsPropsFromState => {
-        const performerState: ImmutablePerformerState = state.get(RootStateKeys.PERFORMER)
+        const performerState: ImmutablePerformerState = state.get(RootStateKey.PERFORMER)
 
         return {
-            disabled: performerState.get(PerformerStateKeys.PERFORMER_DISABLED),
-            patternDuration: performerState.get(PerformerStateKeys.PATTERN_DURATION),
-            paused: performerState.get(PerformerStateKeys.PAUSED),
-            timePosition: performerState.get(PerformerStateKeys.TIME_POSITION),
+            disabled: performerState.get(PerformerStateKey.PERFORMER_DISABLED),
+            patternDuration: performerState.get(PerformerStateKey.PATTERN_DURATION),
+            paused: performerState.get(PerformerStateKey.PAUSED),
+            timePosition: performerState.get(PerformerStateKey.TIME_POSITION),
         }
     }
 
 const mapDispatchToProps: (dispatch: Dispatch) => TimeControlsPropsFromDispatch =
     (dispatch: Dispatch): TimeControlsPropsFromDispatch => ({
+        pauseHandler: buildPauseHandler({ dispatch }),
+        playHandler: buildPlayHandler({ dispatch }),
         rewindHandler: handleRewind,
         stopHandler: buildStopHandler({ dispatch }),
-        togglePausedHandler: buildTogglePausedHandler({ dispatch }),
     })
 
 const TimeControls: React.ComponentType<TimeControlsProps> =
@@ -36,7 +37,8 @@ const TimeControls: React.ComponentType<TimeControlsProps> =
         const {
             disabled,
             rewindHandler,
-            togglePausedHandler,
+            pauseHandler,
+            playHandler,
             stopHandler,
             paused,
             patternDuration,
@@ -59,7 +61,7 @@ const TimeControls: React.ComponentType<TimeControlsProps> =
                 <button {...{ id: 'stop', onClick: stopHandler, disabled }}>
                     <FontAwesomeIcon {...{ icon: faStop }}/>
                 </button>
-                <button {...{ id: controlId, onClick: togglePausedHandler, disabled }}>
+                <button {...{ id: controlId, onClick: paused ? playHandler : pauseHandler, disabled }}>
                     <FontAwesomeIcon {...{ icon }}/>
                 </button>
                 <Timeline/>

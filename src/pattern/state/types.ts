@@ -2,7 +2,7 @@ import { Id, Patterns } from '@musical-patterns/pattern'
 import { Maybe, TypedMap } from '@musical-patterns/utilities'
 import { PageName } from '../types'
 
-enum PatternStateKeys {
+enum PatternStateKey {
     PATTERNS = 'PATTERNS',
     ID = 'ID',
     DEBUG_MODE = 'DEBUG_MODE',
@@ -12,12 +12,12 @@ enum PatternStateKeys {
 }
 
 interface PatternState {
-    [ PatternStateKeys.PATTERNS ]: Maybe<Patterns>,
-    [ PatternStateKeys.ID ]: Maybe<Id>,
-    [ PatternStateKeys.DEBUG_MODE ]: boolean,
-    [ PatternStateKeys.LEFT_COLUMN_OPEN ]: boolean,
-    [ PatternStateKeys.RIGHT_COLUMN_OPEN ]: boolean,
-    [ PatternStateKeys.PAGE_NAME ]: Maybe<PageName>,
+    [ PatternStateKey.PATTERNS ]: Maybe<Patterns>,
+    [ PatternStateKey.ID ]: Maybe<Id>,
+    [ PatternStateKey.DEBUG_MODE ]: boolean,
+    [ PatternStateKey.LEFT_COLUMN_OPEN ]: boolean,
+    [ PatternStateKey.RIGHT_COLUMN_OPEN ]: boolean,
+    [ PatternStateKey.PAGE_NAME ]: Maybe<PageName>,
 }
 
 type ImmutablePatternState = TypedMap<PatternState>
@@ -30,6 +30,8 @@ enum PatternStateActionType {
     SET_RIGHT_COLUMN_OPEN = 'SET_RIGHT_COLUMN_OPEN',
     SET_PAGE_NAME = 'SET_PAGE_NAME',
 }
+
+type PatternStateActionMap = { [key in keyof typeof PatternStateActionType]: PatternStateKey }
 
 interface SetPatterns {
     data: Patterns,
@@ -70,9 +72,10 @@ type PatternStateAction =
     SetPage
 
 export {
-    PatternStateKeys,
+    PatternStateKey,
     ImmutablePatternState,
     PatternStateAction,
     PatternStateActionType,
     PatternState,
+    PatternStateActionMap,
 }

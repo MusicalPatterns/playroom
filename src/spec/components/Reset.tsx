@@ -4,17 +4,17 @@ import * as React from 'react'
 import { connect } from 'react-redux'
 import { Dispatch } from 'redux'
 import { RESET_ALL } from '../../copy'
-import { ImmutableRootState, RootStateKeys } from '../../root'
+import { ImmutableRootState, RootStateKey } from '../../root'
 import { handleReset } from '../events'
-import { SpecStateKeys } from '../state'
+import { SpecStateKey } from '../state'
 import { ResetProps, ResetPropsFromDispatch, ResetPropsFromState } from './types'
 
 const mapStateToProps: (state: ImmutableRootState) => ResetPropsFromState =
     (state: ImmutableRootState): ResetPropsFromState => ({
-        initialSpec: state.get(RootStateKeys.SPEC)
-            .get(SpecStateKeys.INITIAL_SPEC),
-        submittedSpec: state.get(RootStateKeys.SPEC)
-            .get(SpecStateKeys.SUBMITTED_SPEC),
+        initialSpec: state.get(RootStateKey.SPEC)
+            .get(SpecStateKey.INITIAL_SPEC),
+        submittedSpec: state.get(RootStateKey.SPEC)
+            .get(SpecStateKey.SUBMITTED_SPEC),
     })
 
 const mapDispatchToProps: (dispatch: Dispatch) => ResetPropsFromDispatch =

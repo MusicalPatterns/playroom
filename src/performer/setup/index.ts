@@ -1,3 +1,3 @@
 export { onPerformerUpdate } from './onPerformerUpdate'
-export { buildToggleImmersiveAudioHandler } from './buildToggleImmersiveAudioHandler'
+export { buildToggleImmersiveAudioHandlers } from './buildToggleImmersiveAudioHandlers'
 export { setupKeyboard } from './keyboard'

@@ -4,5 +4,5 @@ export {
     ImmutableSpecState,
     SpecStateAction,
     SpecStateActionType,
-    SpecStateKeys,
+    SpecStateKey,
 } from './types'

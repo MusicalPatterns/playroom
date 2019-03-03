@@ -3,22 +3,22 @@ import { entries, from, map, Ordinal } from '@musical-patterns/utilities'
 import * as React from 'react'
 import { connect } from 'react-redux'
 import { Dispatch } from 'redux'
-import { ImmutableRootState, RootStateKeys } from '../../root'
+import { ImmutableRootState, RootStateKey } from '../../root'
 import { EventHandler } from '../../types'
 import { handlePatternChange, PatternChangeEventParameters } from '../events'
-import { ImmutablePatternState, PatternStateKeys } from '../state'
+import { ImmutablePatternState, PatternStateKey } from '../state'
 import { sortByOrderOrPublishDate } from './helpers'
 import PatternListItem from './PatternListItem'
 import { PatternListProps, PatternListPropsFromDispatch, PatternListPropsFromState } from './types'
 
 const mapStateToProps: (state: ImmutableRootState) => PatternListPropsFromState =
     (state: ImmutableRootState): PatternListPropsFromState => {
-        const patternState: ImmutablePatternState = state.get(RootStateKeys.PATTERN)
+        const patternState: ImmutablePatternState = state.get(RootStateKey.PATTERN)
 
         return {
-            id: patternState.get(PatternStateKeys.ID),
-            patterns: patternState.get(PatternStateKeys.PATTERNS),
-            rightColumnOpen: patternState.get(PatternStateKeys.RIGHT_COLUMN_OPEN),
+            id: patternState.get(PatternStateKey.ID),
+            patterns: patternState.get(PatternStateKey.PATTERNS),
+            rightColumnOpen: patternState.get(PatternStateKey.RIGHT_COLUMN_OPEN),
         }
     }
 

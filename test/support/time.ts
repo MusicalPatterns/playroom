@@ -15,7 +15,8 @@ const isPlaying: () => Promise<void> =
     async (): Promise<void> => {
         const initialTime: Ms = await currentTime()
         await sleep(LONG_ENOUGH_FOR_TIME_TO_PASS)
-        expect(await currentTime())
+        const shouldBeLaterTime: Ms = await currentTime()
+        expect(shouldBeLaterTime)
             .toBeGreaterThan(from.Ms(initialTime))
     }
 

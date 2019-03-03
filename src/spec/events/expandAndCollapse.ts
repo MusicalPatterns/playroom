@@ -1,12 +1,11 @@
 import { ActionType } from '../../root'
-import { DispatchAsProp } from '../../types'
+import { CaretClickHandlerParameters } from './types'
 
-const buildCaretClickHandler: (parameters: DispatchAsProp) => VoidFunction =
-    ({ dispatch }: DispatchAsProp): VoidFunction =>
-        (): void => {
-            dispatch({ type: ActionType.TOGGLE_SPEC_PANEL_OPEN })
-        }
+const caretClickHandler: (parameters: CaretClickHandlerParameters) => void =
+    ({ dispatch, specPanelOpen }: CaretClickHandlerParameters): void => {
+        dispatch({ type: ActionType.SET_SPEC_PANEL_OPEN, data: !specPanelOpen })
+    }
 
 export {
-    buildCaretClickHandler,
+    caretClickHandler,
 }

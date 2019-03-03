@@ -1,7 +1,7 @@
 import { Preset, Spec, SpecAttributes, SpecValidationFunction } from '@musical-patterns/pattern'
 import { DictionaryOf, Ordinal } from '@musical-patterns/utilities'
 import { DispatchAsProp, EventAsProp } from '../../types'
-import { AddOrRemoveButtonPropsFromParent } from '../components'
+import { AddOrRemoveButtonPropsFromParent, SpecPanelOpenAsProp } from '../components'
 import { ImmutableSpecState } from '../state'
 import { InvalidSpecMessages } from '../types'
 
@@ -42,6 +42,12 @@ type PresetChangeHandler = (parameters: PresetChangeHandlerParameters) => void
 interface HandleArrayedPropertyAddOrRemoveParameters extends EventAsProp, DispatchAsProp,
     AddOrRemoveButtonPropsFromParent {}
 
+interface CaretClickHandlerParameters extends DispatchAsProp, SpecPanelOpenAsProp {}
+
+interface CaretClickEventParameters extends EventAsProp, SpecPanelOpenAsProp {}
+
+type CaretClickEventExtractor = (parameters: CaretClickEventParameters) => void
+
 export {
     SpecChangeEventParameters,
     SpecControlChangeHandler,
@@ -53,4 +59,7 @@ export {
     PresetChangeHandler,
     PresetChangeHandlerParameters,
     HandleArrayedPropertyAddOrRemoveParameters,
+    CaretClickHandlerParameters,
+    CaretClickEventParameters,
+    CaretClickEventExtractor,
 }

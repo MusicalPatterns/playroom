@@ -1,7 +1,7 @@
 import { Preset, Spec, SpecPropertyAttributes } from '@musical-patterns/pattern'
 import { DictionaryOf, Maybe, Ordinal } from '@musical-patterns/utilities'
-import { DomValueOrChecked, WithClickHandler } from '../../types'
-import { PresetChangeHandler, SpecControlChangeHandler } from '../events'
+import { DomValueOrChecked } from '../../types'
+import { CaretClickEventExtractor, PresetChangeHandler, SpecControlChangeHandler } from '../events'
 import { ImmutableSpecState } from '../state'
 import { SingularPropertyInvalidSpecMessage } from '../types'
 
@@ -67,7 +67,11 @@ interface SpecPanelOpenAsProp {
     specPanelOpen: boolean,
 }
 
-interface SpecPanelHeaderProps extends SpecPanelOpenAsProp, WithClickHandler {}
+interface SpecPanelHeaderPropsFromDispatch {
+    handleCaretClickEvent: CaretClickEventExtractor,
+}
+
+interface SpecPanelHeaderProps extends SpecPanelOpenAsProp, SpecPanelHeaderPropsFromDispatch {}
 
 export {
     SpecControlStates,
@@ -85,5 +89,6 @@ export {
     InvalidMessageProps,
     UnitsProps,
     SpecPanelOpenAsProp,
+    SpecPanelHeaderPropsFromDispatch,
     SpecPanelHeaderProps,
 }

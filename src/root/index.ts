@@ -2,7 +2,7 @@ export {
     Action,
     ActionType,
     ImmutableRootState,
-    RootStateKeys,
+    RootStateKey,
     store,
 } from './state'
 export {

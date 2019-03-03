@@ -8,22 +8,22 @@ type Action =
     PerformerStateAction |
     PatternStateAction
 
-enum RootStateKeys {
+enum RootStateKey {
     SPEC = 'SPEC',
     PERFORMER = 'PERFORMER',
     PATTERN = 'PATTERN',
 }
 
 interface RootState {
-    [ RootStateKeys.SPEC ]: ImmutableSpecState,
-    [ RootStateKeys.PERFORMER ]: ImmutablePerformerState,
-    [ RootStateKeys.PATTERN ]: ImmutablePatternState,
+    [ RootStateKey.SPEC ]: ImmutableSpecState,
+    [ RootStateKey.PERFORMER ]: ImmutablePerformerState,
+    [ RootStateKey.PATTERN ]: ImmutablePatternState,
 }
 
 type ImmutableRootState = TypedMap<RootState>
 
 export {
     ImmutableRootState,
-    RootStateKeys,
+    RootStateKey,
     Action,
 }

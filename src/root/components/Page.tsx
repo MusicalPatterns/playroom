@@ -2,16 +2,16 @@
 
 import * as React from 'react'
 import { connect } from 'react-redux'
-import { ImmutablePatternState, PageName, PatternStateKeys } from '../../pattern'
-import { ImmutableRootState, RootStateKeys } from '../state'
+import { ImmutablePatternState, PageName, PatternStateKey } from '../../pattern'
+import { ImmutableRootState, RootStateKey } from '../state'
 import { PageProps } from './types'
 
 const mapStateToProps: (state: ImmutableRootState) => PageProps =
     (state: ImmutableRootState): PageProps => {
-        const patternState: ImmutablePatternState = state.get(RootStateKeys.PATTERN)
+        const patternState: ImmutablePatternState = state.get(RootStateKey.PATTERN)
 
         return {
-            pageName: patternState.get(PatternStateKeys.PAGE_NAME),
+            pageName: patternState.get(PatternStateKey.PAGE_NAME),
         }
     }
 

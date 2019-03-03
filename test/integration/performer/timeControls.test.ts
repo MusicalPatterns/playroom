@@ -4,15 +4,18 @@ import {
     A_BIT_LONGER,
     currentTime,
     elementExists,
+    EVEN_A_BIT_LONGER,
     findElement,
     hasBeenReset,
     isPaused,
     isPlaying,
-    LONG_ENOUGH_FOR_TIME_TO_HAVE_BEEN_RESET,
+    LONG_DURATION_PATTERN_ID,
     LONG_ENOUGH_FOR_TIME_TO_PASS,
+    openSpecControlsIfNotOpen,
     patternDuration,
+    POST_PATTERN_ID,
     refreshPage,
-    selectOtherTestPattern,
+    simulateDesktopViewport,
     SPEC_RANGED_PROPERTY_ONE_KEY,
     TIME_CONTROLS_PATTERN_ID,
     VALID_TEST_MODIFICATION,
@@ -36,6 +39,8 @@ const timeControlsAreDisabled: () => Promise<void> =
 
 const selectTimeControlsPattern: () => Promise<void> =
     async (): Promise<void> => {
+        const otherTestPattern: ElementHandle = await findElement(`#${POST_PATTERN_ID}`)
+        await otherTestPattern.click()
         const testPattern: ElementHandle = await findElement(`#${TIME_CONTROLS_PATTERN_ID}`)
         await testPattern.click()
     }
@@ -46,29 +51,37 @@ const click: (control: string) => Promise<void> =
         await play.click()
     }
 
-const isAfter: (time: Ms) => Promise<void> =
-    async (time: Ms): Promise<void> => {
-        await sleep(LONG_ENOUGH_FOR_TIME_TO_HAVE_BEEN_RESET)
-        const timeAfterResetting: Ms = await currentTime()
-        expect(timeAfterResetting)
-            .toBeGreaterThan(from.Ms(time))
+const isAfter: (previousTime: Ms) => Promise<void> =
+    async (previousTime: Ms): Promise<void> => {
+        const newTime: Ms = await currentTime()
+
+        expect(newTime)
+            .toBeGreaterThan(from.Ms(previousTime))
     }
 
 const playJustLongEnoughToBeAlmostAboutToWrapAround: () => Promise<void> =
     async (): Promise<void> => {
         const totalTime: Ms = await patternDuration()
-        await sleep(difference(totalTime, LONG_ENOUGH_FOR_TIME_TO_PASS))
+        await sleep(difference(totalTime, A_BIT_LONGER))
     }
 
 const playJustLongEnoughMoreToWrapAround: () => Promise<void> =
     async (): Promise<void> => {
-        await sleep(sum(LONG_ENOUGH_FOR_TIME_TO_PASS, LONG_ENOUGH_FOR_TIME_TO_PASS))
+        await sleep(sum(A_BIT_LONGER, LONG_ENOUGH_FOR_TIME_TO_PASS))
     }
 
 const navigateToAboutPage: () => Promise<void> =
     async (): Promise<void> => {
         const title: ElementHandle = await findElement('#title h1')
         await title.click()
+    }
+
+const selectLongDurationTestPattern: () => Promise<void> =
+    async (): Promise<void> => {
+        const otherTestPattern: ElementHandle = await findElement(`#${POST_PATTERN_ID}`)
+        await otherTestPattern.click()
+        const longDurationTestPattern: ElementHandle = await findElement(`#${LONG_DURATION_PATTERN_ID}`)
+        await longDurationTestPattern.click()
     }
 
 describe('time controls', () => {
@@ -79,13 +92,9 @@ describe('time controls', () => {
         done()
     })
 
-    beforeEach(async (done: DoneFn) => {
+    it('starts off paused', async (done: DoneFn) => {
         await refreshPage()
         await selectTimeControlsPattern()
-        done()
-    })
-
-    it('starts off paused', async (done: DoneFn) => {
         await isPaused()
 
         done()
@@ -93,7 +102,11 @@ describe('time controls', () => {
 
     describe('after pressing play', () => {
         beforeEach(async (done: DoneFn) => {
+            await simulateDesktopViewport()
+            await selectLongDurationTestPattern()
             await click('play')
+            await sleep(LONG_ENOUGH_FOR_TIME_TO_PASS)
+
             done()
         })
 
@@ -117,21 +130,10 @@ describe('time controls', () => {
             done()
         })
 
-        it('resets the time to the beginning but keeps playing when you select a new pattern', async (done: DoneFn) => {
-            await sleep(A_BIT_LONGER)
-            const timeOfSelectingNewPattern: Ms = await currentTime()
-
-            await selectOtherTestPattern()
-            await hasBeenReset({ toBefore: timeOfSelectingNewPattern })
-            await isPlaying()
-
-            done()
-        })
-
         it('keeps playing when you modify the spec but does not reset time to the beginning', async (done: DoneFn) => {
-            await sleep(A_BIT_LONGER)
             const timeOfModifyingSpec: Ms = await currentTime()
 
+            await openSpecControlsIfNotOpen()
             await modifySpec()
             await isAfter(timeOfModifyingSpec)
             await isPlaying()
@@ -159,6 +161,43 @@ describe('time controls', () => {
             done()
         })
 
+        it('pressing rewind sets time to the beginning but keeps playing', async (done: DoneFn) => {
+            await sleep(EVEN_A_BIT_LONGER)
+            const timeOfPressingRewind: Ms = await currentTime()
+            await click('rewind')
+            await hasBeenReset({ toBefore: timeOfPressingRewind })
+            await isPlaying()
+
+            done()
+        })
+    })
+
+    describe('after pressing play (when you need it to not be the pattern with a long duration)', () => {
+        beforeEach(async (done: DoneFn) => {
+            await simulateDesktopViewport()
+            await selectTimeControlsPattern()
+            await click('play')
+            done()
+        })
+
+        afterEach(async (done: DoneFn) => {
+            if (await elementExists('#pause')) {
+                await click('pause')
+            }
+            done()
+        })
+
+        it('resets the time to the beginning but keeps playing when you select a new pattern', async (done: DoneFn) => {
+            await sleep(A_BIT_LONGER)
+            const timeOfSelectingNewPattern: Ms = await currentTime()
+
+            await selectLongDurationTestPattern()
+            await hasBeenReset({ toBefore: timeOfSelectingNewPattern })
+            await isPlaying()
+
+            done()
+        })
+
         it('wraps time back around to the beginning', async (done: DoneFn) => {
             const initialTime: Ms = await currentTime()
 
@@ -168,19 +207,9 @@ describe('time controls', () => {
                 .toBeGreaterThan(from.Ms(initialTime))
 
             await playJustLongEnoughMoreToWrapAround()
-            expect(await currentTime())
+            const afterWrappingTime: Ms = await currentTime()
+            expect(afterWrappingTime)
                 .toBeLessThan(from.Ms(beforeWrappingTime))
-
-            done()
-        })
-
-        it('pressing rewind sets time to the beginning but keeps playing', async (done: DoneFn) => {
-            await sleep(A_BIT_LONGER)
-            const timeOfPressingRewind: Ms = await currentTime()
-
-            await click('rewind')
-            await hasBeenReset({ toBefore: timeOfPressingRewind })
-            await isPlaying()
 
             done()
         })

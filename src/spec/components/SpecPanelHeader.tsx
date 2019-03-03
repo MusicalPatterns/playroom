@@ -4,31 +4,40 @@ import * as React from 'react'
 import { connect } from 'react-redux'
 import { Dispatch } from 'redux'
 import { CONTROLS } from '../../copy'
-import { ImmutableRootState, RootStateKeys } from '../../root'
-import { WithClickHandler } from '../../types'
-import { buildCaretClickHandler } from '../events'
-import { SpecStateKeys } from '../state'
-import { SpecPanelHeaderProps, SpecPanelOpenAsProp } from './types'
+import { ImmutableRootState, RootStateKey } from '../../root'
+import { EventHandler } from '../../types'
+import { CaretClickEventParameters, caretClickHandler } from '../events'
+import { SpecStateKey } from '../state'
+import { SpecPanelHeaderProps, SpecPanelHeaderPropsFromDispatch, SpecPanelOpenAsProp } from './types'
 
 const mapStateToProps: (state: ImmutableRootState) => SpecPanelOpenAsProp =
     (state: ImmutableRootState): SpecPanelOpenAsProp => ({
-        specPanelOpen: state.get(RootStateKeys.SPEC)
-            .get(SpecStateKeys.SPEC_PANEL_OPEN),
+        specPanelOpen: state.get(RootStateKey.SPEC)
+            .get(SpecStateKey.SPEC_PANEL_OPEN),
     })
 
-const mapDispatchToProps: (dispatch: Dispatch) => WithClickHandler =
-    (dispatch: Dispatch): WithClickHandler => ({
-        onClick: buildCaretClickHandler({ dispatch }),
+const mapDispatchToProps: (dispatch: Dispatch) => SpecPanelHeaderPropsFromDispatch =
+    (dispatch: Dispatch): SpecPanelHeaderPropsFromDispatch => ({
+        handleCaretClickEvent: ({ event, specPanelOpen }: CaretClickEventParameters): void => {
+            caretClickHandler({ dispatch, specPanelOpen })
+        },
     })
 
 const SpecPanelHeader: React.ComponentType<SpecPanelHeaderProps> =
-    ({ onClick, specPanelOpen }: SpecPanelHeaderProps): JSX.Element => (
-        <h3 {...{ id: 'spec-panel-header' }}>
-            {CONTROLS}
-            <button {...{ id: 'caret', onClick }}>
-                <FontAwesomeIcon {...{ icon: specPanelOpen ? faCaretDown : faCaretRight }}/>
-            </button>
-        </h3>
-    )
+    ({ handleCaretClickEvent, specPanelOpen }: SpecPanelHeaderProps): JSX.Element => {
+        const onClick: EventHandler =
+            (event: React.SyntheticEvent): void => {
+                handleCaretClickEvent({ event, specPanelOpen })
+            }
+
+        return (
+            <h3 {...{ id: 'spec-panel-header' }}>
+                {CONTROLS}
+                <button {...{ id: 'caret', onClick }}>
+                    <FontAwesomeIcon {...{ icon: specPanelOpen ? faCaretDown : faCaretRight }}/>
+                </button>
+            </h3>
+        )
+    }
 
 export default connect(mapStateToProps, mapDispatchToProps)(SpecPanelHeader)

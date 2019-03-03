@@ -4,5 +4,5 @@ export {
     ImmutablePatternState,
     PatternStateAction,
     PatternStateActionType,
-    PatternStateKeys,
+    PatternStateKey,
 } from './types'

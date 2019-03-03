@@ -9,7 +9,7 @@ export {
 } from './components'
 export {
     onPerformerUpdate,
-    buildToggleImmersiveAudioHandler,
+    buildToggleImmersiveAudioHandlers,
     setupKeyboard,
 } from './setup'
 export {

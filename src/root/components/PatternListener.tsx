@@ -9,22 +9,22 @@ import { doAsync, Maybe, Ms } from '@musical-patterns/utilities'
 import * as React from 'react'
 import { connect } from 'react-redux'
 import { Dispatch } from 'redux'
-import { PatternStateKeys } from '../../pattern'
-import { SpecStateKeys } from '../../spec'
-import { ActionType, ImmutableRootState, RootStateKeys } from '../state'
+import { PatternStateKey } from '../../pattern'
+import { SpecStateKey } from '../../spec'
+import { ActionType, ImmutableRootState, RootStateKey } from '../state'
 import { logDebugInfo, maybePatternFromPatternsAndId } from './helpers'
 import { PatternListenerProps, PatternListenerPropsFromDispatch, PatternListenerPropsFromState } from './types'
 
 const mapStateToProps: (state: ImmutableRootState) => PatternListenerPropsFromState =
     (state: ImmutableRootState): PatternListenerPropsFromState => ({
-        debugMode: state.get(RootStateKeys.PATTERN)
-            .get(PatternStateKeys.DEBUG_MODE),
-        id: state.get(RootStateKeys.PATTERN)
-            .get(PatternStateKeys.ID),
-        patterns: state.get(RootStateKeys.PATTERN)
-            .get(PatternStateKeys.PATTERNS),
-        submittedSpec: state.get(RootStateKeys.SPEC)
-            .get(SpecStateKeys.SUBMITTED_SPEC),
+        debugMode: state.get(RootStateKey.PATTERN)
+            .get(PatternStateKey.DEBUG_MODE),
+        id: state.get(RootStateKey.PATTERN)
+            .get(PatternStateKey.ID),
+        patterns: state.get(RootStateKey.PATTERN)
+            .get(PatternStateKey.PATTERNS),
+        submittedSpec: state.get(RootStateKey.SPEC)
+            .get(SpecStateKey.SUBMITTED_SPEC),
     })
 
 const mapDispatchToProps: (dispatch: Dispatch) => PatternListenerPropsFromDispatch =

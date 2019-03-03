@@ -1,25 +1,25 @@
 import * as React from 'react'
 import { connect } from 'react-redux'
 import { ENTER, EXIT, IMMERSIVE_AUDIO } from '../../copy'
-import { ImmutableRootState, RootStateKeys } from '../../root'
-import { ImmutablePerformerState, PerformerStateKeys } from '../state'
+import { ImmutableRootState, RootStateKey } from '../../root'
+import { ImmutablePerformerState, PerformerStateKey } from '../state'
 import { ToggleImmersiveAudioButtonProps } from './types'
 
 const mapStateToProps: (state: ImmutableRootState) => ToggleImmersiveAudioButtonProps =
     (state: ImmutableRootState): ToggleImmersiveAudioButtonProps => {
-        const performerState: ImmutablePerformerState = state.get(RootStateKeys.PERFORMER)
+        const performerState: ImmutablePerformerState = state.get(RootStateKey.PERFORMER)
 
         return {
             disabled: performerState
-                .get(PerformerStateKeys.PERFORMER_DISABLED),
-            immersiveAudio: performerState
-                .get(PerformerStateKeys.IMMERSIVE_AUDIO),
+                .get(PerformerStateKey.PERFORMER_DISABLED),
+            immersiveAudioEnabled: performerState
+                .get(PerformerStateKey.IMMERSIVE_AUDIO_ENABLED),
             immersiveAudioReady: performerState
-                .get(PerformerStateKeys.IMMERSIVE_AUDIO_READY),
+                .get(PerformerStateKey.IMMERSIVE_AUDIO_READY),
             immersiveAudioUnvailable: performerState
-                .get(PerformerStateKeys.IMMERSIVE_AUDIO_UNAVAILABLE),
-            toggleImmersiveAudioHandler: performerState
-                .get(PerformerStateKeys.TOGGLE_IMMERSIVE_AUDIO_HANDLER),
+                .get(PerformerStateKey.IMMERSIVE_AUDIO_UNAVAILABLE),
+            toggleImmersiveAudioHandlers: performerState
+                .get(PerformerStateKey.TOGGLE_IMMERSIVE_AUDIO_HANDLERS),
         }
     }
 
@@ -27,20 +27,21 @@ const ToggleImmersiveAudioButton: React.ComponentType<ToggleImmersiveAudioButton
     (props: ToggleImmersiveAudioButtonProps): JSX.Element => {
         const {
             disabled,
-            immersiveAudio,
+            immersiveAudioEnabled,
             immersiveAudioReady,
             immersiveAudioUnvailable,
-            toggleImmersiveAudioHandler,
+            toggleImmersiveAudioHandlers,
         } = props
+        const { enterImmersiveAudio, exitImmersiveAudio } = toggleImmersiveAudioHandlers
 
         return (
             <button {...{
                 disabled: disabled || !immersiveAudioReady,
                 id: 'toggle-immersive-audio',
-                onClick: toggleImmersiveAudioHandler,
+                onClick: immersiveAudioEnabled ? exitImmersiveAudio : enterImmersiveAudio,
                 title: immersiveAudioUnvailable ? 'Your system does not support VR.' : '',
             }}>
-                {immersiveAudio ? EXIT : ENTER} {IMMERSIVE_AUDIO}
+                {immersiveAudioEnabled ? EXIT : ENTER} {IMMERSIVE_AUDIO}
             </button>
         )
     }

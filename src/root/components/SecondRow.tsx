@@ -1,20 +1,20 @@
 import * as React from 'react'
 import { connect } from 'react-redux'
-import { ImmutablePatternState, PatternStateKeys } from '../../pattern'
+import { ImmutablePatternState, PatternStateKey } from '../../pattern'
 import { SpecPanel } from '../../spec'
-import { ImmutableRootState, RootStateKeys } from '../state'
+import { ImmutableRootState, RootStateKey } from '../state'
 import { getPatternTitle } from './helpers'
 import PatternListener from './PatternListener'
 import { SecondRowProps } from './types'
 
 const mapStateToProps: (state: ImmutableRootState) => SecondRowProps =
     (state: ImmutableRootState): SecondRowProps => {
-        const patternState: ImmutablePatternState = state.get(RootStateKeys.PATTERN)
+        const patternState: ImmutablePatternState = state.get(RootStateKey.PATTERN)
 
         return {
-            id: patternState.get(PatternStateKeys.ID),
-            pageName: patternState.get(PatternStateKeys.PAGE_NAME),
-            patterns: patternState.get(PatternStateKeys.PATTERNS),
+            id: patternState.get(PatternStateKey.ID),
+            pageName: patternState.get(PatternStateKey.PAGE_NAME),
+            patterns: patternState.get(PatternStateKey.PATTERNS),
         }
     }
 

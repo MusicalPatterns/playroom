@@ -6,7 +6,7 @@ export {
     specReducer,
     ImmutableSpecState,
     SpecStateAction,
-    SpecStateKeys,
+    SpecStateKey,
 } from './state'
 export {
     SpecPanel,

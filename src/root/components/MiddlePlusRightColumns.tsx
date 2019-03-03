@@ -1,7 +1,7 @@
 import * as React from 'react'
 import { connect } from 'react-redux'
-import { ImmutablePatternState, PatternStateKeys } from '../../pattern'
-import { ImmutableRootState, RootStateKeys } from '../state'
+import { ImmutablePatternState, PatternStateKey } from '../../pattern'
+import { ImmutableRootState, RootStateKey } from '../state'
 import BottomRow from './BottomRow'
 import FirstRow from './FirstRow'
 import Page from './Page'
@@ -11,12 +11,12 @@ import { MiddlePlusRightColumnsProps } from './types'
 
 const mapStateToProps: (state: ImmutableRootState) => MiddlePlusRightColumnsProps =
     (state: ImmutableRootState): MiddlePlusRightColumnsProps => {
-        const patternState: ImmutablePatternState = state.get(RootStateKeys.PATTERN)
+        const patternState: ImmutablePatternState = state.get(RootStateKey.PATTERN)
 
         return {
-            id: patternState.get(PatternStateKeys.ID),
-            pageName: patternState.get(PatternStateKeys.PAGE_NAME),
-            rightColumnOpen: patternState.get(PatternStateKeys.RIGHT_COLUMN_OPEN),
+            id: patternState.get(PatternStateKey.ID),
+            pageName: patternState.get(PatternStateKey.PAGE_NAME),
+            rightColumnOpen: patternState.get(PatternStateKey.RIGHT_COLUMN_OPEN),
         }
     }
 

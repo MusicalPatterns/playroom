@@ -4,16 +4,16 @@ import * as React from 'react'
 import { connect } from 'react-redux'
 import { Dispatch } from 'redux'
 import { PATTERN_PARTICULAR, STANDARD } from '../../copy'
-import { ImmutableRootState, RootStateKeys } from '../../root'
+import { ImmutableRootState, RootStateKey } from '../../root'
 import { buildSpecControlChangeHandler } from '../events'
-import { SpecStateKeys } from '../state'
+import { SpecStateKey } from '../state'
 import { buildSortSpecControls } from './helpers'
 import SpecControl from './SpecControl'
 import { SpecControlsProps, SpecControlsPropsFromDispatch, SpecControlsPropsFromState } from './types'
 
 const mapStateToProps: (state: ImmutableRootState) => SpecControlsPropsFromState =
     (state: ImmutableRootState): SpecControlsPropsFromState => ({
-        specState: state.get(RootStateKeys.SPEC),
+        specState: state.get(RootStateKey.SPEC),
     })
 
 const mapDispatchToProps: (dispatch: Dispatch) => SpecControlsPropsFromDispatch =
@@ -25,9 +25,9 @@ const SpecControls: React.ComponentType<SpecControlsProps> =
     (specControlsProps: SpecControlsProps): JSX.Element => {
         const { specState }: SpecControlsProps = specControlsProps
         const displayedSpec: Spec = specState
-            .get(SpecStateKeys.DISPLAYED_SPEC)
+            .get(SpecStateKey.DISPLAYED_SPEC)
         const specAttributes: SpecAttributes = specState
-            .get(SpecStateKeys.SPEC_ATTRIBUTES)
+            .get(SpecStateKey.SPEC_ATTRIBUTES)
 
         const standardSpecControls: JSX.Element[] = map(
             keys(displayedSpec)

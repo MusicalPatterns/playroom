@@ -1,10 +1,14 @@
 import { Patterns } from '@musical-patterns/pattern'
-import { setupPerformer } from '@musical-patterns/performer'
+import { setupPerformer, ToggleImmersiveAudioHandlers } from '@musical-patterns/performer'
 import { createElement } from 'react'
 import { render } from 'react-dom'
 import { Provider } from 'react-redux'
 import { BatchAction, batchActions } from 'redux-batched-actions'
-import { buildToggleImmersiveAudioHandler, onPerformerUpdate, setupKeyboard } from './performer'
+import {
+    buildToggleImmersiveAudioHandlers,
+    onPerformerUpdate,
+    setupKeyboard,
+} from './performer'
 import { ActionType, App, store } from './root'
 // tslint:disable-next-line no-import-side-effect
 import './styles'
@@ -20,13 +24,13 @@ const setupPlayroom: (patterns: Patterns, debugMode?: boolean) => Promise<HTMLDi
         render(createElement(Provider, { store }, createElement(App)), root)
 
         await setupPerformer({ onUpdate: onPerformerUpdate })
-        const toggleImmersiveAudioHandler: VoidFunction = buildToggleImmersiveAudioHandler()
+        const toggleImmersiveAudioHandlers: ToggleImmersiveAudioHandlers = buildToggleImmersiveAudioHandlers()
         setupKeyboard()
 
         const batchedAction: BatchAction = batchActions([
             { type: ActionType.SET_PATTERNS, data: patterns },
             { type: ActionType.SET_DEBUG_MODE, data: debugMode },
-            { type: ActionType.SET_TOGGLE_IMMERSIVE_AUDIO_HANDLER, data: toggleImmersiveAudioHandler },
+            { type: ActionType.SET_TOGGLE_IMMERSIVE_AUDIO_HANDLERS, data: toggleImmersiveAudioHandlers },
         ])
         store.dispatch(batchedAction)
 

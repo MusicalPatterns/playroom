@@ -2,7 +2,7 @@ import { Spec } from '@musical-patterns/pattern'
 import { batchActions } from 'redux-batched-actions'
 import { Action, extractValueFromEvent } from '../../root'
 import { DispatchAsProp, DomValueOrChecked, SpecValue } from '../../types'
-import { SpecStateKeys } from '../state'
+import { SpecStateKey } from '../state'
 import { mergeEventValueIntoSpecValue } from './helpers'
 import { BuildSpecControlChangeHandler, SpecControlChangeHandler, SpecControlChangeHandlerParameters } from './types'
 import { buildAttemptSubmitActions } from './validation'
@@ -14,7 +14,7 @@ const buildSpecControlChangeHandler: BuildSpecControlChangeHandler =
 
             const eventValue: DomValueOrChecked = extractValueFromEvent(event)
 
-            const displayedSpec: Spec = specState.get(SpecStateKeys.DISPLAYED_SPEC)
+            const displayedSpec: Spec = specState.get(SpecStateKey.DISPLAYED_SPEC)
 
             let specValue: SpecValue = eventValue
             if (arrayedPropertyIndex !== undefined) {

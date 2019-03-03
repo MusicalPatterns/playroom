@@ -1,19 +1,15 @@
+import { ToggleImmersiveAudioHandlers } from '@musical-patterns/performer'
 import { Ms, TypedMap } from '@musical-patterns/utilities'
 
 enum PerformerStateActionType {
     SET_TIME_POSITION = 'SET_TIME_POSITION',
     SET_PATTERN_DURATION = 'SET_PATTERN_DURATION',
-    TOGGLE_PAUSED = 'TOGGLE_PAUSED',
     SET_PAUSED = 'SET_PAUSED',
-    SET_TOGGLE_IMMERSIVE_AUDIO_HANDLER = 'SET_TOGGLE_IMMERSIVE_AUDIO_HANDLER',
+    SET_TOGGLE_IMMERSIVE_AUDIO_HANDLERS = 'SET_TOGGLE_IMMERSIVE_AUDIO_HANDLERS',
     SET_IMMERSIVE_AUDIO_READY = 'SET_IMMERSIVE_AUDIO_READY',
     SET_IMMERSIVE_AUDIO_UNAVAILABLE = 'SET_IMMERSIVE_AUDIO_UNAVAILABLE',
-    TOGGLE_IMMERSIVE_AUDIO = 'TOGGLE_IMMERSIVE_AUDIO',
+    SET_IMMERSIVE_AUDIO_ENABLED = 'SET_IMMERSIVE_AUDIO_ENABLED',
     SET_PERFORMER_DISABLED = 'SET_PERFORMER_DISABLED',
-}
-
-interface TogglePaused {
-    type: PerformerStateActionType.TOGGLE_PAUSED,
 }
 
 interface SetPaused {
@@ -31,21 +27,24 @@ interface SetTotalDuration {
     type: PerformerStateActionType.SET_PATTERN_DURATION,
 }
 
-interface SetToggleImmersiveAudioHandler {
-    data: VoidFunction,
-    type: PerformerStateActionType.SET_TOGGLE_IMMERSIVE_AUDIO_HANDLER,
+interface SetToggleImmersiveAudioHandlers {
+    data: ToggleImmersiveAudioHandlers,
+    type: PerformerStateActionType.SET_TOGGLE_IMMERSIVE_AUDIO_HANDLERS,
 }
 
 interface SetImmersiveAudioReady {
+    data: boolean,
     type: PerformerStateActionType.SET_IMMERSIVE_AUDIO_READY,
 }
 
 interface SetImmersiveAudioUnavailable {
+    data: boolean,
     type: PerformerStateActionType.SET_IMMERSIVE_AUDIO_UNAVAILABLE,
 }
 
-interface ToggleImmersiveAudio {
-    type: PerformerStateActionType.TOGGLE_IMMERSIVE_AUDIO,
+interface SetImmersiveAudioEnabled {
+    data: boolean,
+    type: PerformerStateActionType.SET_IMMERSIVE_AUDIO_ENABLED,
 }
 
 interface SetPerformerDisabled {
@@ -54,43 +53,45 @@ interface SetPerformerDisabled {
 }
 
 type PerformerStateAction =
-    TogglePaused |
     SetPaused |
     SetTimePosition |
     SetTotalDuration |
-    SetToggleImmersiveAudioHandler |
+    SetToggleImmersiveAudioHandlers |
     SetImmersiveAudioReady |
     SetImmersiveAudioUnavailable |
-    ToggleImmersiveAudio |
+    SetImmersiveAudioEnabled |
     SetPerformerDisabled
 
-enum PerformerStateKeys {
+enum PerformerStateKey {
     TIME_POSITION = 'timePosition',
     PATTERN_DURATION = 'patternDuration',
     PAUSED = 'paused',
-    TOGGLE_IMMERSIVE_AUDIO_HANDLER = 'toggleImmersiveAudioHandler',
+    TOGGLE_IMMERSIVE_AUDIO_HANDLERS = 'toggleImmersiveAudioHandlers',
     IMMERSIVE_AUDIO_READY = 'immersiveAudioReady',
     IMMERSIVE_AUDIO_UNAVAILABLE = 'immersiveAudioUnavailable',
-    IMMERSIVE_AUDIO = 'immersiveAudio',
+    IMMERSIVE_AUDIO_ENABLED = 'immersiveAudioEnabled',
     PERFORMER_DISABLED = 'performerDisabled',
 }
 
 interface PerformerState {
-    [ PerformerStateKeys.TIME_POSITION ]: Ms,
-    [ PerformerStateKeys.PATTERN_DURATION ]: Ms,
-    [ PerformerStateKeys.PAUSED ]: boolean,
-    [ PerformerStateKeys.TOGGLE_IMMERSIVE_AUDIO_HANDLER ]: VoidFunction,
-    [ PerformerStateKeys.IMMERSIVE_AUDIO_READY ]: boolean,
-    [ PerformerStateKeys.IMMERSIVE_AUDIO_UNAVAILABLE ]: boolean,
-    [ PerformerStateKeys.IMMERSIVE_AUDIO ]: boolean,
-    [ PerformerStateKeys.PERFORMER_DISABLED ]: boolean,
+    [ PerformerStateKey.TIME_POSITION ]: Ms,
+    [ PerformerStateKey.PATTERN_DURATION ]: Ms,
+    [ PerformerStateKey.PAUSED ]: boolean,
+    [ PerformerStateKey.TOGGLE_IMMERSIVE_AUDIO_HANDLERS ]: ToggleImmersiveAudioHandlers,
+    [ PerformerStateKey.IMMERSIVE_AUDIO_READY ]: boolean,
+    [ PerformerStateKey.IMMERSIVE_AUDIO_UNAVAILABLE ]: boolean,
+    [ PerformerStateKey.IMMERSIVE_AUDIO_ENABLED ]: boolean,
+    [ PerformerStateKey.PERFORMER_DISABLED ]: boolean,
 }
 
 type ImmutablePerformerState = TypedMap<PerformerState>
+
+type PerformerStateActionMap = { [key in keyof typeof PerformerStateActionType]: PerformerStateKey }
 
 export {
     ImmutablePerformerState,
     PerformerStateAction,
     PerformerStateActionType,
-    PerformerStateKeys,
+    PerformerStateKey,
+    PerformerStateActionMap,
 }

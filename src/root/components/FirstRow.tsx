@@ -1,14 +1,14 @@
 import * as React from 'react'
 import { connect } from 'react-redux'
-import { PatternStateKeys } from '../../pattern'
+import { PatternStateKey } from '../../pattern'
 import { PerformerPanel } from '../../performer'
-import { ImmutableRootState, RootStateKeys } from '../state'
+import { ImmutableRootState, RootStateKey } from '../state'
 import { FirstRowProps } from './types'
 
 const mapStateToProps: (state: ImmutableRootState) => FirstRowProps =
     (state: ImmutableRootState): FirstRowProps => ({
-        pageName: state.get(RootStateKeys.PATTERN)
-            .get(PatternStateKeys.PAGE_NAME),
+        pageName: state.get(RootStateKey.PATTERN)
+            .get(PatternStateKey.PAGE_NAME),
     })
 
 const FirstRow: React.ComponentType<FirstRowProps> =

@@ -1,13 +1,13 @@
 import * as React from 'react'
 import { connect } from 'react-redux'
-import { PatternPanel, PatternStateKeys } from '../../pattern'
-import { ImmutableRootState, RootStateKeys } from '../state'
+import { PatternPanel, PatternStateKey } from '../../pattern'
+import { ImmutableRootState, RootStateKey } from '../state'
 import { LeftColumnProps } from './types'
 
 const mapStateToProps: (state: ImmutableRootState) => LeftColumnProps =
     (state: ImmutableRootState): LeftColumnProps => ({
-        leftColumnOpen: state.get(RootStateKeys.PATTERN)
-            .get(PatternStateKeys.LEFT_COLUMN_OPEN),
+        leftColumnOpen: state.get(RootStateKey.PATTERN)
+            .get(PatternStateKey.LEFT_COLUMN_OPEN),
     })
 
 const LeftColumn: React.ComponentType<LeftColumnProps> =

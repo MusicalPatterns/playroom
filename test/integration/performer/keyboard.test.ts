@@ -1,18 +1,29 @@
 import { Ms, sleep } from '@musical-patterns/utilities'
+import { ElementHandle } from 'puppeteer'
 import {
     A_BIT_LONGER,
     currentTime,
     elementExists,
+    findElement,
     hasBeenReset,
     isPaused,
     isPlaying,
+    LONG_DURATION_PATTERN_ID,
+    POST_PATTERN_ID,
     press,
-    resetSpecByTogglingToOtherPatternThenBackToTestPattern,
 } from '../../support'
+
+const selectLongDurationTestPattern: () => Promise<void> =
+    async (): Promise<void> => {
+        const otherTestPattern: ElementHandle = await findElement(`#${POST_PATTERN_ID}`)
+        await otherTestPattern.click()
+        const longDurationTestPattern: ElementHandle = await findElement(`#${LONG_DURATION_PATTERN_ID}`)
+        await longDurationTestPattern.click()
+    }
 
 describe('keyboard controls', () => {
     beforeEach(async (done: DoneFn) => {
-        await resetSpecByTogglingToOtherPatternThenBackToTestPattern()
+        await selectLongDurationTestPattern()
         done()
     })
 

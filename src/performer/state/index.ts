@@ -4,5 +4,5 @@ export {
     ImmutablePerformerState,
     PerformerStateAction,
     PerformerStateActionType,
-    PerformerStateKeys,
+    PerformerStateKey,
 } from './types'

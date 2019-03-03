@@ -1,3 +1,4 @@
+import { ToggleImmersiveAudioHandlers } from '@musical-patterns/performer'
 import { Maybe, Ms } from '@musical-patterns/utilities'
 import { PageName } from '../../pattern'
 
@@ -13,19 +14,20 @@ interface TimeControlsPropsFromState {
 }
 
 interface TimeControlsPropsFromDispatch {
+    pauseHandler: VoidFunction,
+    playHandler: VoidFunction,
     rewindHandler: VoidFunction,
     stopHandler: VoidFunction,
-    togglePausedHandler: VoidFunction,
 }
 
 interface TimeControlsProps extends TimeControlsPropsFromState, TimeControlsPropsFromDispatch {}
 
 interface ToggleImmersiveAudioButtonProps {
     disabled: boolean,
-    immersiveAudio: boolean,
+    immersiveAudioEnabled: boolean,
     immersiveAudioReady: boolean,
     immersiveAudioUnvailable: boolean,
-    toggleImmersiveAudioHandler: VoidFunction,
+    toggleImmersiveAudioHandlers: ToggleImmersiveAudioHandlers,
 }
 
 interface PerformerPanelProps {

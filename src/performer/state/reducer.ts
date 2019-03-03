@@ -1,51 +1,35 @@
 import { Reducer } from 'redux'
 import { initialPerformerState } from './initial'
-import { ImmutablePerformerState, PerformerStateAction, PerformerStateActionType, PerformerStateKeys } from './types'
+import {
+    ImmutablePerformerState,
+    PerformerStateAction,
+    PerformerStateActionMap,
+    PerformerStateActionType,
+    PerformerStateKey,
+} from './types'
 
 const performerReducer: Reducer<ImmutablePerformerState, PerformerStateAction> =
-    // tslint:disable-next-line cyclomatic-complexity
     (
         performerState: ImmutablePerformerState = initialPerformerState,
         action: PerformerStateAction,
     ): ImmutablePerformerState => {
-        switch (action.type) {
-            case PerformerStateActionType.TOGGLE_PAUSED: {
-                return performerState.set(
-                    PerformerStateKeys.PAUSED,
-                    !performerState.get(PerformerStateKeys.PAUSED),
-                )
-            }
-            case PerformerStateActionType.SET_PAUSED: {
-                return performerState.set(PerformerStateKeys.PAUSED, action.data)
-            }
-            case PerformerStateActionType.SET_TIME_POSITION: {
-                return performerState.set(PerformerStateKeys.TIME_POSITION, action.data)
-            }
-            case PerformerStateActionType.SET_PATTERN_DURATION: {
-                return performerState.set(PerformerStateKeys.PATTERN_DURATION, action.data)
-            }
-            case PerformerStateActionType.SET_TOGGLE_IMMERSIVE_AUDIO_HANDLER: {
-                return performerState.set(PerformerStateKeys.TOGGLE_IMMERSIVE_AUDIO_HANDLER, action.data)
-            }
-            case PerformerStateActionType.SET_IMMERSIVE_AUDIO_READY: {
-                return performerState.set(PerformerStateKeys.IMMERSIVE_AUDIO_READY, true)
-            }
-            case PerformerStateActionType.SET_IMMERSIVE_AUDIO_UNAVAILABLE: {
-                return performerState.set(PerformerStateKeys.IMMERSIVE_AUDIO_UNAVAILABLE, true)
-            }
-            case PerformerStateActionType.SET_PERFORMER_DISABLED: {
-                return performerState.set(PerformerStateKeys.PERFORMER_DISABLED, action.data)
-            }
-            case PerformerStateActionType.TOGGLE_IMMERSIVE_AUDIO: {
-                return performerState.set(
-                    PerformerStateKeys.IMMERSIVE_AUDIO,
-                    !performerState.get(PerformerStateKeys.IMMERSIVE_AUDIO),
-                )
-            }
-            default: {
-                return performerState
-            }
+        const actionMap: PerformerStateActionMap = {
+            [ PerformerStateActionType.SET_PAUSED ]: PerformerStateKey.PAUSED,
+            [ PerformerStateActionType.SET_TIME_POSITION ]: PerformerStateKey.TIME_POSITION,
+            [ PerformerStateActionType.SET_PATTERN_DURATION ]: PerformerStateKey.PATTERN_DURATION,
+            [ PerformerStateActionType.SET_TOGGLE_IMMERSIVE_AUDIO_HANDLERS ]:
+            PerformerStateKey.TOGGLE_IMMERSIVE_AUDIO_HANDLERS,
+            [ PerformerStateActionType.SET_IMMERSIVE_AUDIO_READY ]: PerformerStateKey.IMMERSIVE_AUDIO_READY,
+            [ PerformerStateActionType.SET_IMMERSIVE_AUDIO_UNAVAILABLE ]: PerformerStateKey.IMMERSIVE_AUDIO_UNAVAILABLE,
+            [ PerformerStateActionType.SET_PERFORMER_DISABLED ]: PerformerStateKey.PERFORMER_DISABLED,
+            [ PerformerStateActionType.SET_IMMERSIVE_AUDIO_ENABLED ]: PerformerStateKey.IMMERSIVE_AUDIO_ENABLED,
         }
+
+        if (actionMap[ action.type ]) {
+            return performerState.set(actionMap[ action.type ], action.data)
+        }
+
+        return performerState
     }
 
 export {

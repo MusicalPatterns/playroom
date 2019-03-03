@@ -1,7 +1,7 @@
 export {
     Action,
     ImmutableRootState,
-    RootStateKeys,
+    RootStateKey,
 } from './types'
 export {
     ActionType,

@@ -23,6 +23,7 @@ const {
     [ Id.PLAYROOM_TEST_ONLY_STANDARD_SPEC ]: playroomTestOnlyStandardSpec,
     [ Id.PLAYROOM_TEST_VALIDATION ]: playroomTestValidation,
     [ Id.PLAYROOM_TEST_PRESETS ]: playroomTestPresets,
+    [ Id.PLAYROOM_TEST_LONG_DURATION ]: playroomTestLongDuration,
 } = patterns as { [key in Id]: Pattern }
 
 const APP_URL: string = `http://localhost:${port}`
@@ -56,7 +57,7 @@ const SPEC_CONTROLS_PATTERN_TOGGLED_PROPERTY_INITIAL_VALUE: boolean = playroomTe
 const SPEC_CONTROLS_PATTERN_TOGGLED_PROPERTY_MODIFIED_VALUE: boolean = !SPEC_CONTROLS_PATTERN_TOGGLED_PROPERTY_INITIAL_VALUE
 const SPEC_CONTROLS_PATTERN_ARRAYED_PROPERTY_INITIAL_VALUE: number[] = playroomTestSpecControls.specData.initial[ SPEC_ARRAYED_PROPERTY_KEY ]
 const SPEC_CONTROLS_PATTERN_ARRAYED_PROPERTY_WITH_INITIAL_ELEMENT_VALUE_INITIAL_VALUE: number[] = playroomTestSpecControls.specData.initial[ SPEC_ARRAYED_PROPERTY_WITH_INITIAL_ELEMENT_VALUE_KEY ]
-const SPEC_CONTROLS_PATTERN_ARRAYED_PROPERTY_WITH_INITIAL_ELEMENT_VALUE_INITIAL_ELEMENT_VALUE: number = playroomTestSpecControls.specData.attributes[ SPEC_ARRAYED_PROPERTY_WITH_INITIAL_ELEMENT_VALUE_KEY].arrayedNewElementInitialValue
+const SPEC_CONTROLS_PATTERN_ARRAYED_PROPERTY_WITH_INITIAL_ELEMENT_VALUE_INITIAL_ELEMENT_VALUE: number = playroomTestSpecControls.specData.attributes[ SPEC_ARRAYED_PROPERTY_WITH_INITIAL_ELEMENT_VALUE_KEY ].arrayedNewElementInitialValue
 
 const POST_PATTERN_ID: Id = playroomTestPost.id
 const POST_PATTERN_TITLE: string = playroomTestPost.metadata.formattedName as string
@@ -70,9 +71,12 @@ const POST_PATTERN_OPTIONED_PROPERTY_TWO_INITIAL_VALUE: string = playroomTestPos
 const postPatternOptionedPropertyTwoConstraint: OptionedConstraint = postPatternAttributes[ SPEC_OPTIONED_PROPERTY_TWO_KEY ].constraint as OptionedConstraint
 const POST_PATTERN_OPTIONED_PROPERTY_TWO_MODIFIED_VALUE: string = postPatternOptionedPropertyTwoConstraint[ 0 ].key
 
+const LONG_DURATION_PATTERN_ID: string = playroomTestLongDuration.id
+
 const LONG_ENOUGH_FOR_TIME_TO_PASS: Ms = to.Ms(100)
-const LONG_ENOUGH_FOR_TIME_TO_HAVE_BEEN_RESET: Ms = to.Ms(100)
+const LONG_ENOUGH_FOR_TIME_TO_HAVE_BEEN_RESET: Ms = to.Ms(200)
 const A_BIT_LONGER: Ms = to.Ms(1000)
+const EVEN_A_BIT_LONGER: Ms = to.Ms(2000)
 
 const TIME_CONTROLS_PATTERN_ID: Id = playroomTestTimeControls.id
 
@@ -132,10 +136,12 @@ export {
     ONLY_STANDARD_SPEC_PATTERN_ID,
     VALIDATION_PATTERN_ID,
     PRESETS_PATTERN_ID,
+    LONG_DURATION_PATTERN_ID,
     PRESET_ONE_PROPERTY_ONE_VALUE,
     PRESET_ONE_PROPERTY_TWO_VALUE,
     PRESET_TWO_PROPERTY_ONE_VALUE,
     PRESET_TWO_PROPERTY_TWO_VALUE,
     PRESET_ONE_NAME,
     PRESET_TWO_NAME,
+    EVEN_A_BIT_LONGER,
 }

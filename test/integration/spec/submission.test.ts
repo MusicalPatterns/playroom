@@ -112,7 +112,6 @@ const controlsAreInOrder: () => Promise<void> =
             ])
     }
 
-// tslint:disable-next-line no-type-definitions-outside-types-modules
 describe('submitting spec changes', () => {
     beforeEach(async (done: DoneFn) => {
         await resetSpecByTogglingToOtherPatternThenBackToTestPattern()

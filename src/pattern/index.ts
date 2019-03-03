@@ -3,7 +3,7 @@ export {
     patternReducer,
     PatternStateAction,
     ImmutablePatternState,
-    PatternStateKeys,
+    PatternStateKey,
 } from './state'
 export {
     PatternPanel,

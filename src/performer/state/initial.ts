@@ -1,15 +1,15 @@
 import { BEGINNING, noop, typedMap } from '@musical-patterns/utilities'
-import { ImmutablePerformerState, PerformerStateKeys } from './types'
+import { ImmutablePerformerState, PerformerStateKey } from './types'
 
 const initialPerformerState: ImmutablePerformerState = typedMap({
-    [ PerformerStateKeys.PAUSED ]: true,
-    [ PerformerStateKeys.TIME_POSITION ]: BEGINNING,
-    [ PerformerStateKeys.PATTERN_DURATION ]: BEGINNING,
-    [ PerformerStateKeys.TOGGLE_IMMERSIVE_AUDIO_HANDLER ]: noop,
-    [ PerformerStateKeys.IMMERSIVE_AUDIO_READY ]: false,
-    [ PerformerStateKeys.IMMERSIVE_AUDIO_UNAVAILABLE ]: false,
-    [ PerformerStateKeys.IMMERSIVE_AUDIO ]: false,
-    [ PerformerStateKeys.PERFORMER_DISABLED ]: true,
+    [ PerformerStateKey.PAUSED ]: true,
+    [ PerformerStateKey.TIME_POSITION ]: BEGINNING,
+    [ PerformerStateKey.PATTERN_DURATION ]: BEGINNING,
+    [ PerformerStateKey.TOGGLE_IMMERSIVE_AUDIO_HANDLERS ]: { enterImmersiveAudio: noop, exitImmersiveAudio: noop },
+    [ PerformerStateKey.IMMERSIVE_AUDIO_READY ]: false,
+    [ PerformerStateKey.IMMERSIVE_AUDIO_UNAVAILABLE ]: false,
+    [ PerformerStateKey.IMMERSIVE_AUDIO_ENABLED ]: false,
+    [ PerformerStateKey.PERFORMER_DISABLED ]: true,
 })
 
 export {

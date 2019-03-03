@@ -7,14 +7,14 @@ import { combineReducers } from 'redux-immutable'
 import { patternReducer } from '../../pattern'
 import { performerReducer } from '../../performer'
 import { specReducer } from '../../spec'
-import { RootStateKeys } from './types'
+import { RootStateKey } from './types'
 
 const initialState: any = Map()
 
 const rootReducer: Reducer = combineReducers({
-    [ RootStateKeys.PATTERN ]: patternReducer,
-    [ RootStateKeys.SPEC ]: specReducer,
-    [ RootStateKeys.PERFORMER ]: performerReducer,
+    [ RootStateKey.PATTERN ]: patternReducer,
+    [ RootStateKey.SPEC ]: specReducer,
+    [ RootStateKey.PERFORMER ]: performerReducer,
 } as any)
 
 // @ts-ignore

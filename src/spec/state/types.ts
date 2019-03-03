@@ -2,7 +2,7 @@ import { Preset, Spec, SpecAttributes, SpecValidationFunction } from '@musical-p
 import { DictionaryOf, Maybe, TypedMap } from '@musical-patterns/utilities'
 import { InvalidSpecMessages } from '../types'
 
-enum SpecStateKeys {
+enum SpecStateKey {
     INITIAL_SPEC = 'INITIAL_SPEC',
     DISPLAYED_SPEC = 'DISPLAYED_SPEC',
     INVALID_SPEC_MESSAGES = 'INVALID_SPEC_MESSAGES',
@@ -14,14 +14,14 @@ enum SpecStateKeys {
 }
 
 interface SpecState {
-    [ SpecStateKeys.INITIAL_SPEC ]: Spec,
-    [ SpecStateKeys.DISPLAYED_SPEC ]: Spec,
-    [ SpecStateKeys.INVALID_SPEC_MESSAGES ]: InvalidSpecMessages,
-    [ SpecStateKeys.SUBMITTED_SPEC ]: Spec,
-    [ SpecStateKeys.SPEC_ATTRIBUTES ]: SpecAttributes,
-    [ SpecStateKeys.VALIDATION_FUNCTION ]: Maybe<SpecValidationFunction>,
-    [ SpecStateKeys.PRESETS ]: Maybe<DictionaryOf<Preset>>,
-    [ SpecStateKeys.SPEC_PANEL_OPEN ]: boolean,
+    [ SpecStateKey.INITIAL_SPEC ]: Spec,
+    [ SpecStateKey.DISPLAYED_SPEC ]: Spec,
+    [ SpecStateKey.INVALID_SPEC_MESSAGES ]: InvalidSpecMessages,
+    [ SpecStateKey.SUBMITTED_SPEC ]: Spec,
+    [ SpecStateKey.SPEC_ATTRIBUTES ]: SpecAttributes,
+    [ SpecStateKey.VALIDATION_FUNCTION ]: Maybe<SpecValidationFunction>,
+    [ SpecStateKey.PRESETS ]: Maybe<DictionaryOf<Preset>>,
+    [ SpecStateKey.SPEC_PANEL_OPEN ]: boolean,
 }
 
 type ImmutableSpecState = TypedMap<SpecState>
@@ -34,8 +34,10 @@ enum SpecStateActionType {
     SET_SPEC_ATTRIBUTES = 'SET_SPEC_ATTRIBUTES',
     SET_VALIDATION_FUNCTION = 'SET_VALIDATION_FUNCTION',
     SET_PRESETS = 'SET_PRESETS',
-    TOGGLE_SPEC_PANEL_OPEN = 'TOGGLE_SPEC_PANEL_OPEN',
+    SET_SPEC_PANEL_OPEN = 'SET_SPEC_PANEL_OPEN',
 }
+
+type SpecStateActionMap = { [key in keyof typeof SpecStateActionType]: SpecStateKey }
 
 interface SetInitialSpec {
     data: Spec,
@@ -72,8 +74,9 @@ interface SetPresets {
     type: SpecStateActionType.SET_PRESETS,
 }
 
-interface ToggleSpecPanelOpen {
-    type: SpecStateActionType.TOGGLE_SPEC_PANEL_OPEN,
+interface SetSpecPanelOpen {
+    data: boolean,
+    type: SpecStateActionType.SET_SPEC_PANEL_OPEN,
 }
 
 type SpecStateAction =
@@ -84,12 +87,13 @@ type SpecStateAction =
     SetSpecAttributes |
     SetValidationFunction |
     SetPresets |
-    ToggleSpecPanelOpen
+    SetSpecPanelOpen
 
 export {
     SpecState,
     ImmutableSpecState,
-    SpecStateKeys,
+    SpecStateKey,
     SpecStateAction,
     SpecStateActionType,
+    SpecStateActionMap,
 }

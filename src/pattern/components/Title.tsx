@@ -1,18 +1,18 @@
 import * as React from 'react'
 import { connect } from 'react-redux'
 import { Dispatch } from 'redux'
-import { ImmutableRootState, RootStateKeys } from '../../root'
+import { ImmutableRootState, RootStateKey } from '../../root'
 import { EventHandler } from '../../types'
 import { handleTitleClick, TitleClickEventParameters } from '../events'
-import { PatternStateKeys } from '../state'
+import { PatternStateKey } from '../state'
 // @ts-ignore
 import SymbolSvg from './symbol.svg'
 import { TitleProps, TitlePropsFromDispatch, TitlePropsFromState } from './types'
 
 const mapStateToProps: (state: ImmutableRootState) => TitlePropsFromState =
     (state: ImmutableRootState): TitlePropsFromState => ({
-        rightColumnOpen: state.get(RootStateKeys.PATTERN)
-            .get(PatternStateKeys.RIGHT_COLUMN_OPEN),
+        rightColumnOpen: state.get(RootStateKey.PATTERN)
+            .get(PatternStateKey.RIGHT_COLUMN_OPEN),
     })
 
 const mapDispatchToProps: (dispatch: Dispatch) => TitlePropsFromDispatch =
