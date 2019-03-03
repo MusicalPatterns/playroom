@@ -17,7 +17,7 @@ const mapStateToProps: (state: ImmutableRootState) => TimeControlsPanelProps =
         }
     }
 
-const TimeControlsPanel: (timeControlsProps: TimeControlsPanelProps) => JSX.Element =
+const TimeControlsPanel: React.ComponentType<TimeControlsPanelProps> =
     (props: TimeControlsPanelProps): JSX.Element => {
         const { timePosition, patternDuration } = props
 

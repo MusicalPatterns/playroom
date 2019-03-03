@@ -21,7 +21,7 @@ const mapDispatchToProps: (dispatch: Dispatch) => WithClickHandler =
         onClick: buildCaretClickHandler({ dispatch }),
     })
 
-const SpecPanelHeader: (props: SpecPanelHeaderProps) => JSX.Element =
+const SpecPanelHeader: React.ComponentType<SpecPanelHeaderProps> =
     ({ onClick, specPanelOpen }: SpecPanelHeaderProps): JSX.Element => (
         <h3 {...{ id: 'spec-panel-header' }}>
             {CONTROLS}

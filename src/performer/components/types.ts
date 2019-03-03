@@ -1,7 +1,7 @@
 import { Maybe, Ms } from '@musical-patterns/utilities'
 import { PageName } from '../../pattern'
 
-interface MaybeDisabled {
+interface NoPatternMessageProps {
     disabled: boolean,
 }
 
@@ -23,7 +23,7 @@ interface TimeControlsPropsFromDispatch {
 
 interface TimeControlsProps extends TimeControlsPropsFromState, TimeControlsPropsFromDispatch {}
 
-interface ToggleImmersiveAudioButtonPropsFromState {
+interface ToggleImmersiveAudioButtonProps {
     disabled: boolean,
     immersiveAudio: boolean,
     immersiveAudioReady: boolean,
@@ -31,14 +31,11 @@ interface ToggleImmersiveAudioButtonPropsFromState {
     toggleImmersiveAudioHandler: VoidFunction,
 }
 
-interface ToggleImmersiveAudioButtonProps extends MaybeDisabled,
-    ToggleImmersiveAudioButtonPropsFromState {}
-
 interface PerformerPanelProps {
     pageName: Maybe<PageName>,
 }
 
-interface TimelineProps {
+interface TimelineOrTimeInMinutesAndSecondsProps {
     disabled: boolean,
     patternDuration: Ms,
     timePosition: Ms,
@@ -49,9 +46,8 @@ export {
     TimeControlsProps,
     TimeControlsPropsFromDispatch,
     TimeControlsPropsFromState,
-    ToggleImmersiveAudioButtonPropsFromState,
     ToggleImmersiveAudioButtonProps,
-    MaybeDisabled,
+    NoPatternMessageProps,
     PerformerPanelProps,
-    TimelineProps,
+    TimelineOrTimeInMinutesAndSecondsProps,
 }

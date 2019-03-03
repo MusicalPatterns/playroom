@@ -11,7 +11,7 @@ const mapStateToProps: (state: ImmutableRootState) => FirstRowProps =
             .get(PatternStateKeys.PAGE_NAME),
     })
 
-const FirstRow: (props: FirstRowProps) => JSX.Element =
+const FirstRow: React.ComponentType<FirstRowProps> =
     ({ pageName }: FirstRowProps): JSX.Element => (
         <div {...{ className: `row ${!pageName ? 'open' : 'closed'}`, id: 'first-row' }}>
             <div {...{ className: 'left' }} >

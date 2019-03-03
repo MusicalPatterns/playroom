@@ -27,7 +27,7 @@ const mapDispatchToProps: (dispatch: Dispatch) => TimeControlsPropsFromDispatch 
         togglePausedHandler: buildTogglePausedHandler({ dispatch }),
     })
 
-const TimeControls: (timeControlsProps: TimeControlsProps) => JSX.Element =
+const TimeControls: React.ComponentType<TimeControlsProps> =
     ({ disabled, rewindHandler, togglePausedHandler, stopHandler, paused }: TimeControlsProps): JSX.Element => {
         const controlId: string = paused ? 'play' : 'pause'
         const icon: IconDefinition = paused ? faPlay : faPause

@@ -10,7 +10,7 @@ import {
 import * as React from 'react'
 import { OptionedInputProps } from './types'
 
-const OptionedSpecControlSelect: (optionedInputProps: OptionedInputProps) => JSX.Element =
+const OptionedSpecControlSelect: React.ComponentType<OptionedInputProps> =
     ({ onChange, id, specValue, validityClass, constraint }: OptionedInputProps): JSX.Element => {
         const optionElements: JSX.Element[] = map(
             constraint

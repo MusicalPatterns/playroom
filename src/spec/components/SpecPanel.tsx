@@ -12,7 +12,7 @@ const mapStateToProps: (state: ImmutableRootState) => SpecPanelOpenAsProp =
             .get(SpecStateKeys.SPEC_PANEL_OPEN),
     })
 
-const SpecPanel: (props: SpecPanelOpenAsProp) => JSX.Element =
+const SpecPanel: React.ComponentType<SpecPanelOpenAsProp> =
     ({ specPanelOpen }: SpecPanelOpenAsProp): JSX.Element => (
         <div {...{ id: 'spec-panel', className: specPanelOpen ? 'open' : 'closed' }}>
             <SpecPanelHeader/>

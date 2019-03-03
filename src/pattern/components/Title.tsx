@@ -22,7 +22,7 @@ const mapDispatchToProps: (dispatch: Dispatch) => TitlePropsFromDispatch =
         },
     })
 
-const Title: (props: TitleProps) => JSX.Element =
+const Title: React.ComponentType<TitleProps> =
     ({ handleTitleClickEvent, rightPanelOpen }: TitleProps): JSX.Element => {
         const onClick: EventHandler =
             (event: React.SyntheticEvent): void => {

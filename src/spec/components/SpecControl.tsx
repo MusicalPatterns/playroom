@@ -7,7 +7,7 @@ import { ArrayedSpecControl } from './arrayed'
 import SingularSpecControl from './SingularSpecControl'
 import { SpecControlProps } from './types'
 
-const SpecControl: (specControlProps: SpecControlProps) => JSX.Element =
+const SpecControl: React.ComponentType<SpecControlProps> =
     ({ specPropertyAttributes, specKey, specControlsProps }: SpecControlProps): JSX.Element => {
         const { specState } = specControlsProps
         const displayedSpec: Spec = specState.get(SpecStateKeys.DISPLAYED_SPEC)

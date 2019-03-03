@@ -3,7 +3,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import * as React from 'react'
 import { ToggledInputProps } from './types'
 
-const ToggledSpecControlCheckboxInput: (toggledControlProps: ToggledInputProps) => JSX.Element =
+const ToggledSpecControlCheckboxInput: React.ComponentType<ToggledInputProps> =
     ({ onChange, id, specValue, validityClass }: ToggledInputProps): JSX.Element => (
         <div {...{ className: 'toggled-spec-control-checkbox-input' }}>
             <input {...{ checked: specValue, className: validityClass, id, onChange, type: 'checkbox' }}/>

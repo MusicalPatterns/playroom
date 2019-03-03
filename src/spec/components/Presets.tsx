@@ -32,7 +32,7 @@ const mapDispatchToProps: (dispatch: Dispatch) => PresetsPropsFromDispatch =
         presetChangeHandler: buildPresetChangeHandler({ dispatch }),
     })
 
-const Presets: (props: PresetsProps) => JSX.Element =
+const Presets: React.ComponentType<PresetsProps> =
     ({ presetChangeHandler, presets, submittedSpec }: PresetsProps): JSX.Element => {
         if (!presets) {
             return <div/>

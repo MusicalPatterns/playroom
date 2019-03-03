@@ -3,7 +3,7 @@ import Hamburger from './Hamburger'
 import PatternList from './PatternList'
 import Title from './Title'
 
-const PatternPanel: () => JSX.Element =
+const PatternPanel: React.ComponentType =
     (): JSX.Element => (
         <div {...{ id: 'pattern-panel' }}>
             <Hamburger/>

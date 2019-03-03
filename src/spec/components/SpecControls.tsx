@@ -21,7 +21,7 @@ const mapDispatchToProps: (dispatch: Dispatch) => SpecControlsPropsFromDispatch 
         handleSpecChange: buildSpecControlChangeHandler({ dispatch }),
     })
 
-const SpecControls: (specControlsProps: SpecControlsProps) => JSX.Element =
+const SpecControls: React.ComponentType<SpecControlsProps> =
     (specControlsProps: SpecControlsProps): JSX.Element => {
         const { specState }: SpecControlsProps = specControlsProps
         const displayedSpec: Spec = specState

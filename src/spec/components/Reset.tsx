@@ -24,7 +24,7 @@ const mapDispatchToProps: (dispatch: Dispatch) => ResetPropsFromDispatch =
         },
     })
 
-const Reset: (props: ResetProps) => JSX.Element =
+const Reset: React.ComponentType<ResetProps> =
     ({ resetHandler, submittedSpec, initialSpec }: ResetProps): JSX.Element => {
         const onClick: VoidFunction = (): void => {
             resetHandler(initialSpec)

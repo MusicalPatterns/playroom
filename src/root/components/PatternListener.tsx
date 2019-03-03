@@ -34,7 +34,7 @@ const mapDispatchToProps: (dispatch: Dispatch) => PatternListenerPropsFromDispat
         },
     })
 
-const PatternListener: (patternListenerProps: PatternListenerProps) => JSX.Element =
+const PatternListener: React.ComponentType<PatternListenerProps> =
     (props: PatternListenerProps): JSX.Element => {
         doAsync(async () => {
             const { debugMode, id, patterns, submittedSpec, setTotalDuration } = props

@@ -10,7 +10,7 @@ const mapStateToProps: (state: ImmutableRootState) => SidePanelProps =
             .get(PatternStateKeys.SIDE_PANEL_OPEN),
     })
 
-const SidePanel: (props: SidePanelProps) => JSX.Element =
+const SidePanel: React.ComponentType<SidePanelProps> =
     ({ sidePanelOpen }: SidePanelProps): JSX.Element => (
         <div {...{ id: 'side-panel', className: sidePanelOpen ? 'open' : 'closed' }}>
             <PatternPanel/>

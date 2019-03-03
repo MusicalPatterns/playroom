@@ -2,7 +2,7 @@ import * as React from 'react'
 import TimeControlsPanel from './TimeControlsPanel'
 import ToggleImmersiveAudioButton from './ToggleImmersiveAudioButton'
 
-const Performer: () => JSX.Element =
+const Performer: React.ComponentType =
     (): JSX.Element =>
         (
             <div {...{ id: 'performer' }}>

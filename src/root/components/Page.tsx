@@ -15,7 +15,7 @@ const mapStateToProps: (state: ImmutableRootState) => PageProps =
         }
     }
 
-const Page: (props: PageProps) => JSX.Element =
+const Page: React.ComponentType<PageProps> =
     ({ pageName }: PageProps): JSX.Element => {
         switch (pageName) {
             case PageName.ABOUT:

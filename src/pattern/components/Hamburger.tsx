@@ -21,7 +21,7 @@ const mapDispatchToProps: (dispatch: Dispatch) => HamburgerPropsFromDispatch =
         },
     })
 
-const Hamburger: (props: HamburgerProps) => JSX.Element =
+const Hamburger: React.ComponentType<HamburgerProps> =
     ({ hamburgerHandler, sidePanelOpen }: HamburgerProps): JSX.Element => {
         const onClick: VoidFunction = (): void => {
             hamburgerHandler(sidePanelOpen)

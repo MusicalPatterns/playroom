@@ -8,7 +8,7 @@ import InvalidMessage from './InvalidMessage'
 import { SingularSpecControlProps } from './types'
 import Units from './Units'
 
-const SingularSpecControl: (specControlProps: SingularSpecControlProps) => JSX.Element =
+const SingularSpecControl: React.ComponentType<SingularSpecControlProps> =
     // tslint:disable-next-line cyclomatic-complexity
     (specControlProps: SingularSpecControlProps): JSX.Element => {
         const {

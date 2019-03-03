@@ -29,7 +29,7 @@ const mapDispatchToProps: (dispatch: Dispatch) => PatternListPropsFromDispatch =
         },
     })
 
-const PatternList: (PatternListProps: PatternListProps) => JSX.Element =
+const PatternList: React.ComponentType<PatternListProps> =
     ({ handlePatternChangeEvent, id, patterns, rightPanelOpen }: PatternListProps): JSX.Element => {
         const onClick: EventHandler =
             (event: React.SyntheticEvent): void => {

@@ -5,10 +5,10 @@ import { ImmutableRootState, RootStateKeys } from '../../root'
 import { timeChangeHandler } from '../events'
 import { ImmutablePerformerState, PerformerStateKeys } from '../state'
 import { formatTimesForDisplay } from './helpers'
-import { TimelineProps } from './types'
+import { TimelineOrTimeInMinutesAndSecondsProps } from './types'
 
-const mapStateToProps: (state: ImmutableRootState) => TimelineProps =
-    (state: ImmutableRootState): TimelineProps => {
+const mapStateToProps: (state: ImmutableRootState) => TimelineOrTimeInMinutesAndSecondsProps =
+    (state: ImmutableRootState): TimelineOrTimeInMinutesAndSecondsProps => {
         const performerState: ImmutablePerformerState = state.get(RootStateKeys.PERFORMER)
 
         return {
@@ -18,8 +18,8 @@ const mapStateToProps: (state: ImmutableRootState) => TimelineProps =
         }
     }
 
-const Timeline: (props: TimelineProps) => JSX.Element =
-    ({ disabled, patternDuration, timePosition }: TimelineProps): JSX.Element => {
+const Timeline: React.ComponentType<TimelineOrTimeInMinutesAndSecondsProps> =
+    ({ disabled, patternDuration, timePosition }: TimelineOrTimeInMinutesAndSecondsProps): JSX.Element => {
         const { timePositionForDisplay, patternDurationForDisplay } = formatTimesForDisplay({
             patternDuration,
             timePosition,

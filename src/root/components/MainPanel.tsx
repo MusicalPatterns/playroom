@@ -20,7 +20,7 @@ const mapStateToProps: (state: ImmutableRootState) => MainPanelProps =
         }
     }
 
-const MainPanel: (props: MainPanelProps) => JSX.Element =
+const MainPanel: React.ComponentType<MainPanelProps> =
     ({ id, pageName, rightPanelOpen }: MainPanelProps): JSX.Element => (
         <div {...{ id: 'main-panel', className: rightPanelOpen ? 'right-panel-open' : 'right-panel-closed' }}>
             <FirstRow/>

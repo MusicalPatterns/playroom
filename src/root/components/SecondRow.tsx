@@ -18,7 +18,7 @@ const mapStateToProps: (state: ImmutableRootState) => SecondRowProps =
         }
     }
 
-const SecondRow: (props: SecondRowProps) => JSX.Element =
+const SecondRow: React.ComponentType<SecondRowProps> =
     ({ id, pageName, patterns }: SecondRowProps): JSX.Element => {
         if (pageName || !id) {
             return (

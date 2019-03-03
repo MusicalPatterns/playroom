@@ -12,7 +12,7 @@ const mapStateToProps: (state: ImmutableRootState) => PerformerPanelProps =
             .get(PatternStateKeys.PAGE_NAME),
     })
 
-const PerformerPanel: (props: PerformerPanelProps) => JSX.Element =
+const PerformerPanel: React.ComponentType<PerformerPanelProps> =
     ({ pageName }: PerformerPanelProps): JSX.Element => (
         <div {...{ id: 'performer-panel', className: !pageName ? 'open' : 'closed' }}>
             <Performer/>

@@ -1,7 +1,7 @@
 import * as React from 'react'
 import { RangedInputProps } from './types'
 
-const RangedSpecControlRangeInput: (rangedInputProps: RangedInputProps) => JSX.Element =
+const RangedSpecControlRangeInput: React.ComponentType<RangedInputProps> =
     ({ onChange, id, specValue, validityClass, min, max, step }: RangedInputProps): JSX.Element => (
         <input {...{
             className: `ranged-spec-control-range-input ${validityClass}`,

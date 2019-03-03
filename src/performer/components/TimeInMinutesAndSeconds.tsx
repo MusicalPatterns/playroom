@@ -12,10 +12,10 @@ import { connect } from 'react-redux'
 import { ImmutableRootState, RootStateKeys } from '../../root'
 import { ImmutablePerformerState, PerformerStateKeys } from '../state'
 import { formatTimesForDisplay } from './helpers'
-import { TimelineProps } from './types'
+import { TimelineOrTimeInMinutesAndSecondsProps } from './types'
 
-const mapStateToProps: (state: ImmutableRootState) => TimelineProps =
-    (state: ImmutableRootState): TimelineProps => {
+const mapStateToProps: (state: ImmutableRootState) => TimelineOrTimeInMinutesAndSecondsProps =
+    (state: ImmutableRootState): TimelineOrTimeInMinutesAndSecondsProps => {
         const performerState: ImmutablePerformerState = state.get(RootStateKeys.PERFORMER)
 
         return {
@@ -25,8 +25,8 @@ const mapStateToProps: (state: ImmutableRootState) => TimelineProps =
         }
     }
 
-const TimeInMinutesAndSeconds: (props: TimelineProps) => JSX.Element =
-    ({ disabled, patternDuration, timePosition }: TimelineProps): JSX.Element => {
+const TimeInMinutesAndSeconds: React.ComponentType<TimelineOrTimeInMinutesAndSecondsProps> =
+    ({ disabled, patternDuration, timePosition }: TimelineOrTimeInMinutesAndSecondsProps): JSX.Element => {
         const { timePositionForDisplay } = formatTimesForDisplay({
             patternDuration,
             timePosition,

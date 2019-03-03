@@ -14,7 +14,7 @@ const mapDispatchToProps: (dispatch: Dispatch) => AddOrRemoveButtonPropsFromDisp
         },
     })
 
-const AddButton: (props: AddOrRemoveButtonProps) => JSX.Element =
+const AddButton: React.ComponentType<AddOrRemoveButtonProps> =
     ({ handleAddOrRemove, specKey, specState }: AddOrRemoveButtonProps): JSX.Element => {
         const onClick: EventHandler = (event: React.SyntheticEvent): void => {
             handleAddOrRemove({ event, specKey, specState })

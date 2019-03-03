@@ -15,7 +15,7 @@ const mapStateToProps: (state: ImmutableRootState) => PostProps =
         }
     }
 
-const Post: (postProps: PostProps) => JSX.Element =
+const Post: React.ComponentType<PostProps> =
     (postProps: PostProps): JSX.Element => (
         <div {...{ dangerouslySetInnerHTML: { __html: getPost(postProps) } }}/>
     )

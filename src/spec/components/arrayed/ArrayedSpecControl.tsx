@@ -8,7 +8,7 @@ import AddButton from './AddButton'
 import RemoveButton from './RemoveButton'
 import { ArrayedSpecControlProps } from './types'
 
-const ArrayedSpecControl: (props: ArrayedSpecControlProps) => JSX.Element =
+const ArrayedSpecControl: React.ComponentType<ArrayedSpecControlProps> =
     (props: ArrayedSpecControlProps): JSX.Element => {
         const {
             displayedSpecValues,

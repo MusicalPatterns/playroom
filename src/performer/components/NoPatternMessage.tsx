@@ -3,10 +3,10 @@ import { connect } from 'react-redux'
 import { TO_BEGIN_MESSAGE } from '../../copy'
 import { ImmutableRootState, RootStateKeys } from '../../root'
 import { ImmutablePerformerState, PerformerStateKeys } from '../state'
-import { MaybeDisabled } from './types'
+import { NoPatternMessageProps } from './types'
 
-const mapStateToProps: (state: ImmutableRootState) => MaybeDisabled =
-    (state: ImmutableRootState): MaybeDisabled => {
+const mapStateToProps: (state: ImmutableRootState) => NoPatternMessageProps =
+    (state: ImmutableRootState): NoPatternMessageProps => {
         const performerState: ImmutablePerformerState = state.get(RootStateKeys.PERFORMER)
 
         return {
@@ -15,8 +15,8 @@ const mapStateToProps: (state: ImmutableRootState) => MaybeDisabled =
         }
     }
 
-const NoPatternMessage: (props: MaybeDisabled) => JSX.Element =
-    ({ disabled }: MaybeDisabled): JSX.Element => {
+const NoPatternMessage: React.ComponentType<NoPatternMessageProps> =
+    ({ disabled }: NoPatternMessageProps): JSX.Element => {
         if (!disabled) {
             return <div/>
         }

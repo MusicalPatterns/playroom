@@ -3,7 +3,7 @@ import * as React from 'react'
 import { formatDate } from './helpers'
 import { PatternListItemProps } from './types'
 
-const PatternListItem: (props: PatternListItemProps) => JSX.Element =
+const PatternListItem: React.ComponentType<PatternListItemProps> =
     ({ listedPattern, listedId, id, onClick }: PatternListItemProps): JSX.Element => {
         const {
             formattedName,
