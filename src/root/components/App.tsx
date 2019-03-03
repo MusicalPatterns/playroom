@@ -11,22 +11,20 @@ const mapStateToProps: (state: ImmutableRootState) => AppProps =
         const patternState: ImmutablePatternState = state.get(RootStateKeys.PATTERN)
 
         return {
-            id: patternState.get(PatternStateKeys.ID),
-            pageName: patternState.get(PatternStateKeys.PAGE_NAME),
             patterns: patternState.get(PatternStateKeys.PATTERNS),
         }
     }
 
 const App: React.ComponentType<AppProps> =
-    ({ patterns, pageName, id }: AppProps): JSX.Element => {
+    ({ patterns }: AppProps): JSX.Element => {
         if (!patterns) {
             return <div/>
         }
 
         return (
             <div {...{ id: 'app' }}>
-                <SidePanel {...{ id, patterns }}/>
-                <MainPanel {...{ id, pageName, patterns }}/>
+                <SidePanel/>
+                <MainPanel/>
             </div>
         )
     }

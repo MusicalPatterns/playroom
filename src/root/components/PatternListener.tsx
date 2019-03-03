@@ -12,13 +12,17 @@ import { Dispatch } from 'redux'
 import { PatternStateKeys } from '../../pattern'
 import { SpecStateKeys } from '../../spec'
 import { ActionType, ImmutableRootState, RootStateKeys } from '../state'
-import { logDebugInfo } from './helpers'
+import { logDebugInfo, maybePatternFromPatternsAndId } from './helpers'
 import { PatternListenerProps, PatternListenerPropsFromDispatch, PatternListenerPropsFromState } from './types'
 
 const mapStateToProps: (state: ImmutableRootState) => PatternListenerPropsFromState =
     (state: ImmutableRootState): PatternListenerPropsFromState => ({
         debugMode: state.get(RootStateKeys.PATTERN)
             .get(PatternStateKeys.DEBUG_MODE),
+        id: state.get(RootStateKeys.PATTERN)
+            .get(PatternStateKeys.ID),
+        patterns: state.get(RootStateKeys.PATTERN)
+            .get(PatternStateKeys.PATTERNS),
         submittedSpec: state.get(RootStateKeys.SPEC)
             .get(SpecStateKeys.SUBMITTED_SPEC),
     })
@@ -35,7 +39,7 @@ const PatternListener: (patternListenerProps: PatternListenerProps) => JSX.Eleme
         doAsync(async () => {
             const { debugMode, id, patterns, submittedSpec, setTotalDuration } = props
 
-            const pattern: Maybe<Pattern> = patterns[ id ]
+            const pattern: Maybe<Pattern> = maybePatternFromPatternsAndId({ patterns, id })
             if (!pattern) {
                 return
             }

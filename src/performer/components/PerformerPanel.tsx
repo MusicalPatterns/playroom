@@ -1,7 +1,16 @@
 import * as React from 'react'
+import { connect } from 'react-redux'
+import { PatternStateKeys } from '../../pattern'
+import { ImmutableRootState, RootStateKeys } from '../../root'
 import NoPatternMessage from './NoPatternMessage'
 import Performer from './Performer'
 import { PerformerPanelProps } from './types'
+
+const mapStateToProps: (state: ImmutableRootState) => PerformerPanelProps =
+    (state: ImmutableRootState): PerformerPanelProps => ({
+        pageName: state.get(RootStateKeys.PATTERN)
+            .get(PatternStateKeys.PAGE_NAME),
+    })
 
 const PerformerPanel: (props: PerformerPanelProps) => JSX.Element =
     ({ pageName }: PerformerPanelProps): JSX.Element => (
@@ -11,4 +20,4 @@ const PerformerPanel: (props: PerformerPanelProps) => JSX.Element =
         </div>
     )
 
-export default PerformerPanel
+export default connect(mapStateToProps)(PerformerPanel)

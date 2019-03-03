@@ -17,7 +17,7 @@ const handlePatternChange: PatternChangeEventHandler =
             return
         }
 
-        const pattern: Maybe<Pattern> = patterns[ newId ]
+        const pattern: Maybe<Pattern> = patterns && patterns[ newId ]
         if (!pattern) {
             return
         }

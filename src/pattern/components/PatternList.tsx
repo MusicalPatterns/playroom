@@ -6,16 +6,21 @@ import { Dispatch } from 'redux'
 import { ImmutableRootState, RootStateKeys } from '../../root'
 import { EventHandler } from '../../types'
 import { handlePatternChange, PatternChangeEventParameters } from '../events'
-import { PatternStateKeys } from '../state'
+import { ImmutablePatternState, PatternStateKeys } from '../state'
 import { sortByOrderOrPublishDate } from './helpers'
 import PatternListItem from './PatternListItem'
 import { PatternListProps, PatternListPropsFromDispatch, PatternListPropsFromState } from './types'
 
 const mapStateToProps: (state: ImmutableRootState) => PatternListPropsFromState =
-    (state: ImmutableRootState): PatternListPropsFromState => ({
-        rightPanelOpen: state.get(RootStateKeys.PATTERN)
-            .get(PatternStateKeys.RIGHT_PANEL_OPEN),
-    })
+    (state: ImmutableRootState): PatternListPropsFromState => {
+        const patternState: ImmutablePatternState = state.get(RootStateKeys.PATTERN)
+
+        return {
+            id: patternState.get(PatternStateKeys.ID),
+            patterns: patternState.get(PatternStateKeys.PATTERNS),
+            rightPanelOpen: patternState.get(PatternStateKeys.RIGHT_PANEL_OPEN),
+        }
+    }
 
 const mapDispatchToProps: (dispatch: Dispatch) => PatternListPropsFromDispatch =
     (dispatch: Dispatch): PatternListPropsFromDispatch => ({

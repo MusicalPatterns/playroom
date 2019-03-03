@@ -1,5 +1,5 @@
-import { MainPanelProps } from '../../root'
 import { DispatchAsProp, EventAsProp } from '../../types'
+import { PatternListPropsFromState } from '../components'
 
 interface PatternChangeEventHandlerParameters extends DispatchAsProp {
     patternChangeEventParameters: PatternChangeEventParameters,
@@ -7,7 +7,7 @@ interface PatternChangeEventHandlerParameters extends DispatchAsProp {
 
 type PatternChangeEventHandler = (parameters: PatternChangeEventHandlerParameters) => Promise<void>
 
-interface PatternChangeEventParameters extends MainPanelProps, EventAsProp {}
+interface PatternChangeEventParameters extends EventAsProp, PatternListPropsFromState {}
 
 type PatternChangeEventExtractor = (parameters: PatternChangeEventParameters) => void
 

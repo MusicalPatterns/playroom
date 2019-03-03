@@ -3,29 +3,33 @@ import { Maybe, Ms } from '@musical-patterns/utilities'
 import { PageName } from '../../pattern'
 
 interface AppProps {
+    patterns: Maybe<Patterns>,
+}
+
+interface SidePanelProps {
+    sidePanelOpen: boolean,
+}
+
+interface MainPanelProps {
+    id: Maybe<Id>,
+    pageName: Maybe<PageName>,
+    rightPanelOpen: boolean,
+}
+
+interface FirstRowProps {
+    pageName: Maybe<PageName>,
+}
+
+interface SecondRowProps {
     id: Maybe<Id>,
     pageName: Maybe<PageName>,
     patterns: Maybe<Patterns>,
 }
 
-interface PropsFromApp {
-    id: Id,
-    patterns: Patterns,
-}
-
-interface PropsFromAppBeforeSelectingPattern {
-    id?: Id,
-    pageName?: PageName,
-    patterns: Patterns,
-}
-
-interface FirstRowProps {
-    id?: Id,
-    pageName?: PageName,
-}
-
 interface PatternListenerPropsFromState {
     debugMode: boolean,
+    id: Maybe<Id>,
+    patterns: Maybe<Patterns>,
     submittedSpec: Spec,
 }
 
@@ -33,35 +37,26 @@ interface PatternListenerPropsFromDispatch {
     setTotalDuration: (patternDuration: Ms) => void,
 }
 
-interface PatternListenerProps extends PatternListenerPropsFromState, PatternListenerPropsFromDispatch, PropsFromApp {}
-
-interface SidePanelPropsFromState {
-    sidePanelOpen: boolean,
-}
-
-interface SidePanelProps extends PropsFromAppBeforeSelectingPattern, SidePanelPropsFromState {}
+interface PatternListenerProps extends PatternListenerPropsFromState, PatternListenerPropsFromDispatch {}
 
 interface PageProps {
-    pageName: PageName,
+    pageName: Maybe<PageName>,
 }
 
-interface MainPanelPropsFromState {
-    rightPanelOpen: boolean,
+interface PostProps {
+    id: Maybe<Id>,
+    patterns: Maybe<Patterns>,
 }
-
-interface MainPanelProps extends PropsFromAppBeforeSelectingPattern, MainPanelPropsFromState {}
 
 export {
     AppProps,
     PatternListenerPropsFromState,
     PatternListenerPropsFromDispatch,
     PatternListenerProps,
-    PropsFromApp,
     FirstRowProps,
-    PropsFromAppBeforeSelectingPattern,
-    SidePanelPropsFromState,
+    SecondRowProps,
     SidePanelProps,
     PageProps,
-    MainPanelPropsFromState,
     MainPanelProps,
+    PostProps,
 }

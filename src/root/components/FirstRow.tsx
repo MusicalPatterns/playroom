@@ -1,15 +1,24 @@
 import * as React from 'react'
+import { connect } from 'react-redux'
+import { PatternStateKeys } from '../../pattern'
 import { PerformerPanel } from '../../performer'
+import { ImmutableRootState, RootStateKeys } from '../state'
 import { FirstRowProps } from './types'
 
+const mapStateToProps: (state: ImmutableRootState) => FirstRowProps =
+    (state: ImmutableRootState): FirstRowProps => ({
+        pageName: state.get(RootStateKeys.PATTERN)
+            .get(PatternStateKeys.PAGE_NAME),
+    })
+
 const FirstRow: (props: FirstRowProps) => JSX.Element =
-    ({ id, pageName }: FirstRowProps): JSX.Element => (
+    ({ pageName }: FirstRowProps): JSX.Element => (
         <div {...{ className: `row ${!pageName ? 'open' : 'closed'}`, id: 'first-row' }}>
             <div {...{ className: 'left' }} >
-                <PerformerPanel {...{ pageName }}/>
+                <PerformerPanel/>
             </div>
             <div {...{ className: 'right' }} />
         </div>
     )
 
-export default FirstRow
+export default connect(mapStateToProps)(FirstRow)

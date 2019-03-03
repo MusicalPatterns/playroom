@@ -1,12 +1,25 @@
-import { Pattern } from '@musical-patterns/pattern'
-import { constantCaseToUpperCase, Maybe } from '@musical-patterns/utilities'
 import * as React from 'react'
+import { connect } from 'react-redux'
+import { ImmutablePatternState, PatternStateKeys } from '../../pattern'
 import { SpecPanel } from '../../spec'
+import { ImmutableRootState, RootStateKeys } from '../state'
+import { getPatternTitle } from './helpers'
 import PatternListener from './PatternListener'
-import { PropsFromAppBeforeSelectingPattern } from './types'
+import { SecondRowProps } from './types'
 
-const SecondRow: (props: PropsFromAppBeforeSelectingPattern) => JSX.Element =
-    ({ id, pageName, patterns }: PropsFromAppBeforeSelectingPattern): JSX.Element => {
+const mapStateToProps: (state: ImmutableRootState) => SecondRowProps =
+    (state: ImmutableRootState): SecondRowProps => {
+        const patternState: ImmutablePatternState = state.get(RootStateKeys.PATTERN)
+
+        return {
+            id: patternState.get(PatternStateKeys.ID),
+            pageName: patternState.get(PatternStateKeys.PAGE_NAME),
+            patterns: patternState.get(PatternStateKeys.PATTERNS),
+        }
+    }
+
+const SecondRow: (props: SecondRowProps) => JSX.Element =
+    ({ id, pageName, patterns }: SecondRowProps): JSX.Element => {
         if (pageName || !id) {
             return (
                 <div {...{ className: 'row closed', id: 'second-row' }} >
@@ -16,19 +29,20 @@ const SecondRow: (props: PropsFromAppBeforeSelectingPattern) => JSX.Element =
                 </div>
             )
         }
-        const maybePattern: Maybe<Pattern> = patterns[ id ]
+
+        const patternTitle: string = getPatternTitle({ patterns, id })
 
         return (
             <div {...{ className: 'row open', id: 'second-row' }} >
                 <div {...{ className: 'left' }} >
-                    <h1>{maybePattern && maybePattern.metadata.formattedName || constantCaseToUpperCase(id)}</h1>
+                    <h1>{patternTitle}</h1>
                 </div>
                 <div {...{ className: 'right' }} >
                     <SpecPanel/>
-                    <PatternListener {...{ id, patterns }}/>
+                    <PatternListener/>
                 </div>
             </div>
         )
     }
 
-export default SecondRow
+export default connect(mapStateToProps)(SecondRow)

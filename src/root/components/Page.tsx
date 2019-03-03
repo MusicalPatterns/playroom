@@ -1,8 +1,19 @@
 // tslint:disable
 
 import * as React from 'react'
-import { PageName } from '../../pattern'
+import { connect } from 'react-redux'
+import { ImmutablePatternState, PageName, PatternStateKeys } from '../../pattern'
+import { ImmutableRootState, RootStateKeys } from '../state'
 import { PageProps } from './types'
+
+const mapStateToProps: (state: ImmutableRootState) => PageProps =
+    (state: ImmutableRootState): PageProps => {
+        const patternState: ImmutablePatternState = state.get(RootStateKeys.PATTERN)
+
+        return {
+            pageName: patternState.get(PatternStateKeys.PAGE_NAME),
+        }
+    }
 
 const Page: (props: PageProps) => JSX.Element =
     ({ pageName }: PageProps): JSX.Element => {
@@ -171,4 +182,4 @@ const Page: (props: PageProps) => JSX.Element =
         }
     }
 
-export default Page
+export default connect(mapStateToProps)(Page)

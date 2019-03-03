@@ -1,16 +1,23 @@
-import { Metadata, Pattern } from '@musical-patterns/pattern'
-import { Maybe } from '@musical-patterns/utilities'
 import * as React from 'react'
-import { PropsFromApp } from './types'
+import { connect } from 'react-redux'
+import { ImmutablePatternState, PatternStateKeys } from '../../pattern'
+import { ImmutableRootState, RootStateKeys } from '../state'
+import { getPost } from './helpers'
+import { PostProps } from './types'
 
-const Post: (postProps: PropsFromApp) => JSX.Element =
-    ({ patterns, id }: PropsFromApp): JSX.Element => {
-        const pattern: Maybe<Pattern> = patterns[ id ]
-        const metadata: Maybe<Metadata> = pattern && pattern.metadata
+const mapStateToProps: (state: ImmutableRootState) => PostProps =
+    (state: ImmutableRootState): PostProps => {
+        const patternState: ImmutablePatternState = state.get(RootStateKeys.PATTERN)
 
-        return (
-            <div {...{ dangerouslySetInnerHTML: { __html: metadata && metadata.description || '' } }}/>
-        )
+        return {
+            id: patternState.get(PatternStateKeys.ID),
+            patterns: patternState.get(PatternStateKeys.PATTERNS),
+        }
     }
 
-export default Post
+const Post: (postProps: PostProps) => JSX.Element =
+    (postProps: PostProps): JSX.Element => (
+        <div {...{ dangerouslySetInnerHTML: { __html: getPost(postProps) } }}/>
+    )
+
+export default connect(mapStateToProps)(Post)

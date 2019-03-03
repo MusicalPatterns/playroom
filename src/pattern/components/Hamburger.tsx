@@ -3,13 +3,13 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import * as React from 'react'
 import { connect } from 'react-redux'
 import { Dispatch } from 'redux'
-import { ImmutableRootState, RootStateKeys, SidePanelPropsFromState } from '../../root'
+import { ImmutableRootState, RootStateKeys } from '../../root'
 import { handleHamburger } from '../events'
 import { PatternStateKeys } from '../state'
-import { HamburgerProps, HamburgerPropsFromDispatch } from './types'
+import { HamburgerProps, HamburgerPropsFromDispatch, HamburgerPropsFromState } from './types'
 
-const mapStateToProps: (state: ImmutableRootState) => SidePanelPropsFromState =
-    (state: ImmutableRootState): SidePanelPropsFromState => ({
+const mapStateToProps: (state: ImmutableRootState) => HamburgerPropsFromState =
+    (state: ImmutableRootState): HamburgerPropsFromState => ({
         sidePanelOpen: state.get(RootStateKeys.PATTERN)
             .get(PatternStateKeys.SIDE_PANEL_OPEN),
     })
