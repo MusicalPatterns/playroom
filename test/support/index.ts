@@ -1,7 +1,7 @@
 export { selectTestPattern, selectOtherTestPattern }from './selectTestPattern'
 export { resetSpecByTogglingToOtherPatternThenBackToTestPattern, refreshPage }from './refresh'
 export { reset } from './reset'
-export { sidePanelIs } from './sidePanel'
+export { leftColumnIs } from './leftColumn'
 export { openSpecControlsIfNotOpen } from './caret'
 export { currentTime, patternDuration, isPlaying, isPaused, hasBeenReset } from './time'
 export {

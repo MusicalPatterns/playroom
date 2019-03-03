@@ -3,8 +3,8 @@
 @import './proportions';
 @import './sizes';
 
-#main-panel {
-  flex: $main-panel-proportion;
+#middle-plus-right-columns {
+  flex: $middle-plus-right-columns-proportion;
   display: flex;
   flex-direction: column;
 
@@ -18,12 +18,12 @@
     }
   }
 
-  &.right-panel-open .right {
+  &.right-column-open .right {
     flex: $right-proportion;
     min-width: $right-min-width;
   }
 
-  &.right-panel-closed .right {
+  &.right-column-closed .right {
     flex: $right-proportion-closed;
     min-width: 0;
   }

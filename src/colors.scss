@@ -8,14 +8,14 @@ $button-background: $light-grey;
 $invalid-color: $some-random-orange-red;
 $focus-color: $some-random-green-blue;
 
-$side-panel-background: nth($greys, 3);
-$side-panel-color: nth($greys, 4);
-$side-panel-color-with-emphasis: nth($greys, 5);
-$side-panel-hover: nth($greys, 5);
-$side-panel-hover-with-emphasis: nth($greys, 6);
-$side-panel-selected: nth($greys, 6);
-$side-panel-selected-with-emphasis: nth($greys, 7);
+$left-column-background: nth($greys, 3);
+$left-column-color: nth($greys, 4);
+$left-column-color-with-emphasis: nth($greys, 5);
+$left-column-hover: nth($greys, 5);
+$left-column-hover-with-emphasis: nth($greys, 6);
+$left-column-selected: nth($greys, 6);
+$left-column-selected-with-emphasis: nth($greys, 7);
 
-$left-panel-background: nth($greys, 7);
+$middle-column-background: nth($greys, 7);
 
-$right-panel-background: nth($greys, 4);
+$right-column-background: nth($greys, 4);

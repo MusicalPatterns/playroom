@@ -1,9 +1,9 @@
 import { ElementHandle } from 'puppeteer'
 import {
     findElement,
+    leftColumnIs,
     refreshPage,
     selectTestPattern,
-    sidePanelIs,
     simulateDesktopViewport,
     simulateMobileViewport,
 } from '../../support'
@@ -14,20 +14,20 @@ const clickHamburger: () => Promise<void> =
         await hamburger.click()
     }
 
-describe('side panel', () => {
+describe('left column', () => {
     beforeEach(async (done: DoneFn) => {
         await refreshPage()
         done()
     })
 
-    it('the hamburger collapses and expands the side panel', async (done: DoneFn) => {
-        await sidePanelIs('open')
+    it('the hamburger collapses and expands the left column', async (done: DoneFn) => {
+        await leftColumnIs('open')
 
         await clickHamburger()
-        await sidePanelIs('closed')
+        await leftColumnIs('closed')
 
         await clickHamburger()
-        await sidePanelIs('open')
+        await leftColumnIs('open')
 
         done()
     })
@@ -45,11 +45,11 @@ describe('side panel', () => {
             done()
         })
 
-        it('collapses the side panel when you select a pattern', async (done: DoneFn) => {
-            await sidePanelIs('open')
+        it('collapses the left column when you select a pattern', async (done: DoneFn) => {
+            await leftColumnIs('open')
 
             await selectTestPattern()
-            await sidePanelIs('closed')
+            await leftColumnIs('closed')
 
             done()
         })

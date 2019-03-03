@@ -21,7 +21,7 @@ const Page: React.ComponentType<PageProps> =
             case PageName.ABOUT:
                 return (
                     <div {...{ className: 'row' }}>
-                        <div {...{ className: 'left' }}>
+                        <div {...{ className: 'middle' }}>
                             <h1>About</h1>
                             <p>
                                 Welcome to Musical Patterns. The music here

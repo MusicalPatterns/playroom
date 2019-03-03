@@ -12,11 +12,11 @@ interface PatternChangeEventParameters extends EventAsProp, PatternListPropsFrom
 type PatternChangeEventExtractor = (parameters: PatternChangeEventParameters) => void
 
 interface HandleHamburgerParameters extends DispatchAsProp {
-    sidePanelOpen: boolean,
+    leftColumnOpen: boolean,
 }
 
 interface TitleClickEventParameters extends EventAsProp {
-    rightPanelOpen: boolean,
+    rightColumnOpen: boolean,
 }
 
 type TitleClickEventExtractor = (parameters: TitleClickEventParameters) => void

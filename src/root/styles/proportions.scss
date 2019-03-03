@@ -1,8 +1,8 @@
 @import '../../baseStyles';
 
-$side-panel-proportion: 1;
-$main-panel-proportion: $phi + $phi + 1;
+$left-column-proportion: 1;
+$middle-plus-right-columns-proportion: $phi + $phi + 1;
 
-$left-proportion: $phi;
+$middle-proportion: $phi;
 $right-proportion: 1;
 $right-proportion-closed: ((((1 / $phi) / $phi) / $phi) / $phi) / $phi;

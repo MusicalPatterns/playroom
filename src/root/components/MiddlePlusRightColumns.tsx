@@ -7,22 +7,22 @@ import FirstRow from './FirstRow'
 import Page from './Page'
 import Post from './Post'
 import SecondRow from './SecondRow'
-import { MainPanelProps } from './types'
+import { MiddlePlusRightColumnsProps } from './types'
 
-const mapStateToProps: (state: ImmutableRootState) => MainPanelProps =
-    (state: ImmutableRootState): MainPanelProps => {
+const mapStateToProps: (state: ImmutableRootState) => MiddlePlusRightColumnsProps =
+    (state: ImmutableRootState): MiddlePlusRightColumnsProps => {
         const patternState: ImmutablePatternState = state.get(RootStateKeys.PATTERN)
 
         return {
             id: patternState.get(PatternStateKeys.ID),
             pageName: patternState.get(PatternStateKeys.PAGE_NAME),
-            rightPanelOpen: patternState.get(PatternStateKeys.RIGHT_PANEL_OPEN),
+            rightColumnOpen: patternState.get(PatternStateKeys.RIGHT_COLUMN_OPEN),
         }
     }
 
-const MainPanel: React.ComponentType<MainPanelProps> =
-    ({ id, pageName, rightPanelOpen }: MainPanelProps): JSX.Element => (
-        <div {...{ id: 'main-panel', className: rightPanelOpen ? 'right-panel-open' : 'right-panel-closed' }}>
+const MiddlePlusRightColumns: React.ComponentType<MiddlePlusRightColumnsProps> =
+    ({ id, pageName, rightColumnOpen }: MiddlePlusRightColumnsProps): JSX.Element => (
+        <div {...{ id: 'middle-plus-right-columns', className: `right-column-${rightColumnOpen ? 'open' : 'closed'}` }}>
             <FirstRow/>
             <SecondRow/>
             {id && <Post/>}
@@ -31,4 +31,4 @@ const MainPanel: React.ComponentType<MainPanelProps> =
         </div>
     )
 
-export default connect(mapStateToProps)(MainPanel)
+export default connect(mapStateToProps)(MiddlePlusRightColumns)

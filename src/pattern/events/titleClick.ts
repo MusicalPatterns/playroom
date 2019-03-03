@@ -3,12 +3,12 @@ import { BatchAction, batchActions } from 'redux-batched-actions'
 import { stopActions } from '../../performer'
 import { Action, ActionType } from '../../root'
 import { PageName } from '../types'
-import { adjustWindowActionsWithSideEffects, closeRightPanel } from './helpers'
+import { adjustWindowActionsWithSideEffects, closeRightColumn } from './helpers'
 import { TitleClickEventHandler, TitleClickEventHandlerParameters } from './types'
 
 const handleTitleClick: TitleClickEventHandler =
     async ({ dispatch, titleClickEventParameters }: TitleClickEventHandlerParameters): Promise<void> => {
-        const { rightPanelOpen } = titleClickEventParameters
+        const { rightColumnOpen } = titleClickEventParameters
         await stop()
 
         const actions: Action[] = adjustWindowActionsWithSideEffects()
@@ -29,7 +29,7 @@ const handleTitleClick: TitleClickEventHandler =
         const batchedAction: BatchAction = batchActions(actions)
         dispatch(batchedAction)
 
-        closeRightPanel({ dispatch, rightPanelOpen })
+        closeRightColumn({ dispatch, rightColumnOpen })
     }
 
 export {

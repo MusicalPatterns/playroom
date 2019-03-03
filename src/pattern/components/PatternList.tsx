@@ -18,7 +18,7 @@ const mapStateToProps: (state: ImmutableRootState) => PatternListPropsFromState 
         return {
             id: patternState.get(PatternStateKeys.ID),
             patterns: patternState.get(PatternStateKeys.PATTERNS),
-            rightPanelOpen: patternState.get(PatternStateKeys.RIGHT_PANEL_OPEN),
+            rightColumnOpen: patternState.get(PatternStateKeys.RIGHT_COLUMN_OPEN),
         }
     }
 
@@ -30,10 +30,10 @@ const mapDispatchToProps: (dispatch: Dispatch) => PatternListPropsFromDispatch =
     })
 
 const PatternList: React.ComponentType<PatternListProps> =
-    ({ handlePatternChangeEvent, id, patterns, rightPanelOpen }: PatternListProps): JSX.Element => {
+    ({ handlePatternChangeEvent, id, patterns, rightColumnOpen }: PatternListProps): JSX.Element => {
         const onClick: EventHandler =
             (event: React.SyntheticEvent): void => {
-                handlePatternChangeEvent({ event, patterns, id, rightPanelOpen })
+                handlePatternChangeEvent({ event, patterns, id, rightColumnOpen })
             }
 
         const options: JSX.Element[] = map(

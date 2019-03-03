@@ -2,8 +2,8 @@ import { ActionType } from '../../root'
 import { HandleHamburgerParameters } from './types'
 
 const handleHamburger: (parameters: HandleHamburgerParameters) => void =
-    ({ dispatch, sidePanelOpen }: HandleHamburgerParameters): void => {
-        dispatch({ type: ActionType.SET_SIDE_PANEL_OPEN, data: !sidePanelOpen })
+    ({ dispatch, leftColumnOpen }: HandleHamburgerParameters): void => {
+        dispatch({ type: ActionType.SET_LEFT_COLUMN_OPEN, data: !leftColumnOpen })
     }
 
 export {

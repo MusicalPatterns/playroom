@@ -6,7 +6,7 @@ import { PatternChangeEventExtractor, TitleClickEventExtractor } from '../events
 interface PatternListPropsFromState {
     id: Maybe<Id>,
     patterns: Maybe<Patterns>,
-    rightPanelOpen: boolean,
+    rightColumnOpen: boolean,
 }
 
 interface PatternListPropsFromDispatch {
@@ -22,17 +22,17 @@ interface PatternListItemProps extends WithClickHandler {
 }
 
 interface HamburgerPropsFromState {
-    sidePanelOpen: boolean,
+    leftColumnOpen: boolean,
 }
 
 interface HamburgerPropsFromDispatch {
-    hamburgerHandler: (sidePanelOpen: boolean) => void,
+    hamburgerHandler: (leftColumnOpen: boolean) => void,
 }
 
 interface HamburgerProps extends HamburgerPropsFromDispatch, HamburgerPropsFromState {}
 
 interface TitlePropsFromState {
-    rightPanelOpen: boolean,
+    rightColumnOpen: boolean,
 }
 
 interface TitlePropsFromDispatch {

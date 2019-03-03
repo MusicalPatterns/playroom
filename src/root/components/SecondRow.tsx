@@ -23,7 +23,7 @@ const SecondRow: React.ComponentType<SecondRowProps> =
         if (pageName || !id) {
             return (
                 <div {...{ className: 'row closed', id: 'second-row' }} >
-                    <div {...{ className: 'left' }} />
+                    <div {...{ className: 'middle' }} />
                     <div {...{ className: 'right' }} >
                     </div>
                 </div>
@@ -34,7 +34,7 @@ const SecondRow: React.ComponentType<SecondRowProps> =
 
         return (
             <div {...{ className: 'row open', id: 'second-row' }} >
-                <div {...{ className: 'left' }} >
+                <div {...{ className: 'middle' }} >
                     <h1>{patternTitle}</h1>
                 </div>
                 <div {...{ className: 'right' }} >

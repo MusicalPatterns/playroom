@@ -117,8 +117,8 @@ describe('pattern list', () => {
             done()
         })
 
-        it('opens the right panel', async (done: DoneFn) => {
-            expect(await elementExists('#main-panel.right-panel-open'))
+        it('opens the right column', async (done: DoneFn) => {
+            expect(await elementExists('#middle-plus-right-columns.right-column-open'))
                 .toBeTruthy()
 
             done()

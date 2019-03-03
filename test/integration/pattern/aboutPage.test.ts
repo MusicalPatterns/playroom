@@ -3,9 +3,9 @@ import {
     elementExists,
     elementInnerText,
     findElement,
+    leftColumnIs,
     refreshPage,
     selectTestPattern,
-    sidePanelIs,
     simulateDesktopViewport,
     simulateMobileViewport,
 } from '../../support'
@@ -24,7 +24,7 @@ const selectAboutPageBySymbol: () => Promise<void> =
 
 const titleIs: (expectedTitle: string) => Promise<void> =
     async (expectedTitle: string): Promise<void> => {
-        expect(await elementInnerText('#main-panel h1'))
+        expect(await elementInnerText('#middle-plus-right-columns h1'))
             .toBe(expectedTitle)
     }
 
@@ -58,9 +58,9 @@ describe('about page', () => {
         done()
     })
 
-    it('hides the right panel', async (done: DoneFn) => {
+    it('hides the right column', async (done: DoneFn) => {
         await selectAboutPage()
-        expect(await elementExists('#main-panel.right-panel-closed'))
+        expect(await elementExists('#middle-plus-right-columns.right-column-closed'))
             .toBeTruthy()
 
         done()
@@ -88,11 +88,11 @@ describe('about page', () => {
             done()
         })
 
-        it('collapses the side panel when you select a pattern', async (done: DoneFn) => {
-            await sidePanelIs('open')
+        it('collapses the left column when you select a pattern', async (done: DoneFn) => {
+            await leftColumnIs('open')
 
             await selectAboutPage()
-            await sidePanelIs('closed')
+            await leftColumnIs('closed')
 
             done()
         })

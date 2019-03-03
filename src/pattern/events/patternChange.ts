@@ -4,12 +4,12 @@ import { BEGINNING, doAsync, Maybe } from '@musical-patterns/utilities'
 import { BatchAction, batchActions } from 'redux-batched-actions'
 import { Action, ActionType } from '../../root'
 import { resetActions } from '../../spec'
-import { adjustWindowActionsWithSideEffects, openRightPanel } from './helpers'
+import { adjustWindowActionsWithSideEffects, openRightColumn } from './helpers'
 import { PatternChangeEventHandler, PatternChangeEventHandlerParameters } from './types'
 
 const handlePatternChange: PatternChangeEventHandler =
     async ({ dispatch, patternChangeEventParameters }: PatternChangeEventHandlerParameters): Promise<void> => {
-        const { event, patterns, id, rightPanelOpen } = patternChangeEventParameters
+        const { event, patterns, id, rightColumnOpen } = patternChangeEventParameters
         const target: HTMLLIElement = event.currentTarget as HTMLLIElement
         const newId: Id = target.id as Id
 
@@ -48,7 +48,7 @@ const handlePatternChange: PatternChangeEventHandler =
             await setTimePosition(BEGINNING)
         })
 
-        openRightPanel({ dispatch, rightPanelOpen })
+        openRightColumn({ dispatch, rightColumnOpen })
     }
 
 export {

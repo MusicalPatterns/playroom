@@ -14,7 +14,7 @@ const mapStateToProps: (state: ImmutableRootState) => FirstRowProps =
 const FirstRow: React.ComponentType<FirstRowProps> =
     ({ pageName }: FirstRowProps): JSX.Element => (
         <div {...{ className: `row ${!pageName ? 'open' : 'closed'}`, id: 'first-row' }}>
-            <div {...{ className: 'left' }} >
+            <div {...{ className: 'middle' }} >
                 <PerformerPanel/>
             </div>
             <div {...{ className: 'right' }} />

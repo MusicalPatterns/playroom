@@ -1,10 +1,10 @@
 import { Dispatch } from 'redux'
 
-interface ToggleRightPanelOpenParameters {
+interface ToggleRightColumnOpenParameters {
     dispatch: Dispatch,
-    rightPanelOpen: boolean,
+    rightColumnOpen: boolean,
 }
 
 export {
-    ToggleRightPanelOpenParameters,
+    ToggleRightColumnOpenParameters,
 }

@@ -2,8 +2,8 @@ import * as React from 'react'
 import { connect } from 'react-redux'
 import { ImmutablePatternState, PatternStateKeys } from '../../pattern'
 import { ImmutableRootState, RootStateKeys } from '../state'
-import MainPanel from './MainPanel'
-import SidePanel from './SidePanel'
+import LeftColumn from './LeftColumn'
+import MiddlePlusRightColumns from './MiddlePlusRightColumns'
 import { AppProps } from './types'
 
 const mapStateToProps: (state: ImmutableRootState) => AppProps =
@@ -23,8 +23,8 @@ const App: React.ComponentType<AppProps> =
 
         return (
             <div {...{ id: 'app' }}>
-                <SidePanel/>
-                <MainPanel/>
+                <LeftColumn/>
+                <MiddlePlusRightColumns/>
             </div>
         )
     }

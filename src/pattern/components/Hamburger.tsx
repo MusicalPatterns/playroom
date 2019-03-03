@@ -10,21 +10,21 @@ import { HamburgerProps, HamburgerPropsFromDispatch, HamburgerPropsFromState } f
 
 const mapStateToProps: (state: ImmutableRootState) => HamburgerPropsFromState =
     (state: ImmutableRootState): HamburgerPropsFromState => ({
-        sidePanelOpen: state.get(RootStateKeys.PATTERN)
-            .get(PatternStateKeys.SIDE_PANEL_OPEN),
+        leftColumnOpen: state.get(RootStateKeys.PATTERN)
+            .get(PatternStateKeys.LEFT_COLUMN_OPEN),
     })
 
 const mapDispatchToProps: (dispatch: Dispatch) => HamburgerPropsFromDispatch =
     (dispatch: Dispatch): HamburgerPropsFromDispatch => ({
-        hamburgerHandler: (sidePanelOpen: boolean): void => {
-            handleHamburger({ dispatch, sidePanelOpen })
+        hamburgerHandler: (leftColumnOpen: boolean): void => {
+            handleHamburger({ dispatch, leftColumnOpen })
         },
     })
 
 const Hamburger: React.ComponentType<HamburgerProps> =
-    ({ hamburgerHandler, sidePanelOpen }: HamburgerProps): JSX.Element => {
+    ({ hamburgerHandler, leftColumnOpen }: HamburgerProps): JSX.Element => {
         const onClick: VoidFunction = (): void => {
-            hamburgerHandler(sidePanelOpen)
+            hamburgerHandler(leftColumnOpen)
         }
 
         return (

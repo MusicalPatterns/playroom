@@ -6,14 +6,14 @@ interface AppProps {
     patterns: Maybe<Patterns>,
 }
 
-interface SidePanelProps {
-    sidePanelOpen: boolean,
+interface LeftColumnProps {
+    leftColumnOpen: boolean,
 }
 
-interface MainPanelProps {
+interface MiddlePlusRightColumnsProps {
     id: Maybe<Id>,
     pageName: Maybe<PageName>,
-    rightPanelOpen: boolean,
+    rightColumnOpen: boolean,
 }
 
 interface FirstRowProps {
@@ -55,8 +55,8 @@ export {
     PatternListenerProps,
     FirstRowProps,
     SecondRowProps,
-    SidePanelProps,
+    LeftColumnProps,
     PageProps,
-    MainPanelProps,
+    MiddlePlusRightColumnsProps,
     PostProps,
 }

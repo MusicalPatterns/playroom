@@ -7,35 +7,35 @@
   display: flex;
   flex-wrap: wrap;
 
-  .left,
+  .middle,
   .right {
     color: $text-color;
 
     p,
     img {
-      padding: $main-panel-paragraph-spacing $main-panel-horizontal-spacing;
+      padding: $middle-plus-right-columns-paragraph-spacing $middle-plus-right-columns-horizontal-spacing;
     }
   }
 
-  .left {
-    flex: $left-proportion;
-    min-width: $left-min-width;
+  .middle {
+    flex: $middle-proportion;
+    min-width: $middle-min-width;
 
     @media screen and (max-width: $mobile-size) {
-      min-width: $left-min-width-mobile;
+      min-width: $middle-min-width-mobile;
     }
 
-    background-color: $left-panel-background;
+    background-color: $middle-column-background;
 
     h1,
     h2,
     h3 {
-      padding: $main-panel-spacing $main-panel-horizontal-spacing;
+      padding: $middle-plus-right-columns-spacing $middle-plus-right-columns-horizontal-spacing;
     }
   }
 
   .right {
-    background-color: $right-panel-background;
+    background-color: $right-column-background;
     text-align: right;
   }
 }

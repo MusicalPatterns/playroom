@@ -8,11 +8,11 @@
   flex: $title-proportion;
   height: $title-height;
   width: $title-width;
-  margin-right: $side-panel-width-closed;
+  margin-right: $left-column-width-closed;
   text-align: center;
   display: flex;
   align-items: center;
-  box-shadow: $pattern-list-fade-horizontal-translation $pattern-list-fade-vertical-translation-for-bottom $pattern-list-fade-size $side-panel-background;
+  box-shadow: $pattern-list-fade-horizontal-translation $pattern-list-fade-vertical-translation-for-bottom $pattern-list-fade-size $left-column-background;
   z-index: 1;
 
   & > div {
@@ -35,11 +35,11 @@
       width: $pattern-list-item-width;
       text-align: center;
       margin-bottom: 0;
-      color: $side-panel-color-with-emphasis;
+      color: $left-column-color-with-emphasis;
       cursor: pointer;
 
       &:hover {
-        color: $side-panel-hover-with-emphasis;
+        color: $left-column-hover-with-emphasis;
       }
     }
   }
@@ -56,10 +56,10 @@
       cursor: pointer;
 
       polygon {
-        fill: $side-panel-color-with-emphasis;
+        fill: $left-column-color-with-emphasis;
 
         &:hover {
-          color: $side-panel-hover-with-emphasis;
+          color: $left-column-hover-with-emphasis;
         }
       }
     }
@@ -71,7 +71,7 @@
     font-family: inherit;
 
     &:hover {
-      color: $side-panel-hover-with-emphasis;
+      color: $left-column-hover-with-emphasis;
     }
   }
 }

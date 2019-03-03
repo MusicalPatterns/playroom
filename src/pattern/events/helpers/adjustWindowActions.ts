@@ -6,7 +6,7 @@ const adjustWindowActionsWithSideEffects: () => Action[] =
         window.scrollTo(0, 0)
 
         if (window.innerWidth < WIDTH_BELOW_WHICH_PATTERNS_LIST_CLOSES_UPON_PATTERN_SELECTION) {
-            return [ { type: ActionType.SET_SIDE_PANEL_OPEN, data: false } ]
+            return [ { type: ActionType.SET_LEFT_COLUMN_OPEN, data: false } ]
         }
 
         return []

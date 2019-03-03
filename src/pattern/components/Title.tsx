@@ -11,8 +11,8 @@ import { TitleProps, TitlePropsFromDispatch, TitlePropsFromState } from './types
 
 const mapStateToProps: (state: ImmutableRootState) => TitlePropsFromState =
     (state: ImmutableRootState): TitlePropsFromState => ({
-        rightPanelOpen: state.get(RootStateKeys.PATTERN)
-            .get(PatternStateKeys.RIGHT_PANEL_OPEN),
+        rightColumnOpen: state.get(RootStateKeys.PATTERN)
+            .get(PatternStateKeys.RIGHT_COLUMN_OPEN),
     })
 
 const mapDispatchToProps: (dispatch: Dispatch) => TitlePropsFromDispatch =
@@ -23,10 +23,10 @@ const mapDispatchToProps: (dispatch: Dispatch) => TitlePropsFromDispatch =
     })
 
 const Title: React.ComponentType<TitleProps> =
-    ({ handleTitleClickEvent, rightPanelOpen }: TitleProps): JSX.Element => {
+    ({ handleTitleClickEvent, rightColumnOpen }: TitleProps): JSX.Element => {
         const onClick: EventHandler =
             (event: React.SyntheticEvent): void => {
-                handleTitleClickEvent({ event, rightPanelOpen })
+                handleTitleClickEvent({ event, rightColumnOpen })
             }
 
         return (

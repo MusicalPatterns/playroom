@@ -20,26 +20,26 @@ li {
 
   &:hover {
     cursor: pointer;
-    color: $side-panel-hover !important;
+    color: $left-column-hover !important;
 
     div:first-child {
-      color: $side-panel-hover-with-emphasis !important;
+      color: $left-column-hover-with-emphasis !important;
     }
   }
 
   &.selected {
-    color: $side-panel-selected;
+    color: $left-column-selected;
 
     div:first-child {
-      color: $side-panel-selected-with-emphasis;
+      color: $left-column-selected-with-emphasis;
     }
   }
 
   &.not-selected {
-    color: $side-panel-color;
+    color: $left-column-color;
 
     div:first-child {
-      color: $side-panel-color;
+      color: $left-column-color;
     }
   }
 }

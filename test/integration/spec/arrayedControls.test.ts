@@ -300,7 +300,7 @@ describe('arrayed controls', () => {
             done()
         })
 
-        it('disables the remove button when there are no fields left in the arrayed control', async (done: DoneFn) => {
+        it('disables the remove button when there are no fields remaining in the arrayed control', async (done: DoneFn) => {
             await removeAllTheFields()
             await removeIsDisabled()
 

@@ -6,8 +6,8 @@ enum PatternStateKeys {
     PATTERNS = 'PATTERNS',
     ID = 'ID',
     DEBUG_MODE = 'DEBUG_MODE',
-    SIDE_PANEL_OPEN = 'SIDE_PANEL_OPEN',
-    RIGHT_PANEL_OPEN = 'RIGHT_PANEL_OPEN',
+    LEFT_COLUMN_OPEN = 'LEFT_COLUMN_OPEN',
+    RIGHT_COLUMN_OPEN = 'RIGHT_COLUMN_OPEN',
     PAGE_NAME = 'PAGE_NAME',
 }
 
@@ -15,8 +15,8 @@ interface PatternState {
     [ PatternStateKeys.PATTERNS ]: Maybe<Patterns>,
     [ PatternStateKeys.ID ]: Maybe<Id>,
     [ PatternStateKeys.DEBUG_MODE ]: boolean,
-    [ PatternStateKeys.SIDE_PANEL_OPEN ]: boolean,
-    [ PatternStateKeys.RIGHT_PANEL_OPEN ]: boolean,
+    [ PatternStateKeys.LEFT_COLUMN_OPEN ]: boolean,
+    [ PatternStateKeys.RIGHT_COLUMN_OPEN ]: boolean,
     [ PatternStateKeys.PAGE_NAME ]: Maybe<PageName>,
 }
 
@@ -26,8 +26,8 @@ enum PatternStateActionType {
     SET_PATTERNS = 'SET_PATTERNS',
     SET_PATTERN_ID = 'SET_PATTERN_ID',
     SET_DEBUG_MODE = 'SET_DEBUG_MODE',
-    SET_SIDE_PANEL_OPEN = 'SET_SIDE_PANEL_OPEN',
-    SET_RIGHT_PANEL_OPEN = 'SET_RIGHT_PANEL_OPEN',
+    SET_LEFT_COLUMN_OPEN = 'SET_LEFT_COLUMN_OPEN',
+    SET_RIGHT_COLUMN_OPEN = 'SET_RIGHT_COLUMN_OPEN',
     SET_PAGE_NAME = 'SET_PAGE_NAME',
 }
 
@@ -46,14 +46,14 @@ interface SetDebugMode {
     type: PatternStateActionType.SET_DEBUG_MODE,
 }
 
-interface SetSidePanelOpen {
+interface SetLeftColumnOpen {
     data: boolean,
-    type: PatternStateActionType.SET_SIDE_PANEL_OPEN,
+    type: PatternStateActionType.SET_LEFT_COLUMN_OPEN,
 }
 
-interface SetRightPanelOpen {
+interface SetRightColumnOpen {
     data: boolean,
-    type: PatternStateActionType.SET_RIGHT_PANEL_OPEN,
+    type: PatternStateActionType.SET_RIGHT_COLUMN_OPEN,
 }
 
 interface SetPage {
@@ -65,8 +65,8 @@ type PatternStateAction =
     SetPatterns |
     SetId |
     SetDebugMode |
-    SetSidePanelOpen |
-    SetRightPanelOpen |
+    SetLeftColumnOpen |
+    SetRightColumnOpen |
     SetPage
 
 export {
