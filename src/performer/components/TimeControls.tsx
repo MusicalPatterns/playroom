@@ -4,8 +4,10 @@ import * as React from 'react'
 import { connect } from 'react-redux'
 import { Dispatch } from 'redux'
 import { ImmutableRootState, RootStateKeys } from '../../root'
+import { SecretSelectorsForTest } from '../../types'
 import { buildStopHandler, buildTogglePausedHandler, handleRewind } from '../events'
 import { ImmutablePerformerState, PerformerStateKeys } from '../state'
+import { formatTimesForDisplay } from './helpers'
 import TimeInMinutesAndSeconds from './TimeInMinutesAndSeconds'
 import Timeline from './Timeline'
 import { TimeControlsProps, TimeControlsPropsFromDispatch, TimeControlsPropsFromState } from './types'
@@ -16,7 +18,9 @@ const mapStateToProps: (state: ImmutableRootState) => TimeControlsPropsFromState
 
         return {
             disabled: performerState.get(PerformerStateKeys.PERFORMER_DISABLED),
+            patternDuration: performerState.get(PerformerStateKeys.PATTERN_DURATION),
             paused: performerState.get(PerformerStateKeys.PAUSED),
+            timePosition: performerState.get(PerformerStateKeys.TIME_POSITION),
         }
     }
 
@@ -28,10 +32,24 @@ const mapDispatchToProps: (dispatch: Dispatch) => TimeControlsPropsFromDispatch 
     })
 
 const TimeControls: React.ComponentType<TimeControlsProps> =
-    ({ disabled, rewindHandler, togglePausedHandler, stopHandler, paused }: TimeControlsProps): JSX.Element => {
+    (timeControlsProps: TimeControlsProps): JSX.Element => {
+        const {
+            disabled,
+            rewindHandler,
+            togglePausedHandler,
+            stopHandler,
+            paused,
+            patternDuration,
+            timePosition,
+        } = timeControlsProps
         const controlId: string = paused ? 'play' : 'pause'
         const icon: IconDefinition = paused ? faPlay : faPause
         const disabledClass: string = disabled ? 'disabled' : ''
+
+        const { timePositionForDisplay, patternDurationForDisplay } = formatTimesForDisplay({
+            patternDuration,
+            timePosition,
+        })
 
         return (
             <div {...{ id: 'time-controls', className: disabledClass }}>
@@ -46,6 +64,8 @@ const TimeControls: React.ComponentType<TimeControlsProps> =
                 </button>
                 <Timeline/>
                 <TimeInMinutesAndSeconds/>
+                <div {...{ id: SecretSelectorsForTest.SECRET_TIMER }}>{timePositionForDisplay}</div>
+                <div {...{ id: SecretSelectorsForTest.SECRET_PATTERN_DURATION }}>{patternDurationForDisplay}</div>
             </div>
         )
     }

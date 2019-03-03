@@ -5,14 +5,11 @@ interface NoPatternMessageProps {
     disabled: boolean,
 }
 
-interface TimeControlsPanelProps {
-    patternDuration: Ms,
-    timePosition: Ms,
-}
-
 interface TimeControlsPropsFromState {
     disabled: boolean,
+    patternDuration: Ms,
     paused: boolean,
+    timePosition: Ms,
 }
 
 interface TimeControlsPropsFromDispatch {
@@ -42,7 +39,6 @@ interface TimelineOrTimeInMinutesAndSecondsProps {
 }
 
 export {
-    TimeControlsPanelProps,
     TimeControlsProps,
     TimeControlsPropsFromDispatch,
     TimeControlsPropsFromState,
