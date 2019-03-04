@@ -1,11 +1,15 @@
 @import './sizes';
 @import '../../colors';
+@import '../../effects';
 
 #spec-panel-header {
   display: flex;
   flex-direction: row;
   justify-content: flex-end;
   align-items: center;
+
+  @include hoverable-color($text-color);
+  cursor: pointer;
 
   button {
     background-color: $right-column-background;

@@ -31,7 +31,7 @@ const SpecPanelHeader: React.ComponentType<SpecPanelHeaderProps> =
             }
 
         return (
-            <h3 {...{ id: 'spec-panel-header' }}>
+            <h3 {...{ id: 'spec-panel-header', onClick }}>
                 {CONTROLS}
                 <button {...{ id: 'caret', onClick }}>
                     <FontAwesomeIcon {...{ icon: specPanelOpen ? faCaretDown : faCaretRight }}/>
