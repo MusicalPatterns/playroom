@@ -6,19 +6,19 @@ import { Dispatch } from 'redux'
 import { ImmutableRootState, RootStateKey } from '../../root'
 import { EventHandler } from '../../types'
 import { handlePatternChange, PatternChangeEventParameters } from '../events'
-import { ImmutablePatternState, PatternStateKey } from '../state'
+import { ImmutablePageState, PageStateKey } from '../state'
 import { sortByOrderOrPublishDate } from './helpers'
 import PatternListItem from './PatternListItem'
 import { PatternListProps, PatternListPropsFromDispatch, PatternListPropsFromState } from './types'
 
 const mapStateToProps: (state: ImmutableRootState) => PatternListPropsFromState =
     (state: ImmutableRootState): PatternListPropsFromState => {
-        const patternState: ImmutablePatternState = state.get(RootStateKey.PATTERN)
+        const patternState: ImmutablePageState = state.get(RootStateKey.PAGE)
 
         return {
-            id: patternState.get(PatternStateKey.ID),
-            patterns: patternState.get(PatternStateKey.PATTERNS),
-            rightColumnOpen: patternState.get(PatternStateKey.RIGHT_COLUMN_OPEN),
+            id: patternState.get(PageStateKey.PATTERN_ID),
+            patterns: patternState.get(PageStateKey.PATTERNS),
+            rightColumnOpen: patternState.get(PageStateKey.RIGHT_COLUMN_OPEN),
         }
     }
 

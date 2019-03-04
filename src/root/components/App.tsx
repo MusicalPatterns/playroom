@@ -1,6 +1,6 @@
 import * as React from 'react'
 import { connect } from 'react-redux'
-import { ImmutablePatternState, PatternStateKey } from '../../pattern'
+import { ImmutablePageState, PageStateKey } from '../../page'
 import { ImmutableRootState, RootStateKey } from '../state'
 import LeftColumn from './LeftColumn'
 import MiddlePlusRightColumns from './MiddlePlusRightColumns'
@@ -8,10 +8,10 @@ import { AppProps } from './types'
 
 const mapStateToProps: (state: ImmutableRootState) => AppProps =
     (state: ImmutableRootState): AppProps => {
-        const patternState: ImmutablePatternState = state.get(RootStateKey.PATTERN)
+        const patternState: ImmutablePageState = state.get(RootStateKey.PAGE)
 
         return {
-            patterns: patternState.get(PatternStateKey.PATTERNS),
+            patterns: patternState.get(PageStateKey.PATTERNS),
         }
     }
 

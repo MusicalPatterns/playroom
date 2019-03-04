@@ -1,7 +1,8 @@
-import { Id, Pattern, Patterns } from '@musical-patterns/pattern'
-import { Maybe } from '@musical-patterns/utilities'
+import { Id, Pattern, Patterns, Spec } from '@musical-patterns/pattern'
+import { Maybe, Ms } from '@musical-patterns/utilities'
 import { WithClickHandler } from '../../types'
 import { PatternChangeEventExtractor, TitleClickEventExtractor } from '../events'
+import { PageName } from '../types'
 
 interface PatternListPropsFromState {
     id: Maybe<Id>,
@@ -41,6 +42,34 @@ interface TitlePropsFromDispatch {
 
 interface TitleProps extends TitlePropsFromState, TitlePropsFromDispatch {}
 
+interface PageProps {
+    pageName: Maybe<PageName>,
+}
+
+interface PostProps {
+    id: Maybe<Id>,
+    patterns: Maybe<Patterns>,
+}
+
+interface SpecAndPatternListenerPropsFromState {
+    debugMode: boolean,
+    id: Maybe<Id>,
+    patterns: Maybe<Patterns>,
+    submittedSpec: Spec,
+}
+
+interface SpecAndPatternListenerPropsFromDispatch {
+    setTotalDuration: (patternDuration: Ms) => void,
+}
+
+interface SpecAndPatternListenerProps extends SpecAndPatternListenerPropsFromState,
+    SpecAndPatternListenerPropsFromDispatch {}
+
+interface PatternTitleProps {
+    id: Maybe<Id>,
+    patterns: Maybe<Patterns>,
+}
+
 export {
     PatternListPropsFromState,
     PatternListPropsFromDispatch,
@@ -52,4 +81,10 @@ export {
     TitlePropsFromState,
     TitlePropsFromDispatch,
     TitleProps,
+    PostProps,
+    PageProps,
+    SpecAndPatternListenerPropsFromState,
+    SpecAndPatternListenerPropsFromDispatch,
+    SpecAndPatternListenerProps,
+    PatternTitleProps,
 }

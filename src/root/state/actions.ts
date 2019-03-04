@@ -1,4 +1,4 @@
-import { PatternStateActionType } from '../../pattern'
+import { PageStateActionType } from '../../page'
 import { PerformerStateActionType } from '../../performer'
 import { SpecStateActionType } from '../../spec'
 
@@ -6,7 +6,7 @@ import { SpecStateActionType } from '../../spec'
 const ActionType = {
     ...SpecStateActionType,
     ...PerformerStateActionType,
-    ...PatternStateActionType,
+    ...PageStateActionType,
 }
 
 export {

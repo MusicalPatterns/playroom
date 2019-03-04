@@ -1,23 +1,23 @@
 import { TypedMap } from '@musical-patterns/utilities'
-import { ImmutablePatternState, PatternStateAction } from '../../pattern'
+import { ImmutablePageState, PageStateAction } from '../../page'
 import { ImmutablePerformerState, PerformerStateAction } from '../../performer'
 import { ImmutableSpecState, SpecStateAction } from '../../spec'
 
 type Action =
     SpecStateAction |
     PerformerStateAction |
-    PatternStateAction
+    PageStateAction
 
 enum RootStateKey {
-    SPEC = 'SPEC',
+    PAGE = 'PAGE',
     PERFORMER = 'PERFORMER',
-    PATTERN = 'PATTERN',
+    SPEC = 'SPEC',
 }
 
 interface RootState {
-    [ RootStateKey.SPEC ]: ImmutableSpecState,
+    [ RootStateKey.PAGE ]: ImmutablePageState,
     [ RootStateKey.PERFORMER ]: ImmutablePerformerState,
-    [ RootStateKey.PATTERN ]: ImmutablePatternState,
+    [ RootStateKey.SPEC ]: ImmutableSpecState,
 }
 
 type ImmutableRootState = TypedMap<RootState>

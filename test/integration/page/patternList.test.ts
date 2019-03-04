@@ -6,6 +6,7 @@ import {
     elementInnerText,
     elementValue,
     findElement,
+    leftColumnIs,
     openSpecControlsIfNotOpen,
     POST_PATTERN_OPTIONED_PROPERTY_ONE_INITIAL_VALUE,
     POST_PATTERN_OPTIONED_PROPERTY_TWO_INITIAL_VALUE,
@@ -16,6 +17,8 @@ import {
     selectOption,
     selectOtherTestPattern,
     selectTestPattern,
+    simulateDesktopViewport,
+    simulateMobileViewport,
     SPEC_CONTROLS_PATTERN_ID,
     SPEC_CONTROLS_PATTERN_OPTIONED_PROPERTY_ONE_INITIAL_VALUE,
     SPEC_CONTROLS_PATTERN_OPTIONED_PROPERTY_ONE_MODIFIED_VALUE,
@@ -171,6 +174,29 @@ describe('pattern list', () => {
                     done()
                 })
             })
+        })
+    })
+
+    describe('when the viewport is smaller than 1000px wide', () => {
+        beforeEach(async (done: DoneFn) => {
+            await simulateMobileViewport()
+
+            done()
+        })
+
+        afterEach(async (done: DoneFn) => {
+            await simulateDesktopViewport()
+
+            done()
+        })
+
+        it('collapses the left column when you select a pattern', async (done: DoneFn) => {
+            await leftColumnIs('open')
+
+            await selectTestPattern()
+            await leftColumnIs('closed')
+
+            done()
         })
     })
 })

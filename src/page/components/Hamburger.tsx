@@ -5,13 +5,13 @@ import { connect } from 'react-redux'
 import { Dispatch } from 'redux'
 import { ImmutableRootState, RootStateKey } from '../../root'
 import { handleHamburger } from '../events'
-import { PatternStateKey } from '../state'
+import { PageStateKey } from '../state'
 import { HamburgerProps, HamburgerPropsFromDispatch, HamburgerPropsFromState } from './types'
 
 const mapStateToProps: (state: ImmutableRootState) => HamburgerPropsFromState =
     (state: ImmutableRootState): HamburgerPropsFromState => ({
-        leftColumnOpen: state.get(RootStateKey.PATTERN)
-            .get(PatternStateKey.LEFT_COLUMN_OPEN),
+        leftColumnOpen: state.get(RootStateKey.PAGE)
+            .get(PageStateKey.LEFT_COLUMN_OPEN),
     })
 
 const mapDispatchToProps: (dispatch: Dispatch) => HamburgerPropsFromDispatch =

@@ -9,33 +9,37 @@ import { doAsync, Maybe, Ms } from '@musical-patterns/utilities'
 import * as React from 'react'
 import { connect } from 'react-redux'
 import { Dispatch } from 'redux'
-import { PatternStateKey } from '../../pattern'
+import { ActionType, ImmutableRootState, RootStateKey } from '../../root'
 import { SpecStateKey } from '../../spec'
-import { ActionType, ImmutableRootState, RootStateKey } from '../state'
+import { PageStateKey } from '../state'
 import { logDebugInfo, maybePatternFromPatternsAndId } from './helpers'
-import { PatternListenerProps, PatternListenerPropsFromDispatch, PatternListenerPropsFromState } from './types'
+import {
+    SpecAndPatternListenerProps,
+    SpecAndPatternListenerPropsFromDispatch,
+    SpecAndPatternListenerPropsFromState,
+} from './types'
 
-const mapStateToProps: (state: ImmutableRootState) => PatternListenerPropsFromState =
-    (state: ImmutableRootState): PatternListenerPropsFromState => ({
-        debugMode: state.get(RootStateKey.PATTERN)
-            .get(PatternStateKey.DEBUG_MODE),
-        id: state.get(RootStateKey.PATTERN)
-            .get(PatternStateKey.ID),
-        patterns: state.get(RootStateKey.PATTERN)
-            .get(PatternStateKey.PATTERNS),
+const mapStateToProps: (state: ImmutableRootState) => SpecAndPatternListenerPropsFromState =
+    (state: ImmutableRootState): SpecAndPatternListenerPropsFromState => ({
+        debugMode: state.get(RootStateKey.PAGE)
+            .get(PageStateKey.DEBUG_MODE),
+        id: state.get(RootStateKey.PAGE)
+            .get(PageStateKey.PATTERN_ID),
+        patterns: state.get(RootStateKey.PAGE)
+            .get(PageStateKey.PATTERNS),
         submittedSpec: state.get(RootStateKey.SPEC)
             .get(SpecStateKey.SUBMITTED_SPEC),
     })
 
-const mapDispatchToProps: (dispatch: Dispatch) => PatternListenerPropsFromDispatch =
-    (dispatch: Dispatch): PatternListenerPropsFromDispatch => ({
+const mapDispatchToProps: (dispatch: Dispatch) => SpecAndPatternListenerPropsFromDispatch =
+    (dispatch: Dispatch): SpecAndPatternListenerPropsFromDispatch => ({
         setTotalDuration: (patternDuration: Ms): void => {
             dispatch({ type: ActionType.SET_PATTERN_DURATION, data: patternDuration })
         },
     })
 
-const PatternListener: React.ComponentType<PatternListenerProps> =
-    (props: PatternListenerProps): JSX.Element => {
+const SpecAndSpecAndPatternListener: React.ComponentType<SpecAndPatternListenerProps> =
+    (props: SpecAndPatternListenerProps): JSX.Element => {
         doAsync(async () => {
             const { debugMode, id, patterns, submittedSpec, setTotalDuration } = props
 
@@ -59,4 +63,4 @@ const PatternListener: React.ComponentType<PatternListenerProps> =
         return <div/>
     }
 
-export default connect(mapStateToProps, mapDispatchToProps)(PatternListener)
+export default connect(mapStateToProps, mapDispatchToProps)(SpecAndSpecAndPatternListener)

@@ -1,12 +1,16 @@
 export {
-    PatternStateActionType,
-    patternReducer,
-    PatternStateAction,
-    ImmutablePatternState,
-    PatternStateKey,
+    PageStateActionType,
+    pageReducer,
+    PageStateAction,
+    ImmutablePageState,
+    PageStateKey,
 } from './state'
 export {
     PatternPanel,
+    Post,
+    Page,
+    SpecAndPatternListener,
+    PatternTitle,
 } from './components'
 export {
     PageName,

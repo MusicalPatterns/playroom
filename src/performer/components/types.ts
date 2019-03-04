@@ -1,6 +1,6 @@
 import { ToggleImmersiveAudioHandlers } from '@musical-patterns/performer'
 import { Maybe, Ms } from '@musical-patterns/utilities'
-import { PageName } from '../../pattern'
+import { PageName } from '../../page'
 
 interface NoPatternMessageProps {
     disabled: boolean,

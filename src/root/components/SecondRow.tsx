@@ -1,25 +1,22 @@
 import * as React from 'react'
 import { connect } from 'react-redux'
-import { ImmutablePatternState, PatternStateKey } from '../../pattern'
+import { ImmutablePageState, PageStateKey, PatternTitle, SpecAndPatternListener } from '../../page'
 import { SpecPanel } from '../../spec'
 import { ImmutableRootState, RootStateKey } from '../state'
-import { getPatternTitle } from './helpers'
-import PatternListener from './PatternListener'
 import { SecondRowProps } from './types'
 
 const mapStateToProps: (state: ImmutableRootState) => SecondRowProps =
     (state: ImmutableRootState): SecondRowProps => {
-        const patternState: ImmutablePatternState = state.get(RootStateKey.PATTERN)
+        const patternState: ImmutablePageState = state.get(RootStateKey.PAGE)
 
         return {
-            id: patternState.get(PatternStateKey.ID),
-            pageName: patternState.get(PatternStateKey.PAGE_NAME),
-            patterns: patternState.get(PatternStateKey.PATTERNS),
+            id: patternState.get(PageStateKey.PATTERN_ID),
+            pageName: patternState.get(PageStateKey.PAGE_NAME),
         }
     }
 
 const SecondRow: React.ComponentType<SecondRowProps> =
-    ({ id, pageName, patterns }: SecondRowProps): JSX.Element => {
+    ({ id, pageName }: SecondRowProps): JSX.Element => {
         if (pageName || !id) {
             return (
                 <div {...{ className: 'row closed', id: 'second-row' }} >
@@ -30,16 +27,14 @@ const SecondRow: React.ComponentType<SecondRowProps> =
             )
         }
 
-        const patternTitle: string = getPatternTitle({ patterns, id })
-
         return (
             <div {...{ className: 'row open', id: 'second-row' }} >
                 <div {...{ className: 'middle' }} >
-                    <h1>{patternTitle}</h1>
+                    <PatternTitle/>
                 </div>
                 <div {...{ className: 'right' }} >
                     <SpecPanel/>
-                    <PatternListener/>
+                    <SpecAndPatternListener/>
                 </div>
             </div>
         )
