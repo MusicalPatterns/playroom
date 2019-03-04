@@ -4,17 +4,17 @@ import { Map } from 'immutable'
 import { applyMiddleware, compose, createStore, Reducer, Store } from 'redux'
 import { batchDispatchMiddleware, enableBatching } from 'redux-batched-actions'
 import { combineReducers } from 'redux-immutable'
-import { leftColumnReducer } from '../../leftColumn'
-import { middleColumnReducer } from '../../middleColumn'
-import { rightColumnReducer } from '../../rightColumn'
+import { patternReducer } from '../../pattern'
+import { performerReducer } from '../../performer'
+import { specReducer } from '../../spec'
 import { RootStateKey } from './types'
 
 const initialState: any = Map()
 
 const rootReducer: Reducer = combineReducers({
-    [ RootStateKey.LEFT_COLUMN ]: leftColumnReducer,
-    [ RootStateKey.RIGHT_COLUMN ]: rightColumnReducer,
-    [ RootStateKey.MIDDLE_COLUMN ]: middleColumnReducer,
+    [ RootStateKey.PATTERN ]: patternReducer,
+    [ RootStateKey.SPEC ]: specReducer,
+    [ RootStateKey.PERFORMER ]: performerReducer,
 } as any)
 
 // @ts-ignore

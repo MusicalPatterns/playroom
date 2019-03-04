@@ -1,23 +1,23 @@
 import { TypedMap } from '@musical-patterns/utilities'
-import { ImmutableLeftColumnState, LeftColumnStateAction } from '../../leftColumn'
-import { ImmutableMiddleColumnState, MiddleColumnStateAction } from '../../middleColumn'
-import { ImmutableRightColumnState, RightColumnStateAction } from '../../rightColumn'
+import { ImmutablePatternState, PatternStateAction } from '../../pattern'
+import { ImmutablePerformerState, PerformerStateAction } from '../../performer'
+import { ImmutableSpecState, SpecStateAction } from '../../spec'
 
 type Action =
-    RightColumnStateAction |
-    MiddleColumnStateAction |
-    LeftColumnStateAction
+    SpecStateAction |
+    PerformerStateAction |
+    PatternStateAction
 
 enum RootStateKey {
-    LEFT_COLUMN = 'LEFT_COLUMN',
-    MIDDLE_COLUMN = 'MIDDLE_COLUMN',
-    RIGHT_COLUMN = 'RIGHT_COLUMN',
+    SPEC = 'SPEC',
+    PERFORMER = 'PERFORMER',
+    PATTERN = 'PATTERN',
 }
 
 interface RootState {
-    [ RootStateKey.LEFT_COLUMN ]: ImmutableLeftColumnState,
-    [ RootStateKey.MIDDLE_COLUMN ]: ImmutableMiddleColumnState,
-    [ RootStateKey.RIGHT_COLUMN ]: ImmutableRightColumnState,
+    [ RootStateKey.SPEC ]: ImmutableSpecState,
+    [ RootStateKey.PERFORMER ]: ImmutablePerformerState,
+    [ RootStateKey.PATTERN ]: ImmutablePatternState,
 }
 
 type ImmutableRootState = TypedMap<RootState>

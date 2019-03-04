@@ -1,8 +1,7 @@
 @import '../../sizes';
 @import '../../effects';
-@import '../../proportions';
-@import './sizes';
 @import './proportions';
+@import './sizes';
 
 #middle-plus-right-columns {
   flex: $middle-plus-right-columns-proportion;

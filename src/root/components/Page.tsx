@@ -2,16 +2,16 @@
 
 import * as React from 'react'
 import { connect } from 'react-redux'
-import { ImmutableLeftColumnState, PageName, LeftColumnStateKey } from '../../leftColumn'
+import { ImmutablePatternState, PageName, PatternStateKey } from '../../pattern'
 import { ImmutableRootState, RootStateKey } from '../state'
 import { PageProps } from './types'
 
 const mapStateToProps: (state: ImmutableRootState) => PageProps =
     (state: ImmutableRootState): PageProps => {
-        const leftColumnState: ImmutableLeftColumnState = state.get(RootStateKey.LEFT_COLUMN)
+        const patternState: ImmutablePatternState = state.get(RootStateKey.PATTERN)
 
         return {
-            pageName: leftColumnState.get(LeftColumnStateKey.PAGE_NAME),
+            pageName: patternState.get(PatternStateKey.PAGE_NAME),
         }
     }
 
