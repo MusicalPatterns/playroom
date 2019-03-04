@@ -27,17 +27,22 @@ const ArrayedSpecControl: React.ComponentType<ArrayedSpecControlProps> =
                     invalidMessage = apply.Ordinal(invalidMessage, index)
                 }
 
+                const key: number = from.Ordinal(index)
+
                 return (
-                    <SingularSpecControl {...{
-                        arrayedPropertyIndex: index,
-                        displayedSpecValue: value,
-                        invalidMessage,
-                        key: from.Ordinal(index),
-                        specControlsProps,
-                        specKey,
-                        specPropertyAttributes,
-                        submittedSpecValue: submittedSpecValues && apply.Ordinal(submittedSpecValues, index),
-                    }}/>
+                    <div {...{ className: 'numbered-spec-control' }}>
+                        <span>{key}</span>
+                        <SingularSpecControl {...{
+                            arrayedPropertyIndex: index,
+                            displayedSpecValue: value,
+                            invalidMessage,
+                            key,
+                            specControlsProps,
+                            specKey,
+                            specPropertyAttributes,
+                            submittedSpecValue: submittedSpecValues && apply.Ordinal(submittedSpecValues, index),
+                        }}/>
+                    </div>
                 )
             },
         )
@@ -48,7 +53,9 @@ const ArrayedSpecControl: React.ComponentType<ArrayedSpecControlProps> =
                     {stringifyIfNecessary(submittedSpecValues)}
                 </span>
                 <div>{specPropertyAttributes.formattedName || camelCaseToLowerCase(specKey)}</div>
-                {controls}
+                <div {...{ className: 'arrayed-fields' }}>
+                    {controls}
+                </div>
                 <div>
                     <AddButton {...{ specKey, specState: specControlsProps.specState }}/>
                     <RemoveButton {...{ specKey, specState: specControlsProps.specState }}/>
