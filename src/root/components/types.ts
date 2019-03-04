@@ -1,13 +1,9 @@
 import { Id, Patterns, Spec } from '@musical-patterns/pattern'
 import { Maybe, Ms } from '@musical-patterns/utilities'
-import { PageName } from '../../pattern'
+import { PageName } from '../../leftColumn'
 
 interface AppProps {
     patterns: Maybe<Patterns>,
-}
-
-interface LeftColumnProps {
-    leftColumnOpen: boolean,
 }
 
 interface MiddlePlusRightColumnsProps {
@@ -55,7 +51,6 @@ export {
     PatternListenerProps,
     FirstRowProps,
     SecondRowProps,
-    LeftColumnProps,
     PageProps,
     MiddlePlusRightColumnsProps,
     PostProps,

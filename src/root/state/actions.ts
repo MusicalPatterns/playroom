@@ -1,12 +1,12 @@
-import { PatternStateActionType } from '../../pattern'
-import { PerformerStateActionType } from '../../performer'
-import { SpecStateActionType } from '../../spec'
+import { LeftColumnStateActionType } from '../../leftColumn'
+import { MiddleColumnStateActionType } from '../../middleColumn'
+import { RightColumnStateActionType } from '../../rightColumn'
 
 // tslint:disable-next-line variable-name typedef
 const ActionType = {
-    ...SpecStateActionType,
-    ...PerformerStateActionType,
-    ...PatternStateActionType,
+    ...RightColumnStateActionType,
+    ...MiddleColumnStateActionType,
+    ...LeftColumnStateActionType,
 }
 
 export {

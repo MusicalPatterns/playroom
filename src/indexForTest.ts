@@ -2,7 +2,7 @@
 
 export {
     SpecControlStates,
-} from './spec/indexForTest'
+} from './rightColumn/indexForTest'
 export {
     SecretSelectorsForTest,
 } from './types'

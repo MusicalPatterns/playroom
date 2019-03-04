@@ -8,7 +8,7 @@ import {
     buildToggleImmersiveAudioHandlers,
     onPerformerUpdate,
     setupKeyboard,
-} from './performer'
+} from './middleColumn'
 import { ActionType, App, store } from './root'
 // tslint:disable-next-line no-import-side-effect
 import './styles'

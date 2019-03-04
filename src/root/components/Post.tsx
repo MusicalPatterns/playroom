@@ -1,17 +1,17 @@
 import * as React from 'react'
 import { connect } from 'react-redux'
-import { ImmutablePatternState, PatternStateKey } from '../../pattern'
+import { ImmutableLeftColumnState, LeftColumnStateKey } from '../../leftColumn'
 import { ImmutableRootState, RootStateKey } from '../state'
 import { getPost } from './helpers'
 import { PostProps } from './types'
 
 const mapStateToProps: (state: ImmutableRootState) => PostProps =
     (state: ImmutableRootState): PostProps => {
-        const patternState: ImmutablePatternState = state.get(RootStateKey.PATTERN)
+        const leftColumnState: ImmutableLeftColumnState = state.get(RootStateKey.LEFT_COLUMN)
 
         return {
-            id: patternState.get(PatternStateKey.ID),
-            patterns: patternState.get(PatternStateKey.PATTERNS),
+            id: leftColumnState.get(LeftColumnStateKey.PATTERN_ID),
+            patterns: leftColumnState.get(LeftColumnStateKey.PATTERNS),
         }
     }
 
