@@ -5,22 +5,26 @@ import { InvalidSpecMessage } from '../../types'
 import { validateArrayedSpecProperty } from './validateArrayedSpecProperty'
 import { validByRangedConstraint } from './validByRangedConstraint'
 
+const validationRequired: (propertyAttributes: Maybe<SpecPropertyAttributes>) => boolean =
+    (propertyAttributes: Maybe<SpecPropertyAttributes>): boolean => {
+        if (!propertyAttributes) {
+            return false
+        }
+
+        return !(propertyAttributes.specPropertyType === SpecPropertyType.OPTIONED ||
+            propertyAttributes.specPropertyType === SpecPropertyType.TOGGLED);
+    }
+
 const validateSpecProperty:
     (specValue: SpecValue, propertyAttributes: Maybe<SpecPropertyAttributes>) => InvalidSpecMessage =
-    // tslint:disable-next-line cyclomatic-complexity
     (specValue: SpecValue, propertyAttributes: Maybe<SpecPropertyAttributes>): InvalidSpecMessage => {
-        if (!propertyAttributes) {
+        if (!validationRequired(propertyAttributes)) {
             return undefined
         }
-        const { specPropertyType, constraint } = propertyAttributes
-
-        if (specPropertyType === SpecPropertyType.OPTIONED ||
-            specPropertyType === SpecPropertyType.TOGGLED) {
-            return undefined
-        }
+        const { constraint } = propertyAttributes as SpecPropertyAttributes
 
         if (specValue instanceof Array) {
-            return validateArrayedSpecProperty(specValue, propertyAttributes)
+            return validateArrayedSpecProperty(specValue, propertyAttributes as SpecPropertyAttributes)
         }
 
         let numericValue: number

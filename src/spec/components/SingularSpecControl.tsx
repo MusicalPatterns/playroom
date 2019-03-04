@@ -9,7 +9,6 @@ import { SingularSpecControlProps } from './types'
 import Units from './Units'
 
 const SingularSpecControl: React.ComponentType<SingularSpecControlProps> =
-    // tslint:disable-next-line cyclomatic-complexity
     (specControlProps: SingularSpecControlProps): JSX.Element => {
         const {
             arrayedPropertyIndex,

@@ -1,4 +1,4 @@
-import { OptionedConstraint, SpecPropertyAttributes } from '@musical-patterns/pattern'
+import { OptionedConstraint, SpecPropertyAttributes, SpecPropertyType } from '@musical-patterns/pattern'
 import { DomValue, DomValueOrChecked, EventHandler } from '../../../types'
 
 interface InputProps {
@@ -29,10 +29,14 @@ interface BuildInputProps {
     specPropertyAttributes: SpecPropertyAttributes,
 }
 
+type SpecPropertyTypeToElementsBuilderMap =
+    { [key in keyof typeof SpecPropertyType]: (props: BuildInputProps) => JSX.Element[] }
+
 export {
     InputProps,
     OptionedInputProps,
     RangedInputProps,
     BuildInputProps,
     ToggledInputProps,
+    SpecPropertyTypeToElementsBuilderMap,
 }
