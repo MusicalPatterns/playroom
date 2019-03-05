@@ -91,6 +91,12 @@ const modifyNewField: () => Promise<void> =
         await newControl.type(VALID_TEST_MODIFICATION)
     }
 
+const invalidateNewField: () => Promise<void> =
+    async (): Promise<void> => {
+        const newControl: ElementHandle = await findElement(`#${SPEC_ARRAYED_PROPERTY_KEY}-5 input[type=number]`)
+        await newControl.type('3e')
+    }
+
 const newFieldHasBeenSubmitted: () => Promise<void> =
     async (): Promise<void> => {
         expect(await elementInnerText(`#${SPEC_ARRAYED_PROPERTY_KEY}-5 .${SecretSelectorsForTest.SECRET_SUBMITTED_SPEC_CONTROL}`))
@@ -175,7 +181,7 @@ const removeIsDisabled: () => Promise<void> =
             .toBeTruthy()
     }
 
-const invalidMessagesAreNotShown: () => Promise<void> =
+const noInvalidMessagesAreShown: () => Promise<void> =
     async (): Promise<void> => {
         expect(await elementExists(`#${SPEC_ARRAYED_PROPERTY_KEY} .invalid-spec-message`))
             .toBeFalsy()
@@ -227,7 +233,7 @@ describe('arrayed controls', () => {
                 })
 
                 it('does not show invalid messages right away', async (done: DoneFn) => {
-                    await invalidMessagesAreNotShown()
+                    await noInvalidMessagesAreShown()
 
                     done()
                 })
@@ -255,6 +261,16 @@ describe('arrayed controls', () => {
 
                     done()
                 })
+            })
+
+            it('does not start out with an invalid message if had existed before with an invalid message then was removed', async (done: DoneFn) => {
+                await clickAdd()
+                await invalidateNewField()
+                await clickRemove()
+                await clickAdd()
+                await noInvalidMessagesAreShown()
+
+                done()
             })
         })
 
@@ -306,7 +322,7 @@ describe('arrayed controls', () => {
             await clickAdd()
             await clickAdd()
             await clickRemove()
-            await invalidMessagesAreNotShown()
+            await noInvalidMessagesAreShown()
 
             done()
         })
