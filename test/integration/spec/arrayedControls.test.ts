@@ -300,6 +300,17 @@ describe('arrayed controls', () => {
             done()
         })
 
+        it('removing the field does not show invalid messages if the removed element was not yet defined', async (done: DoneFn) => {
+            await theSubmittedValueForTheArrayedControlAsAWholeIsInItsInitialState()
+
+            await clickAdd()
+            await clickAdd()
+            await clickRemove()
+            await invalidMessagesAreNotShown()
+
+            done()
+        })
+
         it('disables the remove button when there are no fields remaining in the arrayed control', async (done: DoneFn) => {
             await removeAllTheFields()
             await removeIsDisabled()

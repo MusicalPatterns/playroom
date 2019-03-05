@@ -1,5 +1,5 @@
 import { Spec } from '@musical-patterns/pattern'
-import { indexOfLastElement, INITIAL, slice } from '@musical-patterns/utilities'
+import { indexOfLastElement, INITIAL, lastElement, slice } from '@musical-patterns/utilities'
 import { batchActions } from 'redux-batched-actions'
 import { Action } from '../../root'
 import { DomValueOrChecked } from '../../types'
@@ -17,7 +17,12 @@ const handleArrayedPropertyElementRemove: (parameters: HandleArrayedPropertyAddO
             indexOfLastElement(arrayedSpecValue),
         )
 
-        const actions: Action[] = buildAttemptSubmitActions({ specState, specKey, specValue: updatedArrayedSpecValue })
+        const actions: Action[] = buildAttemptSubmitActions({
+            specKey,
+            specState,
+            specValue: updatedArrayedSpecValue,
+            suppressSpecValidationResults: lastElement(arrayedSpecValue) === '',
+        })
 
         dispatch(batchActions(actions))
     }
