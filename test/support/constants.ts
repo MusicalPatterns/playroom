@@ -8,8 +8,8 @@ import {
     RangedConstraint,
     SpecAttributes,
     StandardSpecProperties,
+    StringedConstraint,
 } from '@musical-patterns/pattern'
-// @ts-ignore
 import { patterns } from '@musical-patterns/pattern-playroom-test'
 import { DictionaryOf, Ms, to } from '@musical-patterns/utilities'
 // @ts-ignore
@@ -55,13 +55,14 @@ const SPEC_CONTROLS_PATTERN_OPTIONED_PROPERTY_TWO_INITIAL_VALUE: string = playro
 const specControlsPatternOptionedPropertyTwoConstraint: OptionedConstraint = specControlsPatternAttributes[ SPEC_OPTIONED_PROPERTY_TWO_KEY ].constraint as OptionedConstraint
 const SPEC_CONTROLS_PATTERN_OPTIONED_PROPERTY_TWO_MODIFIED_VALUE: string = specControlsPatternOptionedPropertyTwoConstraint[ 1 ].key
 const SPEC_CONTROLS_PATTERN_STRINGED_PROPERTY_INITIAL_VALUE: string = playroomTestSpecControls.specData.initial[ SPEC_STRINGED_PROPERTY_KEY ]
-const SPEC_CONTROLS_PATTERN_STRINGED_PROPERTY_ONE_MAX_LENGTH: number = specControlsPatternAttributes[ SPEC_STRINGED_PROPERTY_KEY ].constraint.maxLength
-const SPEC_CONTROLS_PATTERN_STRINGED_PROPERTY_ONE_MIN_LENGTH: number = specControlsPatternAttributes[ SPEC_STRINGED_PROPERTY_KEY ].constraint.minLength
+const specControlsPatternStringedPropertyConstraint: StringedConstraint = specControlsPatternAttributes[ SPEC_STRINGED_PROPERTY_KEY ].constraint as StringedConstraint
+const SPEC_CONTROLS_PATTERN_STRINGED_PROPERTY_ONE_MAX_LENGTH: number = specControlsPatternStringedPropertyConstraint.maxLength as number
+const SPEC_CONTROLS_PATTERN_STRINGED_PROPERTY_ONE_MIN_LENGTH: number = specControlsPatternStringedPropertyConstraint.minLength as number
 const SPEC_CONTROLS_PATTERN_TOGGLED_PROPERTY_INITIAL_VALUE: boolean = playroomTestSpecControls.specData.initial[ SPEC_TOGGLED_PROPERTY_KEY ]
 const SPEC_CONTROLS_PATTERN_TOGGLED_PROPERTY_MODIFIED_VALUE: boolean = !SPEC_CONTROLS_PATTERN_TOGGLED_PROPERTY_INITIAL_VALUE
 const SPEC_CONTROLS_PATTERN_ARRAYED_PROPERTY_INITIAL_VALUE: number[] = playroomTestSpecControls.specData.initial[ SPEC_ARRAYED_PROPERTY_KEY ]
 const SPEC_CONTROLS_PATTERN_ARRAYED_PROPERTY_WITH_INITIAL_ELEMENT_VALUE_INITIAL_VALUE: number[] = playroomTestSpecControls.specData.initial[ SPEC_ARRAYED_PROPERTY_WITH_INITIAL_ELEMENT_VALUE_KEY ]
-const SPEC_CONTROLS_PATTERN_ARRAYED_PROPERTY_WITH_INITIAL_ELEMENT_VALUE_INITIAL_ELEMENT_VALUE: number = playroomTestSpecControls.specData.attributes[ SPEC_ARRAYED_PROPERTY_WITH_INITIAL_ELEMENT_VALUE_KEY ].arrayedNewElementInitialValue
+const SPEC_CONTROLS_PATTERN_ARRAYED_PROPERTY_WITH_INITIAL_ELEMENT_VALUE_INITIAL_ELEMENT_VALUE: number = playroomTestSpecControls.specData.attributes[ SPEC_ARRAYED_PROPERTY_WITH_INITIAL_ELEMENT_VALUE_KEY ].arrayedNewElementInitialValue as number
 
 const POST_PATTERN_ID: Id = playroomTestPost.id
 const POST_PATTERN_TITLE: string = playroomTestPost.metadata.formattedName as string

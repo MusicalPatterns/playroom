@@ -29,7 +29,7 @@ const buildAttemptSubmitActions: (parameters: BuildAttemptSubmitActionsParameter
         ]
 
         if (!suppressSpecValidationResults) {
-            actions.push({ type: ActionType.SET_INVALID_SPEC_MESSAGES, data: updatedSpecValidationResults })
+            actions.push({ type: ActionType.SET_SPEC_VALIDATION_RESULTS, data: updatedSpecValidationResults })
         }
 
         if (isValid) {

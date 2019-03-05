@@ -1,4 +1,4 @@
-import { InvalidSpecMessage, Spec, SpecValidationResults } from '@musical-patterns/pattern'
+import { SingularPropertyInvalidSpecMessage, Spec, SpecValidationResults } from '@musical-patterns/pattern'
 import { indexOfLastElement, INITIAL, lastElement, slice } from '@musical-patterns/utilities'
 import { batchActions } from 'redux-batched-actions'
 import { Action } from '../../root'
@@ -6,6 +6,23 @@ import { DomValueOrChecked } from '../../types'
 import { SpecStateKey } from '../state'
 import { HandleArrayedPropertyAddOrRemoveParameters } from './types'
 import { buildAttemptSubmitActions } from './validation'
+
+const isNoInvalidSpecMessageForRemovedElement:
+    (specValidationResults: SpecValidationResults, specKey: string) => boolean =
+    (specValidationResults: SpecValidationResults, specKey: string): boolean => {
+        if (!specValidationResults) {
+            return true
+        }
+
+        if (!specValidationResults[ specKey ]) {
+            return true
+        }
+
+        const arrayedPropertyInvalidSpecMessage: SingularPropertyInvalidSpecMessage[] =
+            specValidationResults[ specKey ] as SingularPropertyInvalidSpecMessage[]
+
+        return !lastElement(arrayedPropertyInvalidSpecMessage)
+    }
 
 const handleArrayedPropertyElementRemove: (parameters: HandleArrayedPropertyAddOrRemoveParameters) => void =
     ({ dispatch, event, specKey, specState }: HandleArrayedPropertyAddOrRemoveParameters): void => {
@@ -18,12 +35,11 @@ const handleArrayedPropertyElementRemove: (parameters: HandleArrayedPropertyAddO
             indexOfLastElement(arrayedSpecValue),
         )
 
-        const noInvalidMessageForRemovedElement: boolean = !specValidationResults ||
-            !specValidationResults[ specKey ] ||
-            !lastElement<InvalidSpecMessage>(specValidationResults[ specKey ])
+        const removedElementHasNoInvalidSpecMessages: boolean =
+            isNoInvalidSpecMessageForRemovedElement(specValidationResults, specKey)
 
         const removedElementWasEmpty: boolean = lastElement(arrayedSpecValue) === ''
-        const suppressSpecValidationResults: boolean = removedElementWasEmpty && noInvalidMessageForRemovedElement
+        const suppressSpecValidationResults: boolean = removedElementWasEmpty && removedElementHasNoInvalidSpecMessages
 
         const actions: Action[] = buildAttemptSubmitActions({
             specKey,

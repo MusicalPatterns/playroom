@@ -1,3 +1,4 @@
+import { indexOfLastElement } from '@musical-patterns/utilities'
 import { ElementHandle } from 'puppeteer'
 import { SecretSelectorsForTest, SpecControlStates } from '../../../src/indexForTest'
 import {
@@ -163,7 +164,7 @@ const theSubmittedValueForTheArrayedControlWithTheInitialElementValueAsAWholeHas
 const theSubmittedValueForTheArrayedControlAsAWholeIsInItsInitialStateJustWithItsLastElementGone: () => Promise<void> =
     async (): Promise<void> => {
         expect(await elementInnerText(`#${SPEC_ARRAYED_PROPERTY_KEY} .${SecretSelectorsForTest.SECRET_SUBMITTED_SPEC_CONTROL}`))
-            .toBe(JSON.stringify(SPEC_CONTROLS_PATTERN_ARRAYED_PROPERTY_INITIAL_VALUE.slice(0, SPEC_CONTROLS_PATTERN_ARRAYED_PROPERTY_INITIAL_VALUE.length - 1)))
+            .toBe(JSON.stringify(SPEC_CONTROLS_PATTERN_ARRAYED_PROPERTY_INITIAL_VALUE.slice(0, indexOfLastElement(SPEC_CONTROLS_PATTERN_ARRAYED_PROPERTY_INITIAL_VALUE))))
     }
 
 const removeAllTheFields: () => Promise<void> =

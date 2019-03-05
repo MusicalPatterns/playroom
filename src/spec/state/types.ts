@@ -29,7 +29,7 @@ enum SpecStateActionType {
     SET_INITIAL_SPEC = 'SET_INITIAL_SPEC',
     SET_SUBMITTED_SPEC = 'SET_SUBMITTED_SPEC',
     SET_DISPLAYED_SPEC = 'SET_DISPLAYED_SPEC',
-    SET_INVALID_SPEC_MESSAGES = 'SET_INVALID_SPEC_MESSAGES',
+    SET_SPEC_VALIDATION_RESULTS = 'SET_SPEC_VALIDATION_RESULTS',
     SET_SPEC_ATTRIBUTES = 'SET_SPEC_ATTRIBUTES',
     SET_VALIDATION_FUNCTION = 'SET_VALIDATION_FUNCTION',
     SET_PRESETS = 'SET_PRESETS',
@@ -55,7 +55,7 @@ interface SetDisplayedSpec {
 
 interface SetInvalidSpecMessages {
     data: SpecValidationResults,
-    type: SpecStateActionType.SET_INVALID_SPEC_MESSAGES,
+    type: SpecStateActionType.SET_SPEC_VALIDATION_RESULTS,
 }
 
 interface SetSpecAttributes {

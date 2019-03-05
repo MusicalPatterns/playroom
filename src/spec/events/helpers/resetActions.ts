@@ -5,7 +5,7 @@ const resetActions: (spec: Spec) => Action[] =
     (spec: Spec): Action[] => [
         { type: ActionType.SET_SUBMITTED_SPEC, data: spec },
         { type: ActionType.SET_DISPLAYED_SPEC, data: spec },
-        { type: ActionType.SET_INVALID_SPEC_MESSAGES, data: {} },
+        { type: ActionType.SET_SPEC_VALIDATION_RESULTS, data: {} },
     ]
 
 export {

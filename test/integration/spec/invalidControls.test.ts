@@ -1,6 +1,6 @@
 // tslint:disable no-duplicate-string
 
-import { indexOfLastElement } from '@musical-patterns/utilities'
+import { indexOfLastCharacter } from '@musical-patterns/utilities'
 import { ElementHandle } from 'puppeteer'
 import { SecretSelectorsForTest, SpecControlStates } from '../../../src/indexForTest'
 import {
@@ -131,7 +131,7 @@ const stringedControlDisplayValueIsTheTooLongValue: () => Promise<void> =
 const stringedControlDisplayValueIsTheTooShortValue: () => Promise<void> =
     async (): Promise<void> => {
         expect(await elementValue(`input[type=text]#${SPEC_STRINGED_PROPERTY_KEY}`))
-            .toBe(`${SPEC_CONTROLS_PATTERN_STRINGED_PROPERTY_INITIAL_VALUE.slice(0, SPEC_CONTROLS_PATTERN_STRINGED_PROPERTY_INITIAL_VALUE.length - 1)}`)
+            .toBe(`${SPEC_CONTROLS_PATTERN_STRINGED_PROPERTY_INITIAL_VALUE.slice(0, indexOfLastCharacter(SPEC_CONTROLS_PATTERN_STRINGED_PROPERTY_INITIAL_VALUE))}`)
     }
 
 const rangedControlInputHasOutOfRangeMessage: () => Promise<void> =
