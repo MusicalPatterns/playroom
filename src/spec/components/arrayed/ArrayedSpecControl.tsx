@@ -1,7 +1,7 @@
+import { InvalidSpecMessage } from '@musical-patterns/pattern'
 import { apply, camelCaseToLowerCase, from, map, Ordinal } from '@musical-patterns/utilities'
 import * as React from 'react'
 import { DomValueOrChecked, SecretSelectorsForTest } from '../../../types'
-import { InvalidSpecMessage } from '../../types'
 import { stringifyIfNecessary } from '../helpers'
 import SingularSpecControl from '../SingularSpecControl'
 import AddButton from './AddButton'
@@ -13,7 +13,7 @@ const ArrayedSpecControl: React.ComponentType<ArrayedSpecControlProps> =
         const {
             displayedSpecValues,
             submittedSpecValues,
-            invalidMessages,
+            specValidationResults,
             specKey,
             specControlsProps,
             specPropertyAttributes,
@@ -22,21 +22,20 @@ const ArrayedSpecControl: React.ComponentType<ArrayedSpecControlProps> =
         const controls: JSX.Element[] = map(
             displayedSpecValues,
             (value: DomValueOrChecked, index: Ordinal): JSX.Element => {
-                let invalidMessage: InvalidSpecMessage = invalidMessages[ specKey ]
-                if (invalidMessage && invalidMessage instanceof Array) {
-                    invalidMessage = apply.Ordinal(invalidMessage, index)
+                let invalidSpecMessage: InvalidSpecMessage = specValidationResults[ specKey ]
+                if (invalidSpecMessage && invalidSpecMessage instanceof Array) {
+                    invalidSpecMessage = apply.Ordinal(invalidSpecMessage, index)
                 }
 
                 const key: number = from.Ordinal(index)
 
                 return (
-                    <div {...{ className: 'numbered-spec-control' }}>
+                    <div {...{ className: 'numbered-spec-control', key }}>
                         <span>{key}</span>
                         <SingularSpecControl {...{
                             arrayedPropertyIndex: index,
                             displayedSpecValue: value,
-                            invalidMessage,
-                            key,
+                            invalidSpecMessage,
                             specControlsProps,
                             specKey,
                             specPropertyAttributes,

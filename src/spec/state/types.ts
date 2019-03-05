@@ -1,11 +1,10 @@
-import { Preset, Spec, SpecAttributes, SpecValidationFunction } from '@musical-patterns/pattern'
+import { Preset, Spec, SpecAttributes, SpecValidationFunction, SpecValidationResults } from '@musical-patterns/pattern'
 import { DictionaryOf, Maybe, TypedMap } from '@musical-patterns/utilities'
-import { InvalidSpecMessages } from '../types'
 
 enum SpecStateKey {
     INITIAL_SPEC = 'INITIAL_SPEC',
     DISPLAYED_SPEC = 'DISPLAYED_SPEC',
-    INVALID_SPEC_MESSAGES = 'INVALID_SPEC_MESSAGES',
+    SPEC_VALIDATION_RESULTS = 'SPEC_VALIDATION_RESULTS',
     SUBMITTED_SPEC = 'SUBMITTED_SPEC',
     SPEC_ATTRIBUTES = 'SPEC_ATTRIBUTES',
     VALIDATION_FUNCTION = 'VALIDATION_FUNCTION',
@@ -16,7 +15,7 @@ enum SpecStateKey {
 interface SpecState {
     [ SpecStateKey.INITIAL_SPEC ]: Spec,
     [ SpecStateKey.DISPLAYED_SPEC ]: Spec,
-    [ SpecStateKey.INVALID_SPEC_MESSAGES ]: InvalidSpecMessages,
+    [ SpecStateKey.SPEC_VALIDATION_RESULTS ]: SpecValidationResults,
     [ SpecStateKey.SUBMITTED_SPEC ]: Spec,
     [ SpecStateKey.SPEC_ATTRIBUTES ]: SpecAttributes,
     [ SpecStateKey.VALIDATION_FUNCTION ]: Maybe<SpecValidationFunction>,
@@ -55,7 +54,7 @@ interface SetDisplayedSpec {
 }
 
 interface SetInvalidSpecMessages {
-    data: InvalidSpecMessages,
+    data: SpecValidationResults,
     type: SpecStateActionType.SET_INVALID_SPEC_MESSAGES,
 }
 

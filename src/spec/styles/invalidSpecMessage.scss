@@ -3,7 +3,7 @@
 @import './proportions';
 @import './sizes';
 
-.invalid-message {
+.invalid-spec-message {
   @include animate(opacity);
 
   opacity: 0;

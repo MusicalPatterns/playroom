@@ -1,9 +1,9 @@
-import { SingularPropertyInvalidSpecMessage } from '../../types'
+import { SingularPropertyInvalidSpecMessage } from '@musical-patterns/pattern'
 import { SpecControlStates } from '../types'
 
-const getValidityClass: (invalidMessage: SingularPropertyInvalidSpecMessage) => SpecControlStates =
-    (invalidMessage: SingularPropertyInvalidSpecMessage): SpecControlStates =>
-        !!invalidMessage ? SpecControlStates.INVALID : SpecControlStates.VALID
+const getValidityClass: (invalidSpecMessage: SingularPropertyInvalidSpecMessage) => SpecControlStates =
+    (invalidSpecMessage: SingularPropertyInvalidSpecMessage): SpecControlStates =>
+        !!invalidSpecMessage ? SpecControlStates.INVALID : SpecControlStates.VALID
 
 export {
     getValidityClass,

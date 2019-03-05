@@ -1,9 +1,8 @@
-import { Preset, Spec, SpecAttributes, SpecValidationFunction } from '@musical-patterns/pattern'
+import { Preset, Spec, SpecAttributes, SpecValidationFunction, SpecValidationResults } from '@musical-patterns/pattern'
 import { DictionaryOf, Ordinal } from '@musical-patterns/utilities'
 import { DispatchAsProp, EventAsProp } from '../../types'
 import { AddOrRemoveButtonPropsFromParent, SpecPanelOpenAsProp } from '../components'
 import { ImmutableSpecState } from '../state'
-import { InvalidSpecMessages } from '../types'
 
 interface SpecChangeEventParameters {
     arrayedPropertyIndex?: Ordinal,
@@ -30,7 +29,7 @@ interface ValidateSubmittedSpecParameters {
 
 interface SpecValidationResult {
     isValid: boolean,
-    updatedInvalidMessages: InvalidSpecMessages,
+    updatedSpecValidationResults: SpecValidationResults,
 }
 
 interface PresetChangeHandlerParameters extends EventAsProp {

@@ -1,6 +1,10 @@
-import { SpecPropertyAttributes } from '@musical-patterns/pattern'
+import {
+    ArrayedPropertyInvalidSpecMessage,
+    InvalidSpecMessage,
+    SingularPropertyInvalidSpecMessage,
+    SpecPropertyAttributes,
+} from '@musical-patterns/pattern'
 import { DomValueOrChecked } from '../../../types'
-import { ArrayedPropertyInvalidSpecMessage, InvalidSpecMessage, SingularPropertyInvalidSpecMessage } from '../../types'
 import { validateSpecProperty } from './validateSpecProperty'
 
 const validateArrayedSpecProperty:

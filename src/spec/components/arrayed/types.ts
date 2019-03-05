@@ -1,6 +1,6 @@
+import { SpecValidationResults } from '@musical-patterns/pattern'
 import { DomValueOrChecked, EventAsProp } from '../../../types'
 import { ImmutableSpecState } from '../../state'
-import { InvalidSpecMessages } from '../../types'
 import { SpecControlProps } from '../types'
 
 interface AddOrRemoveButtonPropsFromParent {
@@ -18,7 +18,7 @@ interface HandleAddOrRemoveParameters extends EventAsProp, AddOrRemoveButtonProp
 
 interface ArrayedSpecControlProps extends SpecControlProps {
     displayedSpecValues: DomValueOrChecked[],
-    invalidMessages: InvalidSpecMessages,
+    specValidationResults: SpecValidationResults,
     submittedSpecValues: DomValueOrChecked[],
 }
 

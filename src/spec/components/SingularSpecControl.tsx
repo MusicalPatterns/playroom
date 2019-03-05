@@ -4,7 +4,7 @@ import { EventHandler, SecretSelectorsForTest } from '../../types'
 import { SpecChangeEventParameters } from '../events'
 import { getValidityClass, specControlId, stringifyIfNecessary } from './helpers'
 import { Input, InputProps } from './input'
-import InvalidMessage from './InvalidMessage'
+import InvalidSpecMessage from './InvalidSpecMessage'
 import { SingularSpecControlProps } from './types'
 import Units from './Units'
 
@@ -13,7 +13,7 @@ const SingularSpecControl: React.ComponentType<SingularSpecControlProps> =
         const {
             arrayedPropertyIndex,
             displayedSpecValue,
-            invalidMessage,
+            invalidSpecMessage,
             submittedSpecValue,
             specKey,
             specControlsProps,
@@ -31,7 +31,7 @@ const SingularSpecControl: React.ComponentType<SingularSpecControlProps> =
         const isNotAnArrayedProperty: boolean = arrayedPropertyIndex === undefined
         const id: string = specControlId({ isNotAnArrayedProperty, arrayedPropertyIndex, specKey })
 
-        const validityClass: string = getValidityClass(invalidMessage)
+        const validityClass: string = getValidityClass(invalidSpecMessage)
         const inputProps: InputProps = { validityClass, onChange, id, specValue: displayedSpecValue }
 
         const secretClass: string = SecretSelectorsForTest.SECRET_SUBMITTED_SPEC_CONTROL
@@ -42,7 +42,7 @@ const SingularSpecControl: React.ComponentType<SingularSpecControlProps> =
                 {isNotAnArrayedProperty && <div>{formattedName || camelCaseToLowerCase(specKey)}</div>}
                 <Input {...{ specPropertyAttributes, inputProps }}/>
                 {units && <Units {...{ units }}/>}
-                {invalidMessage && <InvalidMessage {...{ invalidMessage }}/>}
+                {invalidSpecMessage && <InvalidSpecMessage {...{ invalidSpecMessage }}/>}
             </div>
         )
     }

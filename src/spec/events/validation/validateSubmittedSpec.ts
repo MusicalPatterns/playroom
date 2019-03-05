@@ -1,7 +1,6 @@
-import { SpecValidationResults } from '@musical-patterns/pattern'
+import { InvalidSpecMessage, SpecValidationResults } from '@musical-patterns/pattern'
 import { entries } from '@musical-patterns/utilities'
 import { SpecValue } from '../../../types'
-import { InvalidSpecMessage, InvalidSpecMessages } from '../../types'
 import { SpecValidationResult, ValidateSubmittedSpecParameters } from '../types'
 import { validateSpecProperty } from './validateSpecProperty'
 
@@ -9,34 +8,34 @@ const validateSubmittedSpec: (parameters: ValidateSubmittedSpecParameters) => Sp
     (parameters: ValidateSubmittedSpecParameters): SpecValidationResult => {
         const { updatedDisplayedSpec, specAttributes, validationFunction, specKey } = parameters
 
-        const invalidMessageAccumulator: InvalidSpecMessages = {}
-        const reevaluatedInvalidMessages: InvalidSpecMessages = entries(updatedDisplayedSpec)
+        const specValidationResultsAccumulator: SpecValidationResults = {}
+        const reevaluatedSpecValidationResults: SpecValidationResults = entries(updatedDisplayedSpec)
             .reduce(
                 // tslint:disable-next-line no-any
-                (accumulator: InvalidSpecMessages, [ key, val ]: [ string, any ]) => ({
+                (accumulator: SpecValidationResults, [ key, val ]: [ string, any ]) => ({
                     ...accumulator,
                     [ key ]: validateSpecProperty(val as SpecValue, specAttributes[ key ]),
                 }),
-                invalidMessageAccumulator,
+                specValidationResultsAccumulator,
             )
 
         const standardInvalidMessageForThisProperty: InvalidSpecMessage =
-            reevaluatedInvalidMessages[ specKey ]
+            reevaluatedSpecValidationResults[ specKey ]
 
-        let customInvalidMessagesBasedOnEntireSpec: SpecValidationResults
+        let customSpecValidationResultsBasedOnEntireSpec: SpecValidationResults
         if (validationFunction) {
-            customInvalidMessagesBasedOnEntireSpec = validationFunction(updatedDisplayedSpec)
+            customSpecValidationResultsBasedOnEntireSpec = validationFunction(updatedDisplayedSpec)
         }
 
-        const updatedInvalidMessages: InvalidSpecMessages = {
-            ...reevaluatedInvalidMessages,
+        const updatedSpecValidationResults: SpecValidationResults = {
+            ...reevaluatedSpecValidationResults,
             [ specKey ]: standardInvalidMessageForThisProperty,
-            ...customInvalidMessagesBasedOnEntireSpec,
+            ...customSpecValidationResultsBasedOnEntireSpec,
         }
 
         return {
-            isValid: !standardInvalidMessageForThisProperty && !customInvalidMessagesBasedOnEntireSpec,
-            updatedInvalidMessages,
+            isValid: !standardInvalidMessageForThisProperty && !customSpecValidationResultsBasedOnEntireSpec,
+            updatedSpecValidationResults,
         }
     }
 

@@ -5,7 +5,7 @@ import { ImmutableSpecState, SpecState, SpecStateKey } from './types'
 const initialSpecState: ImmutableSpecState = typedMap<SpecState>({
     [ SpecStateKey.INITIAL_SPEC ]: {},
     [ SpecStateKey.DISPLAYED_SPEC ]: {},
-    [ SpecStateKey.INVALID_SPEC_MESSAGES ]: {},
+    [ SpecStateKey.SPEC_VALIDATION_RESULTS ]: {},
     [ SpecStateKey.SUBMITTED_SPEC ]: {},
     [ SpecStateKey.SPEC_ATTRIBUTES ]: standardSpecAttributes,
     [ SpecStateKey.VALIDATION_FUNCTION ]: undefined,

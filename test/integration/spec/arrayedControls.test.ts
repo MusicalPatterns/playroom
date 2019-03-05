@@ -177,7 +177,7 @@ const removeIsDisabled: () => Promise<void> =
 
 const invalidMessagesAreNotShown: () => Promise<void> =
     async (): Promise<void> => {
-        expect(await elementExists(`#${SPEC_ARRAYED_PROPERTY_KEY} .invalid-message`))
+        expect(await elementExists(`#${SPEC_ARRAYED_PROPERTY_KEY} .invalid-spec-message`))
             .toBeFalsy()
     }
 

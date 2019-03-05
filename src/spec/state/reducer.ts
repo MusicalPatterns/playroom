@@ -8,7 +8,7 @@ const specReducer: Reducer<ImmutableSpecState, SpecStateAction> =
             [ SpecStateActionType.SET_INITIAL_SPEC ]: SpecStateKey.INITIAL_SPEC,
             [ SpecStateActionType.SET_SUBMITTED_SPEC ]: SpecStateKey.SUBMITTED_SPEC,
             [ SpecStateActionType.SET_DISPLAYED_SPEC ]: SpecStateKey.DISPLAYED_SPEC,
-            [ SpecStateActionType.SET_INVALID_SPEC_MESSAGES ]: SpecStateKey.INVALID_SPEC_MESSAGES,
+            [ SpecStateActionType.SET_INVALID_SPEC_MESSAGES ]: SpecStateKey.SPEC_VALIDATION_RESULTS,
             [ SpecStateActionType.SET_SPEC_ATTRIBUTES ]: SpecStateKey.SPEC_ATTRIBUTES,
             [ SpecStateActionType.SET_VALIDATION_FUNCTION ]: SpecStateKey.VALIDATION_FUNCTION,
             [ SpecStateActionType.SET_PRESETS ]: SpecStateKey.PRESETS,

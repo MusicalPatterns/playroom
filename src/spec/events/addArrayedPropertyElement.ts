@@ -21,7 +21,7 @@ const handleArrayedPropertyElementAdd: (parameters: HandleArrayedPropertyAddOrRe
             specKey,
             specState,
             specValue: updatedArrayedSpecValue,
-            suppressInvalidMessages: true,
+            suppressSpecValidationResults: true,
         })
 
         dispatch(batchActions(actions))

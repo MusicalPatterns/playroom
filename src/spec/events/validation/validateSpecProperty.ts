@@ -1,7 +1,11 @@
-import { RangedConstraint, SpecPropertyAttributes, SpecPropertyType } from '@musical-patterns/pattern'
+import {
+    InvalidSpecMessage,
+    RangedConstraint,
+    SpecPropertyAttributes,
+    SpecPropertyType,
+} from '@musical-patterns/pattern'
 import { Maybe } from '@musical-patterns/utilities'
 import { SpecValue } from '../../../types'
-import { InvalidSpecMessage } from '../../types'
 import { validateArrayedSpecProperty } from './validateArrayedSpecProperty'
 import { validByRangedConstraint } from './validByRangedConstraint'
 

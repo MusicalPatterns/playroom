@@ -90,13 +90,13 @@ describe('invalid controls', () => {
 
     const inputHasBadFormatMessage: () => Promise<void> =
         async (): Promise<void> => {
-            expect(await elementInnerText(`#${SPEC_RANGED_PROPERTY_ONE_KEY} .invalid-message`))
+            expect(await elementInnerText(`#${SPEC_RANGED_PROPERTY_ONE_KEY} .invalid-spec-message`))
                 .toBe('this property is formatted in a way which cannot be parsed')
         }
 
     const inputHasOutOfRangeMessage: () => Promise<void> =
         async (): Promise<void> => {
-            expect(await elementInnerText(`#${SPEC_RANGED_PROPERTY_ONE_KEY} .invalid-message`))
+            expect(await elementInnerText(`#${SPEC_RANGED_PROPERTY_ONE_KEY} .invalid-spec-message`))
                 .toBe(`must be less than ${SPEC_CONTROLS_PATTERN_RANGED_PROPERTY_ONE_MAX_VALUE}`)
         }
 
@@ -132,9 +132,9 @@ describe('invalid controls', () => {
 
     const invalidMessagesForAllControlsInvolvedInCustomInvalidity: () => Promise<void> =
         async (): Promise<void> => {
-            expect(await elementInnerText(`#${SPEC_RANGED_PROPERTY_TWO_KEY} .invalid-message`))
+            expect(await elementInnerText(`#${SPEC_RANGED_PROPERTY_TWO_KEY} .invalid-spec-message`))
                 .toBe('pitch must be more than duration, obvs')
-            expect(await elementInnerText(`#${SPEC_RANGED_PROPERTY_ONE_KEY} .invalid-message`))
+            expect(await elementInnerText(`#${SPEC_RANGED_PROPERTY_ONE_KEY} .invalid-spec-message`))
                 .toBe('duration must be less than pitch, obvs')
         }
 
@@ -178,13 +178,13 @@ describe('invalid controls', () => {
     const everyFieldHasAnInvalidMessage: () => Promise<void> =
         async (): Promise<void> => {
             const expectedInvalidMessage: string = 'arrays can only be odd in length, duoy'
-            expect(await elementInnerText(`#${SPEC_ARRAYED_PROPERTY_KEY}-0 .invalid-message`))
+            expect(await elementInnerText(`#${SPEC_ARRAYED_PROPERTY_KEY}-0 .invalid-spec-message`))
                 .toBe(expectedInvalidMessage)
-            expect(await elementInnerText(`#${SPEC_ARRAYED_PROPERTY_KEY}-1 .invalid-message`))
+            expect(await elementInnerText(`#${SPEC_ARRAYED_PROPERTY_KEY}-1 .invalid-spec-message`))
                 .toBe(expectedInvalidMessage)
-            expect(await elementInnerText(`#${SPEC_ARRAYED_PROPERTY_KEY}-2 .invalid-message`))
+            expect(await elementInnerText(`#${SPEC_ARRAYED_PROPERTY_KEY}-2 .invalid-spec-message`))
                 .toBe(expectedInvalidMessage)
-            expect(await elementInnerText(`#${SPEC_ARRAYED_PROPERTY_KEY}-3 .invalid-message`))
+            expect(await elementInnerText(`#${SPEC_ARRAYED_PROPERTY_KEY}-3 .invalid-spec-message`))
                 .toBe(expectedInvalidMessage)
         }
 
