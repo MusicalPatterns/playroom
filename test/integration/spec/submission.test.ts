@@ -14,24 +14,32 @@ import {
     SPEC_CONTROLS_PATTERN_OPTIONED_PROPERTY_TWO_MODIFIED_VALUE,
     SPEC_CONTROLS_PATTERN_RANGED_PROPERTY_ONE_INITIAL_VALUE,
     SPEC_CONTROLS_PATTERN_RANGED_PROPERTY_TWO_INITIAL_VALUE,
+    SPEC_CONTROLS_PATTERN_STRINGED_PROPERTY_INITIAL_VALUE,
     SPEC_CONTROLS_PATTERN_TOGGLED_PROPERTY_MODIFIED_VALUE,
     SPEC_OPTIONED_PROPERTY_ONE_KEY,
     SPEC_OPTIONED_PROPERTY_TWO_KEY,
     SPEC_RANGED_PROPERTY_ONE_KEY,
     SPEC_RANGED_PROPERTY_TWO_KEY,
+    SPEC_STRINGED_PROPERTY_KEY,
     SPEC_TOGGLED_PROPERTY_KEY,
     VALID_TEST_MODIFICATION,
 } from '../../support'
 
 const modifyRangedControl: () => Promise<void> =
     async (): Promise<void> => {
-        const control: ElementHandle = await findElement(`input[type=number]#${SPEC_RANGED_PROPERTY_ONE_KEY}`)
-        await control.type(VALID_TEST_MODIFICATION)
+        const rangedControl: ElementHandle = await findElement(`input[type=number]#${SPEC_RANGED_PROPERTY_ONE_KEY}`)
+        await rangedControl.type(VALID_TEST_MODIFICATION)
     }
 
 const modifyOptionedControl: () => Promise<void> =
     async (): Promise<void> => {
         await selectOption(`select#${SPEC_OPTIONED_PROPERTY_TWO_KEY}`, SPEC_CONTROLS_PATTERN_OPTIONED_PROPERTY_TWO_MODIFIED_VALUE)
+    }
+
+const modifyStringedControl: () => Promise<void> =
+    async (): Promise<void> => {
+        const stringedControl: ElementHandle = await findElement(`input[type=text]#${SPEC_STRINGED_PROPERTY_KEY}`)
+        await stringedControl.type(VALID_TEST_MODIFICATION)
     }
 
 const modifyToggledControl: () => Promise<void> =
@@ -56,6 +64,12 @@ const optionedControlIsModified: () => Promise<void> =
     async (): Promise<void> => {
         expect(await elementInnerText(`#${SPEC_OPTIONED_PROPERTY_TWO_KEY} .${SecretSelectorsForTest.SECRET_SUBMITTED_SPEC_CONTROL}`))
             .toBe(SPEC_CONTROLS_PATTERN_OPTIONED_PROPERTY_TWO_MODIFIED_VALUE)
+    }
+
+const stringedControlIsModified: () => Promise<void> =
+    async (): Promise<void> => {
+        expect(await elementInnerText(`#${SPEC_STRINGED_PROPERTY_KEY} .${SecretSelectorsForTest.SECRET_SUBMITTED_SPEC_CONTROL}`))
+            .toBe(`${SPEC_CONTROLS_PATTERN_STRINGED_PROPERTY_INITIAL_VALUE}${VALID_TEST_MODIFICATION}`)
     }
 
 const toggledControlIsModified: () => Promise<void> =
@@ -159,6 +173,15 @@ describe('submitting spec changes', () => {
 
             await modifyOptionedControl()
             await thoseOtherControlsAreStillModified()
+
+            done()
+        })
+    })
+
+    describe('stringed controls', () => {
+        it('submits a control when you type into it', async (done: DoneFn) => {
+            await modifyStringedControl()
+            await stringedControlIsModified()
 
             done()
         })

@@ -20,6 +20,12 @@ interface RangedInputProps extends InputProps {
     step: number,
 }
 
+interface StringedInputProps extends InputProps {
+    maxLength: number,
+    minLength: number,
+    specValue: string,
+}
+
 interface ToggledInputProps extends InputProps {
     specValue: boolean,
 }
@@ -37,6 +43,7 @@ export {
     OptionedInputProps,
     RangedInputProps,
     BuildInputProps,
+    StringedInputProps,
     ToggledInputProps,
     SpecPropertyTypeToElementsBuilderMap,
 }

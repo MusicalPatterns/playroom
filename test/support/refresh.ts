@@ -11,6 +11,7 @@ const refreshPage: () => Promise<void> =
 
 const resetSpecByTogglingToOtherPatternThenBackToTestPattern: () => Promise<void> =
     async (): Promise<void> => {
+        await simulateDesktopViewport()
         await selectOtherTestPattern()
         await selectTestPattern()
     }

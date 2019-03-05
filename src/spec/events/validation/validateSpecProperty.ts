@@ -1,13 +1,14 @@
 import {
     InvalidSpecMessage,
-    RangedConstraint,
+    RangedConstraint, RangedSpecPropertyAttributes,
     SpecPropertyAttributes,
-    SpecPropertyType,
+    SpecPropertyType, StringedConstraint,
 } from '@musical-patterns/pattern'
 import { Maybe } from '@musical-patterns/utilities'
 import { SpecValue } from '../../../types'
 import { validateArrayedSpecProperty } from './validateArrayedSpecProperty'
 import { validByRangedConstraint } from './validByRangedConstraint'
+import { validByStringedConstraint } from './validByStringedConstraint'
 
 const validationRequired: (propertyAttributes: Maybe<SpecPropertyAttributes>) => boolean =
     (propertyAttributes: Maybe<SpecPropertyAttributes>): boolean => {
@@ -25,10 +26,14 @@ const validateSpecProperty:
         if (!validationRequired(propertyAttributes)) {
             return undefined
         }
-        const { constraint } = propertyAttributes as SpecPropertyAttributes
+        const { constraint, specPropertyType } = propertyAttributes as SpecPropertyAttributes
 
         if (specValue instanceof Array) {
             return validateArrayedSpecProperty(specValue, propertyAttributes as SpecPropertyAttributes)
+        }
+
+        if (specPropertyType === SpecPropertyType.STRINGED) {
+            return validByStringedConstraint(specValue as string, constraint as Maybe<StringedConstraint>)
         }
 
         let numericValue: number

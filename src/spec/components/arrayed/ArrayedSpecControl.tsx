@@ -22,7 +22,7 @@ const ArrayedSpecControl: React.ComponentType<ArrayedSpecControlProps> =
         const controls: JSX.Element[] = map(
             displayedSpecValues,
             (value: DomValueOrChecked, index: Ordinal): JSX.Element => {
-                let invalidSpecMessage: InvalidSpecMessage = specValidationResults[ specKey ]
+                let invalidSpecMessage: InvalidSpecMessage = specValidationResults && specValidationResults[ specKey ]
                 if (invalidSpecMessage && invalidSpecMessage instanceof Array) {
                     invalidSpecMessage = apply.Ordinal(invalidSpecMessage, index)
                 }

@@ -1,3 +1,4 @@
+import { sleep, to } from '@musical-patterns/utilities'
 import { ElementHandle } from 'puppeteer'
 import { SecretSelectorsForTest } from '../../../src/indexForTest'
 import {
@@ -6,6 +7,7 @@ import {
     elementValue,
     findElement,
     openSpecControlsIfNotOpen,
+    POST_PATTERN_ID,
     PRESET_ONE_NAME,
     PRESET_ONE_PROPERTY_ONE_VALUE,
     PRESET_ONE_PROPERTY_TWO_VALUE,
@@ -15,33 +17,33 @@ import {
     PRESETS_PATTERN_ID,
     resetSpecByTogglingToOtherPatternThenBackToTestPattern,
     selectOption,
+    simulateDesktopViewport,
     SPEC_CONTROLS_PATTERN_OPTIONED_PROPERTY_ONE_INITIAL_VALUE,
     SPEC_CONTROLS_PATTERN_OPTIONED_PROPERTY_ONE_MODIFIED_VALUE,
     SPEC_OPTIONED_PROPERTY_ONE_KEY,
     SPEC_OPTIONED_PROPERTY_TWO_KEY,
-    SPEC_TOGGLED_PROPERTY_KEY,
 } from '../../support'
 
 const PRESETS_SELECT: string = '#presets select'
 
 const selectPresetPattern: () => Promise<void> =
     async (): Promise<void> => {
-        const testPattern: ElementHandle = await findElement(`#${PRESETS_PATTERN_ID}`)
-        await testPattern.click()
+        await simulateDesktopViewport()
+        const otherPattern: ElementHandle = await findElement(`#${POST_PATTERN_ID}`)
+        await otherPattern.click()
+        const presetsPattern: ElementHandle = await findElement(`#${PRESETS_PATTERN_ID}`)
+        await presetsPattern.click()
     }
 
 const bringSpecIntoConformityWithThePreset: () => Promise<void> =
     async (): Promise<void> => {
         await selectOption(`select#${SPEC_OPTIONED_PROPERTY_ONE_KEY}`, SPEC_CONTROLS_PATTERN_OPTIONED_PROPERTY_ONE_MODIFIED_VALUE)
-
-        const checkbox: ElementHandle = await findElement(`input#${SPEC_TOGGLED_PROPERTY_KEY}`)
-        await checkbox.click()
     }
 
 const currentSpecMatchesThePresetAndThusItIsDisplayedInThePresetsDropdown: () => Promise<void> =
     async (): Promise<void> => {
         expect(await elementValue(PRESETS_SELECT))
-            .toBe('presetOne')
+            .toBe('presetOne', 'the preset name was not displayed in the preset dropdown probably because the current spec did not match the preset')
     }
 
 const currentSpecMatchesNoPresetsAndThusThePresetsDropdownDisplaysNothing: () => Promise<void> =
@@ -82,23 +84,26 @@ const specIsInConformityWithTheDifferentPreset: () => Promise<void> =
     }
 
 describe('presets', () => {
-    beforeEach(async (done: DoneFn) => {
-        await resetSpecByTogglingToOtherPatternThenBackToTestPattern()
-        await openSpecControlsIfNotOpen()
+    describe('when the pattern does not have presets', () => {
+        beforeEach(async (done: DoneFn) => {
+            await resetSpecByTogglingToOtherPatternThenBackToTestPattern()
+            await openSpecControlsIfNotOpen()
 
-        done()
-    })
+            done()
+        })
 
-    it('does not show presets if the pattern has none', async (done: DoneFn) => {
-        expect(await elementExists('#presets'))
-            .toBeFalsy()
+        it('does not show presets dropdown', async (done: DoneFn) => {
+            expect(await elementExists('#presets'))
+                .toBeFalsy()
 
-        done()
+            done()
+        })
     })
 
     describe('when the pattern has presets', () => {
         beforeEach(async (done: DoneFn) => {
             await selectPresetPattern()
+            await openSpecControlsIfNotOpen()
 
             done()
         })

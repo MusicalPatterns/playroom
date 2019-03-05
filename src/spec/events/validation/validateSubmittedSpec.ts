@@ -9,7 +9,7 @@ const validateSubmittedSpec: (parameters: ValidateSubmittedSpecParameters) => Sp
         const { updatedDisplayedSpec, specAttributes, validationFunction, specKey } = parameters
 
         const reevaluatedSpecValidationResults: SpecValidationResults = entries(updatedDisplayedSpec)
-            .reduce(
+            .reduce<SpecValidationResults>(
                 // tslint:disable-next-line no-any
                 (accumulator: SpecValidationResults, [ key, val ]: [ string, any ]) => ({
                     ...accumulator,
@@ -19,7 +19,7 @@ const validateSubmittedSpec: (parameters: ValidateSubmittedSpecParameters) => Sp
             )
 
         const standardInvalidMessageForThisProperty: InvalidSpecMessage =
-            reevaluatedSpecValidationResults[ specKey ]
+            reevaluatedSpecValidationResults && reevaluatedSpecValidationResults[ specKey ]
 
         let customSpecValidationResultsBasedOnEntireSpec: SpecValidationResults
         if (validationFunction) {

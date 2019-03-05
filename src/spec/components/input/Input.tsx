@@ -1,5 +1,5 @@
 import {
-    OptionedConstraint,
+    OptionedSpecPropertyAttributes,
     RangedConstraint,
     RangedInputType,
     RangedSpecPropertyAttributes,
@@ -11,26 +11,22 @@ import { SPEC_NON_INTEGER_STEP } from './constants'
 import OptionedSpecControlSelect from './OptionedSpecControlSelect'
 import RangedSpecControlNumberInput from './RangedSpecControlNumberInput'
 import RangedSpecControlRangeInput from './RangedSpecControlRangeInput'
+import StringedSpecControlTextInput from './StringedSpecControlTextInput'
 import ToggledSpecControlCheckboxInput from './ToggledSpecControlCheckboxInput'
 import {
     BuildInputProps,
     OptionedInputProps,
     RangedInputProps,
     SpecPropertyTypeToElementsBuilderMap,
+    StringedInputProps,
     ToggledInputProps,
 } from './types'
 
 const buildOptionedElements: (buildInputProps: BuildInputProps) => JSX.Element[] =
     ({ specPropertyAttributes, inputProps }: BuildInputProps): JSX.Element[] => {
-        const { constraint } = specPropertyAttributes
+        const { constraint } = specPropertyAttributes as OptionedSpecPropertyAttributes
 
-        return [
-            <OptionedSpecControlSelect {...{
-                ...inputProps as OptionedInputProps,
-                constraint: constraint as OptionedConstraint,
-                key: 0,
-            }}/>,
-        ]
+        return [ <OptionedSpecControlSelect {...{ ...inputProps as OptionedInputProps, constraint, key: 0 }}/> ]
     }
 
 const buildRangedElements: (buildInputProps: BuildInputProps) => JSX.Element[] =
@@ -44,41 +40,30 @@ const buildRangedElements: (buildInputProps: BuildInputProps) => JSX.Element[] =
 
         if (hideInput !== RangedInputType.RANGE) {
             rangedElements.push(
-                <RangedSpecControlRangeInput {...{
-                    ...inputProps as RangedInputProps,
-                    key: 1,
-                    max,
-                    min,
-                    step,
-                }}/>,
+                <RangedSpecControlRangeInput {...{ ...inputProps as RangedInputProps, key: 1, max, min, step }}/>,
             )
         }
         if (hideInput !== RangedInputType.NUMBER) {
             rangedElements.push(
-                <RangedSpecControlNumberInput {...{
-                    ...inputProps as RangedInputProps,
-                    key: 0,
-                    max,
-                    min,
-                    step,
-                }}/>,
+                <RangedSpecControlNumberInput {...{ ...inputProps as RangedInputProps, key: 0, max, min, step }}/>,
             )
         }
 
         return rangedElements
     }
 
+const buildStringedElements: (buildInputProps: BuildInputProps) => JSX.Element[] =
+    ({ inputProps }: BuildInputProps): JSX.Element[] =>
+        [ <StringedSpecControlTextInput {...{ ...inputProps as StringedInputProps, key: 0 }}/> ]
+
 const buildToggledElements: (buildInputProps: BuildInputProps) => JSX.Element[] =
-    ({ inputProps }: BuildInputProps): JSX.Element[] => [
-        <ToggledSpecControlCheckboxInput {...{
-            ...inputProps as ToggledInputProps,
-            key: 0,
-        }}/>,
-    ]
+    ({ inputProps }: BuildInputProps): JSX.Element[] =>
+        [ <ToggledSpecControlCheckboxInput {...{ ...inputProps as ToggledInputProps, key: 0 }}/> ]
 
 const specPropertyTypeToElementsBuilderMap: SpecPropertyTypeToElementsBuilderMap = {
     [ SpecPropertyType.OPTIONED ]: buildOptionedElements,
     [ SpecPropertyType.RANGED ]: buildRangedElements,
+    [ SpecPropertyType.STRINGED ]: buildStringedElements,
     [ SpecPropertyType.TOGGLED ]: buildToggledElements,
 }
 

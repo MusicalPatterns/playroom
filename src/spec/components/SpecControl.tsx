@@ -1,4 +1,4 @@
-import { SingularPropertyInvalidSpecMessage, Spec, SpecValidationResults } from '@musical-patterns/pattern'
+import { Spec, SpecValidationResults } from '@musical-patterns/pattern'
 import * as React from 'react'
 import { DomValueOrChecked, SpecValue } from '../../types'
 import { SpecStateKey } from '../state'
@@ -29,7 +29,7 @@ const SpecControl: React.ComponentType<SpecControlProps> =
 
         return <SingularSpecControl {...{
             displayedSpecValue: displayedSpecValue as DomValueOrChecked,
-            invalidSpecMessage: specValidationResults[ specKey ] as SingularPropertyInvalidSpecMessage,
+            invalidSpecMessage: specValidationResults && specValidationResults[ specKey ],
             specControlsProps,
             specKey,
             specPropertyAttributes,
