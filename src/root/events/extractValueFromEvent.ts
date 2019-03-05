@@ -11,8 +11,7 @@ const extractValueFromEvent: (event: React.SyntheticEvent) => DomValueOrChecked 
         const value: DomValueOrChecked = isCheckbox(target) ? target.checked : target.value
 
         try {
-            // @ts-ignore
-            return JSON.parse(value)
+            return JSON.parse(value as string)
         }
         catch (e) {
             return value

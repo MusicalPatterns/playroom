@@ -38,8 +38,7 @@ const validateSpecProperty:
 
         let numericValue: number
         try {
-            // @ts-ignore
-            numericValue = JSON.parse(specValue)
+            numericValue = JSON.parse(specValue as string)
         }
         catch (e) {
             return 'this property is formatted in a way which cannot be parsed'
