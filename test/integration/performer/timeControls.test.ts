@@ -30,11 +30,11 @@ const modifySpec: () => Promise<void> =
 const timeControlsAreDisabled: () => Promise<void> =
     async (): Promise<void> => {
         expect(await elementExists(`#rewind:disabled`))
-            .toBeTruthy()
+            .toBeTruthy('rewind was not disabled')
         expect(await elementExists(`#stop:disabled`))
-            .toBeTruthy()
+            .toBeTruthy('stop was not disabled')
         expect(await elementExists(`#play:disabled`))
-            .toBeTruthy()
+            .toBeTruthy('play was not disabled')
     }
 
 const selectTimeControlsPattern: () => Promise<void> =
@@ -56,7 +56,7 @@ const isAfter: (previousTime: Ms) => Promise<void> =
         const newTime: Ms = await currentTime()
 
         expect(newTime)
-            .toBeGreaterThan(from.Ms(previousTime))
+            .toBeGreaterThan(from.Ms(previousTime), `time ${newTime} was not after ${previousTime}`)
     }
 
 const playJustLongEnoughToBeAlmostAboutToWrapAround: () => Promise<void> =

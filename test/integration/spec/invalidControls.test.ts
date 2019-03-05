@@ -20,7 +20,8 @@ import {
     SPEC_CONTROLS_PATTERN_RANGED_PROPERTY_ONE_INITIAL_VALUE,
     SPEC_CONTROLS_PATTERN_RANGED_PROPERTY_ONE_MAX_VALUE,
     SPEC_CONTROLS_PATTERN_STRINGED_PROPERTY_INITIAL_VALUE,
-    SPEC_CONTROLS_PATTERN_STRINGED_PROPERTY_ONE_MAX_LENGTH, SPEC_CONTROLS_PATTERN_STRINGED_PROPERTY_ONE_MIN_LENGTH,
+    SPEC_CONTROLS_PATTERN_STRINGED_PROPERTY_ONE_MAX_LENGTH,
+    SPEC_CONTROLS_PATTERN_STRINGED_PROPERTY_ONE_MIN_LENGTH,
     SPEC_OPTIONED_PROPERTY_ONE_KEY,
     SPEC_RANGED_PROPERTY_ONE_KEY,
     SPEC_RANGED_PROPERTY_TWO_KEY,
@@ -53,19 +54,19 @@ const modifyAnotherControlValidly: () => Promise<void> =
 const rangedControlInputIsMarkedAsInvalid: () => Promise<void> =
     async (): Promise<void> => {
         expect(await elementExists(`input[type=number]#${SPEC_RANGED_PROPERTY_ONE_KEY}.${SpecControlStates.INVALID}`))
-            .toBeTruthy()
+            .toBeTruthy('ranged input was not marked as invalid')
     }
 
 const stringedControlInputIsMarkedAsInvalid: () => Promise<void> =
     async (): Promise<void> => {
         expect(await elementExists(`input[type=text]#${SPEC_STRINGED_PROPERTY_KEY}.${SpecControlStates.INVALID}`))
-            .toBeTruthy()
+            .toBeTruthy('stringed input was not marked as invalid')
     }
 
 const otherControlInputIsAlsoMarkedAsInvalid: () => Promise<void> =
     async (): Promise<void> => {
         expect(await elementExists(`input[type=number]#${SPEC_RANGED_PROPERTY_TWO_KEY}.${SpecControlStates.INVALID}`))
-            .toBeTruthy()
+            .toBeTruthy('other input was not market as invalid')
     }
 
 const rangedContolInputIsMarkedAsValid: () => Promise<void> =
@@ -89,67 +90,85 @@ const stringedContolInputIsMarkedAsValid: () => Promise<void> =
 const rangedControlWasNotSubmitted: () => Promise<void> =
     async (): Promise<void> => {
         expect(await elementInnerText(`#${SPEC_RANGED_PROPERTY_ONE_KEY} .${SecretSelectorsForTest.SECRET_SUBMITTED_SPEC_CONTROL}`))
-            .toBe(`${SPEC_CONTROLS_PATTERN_RANGED_PROPERTY_ONE_INITIAL_VALUE}`)
+            .toBe(`${SPEC_CONTROLS_PATTERN_RANGED_PROPERTY_ONE_INITIAL_VALUE}`, 'ranged input was submitted')
     }
 
-const stringedControlWasNotSubmittedAndIsAtTheLastValidValueBeforeItGotTooLong: () => Promise<void> =
+const stringedControlTooLongValueWasNotSubmittedAndItIsAtTheLastValidValueBeforeItGotTooLong: () => Promise<void> =
     async (): Promise<void> => {
-        expect(await elementInnerText(`#${SPEC_STRINGED_PROPERTY_KEY} .${SecretSelectorsForTest.SECRET_SUBMITTED_SPEC_CONTROL}`))
-            .toBe(`${SPEC_CONTROLS_PATTERN_STRINGED_PROPERTY_INITIAL_VALUE}${PART_OF_MODIFICATION_WITHIN_STRINGED_CONTROLS_MAX_LENGTH}`)
+        const stringedControlSubmittedValue: string = await elementInnerText(
+            `#${SPEC_STRINGED_PROPERTY_KEY} .${SecretSelectorsForTest.SECRET_SUBMITTED_SPEC_CONTROL}`,
+        )
+        expect(stringedControlSubmittedValue)
+            .toBe(
+                `${SPEC_CONTROLS_PATTERN_STRINGED_PROPERTY_INITIAL_VALUE}${PART_OF_MODIFICATION_WITHIN_STRINGED_CONTROLS_MAX_LENGTH}`,
+                `stringed control was not at the last valid value before it got too long; it was ${stringedControlSubmittedValue}`,
+            )
     }
 
 const stringedControlWasNotSubmitted: () => Promise<void> =
     async (): Promise<void> => {
-        expect(await elementInnerText(`#${SPEC_STRINGED_PROPERTY_KEY} .${SecretSelectorsForTest.SECRET_SUBMITTED_SPEC_CONTROL}`))
-            .toBe(`${SPEC_CONTROLS_PATTERN_STRINGED_PROPERTY_INITIAL_VALUE}`)
+        const stringedControlSubmittedValue: string = await elementInnerText(
+            `#${SPEC_STRINGED_PROPERTY_KEY} .${SecretSelectorsForTest.SECRET_SUBMITTED_SPEC_CONTROL}`,
+        )
+        expect(stringedControlSubmittedValue)
+            .toBe(
+                `${SPEC_CONTROLS_PATTERN_STRINGED_PROPERTY_INITIAL_VALUE}`,
+                `stringed control was submitted; it was ${stringedControlSubmittedValue}`,
+            )
     }
 
 const rangedControlDisplayValueIsWiped: () => Promise<void> =
     async (): Promise<void> => {
         expect(await elementValue(`input[type=number]#${SPEC_RANGED_PROPERTY_ONE_KEY}`))
-            .toBe('')
+            .toBe('', 'ranged control display value was not wiped')
     }
 
 const rangedControlDisplayValueIsTheOutOfRangeValue: () => Promise<void> =
     async (): Promise<void> => {
         expect(await elementValue(`input[type=number]#${SPEC_RANGED_PROPERTY_ONE_KEY}`))
-            .toBe(`${SPEC_CONTROLS_PATTERN_RANGED_PROPERTY_ONE_INITIAL_VALUE}${OUT_OF_RANGE_INVALID_TEST_MODIFICATION}`)
+            .toBe(
+                `${SPEC_CONTROLS_PATTERN_RANGED_PROPERTY_ONE_INITIAL_VALUE}${OUT_OF_RANGE_INVALID_TEST_MODIFICATION}`,
+                'ranged control display value was not the out of range value',
+            )
     }
 
 const rangedControlInputHasBadFormatMessage: () => Promise<void> =
     async (): Promise<void> => {
         expect(await elementInnerText(`#${SPEC_RANGED_PROPERTY_ONE_KEY} .invalid-spec-message`))
-            .toBe('this property is formatted in a way which cannot be parsed')
+            .toBe('this property is formatted in a way which cannot be parsed', 'ranged control input did not have the bad format message')
     }
 
 const stringedControlDisplayValueIsTheTooLongValue: () => Promise<void> =
     async (): Promise<void> => {
         expect(await elementValue(`input[type=text]#${SPEC_STRINGED_PROPERTY_KEY}`))
-            .toBe(`${SPEC_CONTROLS_PATTERN_STRINGED_PROPERTY_INITIAL_VALUE}${MODIFICATION_CAUSING_STRINGED_CONTROL_TO_EXCEED_ITS_MAX_LENGTH}`)
+            .toBe(`${SPEC_CONTROLS_PATTERN_STRINGED_PROPERTY_INITIAL_VALUE}${MODIFICATION_CAUSING_STRINGED_CONTROL_TO_EXCEED_ITS_MAX_LENGTH}`, 'stringed control display value was not the too long value')
     }
 
 const stringedControlDisplayValueIsTheTooShortValue: () => Promise<void> =
     async (): Promise<void> => {
         expect(await elementValue(`input[type=text]#${SPEC_STRINGED_PROPERTY_KEY}`))
-            .toBe(`${SPEC_CONTROLS_PATTERN_STRINGED_PROPERTY_INITIAL_VALUE.slice(0, indexOfLastCharacter(SPEC_CONTROLS_PATTERN_STRINGED_PROPERTY_INITIAL_VALUE))}`)
+            .toBe(
+                `${SPEC_CONTROLS_PATTERN_STRINGED_PROPERTY_INITIAL_VALUE.slice(0, indexOfLastCharacter(SPEC_CONTROLS_PATTERN_STRINGED_PROPERTY_INITIAL_VALUE))}`,
+                'stringed control display value was not the too short value',
+            )
     }
 
 const rangedControlInputHasOutOfRangeMessage: () => Promise<void> =
     async (): Promise<void> => {
         expect(await elementInnerText(`#${SPEC_RANGED_PROPERTY_ONE_KEY} .invalid-spec-message`))
-            .toBe(`must be less than ${SPEC_CONTROLS_PATTERN_RANGED_PROPERTY_ONE_MAX_VALUE}`)
+            .toBe(`must be less than ${SPEC_CONTROLS_PATTERN_RANGED_PROPERTY_ONE_MAX_VALUE}`, 'ranged control input did not have out-of-range invalid message')
     }
 
 const stringedControlInputHasTooLongMessage: () => Promise<void> =
     async (): Promise<void> => {
         expect(await elementInnerText(`#${SPEC_STRINGED_PROPERTY_KEY} .invalid-spec-message`))
-            .toBe(`must be ${SPEC_CONTROLS_PATTERN_STRINGED_PROPERTY_ONE_MAX_LENGTH} characters or less`)
+            .toBe(`must be ${SPEC_CONTROLS_PATTERN_STRINGED_PROPERTY_ONE_MAX_LENGTH} characters or less`, 'stringed control input did not have too-long invalid message')
     }
 
 const stringedControlInputHasTooShortMessage: () => Promise<void> =
     async (): Promise<void> => {
         expect(await elementInnerText(`#${SPEC_STRINGED_PROPERTY_KEY} .invalid-spec-message`))
-            .toBe(`must be ${SPEC_CONTROLS_PATTERN_STRINGED_PROPERTY_ONE_MIN_LENGTH} characters or more`)
+            .toBe(`must be ${SPEC_CONTROLS_PATTERN_STRINGED_PROPERTY_ONE_MIN_LENGTH} characters or more`, 'stringed control input did not have too-short invalid message')
     }
 
 const undoRangedControlEitherModification: () => Promise<void> =
@@ -197,15 +216,15 @@ const enterCustomInvalidityStateAndGetLastStillValidValue: () => Promise<string>
 const theSubmittedValueIsTheLastStillValidValue: (lastStillValidValue: string) => Promise<void> =
     async (lastStillValidValue: string): Promise<void> => {
         expect(await elementInnerText(`#${SPEC_RANGED_PROPERTY_TWO_KEY} .${SecretSelectorsForTest.SECRET_SUBMITTED_SPEC_CONTROL}`))
-            .toBe(lastStillValidValue)
+            .toBe(lastStillValidValue, 'the submitted value was not the last still valid value')
     }
 
 const invalidMessagesForAllControlsInvolvedInCustomInvalidity: () => Promise<void> =
     async (): Promise<void> => {
-        expect(await elementInnerText(`#${SPEC_RANGED_PROPERTY_TWO_KEY} .invalid-spec-message`))
-            .toBe('pitch must be more than duration, obvs')
         expect(await elementInnerText(`#${SPEC_RANGED_PROPERTY_ONE_KEY} .invalid-spec-message`))
-            .toBe('duration must be less than pitch, obvs')
+            .toBe('duration must be less than pitch, obvs', 'spec ranged property one did not have the custom invalid message')
+        expect(await elementInnerText(`#${SPEC_RANGED_PROPERTY_TWO_KEY} .invalid-spec-message`))
+            .toBe('pitch must be more than duration, obvs', 'spec ranged property two did not have the custom invalid message')
     }
 
 const fixCustomValidity: () => Promise<void> =
@@ -229,15 +248,15 @@ const invalidateJustOneFieldOfAnArrayedControl: () => Promise<void> =
 const justThatOneFieldIsMarkedIsInvalidAndTheOtherFieldsOfThatArrayedControlAreStillMarkedAsValid: () => Promise<void> =
     async (): Promise<void> => {
         expect(await elementExists(`input[type=number]#${SPEC_ARRAYED_PROPERTY_KEY}-0.${SpecControlStates.VALID}`))
-            .toBeTruthy()
+            .toBeTruthy('one of the other fields of the arrayed control was not valid')
         expect(await elementExists(`input[type=number]#${SPEC_ARRAYED_PROPERTY_KEY}-1.${SpecControlStates.VALID}`))
-            .toBeTruthy()
+            .toBeTruthy('one of the other fields of the arrayed control was not valid')
         expect(await elementExists(`input[type=number]#${SPEC_ARRAYED_PROPERTY_KEY}-2.${SpecControlStates.INVALID}`))
-            .toBeTruthy()
+            .toBeTruthy('that one feild of the arrayed control was not marked as invalid')
         expect(await elementExists(`input[type=number]#${SPEC_ARRAYED_PROPERTY_KEY}-3.${SpecControlStates.VALID}`))
-            .toBeTruthy()
+            .toBeTruthy('one of the other fields of the arrayed control was not valid')
         expect(await elementExists(`input[type=number]#${SPEC_ARRAYED_PROPERTY_KEY}-4.${SpecControlStates.VALID}`))
-            .toBeTruthy()
+            .toBeTruthy('one of the other fields of the arrayed control was not valid')
     }
 
 const clickRemove: () => Promise<void> =
@@ -250,13 +269,13 @@ const everyFieldHasAnInvalidMessage: () => Promise<void> =
     async (): Promise<void> => {
         const expectedInvalidMessage: string = 'arrays can only be odd in length, duoy'
         expect(await elementInnerText(`#${SPEC_ARRAYED_PROPERTY_KEY}-0 .invalid-spec-message`))
-            .toBe(expectedInvalidMessage)
+            .toBe(expectedInvalidMessage, 'a field did not have an invalid message')
         expect(await elementInnerText(`#${SPEC_ARRAYED_PROPERTY_KEY}-1 .invalid-spec-message`))
-            .toBe(expectedInvalidMessage)
+            .toBe(expectedInvalidMessage, 'a field did not have an invalid message')
         expect(await elementInnerText(`#${SPEC_ARRAYED_PROPERTY_KEY}-2 .invalid-spec-message`))
-            .toBe(expectedInvalidMessage)
+            .toBe(expectedInvalidMessage, 'a field did not have an invalid message')
         expect(await elementInnerText(`#${SPEC_ARRAYED_PROPERTY_KEY}-3 .invalid-spec-message`))
-            .toBe(expectedInvalidMessage)
+            .toBe(expectedInvalidMessage, 'a field did not have an invalid message')
     }
 
 const modifyStringedControlToBeTooShort: () => Promise<void> =
@@ -439,7 +458,7 @@ describe('invalid controls', () => {
         })
 
         it('it does not submit the invalid data which could crash things', async (done: DoneFn) => {
-            await stringedControlWasNotSubmittedAndIsAtTheLastValidValueBeforeItGotTooLong()
+            await stringedControlTooLongValueWasNotSubmittedAndItIsAtTheLastValidValueBeforeItGotTooLong()
 
             done()
         })
@@ -467,7 +486,7 @@ describe('invalid controls', () => {
             await modifyAnotherControlValidly()
             await stringedControlInputIsMarkedAsInvalid()
             await stringedControlDisplayValueIsTheTooLongValue()
-            await stringedControlWasNotSubmittedAndIsAtTheLastValidValueBeforeItGotTooLong()
+            await stringedControlTooLongValueWasNotSubmittedAndItIsAtTheLastValidValueBeforeItGotTooLong()
             await stringedControlInputHasTooLongMessage()
 
             done()

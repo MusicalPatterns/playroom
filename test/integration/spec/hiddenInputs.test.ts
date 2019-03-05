@@ -17,9 +17,9 @@ describe('hidden inputs', () => {
 
     it('some controls hide the range input', async (done: DoneFn) => {
         expect(await elementExists(`input[type=number]#${SPEC_RANGED_PROPERTY_TWO_KEY}`))
-            .toBeTruthy()
+            .toBeTruthy('number input did not exist')
         expect(await elementExists(`input[type=range]#${SPEC_RANGED_PROPERTY_TWO_KEY}`))
-            .toBeFalsy()
+            .toBeFalsy('ranged input existed')
 
         done()
     })
@@ -29,9 +29,9 @@ describe('hidden inputs', () => {
         await otherTestPattern.click()
 
         expect(await elementExists(`input[type=number]#${SPEC_RANGED_PROPERTY_TWO_KEY}`))
-            .toBeFalsy()
+            .toBeFalsy('number input existed')
         expect(await elementExists(`input[type=range]#${SPEC_RANGED_PROPERTY_TWO_KEY}`))
-            .toBeTruthy()
+            .toBeTruthy('ranged input did not exist')
 
         done()
     })

@@ -49,7 +49,7 @@ const currentSpecMatchesThePresetAndThusItIsDisplayedInThePresetsDropdown: () =>
 const currentSpecMatchesNoPresetsAndThusThePresetsDropdownDisplaysNothing: () => Promise<void> =
     async (): Promise<void> => {
         expect(await elementValue(PRESETS_SELECT))
-            .toBe('')
+            .toBe('', 'the current spec must have matched a preset because the dropdown displayed something')
     }
 
 const breakConformityWithThePreset: () => Promise<void> =
@@ -70,17 +70,17 @@ const selectADifferentPreset: () => Promise<void> =
 const specIsInConformityWithThePreset: () => Promise<void> =
     async (): Promise<void> => {
         expect(await elementInnerText(`#${SPEC_OPTIONED_PROPERTY_ONE_KEY} .${SecretSelectorsForTest.SECRET_SUBMITTED_SPEC_CONTROL}`))
-            .toBe(PRESET_ONE_PROPERTY_ONE_VALUE)
+            .toBe(PRESET_ONE_PROPERTY_ONE_VALUE, 'property one value was not in conformity with the preset')
         expect(await elementInnerText(`#${SPEC_OPTIONED_PROPERTY_TWO_KEY} .${SecretSelectorsForTest.SECRET_SUBMITTED_SPEC_CONTROL}`))
-            .toBe(PRESET_ONE_PROPERTY_TWO_VALUE)
+            .toBe(PRESET_ONE_PROPERTY_TWO_VALUE, 'property two value was not in conformity with the preset')
     }
 
 const specIsInConformityWithTheDifferentPreset: () => Promise<void> =
     async (): Promise<void> => {
         expect(await elementInnerText(`#${SPEC_OPTIONED_PROPERTY_ONE_KEY} .${SecretSelectorsForTest.SECRET_SUBMITTED_SPEC_CONTROL}`))
-            .toBe(PRESET_TWO_PROPERTY_ONE_VALUE)
+            .toBe(PRESET_TWO_PROPERTY_ONE_VALUE, 'property one value was not in conformity with the different preset')
         expect(await elementInnerText(`#${SPEC_OPTIONED_PROPERTY_TWO_KEY} .${SecretSelectorsForTest.SECRET_SUBMITTED_SPEC_CONTROL}`))
-            .toBe(PRESET_TWO_PROPERTY_TWO_VALUE)
+            .toBe(PRESET_TWO_PROPERTY_TWO_VALUE, 'property two value was not in conformity with the different preset')
     }
 
 describe('presets', () => {
@@ -94,7 +94,7 @@ describe('presets', () => {
 
         it('does not show presets dropdown', async (done: DoneFn) => {
             expect(await elementExists('#presets'))
-                .toBeFalsy()
+                .toBeFalsy('presets dropdown was shown')
 
             done()
         })
@@ -110,7 +110,7 @@ describe('presets', () => {
 
         it('shows them', async (done: DoneFn) => {
             expect(await elementExists('#presets'))
-                .toBeTruthy()
+                .toBeTruthy('presets were not shown')
 
             done()
         })

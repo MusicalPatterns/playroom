@@ -25,7 +25,7 @@ const selectAboutPageBySymbol: () => Promise<void> =
 const titleIs: (expectedTitle: string) => Promise<void> =
     async (expectedTitle: string): Promise<void> => {
         expect(await elementInnerText('#middle-plus-right-columns h1'))
-            .toBe(expectedTitle)
+            .toBe(expectedTitle, `title was not ${expectedTitle}`)
     }
 
 describe('about page', () => {

@@ -1,4 +1,9 @@
-import { elementExists, openSpecControlsIfNotOpen, refreshPage, resetSpecByTogglingToOtherPatternThenBackToTestPattern } from '../../support'
+import {
+    elementExists,
+    openSpecControlsIfNotOpen,
+    refreshPage,
+    resetSpecByTogglingToOtherPatternThenBackToTestPattern,
+} from '../../support'
 
 describe('expanding and collapsing spec controls', () => {
     beforeEach(async (done: DoneFn) => {
@@ -9,14 +14,14 @@ describe('expanding and collapsing spec controls', () => {
 
     it('the controls begin closed', async (done: DoneFn) => {
         expect(await elementExists('#spec-panel.closed'))
-            .toBeTruthy()
+            .toBeTruthy('spec panel was not closed')
 
         done()
     })
 
     it('when the controls are closed, the sections, controls themselves, and reset button are not visible', async (done: DoneFn) => {
         expect(await elementExists('#spec-panel-body.closed'))
-            .toBeTruthy()
+            .toBeTruthy('spec panel body was not closed')
 
         done()
     })
@@ -29,14 +34,14 @@ describe('expanding and collapsing spec controls', () => {
 
         it('the controls open', async (done: DoneFn) => {
             expect(await elementExists('#spec-panel.open'))
-                .toBeTruthy()
+                .toBeTruthy('spec panel was not open')
 
             done()
         })
 
         it('the sections, controls themselves, and reset button are visible', async (done: DoneFn) => {
             expect(await elementExists('#spec-panel-body.open'))
-                .toBeTruthy()
+                .toBeTruthy('spec panel body was not open')
 
             done()
         })

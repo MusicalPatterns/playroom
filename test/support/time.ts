@@ -7,8 +7,9 @@ const isPaused: () => Promise<void> =
     async (): Promise<void> => {
         const initialTime: Ms = await currentTime()
         await sleep(LONG_ENOUGH_FOR_TIME_TO_PASS)
-        expect(await currentTime())
-            .toBe(initialTime)
+        const shouldBeSameTime: Ms = await currentTime()
+        expect(shouldBeSameTime)
+            .toBe(initialTime, `was not paused: second time taken was ${shouldBeSameTime} while initial time was ${initialTime}`)
     }
 
 const isPlaying: () => Promise<void> =
@@ -17,7 +18,7 @@ const isPlaying: () => Promise<void> =
         await sleep(LONG_ENOUGH_FOR_TIME_TO_PASS)
         const shouldBeLaterTime: Ms = await currentTime()
         expect(shouldBeLaterTime)
-            .toBeGreaterThan(from.Ms(initialTime))
+            .toBeGreaterThan(from.Ms(initialTime), `was not playing: second time was ${shouldBeLaterTime} while initial time was ${initialTime}`)
     }
 
 const hasBeenReset: (options?: { toBefore?: Ms }) => Promise<void> =
@@ -25,7 +26,7 @@ const hasBeenReset: (options?: { toBefore?: Ms }) => Promise<void> =
         await sleep(LONG_ENOUGH_FOR_TIME_TO_HAVE_BEEN_RESET)
         const timeAfterResetting: Ms = await currentTime()
         expect(timeAfterResetting)
-            .toBeLessThan(from.Ms(toBefore))
+            .toBeLessThan(from.Ms(toBefore), `time was not reset: time after resetting was ${timeAfterResetting} while it was expected to be before ${toBefore}`)
     }
 
 const currentTime: () => Promise<Ms> =

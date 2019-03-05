@@ -10,10 +10,10 @@ import {
 const IMMERSIVE_AUDIO_TOGGLE: string = '#toggle-immersive-audio'
 
 describe('immersive audio', () => {
-    it('starts out disabled', async (done: DoneFn) => {
+    it('starts out not yet enabled', async (done: DoneFn) => {
         await refreshPage()
         expect(await elementExists('#toggle-immersive-audio:disabled'))
-            .toBeTruthy()
+            .toBeTruthy('immersive audio was not disabled')
 
         done()
     })
@@ -26,7 +26,7 @@ describe('immersive audio', () => {
 
         it('starts outside of immersive audio', async (done: DoneFn) => {
             expect(await elementInnerText(IMMERSIVE_AUDIO_TOGGLE))
-                .toBe('enter immersive audio')
+                .toBe('enter immersive audio', 'immersive audio was not shown to be enterable')
 
             done()
         })
@@ -36,7 +36,7 @@ describe('immersive audio', () => {
             await toggleImmersiveAudioButton.click()
 
             expect(await elementInnerText(IMMERSIVE_AUDIO_TOGGLE))
-                .toBe('exit immersive audio')
+                .toBe('exit immersive audio', 'immersive audio was not show to be exitable')
 
             done()
         })

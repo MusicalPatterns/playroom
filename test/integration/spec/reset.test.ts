@@ -10,16 +10,19 @@ import {
     press,
     reset,
     resetSpecByTogglingToOtherPatternThenBackToTestPattern,
-    selectOption, simulateDesktopViewport,
+    selectOption,
+    simulateDesktopViewport,
     SPEC_CONTROLS_PATTERN_OPTIONED_PROPERTY_ONE_INITIAL_VALUE,
     SPEC_CONTROLS_PATTERN_OPTIONED_PROPERTY_ONE_MODIFIED_VALUE,
     SPEC_CONTROLS_PATTERN_RANGED_PROPERTY_ONE_INITIAL_VALUE,
-    SPEC_CONTROLS_PATTERN_RANGED_PROPERTY_TWO_INITIAL_VALUE, SPEC_CONTROLS_PATTERN_STRINGED_PROPERTY_INITIAL_VALUE,
+    SPEC_CONTROLS_PATTERN_RANGED_PROPERTY_TWO_INITIAL_VALUE,
+    SPEC_CONTROLS_PATTERN_STRINGED_PROPERTY_INITIAL_VALUE,
     SPEC_CONTROLS_PATTERN_TOGGLED_PROPERTY_INITIAL_VALUE,
     SPEC_CONTROLS_PATTERN_TOGGLED_PROPERTY_MODIFIED_VALUE,
     SPEC_OPTIONED_PROPERTY_ONE_KEY,
     SPEC_RANGED_PROPERTY_ONE_KEY,
-    SPEC_RANGED_PROPERTY_TWO_KEY, SPEC_STRINGED_PROPERTY_KEY,
+    SPEC_RANGED_PROPERTY_TWO_KEY,
+    SPEC_STRINGED_PROPERTY_KEY,
     SPEC_TOGGLED_PROPERTY_KEY,
     VALID_TEST_MODIFICATION,
 } from '../../support'
@@ -27,13 +30,13 @@ import {
 const resetIsDisabled: () => Promise<void> =
     async (): Promise<void> => {
         expect(await elementExists(`button#reset:disabled`))
-            .toBeTruthy()
+            .toBeTruthy('reset was not disabled')
     }
 
 const resetIsEnabled: () => Promise<void> =
     async (): Promise<void> => {
         expect(await elementExists(`button#reset:enabled`))
-            .toBeTruthy()
+            .toBeTruthy('reset was not enabled')
     }
 
 const modifyControl: () => Promise<void> =
@@ -95,7 +98,7 @@ const modifyControlToBeInvalid: () => Promise<void> =
         const controlToBeInvalid: ElementHandle = await findElement(`input[type=number]#${SPEC_RANGED_PROPERTY_ONE_KEY}`)
         await controlToBeInvalid.type(BAD_FORMAT_INVALID_TEST_MODIFICATION)
         expect(await elementExists(`input[type=number]#${SPEC_RANGED_PROPERTY_ONE_KEY}.${SpecControlStates.INVALID}`))
-            .toBeTruthy()
+            .toBeTruthy('control was not invalid')
     }
 
 const modifyAnotherControlJustSoThatTheResetButtonIsEnabled: () => Promise<void> =
@@ -107,7 +110,7 @@ const modifyAnotherControlJustSoThatTheResetButtonIsEnabled: () => Promise<void>
 const controlIsBackToValid: () => Promise<void> =
     async (): Promise<void> => {
         expect(await elementExists(`input[type=number]#${SPEC_RANGED_PROPERTY_ONE_KEY}.${SpecControlStates.VALID}`))
-            .toBeTruthy()
+            .toBeTruthy('control was not back to valid')
     }
 
 describe('reset button', () => {

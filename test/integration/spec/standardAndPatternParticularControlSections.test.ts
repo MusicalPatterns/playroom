@@ -17,7 +17,7 @@ describe('standard and pattern-particular control sections', () => {
         await openSpecControlsIfNotOpen()
 
         expect(await elementExists(SECTION_HEADING))
-            .toBeTruthy()
+            .toBeTruthy('section headings were not shown')
 
         done()
     })
@@ -28,7 +28,7 @@ describe('standard and pattern-particular control sections', () => {
         await openSpecControlsIfNotOpen()
 
         expect(await elementExists(SECTION_HEADING))
-            .toBeFalsy()
+            .toBeFalsy('section headings were shown')
 
         done()
     })
@@ -39,7 +39,7 @@ describe('standard and pattern-particular control sections', () => {
         await openSpecControlsIfNotOpen()
 
         expect(await elementExists(SECTION_HEADING))
-            .toBeFalsy()
+            .toBeFalsy('section headings were shown')
 
         done()
     })
