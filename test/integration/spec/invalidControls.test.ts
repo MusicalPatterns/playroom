@@ -5,16 +5,19 @@ import { ElementHandle } from 'puppeteer'
 import { SecretSelectorsForTest, SpecControlStates } from '../../../src/indexForTest'
 import {
     BAD_FORMAT_INVALID_TEST_MODIFICATION,
+    clickElement,
+    deleteCharacterFromInput,
     elementExists,
     elementInnerText,
     elementValue,
     findElement,
+    loseFocus,
     openSpecControlsIfNotOpen,
     OUT_OF_RANGE_INVALID_TEST_MODIFICATION,
-    press,
-    resetSpecByTogglingToOtherPatternThenBackToTestPattern,
+    quickRefresh,
+    refreshForSpecControlsTest,
     selectOption,
-    simulateDesktopViewport,
+    selectValidationPattern,
     SPEC_ARRAYED_PROPERTY_KEY,
     SPEC_CONTROLS_PATTERN_OPTIONED_PROPERTY_ONE_MODIFIED_VALUE,
     SPEC_CONTROLS_PATTERN_RANGED_PROPERTY_ONE_INITIAL_VALUE,
@@ -27,7 +30,6 @@ import {
     SPEC_RANGED_PROPERTY_TWO_KEY,
     SPEC_STRINGED_PROPERTY_KEY,
     VALID_TEST_MODIFICATION,
-    VALIDATION_PATTERN_ID,
 } from '../../support'
 
 const MODIFICATION_CAUSING_STRINGED_CONTROL_TO_EXCEED_ITS_MAX_LENGTH: string = 'HI'
@@ -101,7 +103,7 @@ const stringedControlTooLongValueWasNotSubmittedAndItIsAtTheLastValidValueBefore
         expect(stringedControlSubmittedValue)
             .toBe(
                 `${SPEC_CONTROLS_PATTERN_STRINGED_PROPERTY_INITIAL_VALUE}${PART_OF_MODIFICATION_WITHIN_STRINGED_CONTROLS_MAX_LENGTH}`,
-                `stringed control was not at the last valid value before it got too long; it was ${stringedControlSubmittedValue}`,
+                `stringed control was not at the last valid value before it got too long`,
             )
     }
 
@@ -113,7 +115,7 @@ const stringedControlWasNotSubmitted: () => Promise<void> =
         expect(stringedControlSubmittedValue)
             .toBe(
                 `${SPEC_CONTROLS_PATTERN_STRINGED_PROPERTY_INITIAL_VALUE}`,
-                `stringed control was submitted; it was ${stringedControlSubmittedValue}`,
+                `stringed control was submitted`,
             )
     }
 
@@ -173,17 +175,13 @@ const stringedControlInputHasTooShortMessage: () => Promise<void> =
 
 const undoRangedControlEitherModification: () => Promise<void> =
     async (): Promise<void> => {
-        const control: ElementHandle = await findElement(`input[type=number]#${SPEC_RANGED_PROPERTY_ONE_KEY}`)
-        await control.click()
-        await press('Backspace')
+        await deleteCharacterFromInput(`input[type=number]#${SPEC_RANGED_PROPERTY_ONE_KEY}`)
     }
 
 const undoStringedControlTooLongModification: () => Promise<void> =
     async (): Promise<void> => {
-        const control: ElementHandle = await findElement(`input[type=text]#${SPEC_STRINGED_PROPERTY_KEY}`)
-        await control.click()
-        await press('Backspace')
-        await press('Backspace')
+        await deleteCharacterFromInput(`input[type=text]#${SPEC_STRINGED_PROPERTY_KEY}`)
+        await deleteCharacterFromInput(`input[type=text]#${SPEC_STRINGED_PROPERTY_KEY}`)
     }
 
 const undoStringedControlTooShortModification: () => Promise<void> =
@@ -192,23 +190,13 @@ const undoStringedControlTooShortModification: () => Promise<void> =
         await control.type(VALID_TEST_MODIFICATION)
     }
 
-const selectCustomValidationPattern: () => Promise<void> =
-    async (): Promise<void> => {
-        await simulateDesktopViewport()
-        await resetSpecByTogglingToOtherPatternThenBackToTestPattern()
-        const testPattern: ElementHandle = await findElement(`#${VALIDATION_PATTERN_ID}`)
-        await testPattern.click()
-    }
-
 const enterCustomInvalidityStateAndGetLastStillValidValue: () => Promise<string> =
     async (): Promise<string> => {
-        const control: ElementHandle = await findElement(`input[type=number]#${SPEC_RANGED_PROPERTY_TWO_KEY}`)
-        await control.click()
-        await press('Backspace')
+        await deleteCharacterFromInput(`input[type=number]#${SPEC_RANGED_PROPERTY_TWO_KEY}`)
         const lastStillValidValue: string = await elementInnerText(`#${SPEC_RANGED_PROPERTY_TWO_KEY} .${SecretSelectorsForTest.SECRET_SUBMITTED_SPEC_CONTROL}`)
-        await press('Backspace')
-        const anythingElse: ElementHandle = await findElement('#first-row .right')
-        await anythingElse.click()
+        await deleteCharacterFromInput(`input[type=number]#${SPEC_RANGED_PROPERTY_TWO_KEY}`)
+        const SELECT_ANYTHING_ELSE: string = '#first-row .right'
+        await loseFocus(SELECT_ANYTHING_ELSE)
 
         return lastStillValidValue
     }
@@ -261,8 +249,7 @@ const justThatOneFieldIsMarkedIsInvalidAndTheOtherFieldsOfThatArrayedControlAreS
 
 const clickRemove: () => Promise<void> =
     async (): Promise<void> => {
-        const removeButton: ElementHandle = await findElement(`#${SPEC_ARRAYED_PROPERTY_KEY} .remove`)
-        await removeButton.click()
+        await clickElement(`#${SPEC_ARRAYED_PROPERTY_KEY} .remove`)
     }
 
 const everyFieldHasAnInvalidMessage: () => Promise<void> =
@@ -280,9 +267,7 @@ const everyFieldHasAnInvalidMessage: () => Promise<void> =
 
 const modifyStringedControlToBeTooShort: () => Promise<void> =
     async (): Promise<void> => {
-        const control: ElementHandle = await findElement(`input[type=text]#${SPEC_STRINGED_PROPERTY_KEY}`)
-        await control.click()
-        await press('Backspace')
+        await deleteCharacterFromInput(`input[type=text]#${SPEC_STRINGED_PROPERTY_KEY}`)
     }
 
 const modifyStringedControlToBeTooLong: () => Promise<void> =
@@ -294,8 +279,7 @@ const modifyStringedControlToBeTooLong: () => Promise<void> =
 describe('invalid controls', () => {
     describe('ranged controls - bad format', () => {
         beforeEach(async (done: DoneFn) => {
-            await resetSpecByTogglingToOtherPatternThenBackToTestPattern()
-            await openSpecControlsIfNotOpen()
+            await refreshForSpecControlsTest()
             await modifyRangedControlToBeBadlyFormatted()
 
             done()
@@ -345,7 +329,7 @@ describe('invalid controls', () => {
 
     describe('ranged controls - out of range', () => {
         beforeEach(async (done: DoneFn) => {
-            await resetSpecByTogglingToOtherPatternThenBackToTestPattern()
+            await refreshForSpecControlsTest()
             await modifyRangedControlToBeOutOfRange()
 
             done()
@@ -395,7 +379,7 @@ describe('invalid controls', () => {
 
     describe('stringed controls - too short', () => {
         beforeEach(async (done: DoneFn) => {
-            await resetSpecByTogglingToOtherPatternThenBackToTestPattern()
+            await refreshForSpecControlsTest()
             await modifyStringedControlToBeTooShort()
 
             done()
@@ -413,7 +397,7 @@ describe('invalid controls', () => {
             done()
         })
 
-        it('displays the too-long value in the input', async (done: DoneFn) => {
+        it('displays the too-short value in the input', async (done: DoneFn) => {
             await stringedControlDisplayValueIsTheTooShortValue()
 
             done()
@@ -445,7 +429,7 @@ describe('invalid controls', () => {
 
     describe('stringed controls - too long', () => {
         beforeEach(async (done: DoneFn) => {
-            await resetSpecByTogglingToOtherPatternThenBackToTestPattern()
+            await refreshForSpecControlsTest()
             await modifyStringedControlToBeTooLong()
 
             done()
@@ -495,7 +479,7 @@ describe('invalid controls', () => {
 
     describe('arrayed controls', () => {
         beforeEach(async (done: DoneFn) => {
-            await resetSpecByTogglingToOtherPatternThenBackToTestPattern()
+            await refreshForSpecControlsTest()
             await invalidateJustOneFieldOfAnArrayedControl()
 
             done()
@@ -510,7 +494,9 @@ describe('invalid controls', () => {
 
     describe('breaking custom validity', () => {
         beforeEach(async (done: DoneFn) => {
-            await selectCustomValidationPattern()
+            await quickRefresh()
+            await selectValidationPattern()
+            await openSpecControlsIfNotOpen()
 
             done()
         })

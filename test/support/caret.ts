@@ -1,5 +1,5 @@
 import { ElementHandle, JSHandle } from 'puppeteer'
-import { findElement } from './generic'
+import { clickElement, findElement } from './generic'
 
 const openSpecControlsIfNotOpen: () => Promise<void> =
     async (): Promise<void> => {
@@ -11,8 +11,7 @@ const openSpecControlsIfNotOpen: () => Promise<void> =
             return
         }
 
-        const caret: ElementHandle = await findElement('#spec-panel #caret')
-        await caret.click()
+        await clickElement('#spec-panel #caret')
     }
 
 export {

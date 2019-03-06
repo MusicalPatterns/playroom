@@ -2,13 +2,12 @@ import { indexOfLastElement } from '@musical-patterns/utilities'
 import { ElementHandle } from 'puppeteer'
 import { SecretSelectorsForTest, SpecControlStates } from '../../../src/indexForTest'
 import {
+    clickElement,
     elementCount,
     elementExists,
     elementInnerText,
     findElement,
-    openSpecControlsIfNotOpen,
-    refreshPage,
-    resetSpecByTogglingToOtherPatternThenBackToTestPattern,
+    refreshForSpecControlsTest,
     SPEC_ARRAYED_PROPERTY_KEY,
     SPEC_ARRAYED_PROPERTY_WITH_INITIAL_ELEMENT_VALUE_KEY,
     SPEC_CONTROLS_PATTERN_ARRAYED_PROPERTY_INITIAL_VALUE,
@@ -19,20 +18,17 @@ import {
 
 const clickAdd: () => Promise<void> =
     async (): Promise<void> => {
-        const addButton: ElementHandle = await findElement(`#${SPEC_ARRAYED_PROPERTY_KEY} .add`)
-        await addButton.click()
+        await clickElement(`#${SPEC_ARRAYED_PROPERTY_KEY} .add`)
     }
 
 const clickAddForTheArrayedControlWithTheInitialElementValue: () => Promise<void> =
     async (): Promise<void> => {
-        const addButton: ElementHandle = await findElement(`#${SPEC_ARRAYED_PROPERTY_WITH_INITIAL_ELEMENT_VALUE_KEY} .add`)
-        await addButton.click()
+        await clickElement(`#${SPEC_ARRAYED_PROPERTY_WITH_INITIAL_ELEMENT_VALUE_KEY} .add`)
     }
 
 const clickRemove: () => Promise<void> =
     async (): Promise<void> => {
-        const removeButton: ElementHandle = await findElement(`#${SPEC_ARRAYED_PROPERTY_KEY} .remove`)
-        await removeButton.click()
+        await clickElement(`#${SPEC_ARRAYED_PROPERTY_KEY} .remove`)
     }
 
 const thereIsAnAdditionalField: (originalFieldCount: number) => Promise<void> =
@@ -102,7 +98,7 @@ const newFieldHasBeenSubmitted: () => Promise<void> =
     async (): Promise<void> => {
         const updatedFieldValue: string = await elementInnerText(`#${SPEC_ARRAYED_PROPERTY_KEY}-5 .${SecretSelectorsForTest.SECRET_SUBMITTED_SPEC_CONTROL}`)
         expect(updatedFieldValue)
-            .toBe(VALID_TEST_MODIFICATION, `the new field was not submitted; it was ${updatedFieldValue}`)
+            .toBe(VALID_TEST_MODIFICATION, `the new field was not submitted`)
     }
 
 const modifyTheFirstOfTheTwoNewFields: () => Promise<void> =
@@ -158,7 +154,7 @@ const theSubmittedValueForTheArrayedControlAsAWholeIsInItsInitialState: () => Pr
         expect(submittedValueForTheArrayedControlAsAWhole)
             .toBe(
                 JSON.stringify(SPEC_CONTROLS_PATTERN_ARRAYED_PROPERTY_INITIAL_VALUE),
-                `the submitted value for the arrayed control as a whole was not in its initial state; it was ${submittedValueForTheArrayedControlAsAWhole}`,
+                `the submitted value for the arrayed control as a whole was not in its initial state`,
             )
     }
 
@@ -174,7 +170,7 @@ const theSubmittedValueForTheArrayedControlWithTheInitialElementValueAsAWholeHas
                         SPEC_CONTROLS_PATTERN_ARRAYED_PROPERTY_WITH_INITIAL_ELEMENT_VALUE_INITIAL_ELEMENT_VALUE,
                     ]),
                 ),
-                `the submitted value for the arrayed control with the initial element value as a whole did not have a new element at the end with the initial element value; it was ${submittedValueForTheArrayedControlWithTheInitialElementValueAsAWhole}`,
+                `the submitted value for the arrayed control with the initial element value as a whole did not have a new element at the end with the initial element value`,
             )
     }
 
@@ -186,7 +182,7 @@ const theSubmittedValueForTheArrayedControlAsAWholeIsInItsInitialStateJustWithIt
         expect(submittedValueForTheArrayedControlAsAWhole)
             .toBe(
                 JSON.stringify(SPEC_CONTROLS_PATTERN_ARRAYED_PROPERTY_INITIAL_VALUE.slice(0, indexOfLastElement(SPEC_CONTROLS_PATTERN_ARRAYED_PROPERTY_INITIAL_VALUE))),
-                `the submitted value for the arrayed control as a whole was not in its initial state just with its last element gone; it was ${submittedValueForTheArrayedControlAsAWhole}`,
+                `the submitted value for the arrayed control as a whole was not in its initial state just with its last element gone`,
             )
     }
 
@@ -213,9 +209,7 @@ const noInvalidMessagesAreShown: () => Promise<void> =
 
 describe('arrayed controls', () => {
     beforeEach(async (done: DoneFn) => {
-        await refreshPage()
-        await resetSpecByTogglingToOtherPatternThenBackToTestPattern()
-        await openSpecControlsIfNotOpen()
+        await refreshForSpecControlsTest()
         done()
     })
 

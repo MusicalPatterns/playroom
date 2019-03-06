@@ -2,6 +2,7 @@ import { difference, from, Ms, sleep, sum } from '@musical-patterns/utilities'
 import { ElementHandle } from 'puppeteer'
 import {
     A_BIT_LONGER,
+    clickElement,
     currentTime,
     elementExists,
     EVEN_A_BIT_LONGER,
@@ -9,15 +10,15 @@ import {
     hasBeenReset,
     isPaused,
     isPlaying,
-    LONG_DURATION_PATTERN_ID,
     LONG_ENOUGH_FOR_TIME_TO_PASS,
     openSpecControlsIfNotOpen,
     patternDuration,
-    POST_PATTERN_ID,
+    quickRefresh,
     refreshPage,
-    simulateDesktopViewport,
+    selectAboutPage,
+    selectLongDurationPattern,
+    selectTimeControlsPattern,
     SPEC_RANGED_PROPERTY_ONE_KEY,
-    TIME_CONTROLS_PATTERN_ID,
     VALID_TEST_MODIFICATION,
 } from '../../support'
 
@@ -37,18 +38,9 @@ const timeControlsAreDisabled: () => Promise<void> =
             .toBeTruthy('play was not disabled')
     }
 
-const selectTimeControlsPattern: () => Promise<void> =
-    async (): Promise<void> => {
-        const otherTestPattern: ElementHandle = await findElement(`#${POST_PATTERN_ID}`)
-        await otherTestPattern.click()
-        const testPattern: ElementHandle = await findElement(`#${TIME_CONTROLS_PATTERN_ID}`)
-        await testPattern.click()
-    }
-
 const click: (control: string) => Promise<void> =
     async (control: string): Promise<void> => {
-        const play: ElementHandle = await findElement(`#${control}`)
-        await play.click()
+        await clickElement(`#${control}`)
     }
 
 const isAfter: (previousTime: Ms) => Promise<void> =
@@ -70,20 +62,6 @@ const playJustLongEnoughMoreToWrapAround: () => Promise<void> =
         await sleep(sum(A_BIT_LONGER, LONG_ENOUGH_FOR_TIME_TO_PASS))
     }
 
-const navigateToAboutPage: () => Promise<void> =
-    async (): Promise<void> => {
-        const title: ElementHandle = await findElement('#title h1')
-        await title.click()
-    }
-
-const selectLongDurationTestPattern: () => Promise<void> =
-    async (): Promise<void> => {
-        const otherTestPattern: ElementHandle = await findElement(`#${POST_PATTERN_ID}`)
-        await otherTestPattern.click()
-        const longDurationTestPattern: ElementHandle = await findElement(`#${LONG_DURATION_PATTERN_ID}`)
-        await longDurationTestPattern.click()
-    }
-
 describe('time controls', () => {
     it('are disabled if you have not yet selected a pattern', async (done: DoneFn) => {
         await refreshPage()
@@ -93,7 +71,7 @@ describe('time controls', () => {
     })
 
     it('starts off paused', async (done: DoneFn) => {
-        await refreshPage()
+        await quickRefresh()
         await selectTimeControlsPattern()
         await isPaused()
 
@@ -102,8 +80,8 @@ describe('time controls', () => {
 
     describe('after pressing play', () => {
         beforeEach(async (done: DoneFn) => {
-            await simulateDesktopViewport()
-            await selectLongDurationTestPattern()
+            await quickRefresh()
+            await selectLongDurationPattern()
             await click('play')
             await sleep(LONG_ENOUGH_FOR_TIME_TO_PASS)
 
@@ -143,7 +121,7 @@ describe('time controls', () => {
 
         it('resets the time to the beginning and stops when you navigate to the about page', async (done: DoneFn) => {
             await sleep(A_BIT_LONGER)
-            await navigateToAboutPage()
+            await selectAboutPage()
 
             await hasBeenReset()
             await isPaused()
@@ -174,7 +152,7 @@ describe('time controls', () => {
 
     describe('after pressing play (when you need it to not be the pattern with a long duration)', () => {
         beforeEach(async (done: DoneFn) => {
-            await simulateDesktopViewport()
+            await quickRefresh()
             await selectTimeControlsPattern()
             await click('play')
             done()
@@ -191,7 +169,7 @@ describe('time controls', () => {
             await sleep(A_BIT_LONGER)
             const timeOfSelectingNewPattern: Ms = await currentTime()
 
-            await selectLongDurationTestPattern()
+            await selectLongDurationPattern()
             await hasBeenReset({ toBefore: timeOfSelectingNewPattern })
             await isPlaying()
 

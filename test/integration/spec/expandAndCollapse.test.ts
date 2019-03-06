@@ -1,29 +1,26 @@
-import {
-    elementExists,
-    openSpecControlsIfNotOpen,
-    refreshPage,
-    resetSpecByTogglingToOtherPatternThenBackToTestPattern,
-} from '../../support'
+import { elementExists, openSpecControlsIfNotOpen, refreshPage, selectSpecControlsPattern } from '../../support'
 
 describe('expanding and collapsing spec controls', () => {
     beforeEach(async (done: DoneFn) => {
         await refreshPage()
-        await resetSpecByTogglingToOtherPatternThenBackToTestPattern()
+        await selectSpecControlsPattern()
         done()
     })
 
-    it('the controls begin closed', async (done: DoneFn) => {
-        expect(await elementExists('#spec-panel.closed'))
-            .toBeTruthy('spec panel was not closed')
+    describe('at the beginning', () => {
+        it('the controls begin closed', async (done: DoneFn) => {
+            expect(await elementExists('#spec-panel.closed'))
+                .toBeTruthy('spec panel was not closed')
 
-        done()
-    })
+            done()
+        })
 
-    it('when the controls are closed, the sections, controls themselves, and reset button are not visible', async (done: DoneFn) => {
-        expect(await elementExists('#spec-panel-body.closed'))
-            .toBeTruthy('spec panel body was not closed')
+        it('when the controls are closed, the sections, controls themselves, and reset button are not visible', async (done: DoneFn) => {
+            expect(await elementExists('#spec-panel-body.closed'))
+                .toBeTruthy('spec panel body was not closed')
 
-        done()
+            done()
+        })
     })
 
     describe('after clicking the caret', () => {

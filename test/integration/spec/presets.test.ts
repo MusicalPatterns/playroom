@@ -1,23 +1,19 @@
-import { sleep, to } from '@musical-patterns/utilities'
-import { ElementHandle } from 'puppeteer'
 import { SecretSelectorsForTest } from '../../../src/indexForTest'
 import {
     elementExists,
     elementInnerText,
     elementValue,
-    findElement,
     openSpecControlsIfNotOpen,
-    POST_PATTERN_ID,
     PRESET_ONE_NAME,
     PRESET_ONE_PROPERTY_ONE_VALUE,
     PRESET_ONE_PROPERTY_TWO_VALUE,
     PRESET_TWO_NAME,
     PRESET_TWO_PROPERTY_ONE_VALUE,
     PRESET_TWO_PROPERTY_TWO_VALUE,
-    PRESETS_PATTERN_ID,
-    resetSpecByTogglingToOtherPatternThenBackToTestPattern,
+    quickRefresh,
+    refreshForSpecControlsTest,
     selectOption,
-    simulateDesktopViewport,
+    selectPresetsPattern,
     SPEC_CONTROLS_PATTERN_OPTIONED_PROPERTY_ONE_INITIAL_VALUE,
     SPEC_CONTROLS_PATTERN_OPTIONED_PROPERTY_ONE_MODIFIED_VALUE,
     SPEC_OPTIONED_PROPERTY_ONE_KEY,
@@ -25,15 +21,6 @@ import {
 } from '../../support'
 
 const PRESETS_SELECT: string = '#presets select'
-
-const selectPresetPattern: () => Promise<void> =
-    async (): Promise<void> => {
-        await simulateDesktopViewport()
-        const otherPattern: ElementHandle = await findElement(`#${POST_PATTERN_ID}`)
-        await otherPattern.click()
-        const presetsPattern: ElementHandle = await findElement(`#${PRESETS_PATTERN_ID}`)
-        await presetsPattern.click()
-    }
 
 const bringSpecIntoConformityWithThePreset: () => Promise<void> =
     async (): Promise<void> => {
@@ -86,8 +73,7 @@ const specIsInConformityWithTheDifferentPreset: () => Promise<void> =
 describe('presets', () => {
     describe('when the pattern does not have presets', () => {
         beforeEach(async (done: DoneFn) => {
-            await resetSpecByTogglingToOtherPatternThenBackToTestPattern()
-            await openSpecControlsIfNotOpen()
+            await refreshForSpecControlsTest()
 
             done()
         })
@@ -102,7 +88,8 @@ describe('presets', () => {
 
     describe('when the pattern has presets', () => {
         beforeEach(async (done: DoneFn) => {
-            await selectPresetPattern()
+            await quickRefresh()
+            await selectPresetsPattern()
             await openSpecControlsIfNotOpen()
 
             done()

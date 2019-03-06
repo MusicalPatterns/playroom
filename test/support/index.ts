@@ -1,6 +1,16 @@
-export { selectTestPattern, selectOtherTestPattern }from './selectTestPattern'
-export { resetSpecByTogglingToOtherPatternThenBackToTestPattern, refreshPage }from './refresh'
-export { reset } from './reset'
+export {
+    selectSpecControlsPattern,
+    selectPostPattern,
+    selectLongDurationPattern,
+    selectTimeControlsPattern,
+    selectValidationPattern,
+    selectPresetsPattern,
+    selectOnlyStandardSpecPattern,
+    selectOnlyPatternParticularSpecPattern,
+}from './selectPattern'
+export { quickRefresh, refreshPage, refreshForSpecControlsTest }from './refresh'
+export { waitForHeadfulQaing, waitLongEnoughForAnimationToComplete } from './wait'
+export { selectAboutPage } from './aboutPage'
 export { leftColumnIs } from './leftColumn'
 export { openSpecControlsIfNotOpen } from './caret'
 export { currentTime, patternDuration, isPlaying, isPaused, hasBeenReset } from './time'
@@ -17,6 +27,8 @@ export {
     findElement,
     simulateDesktopViewport,
     simulateMobileViewport,
+    clickElement,
+    deleteCharacterFromInput,
 } from './generic'
 
 export {

@@ -1,10 +1,11 @@
 import { ElementHandle } from 'puppeteer'
 import {
+    clickElement,
     elementExists,
     elementInnerText,
-    findElement,
+    quickRefresh,
     refreshPage,
-    resetSpecByTogglingToOtherPatternThenBackToTestPattern,
+    selectSpecControlsPattern,
 } from '../../support'
 
 const IMMERSIVE_AUDIO_TOGGLE: string = '#toggle-immersive-audio'
@@ -20,7 +21,8 @@ describe('immersive audio', () => {
 
     describe('after selecting a pattern', () => {
         beforeEach(async (done: DoneFn) => {
-            await resetSpecByTogglingToOtherPatternThenBackToTestPattern()
+            await quickRefresh()
+            await selectSpecControlsPattern()
             done()
         })
 
@@ -32,8 +34,7 @@ describe('immersive audio', () => {
         })
 
         it('changes the button to exit after entering', async (done: DoneFn) => {
-            const toggleImmersiveAudioButton: ElementHandle = await findElement(IMMERSIVE_AUDIO_TOGGLE)
-            await toggleImmersiveAudioButton.click()
+            await clickElement(IMMERSIVE_AUDIO_TOGGLE)
 
             expect(await elementInnerText(IMMERSIVE_AUDIO_TOGGLE))
                 .toBe('exit immersive audio', 'immersive audio was not show to be exitable')

@@ -1,36 +1,38 @@
-import { ElementHandle } from 'puppeteer'
 import {
+    clickElement,
     elementExists,
     elementInnerText,
-    findElement,
     leftColumnIs,
-    refreshPage,
-    selectTestPattern,
+    quickRefresh,
+    selectAboutPage,
+    selectSpecControlsPattern,
     simulateDesktopViewport,
     simulateMobileViewport,
+    waitLongEnoughForAnimationToComplete,
 } from '../../support'
 
-const selectAboutPage: () => Promise<void> =
+const selectAboutPageWithoutAlsoSimulatingDesktopViewport: () => Promise<void> =
     async (): Promise<void> => {
-        const title: ElementHandle = await findElement('#title h1')
-        await title.click()
+        await clickElement('#title h1')
+        await waitLongEnoughForAnimationToComplete()
     }
 
 const selectAboutPageBySymbol: () => Promise<void> =
     async (): Promise<void> => {
-        const title: ElementHandle = await findElement('#title svg')
-        await title.click()
+        await clickElement('#title svg')
+        await waitLongEnoughForAnimationToComplete()
     }
 
 const titleIs: (expectedTitle: string) => Promise<void> =
     async (expectedTitle: string): Promise<void> => {
         expect(await elementInnerText('#middle-plus-right-columns h1'))
-            .toBe(expectedTitle, `title was not ${expectedTitle}`)
+            .toBe(expectedTitle)
     }
 
 describe('about page', () => {
     beforeEach(async (done: DoneFn) => {
-        await refreshPage()
+        await quickRefresh()
+        await selectSpecControlsPattern()
 
         done()
     })
@@ -45,7 +47,7 @@ describe('about page', () => {
     it('completely removes the spec panel', async (done: DoneFn) => {
         await selectAboutPage()
         expect(await elementExists('#spec-panel'))
-            .toBeFalsy()
+            .toBeFalsy('spec panel was still shown')
 
         done()
     })
@@ -53,7 +55,7 @@ describe('about page', () => {
     it('hides the performer panel', async (done: DoneFn) => {
         await selectAboutPage()
         expect(await elementExists('#performer-panel.closed'))
-            .toBeTruthy()
+            .toBeTruthy('performer panel was not hidden')
 
         done()
     })
@@ -61,7 +63,7 @@ describe('about page', () => {
     it('hides the right column', async (done: DoneFn) => {
         await selectAboutPage()
         expect(await elementExists('#middle-plus-right-columns.right-column-closed'))
-            .toBeTruthy()
+            .toBeTruthy('right column was not hidden')
 
         done()
     })
@@ -69,7 +71,7 @@ describe('about page', () => {
     it('no longer shows the about page after you select a pattern from the list', async (done: DoneFn) => {
         await selectAboutPage()
 
-        await selectTestPattern()
+        await selectSpecControlsPattern()
         await titleIs('Playroom Test Spec Controls')
 
         done()
@@ -84,6 +86,7 @@ describe('about page', () => {
 
         afterEach(async (done: DoneFn) => {
             await simulateDesktopViewport()
+            await clickElement('#hamburger')
 
             done()
         })
@@ -91,7 +94,7 @@ describe('about page', () => {
         it('collapses the left column when you select a pattern', async (done: DoneFn) => {
             await leftColumnIs('open')
 
-            await selectAboutPage()
+            await selectAboutPageWithoutAlsoSimulatingDesktopViewport()
             await leftColumnIs('closed')
 
             done()

@@ -13,10 +13,9 @@ import {
     POST_PATTERN_RANGED_PROPERTY_ONE_INITIAL_VALUE,
     POST_PATTERN_RANGED_PROPERTY_TWO_INITIAL_VALUE,
     refreshPage,
-    resetSpecByTogglingToOtherPatternThenBackToTestPattern,
     selectOption,
-    selectOtherTestPattern,
-    selectTestPattern,
+    selectPostPattern,
+    selectSpecControlsPattern,
     simulateDesktopViewport,
     simulateMobileViewport,
     SPEC_CONTROLS_PATTERN_ID,
@@ -94,35 +93,35 @@ describe('pattern list', () => {
 
     it('shows the no-pattern message before you select one', async (done: DoneFn) => {
         expect(await elementExists('#no-pattern-message'))
-            .toBeTruthy()
+            .toBeTruthy('no pattern message was not shown before selecting a pattern')
 
         done()
     })
 
     it('does not show a header for a pattern before you select one', async (done: DoneFn) => {
         expect(await elementExists('#second-row h1'))
-            .toBeFalsy()
+            .toBeFalsy('header was shown for pattern before selecting one')
 
         done()
     })
 
     describe('after selecting a pattern', () => {
         beforeEach(async (done: DoneFn) => {
-            await resetSpecByTogglingToOtherPatternThenBackToTestPattern()
-            await openSpecControlsIfNotOpen()
+            await simulateDesktopViewport()
+            await selectSpecControlsPattern()
             done()
         })
 
         it('no longer shows the no-pattern message after you select one', async (done: DoneFn) => {
             expect(await elementExists('#no-pattern-message'))
-                .toBeFalsy()
+                .toBeFalsy('no pattern message was still shown')
 
             done()
         })
 
         it('opens the right column', async (done: DoneFn) => {
             expect(await elementExists('#middle-plus-right-columns.right-column-open'))
-                .toBeTruthy()
+                .toBeTruthy('the right column was not open')
 
             done()
         })
@@ -131,24 +130,29 @@ describe('pattern list', () => {
             const patternTitle: string = await elementInnerText('#second-row h1')
 
             expect(patternTitle)
-                .toBe('Playroom Test Spec Controls')
+                .toBe('Playroom Test Spec Controls', 'header for the pattern\'s title was not shown')
 
             done()
         })
 
         it('the selected pattern is highlighted', async (done: DoneFn) => {
             expect(await elementExists(`#${SPEC_CONTROLS_PATTERN_ID}.selected`))
-                .toBeTruthy()
+                .toBeTruthy('the selected pattern was not highlighted')
 
             done()
         })
 
         describe('making a new selection from the pattern list', () => {
             describe('when it is a different pattern than the current selection', () => {
+                beforeEach(async (done: DoneFn) => {
+                    await openSpecControlsIfNotOpen()
+                    done()
+                })
+
                 it('changes the spec to the new pattern\'s initial', async (done: DoneFn) => {
                     await expectInitial()
 
-                    await selectOtherTestPattern()
+                    await selectPostPattern()
                     await expectOtherInitial()
 
                     done()
@@ -157,7 +161,7 @@ describe('pattern list', () => {
                 it('if there were any invalid controls, they no longer appear as invalid', async (done: DoneFn) => {
                     await invalidateControl()
 
-                    await selectOtherTestPattern()
+                    await selectPostPattern()
                     await controlIsValid()
 
                     done()
@@ -168,7 +172,7 @@ describe('pattern list', () => {
                 it('does not reset the spec changes you have made', async (done: DoneFn) => {
                     await makeSpecChanges()
 
-                    await selectTestPattern()
+                    await selectSpecControlsPattern()
                     await specModificationsPreserved()
 
                     done()
@@ -193,7 +197,7 @@ describe('pattern list', () => {
         it('collapses the left column when you select a pattern', async (done: DoneFn) => {
             await leftColumnIs('open')
 
-            await selectTestPattern()
+            await selectSpecControlsPattern()
             await leftColumnIs('closed')
 
             done()

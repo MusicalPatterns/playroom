@@ -3,11 +3,11 @@
 import { ElementHandle } from 'puppeteer'
 import { SecretSelectorsForTest } from '../../../src/indexForTest'
 import {
+    clickElement,
     elementIds,
     elementInnerText,
     findElement,
-    openSpecControlsIfNotOpen,
-    resetSpecByTogglingToOtherPatternThenBackToTestPattern,
+    refreshForSpecControlsTest,
     selectOption,
     SPEC_ARRAYED_PROPERTY_KEY,
     SPEC_ARRAYED_PROPERTY_WITH_INITIAL_ELEMENT_VALUE_KEY,
@@ -46,8 +46,7 @@ const modifyStringedControl: () => Promise<void> =
 
 const modifyToggledControl: () => Promise<void> =
     async (): Promise<void> => {
-        const checkbox: ElementHandle = await findElement(`input#${SPEC_TOGGLED_PROPERTY_KEY}`)
-        await checkbox.click()
+        await clickElement(`input#${SPEC_TOGGLED_PROPERTY_KEY}`)
     }
 
 const modifyFieldOfArrayedControl: () => Promise<void> =
@@ -133,8 +132,7 @@ const controlsAreInOrder: () => Promise<void> =
 
 describe('submitting spec changes', () => {
     beforeEach(async (done: DoneFn) => {
-        await resetSpecByTogglingToOtherPatternThenBackToTestPattern()
-        await openSpecControlsIfNotOpen()
+        await refreshForSpecControlsTest()
         done()
     })
 

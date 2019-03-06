@@ -2,16 +2,14 @@ import { ElementHandle } from 'puppeteer'
 import { SpecControlStates } from '../../../src/indexForTest'
 import {
     BAD_FORMAT_INVALID_TEST_MODIFICATION,
+    clickElement,
+    deleteCharacterFromInput,
     elementChecked,
     elementExists,
     elementValue,
     findElement,
-    openSpecControlsIfNotOpen,
-    press,
-    reset,
-    resetSpecByTogglingToOtherPatternThenBackToTestPattern,
+    refreshForSpecControlsTest,
     selectOption,
-    simulateDesktopViewport,
     SPEC_CONTROLS_PATTERN_OPTIONED_PROPERTY_ONE_INITIAL_VALUE,
     SPEC_CONTROLS_PATTERN_OPTIONED_PROPERTY_ONE_MODIFIED_VALUE,
     SPEC_CONTROLS_PATTERN_RANGED_PROPERTY_ONE_INITIAL_VALUE,
@@ -26,6 +24,11 @@ import {
     SPEC_TOGGLED_PROPERTY_KEY,
     VALID_TEST_MODIFICATION,
 } from '../../support'
+
+const clickResetButton: () => Promise<void> =
+    async (): Promise<void> => {
+        await clickElement('button#reset')
+    }
 
 const resetIsDisabled: () => Promise<void> =
     async (): Promise<void> => {
@@ -47,9 +50,7 @@ const modifyControl: () => Promise<void> =
 
 const returnControlBackToItsDefault: () => Promise<void> =
     async (): Promise<void> => {
-        const control: ElementHandle = await findElement(`input[type=number]#${SPEC_RANGED_PROPERTY_ONE_KEY}`)
-        await control.click()
-        await press('Backspace')
+        await deleteCharacterFromInput(`input[type=number]#${SPEC_RANGED_PROPERTY_ONE_KEY}`)
     }
 
 const modifyAllTheThings: () => Promise<void> =
@@ -59,8 +60,7 @@ const modifyAllTheThings: () => Promise<void> =
         const rangedControlTwo: ElementHandle = await findElement(`input[type=number]#${SPEC_RANGED_PROPERTY_TWO_KEY}`)
         await rangedControlTwo.type(VALID_TEST_MODIFICATION)
         await selectOption(`select#${SPEC_OPTIONED_PROPERTY_ONE_KEY}`, SPEC_CONTROLS_PATTERN_OPTIONED_PROPERTY_ONE_MODIFIED_VALUE)
-        const checkbox: ElementHandle = await findElement(`input#${SPEC_TOGGLED_PROPERTY_KEY}`)
-        await checkbox.click()
+        await clickElement(`input#${SPEC_TOGGLED_PROPERTY_KEY}`)
         const stringedControl: ElementHandle = await findElement(`input[type=text]#${SPEC_STRINGED_PROPERTY_KEY}`)
         await stringedControl.type(VALID_TEST_MODIFICATION)
     }
@@ -115,9 +115,7 @@ const controlIsBackToValid: () => Promise<void> =
 
 describe('reset button', () => {
     beforeEach(async (done: DoneFn) => {
-        await simulateDesktopViewport()
-        await resetSpecByTogglingToOtherPatternThenBackToTestPattern()
-        await openSpecControlsIfNotOpen()
+        await refreshForSpecControlsTest()
         done()
     })
 
@@ -149,7 +147,7 @@ describe('reset button', () => {
         await modifyAllTheThings()
         await expectAllTheThingsToBeModified()
 
-        await reset()
+        await clickResetButton()
         await expectAllTheThingsToBeBackToTheirInitialStates()
 
         done()
@@ -160,7 +158,7 @@ describe('reset button', () => {
 
         await modifyAnotherControlJustSoThatTheResetButtonIsEnabled()
 
-        await reset()
+        await clickResetButton()
         await controlIsBackToValid()
 
         done()

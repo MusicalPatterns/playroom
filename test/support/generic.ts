@@ -1,4 +1,6 @@
 import {
+    clickElement as utilitiesClickElement,
+    deleteCharacterFromInput as utilitiesDeleteCharacterFromInput,
     DomValue,
     elementChecked as utilitiesElementChecked,
     elementCount as utilitiesElementCount,
@@ -64,6 +66,14 @@ const simulateDesktopViewport: () => Promise<void> =
     async (): Promise<void> =>
         utilitiesSimulateDesktopViewport(page)
 
+const clickElement: (selector: string) => Promise<void> =
+    async (selector: string): Promise<void> =>
+        utilitiesClickElement(page, selector)
+
+const deleteCharacterFromInput: (selector: string) => Promise<void> =
+    async (selector: string): Promise<void> =>
+        utilitiesDeleteCharacterFromInput(page, selector)
+
 export {
     elementValue,
     elementExists,
@@ -77,4 +87,6 @@ export {
     selectOption,
     simulateMobileViewport,
     simulateDesktopViewport,
+    clickElement,
+    deleteCharacterFromInput,
 }
