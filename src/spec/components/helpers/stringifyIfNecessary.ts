@@ -1,4 +1,4 @@
-import { SpecValue } from '../../../types'
+import { SpecValue } from '@musical-patterns/pattern'
 
 const stringifyIfNecessary: (value: SpecValue) => string =
     (value: SpecValue): string =>

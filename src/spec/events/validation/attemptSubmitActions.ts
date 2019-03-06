@@ -1,4 +1,4 @@
-import { Spec, SpecAttributes, SpecValidationFunction } from '@musical-patterns/pattern'
+import { DomSpec, DomSpecValue, Spec, SpecAttributes, SpecValidationFunction } from '@musical-patterns/pattern'
 import { Maybe } from '@musical-patterns/utilities'
 import { Action, ActionType } from '../../../root'
 import { SpecStateKey } from '../../state'
@@ -9,13 +9,13 @@ const buildAttemptSubmitActions: (parameters: BuildAttemptSubmitActionsParameter
     (parameters: BuildAttemptSubmitActionsParameters): Action[] => {
         const { specState, specKey, specValue, suppressSpecValidationResults } = parameters
 
-        const displayedSpec: Spec = specState.get(SpecStateKey.DISPLAYED_SPEC)
+        const displayedSpec: DomSpec = specState.get(SpecStateKey.DISPLAYED_SPEC)
         const submittedSpec: Spec = specState.get(SpecStateKey.SUBMITTED_SPEC)
         const specAttributes: SpecAttributes = specState.get(SpecStateKey.SPEC_ATTRIBUTES)
         const validationFunction: Maybe<SpecValidationFunction> = specState.get(SpecStateKey.VALIDATION_FUNCTION)
 
         const updatedSubmittedSpec: Spec = { ...submittedSpec, [ specKey ]: specValue }
-        const updatedDisplayedSpec: Spec = { ...displayedSpec, [ specKey ]: specValue }
+        const updatedDisplayedSpec: DomSpec = { ...displayedSpec, [ specKey ]: specValue as DomSpecValue }
 
         const { isValid, updatedSpecValidationResults } = validateSubmittedSpec({
             specAttributes,

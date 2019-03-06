@@ -1,5 +1,5 @@
+import { DomValueOrChecked } from '@musical-patterns/utilities'
 import * as React from 'react'
-import { DomValueOrChecked } from '../../types'
 
 const isCheckbox: (target: HTMLInputElement) => boolean =
     (target: HTMLInputElement): boolean =>

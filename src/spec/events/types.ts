@@ -1,4 +1,11 @@
-import { Preset, Spec, SpecAttributes, SpecValidationFunction, SpecValidationResults } from '@musical-patterns/pattern'
+import {
+    DomSpec,
+    Preset,
+    Spec,
+    SpecAttributes,
+    SpecValidationFunction,
+    SpecValidationResults,
+} from '@musical-patterns/pattern'
 import { DictionaryOf, Ordinal } from '@musical-patterns/utilities'
 import { DispatchAsProp, EventAsProp } from '../../types'
 import { AddOrRemoveButtonPropsFromParent, SpecPanelOpenAsProp } from '../components'
@@ -23,7 +30,7 @@ interface HandleResetParameters extends DispatchAsProp {
 interface ValidateSubmittedSpecParameters {
     specAttributes: SpecAttributes,
     specKey: string,
-    updatedDisplayedSpec: Spec,
+    updatedDisplayedSpec: DomSpec,
     validationFunction?: SpecValidationFunction,
 }
 

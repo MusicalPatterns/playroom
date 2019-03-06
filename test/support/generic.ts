@@ -1,6 +1,5 @@
-// tslint:disable no-any
-
 import {
+    DomValue,
     elementChecked as utilitiesElementChecked,
     elementCount as utilitiesElementCount,
     elementExists as utilitiesElementExists,
@@ -17,8 +16,8 @@ import {
 import { ElementHandle } from 'puppeteer'
 import { page } from '../setup'
 
-const elementValue: (selector: string) => Promise<any> =
-    async (selector: string): Promise<any> =>
+const elementValue: (selector: string) => Promise<DomValue> =
+    async (selector: string): Promise<DomValue> =>
         utilitiesElementValue(page, selector)
 
 const elementExists: (selector: string) => Promise<boolean> =

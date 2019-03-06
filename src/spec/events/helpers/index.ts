@@ -1,2 +1,3 @@
 export { resetActions } from './resetActions'
-export { mergeEventValueIntoSpecValue } from './mergeEventValueIntoSpecValue'
+export { getArrayedDomSpecValue } from './getArrayedDomSpecValue'
+export { mergeEventValueIntoArrayedSpecValue } from './mergeEventValueIntoArrayedSpecValue'

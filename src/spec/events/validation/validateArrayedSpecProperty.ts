@@ -1,20 +1,21 @@
 import {
+    ArrayedDomSpecValue,
     ArrayedPropertyInvalidSpecMessage,
     InvalidSpecMessage,
+    SingularDomSpecValue,
     SingularPropertyInvalidSpecMessage,
     SpecPropertyAttributes,
 } from '@musical-patterns/pattern'
-import { DomValueOrChecked } from '../../../types'
 import { validateSpecProperty } from './validateSpecProperty'
 
 const validateArrayedSpecProperty:
-    (specValueArray: DomValueOrChecked[], propertyAttributes: SpecPropertyAttributes) => InvalidSpecMessage =
-    (specValueArray: DomValueOrChecked[], propertyAttributes: SpecPropertyAttributes): InvalidSpecMessage => {
+    (arrayedDomSpecValue: ArrayedDomSpecValue, propertyAttributes: SpecPropertyAttributes) => InvalidSpecMessage =
+    (arrayedDomSpecValue: ArrayedDomSpecValue, propertyAttributes: SpecPropertyAttributes): InvalidSpecMessage => {
         let valid: boolean = true
-        const results: ArrayedPropertyInvalidSpecMessage = specValueArray.map(
-            (subValue: DomValueOrChecked): SingularPropertyInvalidSpecMessage => {
+        const results: ArrayedPropertyInvalidSpecMessage = arrayedDomSpecValue.map(
+            (singularDomSpecValue: SingularDomSpecValue): SingularPropertyInvalidSpecMessage => {
                 const subResult: SingularPropertyInvalidSpecMessage =
-                    validateSpecProperty(subValue, propertyAttributes) as SingularPropertyInvalidSpecMessage
+                    validateSpecProperty(singularDomSpecValue, propertyAttributes) as SingularPropertyInvalidSpecMessage
                 if (subResult) {
                     valid = false
                 }

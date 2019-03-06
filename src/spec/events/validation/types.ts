@@ -1,4 +1,4 @@
-import { SpecValue } from '../../../types'
+import { SpecValue } from '@musical-patterns/pattern'
 import { ImmutableSpecState } from '../../state'
 
 interface BuildAttemptSubmitActionsParameters {

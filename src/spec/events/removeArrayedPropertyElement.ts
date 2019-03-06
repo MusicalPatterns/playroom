@@ -1,9 +1,14 @@
-import { SingularPropertyInvalidSpecMessage, Spec, SpecValidationResults } from '@musical-patterns/pattern'
+import {
+    ArrayedDomSpecValue,
+    DomSpec,
+    SingularPropertyInvalidSpecMessage,
+    SpecValidationResults,
+} from '@musical-patterns/pattern'
 import { indexOfLastElement, INITIAL, lastElement, slice } from '@musical-patterns/utilities'
 import { batchActions } from 'redux-batched-actions'
 import { Action } from '../../root'
-import { DomValueOrChecked } from '../../types'
 import { SpecStateKey } from '../state'
+import { getArrayedDomSpecValue } from './helpers'
 import { HandleArrayedPropertyAddOrRemoveParameters } from './types'
 import { buildAttemptSubmitActions } from './validation'
 
@@ -26,10 +31,12 @@ const isNoInvalidSpecMessageForRemovedElement:
 
 const handleArrayedPropertyElementRemove: (parameters: HandleArrayedPropertyAddOrRemoveParameters) => void =
     ({ dispatch, event, specKey, specState }: HandleArrayedPropertyAddOrRemoveParameters): void => {
-        const displayedSpec: Spec = specState.get(SpecStateKey.DISPLAYED_SPEC)
+        const displayedSpec: DomSpec = specState.get(SpecStateKey.DISPLAYED_SPEC)
         const specValidationResults: SpecValidationResults = specState.get(SpecStateKey.SPEC_VALIDATION_RESULTS)
-        const arrayedSpecValue: DomValueOrChecked[] = displayedSpec[ specKey ] as DomValueOrChecked[]
-        const updatedArrayedSpecValue: DomValueOrChecked[] = slice(
+
+        const arrayedSpecValue: ArrayedDomSpecValue = getArrayedDomSpecValue(displayedSpec, specKey)
+
+        const updatedArrayedSpecValue: ArrayedDomSpecValue = slice(
             arrayedSpecValue,
             INITIAL,
             indexOfLastElement(arrayedSpecValue),

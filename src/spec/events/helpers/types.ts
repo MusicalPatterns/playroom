@@ -1,10 +1,9 @@
-import { Spec } from '@musical-patterns/pattern'
-import { Ordinal } from '@musical-patterns/utilities'
-import { DomValueOrChecked } from '../../../types'
+import { DomSpec } from '@musical-patterns/pattern'
+import { DomValueOrChecked, Ordinal } from '@musical-patterns/utilities'
 
 interface MergeEventValueIntoSpecValueParameters {
     arrayedPropertyIndex: Ordinal,
-    displayedSpec: Spec,
+    displayedSpec: DomSpec,
     eventValue: DomValueOrChecked,
     specKey: string,
 }

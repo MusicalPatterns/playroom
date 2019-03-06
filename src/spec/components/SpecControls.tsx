@@ -1,4 +1,10 @@
-import { defaultSpecPropertyAttributes, Spec, SpecAttributes, StandardSpecProperties } from '@musical-patterns/pattern'
+import {
+    defaultSpecPropertyAttributes,
+    DomSpec,
+    Spec,
+    SpecAttributes,
+    StandardSpecProperties,
+} from '@musical-patterns/pattern'
 import { from, keys, map, Ordinal } from '@musical-patterns/utilities'
 import * as React from 'react'
 import { connect } from 'react-redux'
@@ -24,7 +30,7 @@ const mapDispatchToProps: (dispatch: Dispatch) => SpecControlsPropsFromDispatch 
 const SpecControls: React.ComponentType<SpecControlsProps> =
     (specControlsProps: SpecControlsProps): JSX.Element => {
         const { specState }: SpecControlsProps = specControlsProps
-        const displayedSpec: Spec = specState
+        const displayedSpec: DomSpec = specState
             .get(SpecStateKey.DISPLAYED_SPEC)
         const specAttributes: SpecAttributes = specState
             .get(SpecStateKey.SPEC_ATTRIBUTES)

@@ -1,6 +1,11 @@
-import { Preset, SingularPropertyInvalidSpecMessage, Spec, SpecPropertyAttributes } from '@musical-patterns/pattern'
-import { DictionaryOf, Maybe, Ordinal } from '@musical-patterns/utilities'
-import { DomValueOrChecked } from '../../types'
+import {
+    DomSpec,
+    Preset, SingularDomSpecValue,
+    SingularPropertyInvalidSpecMessage, SingularSpecValue,
+    Spec,
+    SpecPropertyAttributes,
+} from '@musical-patterns/pattern'
+import { DictionaryOf, DomValueOrChecked, Maybe, Ordinal } from '@musical-patterns/utilities'
 import { CaretClickEventExtractor, PresetChangeHandler, SpecControlChangeHandler } from '../events'
 import { ImmutableSpecState } from '../state'
 
@@ -27,9 +32,9 @@ interface SpecControlProps {
 
 interface SingularSpecControlProps extends SpecControlProps {
     arrayedPropertyIndex?: Ordinal,
-    displayedSpecValue: DomValueOrChecked,
+    displayedSpecValue: SingularDomSpecValue,
     invalidSpecMessage: SingularPropertyInvalidSpecMessage,
-    submittedSpecValue: DomValueOrChecked,
+    submittedSpecValue: SingularSpecValue,
 }
 
 interface ResetPropsFromState {

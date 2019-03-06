@@ -32,7 +32,7 @@ const SingularSpecControl: React.ComponentType<SingularSpecControlProps> =
         const id: string = specControlId({ isNotAnArrayedProperty, arrayedPropertyIndex, specKey })
 
         const validityClass: string = getValidityClass(invalidSpecMessage)
-        const inputProps: InputProps = { validityClass, onChange, id, specValue: displayedSpecValue }
+        const inputProps: InputProps = { validityClass, onChange, id, value: displayedSpecValue }
 
         const secretClass: string = SecretSelectorsForTest.SECRET_SUBMITTED_SPEC_CONTROL
 

@@ -1,4 +1,13 @@
-import { Preset, Spec, SpecAttributes, SpecValidationFunction, SpecValidationResults } from '@musical-patterns/pattern'
+// tslint:disable max-file-line-count
+
+import {
+    DomSpec,
+    Preset,
+    Spec,
+    SpecAttributes,
+    SpecValidationFunction,
+    SpecValidationResults,
+} from '@musical-patterns/pattern'
 import { DictionaryOf, Maybe, TypedMap } from '@musical-patterns/utilities'
 
 enum SpecStateKey {
@@ -14,7 +23,7 @@ enum SpecStateKey {
 
 interface SpecState {
     [ SpecStateKey.INITIAL_SPEC ]: Spec,
-    [ SpecStateKey.DISPLAYED_SPEC ]: Spec,
+    [ SpecStateKey.DISPLAYED_SPEC ]: DomSpec,
     [ SpecStateKey.SPEC_VALIDATION_RESULTS ]: SpecValidationResults,
     [ SpecStateKey.SUBMITTED_SPEC ]: Spec,
     [ SpecStateKey.SPEC_ATTRIBUTES ]: SpecAttributes,
@@ -49,7 +58,7 @@ interface SetSubmittedSpec {
 }
 
 interface SetDisplayedSpec {
-    data: Spec,
+    data: DomSpec,
     type: SpecStateActionType.SET_DISPLAYED_SPEC,
 }
 

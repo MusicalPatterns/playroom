@@ -1,11 +1,13 @@
 import {
+    ArrayedDomSpecValue,
+    DomSpecValue,
     InvalidSpecMessage,
-    RangedConstraint, RangedSpecPropertyAttributes,
+    RangedConstraint,
     SpecPropertyAttributes,
-    SpecPropertyType, StringedConstraint,
+    SpecPropertyType,
+    StringedConstraint,
 } from '@musical-patterns/pattern'
 import { Maybe } from '@musical-patterns/utilities'
-import { SpecValue } from '../../../types'
 import { validateArrayedSpecProperty } from './validateArrayedSpecProperty'
 import { validByRangedConstraint } from './validByRangedConstraint'
 import { validByStringedConstraint } from './validByStringedConstraint'
@@ -17,28 +19,31 @@ const validationRequired: (propertyAttributes: Maybe<SpecPropertyAttributes>) =>
         }
 
         return !(propertyAttributes.specPropertyType === SpecPropertyType.OPTIONED ||
-            propertyAttributes.specPropertyType === SpecPropertyType.TOGGLED);
+            propertyAttributes.specPropertyType === SpecPropertyType.TOGGLED)
     }
 
 const validateSpecProperty:
-    (specValue: SpecValue, propertyAttributes: Maybe<SpecPropertyAttributes>) => InvalidSpecMessage =
-    (specValue: SpecValue, propertyAttributes: Maybe<SpecPropertyAttributes>): InvalidSpecMessage => {
+    (domSpecValue: DomSpecValue, propertyAttributes: Maybe<SpecPropertyAttributes>) => InvalidSpecMessage =
+    (domSpecValue: DomSpecValue, propertyAttributes: Maybe<SpecPropertyAttributes>): InvalidSpecMessage => {
         if (!validationRequired(propertyAttributes)) {
             return undefined
         }
         const { constraint, specPropertyType } = propertyAttributes as SpecPropertyAttributes
 
-        if (specValue instanceof Array) {
-            return validateArrayedSpecProperty(specValue, propertyAttributes as SpecPropertyAttributes)
+        if (domSpecValue instanceof Array) {
+            return validateArrayedSpecProperty(
+                domSpecValue as ArrayedDomSpecValue,
+                propertyAttributes as SpecPropertyAttributes,
+            )
         }
 
         if (specPropertyType === SpecPropertyType.STRINGED) {
-            return validByStringedConstraint(specValue as string, constraint as Maybe<StringedConstraint>)
+            return validByStringedConstraint(domSpecValue as string, constraint as Maybe<StringedConstraint>)
         }
 
         let numericValue: number
         try {
-            numericValue = JSON.parse(specValue as string)
+            numericValue = JSON.parse(domSpecValue as string)
         }
         catch (e) {
             return 'this property is formatted in a way which cannot be parsed'

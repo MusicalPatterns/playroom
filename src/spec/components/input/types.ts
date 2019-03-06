@@ -1,33 +1,38 @@
-import { OptionedConstraint, SpecPropertyAttributes, SpecPropertyType } from '@musical-patterns/pattern'
-import { DomValue, DomValueOrChecked, EventHandler } from '../../../types'
+import {
+    OptionedConstraint,
+    SpecPropertyAttributes,
+    SpecPropertyType,
+} from '@musical-patterns/pattern'
+import { DomValue, DomValueOrChecked } from '@musical-patterns/utilities'
+import { EventHandler } from '../../../types'
 
 interface InputProps {
     id: string,
     onChange: EventHandler,
-    specValue: DomValueOrChecked,
     validityClass: string,
+    value: DomValueOrChecked,
 }
 
 interface OptionedInputProps extends InputProps {
     constraint: OptionedConstraint,
-    specValue: DomValue,
+    value: DomValue,
 }
 
 interface RangedInputProps extends InputProps {
     max: number,
     min: number,
-    specValue: DomValue,
     step: number,
+    value: DomValue,
 }
 
 interface StringedInputProps extends InputProps {
     maxLength: number,
     minLength: number,
-    specValue: string,
+    value: string,
 }
 
 interface ToggledInputProps extends InputProps {
-    specValue: boolean,
+    value: boolean,
 }
 
 interface BuildInputProps {

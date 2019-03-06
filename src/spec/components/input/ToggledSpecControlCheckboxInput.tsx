@@ -4,10 +4,10 @@ import * as React from 'react'
 import { ToggledInputProps } from './types'
 
 const ToggledSpecControlCheckboxInput: React.ComponentType<ToggledInputProps> =
-    ({ onChange, id, specValue, validityClass }: ToggledInputProps): JSX.Element => (
+    ({ onChange, id, value: checked, validityClass }: ToggledInputProps): JSX.Element => (
         <div {...{ className: 'toggled-spec-control-checkbox-input' }}>
-            <input {...{ checked: specValue, className: validityClass, id, onChange, type: 'checkbox' }}/>
-            <FontAwesomeIcon {...{ key: 1, icon: specValue ? faCheckSquare : faSquare }}/>
+            <input {...{ checked, className: validityClass, id, onChange, type: 'checkbox' }}/>
+            <FontAwesomeIcon {...{ key: 1, icon: checked ? faCheckSquare : faSquare }}/>
         </div>
     )
 

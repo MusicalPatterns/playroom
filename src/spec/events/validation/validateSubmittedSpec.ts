@@ -1,6 +1,5 @@
-import { InvalidSpecMessage, SpecValidationResults } from '@musical-patterns/pattern'
+import { DomSpecValue, InvalidSpecMessage, Spec, SpecValidationResults } from '@musical-patterns/pattern'
 import { entries } from '@musical-patterns/utilities'
-import { SpecValue } from '../../../types'
 import { SpecValidationResult, ValidateSubmittedSpecParameters } from '../types'
 import { validateSpecProperty } from './validateSpecProperty'
 
@@ -10,10 +9,9 @@ const validateSubmittedSpec: (parameters: ValidateSubmittedSpecParameters) => Sp
 
         const reevaluatedSpecValidationResults: SpecValidationResults = entries(updatedDisplayedSpec)
             .reduce<SpecValidationResults>(
-                // tslint:disable-next-line no-any
-                (accumulator: SpecValidationResults, [ key, val ]: [ string, any ]) => ({
+                (accumulator: SpecValidationResults, [ key, val ]: [ string, DomSpecValue ]) => ({
                     ...accumulator,
-                    [ key ]: validateSpecProperty(val as SpecValue, specAttributes[ key ]),
+                    [ key ]: validateSpecProperty(val, specAttributes[ key ]),
                 }),
                 {},
             )
@@ -23,7 +21,7 @@ const validateSubmittedSpec: (parameters: ValidateSubmittedSpecParameters) => Sp
 
         let customSpecValidationResultsBasedOnEntireSpec: SpecValidationResults
         if (validationFunction) {
-            customSpecValidationResultsBasedOnEntireSpec = validationFunction(updatedDisplayedSpec)
+            customSpecValidationResultsBasedOnEntireSpec = validationFunction(updatedDisplayedSpec as Spec)
         }
 
         const updatedSpecValidationResults: SpecValidationResults = {
