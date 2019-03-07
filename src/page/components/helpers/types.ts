@@ -3,7 +3,7 @@ import { Maybe } from '@musical-patterns/utilities'
 
 interface GetPatternTitleParameters {
     id: Maybe<Id>,
-    patterns: Maybe<Patterns>
+    patterns: Maybe<Partial<Patterns>>
 }
 
 export {

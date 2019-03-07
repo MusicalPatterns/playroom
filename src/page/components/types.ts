@@ -6,7 +6,7 @@ import { PageName } from '../types'
 
 interface PatternListPropsFromState {
     id: Maybe<Id>,
-    patterns: Maybe<Patterns>,
+    patterns: Maybe<Partial<Patterns>>,
     rightColumnOpen: boolean,
 }
 
@@ -48,13 +48,13 @@ interface PageProps {
 
 interface PostProps {
     id: Maybe<Id>,
-    patterns: Maybe<Patterns>,
+    patterns: Maybe<Partial<Patterns>>,
 }
 
 interface SpecAndPatternListenerPropsFromState {
     debugMode: boolean,
     id: Maybe<Id>,
-    patterns: Maybe<Patterns>,
+    patterns: Maybe<Partial<Patterns>>,
     submittedSpec: Spec,
 }
 
@@ -67,7 +67,7 @@ interface SpecAndPatternListenerProps extends SpecAndPatternListenerPropsFromSta
 
 interface PatternTitleProps {
     id: Maybe<Id>,
-    patterns: Maybe<Patterns>,
+    patterns: Maybe<Partial<Patterns>>,
 }
 
 export {

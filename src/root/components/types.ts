@@ -3,7 +3,7 @@ import { Maybe } from '@musical-patterns/utilities'
 import { PageName } from '../../page'
 
 interface AppProps {
-    patterns: Maybe<Patterns>,
+    patterns: Maybe<Partial<Patterns>>,
 }
 
 interface LeftColumnProps {

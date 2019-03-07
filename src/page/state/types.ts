@@ -12,7 +12,7 @@ enum PageStateKey {
 }
 
 interface PageState {
-    [ PageStateKey.PATTERNS ]: Maybe<Patterns>,
+    [ PageStateKey.PATTERNS ]: Maybe<Partial<Patterns>>,
     [ PageStateKey.PATTERN_ID ]: Maybe<Id>,
     [ PageStateKey.DEBUG_MODE ]: boolean,
     [ PageStateKey.LEFT_COLUMN_OPEN ]: boolean,
@@ -34,7 +34,7 @@ enum PageStateActionType {
 type PageStateActionMap = { [key in keyof typeof PageStateActionType]: PageStateKey }
 
 interface SetPatterns {
-    data: Patterns,
+    data: Partial<Patterns>,
     type: PageStateActionType.SET_PATTERNS,
 }
 

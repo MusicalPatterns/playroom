@@ -10,8 +10,8 @@ import { ActionType, App, store } from './root'
 import './styles'
 
 // tslint:disable-next-line bool-param-default
-const setupPlayroom: (patterns: Patterns, debugMode?: boolean) => Promise<HTMLDivElement> =
-    async (patterns: Patterns, debugMode: boolean = false): Promise<HTMLDivElement> => {
+const setupPlayroom: (patterns: Partial<Patterns>, debugMode?: boolean) => Promise<HTMLDivElement> =
+    async (patterns: Partial<Patterns>, debugMode: boolean = false): Promise<HTMLDivElement> => {
         const root: HTMLDivElement = document.createElement('div')
         root.id = 'root'
 
