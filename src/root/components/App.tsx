@@ -1,3 +1,4 @@
+import { isUndefined } from '@musical-patterns/utilities'
 import * as React from 'react'
 import { connect } from 'react-redux'
 import { ImmutablePageState, PageStateKey } from '../../page'
@@ -17,7 +18,7 @@ const mapStateToProps: (state: ImmutableRootState) => AppProps =
 
 const App: React.ComponentType<AppProps> =
     ({ patterns }: AppProps): JSX.Element => {
-        if (!patterns) {
+        if (isUndefined(patterns)) {
             return <div/>
         }
 

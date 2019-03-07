@@ -10,7 +10,7 @@ import {
     SpecValidationResults,
     SpecValue,
 } from '@musical-patterns/pattern'
-import { Maybe } from '@musical-patterns/utilities'
+import { isUndefined, Maybe } from '@musical-patterns/utilities'
 import * as React from 'react'
 import { SpecStateKey } from '../state'
 import { ArrayedSpecControl } from './arrayed'
@@ -27,7 +27,7 @@ const SpecControl: React.ComponentType<SpecControlProps> =
         const submittedSpecValue: Maybe<SpecValue> = submittedSpec[ specKey ]
         const displayedSpecValue: Maybe<DomSpecValue> = displayedSpec[ specKey ]
 
-        if (submittedSpecValue === undefined || displayedSpecValue === undefined) {
+        if (isUndefined(submittedSpecValue) || isUndefined(displayedSpecValue)) {
             return <div/>
         }
 

@@ -3,6 +3,7 @@ import {
     ARBITRARILY_LARGE_NUMBER,
     constantCaseToUpperCase,
     from,
+    isUndefined,
     map,
     negative,
     Ordinal,
@@ -15,8 +16,8 @@ const OptionedSpecControlSelect: React.ComponentType<OptionedInputProps> =
         const optionElements: JSX.Element[] = map(
             constraint
                 .sort((option: OptionedConstraintOption, nextOption: OptionedConstraintOption): number => {
-                    const order: number = option.order === undefined ? ARBITRARILY_LARGE_NUMBER : option.order
-                    const nextOrder: number = nextOption.order === undefined ?
+                    const order: number = isUndefined(option.order) ? ARBITRARILY_LARGE_NUMBER : option.order
+                    const nextOrder: number = isUndefined(nextOption.order) ?
                         ARBITRARILY_LARGE_NUMBER :
                         nextOption.order
 

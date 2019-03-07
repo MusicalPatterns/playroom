@@ -15,3 +15,6 @@ export {
 export {
     PatternListPropsFromState,
 } from './types'
+export {
+    maybePatternFromPatternsAndId,
+} from './helpers'

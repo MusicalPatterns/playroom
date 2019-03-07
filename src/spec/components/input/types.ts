@@ -1,8 +1,4 @@
-import {
-    OptionedConstraint,
-    SpecPropertyAttributes,
-    SpecPropertyType,
-} from '@musical-patterns/pattern'
+import { OptionedConstraint, SpecPropertyAttributes, SpecPropertyType } from '@musical-patterns/pattern'
 import { DomValue, DomValueOrChecked } from '@musical-patterns/utilities'
 import { EventHandler } from '../../../types'
 

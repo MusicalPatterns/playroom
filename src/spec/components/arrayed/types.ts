@@ -1,5 +1,4 @@
 import { ArrayedDomSpecValue, ArrayedSpecValue, SpecValidationResults } from '@musical-patterns/pattern'
-import { DomValueOrChecked } from '@musical-patterns/utilities'
 import { EventAsProp } from '../../../types'
 import { ImmutableSpecState } from '../../state'
 import { SpecControlProps } from '../types'

@@ -1,5 +1,4 @@
 import {
-    ArrayedDomSpecValue,
     DomSpecValue,
     InvalidSpecMessage,
     RangedConstraint,
@@ -7,14 +6,15 @@ import {
     SpecPropertyType,
     StringedConstraint,
 } from '@musical-patterns/pattern'
-import { Maybe } from '@musical-patterns/utilities'
+import { isUndefined, Maybe } from '@musical-patterns/utilities'
+import { isArrayedDomSpecValue } from '../../components'
 import { validateArrayedSpecProperty } from './validateArrayedSpecProperty'
 import { validByRangedConstraint } from './validByRangedConstraint'
 import { validByStringedConstraint } from './validByStringedConstraint'
 
 const validationRequired: (propertyAttributes: Maybe<SpecPropertyAttributes>) => boolean =
     (propertyAttributes: Maybe<SpecPropertyAttributes>): boolean => {
-        if (!propertyAttributes) {
+        if (isUndefined(propertyAttributes)) {
             return false
         }
 
@@ -30,9 +30,9 @@ const validateSpecProperty:
         }
         const { constraint, specPropertyType } = propertyAttributes as SpecPropertyAttributes
 
-        if (domSpecValue instanceof Array) {
+        if (isArrayedDomSpecValue(domSpecValue)) {
             return validateArrayedSpecProperty(
-                domSpecValue as ArrayedDomSpecValue,
+                domSpecValue,
                 propertyAttributes as SpecPropertyAttributes,
             )
         }

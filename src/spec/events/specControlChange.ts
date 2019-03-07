@@ -1,5 +1,5 @@
 import { DomSpec, SpecValue } from '@musical-patterns/pattern'
-import { DomValueOrChecked } from '@musical-patterns/utilities'
+import { DomValueOrChecked, isUndefined } from '@musical-patterns/utilities'
 import { batchActions } from 'redux-batched-actions'
 import { Action, extractValueFromEvent } from '../../root'
 import { DispatchAsProp } from '../../types'
@@ -18,7 +18,7 @@ const buildSpecControlChangeHandler: BuildSpecControlChangeHandler =
             const displayedSpec: DomSpec = specState.get(SpecStateKey.DISPLAYED_SPEC)
 
             let specValue: SpecValue = eventValue
-            if (arrayedPropertyIndex !== undefined) {
+            if (!isUndefined(arrayedPropertyIndex)) {
                 specValue = mergeEventValueIntoArrayedSpecValue({
                     arrayedPropertyIndex,
                     displayedSpec,

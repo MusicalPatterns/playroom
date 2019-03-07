@@ -1,24 +1,31 @@
-import { Id, Pattern, Spec, SpecData } from '@musical-patterns/pattern'
+import { Id, isId, Pattern, Spec, SpecData } from '@musical-patterns/pattern'
 import { setTimePosition } from '@musical-patterns/performer'
-import { BEGINNING, doAsync, Maybe } from '@musical-patterns/utilities'
+import { BEGINNING, doAsync, isUndefined, Maybe } from '@musical-patterns/utilities'
 import { BatchAction, batchActions } from 'redux-batched-actions'
 import { Action, ActionType } from '../../root'
 import { resetActions } from '../../spec'
+import { maybePatternFromPatternsAndId } from '../components'
 import { adjustWindowActionsWithSideEffects, openRightColumn } from './helpers'
 import { PatternChangeEventHandler, PatternChangeEventHandlerParameters } from './types'
 
 const handlePatternChange: PatternChangeEventHandler =
     async ({ dispatch, patternChangeEventParameters }: PatternChangeEventHandlerParameters): Promise<void> => {
         const { event, patterns, id, rightColumnOpen } = patternChangeEventParameters
-        const target: HTMLLIElement = event.currentTarget as HTMLLIElement
-        const newId: Id = target.id as Id
+        const target: EventTarget & Element = event.currentTarget
+        let newId: Id
+        if (isId(target.id)) {
+            newId = target.id
+        }
+        else {
+            throw new Error('target id was not a pattern Id')
+        }
 
         if (newId === id) {
             return
         }
 
-        const pattern: Maybe<Pattern> = patterns && patterns[ newId ]
-        if (!pattern) {
+        const pattern: Maybe<Pattern> = maybePatternFromPatternsAndId({ patterns, id: newId })
+        if (isUndefined(pattern)) {
             return
         }
 

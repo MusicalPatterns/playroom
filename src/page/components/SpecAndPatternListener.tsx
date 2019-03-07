@@ -5,7 +5,7 @@ import {
 } from '@musical-patterns/compiler'
 import { Pattern } from '@musical-patterns/pattern'
 import { setThreadSpecs, ThreadSpec } from '@musical-patterns/performer'
-import { doAsync, Maybe, Ms } from '@musical-patterns/utilities'
+import { doAsync, isUndefined, Maybe, Ms } from '@musical-patterns/utilities'
 import * as React from 'react'
 import { connect } from 'react-redux'
 import { Dispatch } from 'redux'
@@ -44,7 +44,7 @@ const SpecAndSpecAndPatternListener: React.ComponentType<SpecAndPatternListenerP
             const { debugMode, id, patterns, submittedSpec, setTotalDuration } = props
 
             const pattern: Maybe<Pattern> = maybePatternFromPatternsAndId({ patterns, id })
-            if (!pattern) {
+            if (isUndefined(pattern)) {
                 return
             }
 

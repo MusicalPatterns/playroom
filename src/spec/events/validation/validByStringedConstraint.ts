@@ -1,9 +1,9 @@
 import { SingularPropertyInvalidSpecMessage, StringedConstraint } from '@musical-patterns/pattern'
-import { Maybe } from '@musical-patterns/utilities'
+import { isUndefined, Maybe } from '@musical-patterns/utilities'
 
 const validByMaxLength: (textValue: string, maxLength: Maybe<number>) => SingularPropertyInvalidSpecMessage =
     (textValue: string, maxLength: Maybe<number>): SingularPropertyInvalidSpecMessage => {
-        if (maxLength !== undefined && textValue.length > maxLength) {
+        if (!isUndefined(maxLength) && textValue.length > maxLength) {
             return `must be ${maxLength} characters or less`
         }
 
@@ -12,7 +12,7 @@ const validByMaxLength: (textValue: string, maxLength: Maybe<number>) => Singula
 
 const validByMinLength: (textValue: string, minLength: Maybe<number>) => SingularPropertyInvalidSpecMessage =
     (textValue: string, minLength: Maybe<number>): SingularPropertyInvalidSpecMessage => {
-        if (minLength !== undefined && textValue.length < minLength) {
+        if (!isUndefined(minLength) && textValue.length < minLength) {
             return `must be ${minLength} characters or more`
         }
 
@@ -22,7 +22,7 @@ const validByMinLength: (textValue: string, minLength: Maybe<number>) => Singula
 const validByStringedConstraint:
     (textValue: string, constraint: Maybe<StringedConstraint>) => SingularPropertyInvalidSpecMessage =
     (textValue: string, constraint: Maybe<StringedConstraint>): SingularPropertyInvalidSpecMessage => {
-        if (!constraint) {
+        if (isUndefined(constraint)) {
             return undefined
         }
 

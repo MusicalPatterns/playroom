@@ -7,6 +7,7 @@ import { Dispatch } from 'redux'
 import { EventHandler } from '../../../types'
 import { handleArrayedPropertyElementRemove } from '../../events'
 import { SpecStateKey } from '../../state'
+import { isArrayedDomSpecValue } from '../helpers'
 import { AddOrRemoveButtonProps, AddOrRemoveButtonPropsFromDispatch, HandleAddOrRemoveParameters } from './types'
 
 const mapDispatchToProps: (dispatch: Dispatch) => AddOrRemoveButtonPropsFromDispatch =
@@ -23,8 +24,11 @@ const RemoveButton: React.ComponentType<AddOrRemoveButtonProps> =
         }
 
         const displayedSpec: DomSpec = specState.get(SpecStateKey.DISPLAYED_SPEC)
-        const arrayedSpecValue: DomSpecValue[] = displayedSpec[ specKey ] as DomSpecValue[]
-        const disabled: boolean = !arrayedSpecValue.length
+        const domSpecValue: DomSpecValue = displayedSpec[ specKey ]
+        if (!isArrayedDomSpecValue(domSpecValue)) {
+            throw new Error('tried to remove an element from a non-arrayed dom spec value')
+        }
+        const disabled: boolean = !domSpecValue.length
 
         return (
             <button {...{ className: 'remove', onClick, disabled }}>

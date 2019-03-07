@@ -1,4 +1,4 @@
-import { camelCaseToLowerCase } from '@musical-patterns/utilities'
+import { camelCaseToLowerCase, isUndefined } from '@musical-patterns/utilities'
 import * as React from 'react'
 import { EventHandler, SecretSelectorsForTest } from '../../types'
 import { SpecChangeEventParameters } from '../events'
@@ -28,7 +28,7 @@ const SingularSpecControl: React.ComponentType<SingularSpecControlProps> =
             handleSpecChange({ ...specChangeEventParameters, event })
         }
 
-        const isNotAnArrayedProperty: boolean = arrayedPropertyIndex === undefined
+        const isNotAnArrayedProperty: boolean = isUndefined(arrayedPropertyIndex)
         const id: string = specControlId({ isNotAnArrayedProperty, arrayedPropertyIndex, specKey })
 
         const validityClass: string = getValidityClass(invalidSpecMessage)

@@ -1,5 +1,5 @@
 import { Id, Pattern } from '@musical-patterns/pattern'
-import { entries, from, map, Ordinal } from '@musical-patterns/utilities'
+import { entries, from, isUndefined, map, Ordinal } from '@musical-patterns/utilities'
 import * as React from 'react'
 import { connect } from 'react-redux'
 import { Dispatch } from 'redux'
@@ -31,13 +31,17 @@ const mapDispatchToProps: (dispatch: Dispatch) => PatternListPropsFromDispatch =
 
 const PatternList: React.ComponentType<PatternListProps> =
     ({ handlePatternChangeEvent, id, patterns, rightColumnOpen }: PatternListProps): JSX.Element => {
+        if (isUndefined(patterns)) {
+            return <div/>
+        }
+
         const onClick: EventHandler =
             (event: React.SyntheticEvent): void => {
                 handlePatternChangeEvent({ event, patterns, id, rightColumnOpen })
             }
 
         const options: JSX.Element[] = map(
-            entries(patterns as { [key in Id]: Pattern })
+            entries(patterns)
                 .sort(sortByOrderOrPublishDate),
             ([ listedId, listedPattern ]: [ Id, Pattern ], index: Ordinal): JSX.Element => (
                 <PatternListItem {...{ key: from.Ordinal(index), listedPattern, listedId, onClick, id }} />

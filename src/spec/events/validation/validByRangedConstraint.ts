@@ -1,10 +1,10 @@
 import { RangedConstraint, SingularPropertyInvalidSpecMessage } from '@musical-patterns/pattern'
-import { Maybe } from '@musical-patterns/utilities'
+import { isUndefined, Maybe } from '@musical-patterns/utilities'
 
 const validByMin:
     (numericValue: number, min: Maybe<number>, excludeMin: boolean) => SingularPropertyInvalidSpecMessage =
     (numericValue: number, min: Maybe<number>, excludeMin: boolean): SingularPropertyInvalidSpecMessage => {
-        if (min === undefined) {
+        if (isUndefined(min)) {
             return undefined
         }
 
@@ -25,7 +25,7 @@ const validByMin:
 const validByMax:
     (numericValue: number, max: Maybe<number>, excludeMax: boolean) => SingularPropertyInvalidSpecMessage =
     (numericValue: number, max: Maybe<number>, excludeMax: boolean): SingularPropertyInvalidSpecMessage => {
-        if (max === undefined) {
+        if (isUndefined(max)) {
             return undefined
         }
 
@@ -45,7 +45,7 @@ const validByMax:
 
 const validByStep: (numericValue: number, integer: Maybe<boolean>) => SingularPropertyInvalidSpecMessage =
     (numericValue: number, integer: Maybe<boolean>): SingularPropertyInvalidSpecMessage => {
-        if (!integer) {
+        if (isUndefined(integer)) {
             return undefined
         }
 
@@ -59,7 +59,7 @@ const validByStep: (numericValue: number, integer: Maybe<boolean>) => SingularPr
 const validByRangedConstraint:
     (numericValue: number, constraint: Maybe<RangedConstraint>) => SingularPropertyInvalidSpecMessage =
     (numericValue: number, constraint: Maybe<RangedConstraint>): SingularPropertyInvalidSpecMessage => {
-        if (!constraint) {
+        if (isUndefined(constraint)) {
             return undefined
         }
 

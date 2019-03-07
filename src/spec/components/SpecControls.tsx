@@ -1,7 +1,6 @@
 import {
     defaultSpecPropertyAttributes,
     DomSpec,
-    Spec,
     SpecAttributes,
     StandardSpecProperties,
 } from '@musical-patterns/pattern'

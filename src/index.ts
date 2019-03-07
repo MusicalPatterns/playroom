@@ -4,11 +4,7 @@ import { createElement } from 'react'
 import { render } from 'react-dom'
 import { Provider } from 'react-redux'
 import { BatchAction, batchActions } from 'redux-batched-actions'
-import {
-    buildToggleImmersiveAudioHandlers,
-    onPerformerUpdate,
-    setupKeyboard,
-} from './performer'
+import { buildToggleImmersiveAudioHandlers, onPerformerUpdate, setupKeyboard } from './performer'
 import { ActionType, App, store } from './root'
 // tslint:disable-next-line no-import-side-effect
 import './styles'

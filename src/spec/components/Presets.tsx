@@ -5,6 +5,7 @@ import {
     deepEqual,
     entries,
     from,
+    isUndefined,
     map,
     negative,
     Ordinal,
@@ -34,7 +35,7 @@ const mapDispatchToProps: (dispatch: Dispatch) => PresetsPropsFromDispatch =
 
 const Presets: React.ComponentType<PresetsProps> =
     ({ presetChangeHandler, presets, submittedSpec }: PresetsProps): JSX.Element => {
-        if (!presets) {
+        if (isUndefined(presets)) {
             return <div/>
         }
 
@@ -42,8 +43,8 @@ const Presets: React.ComponentType<PresetsProps> =
         const options: JSX.Element[] = map(
             entries<string, Preset>(presets)
                 .sort(([ _, preset ]: [ string, Preset ], [ __, nextPreset ]: [ string, Preset ]): number => {
-                    const order: number = preset.order === undefined ? ARBITRARILY_LARGE_NUMBER : preset.order
-                    const nextOrder: number = nextPreset.order === undefined ?
+                    const order: number = isUndefined(preset.order) ? ARBITRARILY_LARGE_NUMBER : preset.order
+                    const nextOrder: number = isUndefined(nextPreset.order) ?
                         ARBITRARILY_LARGE_NUMBER :
                         nextPreset.order
 

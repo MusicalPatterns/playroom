@@ -1,32 +1,28 @@
-import {
-    ArrayedDomSpecValue,
-    DomSpec,
-    SingularPropertyInvalidSpecMessage,
-    SpecValidationResults,
-} from '@musical-patterns/pattern'
-import { indexOfLastElement, INITIAL, lastElement, slice } from '@musical-patterns/utilities'
+import { ArrayedDomSpecValue, DomSpec, InvalidSpecMessage, SpecValidationResults } from '@musical-patterns/pattern'
+import { indexOfLastElement, INITIAL, isUndefined, lastElement, slice } from '@musical-patterns/utilities'
 import { batchActions } from 'redux-batched-actions'
 import { Action } from '../../root'
 import { SpecStateKey } from '../state'
-import { getArrayedDomSpecValue } from './helpers'
+import { getArrayedDomSpecValue, isArrayedPropertyInvalidSpecMessage } from './helpers'
 import { HandleArrayedPropertyAddOrRemoveParameters } from './types'
 import { buildAttemptSubmitActions } from './validation'
 
 const isNoInvalidSpecMessageForRemovedElement:
     (specValidationResults: SpecValidationResults, specKey: string) => boolean =
     (specValidationResults: SpecValidationResults, specKey: string): boolean => {
-        if (!specValidationResults) {
+        if (isUndefined(specValidationResults)) {
             return true
         }
 
-        if (!specValidationResults[ specKey ]) {
+        const invalidSpecMessage: InvalidSpecMessage = specValidationResults[ specKey ]
+        if (isUndefined(invalidSpecMessage)) {
             return true
         }
+        if (!isArrayedPropertyInvalidSpecMessage(invalidSpecMessage)) {
+            throw new Error('tried to check invalid spec message array for non-arrayed element')
+        }
 
-        const arrayedPropertyInvalidSpecMessage: SingularPropertyInvalidSpecMessage[] =
-            specValidationResults[ specKey ] as SingularPropertyInvalidSpecMessage[]
-
-        return !lastElement(arrayedPropertyInvalidSpecMessage)
+        return isUndefined(lastElement(invalidSpecMessage))
     }
 
 const handleArrayedPropertyElementRemove: (parameters: HandleArrayedPropertyAddOrRemoveParameters) => void =

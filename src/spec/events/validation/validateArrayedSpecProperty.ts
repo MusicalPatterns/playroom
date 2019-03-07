@@ -6,6 +6,7 @@ import {
     SingularPropertyInvalidSpecMessage,
     SpecPropertyAttributes,
 } from '@musical-patterns/pattern'
+import { isUndefined } from '@musical-patterns/utilities'
 import { validateSpecProperty } from './validateSpecProperty'
 
 const validateArrayedSpecProperty:
@@ -16,7 +17,7 @@ const validateArrayedSpecProperty:
             (singularDomSpecValue: SingularDomSpecValue): SingularPropertyInvalidSpecMessage => {
                 const subResult: SingularPropertyInvalidSpecMessage =
                     validateSpecProperty(singularDomSpecValue, propertyAttributes) as SingularPropertyInvalidSpecMessage
-                if (subResult) {
+                if (!isUndefined(subResult)) {
                     valid = false
                 }
 

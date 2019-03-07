@@ -1,12 +1,6 @@
 import { Reducer } from 'redux'
 import { initialPageState } from './initial'
-import {
-    ImmutablePageState,
-    PageStateAction,
-    PageStateActionMap,
-    PageStateActionType,
-    PageStateKey,
-} from './types'
+import { ImmutablePageState, PageStateAction, PageStateActionMap, PageStateActionType, PageStateKey } from './types'
 
 const pageReducer: Reducer<ImmutablePageState, PageStateAction> =
     (pageState: ImmutablePageState = initialPageState, action: PageStateAction): ImmutablePageState => {
