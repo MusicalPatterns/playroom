@@ -1,5 +1,13 @@
-import { InvalidSpecMessage } from '@musical-patterns/pattern'
-import { apply, camelCaseToLowerCase, DomValueOrChecked, from, map, Ordinal } from '@musical-patterns/utilities'
+import { ArrayedSpecValue, InvalidSpecMessage, SingularSpecValue } from '@musical-patterns/pattern'
+import {
+    apply,
+    camelCaseToLowerCase,
+    DomValueOrChecked,
+    from,
+    indexOfLastElement,
+    map,
+    Ordinal,
+} from '@musical-patterns/utilities'
 import * as React from 'react'
 import { SecretSelectorsForTest } from '../../../types'
 import { stringifyIfNecessary } from '../helpers'
@@ -7,6 +15,15 @@ import SingularSpecControl from '../SingularSpecControl'
 import AddButton from './AddButton'
 import RemoveButton from './RemoveButton'
 import { ArrayedSpecControlProps } from './types'
+
+const calculateSubmittedSpecValue: (submittedSpecValues: ArrayedSpecValue, index: Ordinal) => SingularSpecValue =
+    (submittedSpecValues: ArrayedSpecValue, index: Ordinal): SingularSpecValue => {
+        if (index > indexOfLastElement(submittedSpecValues)) {
+            return undefined
+        }
+
+        return apply.Ordinal(submittedSpecValues, index)
+    }
 
 const ArrayedSpecControl: React.ComponentType<ArrayedSpecControlProps> =
     (props: ArrayedSpecControlProps): JSX.Element => {
@@ -39,7 +56,7 @@ const ArrayedSpecControl: React.ComponentType<ArrayedSpecControlProps> =
                             specControlsProps,
                             specKey,
                             specPropertyAttributes,
-                            submittedSpecValue: submittedSpecValues && apply.Ordinal(submittedSpecValues, index),
+                            submittedSpecValue: calculateSubmittedSpecValue(submittedSpecValues, index),
                         }}/>
                     </div>
                 )
