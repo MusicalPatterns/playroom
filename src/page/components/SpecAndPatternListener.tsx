@@ -9,7 +9,8 @@ import { doAsync, isUndefined, Maybe, Ms } from '@musical-patterns/utilities'
 import * as React from 'react'
 import { connect } from 'react-redux'
 import { Dispatch } from 'redux'
-import { ActionType, ImmutableRootState, RootStateKey } from '../../root'
+import { PerformerStateKey } from '../../performer'
+import { ImmutableRootState, RootStateKey } from '../../root'
 import { SpecStateKey } from '../../spec'
 import { PageStateKey } from '../state'
 import { logDebugInfo, maybePatternFromPatternsAndId } from './helpers'
@@ -34,7 +35,7 @@ const mapStateToProps: (state: ImmutableRootState) => SpecAndPatternListenerProp
 const mapDispatchToProps: (dispatch: Dispatch) => SpecAndPatternListenerPropsFromDispatch =
     (dispatch: Dispatch): SpecAndPatternListenerPropsFromDispatch => ({
         setTotalDuration: (patternDuration: Ms): void => {
-            dispatch({ type: ActionType.SET_PATTERN_DURATION, data: patternDuration })
+            dispatch({ type: PerformerStateKey.PATTERN_DURATION, data: patternDuration })
         },
     })
 

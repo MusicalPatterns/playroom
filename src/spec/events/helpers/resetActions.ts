@@ -1,11 +1,12 @@
 import { DomSpec, Spec } from '@musical-patterns/pattern'
-import { Action, ActionType } from '../../../root'
+import { Action } from '../../../root'
+import { SpecStateKey } from '../../state'
 
 const resetActions: (spec: Spec) => Action[] =
     (spec: Spec): Action[] => [
-        { type: ActionType.SET_SUBMITTED_SPEC, data: spec },
-        { type: ActionType.SET_DISPLAYED_SPEC, data: spec as DomSpec },
-        { type: ActionType.SET_SPEC_VALIDATION_RESULTS, data: {} },
+        { type: SpecStateKey.SUBMITTED_SPEC, data: spec },
+        { type: SpecStateKey.DISPLAYED_SPEC, data: spec as DomSpec },
+        { type: SpecStateKey.SPEC_VALIDATION_RESULTS, data: {} },
     ]
 
 export {

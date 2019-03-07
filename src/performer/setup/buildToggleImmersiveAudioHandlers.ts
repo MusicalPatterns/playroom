@@ -1,14 +1,15 @@
 import { enableImmersiveAudio, ToggleImmersiveAudioHandlers } from '@musical-patterns/performer'
-import { ActionType, store } from '../../root'
+import { store } from '../../root'
+import { PerformerStateKey } from '../state'
 
 const onImmersiveAudioReady: VoidFunction =
     (): void => {
-        store.dispatch({ type: ActionType.SET_IMMERSIVE_AUDIO_READY, data: true })
+        store.dispatch({ type: PerformerStateKey.IMMERSIVE_AUDIO_READY, data: true })
     }
 
 const onImmersiveAudioUnavailable: VoidFunction =
     (): void => {
-        store.dispatch({ type: ActionType.SET_IMMERSIVE_AUDIO_UNAVAILABLE })
+        store.dispatch({ type: PerformerStateKey.IMMERSIVE_AUDIO_UNAVAILABLE, data: true })
     }
 
 const buildToggleImmersiveAudioHandlers: () => ToggleImmersiveAudioHandlers =
@@ -25,11 +26,11 @@ const buildToggleImmersiveAudioHandlers: () => ToggleImmersiveAudioHandlers =
 
         return {
             enterImmersiveAudio: (): void => {
-                store.dispatch({ type: ActionType.SET_IMMERSIVE_AUDIO_ENABLED, data: true })
+                store.dispatch({ type: PerformerStateKey.IMMERSIVE_AUDIO_ENABLED, data: true })
                 enterImmersiveAudio()
             },
             exitImmersiveAudio: (): void => {
-                store.dispatch({ type: ActionType.SET_IMMERSIVE_AUDIO_ENABLED, data: false })
+                store.dispatch({ type: PerformerStateKey.IMMERSIVE_AUDIO_ENABLED, data: false })
                 exitImmersiveAudio()
             },
         }

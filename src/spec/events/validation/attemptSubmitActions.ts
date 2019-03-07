@@ -1,6 +1,6 @@
 import { DomSpec, DomSpecValue, Spec, SpecAttributes, SpecValidationFunction } from '@musical-patterns/pattern'
 import { Maybe } from '@musical-patterns/utilities'
-import { Action, ActionType } from '../../../root'
+import { Action } from '../../../root'
 import { SpecStateKey } from '../../state'
 import { BuildAttemptSubmitActionsParameters } from './types'
 import { validateSubmittedSpec } from './validateSubmittedSpec'
@@ -25,15 +25,15 @@ const buildAttemptSubmitActions: (parameters: BuildAttemptSubmitActionsParameter
         })
 
         const actions: Action[] = [
-            { type: ActionType.SET_DISPLAYED_SPEC, data: updatedDisplayedSpec },
+            { type: SpecStateKey.DISPLAYED_SPEC, data: updatedDisplayedSpec },
         ]
 
         if (!suppressSpecValidationResults) {
-            actions.push({ type: ActionType.SET_SPEC_VALIDATION_RESULTS, data: updatedSpecValidationResults })
+            actions.push({ type: SpecStateKey.SPEC_VALIDATION_RESULTS, data: updatedSpecValidationResults })
         }
 
         if (isValid) {
-            actions.push({ type: ActionType.SET_SUBMITTED_SPEC, data: updatedSubmittedSpec })
+            actions.push({ type: SpecStateKey.SUBMITTED_SPEC, data: updatedSubmittedSpec })
         }
 
         return actions

@@ -2,7 +2,6 @@ export { pageReducer } from './reducer'
 
 export {
     ImmutablePageState,
-    PageStateAction,
-    PageStateActionType,
+    PageAction,
     PageStateKey,
 } from './types'

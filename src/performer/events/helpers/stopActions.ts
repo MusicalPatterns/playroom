@@ -1,10 +1,11 @@
 import { BEGINNING } from '@musical-patterns/utilities'
-import { Action, ActionType } from '../../../root'
+import { Action } from '../../../root'
+import { PerformerStateKey } from '../../state'
 
 const stopActions: () => Action[] =
     (): Action[] => [
-        { type: ActionType.SET_PAUSED, data: true },
-        { type: ActionType.SET_TIME_POSITION, data: BEGINNING },
+        { type: PerformerStateKey.PAUSED, data: true },
+        { type: PerformerStateKey.TIME_POSITION, data: BEGINNING },
     ]
 
 export {

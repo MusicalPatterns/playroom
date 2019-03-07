@@ -1,12 +1,9 @@
 import { TypedMap } from '@musical-patterns/utilities'
-import { ImmutablePageState, PageStateAction } from '../../page'
-import { ImmutablePerformerState, PerformerStateAction } from '../../performer'
-import { ImmutableSpecState, SpecStateAction } from '../../spec'
+import { ImmutablePageState, PageAction } from '../../page'
+import { ImmutablePerformerState, PerformerAction } from '../../performer'
+import { ImmutableSpecState, SpecAction } from '../../spec'
 
-type Action =
-    SpecStateAction |
-    PerformerStateAction |
-    PageStateAction
+type Action = SpecAction | PerformerAction | PageAction
 
 enum RootStateKey {
     PAGE = 'PAGE',

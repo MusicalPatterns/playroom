@@ -2,9 +2,11 @@ import { Id, isId, Pattern, Spec, SpecData } from '@musical-patterns/pattern'
 import { setTimePosition } from '@musical-patterns/performer'
 import { BEGINNING, doAsync, isUndefined, Maybe } from '@musical-patterns/utilities'
 import { BatchAction, batchActions } from 'redux-batched-actions'
-import { Action, ActionType } from '../../root'
-import { resetActions } from '../../spec'
+import { PerformerStateKey } from '../../performer'
+import { Action } from '../../root'
+import { resetActions, SpecStateKey } from '../../spec'
 import { maybePatternFromPatternsAndId } from '../components'
+import { PageStateKey } from '../state'
 import { adjustWindowActionsWithSideEffects, openRightColumn } from './helpers'
 import { PatternChangeEventHandler, PatternChangeEventHandlerParameters } from './types'
 
@@ -34,13 +36,13 @@ const handlePatternChange: PatternChangeEventHandler =
 
         const actions: Action[] = resetActions(initialSpec)
             .concat([
-                { type: ActionType.SET_INITIAL_SPEC, data: initialSpec },
-                { type: ActionType.SET_PATTERN_ID, data: newId },
-                { type: ActionType.SET_SPEC_ATTRIBUTES, data: specData.attributes },
-                { type: ActionType.SET_VALIDATION_FUNCTION, data: specData.validationFunction },
-                { type: ActionType.SET_PRESETS, data: specData.presets },
-                { type: ActionType.SET_PAGE_NAME, data: undefined },
-                { type: ActionType.SET_PERFORMER_DISABLED, data: false },
+                { type: SpecStateKey.INITIAL_SPEC, data: initialSpec },
+                { type: PageStateKey.PATTERN_ID, data: newId },
+                { type: SpecStateKey.SPEC_ATTRIBUTES, data: specData.attributes },
+                { type: SpecStateKey.VALIDATION_FUNCTION, data: specData.validationFunction },
+                { type: SpecStateKey.PRESETS, data: specData.presets },
+                { type: PageStateKey.PAGE_NAME, data: undefined },
+                { type: PerformerStateKey.PERFORMER_DISABLED, data: false },
             ])
             .concat(adjustWindowActionsWithSideEffects())
 

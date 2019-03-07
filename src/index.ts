@@ -4,8 +4,9 @@ import { createElement } from 'react'
 import { render } from 'react-dom'
 import { Provider } from 'react-redux'
 import { BatchAction, batchActions } from 'redux-batched-actions'
-import { buildToggleImmersiveAudioHandlers, onPerformerUpdate, setupKeyboard } from './performer'
-import { ActionType, App, store } from './root'
+import { PageStateKey } from './page'
+import { buildToggleImmersiveAudioHandlers, onPerformerUpdate, PerformerStateKey, setupKeyboard } from './performer'
+import { App, store } from './root'
 // tslint:disable-next-line no-import-side-effect
 import './styles'
 
@@ -24,9 +25,9 @@ const setupPlayroom: (patterns: Partial<Patterns>, debugMode?: boolean) => Promi
         setupKeyboard()
 
         const batchedAction: BatchAction = batchActions([
-            { type: ActionType.SET_PATTERNS, data: patterns },
-            { type: ActionType.SET_DEBUG_MODE, data: debugMode },
-            { type: ActionType.SET_TOGGLE_IMMERSIVE_AUDIO_HANDLERS, data: toggleImmersiveAudioHandlers },
+            { type: PageStateKey.PATTERNS, data: patterns },
+            { type: PageStateKey.DEBUG_MODE, data: debugMode },
+            { type: PerformerStateKey.TOGGLE_IMMERSIVE_AUDIO_HANDLERS, data: toggleImmersiveAudioHandlers },
         ])
         store.dispatch(batchedAction)
 

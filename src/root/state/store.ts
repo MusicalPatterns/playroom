@@ -2,12 +2,12 @@
 
 import { Map } from 'immutable'
 import { applyMiddleware, compose, createStore, Reducer, Store } from 'redux'
-import { batchDispatchMiddleware, enableBatching } from 'redux-batched-actions'
+import { BatchAction, batchDispatchMiddleware, enableBatching } from 'redux-batched-actions'
 import { combineReducers } from 'redux-immutable'
 import { pageReducer } from '../../page'
 import { performerReducer } from '../../performer'
 import { specReducer } from '../../spec'
-import { RootStateKey } from './types'
+import { Action, ImmutableRootState, RootStateKey } from './types'
 
 const initialState: any = Map()
 
@@ -20,7 +20,7 @@ const rootReducer: Reducer = combineReducers({
 // @ts-ignore
 const composeEnhancers: any = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose
 
-const store: Store = createStore(
+const store: Store<ImmutableRootState, Action | BatchAction> = createStore(
     enableBatching(rootReducer),
     initialState,
     composeEnhancers(applyMiddleware(batchDispatchMiddleware)),

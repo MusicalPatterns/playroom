@@ -1,9 +1,8 @@
 export {
-    PageStateActionType,
     pageReducer,
-    PageStateAction,
     ImmutablePageState,
     PageStateKey,
+    PageAction,
 } from './state'
 export {
     PatternPanel,

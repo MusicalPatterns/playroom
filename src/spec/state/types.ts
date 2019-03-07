@@ -8,7 +8,7 @@ import {
     SpecValidationFunction,
     SpecValidationResults,
 } from '@musical-patterns/pattern'
-import { DictionaryOf, Maybe, TypedMap } from '@musical-patterns/utilities'
+import { ActionForState, DictionaryOf, Maybe, TypedMap } from '@musical-patterns/utilities'
 
 enum SpecStateKey {
     INITIAL_SPEC = 'INITIAL_SPEC',
@@ -34,74 +34,11 @@ interface SpecState {
 
 type ImmutableSpecState = TypedMap<SpecState>
 
-enum SpecStateActionType {
-    SET_INITIAL_SPEC = 'SET_INITIAL_SPEC',
-    SET_SUBMITTED_SPEC = 'SET_SUBMITTED_SPEC',
-    SET_DISPLAYED_SPEC = 'SET_DISPLAYED_SPEC',
-    SET_SPEC_VALIDATION_RESULTS = 'SET_SPEC_VALIDATION_RESULTS',
-    SET_SPEC_ATTRIBUTES = 'SET_SPEC_ATTRIBUTES',
-    SET_VALIDATION_FUNCTION = 'SET_VALIDATION_FUNCTION',
-    SET_PRESETS = 'SET_PRESETS',
-    SET_SPEC_PANEL_OPEN = 'SET_SPEC_PANEL_OPEN',
-}
-
-type SpecStateActionMap = { [key in keyof typeof SpecStateActionType]: SpecStateKey }
-
-interface SetInitialSpec {
-    data: Spec,
-    type: SpecStateActionType.SET_INITIAL_SPEC,
-}
-
-interface SetSubmittedSpec {
-    data: Spec,
-    type: SpecStateActionType.SET_SUBMITTED_SPEC,
-}
-
-interface SetDisplayedSpec {
-    data: DomSpec,
-    type: SpecStateActionType.SET_DISPLAYED_SPEC,
-}
-
-interface SetInvalidSpecMessages {
-    data: SpecValidationResults,
-    type: SpecStateActionType.SET_SPEC_VALIDATION_RESULTS,
-}
-
-interface SetSpecAttributes {
-    data: SpecAttributes,
-    type: SpecStateActionType.SET_SPEC_ATTRIBUTES,
-}
-
-interface SetValidationFunction {
-    data: Maybe<SpecValidationFunction>,
-    type: SpecStateActionType.SET_VALIDATION_FUNCTION,
-}
-
-interface SetPresets {
-    data: Maybe<DictionaryOf<Preset>>,
-    type: SpecStateActionType.SET_PRESETS,
-}
-
-interface SetSpecPanelOpen {
-    data: boolean,
-    type: SpecStateActionType.SET_SPEC_PANEL_OPEN,
-}
-
-type SpecStateAction =
-    SetInitialSpec |
-    SetSubmittedSpec |
-    SetDisplayedSpec |
-    SetInvalidSpecMessages |
-    SetSpecAttributes |
-    SetValidationFunction |
-    SetPresets |
-    SetSpecPanelOpen
+type SpecAction = ActionForState<SpecState>
 
 export {
     SpecState,
     ImmutableSpecState,
     SpecStateKey,
-    SpecStateAction,
-    SpecStateActionType,
-    SpecStateActionMap,
+    SpecAction,
 }

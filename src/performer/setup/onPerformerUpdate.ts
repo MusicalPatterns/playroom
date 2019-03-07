@@ -1,10 +1,11 @@
 import { OnUpdate } from '@musical-patterns/performer'
 import { Ms } from '@musical-patterns/utilities'
-import { ActionType, store } from '../../root'
+import { store } from '../../root'
+import { PerformerStateKey } from '../state'
 
 const onPerformerUpdate: OnUpdate =
     (timePosition: Ms): void => {
-        store.dispatch({ type: ActionType.SET_TIME_POSITION, data: timePosition })
+        store.dispatch({ type: PerformerStateKey.TIME_POSITION, data: timePosition })
     }
 
 export {

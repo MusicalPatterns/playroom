@@ -1,8 +1,8 @@
 export {
-    PerformerStateActionType,
     performerReducer,
     ImmutablePerformerState,
-    PerformerStateAction,
+    PerformerAction,
+    PerformerStateKey,
 } from './state'
 export {
     PerformerPanel,

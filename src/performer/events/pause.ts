@@ -1,11 +1,11 @@
 import { pause } from '@musical-patterns/performer'
-import { ActionType } from '../../root'
 import { DispatchAsProp } from '../../types'
+import { PerformerStateKey } from '../state'
 
 const buildPauseHandler: (parameters: DispatchAsProp) => VoidFunction =
     ({ dispatch }: DispatchAsProp): VoidFunction =>
         (): void => {
-            dispatch({ type: ActionType.SET_PAUSED, data: true })
+            dispatch({ type: PerformerStateKey.PAUSED, data: true })
             pause()
         }
 

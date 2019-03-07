@@ -1,6 +1,5 @@
 export {
     Action,
-    ActionType,
     ImmutableRootState,
     RootStateKey,
     store,

@@ -2,10 +2,9 @@ export {
     resetActions,
 } from './events'
 export {
-    SpecStateActionType,
     specReducer,
     ImmutableSpecState,
-    SpecStateAction,
+    SpecAction,
     SpecStateKey,
 } from './state'
 export {
