@@ -40,7 +40,7 @@ const thereIsAnAdditionalField: (originalFieldCount: number) => Promise<void> =
 
 const thereIsAnAdditionalFieldForTheArrayedControlWithTheInitialElementValue: (originalFieldCount: number) => Promise<void> =
     async (originalFieldCount: number): Promise<void> => {
-        const updatedFieldCount: number = await elementCount(`#${SPEC_ARRAYED_PROPERTY_WITH_INITIAL_ELEMENT_VALUE_KEY} input[type=number]`)
+        const updatedFieldCount: number = await elementCount(`#${SPEC_ARRAYED_PROPERTY_WITH_INITIAL_ELEMENT_VALUE_KEY} input[type=range]`)
         expect(updatedFieldCount)
             .toBe(originalFieldCount + 1, `there was not an additional field; original field count was ${originalFieldCount} and updated was ${updatedFieldCount}`)
     }
@@ -294,7 +294,7 @@ describe('arrayed controls', () => {
 
         describe('for arrayed controls with an initial element value', () => {
             it('clicking the add button displays a new field at the end of the arrayed control with that initial value', async (done: DoneFn) => {
-                const originalFieldCount: number = await elementCount(`#${SPEC_ARRAYED_PROPERTY_WITH_INITIAL_ELEMENT_VALUE_KEY} input[type=number]`)
+                const originalFieldCount: number = await elementCount(`#${SPEC_ARRAYED_PROPERTY_WITH_INITIAL_ELEMENT_VALUE_KEY} input[type=range]`)
 
                 await clickAddForTheArrayedControlWithTheInitialElementValue()
                 await thereIsAnAdditionalFieldForTheArrayedControlWithTheInitialElementValue(originalFieldCount)
