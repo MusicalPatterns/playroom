@@ -37,7 +37,7 @@ interface ValidateSubmittedSpecParameters {
     validationFunction?: ValidationFunction,
 }
 
-interface SpecValidationResult {
+interface UpdatedValidationResultsPlusIsValid {
     isValid: boolean,
     updatedValidationResults: ValidationResults,
 }
@@ -50,6 +50,6 @@ export {
     HandleAddOrRemoveParameters,
     HandleArrayedSpecControlAddOrRemoveParameters,
     BuildAttemptSubmitActionsParameters,
-    SpecValidationResult,
+    UpdatedValidationResultsPlusIsValid,
     ValidateSubmittedSpecParameters,
 }

@@ -1,10 +1,10 @@
 import { DomValue, Spec, ValidationResult, ValidationResults } from '@musical-patterns/pattern'
 import { entries, reduce } from '@musical-patterns/utilities'
-import { SpecValidationResult, ValidateSubmittedSpecParameters } from './types'
+import { ValidateSubmittedSpecParameters, UpdatedValidationResultsPlusIsValid } from './types'
 import { validateProperty } from './validateProperty'
 
-const validateSubmittedSpec: (parameters: ValidateSubmittedSpecParameters) => SpecValidationResult =
-    (parameters: ValidateSubmittedSpecParameters): SpecValidationResult => {
+const validateSubmittedSpec: (parameters: ValidateSubmittedSpecParameters) => UpdatedValidationResultsPlusIsValid =
+    (parameters: ValidateSubmittedSpecParameters): UpdatedValidationResultsPlusIsValid => {
         const { updatedDisplayedSpec, attributes, validationFunction, property } = parameters
 
         const reevaluatedValidationResults: ValidationResults = reduce(
@@ -16,7 +16,7 @@ const validateSubmittedSpec: (parameters: ValidateSubmittedSpecParameters) => Sp
             {},
         )
 
-        const validationResultForThisPropertyInAndOfItself: ValidationResult =
+        const validationResultForTheUpdatedPropertyInAndOfItself: ValidationResult =
             reevaluatedValidationResults && reevaluatedValidationResults[ property ]
 
         let validationResultsFromFunctionOfEntireSpec: ValidationResults
@@ -26,12 +26,12 @@ const validateSubmittedSpec: (parameters: ValidateSubmittedSpecParameters) => Sp
 
         const updatedValidationResults: ValidationResults = {
             ...reevaluatedValidationResults,
-            [ property ]: validationResultForThisPropertyInAndOfItself,
+            [ property ]: validationResultForTheUpdatedPropertyInAndOfItself,
             ...validationResultsFromFunctionOfEntireSpec,
         }
 
         return {
-            isValid: !validationResultForThisPropertyInAndOfItself && !validationResultsFromFunctionOfEntireSpec,
+            isValid: !validationResultForTheUpdatedPropertyInAndOfItself && !validationResultsFromFunctionOfEntireSpec,
             updatedValidationResults,
         }
     }
