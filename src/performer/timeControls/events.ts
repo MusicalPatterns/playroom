@@ -5,26 +5,26 @@ import { DispatchParameter } from '../../types'
 import { stopActions } from '../stopActions'
 import { PerformerStateKey } from '../types'
 
-const buildPauseHandler: (parameters: DispatchParameter) => VoidFunction =
+const buildHandlePauseClickEvent: (parameters: DispatchParameter) => VoidFunction =
     ({ dispatch }: DispatchParameter): VoidFunction =>
         (): void => {
             dispatch({ type: PerformerStateKey.PAUSED, data: true })
             pause()
         }
 
-const buildPlayHandler: (parameters: DispatchParameter) => VoidFunction =
+const buildHandlePlayClickEvent: (parameters: DispatchParameter) => VoidFunction =
     ({ dispatch }: DispatchParameter): VoidFunction =>
         (): void => {
             dispatch({ type: PerformerStateKey.PAUSED, data: false })
             play()
         }
 
-const handleRewind: () => Promise<void> =
+const buildHandleRewindClickEvent: () => Promise<void> =
     async (): Promise<void> => {
         await setTimePosition(BEGINNING)
     }
 
-const buildStopHandler: (parameters: DispatchParameter) => () => Promise<void> =
+const buildHandleStopClickEvent: (parameters: DispatchParameter) => () => Promise<void> =
     ({ dispatch }: DispatchParameter): () => Promise<void> =>
         async (): Promise<void> => {
             await stop()
@@ -33,8 +33,8 @@ const buildStopHandler: (parameters: DispatchParameter) => () => Promise<void> =
         }
 
 export {
-    buildPlayHandler,
-    buildPauseHandler,
-    buildStopHandler,
-    handleRewind,
+    buildHandlePlayClickEvent,
+    buildHandlePauseClickEvent,
+    buildHandleStopClickEvent,
+    buildHandleRewindClickEvent,
 }

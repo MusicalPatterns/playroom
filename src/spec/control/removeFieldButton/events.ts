@@ -5,7 +5,7 @@ import { Action } from '../../../types'
 import { buildAttemptSubmitActions } from '../attemptSubmitActions'
 import { getArrayedDisplayedValue } from '../getArrayedDisplayedValue'
 import { isArrayedValidationResult } from './isArrayedValidationResult'
-import { HandleRemoveParameters } from './types'
+import { HandleFieldRemoveParameters } from './types'
 
 const isNoInvalidMessageForRemovedField:
     (validationResults: ValidationResults, property: string) => boolean =
@@ -25,8 +25,8 @@ const isNoInvalidMessageForRemovedField:
         return isUndefined(lastElement(validationResult))
     }
 
-const handleArrayedSpecControlRemove: (parameters: HandleRemoveParameters) => void =
-    (parameters: HandleRemoveParameters): void => {
+const handleFieldRemove: (parameters: HandleFieldRemoveParameters) => void =
+    (parameters: HandleFieldRemoveParameters): void => {
         const {
             dispatch,
             property,
@@ -64,5 +64,5 @@ const handleArrayedSpecControlRemove: (parameters: HandleRemoveParameters) => vo
     }
 
 export {
-    handleArrayedSpecControlRemove,
+    handleFieldRemove,
 }

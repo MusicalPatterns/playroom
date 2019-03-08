@@ -5,11 +5,15 @@ import { extractValueOrCheckedFromEvent } from '../../../extractValueOrCheckedFr
 import { Action, DispatchParameter } from '../../../types'
 import { buildAttemptSubmitActions } from '../attemptSubmitActions'
 import { mergeEventValueIntoArrayedValue } from './mergeEventValueIntoArrayedValue'
-import { BuildSpecControlChangeHandler, SpecControlChangeHandler, SpecControlChangeHandlerParameters } from './types'
+import {
+    BuildHandleSpecControlChangeEvent,
+    HandleSpecControlChangeEvent,
+    HandleSpecControlChangeEventParameters,
+} from './types'
 
-const buildSpecControlChangeHandler: BuildSpecControlChangeHandler =
-    ({ dispatch }: DispatchParameter): SpecControlChangeHandler =>
-        async (parameters: SpecControlChangeHandlerParameters): Promise<void> => {
+const buildHandleSpecControlChangeEvent: BuildHandleSpecControlChangeEvent =
+    ({ dispatch }: DispatchParameter): HandleSpecControlChangeEvent =>
+        async (parameters: HandleSpecControlChangeEventParameters): Promise<void> => {
             const {
                 fieldIndex,
                 event,
@@ -45,5 +49,5 @@ const buildSpecControlChangeHandler: BuildSpecControlChangeHandler =
         }
 
 export {
-    buildSpecControlChangeHandler,
+    buildHandleSpecControlChangeEvent,
 }

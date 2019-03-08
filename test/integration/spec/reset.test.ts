@@ -25,21 +25,21 @@ import {
     VALID_TEST_MODIFICATION,
 } from '../../support'
 
-const clickResetButton: () => Promise<void> =
+const clickResetSpecButton: () => Promise<void> =
     async (): Promise<void> => {
-        await clickElement('button#reset')
+        await clickElement('button#reset-spec')
     }
 
-const resetIsDisabled: () => Promise<void> =
+const resetSpecButtonIsDisabled: () => Promise<void> =
     async (): Promise<void> => {
-        expect(await elementExists(`button#reset:disabled`))
-            .toBeTruthy('reset was not disabled')
+        expect(await elementExists(`button#reset-spec:disabled`))
+            .toBeTruthy('reset spec button was not disabled')
     }
 
-const resetIsEnabled: () => Promise<void> =
+const resetSpecButtonIsEnabled: () => Promise<void> =
     async (): Promise<void> => {
-        expect(await elementExists(`button#reset:enabled`))
-            .toBeTruthy('reset was not enabled')
+        expect(await elementExists(`button#reset-spec:enabled`))
+            .toBeTruthy('reset spec button was not enabled')
     }
 
 const modifyControl: () => Promise<void> =
@@ -120,25 +120,25 @@ describe('reset button', () => {
     })
 
     it('reset button is disabled initially', async (done: DoneFn) => {
-        await resetIsDisabled()
+        await resetSpecButtonIsDisabled()
 
         done()
     })
 
     it('reset button is enabled when any control is modified', async (done: DoneFn) => {
         await modifyControl()
-        await resetIsEnabled()
+        await resetSpecButtonIsEnabled()
 
         done()
     })
 
     it('reset button is disabled when the control is modified back to the defaults', async (done: DoneFn) => {
         await modifyControl()
-        await resetIsEnabled()
+        await resetSpecButtonIsEnabled()
 
         await returnControlBackToItsDefault()
 
-        await resetIsDisabled()
+        await resetSpecButtonIsDisabled()
 
         done()
     })
@@ -147,7 +147,7 @@ describe('reset button', () => {
         await modifyAllTheThings()
         await expectAllTheThingsToBeModified()
 
-        await clickResetButton()
+        await clickResetSpecButton()
         await expectAllTheThingsToBeBackToTheirInitialStates()
 
         done()
@@ -158,7 +158,7 @@ describe('reset button', () => {
 
         await modifyAnotherControlJustSoThatTheResetButtonIsEnabled()
 
-        await clickResetButton()
+        await clickResetSpecButton()
         await controlIsBackToValid()
 
         done()

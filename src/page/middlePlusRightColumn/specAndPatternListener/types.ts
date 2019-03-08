@@ -9,7 +9,7 @@ interface SpecAndPatternListenerPropsFromState {
 }
 
 interface SpecAndPatternListenerPropsFromDispatch {
-    setTotalDuration: (patternDuration: Ms) => void,
+    setPatternDuration: (patternDuration: Ms) => void,
 }
 
 interface SpecAndPatternListenerProps extends SpecAndPatternListenerPropsFromState,

@@ -11,7 +11,7 @@ import { Field, FieldPropsFromParent } from '../field'
 import { InvalidMessage } from '../invalidMessage'
 import { stringifyIfNecessary } from '../stringifyIfNecessary'
 import { Units } from '../units'
-import { buildSpecControlChangeHandler } from './events'
+import { buildHandleSpecControlChangeEvent } from './events'
 import { specControlId } from './specControlId'
 import './styles'
 import {
@@ -35,7 +35,7 @@ const mapStateToProps: (state: ImmutableState) => SingularSpecControlPropsFromSt
 
 const mapDispatchToProps: (dispatch: Dispatch) => SingularSpecControlPropsFromDispatch =
     (dispatch: Dispatch): SingularSpecControlPropsFromDispatch => ({
-        handleSpecChangeEvent: buildSpecControlChangeHandler({ dispatch }),
+        handleSpecControlChangeEvent: buildHandleSpecControlChangeEvent({ dispatch }),
     })
 
 const SingularSpecControl: React.ComponentType<SingularSpecControlProps> =
@@ -43,7 +43,7 @@ const SingularSpecControl: React.ComponentType<SingularSpecControlProps> =
         const {
             fieldIndex,
             property,
-            handleSpecChangeEvent,
+            handleSpecControlChangeEvent,
             attributes,
             displayedSpec,
             submittedSpec,
@@ -57,7 +57,7 @@ const SingularSpecControl: React.ComponentType<SingularSpecControlProps> =
         const { description, formattedName } = propertyAttributes
 
         const onChange: EventHandler = (event: React.SyntheticEvent): void => {
-            handleSpecChangeEvent({
+            handleSpecControlChangeEvent({
                 attributes,
                 displayedSpec,
                 event,

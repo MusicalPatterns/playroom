@@ -4,10 +4,10 @@ import { batchActions } from 'redux-batched-actions'
 import { Action } from '../../../types'
 import { buildAttemptSubmitActions } from '../attemptSubmitActions'
 import { getArrayedDisplayedValue } from '../getArrayedDisplayedValue'
-import { HandleAddParameters } from './types'
+import { HandleFieldAddParameters } from './types'
 
-const handleArrayedSpecControlAdd: (parameters: HandleAddParameters) => void =
-    (parameters: HandleAddParameters): void => {
+const handleFieldAdd: (parameters: HandleFieldAddParameters) => void =
+    (parameters: HandleFieldAddParameters): void => {
         const { dispatch, property, displayedSpec, attributes, validationFunction, submittedSpec } = parameters
         const initialFieldValue: Maybe<HtmlValueOrChecked> = attributes[ property ].arrayedNewFieldInitialValue
 
@@ -30,5 +30,5 @@ const handleArrayedSpecControlAdd: (parameters: HandleAddParameters) => void =
     }
 
 export {
-    handleArrayedSpecControlAdd,
+    handleFieldAdd,
 }

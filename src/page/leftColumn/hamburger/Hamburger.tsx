@@ -7,7 +7,7 @@ import { connect } from 'react-redux'
 import { Dispatch } from 'redux'
 import { ImmutableState, StateKey } from '../../../types'
 import { PageStateKey } from '../../types'
-import { handleHamburger } from './events'
+import { handleHamburgerClick } from './events'
 import './styles'
 import { HamburgerProps, HamburgerPropsFromDispatch, HamburgerPropsFromState } from './types'
 
@@ -19,15 +19,15 @@ const mapStateToProps: (state: ImmutableState) => HamburgerPropsFromState =
 
 const mapDispatchToProps: (dispatch: Dispatch) => HamburgerPropsFromDispatch =
     (dispatch: Dispatch): HamburgerPropsFromDispatch => ({
-        hamburgerHandler: (leftColumnOpen: boolean): void => {
-            handleHamburger({ dispatch, leftColumnOpen })
+        handleHamburgerClickEvent: ({ leftColumnOpen }: HamburgerPropsFromState): void => {
+            handleHamburgerClick({ dispatch, leftColumnOpen })
         },
     })
 
 const Hamburger: React.ComponentType<HamburgerProps> =
-    ({ hamburgerHandler, leftColumnOpen }: HamburgerProps): JSX.Element => {
+    ({ handleHamburgerClickEvent, leftColumnOpen }: HamburgerProps): JSX.Element => {
         const onClick: VoidFunction = (): void => {
-            hamburgerHandler(leftColumnOpen)
+            handleHamburgerClickEvent({ leftColumnOpen })
         }
 
         return (

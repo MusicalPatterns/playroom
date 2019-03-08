@@ -6,8 +6,8 @@ import * as React from 'react'
 import { connect } from 'react-redux'
 import { ImmutableState, SecretSelectorsForTest, StateKey } from '../../../types'
 import { SpecStateKey } from '../../types'
-import { AddButton } from '../addButton'
-import { RemoveButton } from '../removeButton'
+import { AddFieldButton } from '../addFieldButton'
+import { RemoveFieldButton } from '../removeFieldButton'
 import { SingularSpecControl } from '../singularSpecControl'
 import { stringifyIfNecessary } from '../stringifyIfNecessary'
 import { calculateSingularSubmittedValue, calculateSingularValidationResult } from './calculateSingular'
@@ -63,8 +63,8 @@ const ArrayedSpecControl: React.ComponentType<ArrayedSpecControlProps> =
                     {controls}
                 </div>
                 <div>
-                    <AddButton {...{ property }}/>
-                    <RemoveButton {...{ property }}/>
+                    <AddFieldButton {...{ property }}/>
+                    <RemoveFieldButton {...{ property }}/>
                 </div>
             </div>
         )

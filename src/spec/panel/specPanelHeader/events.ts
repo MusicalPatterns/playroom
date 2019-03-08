@@ -1,11 +1,11 @@
 import { SpecStateKey } from '../../types'
-import { SpecPanelCaretClickHandlerParameters } from './types'
+import { HandleSpecPanelHeaderClickParameters } from './types'
 
-const specPanelCaretClickHandler: (parameters: SpecPanelCaretClickHandlerParameters) => void =
-    ({ dispatch, specPanelOpen }: SpecPanelCaretClickHandlerParameters): void => {
+const handleSpecPanelHeaderClick: (parameters: HandleSpecPanelHeaderClickParameters) => void =
+    ({ dispatch, specPanelOpen }: HandleSpecPanelHeaderClickParameters): void => {
         dispatch({ type: SpecStateKey.SPEC_PANEL_OPEN, data: !specPanelOpen })
     }
 
 export {
-    specPanelCaretClickHandler,
+    handleSpecPanelHeaderClick,
 }

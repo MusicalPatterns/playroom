@@ -10,7 +10,12 @@ import { formatTimesForDisplay } from '../formatTimesForDisplay'
 import { TimeInMinutesAndSeconds } from '../timeInMinutesAndSeconds'
 import { Timeline } from '../timeline'
 import { ImmutablePerformerState, PerformerStateKey } from '../types'
-import { buildPauseHandler, buildPlayHandler, buildStopHandler, handleRewind } from './events'
+import {
+    buildHandlePauseClickEvent,
+    buildHandlePlayClickEvent,
+    buildHandleRewindClickEvent,
+    buildHandleStopClickEvent,
+} from './events'
 import './styles'
 import { TimeControlsProps, TimeControlsPropsFromDispatch, TimeControlsPropsFromState } from './types'
 
@@ -28,20 +33,20 @@ const mapStateToProps: (state: ImmutableState) => TimeControlsPropsFromState =
 
 const mapDispatchToProps: (dispatch: Dispatch) => TimeControlsPropsFromDispatch =
     (dispatch: Dispatch): TimeControlsPropsFromDispatch => ({
-        pauseHandler: buildPauseHandler({ dispatch }),
-        playHandler: buildPlayHandler({ dispatch }),
-        rewindHandler: handleRewind,
-        stopHandler: buildStopHandler({ dispatch }),
+        handlePauseClickEvent: buildHandlePauseClickEvent({ dispatch }),
+        handlePlayClickEvent: buildHandlePlayClickEvent({ dispatch }),
+        handleRewindClickEvent: buildHandleRewindClickEvent,
+        handleStopClickEvent: buildHandleStopClickEvent({ dispatch }),
     })
 
 const TimeControls: React.ComponentType<TimeControlsProps> =
     (timeControlsProps: TimeControlsProps): JSX.Element => {
         const {
             disabled,
-            rewindHandler,
-            pauseHandler,
-            playHandler,
-            stopHandler,
+            handleRewindClickEvent,
+            handlePauseClickEvent,
+            handlePlayClickEvent,
+            handleStopClickEvent,
             paused,
             patternDuration,
             timePosition,
@@ -57,13 +62,17 @@ const TimeControls: React.ComponentType<TimeControlsProps> =
 
         return (
             <div {...{ id: 'time-controls', className: disabledClass }}>
-                <button {...{ id: 'rewind', onClick: rewindHandler, disabled }}>
+                <button {...{ id: 'rewind', onClick: handleRewindClickEvent, disabled }}>
                     <FontAwesomeIcon {...{ icon: faFastBackward }}/>
                 </button>
-                <button {...{ id: 'stop', onClick: stopHandler, disabled }}>
+                <button {...{ id: 'stop', onClick: handleStopClickEvent, disabled }}>
                     <FontAwesomeIcon {...{ icon: faStop }}/>
                 </button>
-                <button {...{ id: controlId, onClick: paused ? playHandler : pauseHandler, disabled }}>
+                <button {...{
+                    disabled,
+                    id: controlId,
+                    onClick: paused ? handlePlayClickEvent : handlePauseClickEvent,
+                }}>
                     <FontAwesomeIcon {...{ icon }}/>
                 </button>
                 <Timeline/>

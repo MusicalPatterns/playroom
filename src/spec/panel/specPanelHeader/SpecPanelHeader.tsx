@@ -6,12 +6,12 @@ import * as React from 'react'
 import { connect } from 'react-redux'
 import { Dispatch } from 'redux'
 import { CONTROLS } from '../../../copy'
-import { EventHandler, ImmutableState, StateKey } from '../../../types'
+import { ImmutableState, StateKey } from '../../../types'
 import { SpecStateKey } from '../../types'
 import { SpecPanelOpenParameter } from '../types'
-import { specPanelCaretClickHandler } from './events'
+import { handleSpecPanelHeaderClick } from './events'
 import './styles'
-import { SpecPanelCaretClickEventParameters, SpecPanelHeaderProps, SpecPanelHeaderPropsFromDispatch } from './types'
+import { SpecPanelHeaderProps, SpecPanelHeaderPropsFromDispatch } from './types'
 
 const mapStateToProps: (state: ImmutableState) => SpecPanelOpenParameter =
     (state: ImmutableState): SpecPanelOpenParameter => ({
@@ -21,17 +21,16 @@ const mapStateToProps: (state: ImmutableState) => SpecPanelOpenParameter =
 
 const mapDispatchToProps: (dispatch: Dispatch) => SpecPanelHeaderPropsFromDispatch =
     (dispatch: Dispatch): SpecPanelHeaderPropsFromDispatch => ({
-        handleSpecPanelCaretClickEvent: ({ event, specPanelOpen }: SpecPanelCaretClickEventParameters): void => {
-            specPanelCaretClickHandler({ dispatch, specPanelOpen })
+        handleSpecPanelHeaderClickEvent: ({ specPanelOpen }: SpecPanelOpenParameter): void => {
+            handleSpecPanelHeaderClick({ dispatch, specPanelOpen })
         },
     })
 
 const SpecPanelHeader: React.ComponentType<SpecPanelHeaderProps> =
-    ({ handleSpecPanelCaretClickEvent, specPanelOpen }: SpecPanelHeaderProps): JSX.Element => {
-        const onClick: EventHandler =
-            (event: React.SyntheticEvent): void => {
-                handleSpecPanelCaretClickEvent({ event, specPanelOpen })
-            }
+    ({ handleSpecPanelHeaderClickEvent, specPanelOpen }: SpecPanelHeaderProps): JSX.Element => {
+        const onClick: VoidFunction = (): void => {
+            handleSpecPanelHeaderClickEvent({ specPanelOpen })
+        }
 
         return (
             <h3 {...{ id: 'spec-panel-header', onClick }}>

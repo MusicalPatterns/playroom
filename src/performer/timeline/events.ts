@@ -8,7 +8,7 @@ const timePositionIsNumber: (timePosition: HtmlValueOrChecked) => timePosition i
     (timePosition: HtmlValueOrChecked): timePosition is number =>
         typeof timePosition === 'number'
 
-const timeChangeHandler: AsyncEventHandler =
+const handleTimelineChangeEvent: AsyncEventHandler =
     async (event: React.SyntheticEvent): Promise<void> => {
         const timePosition: HtmlValueOrChecked = extractValueOrCheckedFromEvent(event)
         if (!timePositionIsNumber(timePosition)) {
@@ -20,5 +20,5 @@ const timeChangeHandler: AsyncEventHandler =
     }
 
 export {
-    timeChangeHandler,
+    handleTimelineChangeEvent,
 }

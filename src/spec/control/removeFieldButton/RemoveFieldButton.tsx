@@ -9,16 +9,16 @@ import { Dispatch } from 'redux'
 import { EventHandler, ImmutableState, StateKey } from '../../../types'
 import { ImmutableSpecState, SpecStateKey } from '../../types'
 import { isArrayedDisplayedValue } from '../isArrayedDisplayedValue'
-import { handleArrayedSpecControlRemove } from './events'
+import { handleFieldRemove } from './events'
 import {
-    HandleRemoveEventParameters,
-    RemoveButtonProps,
-    RemoveButtonPropsFromDispatch,
-    RemoveButtonPropsFromState,
+    HandleFieldRemoveEventParameters,
+    RemoveFieldButtonProps,
+    RemoveFieldButtonPropsFromDispatch,
+    RemoveFieldButtonPropsFromState,
 } from './types'
 
-const mapStateToProps: (state: ImmutableState) => RemoveButtonPropsFromState =
-    (state: ImmutableState): RemoveButtonPropsFromState => {
+const mapStateToProps: (state: ImmutableState) => RemoveFieldButtonPropsFromState =
+    (state: ImmutableState): RemoveFieldButtonPropsFromState => {
         const specState: ImmutableSpecState = state.get(StateKey.SPEC)
 
         return {
@@ -30,17 +30,17 @@ const mapStateToProps: (state: ImmutableState) => RemoveButtonPropsFromState =
         }
     }
 
-const mapDispatchToProps: (dispatch: Dispatch) => RemoveButtonPropsFromDispatch =
-    (dispatch: Dispatch): RemoveButtonPropsFromDispatch => ({
-        handleRemoveEvent: (handleAddOrRemoveParameters: HandleRemoveEventParameters): void => {
-            handleArrayedSpecControlRemove({ dispatch, ...handleAddOrRemoveParameters })
+const mapDispatchToProps: (dispatch: Dispatch) => RemoveFieldButtonPropsFromDispatch =
+    (dispatch: Dispatch): RemoveFieldButtonPropsFromDispatch => ({
+        handleFieldRemoveEvent: (handleFieldRemoveEventParameters: HandleFieldRemoveEventParameters): void => {
+            handleFieldRemove({ dispatch, ...handleFieldRemoveEventParameters })
         },
     })
 
-const RemoveButton: React.ComponentType<RemoveButtonProps> =
-    (props: RemoveButtonProps): JSX.Element => {
+const RemoveFieldButton: React.ComponentType<RemoveFieldButtonProps> =
+    (props: RemoveFieldButtonProps): JSX.Element => {
         const {
-            handleRemoveEvent,
+            handleFieldRemoveEvent,
             property,
             attributes,
             displayedSpec,
@@ -49,7 +49,7 @@ const RemoveButton: React.ComponentType<RemoveButtonProps> =
             validationResults,
         } = props
         const onClick: EventHandler = (event: React.SyntheticEvent): void => {
-            handleRemoveEvent({
+            handleFieldRemoveEvent({
                 attributes,
                 displayedSpec,
                 event,
@@ -73,4 +73,4 @@ const RemoveButton: React.ComponentType<RemoveButtonProps> =
         )
     }
 
-export default connect(mapStateToProps, mapDispatchToProps)(RemoveButton)
+export default connect(mapStateToProps, mapDispatchToProps)(RemoveFieldButton)

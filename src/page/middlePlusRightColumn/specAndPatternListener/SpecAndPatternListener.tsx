@@ -11,12 +11,12 @@ import { doAsync, isUndefined, Maybe, Ms } from '@musical-patterns/utilities'
 import * as React from 'react'
 import { connect } from 'react-redux'
 import { Dispatch } from 'redux'
-import { PerformerStateKey } from '../../../performer'
 import { SpecStateKey } from '../../../spec'
 import { ImmutableState, StateKey } from '../../../types'
 import { maybePatternFromPatternsAndId } from '../../maybePatternFromPatternsAndId'
 import { ImmutablePageState, PageStateKey } from '../../types'
 import { logDebugInfo } from './debug'
+import { buildSetPatternDuration } from './events'
 import {
     SpecAndPatternListenerProps,
     SpecAndPatternListenerPropsFromDispatch,
@@ -38,15 +38,13 @@ const mapStateToProps: (state: ImmutableState) => SpecAndPatternListenerPropsFro
 
 const mapDispatchToProps: (dispatch: Dispatch) => SpecAndPatternListenerPropsFromDispatch =
     (dispatch: Dispatch): SpecAndPatternListenerPropsFromDispatch => ({
-        setTotalDuration: (patternDuration: Ms): void => {
-            dispatch({ type: PerformerStateKey.PATTERN_DURATION, data: patternDuration })
-        },
+        setPatternDuration: buildSetPatternDuration({ dispatch }),
     })
 
 const SpecAndPatternListener: React.ComponentType<SpecAndPatternListenerProps> =
     (props: SpecAndPatternListenerProps): JSX.Element => {
         doAsync(async () => {
-            const { debugMode, id, patterns, submittedSpec, setTotalDuration } = props
+            const { debugMode, id, patterns, submittedSpec, setPatternDuration } = props
 
             const pattern: Maybe<Pattern> = maybePatternFromPatternsAndId({ patterns, id })
             if (isUndefined(pattern)) {
@@ -56,7 +54,7 @@ const SpecAndPatternListener: React.ComponentType<SpecAndPatternListenerProps> =
             const compilePatternParameters: CompilePatternParameters = { ...pattern, spec: submittedSpec }
             const threadSpecs: ThreadSpec[] = await compilePattern(compilePatternParameters)
             const patternDuration: Ms = await calculatePatternTotalCompiledDuration(compilePatternParameters)
-            setTotalDuration(patternDuration)
+            setPatternDuration(patternDuration)
 
             await setThreadSpecs(threadSpecs)
 

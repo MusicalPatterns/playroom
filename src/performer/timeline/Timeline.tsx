@@ -6,7 +6,7 @@ import { connect } from 'react-redux'
 import { ImmutableState, StateKey } from '../../types'
 import { formatTimesForDisplay } from '../formatTimesForDisplay'
 import { ImmutablePerformerState, PerformerStateKey, TimelineOrTimeInMinutesAndSecondsProps } from '../types'
-import { timeChangeHandler } from './events'
+import { handleTimelineChangeEvent } from './events'
 import './styles'
 
 const mapStateToProps: (state: ImmutableState) => TimelineOrTimeInMinutesAndSecondsProps =
@@ -33,7 +33,7 @@ const Timeline: React.ComponentType<TimelineOrTimeInMinutesAndSecondsProps> =
                 id: 'timeline',
                 max: from.Ms(patternDurationForDisplay || 0),
                 min: 0,
-                onChange: timeChangeHandler,
+                onChange: handleTimelineChangeEvent,
                 type: 'range',
                 value: from.Ms(timePositionForDisplay || 0),
             }}/>

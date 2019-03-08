@@ -42,10 +42,9 @@ const PatternList: React.ComponentType<PatternListProps> =
             return <div/>
         }
 
-        const onClick: EventHandler =
-            (event: React.SyntheticEvent): void => {
-                handlePatternChangeEvent({ event, patterns, id, rightColumnOpen })
-            }
+        const onClick: EventHandler = (event: React.SyntheticEvent): void => {
+            handlePatternChangeEvent({ event, patterns, id, rightColumnOpen })
+        }
 
         const options: JSX.Element[] = map(
             entries(patterns)

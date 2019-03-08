@@ -8,10 +8,10 @@ interface TimeControlsPropsFromState {
 }
 
 interface TimeControlsPropsFromDispatch {
-    pauseHandler: VoidFunction,
-    playHandler: VoidFunction,
-    rewindHandler: VoidFunction,
-    stopHandler: VoidFunction,
+    handlePauseClickEvent: VoidFunction,
+    handlePlayClickEvent: VoidFunction,
+    handleRewindClickEvent: VoidFunction,
+    handleStopClickEvent: VoidFunction,
 }
 
 interface TimeControlsProps extends TimeControlsPropsFromState, TimeControlsPropsFromDispatch {}

@@ -8,21 +8,21 @@ interface PresetsSelectPropsFromState {
 }
 
 interface PresetsSelectPropsFromDispatch {
-    presetChangeHandler: PresetChangeHandler,
+    handlePresetChangeEvent: HandlePresetChangeEvent,
 }
 
 interface PresetsSelectProps extends PresetsSelectPropsFromState, PresetsSelectPropsFromDispatch {}
 
-interface PresetChangeHandlerParameters extends EventParameter {
+interface HandlePresetChangeEventParameters extends EventParameter {
     presets: DictionaryOf<Preset>,
 }
 
-type PresetChangeHandler = (parameters: PresetChangeHandlerParameters) => void
+type HandlePresetChangeEvent = (parameters: HandlePresetChangeEventParameters) => void
 
 export {
     PresetsSelectPropsFromState,
     PresetsSelectPropsFromDispatch,
     PresetsSelectProps,
-    PresetChangeHandler,
-    PresetChangeHandlerParameters,
+    HandlePresetChangeEvent,
+    HandlePresetChangeEventParameters,
 }

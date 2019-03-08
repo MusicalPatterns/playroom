@@ -19,7 +19,7 @@ interface SingularSpecControlPropsFromState {
 }
 
 interface SingularSpecControlPropsFromDispatch {
-    handleSpecChangeEvent: SpecControlChangeHandler,
+    handleSpecControlChangeEvent: HandleSpecControlChangeEvent,
 }
 
 interface SingularSpecControlPropsFromParent extends PropertyParameter {
@@ -37,15 +37,14 @@ interface SpecControlIdParameters extends PropertyParameter {
     isNotAnArrayedSpecControl: boolean,
 }
 
-interface SpecChangeEventParameters extends PropertyParameter, SingularSpecControlPropsFromState {
+interface HandleSpecControlChangeEventParameters extends PropertyParameter,
+    SingularSpecControlPropsFromState, EventParameter {
     fieldIndex?: Ordinal,
 }
 
-interface SpecControlChangeHandlerParameters extends SpecChangeEventParameters, EventParameter {}
+type HandleSpecControlChangeEvent = (parameters: HandleSpecControlChangeEventParameters) => void
 
-type SpecControlChangeHandler = (parameters: SpecControlChangeHandlerParameters) => void
-
-type BuildSpecControlChangeHandler = (parameters: DispatchParameter) => SpecControlChangeHandler
+type BuildHandleSpecControlChangeEvent = (parameters: DispatchParameter) => HandleSpecControlChangeEvent
 
 interface MergeEventValueIntoValueParameters extends PropertyParameter {
     displayedSpec: DomSpec,
@@ -59,9 +58,8 @@ export {
     SingularSpecControlPropsFromParent,
     SingularSpecControlProps,
     SpecControlIdParameters,
-    SpecChangeEventParameters,
-    SpecControlChangeHandler,
-    BuildSpecControlChangeHandler,
-    SpecControlChangeHandlerParameters,
+    HandleSpecControlChangeEvent,
+    BuildHandleSpecControlChangeEvent,
+    HandleSpecControlChangeEventParameters,
     MergeEventValueIntoValueParameters,
 }

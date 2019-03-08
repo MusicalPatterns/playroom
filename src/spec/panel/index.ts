@@ -1,2 +1,2 @@
 export { SpecPanel } from './specPanel'
-export { resetActions } from './resetButton'
+export { resetActions } from './resetSpecButton'

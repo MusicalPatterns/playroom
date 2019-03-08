@@ -27,10 +27,9 @@ const mapDispatchToProps: (dispatch: Dispatch) => TitlePropsFromDispatch =
 
 const Title: React.ComponentType<TitleProps> =
     ({ handleTitleClickEvent, rightColumnOpen }: TitleProps): JSX.Element => {
-        const onClick: EventHandler =
-            (event: React.SyntheticEvent): void => {
-                handleTitleClickEvent({ event, rightColumnOpen })
-            }
+        const onClick: EventHandler = (event: React.SyntheticEvent): void => {
+            handleTitleClickEvent({ event, rightColumnOpen })
+        }
 
         return (
             <div {...{ id: 'title' }}>

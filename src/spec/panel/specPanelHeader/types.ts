@@ -2,21 +2,18 @@ import { DispatchParameter, EventParameter } from '../../../types'
 import { SpecPanelOpenParameter } from '../types'
 
 interface SpecPanelHeaderPropsFromDispatch {
-    handleSpecPanelCaretClickEvent: SpecPanelCaretClickEventExtractor,
+    handleSpecPanelHeaderClickEvent: HandleSpecPanelHeaderClickEvent,
 }
 
 interface SpecPanelHeaderProps extends SpecPanelOpenParameter, SpecPanelHeaderPropsFromDispatch {}
 
-interface SpecPanelCaretClickHandlerParameters extends DispatchParameter, SpecPanelOpenParameter {}
+interface HandleSpecPanelHeaderClickParameters extends DispatchParameter, SpecPanelOpenParameter {}
 
-interface SpecPanelCaretClickEventParameters extends EventParameter, SpecPanelOpenParameter {}
-
-type SpecPanelCaretClickEventExtractor = (parameters: SpecPanelCaretClickEventParameters) => void
+type HandleSpecPanelHeaderClickEvent = (parameters: SpecPanelOpenParameter) => void
 
 export {
     SpecPanelHeaderPropsFromDispatch,
     SpecPanelHeaderProps,
-    SpecPanelCaretClickHandlerParameters,
-    SpecPanelCaretClickEventParameters,
-    SpecPanelCaretClickEventExtractor,
+    HandleSpecPanelHeaderClickParameters,
+    HandleSpecPanelHeaderClickEvent,
 }

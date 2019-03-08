@@ -18,7 +18,7 @@ import { connect } from 'react-redux'
 import { Dispatch } from 'redux'
 import { EventHandler, ImmutableState, StateKey } from '../../../types'
 import { ImmutableSpecState, SpecStateKey } from '../../types'
-import { buildPresetChangeHandler } from './events'
+import { buildHandlePresetChangeEvent } from './events'
 import './styles'
 import { PresetsSelectProps, PresetsSelectPropsFromDispatch, PresetsSelectPropsFromState } from './types'
 
@@ -34,11 +34,11 @@ const mapStateToProps: (state: ImmutableState) => PresetsSelectPropsFromState =
 
 const mapDispatchToProps: (dispatch: Dispatch) => PresetsSelectPropsFromDispatch =
     (dispatch: Dispatch): PresetsSelectPropsFromDispatch => ({
-        presetChangeHandler: buildPresetChangeHandler({ dispatch }),
+        handlePresetChangeEvent: buildHandlePresetChangeEvent({ dispatch }),
     })
 
 const PresetsSelect: React.ComponentType<PresetsSelectProps> =
-    ({ presetChangeHandler, presets, submittedSpec }: PresetsSelectProps): JSX.Element => {
+    ({ handlePresetChangeEvent, presets, submittedSpec }: PresetsSelectProps): JSX.Element => {
         if (isUndefined(presets)) {
             return <div/>
         }
@@ -67,7 +67,7 @@ const PresetsSelect: React.ComponentType<PresetsSelectProps> =
         options.unshift(<option {...{ disabled: true, key: 0 }}/>)
 
         const onChange: EventHandler = (event: React.SyntheticEvent): void => {
-            presetChangeHandler({ presets, event })
+            handlePresetChangeEvent({ presets, event })
         }
 
         return (

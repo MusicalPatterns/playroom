@@ -5,18 +5,16 @@ interface HamburgerPropsFromState {
 }
 
 interface HamburgerPropsFromDispatch {
-    hamburgerHandler: (leftColumnOpen: boolean) => void,
+    handleHamburgerClickEvent: (parameters: HamburgerPropsFromState) => void,
 }
 
 interface HamburgerProps extends HamburgerPropsFromDispatch, HamburgerPropsFromState {}
 
-interface HandleHamburgerParameters extends DispatchParameter {
-    leftColumnOpen: boolean,
-}
+interface HandleHamburgerClickParameters extends DispatchParameter, HamburgerPropsFromState {}
 
 export {
     HamburgerProps,
     HamburgerPropsFromDispatch,
     HamburgerPropsFromState,
-    HandleHamburgerParameters,
+    HandleHamburgerClickParameters,
 }
