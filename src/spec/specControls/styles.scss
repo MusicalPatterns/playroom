@@ -1,0 +1,8 @@
+@import '../sizes';
+
+#spec-controls {
+  h3 {
+    margin-top: $spec-controls-vertical-spacing;
+    font-weight: bold;
+  }
+}

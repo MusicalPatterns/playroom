@@ -1,0 +1,28 @@
+@import '../sizes';
+
+$mobile-spec-panel-max-width: $big-area;
+$little-mobile-spec-panel-max-width: $medium-area;
+$littler-mobile-spec-panel-max-width: $small-area;
+$littlest-mobile-spec-panel-max-width: $tiny-area;
+
+$spec-panel-spacing: $huge;
+$spec-controls-vertical-spacing: $big;
+$spec-controls-horizontal-spacing: $medium;
+$invalid-message-spacing: $small;
+$spec-panel-bottom-spacing: $tiny;
+
+$spec-panel-caret-size: $big;
+$spec-panel-max-height-for-animation: $phi * $enormous-area;
+
+$invalid-message-vertical-translation: $huge;
+
+$presets-spacing: $medium;
+
+$units-size: $big;
+
+$arrayed-control-width: $enormous;
+$arrayed-control-input-width: $huge;
+$arrayed-control-spacing: $medium;
+
+$arrayed-control-input-horizontal-spacing: $small;
+$arrayed-control-input-vertical-spacing: $tiny;

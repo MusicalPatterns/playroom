@@ -1,0 +1,61 @@
+@import '../../effects';
+@import '../colors';
+@import '../sizes';
+
+#time-controls {
+  @include animate(background, color, border);
+
+  display: flex;
+  align-items: center;
+  padding: $time-controls-vertical-spacing $time-controls-horizontal-spacing;
+  font-size: $important-text-size;
+  border-radius: $border-size;
+  border: $border-size solid $time-controls-border-and-track;
+  background: $time-controls-background;
+  color: $time-controls-color;
+
+  button {
+    @include animate(background);
+    @include no-glow();
+
+    height: $time-control-size;
+    min-width: $time-control-size;
+    width: $time-control-size;
+    margin-right: $time-control-spacing;
+    background: $time-controls-background;
+    padding: 0;
+
+    &:disabled {
+      background: $time-controls-background-disabled;
+    }
+
+    svg {
+      width: $time-control-size;
+      height: $time-control-size;
+    }
+  }
+
+  input {
+    flex: auto;
+    height: $time-control-size;
+    padding-right: $time-controls-horizontal-spacing;
+  }
+
+  path {
+    @include hoverable-color($time-controls-color);
+  }
+
+  &.disabled {
+    border-color: $time-controls-border-and-track-disabled;
+    background: $time-controls-background-disabled;
+    color: $time-controls-color-disabled;
+
+    path {
+      color: $time-controls-color-disabled;
+
+      &:hover {
+        color: $time-controls-color-disabled;
+      }
+    }
+  }
+}

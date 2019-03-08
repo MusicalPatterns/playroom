@@ -1,0 +1,7 @@
+@import '../baseStyles';
+
+$invalid-message-horizontal-translation-percentage: 100% * (1 - ($phi - 1));
+$invalid-message-opacity: $phi - 1;
+
+$spec-control-name-proportion: $phi;
+$spec-control-input-proportion: 1;

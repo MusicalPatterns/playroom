@@ -1,0 +1,8 @@
+@import '../sizes';
+
+#pattern-panel {
+  display: flex;
+  flex-direction: column;
+  height: $pattern-panel-height;
+  align-items: flex-end;
+}

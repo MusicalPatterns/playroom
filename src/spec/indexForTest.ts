@@ -2,4 +2,4 @@
 
 export {
     SpecControlStates,
-} from './components/indexForTest'
+} from './types'

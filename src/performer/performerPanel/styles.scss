@@ -1,0 +1,12 @@
+@import '../sizes';
+@import '../../effects';
+
+#performer-panel {
+  max-height: $performer-panel-max-height;
+
+  @include animate(max-height);
+
+  &.closed {
+    max-height: 0;
+  }
+}

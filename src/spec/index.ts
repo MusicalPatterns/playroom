@@ -1,15 +1,11 @@
+export { SpecPanel } from './specPanel'
+
+export { specReducer } from './reducer'
+
+export { resetActions } from './resetButton'
+
 export {
-    resetActions,
-} from './events'
-export {
-    specReducer,
     ImmutableSpecState,
     SpecAction,
     SpecStateKey,
-} from './state'
-export {
-    SpecPanel,
-} from './components'
-
-// tslint:disable-next-line no-import-side-effect
-import './styles'
+} from './types'

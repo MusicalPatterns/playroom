@@ -1,0 +1,34 @@
+@import '../baseStyles';
+
+$hamburger-padding: $medium;
+
+$pattern-panel-height: $huge-area;
+
+$pattern-list-width: $medium-area;
+$pattern-list-item-width: $small-area;
+
+$pattern-list-scroll-bar-hiding-translation: -$big;
+$pattern-list-spacing-to-keep-the-top-and-bottom-elements-out-of-the-shadow: $huge;
+
+$pattern-list-fade-horizontal-translation: $big;
+$pattern-list-fade-vertical-translation-for-bottom: -$huge;
+$pattern-list-fade-vertical-translation-for-top: $huge;
+$pattern-list-fade-size: $big;
+
+$pattern-list-item-spacing: $medium;
+
+$title-line-height: 28px;
+
+$title-height: $small-area;
+$title-width: $medium-area;
+
+$musical-patterns-symbol-size: $big;
+
+$first-row-height: $enormous;
+$second-row-height: $medium-area;
+
+$middle-min-width: $huge-area;
+$right-min-width: $big-area;
+
+$middle-min-width-mobile: $big-area;
+$right-min-width-mobile: $medium-area;

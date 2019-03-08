@@ -1,5 +1,9 @@
+import { TypedMap } from '@musical-patterns/utilities'
 import * as React from 'react'
 import { Dispatch } from 'redux'
+import { ImmutablePageState, PageAction } from './page'
+import { ImmutablePerformerState, PerformerAction } from './performer'
+import { ImmutableSpecState, SpecAction } from './spec'
 
 enum SecretSelectorsForTest {
     SECRET_SUBMITTED_SPEC_CONTROL = 'secret-submitted-spec-control',
@@ -23,6 +27,22 @@ interface WithClickHandler {
 
 type AsyncEventHandler = (event: React.SyntheticEvent) => Promise<void>
 
+type Action = SpecAction | PerformerAction | PageAction
+
+enum StateKey {
+    PAGE = 'PAGE',
+    PERFORMER = 'PERFORMER',
+    SPEC = 'SPEC',
+}
+
+interface State {
+    [ StateKey.PAGE ]: ImmutablePageState,
+    [ StateKey.PERFORMER ]: ImmutablePerformerState,
+    [ StateKey.SPEC ]: ImmutableSpecState,
+}
+
+type ImmutableState = TypedMap<State>
+
 export {
     DispatchAsProp,
     SecretSelectorsForTest,
@@ -30,4 +50,7 @@ export {
     AsyncEventHandler,
     EventAsProp,
     WithClickHandler,
+    ImmutableState,
+    StateKey,
+    Action,
 }

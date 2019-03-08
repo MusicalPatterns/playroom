@@ -1,1 +1,0 @@
-export { extractValueFromEvent } from './extractValueFromEvent'
