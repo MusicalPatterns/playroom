@@ -1,6 +1,6 @@
 import { DomValue, Spec, ValidationResult, ValidationResults } from '@musical-patterns/pattern'
 import { entries, reduce } from '@musical-patterns/utilities'
-import { ValidateSubmittedSpecParameters, UpdatedValidationResultsPlusIsValid } from './types'
+import { UpdatedValidationResultsPlusIsValid, ValidateSubmittedSpecParameters } from './types'
 import { validateProperty } from './validateProperty'
 
 const validateSubmittedSpec: (parameters: ValidateSubmittedSpecParameters) => UpdatedValidationResultsPlusIsValid =

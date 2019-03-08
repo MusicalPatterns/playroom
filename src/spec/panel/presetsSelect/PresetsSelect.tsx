@@ -20,23 +20,23 @@ import { EventHandler, ImmutableState, StateKey } from '../../../types'
 import { SpecStateKey } from '../../types'
 import { buildPresetChangeHandler } from './events'
 import './styles'
-import { PresetsProps, PresetsPropsFromDispatch, PresetsPropsFromState } from './types'
+import { PresetsSelectProps, PresetsSelectPropsFromDispatch, PresetsSelectPropsFromState } from './types'
 
-const mapStateToProps: (state: ImmutableState) => PresetsPropsFromState =
-    (state: ImmutableState): PresetsPropsFromState => ({
+const mapStateToProps: (state: ImmutableState) => PresetsSelectPropsFromState =
+    (state: ImmutableState): PresetsSelectPropsFromState => ({
         presets: state.get(StateKey.SPEC)
             .get(SpecStateKey.PRESETS),
         submittedSpec: state.get(StateKey.SPEC)
             .get(SpecStateKey.SUBMITTED_SPEC),
     })
 
-const mapDispatchToProps: (dispatch: Dispatch) => PresetsPropsFromDispatch =
-    (dispatch: Dispatch): PresetsPropsFromDispatch => ({
+const mapDispatchToProps: (dispatch: Dispatch) => PresetsSelectPropsFromDispatch =
+    (dispatch: Dispatch): PresetsSelectPropsFromDispatch => ({
         presetChangeHandler: buildPresetChangeHandler({ dispatch }),
     })
 
-const PresetsSelect: React.ComponentType<PresetsProps> =
-    ({ presetChangeHandler, presets, submittedSpec }: PresetsProps): JSX.Element => {
+const PresetsSelect: React.ComponentType<PresetsSelectProps> =
+    ({ presetChangeHandler, presets, submittedSpec }: PresetsSelectProps): JSX.Element => {
         if (isUndefined(presets)) {
             return <div/>
         }

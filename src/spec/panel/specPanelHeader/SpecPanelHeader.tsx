@@ -9,9 +9,9 @@ import { CONTROLS } from '../../../copy'
 import { EventHandler, ImmutableState, StateKey } from '../../../types'
 import { SpecStateKey } from '../../types'
 import { SpecPanelOpenAsProp } from '../types'
-import { caretClickHandler } from './events'
+import { specPanelCaretClickHandler } from './events'
 import './styles'
-import { CaretClickEventParameters, SpecPanelHeaderProps, SpecPanelHeaderPropsFromDispatch } from './types'
+import { SpecPanelCaretClickEventParameters, SpecPanelHeaderProps, SpecPanelHeaderPropsFromDispatch } from './types'
 
 const mapStateToProps: (state: ImmutableState) => SpecPanelOpenAsProp =
     (state: ImmutableState): SpecPanelOpenAsProp => ({
@@ -21,16 +21,16 @@ const mapStateToProps: (state: ImmutableState) => SpecPanelOpenAsProp =
 
 const mapDispatchToProps: (dispatch: Dispatch) => SpecPanelHeaderPropsFromDispatch =
     (dispatch: Dispatch): SpecPanelHeaderPropsFromDispatch => ({
-        handleCaretClickEvent: ({ event, specPanelOpen }: CaretClickEventParameters): void => {
-            caretClickHandler({ dispatch, specPanelOpen })
+        handleSpecPanelCaretClickEvent: ({ event, specPanelOpen }: SpecPanelCaretClickEventParameters): void => {
+            specPanelCaretClickHandler({ dispatch, specPanelOpen })
         },
     })
 
 const SpecPanelHeader: React.ComponentType<SpecPanelHeaderProps> =
-    ({ handleCaretClickEvent, specPanelOpen }: SpecPanelHeaderProps): JSX.Element => {
+    ({ handleSpecPanelCaretClickEvent, specPanelOpen }: SpecPanelHeaderProps): JSX.Element => {
         const onClick: EventHandler =
             (event: React.SyntheticEvent): void => {
-                handleCaretClickEvent({ event, specPanelOpen })
+                handleSpecPanelCaretClickEvent({ event, specPanelOpen })
             }
 
         return (

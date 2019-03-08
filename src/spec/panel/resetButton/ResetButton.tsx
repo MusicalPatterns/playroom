@@ -10,25 +10,25 @@ import { ImmutableState, StateKey } from '../../../types'
 import { SpecStateKey } from '../../types'
 import { handleReset } from './events'
 import './styles'
-import { ResetProps, ResetPropsFromDispatch, ResetPropsFromState } from './types'
+import { ResetButtonProps, ResetButtonPropsFromDispatch, ResetButtonPropsFromState } from './types'
 
-const mapStateToProps: (state: ImmutableState) => ResetPropsFromState =
-    (state: ImmutableState): ResetPropsFromState => ({
+const mapStateToProps: (state: ImmutableState) => ResetButtonPropsFromState =
+    (state: ImmutableState): ResetButtonPropsFromState => ({
         initialSpec: state.get(StateKey.SPEC)
             .get(SpecStateKey.INITIAL_SPEC),
         submittedSpec: state.get(StateKey.SPEC)
             .get(SpecStateKey.SUBMITTED_SPEC),
     })
 
-const mapDispatchToProps: (dispatch: Dispatch) => ResetPropsFromDispatch =
-    (dispatch: Dispatch): ResetPropsFromDispatch => ({
+const mapDispatchToProps: (dispatch: Dispatch) => ResetButtonPropsFromDispatch =
+    (dispatch: Dispatch): ResetButtonPropsFromDispatch => ({
         resetHandler: (spec: Spec): void => {
             handleReset({ dispatch, spec })
         },
     })
 
-const ResetButton: React.ComponentType<ResetProps> =
-    ({ resetHandler, submittedSpec, initialSpec }: ResetProps): JSX.Element => {
+const ResetButton: React.ComponentType<ResetButtonProps> =
+    ({ resetHandler, submittedSpec, initialSpec }: ResetButtonProps): JSX.Element => {
         const onClick: VoidFunction = (): void => {
             resetHandler(initialSpec)
         }
