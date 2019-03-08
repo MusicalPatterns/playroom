@@ -1,17 +1,13 @@
 import { Attributes } from '@musical-patterns/pattern'
-
-interface UnitsPropsFromParent {
-    property: string,
-}
+import { PropertyParameter } from '../types'
 
 interface UnitsPropsFromState {
     attributes: Attributes,
 }
 
-interface UnitsProps extends UnitsPropsFromParent, UnitsPropsFromState {}
+interface UnitsProps extends PropertyParameter, UnitsPropsFromState {}
 
 export {
     UnitsPropsFromState,
-    UnitsPropsFromParent,
     UnitsProps,
 }

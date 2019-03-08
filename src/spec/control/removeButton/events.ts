@@ -1,12 +1,11 @@
-import { ArrayedDomValue, DomSpec, ValidationResult, ValidationResults } from '@musical-patterns/pattern'
+import { ArrayedDomValue, ValidationResult, ValidationResults } from '@musical-patterns/pattern'
 import { indexOfLastElement, INITIAL, isUndefined, lastElement, slice } from '@musical-patterns/utilities'
 import { batchActions } from 'redux-batched-actions'
 import { Action } from '../../../types'
-import { SpecStateKey } from '../../types'
 import { buildAttemptSubmitActions } from '../attemptSubmitActions'
 import { getArrayedDisplayedValue } from '../getArrayedDisplayedValue'
-import { HandleArrayedSpecControlAddOrRemoveParameters } from '../types'
 import { isArrayedValidationResult } from './isArrayedValidationResult'
+import { HandleRemoveParameters } from './types'
 
 const isNoInvalidMessageForRemovedField:
     (validationResults: ValidationResults, property: string) => boolean =
@@ -26,11 +25,17 @@ const isNoInvalidMessageForRemovedField:
         return isUndefined(lastElement(validationResult))
     }
 
-const handleArrayedSpecControlRemove: (parameters: HandleArrayedSpecControlAddOrRemoveParameters) => void =
-    ({ dispatch, event, property, specState }: HandleArrayedSpecControlAddOrRemoveParameters): void => {
-        const displayedSpec: DomSpec = specState.get(SpecStateKey.DISPLAYED_SPEC)
-        const validationResults: ValidationResults = specState.get(SpecStateKey.VALIDATION_RESULTS)
-
+const handleArrayedSpecControlRemove: (parameters: HandleRemoveParameters) => void =
+    (parameters: HandleRemoveParameters): void => {
+        const {
+            dispatch,
+            property,
+            attributes,
+            displayedSpec,
+            submittedSpec,
+            validationFunction,
+            validationResults,
+        } = parameters
         const arrayedDisplayedValue: ArrayedDomValue = getArrayedDisplayedValue(displayedSpec, property)
 
         const updatedArrayedDisplayedValue: ArrayedDomValue = slice(
@@ -46,10 +51,13 @@ const handleArrayedSpecControlRemove: (parameters: HandleArrayedSpecControlAddOr
         const suppressReevaluatingValidationResults: boolean = removedFieldIsEmpty && removedFieldHasNoInvalidMessages
 
         const actions: Action[] = buildAttemptSubmitActions({
+            attributes,
+            displayedSpec,
             property,
-            specState,
+            submittedSpec,
             suppressReevaluatingValidationResults,
             updatedValue: updatedArrayedDisplayedValue,
+            validationFunction,
         })
 
         dispatch(batchActions(actions))

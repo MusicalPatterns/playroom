@@ -1,15 +1,15 @@
-import { DispatchAsProp, EventAsProp } from '../../../types'
-import { SpecPanelOpenAsProp } from '../types'
+import { DispatchParameter, EventParameter } from '../../../types'
+import { SpecPanelOpenParameter } from '../types'
 
 interface SpecPanelHeaderPropsFromDispatch {
     handleSpecPanelCaretClickEvent: SpecPanelCaretClickEventExtractor,
 }
 
-interface SpecPanelHeaderProps extends SpecPanelOpenAsProp, SpecPanelHeaderPropsFromDispatch {}
+interface SpecPanelHeaderProps extends SpecPanelOpenParameter, SpecPanelHeaderPropsFromDispatch {}
 
-interface SpecPanelCaretClickHandlerParameters extends DispatchAsProp, SpecPanelOpenAsProp {}
+interface SpecPanelCaretClickHandlerParameters extends DispatchParameter, SpecPanelOpenParameter {}
 
-interface SpecPanelCaretClickEventParameters extends EventAsProp, SpecPanelOpenAsProp {}
+interface SpecPanelCaretClickEventParameters extends EventParameter, SpecPanelOpenParameter {}
 
 type SpecPanelCaretClickEventExtractor = (parameters: SpecPanelCaretClickEventParameters) => void
 

@@ -1,12 +1,11 @@
-import { ArrayedDomValue, ArrayedValidationResult, ArrayedValue } from '@musical-patterns/pattern'
-import { ImmutableSpecState } from '../../types'
-import { SpecControlPropsFromParent } from '../specControl'
+import { ArrayedDomValue, ArrayedValidationResult, ArrayedValue, Attributes } from '@musical-patterns/pattern'
+import { PropertyParameter } from '../types'
 
 interface ArrayedSpecControlPropsFromState {
-    specState: ImmutableSpecState,
+    attributes: Attributes,
 }
 
-interface ArrayedSpecControlPropsFromParent extends SpecControlPropsFromParent {
+interface ArrayedSpecControlPropsFromParent extends PropertyParameter {
     arrayedDisplayedValue: ArrayedDomValue,
     arrayedSubmittedValue: ArrayedValue,
     arrayedValidationResult: ArrayedValidationResult,

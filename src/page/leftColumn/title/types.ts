@@ -1,4 +1,4 @@
-import { DispatchAsProp, EventAsProp } from '../../../types'
+import { DispatchParameter, EventParameter } from '../../../types'
 
 interface TitlePropsFromState {
     rightColumnOpen: boolean,
@@ -10,13 +10,13 @@ interface TitlePropsFromDispatch {
 
 interface TitleProps extends TitlePropsFromState, TitlePropsFromDispatch {}
 
-interface TitleClickEventParameters extends EventAsProp {
+interface TitleClickEventParameters extends EventParameter {
     rightColumnOpen: boolean,
 }
 
 type TitleClickEventExtractor = (parameters: TitleClickEventParameters) => void
 
-interface TitleClickEventHandlerParameters extends DispatchAsProp {
+interface TitleClickEventHandlerParameters extends DispatchParameter {
     titleClickEventParameters: TitleClickEventParameters,
 }
 

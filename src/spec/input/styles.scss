@@ -3,7 +3,7 @@
 
 .field {
   input,
- select {
+  select {
     @include hoverable-background($control-background);
   }
 }

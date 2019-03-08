@@ -11,11 +11,11 @@ enum SecretSelectorsForTest {
     SECRET_PATTERN_DURATION = 'secret-pattern-duration',
 }
 
-interface DispatchAsProp {
+interface DispatchParameter {
     dispatch: Dispatch,
 }
 
-interface EventAsProp {
+interface EventParameter {
     event: React.SyntheticEvent,
 }
 
@@ -44,11 +44,11 @@ interface State {
 type ImmutableState = TypedMap<State>
 
 export {
-    DispatchAsProp,
+    DispatchParameter,
     SecretSelectorsForTest,
     EventHandler,
     AsyncEventHandler,
-    EventAsProp,
+    EventParameter,
     WithClickHandler,
     ImmutableState,
     StateKey,

@@ -1,12 +1,12 @@
 // tslint:disable variable-name file-name-casing no-default-export no-import-side-effect
 
-import { Attributes, PropertyAttributes } from '@musical-patterns/pattern'
+import { PropertyAttributes } from '@musical-patterns/pattern'
 import { camelCaseToLowerCase, isUndefined } from '@musical-patterns/utilities'
 import * as React from 'react'
 import { connect } from 'react-redux'
 import { Dispatch } from 'redux'
 import { EventHandler, ImmutableState, SecretSelectorsForTest, StateKey } from '../../../types'
-import { SpecStateKey } from '../../types'
+import { ImmutableSpecState, SpecStateKey } from '../../types'
 import { Field, FieldPropsFromParent } from '../field'
 import { InvalidMessage } from '../invalidMessage'
 import { stringifyIfNecessary } from '../stringifyIfNecessary'
@@ -18,18 +18,24 @@ import {
     SingularSpecControlProps,
     SingularSpecControlPropsFromDispatch,
     SingularSpecControlPropsFromState,
-    SpecChangeEventParameters,
 } from './types'
 import { getValidityClass } from './validityClass'
 
 const mapStateToProps: (state: ImmutableState) => SingularSpecControlPropsFromState =
-    (state: ImmutableState): SingularSpecControlPropsFromState => ({
-        specState: state.get(StateKey.SPEC),
-    })
+    (state: ImmutableState): SingularSpecControlPropsFromState => {
+        const specState: ImmutableSpecState = state.get(StateKey.SPEC)
+
+        return {
+            attributes: specState.get(SpecStateKey.ATTRIBUTES),
+            displayedSpec: specState.get(SpecStateKey.DISPLAYED_SPEC),
+            submittedSpec: specState.get(SpecStateKey.SUBMITTED_SPEC),
+            validationFunction: specState.get(SpecStateKey.VALIDATION_FUNCTION),
+        }
+    }
 
 const mapDispatchToProps: (dispatch: Dispatch) => SingularSpecControlPropsFromDispatch =
     (dispatch: Dispatch): SingularSpecControlPropsFromDispatch => ({
-        handleSpecChange: buildSpecControlChangeHandler({ dispatch }),
+        handleSpecChangeEvent: buildSpecControlChangeHandler({ dispatch }),
     })
 
 const SingularSpecControl: React.ComponentType<SingularSpecControlProps> =
@@ -37,21 +43,29 @@ const SingularSpecControl: React.ComponentType<SingularSpecControlProps> =
         const {
             fieldIndex,
             property,
-            handleSpecChange,
-            specState,
+            handleSpecChangeEvent,
+            attributes,
+            displayedSpec,
+            submittedSpec,
+            validationFunction,
             singularValidationResult,
             singularDisplayedValue,
             singularSubmittedValue,
         } = singularSpecControlProps
 
-        const attributes: Attributes = specState.get(SpecStateKey.ATTRIBUTES)
         const propertyAttributes: PropertyAttributes = attributes[ property ]
         const { description, formattedName } = propertyAttributes
 
-        const specChangeEventParameters: SpecChangeEventParameters = { fieldIndex, property, specState }
-
         const onChange: EventHandler = (event: React.SyntheticEvent): void => {
-            handleSpecChange({ ...specChangeEventParameters, event })
+            handleSpecChangeEvent({
+                attributes,
+                displayedSpec,
+                event,
+                fieldIndex,
+                property,
+                submittedSpec,
+                validationFunction,
+            })
         }
 
         const isNotAnArrayedSpecControl: boolean = isUndefined(fieldIndex)

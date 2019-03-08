@@ -1,38 +1,17 @@
-import { Attributes, DomSpec, ValidationFunction, ValidationResults, Value } from '@musical-patterns/pattern'
-import { DispatchAsProp, EventAsProp } from '../../types'
-import { ImmutableSpecState } from '../types'
+import { Attributes, DomSpec, Spec, ValidationFunction, ValidationResults, Value } from '@musical-patterns/pattern'
+import { Maybe } from '@musical-patterns/utilities'
 
-interface AddOrRemoveButtonPropsFromParent {
-    property: string,
-}
-
-interface AddOrRemoveButtonPropsFromState {
-    specState: ImmutableSpecState,
-}
-
-interface AddOrRemoveButtonPropsFromDispatch {
-    handleAddOrRemove: (parameters: HandleAddOrRemoveParameters) => void,
-}
-
-interface AddOrRemoveButtonProps extends AddOrRemoveButtonPropsFromState,
-    AddOrRemoveButtonPropsFromDispatch, AddOrRemoveButtonPropsFromParent {}
-
-interface HandleAddOrRemoveParameters extends EventAsProp,
-    AddOrRemoveButtonPropsFromParent, AddOrRemoveButtonPropsFromState {}
-
-interface HandleArrayedSpecControlAddOrRemoveParameters extends EventAsProp,
-    DispatchAsProp, AddOrRemoveButtonPropsFromParent, AddOrRemoveButtonPropsFromState {}
-
-interface BuildAttemptSubmitActionsParameters {
-    property: string,
-    specState: ImmutableSpecState,
+interface BuildAttemptSubmitActionsParameters extends PropertyParameter {
+    attributes: Attributes,
+    displayedSpec: DomSpec,
+    submittedSpec: Spec,
     suppressReevaluatingValidationResults?: boolean,
     updatedValue: Value,
+    validationFunction: Maybe<ValidationFunction>,
 }
 
-interface ValidateSubmittedSpecParameters {
+interface ValidateSubmittedSpecParameters extends PropertyParameter {
     attributes: Attributes,
-    property: string,
     updatedDisplayedSpec: DomSpec,
     validationFunction?: ValidationFunction,
 }
@@ -42,14 +21,13 @@ interface UpdatedValidationResultsPlusIsValid {
     updatedValidationResults: ValidationResults,
 }
 
+interface PropertyParameter {
+    property: string,
+}
+
 export {
-    AddOrRemoveButtonPropsFromState,
-    AddOrRemoveButtonPropsFromDispatch,
-    AddOrRemoveButtonPropsFromParent,
-    AddOrRemoveButtonProps,
-    HandleAddOrRemoveParameters,
-    HandleArrayedSpecControlAddOrRemoveParameters,
     BuildAttemptSubmitActionsParameters,
     UpdatedValidationResultsPlusIsValid,
     ValidateSubmittedSpecParameters,
+    PropertyParameter,
 }

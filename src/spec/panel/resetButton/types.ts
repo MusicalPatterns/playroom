@@ -1,5 +1,5 @@
 import { Spec } from '@musical-patterns/pattern'
-import { DispatchAsProp } from '../../../types'
+import { DispatchParameter } from '../../../types'
 
 interface ResetButtonPropsFromState {
     initialSpec: Spec,
@@ -12,7 +12,7 @@ interface ResetButtonPropsFromDispatch {
 
 interface ResetButtonProps extends ResetButtonPropsFromState, ResetButtonPropsFromDispatch {}
 
-interface HandleResetParameters extends DispatchAsProp {
+interface HandleResetParameters extends DispatchParameter {
     spec: Spec,
 }
 

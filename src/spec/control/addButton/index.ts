@@ -5,3 +5,7 @@ import AddButton from './AddButton'
 export {
     AddButton,
 }
+
+export {
+    AddButtonPropsFromState,
+} from './types'

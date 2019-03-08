@@ -4,45 +4,40 @@ import {
     ArrayedDomValue,
     ArrayedValidationResult,
     ArrayedValue,
-    Attributes,
-    DomSpec,
     DomValue,
     PropertyAttributes,
     SingularDomValue,
     SingularValidationResult,
     SingularValue,
-    Spec,
     ValidationResult,
-    ValidationResults,
     Value,
 } from '@musical-patterns/pattern'
 import { isUndefined, Maybe } from '@musical-patterns/utilities'
 import * as React from 'react'
 import { connect } from 'react-redux'
 import { ImmutableState, StateKey } from '../../../types'
-import { SpecStateKey } from '../../types'
+import { ImmutableSpecState, SpecStateKey } from '../../types'
 import { ArrayedSpecControl } from '../arrayedSpecControl'
 import { SingularSpecControl } from '../singularSpecControl'
-import { AddOrRemoveButtonPropsFromState } from '../types'
-import { SpecControlProps } from './types'
+import { SpecControlProps, SpecControlPropsFromState } from './types'
 
-const mapStateToProps: (state: ImmutableState) => AddOrRemoveButtonPropsFromState =
-    (state: ImmutableState): AddOrRemoveButtonPropsFromState => ({
-        specState: state.get(StateKey.SPEC),
-    })
+const mapStateToProps: (state: ImmutableState) => SpecControlPropsFromState =
+    (state: ImmutableState): SpecControlPropsFromState => {
+        const specState: ImmutableSpecState = state.get(StateKey.SPEC)
+
+        return {
+            attributes: specState.get(SpecStateKey.ATTRIBUTES),
+            displayedSpec: specState.get(SpecStateKey.DISPLAYED_SPEC),
+            submittedSpec: specState.get(SpecStateKey.SUBMITTED_SPEC),
+            validationResults: specState.get(SpecStateKey.VALIDATION_RESULTS),
+        }
+    }
 
 const SpecControl: React.ComponentType<SpecControlProps> =
-    ({ property, specState }: SpecControlProps): JSX.Element => {
-        const displayedSpec: DomSpec = specState.get(SpecStateKey.DISPLAYED_SPEC)
+    ({ property, displayedSpec, submittedSpec, validationResults, attributes }: SpecControlProps): JSX.Element => {
         const displayedValue: Maybe<DomValue> = displayedSpec[ property ]
-
-        const validationResults: ValidationResults = specState.get(SpecStateKey.VALIDATION_RESULTS)
         const validationResult: ValidationResult = validationResults && validationResults[ property ]
-
-        const submittedSpec: Spec = specState.get(SpecStateKey.SUBMITTED_SPEC)
         const submittedValue: Maybe<Value> = submittedSpec[ property ]
-
-        const attributes: Attributes = specState.get(SpecStateKey.ATTRIBUTES)
         const propertyAttributes: PropertyAttributes = attributes[ property ]
 
         if (isUndefined(submittedValue) || isUndefined(displayedValue)) {

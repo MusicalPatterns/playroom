@@ -1,18 +1,28 @@
-import { DomSpec, SingularDomValue, SingularValidationResult, SingularValue } from '@musical-patterns/pattern'
+import {
+    Attributes,
+    DomSpec,
+    SingularDomValue,
+    SingularValidationResult,
+    SingularValue,
+    Spec,
+    ValidationFunction,
+} from '@musical-patterns/pattern'
 import { HtmlValueOrChecked, Maybe, Ordinal } from '@musical-patterns/utilities'
-import { DispatchAsProp, EventAsProp } from '../../../types'
-import { ImmutableSpecState } from '../../types'
-import { SpecControlPropsFromParent } from '../specControl'
+import { DispatchParameter, EventParameter } from '../../../types'
+import { PropertyParameter } from '../types'
 
 interface SingularSpecControlPropsFromState {
-    specState: ImmutableSpecState,
+    attributes: Attributes,
+    displayedSpec: DomSpec,
+    submittedSpec: Spec,
+    validationFunction: Maybe<ValidationFunction>,
 }
 
 interface SingularSpecControlPropsFromDispatch {
-    handleSpecChange: SpecControlChangeHandler,
+    handleSpecChangeEvent: SpecControlChangeHandler,
 }
 
-interface SingularSpecControlPropsFromParent extends SpecControlPropsFromParent {
+interface SingularSpecControlPropsFromParent extends PropertyParameter {
     fieldIndex?: Ordinal,
     singularDisplayedValue: SingularDomValue,
     singularSubmittedValue: SingularValue,
@@ -22,29 +32,25 @@ interface SingularSpecControlPropsFromParent extends SpecControlPropsFromParent 
 interface SingularSpecControlProps extends SingularSpecControlPropsFromDispatch,
     SingularSpecControlPropsFromState, SingularSpecControlPropsFromParent {}
 
-interface SpecControlIdParameters {
+interface SpecControlIdParameters extends PropertyParameter {
     fieldIndex: Maybe<Ordinal>,
     isNotAnArrayedSpecControl: boolean,
-    property: string,
 }
 
-interface SpecChangeEventParameters {
+interface SpecChangeEventParameters extends PropertyParameter, SingularSpecControlPropsFromState {
     fieldIndex?: Ordinal,
-    property: string,
-    specState: ImmutableSpecState,
 }
 
-interface SpecControlChangeHandlerParameters extends SpecChangeEventParameters, EventAsProp {}
+interface SpecControlChangeHandlerParameters extends SpecChangeEventParameters, EventParameter {}
 
 type SpecControlChangeHandler = (parameters: SpecControlChangeHandlerParameters) => void
 
-type BuildSpecControlChangeHandler = (parameters: DispatchAsProp) => SpecControlChangeHandler
+type BuildSpecControlChangeHandler = (parameters: DispatchParameter) => SpecControlChangeHandler
 
-interface MergeEventValueIntoValueParameters {
+interface MergeEventValueIntoValueParameters extends PropertyParameter {
     displayedSpec: DomSpec,
     eventValue: HtmlValueOrChecked,
     fieldIndex: Ordinal,
-    property: string,
 }
 
 export {

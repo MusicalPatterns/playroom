@@ -1,6 +1,6 @@
 import { Id, Patterns } from '@musical-patterns/pattern'
 import { Maybe } from '@musical-patterns/utilities'
-import { DispatchAsProp, EventAsProp } from '../../../types'
+import { DispatchParameter, EventParameter } from '../../../types'
 
 interface PatternListPropsFromState {
     id: Maybe<Id>,
@@ -14,13 +14,13 @@ interface PatternListPropsFromDispatch {
 
 interface PatternListProps extends PatternListPropsFromState, PatternListPropsFromDispatch {}
 
-interface PatternChangeEventHandlerParameters extends DispatchAsProp {
+interface PatternChangeEventHandlerParameters extends DispatchParameter {
     patternChangeEventParameters: PatternChangeEventParameters,
 }
 
 type PatternChangeEventHandler = (parameters: PatternChangeEventHandlerParameters) => Promise<void>
 
-interface PatternChangeEventParameters extends EventAsProp, PatternListPropsFromState {}
+interface PatternChangeEventParameters extends EventParameter, PatternListPropsFromState {}
 
 type PatternChangeEventExtractor = (parameters: PatternChangeEventParameters) => void
 

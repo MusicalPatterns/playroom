@@ -1,15 +1,15 @@
 import { Attributes, PropertyAttributes, PropertyType } from '@musical-patterns/pattern'
 import { HtmlValueOrChecked } from '@musical-patterns/utilities'
 import { EventHandler } from '../../../types'
+import { PropertyParameter } from '../types'
 
 interface FieldPropsFromState {
     attributes: Attributes,
 }
 
-interface FieldPropsFromParent {
+interface FieldPropsFromParent extends PropertyParameter {
     id: string,
     onChange: EventHandler,
-    property: string,
     validityClass: string,
     value: HtmlValueOrChecked,
 }

@@ -7,17 +7,17 @@ import { SpecStateKey } from '../../types'
 import { PresetsSelect } from '../presetsSelect'
 import { ResetButton } from '../resetButton'
 import { SpecControls } from '../specControls'
-import { SpecPanelOpenAsProp } from '../types'
+import { SpecPanelOpenParameter } from '../types'
 import './styles'
 
-const mapStateToProps: (state: ImmutableState) => SpecPanelOpenAsProp =
-    (state: ImmutableState): SpecPanelOpenAsProp => ({
+const mapStateToProps: (state: ImmutableState) => SpecPanelOpenParameter =
+    (state: ImmutableState): SpecPanelOpenParameter => ({
         specPanelOpen: state.get(StateKey.SPEC)
             .get(SpecStateKey.SPEC_PANEL_OPEN),
     })
 
-const SpecPanelBody: React.ComponentType<SpecPanelOpenAsProp> =
-    ({ specPanelOpen }: SpecPanelOpenAsProp): JSX.Element => (
+const SpecPanelBody: React.ComponentType<SpecPanelOpenParameter> =
+    ({ specPanelOpen }: SpecPanelOpenParameter): JSX.Element => (
         <div {...{ id: 'spec-panel-body', className: specPanelOpen ? 'open' : 'closed' }}>
             <PresetsSelect/>
             <hr/>

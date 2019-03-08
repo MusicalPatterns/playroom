@@ -1,17 +1,16 @@
-import { ImmutableSpecState } from '../../types'
+import { Attributes, DomSpec, Spec, ValidationResults } from '@musical-patterns/pattern'
+import { PropertyParameter } from '../types'
 
 interface SpecControlPropsFromState {
-    specState: ImmutableSpecState,
+    attributes: Attributes,
+    displayedSpec: DomSpec,
+    submittedSpec: Spec,
+    validationResults: ValidationResults,
 }
 
-interface SpecControlPropsFromParent {
-    property: string,
-}
-
-interface SpecControlProps extends SpecControlPropsFromParent, SpecControlPropsFromState {}
+interface SpecControlProps extends PropertyParameter, SpecControlPropsFromState {}
 
 export {
-    SpecControlPropsFromParent,
     SpecControlPropsFromState,
     SpecControlProps,
 }

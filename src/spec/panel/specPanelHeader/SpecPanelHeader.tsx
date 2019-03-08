@@ -8,13 +8,13 @@ import { Dispatch } from 'redux'
 import { CONTROLS } from '../../../copy'
 import { EventHandler, ImmutableState, StateKey } from '../../../types'
 import { SpecStateKey } from '../../types'
-import { SpecPanelOpenAsProp } from '../types'
+import { SpecPanelOpenParameter } from '../types'
 import { specPanelCaretClickHandler } from './events'
 import './styles'
 import { SpecPanelCaretClickEventParameters, SpecPanelHeaderProps, SpecPanelHeaderPropsFromDispatch } from './types'
 
-const mapStateToProps: (state: ImmutableState) => SpecPanelOpenAsProp =
-    (state: ImmutableState): SpecPanelOpenAsProp => ({
+const mapStateToProps: (state: ImmutableState) => SpecPanelOpenParameter =
+    (state: ImmutableState): SpecPanelOpenParameter => ({
         specPanelOpen: state.get(StateKey.SPEC)
             .get(SpecStateKey.SPEC_PANEL_OPEN),
     })

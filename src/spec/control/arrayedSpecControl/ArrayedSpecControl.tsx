@@ -1,6 +1,6 @@
 // tslint:disable variable-name file-name-casing no-default-export no-import-side-effect
 
-import { Attributes, PropertyAttributes } from '@musical-patterns/pattern'
+import { PropertyAttributes } from '@musical-patterns/pattern'
 import { camelCaseToLowerCase, from, HtmlValueOrChecked, map, Ordinal } from '@musical-patterns/utilities'
 import * as React from 'react'
 import { connect } from 'react-redux'
@@ -16,7 +16,8 @@ import { ArrayedSpecControlProps, ArrayedSpecControlPropsFromState } from './typ
 
 const mapStateToProps: (state: ImmutableState) => ArrayedSpecControlPropsFromState =
     (state: ImmutableState): ArrayedSpecControlPropsFromState => ({
-        specState: state.get(StateKey.SPEC),
+        attributes: state.get(StateKey.SPEC)
+            .get(SpecStateKey.ATTRIBUTES),
     })
 
 const ArrayedSpecControl: React.ComponentType<ArrayedSpecControlProps> =
@@ -26,9 +27,8 @@ const ArrayedSpecControl: React.ComponentType<ArrayedSpecControlProps> =
             arrayedDisplayedValue,
             arrayedValidationResult,
             arrayedSubmittedValue,
-            specState,
+            attributes,
         } = arrayedSpecControlProps
-        const attributes: Attributes = specState.get(SpecStateKey.ATTRIBUTES)
         const propertyAttributes: PropertyAttributes = attributes[ property ]
         const formattedName: string = propertyAttributes.formattedName || camelCaseToLowerCase(property)
 

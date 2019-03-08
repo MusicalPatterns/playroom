@@ -1,7 +1,7 @@
-interface SpecPanelOpenAsProp {
+interface SpecPanelOpenParameter {
     specPanelOpen: boolean,
 }
 
 export {
-    SpecPanelOpenAsProp,
+    SpecPanelOpenParameter,
 }

@@ -1,4 +1,4 @@
-import { DispatchAsProp } from '../../../types'
+import { DispatchParameter } from '../../../types'
 
 interface HamburgerPropsFromState {
     leftColumnOpen: boolean,
@@ -10,7 +10,7 @@ interface HamburgerPropsFromDispatch {
 
 interface HamburgerProps extends HamburgerPropsFromDispatch, HamburgerPropsFromState {}
 
-interface HandleHamburgerParameters extends DispatchAsProp {
+interface HandleHamburgerParameters extends DispatchParameter {
     leftColumnOpen: boolean,
 }
 
