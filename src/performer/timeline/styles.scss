@@ -1,5 +1,5 @@
-@import '../colors';
 @import '../../effects';
+@import '../colors';
 
 #timeline {
   @include animate(background);
