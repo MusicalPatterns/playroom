@@ -5,9 +5,19 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import * as React from 'react'
 import { connect } from 'react-redux'
 import { Dispatch } from 'redux'
-import { EventHandler } from '../../types'
-import { AddOrRemoveButtonProps, AddOrRemoveButtonPropsFromDispatch, HandleAddOrRemoveParameters } from '../types'
+import { EventHandler, ImmutableState, StateKey } from '../../types'
+import {
+    AddOrRemoveButtonProps,
+    AddOrRemoveButtonPropsFromDispatch,
+    AddOrRemoveButtonPropsFromState,
+    HandleAddOrRemoveParameters,
+} from '../types'
 import { handleArrayedPropertyElementAdd } from './events'
+
+const mapStateToProps: (state: ImmutableState) => AddOrRemoveButtonPropsFromState =
+    (state: ImmutableState): AddOrRemoveButtonPropsFromState => ({
+        specState: state.get(StateKey.SPEC),
+    })
 
 const mapDispatchToProps: (dispatch: Dispatch) => AddOrRemoveButtonPropsFromDispatch =
     (dispatch: Dispatch): AddOrRemoveButtonPropsFromDispatch => ({
@@ -29,4 +39,4 @@ const AddButton: React.ComponentType<AddOrRemoveButtonProps> =
         )
     }
 
-export default connect(undefined, mapDispatchToProps)(AddButton)
+export default connect(mapStateToProps, mapDispatchToProps)(AddButton)

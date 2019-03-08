@@ -1,31 +1,51 @@
 // tslint:disable variable-name file-name-casing no-default-export no-import-side-effect
 
-import { camelCaseToLowerCase, isUndefined } from '@musical-patterns/utilities'
+import { SpecAttributes, SpecPropertyAttributes } from '@musical-patterns/pattern'
+import { camelCaseToLowerCase, isUndefined, Maybe } from '@musical-patterns/utilities'
 import * as React from 'react'
-import { EventHandler, SecretSelectorsForTest } from '../../types'
+import { connect } from 'react-redux'
+import { Dispatch } from 'redux'
+import { EventHandler, ImmutableState, SecretSelectorsForTest, StateKey } from '../../types'
 import { Input, InputProps } from '../input'
 import { InvalidSpecMessage } from '../invalidSpecMessage'
-import { SpecChangeEventParameters } from '../specControls'
 import { stringifyIfNecessary } from '../stringifyIfNecessary'
+import { SpecStateKey } from '../types'
 import { Units } from '../units'
+import { buildSpecControlChangeHandler } from './events'
 import { specControlId } from './specControlId'
 import './styles'
-import { SingularSpecControlProps } from './types'
+import {
+    SingularSpecControlProps,
+    SingularSpecControlPropsFromDispatch,
+    SingularSpecControlPropsFromState, SpecChangeEventParameters,
+} from './types'
 import { getValidityClass } from './validityClass'
 
+const mapStateToProps: (state: ImmutableState) => SingularSpecControlPropsFromState =
+    (state: ImmutableState): SingularSpecControlPropsFromState => ({
+        specState: state.get(StateKey.SPEC),
+    })
+
+const mapDispatchToProps: (dispatch: Dispatch) => SingularSpecControlPropsFromDispatch =
+    (dispatch: Dispatch): SingularSpecControlPropsFromDispatch => ({
+        handleSpecChange: buildSpecControlChangeHandler({ dispatch }),
+    })
+
 const SingularSpecControl: React.ComponentType<SingularSpecControlProps> =
-    (specControlProps: SingularSpecControlProps): JSX.Element => {
+    (singularSpecControlProps: SingularSpecControlProps): JSX.Element => {
         const {
             arrayedPropertyIndex,
-            displayedSpecValue,
-            invalidSpecMessage,
-            submittedSpecValue,
             specKey,
-            specControlsProps,
-            specPropertyAttributes,
-        } = specControlProps
-        const { handleSpecChange, specState } = specControlsProps
-        const { description, formattedName, units } = specPropertyAttributes
+            handleSpecChange,
+            specState,
+            invalidSpecMessage,
+            displayedSpecValue,
+            submittedSpecValue,
+        } = singularSpecControlProps
+
+        const specAttributes: SpecAttributes = specState.get(SpecStateKey.SPEC_ATTRIBUTES)
+        const specPropertyAttributes: Maybe<SpecPropertyAttributes> = specAttributes[ specKey ]
+        const { description, formattedName } = specPropertyAttributes
 
         const specChangeEventParameters: SpecChangeEventParameters = { arrayedPropertyIndex, specKey, specState }
 
@@ -46,10 +66,10 @@ const SingularSpecControl: React.ComponentType<SingularSpecControlProps> =
                 <span {...{ className: secretClass }}>{stringifyIfNecessary(submittedSpecValue)}</span>
                 {isNotAnArrayedProperty && <div>{formattedName || camelCaseToLowerCase(specKey)}</div>}
                 <Input {...{ specPropertyAttributes, inputProps }}/>
-                {units && <Units {...{ units }}/>}
+                <Units {...{ specKey }}/>
                 {invalidSpecMessage && <InvalidSpecMessage {...{ invalidSpecMessage }}/>}
             </div>
         )
     }
 
-export default SingularSpecControl
+export default connect(mapStateToProps, mapDispatchToProps)(SingularSpecControl)

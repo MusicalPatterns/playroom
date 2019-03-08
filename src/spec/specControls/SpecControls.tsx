@@ -1,42 +1,27 @@
 // tslint:disable variable-name file-name-casing no-default-export no-import-side-effect
 
-import {
-    defaultSpecPropertyAttributes,
-    DomSpec,
-    SpecAttributes,
-    StandardSpecProperties,
-} from '@musical-patterns/pattern'
+import { StandardSpecProperties } from '@musical-patterns/pattern'
 import { from, keys, map, Ordinal } from '@musical-patterns/utilities'
 import * as React from 'react'
 import { connect } from 'react-redux'
-import { Dispatch } from 'redux'
 import { PATTERN_PARTICULAR, STANDARD } from '../../copy'
 import { ImmutableState, StateKey } from '../../types'
 import { SpecControl } from '../specControl'
 import { SpecStateKey } from '../types'
-import { buildSpecControlChangeHandler } from './events'
 import { buildSortSpecControls } from './sortSpecControls'
 import './styles'
-import { SpecControlsProps, SpecControlsPropsFromDispatch, SpecControlsPropsFromState } from './types'
+import { SpecControlsProps } from './types'
 
-const mapStateToProps: (state: ImmutableState) => SpecControlsPropsFromState =
-    (state: ImmutableState): SpecControlsPropsFromState => ({
-        specState: state.get(StateKey.SPEC),
-    })
-
-const mapDispatchToProps: (dispatch: Dispatch) => SpecControlsPropsFromDispatch =
-    (dispatch: Dispatch): SpecControlsPropsFromDispatch => ({
-        handleSpecChange: buildSpecControlChangeHandler({ dispatch }),
+const mapStateToProps: (state: ImmutableState) => SpecControlsProps =
+    (state: ImmutableState): SpecControlsProps => ({
+        displayedSpec: state.get(StateKey.SPEC)
+            .get(SpecStateKey.DISPLAYED_SPEC),
+        specAttributes: state.get(StateKey.SPEC)
+            .get(SpecStateKey.SPEC_ATTRIBUTES),
     })
 
 const SpecControls: React.ComponentType<SpecControlsProps> =
-    (specControlsProps: SpecControlsProps): JSX.Element => {
-        const { specState }: SpecControlsProps = specControlsProps
-        const displayedSpec: DomSpec = specState
-            .get(SpecStateKey.DISPLAYED_SPEC)
-        const specAttributes: SpecAttributes = specState
-            .get(SpecStateKey.SPEC_ATTRIBUTES)
-
+    ({ displayedSpec, specAttributes }: SpecControlsProps): JSX.Element => {
         const standardSpecControls: JSX.Element[] = map(
             keys(displayedSpec)
                 .filter((key: string) =>
@@ -45,12 +30,7 @@ const SpecControls: React.ComponentType<SpecControlsProps> =
                 )
                 .sort(buildSortSpecControls(specAttributes)),
             (specKey: string, index: Ordinal): JSX.Element =>
-                <SpecControl {...{
-                    key: from.Ordinal(index),
-                    specControlsProps,
-                    specKey,
-                    specPropertyAttributes: specAttributes[ specKey ] || defaultSpecPropertyAttributes,
-                }} />,
+                <SpecControl {...{ key: from.Ordinal(index), specKey }} />,
         )
         const patternParticularControls: JSX.Element[] = map(
             keys(displayedSpec)
@@ -60,12 +40,7 @@ const SpecControls: React.ComponentType<SpecControlsProps> =
                 )
                 .sort(buildSortSpecControls(specAttributes)),
             (specKey: string, index: Ordinal): JSX.Element =>
-                <SpecControl {...{
-                    key: from.Ordinal(index),
-                    specControlsProps,
-                    specKey,
-                    specPropertyAttributes: specAttributes[ specKey ] || defaultSpecPropertyAttributes,
-                }} />,
+                <SpecControl {...{ key: from.Ordinal(index), specKey }} />,
         )
 
         const bothTypesOfControlsPresent: boolean = !!standardSpecControls.length &&
@@ -81,4 +56,4 @@ const SpecControls: React.ComponentType<SpecControlsProps> =
         )
     }
 
-export default connect(mapStateToProps, mapDispatchToProps)(SpecControls)
+export default connect(mapStateToProps)(SpecControls)

@@ -1,12 +1,17 @@
-import { SpecPropertyAttributes } from '@musical-patterns/pattern'
-import { SpecControlsProps } from '../specControls'
+import { ImmutableSpecState } from '../types'
 
-interface SpecControlProps {
-    specControlsProps: SpecControlsProps,
-    specKey: string,
-    specPropertyAttributes: SpecPropertyAttributes,
+interface SpecControlPropsFromState {
+    specState: ImmutableSpecState,
 }
 
+interface SpecControlPropsFromParent {
+    specKey: string,
+}
+
+interface SpecControlProps extends SpecControlPropsFromParent, SpecControlPropsFromState {}
+
 export {
+    SpecControlPropsFromParent,
+    SpecControlPropsFromState,
     SpecControlProps,
 }

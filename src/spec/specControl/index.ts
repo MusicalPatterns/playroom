@@ -7,5 +7,5 @@ export {
 }
 
 export {
-    SpecControlProps,
+    SpecControlPropsFromParent,
 } from './types'

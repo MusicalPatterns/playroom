@@ -1,52 +1,40 @@
 // tslint:disable variable-name file-name-casing no-default-export no-import-side-effect
 
-import { ArrayedSpecValue, InvalidSpecMessage, SingularSpecValue } from '@musical-patterns/pattern'
-import {
-    apply,
-    camelCaseToLowerCase,
-    DomValueOrChecked,
-    from,
-    indexOfLastElement,
-    map,
-    Ordinal,
-} from '@musical-patterns/utilities'
+import { SpecAttributes, SpecPropertyAttributes } from '@musical-patterns/pattern'
+import { camelCaseToLowerCase, DomValueOrChecked, from, map, Maybe, Ordinal } from '@musical-patterns/utilities'
 import * as React from 'react'
-import { SecretSelectorsForTest } from '../../types'
+import { connect } from 'react-redux'
+import { ImmutableState, SecretSelectorsForTest, StateKey } from '../../types'
 import { AddButton } from '../addButton'
 import { RemoveButton } from '../removeButton'
 import { SingularSpecControl } from '../singularSpecControl'
 import { stringifyIfNecessary } from '../stringifyIfNecessary'
+import { SpecStateKey } from '../types'
+import { calculateInvalidSpecMessage, calculateSubmittedSpecValue } from './calculateSingularValue'
 import './styles'
-import { ArrayedSpecControlProps } from './types'
+import { ArrayedSpecControlProps, ArrayedSpecControlPropsFromState } from './types'
 
-const calculateSubmittedSpecValue: (submittedSpecValues: ArrayedSpecValue, index: Ordinal) => SingularSpecValue =
-    (submittedSpecValues: ArrayedSpecValue, index: Ordinal): SingularSpecValue => {
-        if (index > indexOfLastElement(submittedSpecValues)) {
-            return undefined
-        }
-
-        return apply.Ordinal(submittedSpecValues, index)
-    }
+const mapStateToProps: (state: ImmutableState) => ArrayedSpecControlPropsFromState =
+    (state: ImmutableState): ArrayedSpecControlPropsFromState => ({
+        specState: state.get(StateKey.SPEC),
+    })
 
 const ArrayedSpecControl: React.ComponentType<ArrayedSpecControlProps> =
-    (props: ArrayedSpecControlProps): JSX.Element => {
+    (arrayedSpecControlProps: ArrayedSpecControlProps): JSX.Element => {
         const {
-            displayedSpecValues,
-            submittedSpecValues,
-            specValidationResults,
             specKey,
-            specControlsProps,
-            specPropertyAttributes,
-        } = props
+            displayedSpecValues,
+            invalidSpecMessages,
+            submittedSpecValues,
+            specState,
+        } = arrayedSpecControlProps
+        const specAttributes: SpecAttributes = specState.get(SpecStateKey.SPEC_ATTRIBUTES)
+        const specPropertyAttributes: Maybe<SpecPropertyAttributes> = specAttributes[ specKey ]
+        const formattedName: string = specPropertyAttributes.formattedName || camelCaseToLowerCase(specKey)
 
         const controls: JSX.Element[] = map(
             displayedSpecValues,
-            (value: DomValueOrChecked, index: Ordinal): JSX.Element => {
-                let invalidSpecMessage: InvalidSpecMessage = specValidationResults && specValidationResults[ specKey ]
-                if (invalidSpecMessage && invalidSpecMessage instanceof Array) {
-                    invalidSpecMessage = apply.Ordinal(invalidSpecMessage, index)
-                }
-
+            (displayedSpecValue: DomValueOrChecked, index: Ordinal): JSX.Element => {
                 const key: number = from.Ordinal(index)
 
                 return (
@@ -54,11 +42,9 @@ const ArrayedSpecControl: React.ComponentType<ArrayedSpecControlProps> =
                         <span>{key}</span>
                         <SingularSpecControl {...{
                             arrayedPropertyIndex: index,
-                            displayedSpecValue: value,
-                            invalidSpecMessage,
-                            specControlsProps,
+                            displayedSpecValue,
+                            invalidSpecMessage: calculateInvalidSpecMessage(invalidSpecMessages, index),
                             specKey,
-                            specPropertyAttributes,
                             submittedSpecValue: calculateSubmittedSpecValue(submittedSpecValues, index),
                         }}/>
                     </div>
@@ -71,16 +57,16 @@ const ArrayedSpecControl: React.ComponentType<ArrayedSpecControlProps> =
                 <span {...{ className: SecretSelectorsForTest.SECRET_SUBMITTED_SPEC_CONTROL }}>
                     {stringifyIfNecessary(submittedSpecValues)}
                 </span>
-                <div>{specPropertyAttributes.formattedName || camelCaseToLowerCase(specKey)}</div>
+                <div>{formattedName}</div>
                 <div {...{ className: 'arrayed-fields' }}>
                     {controls}
                 </div>
                 <div>
-                    <AddButton {...{ specKey, specState: specControlsProps.specState }}/>
-                    <RemoveButton {...{ specKey, specState: specControlsProps.specState }}/>
+                    <AddButton {...{ specKey }}/>
+                    <RemoveButton {...{ specKey }}/>
                 </div>
             </div>
         )
     }
 
-export default ArrayedSpecControl
+export default connect(mapStateToProps)(ArrayedSpecControl)

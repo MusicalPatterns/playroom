@@ -6,7 +6,8 @@ import {
     Spec,
     SpecAttributes,
     SpecValidationFunction,
-    SpecValidationResults, SpecValue,
+    SpecValidationResults,
+    SpecValue,
 } from '@musical-patterns/pattern'
 import { ActionForState, DictionaryOf, DomValue, Maybe, TypedMap } from '@musical-patterns/utilities'
 import { DispatchAsProp, EventAsProp } from '../types'
@@ -40,6 +41,9 @@ type SpecAction = ActionForState<SpecState>
 
 interface AddOrRemoveButtonPropsFromParent {
     specKey: string,
+}
+
+interface AddOrRemoveButtonPropsFromState {
     specState: ImmutableSpecState,
 }
 
@@ -47,9 +51,11 @@ interface AddOrRemoveButtonPropsFromDispatch {
     handleAddOrRemove: (parameters: HandleAddOrRemoveParameters) => void,
 }
 
-interface AddOrRemoveButtonProps extends AddOrRemoveButtonPropsFromDispatch, AddOrRemoveButtonPropsFromParent {}
+interface AddOrRemoveButtonProps extends AddOrRemoveButtonPropsFromState,
+    AddOrRemoveButtonPropsFromDispatch, AddOrRemoveButtonPropsFromParent {}
 
-interface HandleAddOrRemoveParameters extends EventAsProp, AddOrRemoveButtonPropsFromParent {}
+interface HandleAddOrRemoveParameters extends EventAsProp,
+    AddOrRemoveButtonPropsFromParent, AddOrRemoveButtonPropsFromState {}
 
 interface RangedInputProps extends InputProps {
     max: number,
@@ -67,8 +73,8 @@ interface SpecPanelOpenAsProp {
     specPanelOpen: boolean,
 }
 
-interface HandleArrayedPropertyAddOrRemoveParameters extends EventAsProp, DispatchAsProp,
-    AddOrRemoveButtonPropsFromParent {}
+interface HandleArrayedPropertyAddOrRemoveParameters extends EventAsProp,
+    DispatchAsProp, AddOrRemoveButtonPropsFromParent, AddOrRemoveButtonPropsFromState {}
 
 interface BuildAttemptSubmitActionsParameters {
     specKey: string,
@@ -94,9 +100,10 @@ export {
     ImmutableSpecState,
     SpecStateKey,
     SpecAction,
-    AddOrRemoveButtonProps,
-    AddOrRemoveButtonPropsFromParent,
+    AddOrRemoveButtonPropsFromState,
     AddOrRemoveButtonPropsFromDispatch,
+    AddOrRemoveButtonPropsFromParent,
+    AddOrRemoveButtonProps,
     HandleAddOrRemoveParameters,
     SpecControlStates,
     SpecPanelOpenAsProp,

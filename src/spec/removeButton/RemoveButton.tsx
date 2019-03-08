@@ -6,15 +6,20 @@ import { DomSpec, DomSpecValue } from '@musical-patterns/pattern'
 import * as React from 'react'
 import { connect } from 'react-redux'
 import { Dispatch } from 'redux'
-import { EventHandler } from '../../types'
+import { EventHandler, ImmutableState, StateKey } from '../../types'
 import { isArrayedDomSpecValue } from '../isArrayedDomSpecValue'
 import {
     AddOrRemoveButtonProps,
-    AddOrRemoveButtonPropsFromDispatch,
+    AddOrRemoveButtonPropsFromDispatch, AddOrRemoveButtonPropsFromState,
     HandleAddOrRemoveParameters,
     SpecStateKey,
 } from '../types'
 import { handleArrayedPropertyElementRemove } from './events'
+
+const mapStateToProps: (state: ImmutableState) => AddOrRemoveButtonPropsFromState =
+    (state: ImmutableState): AddOrRemoveButtonPropsFromState => ({
+        specState: state.get(StateKey.SPEC),
+    })
 
 const mapDispatchToProps: (dispatch: Dispatch) => AddOrRemoveButtonPropsFromDispatch =
     (dispatch: Dispatch): AddOrRemoveButtonPropsFromDispatch => ({
@@ -43,4 +48,4 @@ const RemoveButton: React.ComponentType<AddOrRemoveButtonProps> =
         )
     }
 
-export default connect(undefined, mapDispatchToProps)(RemoveButton)
+export default connect(mapStateToProps, mapDispatchToProps)(RemoveButton)
