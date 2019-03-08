@@ -12,11 +12,11 @@ import { SecondRowProps } from './types'
 
 const mapStateToProps: (state: ImmutableState) => SecondRowProps =
     (state: ImmutableState): SecondRowProps => {
-        const patternState: ImmutablePageState = state.get(StateKey.PAGE)
+        const pageState: ImmutablePageState = state.get(StateKey.PAGE)
 
         return {
-            id: patternState.get(PageStateKey.PATTERN_ID),
-            pageName: patternState.get(PageStateKey.PAGE_NAME),
+            id: pageState.get(PageStateKey.PATTERN_ID),
+            pageName: pageState.get(PageStateKey.PAGE_NAME),
         }
     }
 

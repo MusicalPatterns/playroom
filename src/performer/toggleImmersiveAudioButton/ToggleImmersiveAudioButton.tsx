@@ -13,16 +13,11 @@ const mapStateToProps: (state: ImmutableState) => ToggleImmersiveAudioButtonProp
         const performerState: ImmutablePerformerState = state.get(StateKey.PERFORMER)
 
         return {
-            disabled: performerState
-                .get(PerformerStateKey.PERFORMER_DISABLED),
-            immersiveAudioEnabled: performerState
-                .get(PerformerStateKey.IMMERSIVE_AUDIO_ENABLED),
-            immersiveAudioReady: performerState
-                .get(PerformerStateKey.IMMERSIVE_AUDIO_READY),
-            immersiveAudioUnvailable: performerState
-                .get(PerformerStateKey.IMMERSIVE_AUDIO_UNAVAILABLE),
-            toggleImmersiveAudioHandlers: performerState
-                .get(PerformerStateKey.TOGGLE_IMMERSIVE_AUDIO_HANDLERS),
+            disabled: performerState.get(PerformerStateKey.PERFORMER_DISABLED),
+            immersiveAudioEnabled: performerState.get(PerformerStateKey.IMMERSIVE_AUDIO_ENABLED),
+            immersiveAudioReady: performerState.get(PerformerStateKey.IMMERSIVE_AUDIO_READY),
+            immersiveAudioUnvailable: performerState.get(PerformerStateKey.IMMERSIVE_AUDIO_UNAVAILABLE),
+            toggleImmersiveAudioHandlers: performerState.get(PerformerStateKey.TOGGLE_IMMERSIVE_AUDIO_HANDLERS),
         }
     }
 

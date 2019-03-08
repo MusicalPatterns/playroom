@@ -20,12 +20,12 @@ import {
 
 const mapStateToProps: (state: ImmutableState) => PatternListPropsFromState =
     (state: ImmutableState): PatternListPropsFromState => {
-        const patternState: ImmutablePageState = state.get(StateKey.PAGE)
+        const pageState: ImmutablePageState = state.get(StateKey.PAGE)
 
         return {
-            id: patternState.get(PageStateKey.PATTERN_ID),
-            patterns: patternState.get(PageStateKey.PATTERNS),
-            rightColumnOpen: patternState.get(PageStateKey.RIGHT_COLUMN_OPEN),
+            id: pageState.get(PageStateKey.PATTERN_ID),
+            patterns: pageState.get(PageStateKey.PATTERNS),
+            rightColumnOpen: pageState.get(PageStateKey.RIGHT_COLUMN_OPEN),
         }
     }
 

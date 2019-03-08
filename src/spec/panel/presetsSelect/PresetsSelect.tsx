@@ -17,18 +17,20 @@ import * as React from 'react'
 import { connect } from 'react-redux'
 import { Dispatch } from 'redux'
 import { EventHandler, ImmutableState, StateKey } from '../../../types'
-import { SpecStateKey } from '../../types'
+import { ImmutableSpecState, SpecStateKey } from '../../types'
 import { buildPresetChangeHandler } from './events'
 import './styles'
 import { PresetsSelectProps, PresetsSelectPropsFromDispatch, PresetsSelectPropsFromState } from './types'
 
 const mapStateToProps: (state: ImmutableState) => PresetsSelectPropsFromState =
-    (state: ImmutableState): PresetsSelectPropsFromState => ({
-        presets: state.get(StateKey.SPEC)
-            .get(SpecStateKey.PRESETS),
-        submittedSpec: state.get(StateKey.SPEC)
-            .get(SpecStateKey.SUBMITTED_SPEC),
-    })
+    (state: ImmutableState): PresetsSelectPropsFromState => {
+        const specState: ImmutableSpecState = state.get(StateKey.SPEC)
+
+        return {
+            presets: specState.get(SpecStateKey.PRESETS),
+            submittedSpec: specState.get(SpecStateKey.SUBMITTED_SPEC),
+        }
+    }
 
 const mapDispatchToProps: (dispatch: Dispatch) => PresetsSelectPropsFromDispatch =
     (dispatch: Dispatch): PresetsSelectPropsFromDispatch => ({

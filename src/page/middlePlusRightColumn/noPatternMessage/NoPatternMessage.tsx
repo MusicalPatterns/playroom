@@ -14,10 +14,8 @@ const mapStateToProps: (state: ImmutableState) => NoPatternMessageProps =
         const pageState: ImmutablePageState = state.get(StateKey.PAGE)
 
         return {
-            pageName: pageState
-                .get(PageStateKey.PAGE_NAME),
-            patternId: pageState
-                .get(PageStateKey.PATTERN_ID),
+            pageName: pageState.get(PageStateKey.PAGE_NAME),
+            patternId: pageState.get(PageStateKey.PATTERN_ID),
         }
     }
 

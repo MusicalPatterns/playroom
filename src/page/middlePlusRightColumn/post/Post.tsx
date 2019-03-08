@@ -9,11 +9,11 @@ import { PostProps } from './types'
 
 const mapStateToProps: (state: ImmutableState) => PostProps =
     (state: ImmutableState): PostProps => {
-        const patternState: ImmutablePageState = state.get(StateKey.PAGE)
+        const pageState: ImmutablePageState = state.get(StateKey.PAGE)
 
         return {
-            id: patternState.get(PageStateKey.PATTERN_ID),
-            patterns: patternState.get(PageStateKey.PATTERNS),
+            id: pageState.get(PageStateKey.PATTERN_ID),
+            patterns: pageState.get(PageStateKey.PATTERNS),
         }
     }
 

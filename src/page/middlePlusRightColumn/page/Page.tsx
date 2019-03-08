@@ -3,17 +3,14 @@
 import * as React from 'react'
 import { connect } from 'react-redux'
 import { ImmutableState, StateKey } from '../../../types'
-import { ImmutablePageState, PageName, PageStateKey } from '../../types'
+import { PageName, PageStateKey } from '../../types'
 import { PageProps } from './types'
 
 const mapStateToProps: (state: ImmutableState) => PageProps =
-    (state: ImmutableState): PageProps => {
-        const patternState: ImmutablePageState = state.get(StateKey.PAGE)
-
-        return {
-            pageName: patternState.get(PageStateKey.PAGE_NAME),
-        }
-    }
+    (state: ImmutableState): PageProps => ({
+        pageName: state.get(StateKey.PAGE)
+            .get(PageStateKey.PAGE_NAME),
+    })
 
 const Page: React.ComponentType<PageProps> =
     ({ pageName }: PageProps): JSX.Element => {
@@ -25,7 +22,8 @@ const Page: React.ComponentType<PageProps> =
                             <h1>About</h1>
                             <p>
                                 Welcome to Musical Patterns. The music here
-                                has <a {...{ href: 'https://github.com/MusicalPatterns', target: '_blank' }}>all been written in code</a>.
+                                has <a {...{ href: 'https://github.com/MusicalPatterns', target: '_blank' }}>all been
+                                written in code</a>.
                                 Each piece exists not a single listening experience but as a range of possibilities
                                 which you can explore using its controls.
                             </p>
@@ -120,7 +118,10 @@ const Page: React.ComponentType<PageProps> =
                                 similarly to me, or who might benefit from experimenting with such approaches, perhaps
                                 TDD would be worth a shot. I just discovered that the page about unit testing in the
                                 wiki for the SuperCollider platform
-                                includes <a {...{ href: 'https://github.com/supercollider/supercollider/wiki/Unit-Testing-Guide#test-driven-development-redgreen-testing', target: '_blank' }}>a
+                                includes <a {...{
+                                href: 'https://github.com/supercollider/supercollider/wiki/Unit-Testing-Guide#test-driven-development-redgreen-testing',
+                                target: '_blank',
+                            }}>a
                                 section about TDD</a>, so maybe it's not too far on the horizon.
                             </p>
                             <h3>
@@ -154,7 +155,10 @@ const Page: React.ComponentType<PageProps> =
                                 The past and future
                             </h3>
                             <p>
-                                <a {...{ href: 'https://www.dropbox.com/s/kqd5emgc41b1ap4/Fun%20Musical%20Ideas%20-%20v1.0%20-%20July%202014.pdf?dl=0', target: '_blank' }}>Several
+                                <a {...{
+                                    href: 'https://www.dropbox.com/s/kqd5emgc41b1ap4/Fun%20Musical%20Ideas%20-%20v1.0%20-%20July%202014.pdf?dl=0',
+                                    target: '_blank',
+                                }}>Several
                                     years ago I drafted a book of sorts (unpublished) which I call "Fun Musical
                                     Ideas".</a> In its introduction, I wrote that one of my purposes with the book was
                                 to

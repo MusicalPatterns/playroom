@@ -14,12 +14,12 @@ import { MiddlePlusRightColumnProps } from './types'
 
 const mapStateToProps: (state: ImmutableState) => MiddlePlusRightColumnProps =
     (state: ImmutableState): MiddlePlusRightColumnProps => {
-        const patternState: ImmutablePageState = state.get(StateKey.PAGE)
+        const pageState: ImmutablePageState = state.get(StateKey.PAGE)
 
         return {
-            id: patternState.get(PageStateKey.PATTERN_ID),
-            pageName: patternState.get(PageStateKey.PAGE_NAME),
-            rightColumnOpen: patternState.get(PageStateKey.RIGHT_COLUMN_OPEN),
+            id: pageState.get(PageStateKey.PATTERN_ID),
+            pageName: pageState.get(PageStateKey.PAGE_NAME),
+            rightColumnOpen: pageState.get(PageStateKey.RIGHT_COLUMN_OPEN),
         }
     }
 

@@ -7,18 +7,20 @@ import { connect } from 'react-redux'
 import { PATTERN_PARTICULAR, STANDARD } from '../../../copy'
 import { ImmutableState, StateKey } from '../../../types'
 import { SpecControl } from '../../control'
-import { SpecStateKey } from '../../types'
+import { ImmutableSpecState, SpecStateKey } from '../../types'
 import { buildSortSpecControls } from './sortSpecControls'
 import './styles'
 import { SpecControlsProps } from './types'
 
 const mapStateToProps: (state: ImmutableState) => SpecControlsProps =
-    (state: ImmutableState): SpecControlsProps => ({
-        attributes: state.get(StateKey.SPEC)
-            .get(SpecStateKey.ATTRIBUTES),
-        displayedSpec: state.get(StateKey.SPEC)
-            .get(SpecStateKey.DISPLAYED_SPEC),
-    })
+    (state: ImmutableState): SpecControlsProps => {
+        const specState: ImmutableSpecState = state.get(StateKey.SPEC)
+
+        return {
+            attributes: specState.get(SpecStateKey.ATTRIBUTES),
+            displayedSpec: specState.get(SpecStateKey.DISPLAYED_SPEC),
+        }
+    }
 
 const SpecControls: React.ComponentType<SpecControlsProps> =
     ({ displayedSpec, attributes }: SpecControlsProps): JSX.Element => {

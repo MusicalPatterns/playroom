@@ -7,18 +7,20 @@ import { connect } from 'react-redux'
 import { Dispatch } from 'redux'
 import { RESET_ALL } from '../../../copy'
 import { ImmutableState, StateKey } from '../../../types'
-import { SpecStateKey } from '../../types'
+import { ImmutableSpecState, SpecStateKey } from '../../types'
 import { handleReset } from './events'
 import './styles'
 import { ResetButtonProps, ResetButtonPropsFromDispatch, ResetButtonPropsFromState } from './types'
 
 const mapStateToProps: (state: ImmutableState) => ResetButtonPropsFromState =
-    (state: ImmutableState): ResetButtonPropsFromState => ({
-        initialSpec: state.get(StateKey.SPEC)
-            .get(SpecStateKey.INITIAL_SPEC),
-        submittedSpec: state.get(StateKey.SPEC)
-            .get(SpecStateKey.SUBMITTED_SPEC),
-    })
+    (state: ImmutableState): ResetButtonPropsFromState => {
+        const specState: ImmutableSpecState = state.get(StateKey.SPEC)
+
+        return {
+            initialSpec: specState.get(SpecStateKey.INITIAL_SPEC),
+            submittedSpec: specState.get(SpecStateKey.SUBMITTED_SPEC),
+        }
+    }
 
 const mapDispatchToProps: (dispatch: Dispatch) => ResetButtonPropsFromDispatch =
     (dispatch: Dispatch): ResetButtonPropsFromDispatch => ({

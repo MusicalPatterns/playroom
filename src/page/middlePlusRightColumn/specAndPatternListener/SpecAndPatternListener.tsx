@@ -15,7 +15,7 @@ import { PerformerStateKey } from '../../../performer'
 import { SpecStateKey } from '../../../spec'
 import { ImmutableState, StateKey } from '../../../types'
 import { maybePatternFromPatternsAndId } from '../../maybePatternFromPatternsAndId'
-import { PageStateKey } from '../../types'
+import { ImmutablePageState, PageStateKey } from '../../types'
 import { logDebugInfo } from './debug'
 import {
     SpecAndPatternListenerProps,
@@ -24,16 +24,17 @@ import {
 } from './types'
 
 const mapStateToProps: (state: ImmutableState) => SpecAndPatternListenerPropsFromState =
-    (state: ImmutableState): SpecAndPatternListenerPropsFromState => ({
-        debugMode: state.get(StateKey.PAGE)
-            .get(PageStateKey.DEBUG_MODE),
-        id: state.get(StateKey.PAGE)
-            .get(PageStateKey.PATTERN_ID),
-        patterns: state.get(StateKey.PAGE)
-            .get(PageStateKey.PATTERNS),
-        submittedSpec: state.get(StateKey.SPEC)
-            .get(SpecStateKey.SUBMITTED_SPEC),
-    })
+    (state: ImmutableState): SpecAndPatternListenerPropsFromState => {
+        const pageState: ImmutablePageState = state.get(StateKey.PAGE)
+
+        return {
+            debugMode: pageState.get(PageStateKey.DEBUG_MODE),
+            id: pageState.get(PageStateKey.PATTERN_ID),
+            patterns: pageState.get(PageStateKey.PATTERNS),
+            submittedSpec: state.get(StateKey.SPEC)
+                .get(SpecStateKey.SUBMITTED_SPEC),
+        }
+    }
 
 const mapDispatchToProps: (dispatch: Dispatch) => SpecAndPatternListenerPropsFromDispatch =
     (dispatch: Dispatch): SpecAndPatternListenerPropsFromDispatch => ({

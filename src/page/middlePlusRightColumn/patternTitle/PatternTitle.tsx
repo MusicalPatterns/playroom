@@ -3,17 +3,19 @@
 import * as React from 'react'
 import { connect } from 'react-redux'
 import { ImmutableState, StateKey } from '../../../types'
-import { PageStateKey } from '../../types'
+import { ImmutablePageState, PageStateKey } from '../../types'
 import { getPatternTitle } from './getPatternTitle'
 import { PatternTitleProps } from './types'
 
 const mapStateToProps: (state: ImmutableState) => PatternTitleProps =
-    (state: ImmutableState): PatternTitleProps => ({
-        id: state.get(StateKey.PAGE)
-            .get(PageStateKey.PATTERN_ID),
-        patterns: state.get(StateKey.PAGE)
-            .get(PageStateKey.PATTERNS),
-    })
+    (state: ImmutableState): PatternTitleProps => {
+        const pageState: ImmutablePageState = state.get(StateKey.PAGE)
+
+        return {
+            id: pageState.get(PageStateKey.PATTERN_ID),
+            patterns: pageState.get(PageStateKey.PATTERNS),
+        }
+    }
 
 const PatternTitle: React.ComponentType<PatternTitleProps> =
     ({ patterns, id }: PatternTitleProps): JSX.Element => {
