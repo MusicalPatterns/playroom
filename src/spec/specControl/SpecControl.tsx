@@ -1,20 +1,20 @@
 // tslint:disable variable-name file-name-casing no-default-export no-import-side-effect
 
 import {
-    ArrayedDomSpecValue,
-    ArrayedPropertyInvalidSpecMessage,
-    ArrayedSpecValue,
+    ArrayedDomValue,
+    ArrayedValidationResult,
+    ArrayedValue,
+    Attributes,
     DomSpec,
-    DomSpecValue,
-    InvalidSpecMessage,
-    SingularDomSpecValue,
-    SingularPropertyInvalidSpecMessage,
-    SingularSpecValue,
+    DomValue,
+    PropertyAttributes,
+    SingularDomValue,
+    SingularValidationResult,
+    SingularValue,
     Spec,
-    SpecAttributes,
-    SpecPropertyAttributes,
-    SpecValidationResults,
-    SpecValue,
+    ValidationResult,
+    ValidationResults,
+    Value,
 } from '@musical-patterns/pattern'
 import { isUndefined, Maybe } from '@musical-patterns/utilities'
 import * as React from 'react'
@@ -31,39 +31,39 @@ const mapStateToProps: (state: ImmutableState) => AddOrRemoveButtonPropsFromStat
     })
 
 const SpecControl: React.ComponentType<SpecControlProps> =
-    ({ specKey, specState }: SpecControlProps): JSX.Element => {
+    ({ property, specState }: SpecControlProps): JSX.Element => {
         const displayedSpec: DomSpec = specState.get(SpecStateKey.DISPLAYED_SPEC)
-        const displayedSpecValue: Maybe<DomSpecValue> = displayedSpec[ specKey ]
+        const displayedValue: Maybe<DomValue> = displayedSpec[ property ]
 
-        const specValidationResults: SpecValidationResults = specState.get(SpecStateKey.SPEC_VALIDATION_RESULTS)
-        const specValidationResult: InvalidSpecMessage = specValidationResults && specValidationResults[ specKey ]
+        const validationResults: ValidationResults = specState.get(SpecStateKey.VALIDATION_RESULTS)
+        const validationResult: ValidationResult = validationResults && validationResults[ property ]
 
         const submittedSpec: Spec = specState.get(SpecStateKey.SUBMITTED_SPEC)
-        const submittedSpecValue: Maybe<SpecValue> = submittedSpec[ specKey ]
+        const submittedValue: Maybe<Value> = submittedSpec[ property ]
 
-        const specAttributes: SpecAttributes = specState.get(SpecStateKey.SPEC_ATTRIBUTES)
-        const specPropertyAttributes: Maybe<SpecPropertyAttributes> = specAttributes[ specKey ]
+        const attributes: Attributes = specState.get(SpecStateKey.ATTRIBUTES)
+        const propertyAttributes: PropertyAttributes = attributes[ property ]
 
-        if (isUndefined(submittedSpecValue) || isUndefined(displayedSpecValue)) {
+        if (isUndefined(submittedValue) || isUndefined(displayedValue)) {
             return <div/>
         }
 
-        if (specPropertyAttributes.isArrayed) {
+        if (propertyAttributes.isArrayed) {
             return <ArrayedSpecControl {...{
-                displayedSpecValues: displayedSpecValue as ArrayedDomSpecValue,
-                invalidSpecMessages: specValidationResult as ArrayedPropertyInvalidSpecMessage,
-                specKey,
-                specPropertyAttributes,
-                submittedSpecValues: submittedSpecValue as ArrayedSpecValue,
+                arrayedDisplayedValue: displayedValue as ArrayedDomValue,
+                arrayedSubmittedValue: submittedValue as ArrayedValue,
+                arrayedValidationResult: validationResult as ArrayedValidationResult,
+                property,
+                propertyAttributes,
             }}/>
         }
 
         return <SingularSpecControl {...{
-            displayedSpecValue: displayedSpecValue as SingularDomSpecValue,
-            invalidSpecMessage: specValidationResult as SingularPropertyInvalidSpecMessage,
-            specKey,
-            specPropertyAttributes,
-            submittedSpecValue: submittedSpecValue as SingularSpecValue,
+            property,
+            propertyAttributes,
+            singularDisplayedValue: displayedValue as SingularDomValue,
+            singularSubmittedValue: submittedValue as SingularValue,
+            singularValidationResult: validationResult as SingularValidationResult,
         }}/>
     }
 

@@ -1,8 +1,8 @@
 import { SpecControlIdParameters } from './types'
 
 const specControlId: (parameters: SpecControlIdParameters) => string =
-    ({ isNotAnArrayedProperty, specKey, arrayedPropertyIndex }: SpecControlIdParameters): string =>
-        isNotAnArrayedProperty ? specKey : `${specKey}-${arrayedPropertyIndex}`
+    ({ isNotAnArrayedSpecControl, property, arrayedFieldIndex }: SpecControlIdParameters): string =>
+        isNotAnArrayedSpecControl ? property : `${property}-${arrayedFieldIndex}`
 
 export {
     specControlId,

@@ -1,24 +1,24 @@
 // tslint:disable max-file-line-count
 
 import {
+    Attributes,
     DomSpec,
     Preset,
     Spec,
-    SpecAttributes,
-    SpecValidationFunction,
-    SpecValidationResults,
-    SpecValue,
+    ValidationFunction,
+    ValidationResults,
+    Value,
 } from '@musical-patterns/pattern'
-import { ActionForState, DictionaryOf, DomValue, Maybe, TypedMap } from '@musical-patterns/utilities'
+import { ActionForState, DictionaryOf, HtmlValue, Maybe, TypedMap } from '@musical-patterns/utilities'
 import { DispatchAsProp, EventAsProp } from '../types'
-import { InputProps } from './input'
+import { InputsPropsFromParent } from './inputs'
 
 enum SpecStateKey {
     INITIAL_SPEC = 'INITIAL_SPEC',
     DISPLAYED_SPEC = 'DISPLAYED_SPEC',
-    SPEC_VALIDATION_RESULTS = 'SPEC_VALIDATION_RESULTS',
+    VALIDATION_RESULTS = 'VALIDATION_RESULTS',
     SUBMITTED_SPEC = 'SUBMITTED_SPEC',
-    SPEC_ATTRIBUTES = 'SPEC_ATTRIBUTES',
+    ATTRIBUTES = 'ATTRIBUTES',
     VALIDATION_FUNCTION = 'VALIDATION_FUNCTION',
     PRESETS = 'PRESETS',
     SPEC_PANEL_OPEN = 'SPEC_PANEL_OPEN',
@@ -27,10 +27,10 @@ enum SpecStateKey {
 interface SpecState {
     [ SpecStateKey.INITIAL_SPEC ]: Spec,
     [ SpecStateKey.DISPLAYED_SPEC ]: DomSpec,
-    [ SpecStateKey.SPEC_VALIDATION_RESULTS ]: SpecValidationResults,
+    [ SpecStateKey.VALIDATION_RESULTS ]: ValidationResults,
     [ SpecStateKey.SUBMITTED_SPEC ]: Spec,
-    [ SpecStateKey.SPEC_ATTRIBUTES ]: SpecAttributes,
-    [ SpecStateKey.VALIDATION_FUNCTION ]: Maybe<SpecValidationFunction>,
+    [ SpecStateKey.ATTRIBUTES ]: Attributes,
+    [ SpecStateKey.VALIDATION_FUNCTION ]: Maybe<ValidationFunction>,
     [ SpecStateKey.PRESETS ]: Maybe<DictionaryOf<Preset>>,
     [ SpecStateKey.SPEC_PANEL_OPEN ]: boolean,
 }
@@ -40,7 +40,7 @@ type ImmutableSpecState = TypedMap<SpecState>
 type SpecAction = ActionForState<SpecState>
 
 interface AddOrRemoveButtonPropsFromParent {
-    specKey: string,
+    property: string,
 }
 
 interface AddOrRemoveButtonPropsFromState {
@@ -57,11 +57,11 @@ interface AddOrRemoveButtonProps extends AddOrRemoveButtonPropsFromState,
 interface HandleAddOrRemoveParameters extends EventAsProp,
     AddOrRemoveButtonPropsFromParent, AddOrRemoveButtonPropsFromState {}
 
-interface RangedInputProps extends InputProps {
+interface RangedInputsProps extends InputsPropsFromParent {
     max: number,
     min: number,
     step: number,
-    value: DomValue,
+    value: HtmlValue,
 }
 
 enum SpecControlStates {
@@ -73,26 +73,26 @@ interface SpecPanelOpenAsProp {
     specPanelOpen: boolean,
 }
 
-interface HandleArrayedPropertyAddOrRemoveParameters extends EventAsProp,
+interface HandleArrayedSpecControlAddOrRemoveParameters extends EventAsProp,
     DispatchAsProp, AddOrRemoveButtonPropsFromParent, AddOrRemoveButtonPropsFromState {}
 
 interface BuildAttemptSubmitActionsParameters {
-    specKey: string,
+    property: string,
     specState: ImmutableSpecState,
-    specValue: SpecValue,
-    suppressSpecValidationResults?: boolean,
+    suppressReevaluatingValidationResults?: boolean,
+    updatedValue: Value,
 }
 
 interface ValidateSubmittedSpecParameters {
-    specAttributes: SpecAttributes,
-    specKey: string,
+    attributes: Attributes,
+    property: string,
     updatedDisplayedSpec: DomSpec,
-    validationFunction?: SpecValidationFunction,
+    validationFunction?: ValidationFunction,
 }
 
 interface SpecValidationResult {
     isValid: boolean,
-    updatedSpecValidationResults: SpecValidationResults,
+    updatedValidationResults: ValidationResults,
 }
 
 export {
@@ -107,8 +107,8 @@ export {
     HandleAddOrRemoveParameters,
     SpecControlStates,
     SpecPanelOpenAsProp,
-    RangedInputProps,
-    HandleArrayedPropertyAddOrRemoveParameters,
+    RangedInputsProps,
+    HandleArrayedSpecControlAddOrRemoveParameters,
     BuildAttemptSubmitActionsParameters,
     SpecValidationResult,
     ValidateSubmittedSpecParameters,

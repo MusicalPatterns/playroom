@@ -14,17 +14,17 @@ import {
     openSpecControlsIfNotOpen,
     patternDuration,
     quickRefresh,
+    RANGED_PROPERTY_ONE_KEY,
     refreshPage,
     selectAboutPage,
     selectLongDurationPattern,
     selectTimeControlsPattern,
-    SPEC_RANGED_PROPERTY_ONE_KEY,
     VALID_TEST_MODIFICATION,
 } from '../../support'
 
 const modifySpec: () => Promise<void> =
     async (): Promise<void> => {
-        const input: ElementHandle = await findElement(`input[type=number]#${SPEC_RANGED_PROPERTY_ONE_KEY}`)
+        const input: ElementHandle = await findElement(`input[type=number]#${RANGED_PROPERTY_ONE_KEY}`)
         await input.type(VALID_TEST_MODIFICATION)
     }
 

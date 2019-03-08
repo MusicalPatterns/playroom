@@ -1,4 +1,4 @@
-import { standardSpecAttributes } from '@musical-patterns/pattern'
+import { standardAttributes } from '@musical-patterns/pattern'
 import { stop } from '@musical-patterns/performer'
 import { BatchAction, batchActions } from 'redux-batched-actions'
 import { PerformerStateKey, stopActions } from '../../performer'
@@ -20,9 +20,9 @@ const handleTitleClick: TitleClickEventHandler =
                 { type: PageStateKey.PAGE_NAME, data: PageName.ABOUT },
                 { type: SpecStateKey.INITIAL_SPEC, data: {} },
                 { type: SpecStateKey.DISPLAYED_SPEC, data: {} },
-                { type: SpecStateKey.SPEC_VALIDATION_RESULTS, data: {} },
+                { type: SpecStateKey.VALIDATION_RESULTS, data: {} },
                 { type: SpecStateKey.SUBMITTED_SPEC, data: {} },
-                { type: SpecStateKey.SPEC_ATTRIBUTES, data: standardSpecAttributes },
+                { type: SpecStateKey.ATTRIBUTES, data: standardAttributes },
                 { type: SpecStateKey.VALIDATION_FUNCTION, data: undefined },
                 { type: SpecStateKey.PRESETS, data: undefined },
                 { type: PageStateKey.PATTERN_ID, data: undefined },

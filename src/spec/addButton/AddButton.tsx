@@ -12,7 +12,7 @@ import {
     AddOrRemoveButtonPropsFromState,
     HandleAddOrRemoveParameters,
 } from '../types'
-import { handleArrayedPropertyElementAdd } from './events'
+import { handleArrayedSpecControlAdd } from './events'
 
 const mapStateToProps: (state: ImmutableState) => AddOrRemoveButtonPropsFromState =
     (state: ImmutableState): AddOrRemoveButtonPropsFromState => ({
@@ -21,15 +21,15 @@ const mapStateToProps: (state: ImmutableState) => AddOrRemoveButtonPropsFromStat
 
 const mapDispatchToProps: (dispatch: Dispatch) => AddOrRemoveButtonPropsFromDispatch =
     (dispatch: Dispatch): AddOrRemoveButtonPropsFromDispatch => ({
-        handleAddOrRemove: ({ event, specKey, specState }: HandleAddOrRemoveParameters): void => {
-            handleArrayedPropertyElementAdd({ dispatch, event, specKey, specState })
+        handleAddOrRemove: ({ event, property, specState }: HandleAddOrRemoveParameters): void => {
+            handleArrayedSpecControlAdd({ dispatch, event, property, specState })
         },
     })
 
 const AddButton: React.ComponentType<AddOrRemoveButtonProps> =
-    ({ handleAddOrRemove, specKey, specState }: AddOrRemoveButtonProps): JSX.Element => {
+    ({ handleAddOrRemove, property, specState }: AddOrRemoveButtonProps): JSX.Element => {
         const onClick: EventHandler = (event: React.SyntheticEvent): void => {
-            handleAddOrRemove({ event, specKey, specState })
+            handleAddOrRemove({ event, property, specState })
         }
 
         return (

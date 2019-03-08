@@ -1,33 +1,33 @@
-import { DomSpec, SpecValue } from '@musical-patterns/pattern'
-import { DomValueOrChecked, isUndefined } from '@musical-patterns/utilities'
+import { DomSpec, Value } from '@musical-patterns/pattern'
+import { HtmlValueOrChecked, isUndefined } from '@musical-patterns/utilities'
 import { batchActions } from 'redux-batched-actions'
-import { extractValueFromEvent } from '../../extractValueFromEvent'
+import { extractValueOrCheckedFromEvent } from '../../extractValueOrCheckedFromEvent'
 import { Action, DispatchAsProp } from '../../types'
 import { buildAttemptSubmitActions } from '../attemptSubmitActions'
 import { SpecStateKey } from '../types'
-import { mergeEventValueIntoArrayedSpecValue } from './mergeEventValueIntoArrayedSpecValue'
+import { mergeEventValueIntoArrayedValue } from './mergeEventValueIntoArrayedValue'
 import { BuildSpecControlChangeHandler, SpecControlChangeHandler, SpecControlChangeHandlerParameters } from './types'
 
 const buildSpecControlChangeHandler: BuildSpecControlChangeHandler =
     ({ dispatch }: DispatchAsProp): SpecControlChangeHandler =>
         async (parameters: SpecControlChangeHandlerParameters): Promise<void> => {
-            const { arrayedPropertyIndex, event, specKey, specState } = parameters
+            const { arrayedFieldIndex, event, property, specState } = parameters
 
-            const eventValue: DomValueOrChecked = extractValueFromEvent(event)
+            const eventValue: HtmlValueOrChecked = extractValueOrCheckedFromEvent(event)
 
             const displayedSpec: DomSpec = specState.get(SpecStateKey.DISPLAYED_SPEC)
 
-            let specValue: SpecValue = eventValue
-            if (!isUndefined(arrayedPropertyIndex)) {
-                specValue = mergeEventValueIntoArrayedSpecValue({
-                    arrayedPropertyIndex,
+            let updatedValue: Value = eventValue
+            if (!isUndefined(arrayedFieldIndex)) {
+                updatedValue = mergeEventValueIntoArrayedValue({
+                    arrayedFieldIndex,
                     displayedSpec,
                     eventValue,
-                    specKey,
+                    property,
                 })
             }
 
-            const actions: Action[] = buildAttemptSubmitActions({ specState, specKey, specValue })
+            const actions: Action[] = buildAttemptSubmitActions({ specState, property, updatedValue })
 
             dispatch(batchActions(actions))
         }

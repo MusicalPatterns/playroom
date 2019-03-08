@@ -2,19 +2,20 @@
 
 import { faMinus } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { DomSpec, DomSpecValue } from '@musical-patterns/pattern'
+import { DomSpec, DomValue } from '@musical-patterns/pattern'
 import * as React from 'react'
 import { connect } from 'react-redux'
 import { Dispatch } from 'redux'
 import { EventHandler, ImmutableState, StateKey } from '../../types'
-import { isArrayedDomSpecValue } from '../isArrayedDomSpecValue'
+import { isArrayedDisplayedValue } from '../isArrayedDisplayedValue'
 import {
     AddOrRemoveButtonProps,
-    AddOrRemoveButtonPropsFromDispatch, AddOrRemoveButtonPropsFromState,
+    AddOrRemoveButtonPropsFromDispatch,
+    AddOrRemoveButtonPropsFromState,
     HandleAddOrRemoveParameters,
     SpecStateKey,
 } from '../types'
-import { handleArrayedPropertyElementRemove } from './events'
+import { handleArrayedSpecControlRemove } from './events'
 
 const mapStateToProps: (state: ImmutableState) => AddOrRemoveButtonPropsFromState =
     (state: ImmutableState): AddOrRemoveButtonPropsFromState => ({
@@ -23,23 +24,23 @@ const mapStateToProps: (state: ImmutableState) => AddOrRemoveButtonPropsFromStat
 
 const mapDispatchToProps: (dispatch: Dispatch) => AddOrRemoveButtonPropsFromDispatch =
     (dispatch: Dispatch): AddOrRemoveButtonPropsFromDispatch => ({
-        handleAddOrRemove: ({ event, specKey, specState }: HandleAddOrRemoveParameters): void => {
-            handleArrayedPropertyElementRemove({ dispatch, event, specKey, specState })
+        handleAddOrRemove: ({ event, property, specState }: HandleAddOrRemoveParameters): void => {
+            handleArrayedSpecControlRemove({ dispatch, event, property, specState })
         },
     })
 
 const RemoveButton: React.ComponentType<AddOrRemoveButtonProps> =
-    ({ handleAddOrRemove, specKey, specState }: AddOrRemoveButtonProps): JSX.Element => {
+    ({ handleAddOrRemove, property, specState }: AddOrRemoveButtonProps): JSX.Element => {
         const onClick: EventHandler = (event: React.SyntheticEvent): void => {
-            handleAddOrRemove({ event, specKey, specState })
+            handleAddOrRemove({ event, property, specState })
         }
 
         const displayedSpec: DomSpec = specState.get(SpecStateKey.DISPLAYED_SPEC)
-        const domSpecValue: DomSpecValue = displayedSpec[ specKey ]
-        if (!isArrayedDomSpecValue(domSpecValue)) {
-            throw new Error('tried to remove an element from a non-arrayed dom spec value')
+        const displayedValue: DomValue = displayedSpec[ property ]
+        if (!isArrayedDisplayedValue(displayedValue)) {
+            throw new Error('cannot treat a singular spec control as arrayed')
         }
-        const disabled: boolean = !domSpecValue.length
+        const disabled: boolean = !displayedValue.length
 
         return (
             <button {...{ className: 'remove', onClick, disabled }}>

@@ -1,4 +1,4 @@
-import { standardSpecAttributes } from '@musical-patterns/pattern'
+import { standardAttributes } from '@musical-patterns/pattern'
 import { keyExistsOnObject, typedMap } from '@musical-patterns/utilities'
 import { Reducer } from 'redux'
 import { ImmutableSpecState, SpecAction, SpecState, SpecStateKey } from './types'
@@ -6,9 +6,9 @@ import { ImmutableSpecState, SpecAction, SpecState, SpecStateKey } from './types
 const initialSpecState: ImmutableSpecState = typedMap<SpecState>({
     [ SpecStateKey.INITIAL_SPEC ]: {},
     [ SpecStateKey.DISPLAYED_SPEC ]: {},
-    [ SpecStateKey.SPEC_VALIDATION_RESULTS ]: {},
+    [ SpecStateKey.VALIDATION_RESULTS ]: {},
     [ SpecStateKey.SUBMITTED_SPEC ]: {},
-    [ SpecStateKey.SPEC_ATTRIBUTES ]: standardSpecAttributes,
+    [ SpecStateKey.ATTRIBUTES ]: standardAttributes,
     [ SpecStateKey.VALIDATION_FUNCTION ]: undefined,
     [ SpecStateKey.PRESETS ]: undefined,
     [ SpecStateKey.SPEC_PANEL_OPEN ]: false,

@@ -1,9 +1,9 @@
-import { RangedConstraint, SingularPropertyInvalidSpecMessage } from '@musical-patterns/pattern'
+import { RangedConstraint, SingularValidationResult } from '@musical-patterns/pattern'
 import { isUndefined, Maybe } from '@musical-patterns/utilities'
 
 const validByMin:
-    (numericValue: number, min: Maybe<number>, excludeMin: boolean) => SingularPropertyInvalidSpecMessage =
-    (numericValue: number, min: Maybe<number>, excludeMin: boolean): SingularPropertyInvalidSpecMessage => {
+    (numericValue: number, min: Maybe<number>, excludeMin: boolean) => SingularValidationResult =
+    (numericValue: number, min: Maybe<number>, excludeMin: boolean): SingularValidationResult => {
         if (isUndefined(min)) {
             return undefined
         }
@@ -23,8 +23,8 @@ const validByMin:
     }
 
 const validByMax:
-    (numericValue: number, max: Maybe<number>, excludeMax: boolean) => SingularPropertyInvalidSpecMessage =
-    (numericValue: number, max: Maybe<number>, excludeMax: boolean): SingularPropertyInvalidSpecMessage => {
+    (numericValue: number, max: Maybe<number>, excludeMax: boolean) => SingularValidationResult =
+    (numericValue: number, max: Maybe<number>, excludeMax: boolean): SingularValidationResult => {
         if (isUndefined(max)) {
             return undefined
         }
@@ -43,8 +43,8 @@ const validByMax:
         return undefined
     }
 
-const validByStep: (numericValue: number, integer: Maybe<boolean>) => SingularPropertyInvalidSpecMessage =
-    (numericValue: number, integer: Maybe<boolean>): SingularPropertyInvalidSpecMessage => {
+const validByStep: (numericValue: number, integer: Maybe<boolean>) => SingularValidationResult =
+    (numericValue: number, integer: Maybe<boolean>): SingularValidationResult => {
         if (isUndefined(integer)) {
             return undefined
         }
@@ -57,8 +57,8 @@ const validByStep: (numericValue: number, integer: Maybe<boolean>) => SingularPr
     }
 
 const validByRangedConstraint:
-    (numericValue: number, constraint: Maybe<RangedConstraint>) => SingularPropertyInvalidSpecMessage =
-    (numericValue: number, constraint: Maybe<RangedConstraint>): SingularPropertyInvalidSpecMessage => {
+    (numericValue: number, constraint: Maybe<RangedConstraint>) => SingularValidationResult =
+    (numericValue: number, constraint: Maybe<RangedConstraint>): SingularValidationResult => {
         if (isUndefined(constraint)) {
             return undefined
         }

@@ -1,59 +1,59 @@
-import { ArrayedDomSpecValue, DomSpec, InvalidSpecMessage, SpecValidationResults } from '@musical-patterns/pattern'
+import { ArrayedDomValue, DomSpec, ValidationResult, ValidationResults } from '@musical-patterns/pattern'
 import { indexOfLastElement, INITIAL, isUndefined, lastElement, slice } from '@musical-patterns/utilities'
 import { batchActions } from 'redux-batched-actions'
 import { Action } from '../../types'
 import { buildAttemptSubmitActions } from '../attemptSubmitActions'
-import { getArrayedDomSpecValue } from '../getArrayedDomSpecValue'
-import { HandleArrayedPropertyAddOrRemoveParameters, SpecStateKey } from '../types'
-import { isArrayedPropertyInvalidSpecMessage } from './isArrayedPropertyInvalidSpecMessage'
+import { getArrayedDisplayedValue } from '../getArrayedDisplayedValue'
+import { HandleArrayedSpecControlAddOrRemoveParameters, SpecStateKey } from '../types'
+import { isArrayedValidationResult } from './isArrayedValidationResult'
 
-const isNoInvalidSpecMessageForRemovedElement:
-    (specValidationResults: SpecValidationResults, specKey: string) => boolean =
-    (specValidationResults: SpecValidationResults, specKey: string): boolean => {
-        if (isUndefined(specValidationResults)) {
+const isNoInvalidMessageForRemovedField:
+    (validationResults: ValidationResults, property: string) => boolean =
+    (validationResults: ValidationResults, property: string): boolean => {
+        if (isUndefined(validationResults)) {
             return true
         }
 
-        const invalidSpecMessage: InvalidSpecMessage = specValidationResults[ specKey ]
-        if (isUndefined(invalidSpecMessage)) {
+        const validationResult: ValidationResult = validationResults[ property ]
+        if (isUndefined(validationResult)) {
             return true
         }
-        if (!isArrayedPropertyInvalidSpecMessage(invalidSpecMessage)) {
-            throw new Error('tried to check invalid spec message array for non-arrayed element')
+        if (!isArrayedValidationResult(validationResult)) {
+            throw new Error('cannot treat a singular spec control as arrayed')
         }
 
-        return isUndefined(lastElement(invalidSpecMessage))
+        return isUndefined(lastElement(validationResult))
     }
 
-const handleArrayedPropertyElementRemove: (parameters: HandleArrayedPropertyAddOrRemoveParameters) => void =
-    ({ dispatch, event, specKey, specState }: HandleArrayedPropertyAddOrRemoveParameters): void => {
+const handleArrayedSpecControlRemove: (parameters: HandleArrayedSpecControlAddOrRemoveParameters) => void =
+    ({ dispatch, event, property, specState }: HandleArrayedSpecControlAddOrRemoveParameters): void => {
         const displayedSpec: DomSpec = specState.get(SpecStateKey.DISPLAYED_SPEC)
-        const specValidationResults: SpecValidationResults = specState.get(SpecStateKey.SPEC_VALIDATION_RESULTS)
+        const validationResults: ValidationResults = specState.get(SpecStateKey.VALIDATION_RESULTS)
 
-        const arrayedSpecValue: ArrayedDomSpecValue = getArrayedDomSpecValue(displayedSpec, specKey)
+        const arrayedDisplayedValue: ArrayedDomValue = getArrayedDisplayedValue(displayedSpec, property)
 
-        const updatedArrayedSpecValue: ArrayedDomSpecValue = slice(
-            arrayedSpecValue,
+        const updatedArrayedDisplayedValue: ArrayedDomValue = slice(
+            arrayedDisplayedValue,
             INITIAL,
-            indexOfLastElement(arrayedSpecValue),
+            indexOfLastElement(arrayedDisplayedValue),
         )
 
-        const removedElementHasNoInvalidSpecMessages: boolean =
-            isNoInvalidSpecMessageForRemovedElement(specValidationResults, specKey)
+        const removedFieldHasNoInvalidMessages: boolean =
+            isNoInvalidMessageForRemovedField(validationResults, property)
 
-        const removedElementWasEmpty: boolean = lastElement(arrayedSpecValue) === ''
-        const suppressSpecValidationResults: boolean = removedElementWasEmpty && removedElementHasNoInvalidSpecMessages
+        const removedFieldIsEmpty: boolean = lastElement(arrayedDisplayedValue) === ''
+        const suppressReevaluatingValidationResults: boolean = removedFieldIsEmpty && removedFieldHasNoInvalidMessages
 
         const actions: Action[] = buildAttemptSubmitActions({
-            specKey,
+            property,
             specState,
-            specValue: updatedArrayedSpecValue,
-            suppressSpecValidationResults,
+            suppressReevaluatingValidationResults,
+            updatedValue: updatedArrayedDisplayedValue,
         })
 
         dispatch(batchActions(actions))
     }
 
 export {
-    handleArrayedPropertyElementRemove,
+    handleArrayedSpecControlRemove,
 }

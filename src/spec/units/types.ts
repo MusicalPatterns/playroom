@@ -1,11 +1,11 @@
-import { SpecAttributes } from '@musical-patterns/pattern'
+import { Attributes } from '@musical-patterns/pattern'
 
 interface UnitsPropsFromParent {
-    specKey: string,
+    property: string,
 }
 
 interface UnitsPropsFromState {
-    specAttributes: SpecAttributes,
+    attributes: Attributes,
 }
 
 interface UnitsProps extends UnitsPropsFromParent, UnitsPropsFromState {}

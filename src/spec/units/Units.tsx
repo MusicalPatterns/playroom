@@ -9,13 +9,13 @@ import { UnitsProps, UnitsPropsFromState } from './types'
 
 const mapStateToProps: (state: ImmutableState) => UnitsPropsFromState =
     (state: ImmutableState): UnitsPropsFromState => ({
-        specAttributes: state.get(StateKey.SPEC)
-            .get(SpecStateKey.SPEC_ATTRIBUTES),
+        attributes: state.get(StateKey.SPEC)
+            .get(SpecStateKey.ATTRIBUTES),
     })
 
 const Units: React.ComponentType<UnitsProps> =
-    ({ specAttributes, specKey }: UnitsProps): JSX.Element => {
-        const { units } = specAttributes[ specKey ]
+    ({ attributes, property }: UnitsProps): JSX.Element => {
+        const { units } = attributes[ property ]
 
         return (
             <div {...{ className: 'units' }}>{units}</div>

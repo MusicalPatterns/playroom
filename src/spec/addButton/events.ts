@@ -1,32 +1,33 @@
-import { ArrayedDomSpecValue, DomSpec, SpecAttributes } from '@musical-patterns/pattern'
-import { DomValueOrChecked, Maybe } from '@musical-patterns/utilities'
+import { ArrayedDomValue, Attributes, DomSpec } from '@musical-patterns/pattern'
+import { HtmlValueOrChecked, Maybe } from '@musical-patterns/utilities'
 import { batchActions } from 'redux-batched-actions'
 import { Action } from '../../types'
 import { buildAttemptSubmitActions } from '../attemptSubmitActions'
-import { getArrayedDomSpecValue } from '../getArrayedDomSpecValue'
-import { HandleArrayedPropertyAddOrRemoveParameters, SpecStateKey } from '../types'
+import { getArrayedDisplayedValue } from '../getArrayedDisplayedValue'
+import { HandleArrayedSpecControlAddOrRemoveParameters, SpecStateKey } from '../types'
 
-const handleArrayedPropertyElementAdd: (parameters: HandleArrayedPropertyAddOrRemoveParameters) => void =
-    ({ dispatch, event, specKey, specState }: HandleArrayedPropertyAddOrRemoveParameters): void => {
+const handleArrayedSpecControlAdd: (parameters: HandleArrayedSpecControlAddOrRemoveParameters) => void =
+    ({ dispatch, event, property, specState }: HandleArrayedSpecControlAddOrRemoveParameters): void => {
         const displayedSpec: DomSpec = specState.get(SpecStateKey.DISPLAYED_SPEC)
 
-        const specAttributes: SpecAttributes = specState.get(SpecStateKey.SPEC_ATTRIBUTES)
-        const initialElementValue: Maybe<DomValueOrChecked> = specAttributes[ specKey ].arrayedNewElementInitialValue
+        const attributes: Attributes = specState.get(SpecStateKey.ATTRIBUTES)
+        const initialFieldValue: Maybe<HtmlValueOrChecked> = attributes[ property ].arrayedNewFieldInitialValue
 
-        const arrayedSpecValue: ArrayedDomSpecValue = getArrayedDomSpecValue(displayedSpec, specKey)
+        const arrayedDisplayedValue: ArrayedDomValue = getArrayedDisplayedValue(displayedSpec, property)
 
-        const updatedArrayedSpecValue: ArrayedDomSpecValue = arrayedSpecValue.concat([ initialElementValue || '' ])
+        const updatedArrayedDisplayedValue: ArrayedDomValue =
+            arrayedDisplayedValue.concat([ initialFieldValue || '' ])
 
         const actions: Action[] = buildAttemptSubmitActions({
-            specKey,
+            property,
             specState,
-            specValue: updatedArrayedSpecValue,
-            suppressSpecValidationResults: true,
+            suppressReevaluatingValidationResults: true,
+            updatedValue: updatedArrayedDisplayedValue,
         })
 
         dispatch(batchActions(actions))
     }
 
 export {
-    handleArrayedPropertyElementAdd,
+    handleArrayedSpecControlAdd,
 }

@@ -5,7 +5,7 @@ interface SpecControlPropsFromState {
 }
 
 interface SpecControlPropsFromParent {
-    specKey: string,
+    property: string,
 }
 
 interface SpecControlProps extends SpecControlPropsFromParent, SpecControlPropsFromState {}

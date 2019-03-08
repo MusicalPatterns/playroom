@@ -1,4 +1,4 @@
-import { DomSpec, DomSpecValue, Spec, SpecAttributes, SpecValidationFunction } from '@musical-patterns/pattern'
+import { Attributes, DomSpec, DomValue, Spec, ValidationFunction } from '@musical-patterns/pattern'
 import { Maybe } from '@musical-patterns/utilities'
 import { Action } from '../types'
 import { BuildAttemptSubmitActionsParameters, SpecStateKey } from './types'
@@ -6,19 +6,19 @@ import { validateSubmittedSpec } from './validateSubmittedSpec'
 
 const buildAttemptSubmitActions: (parameters: BuildAttemptSubmitActionsParameters) => Action[] =
     (parameters: BuildAttemptSubmitActionsParameters): Action[] => {
-        const { specState, specKey, specValue, suppressSpecValidationResults } = parameters
+        const { specState, property, updatedValue, suppressReevaluatingValidationResults } = parameters
 
         const displayedSpec: DomSpec = specState.get(SpecStateKey.DISPLAYED_SPEC)
         const submittedSpec: Spec = specState.get(SpecStateKey.SUBMITTED_SPEC)
-        const specAttributes: SpecAttributes = specState.get(SpecStateKey.SPEC_ATTRIBUTES)
-        const validationFunction: Maybe<SpecValidationFunction> = specState.get(SpecStateKey.VALIDATION_FUNCTION)
+        const attributes: Attributes = specState.get(SpecStateKey.ATTRIBUTES)
+        const validationFunction: Maybe<ValidationFunction> = specState.get(SpecStateKey.VALIDATION_FUNCTION)
 
-        const updatedSubmittedSpec: Spec = { ...submittedSpec, [ specKey ]: specValue }
-        const updatedDisplayedSpec: DomSpec = { ...displayedSpec, [ specKey ]: specValue as DomSpecValue }
+        const updatedSubmittedSpec: Spec = { ...submittedSpec, [ property ]: updatedValue }
+        const updatedDisplayedSpec: DomSpec = { ...displayedSpec, [ property ]: updatedValue as DomValue }
 
-        const { isValid, updatedSpecValidationResults } = validateSubmittedSpec({
-            specAttributes,
-            specKey,
+        const { isValid, updatedValidationResults } = validateSubmittedSpec({
+            attributes,
+            property,
             updatedDisplayedSpec,
             validationFunction,
         })
@@ -27,8 +27,8 @@ const buildAttemptSubmitActions: (parameters: BuildAttemptSubmitActionsParameter
             { type: SpecStateKey.DISPLAYED_SPEC, data: updatedDisplayedSpec },
         ]
 
-        if (!suppressSpecValidationResults) {
-            actions.push({ type: SpecStateKey.SPEC_VALIDATION_RESULTS, data: updatedSpecValidationResults })
+        if (!suppressReevaluatingValidationResults) {
+            actions.push({ type: SpecStateKey.VALIDATION_RESULTS, data: updatedValidationResults })
         }
 
         if (isValid) {

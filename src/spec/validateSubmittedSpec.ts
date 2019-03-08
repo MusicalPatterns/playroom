@@ -1,38 +1,38 @@
-import { DomSpecValue, InvalidSpecMessage, Spec, SpecValidationResults } from '@musical-patterns/pattern'
+import { DomValue, Spec, ValidationResult, ValidationResults } from '@musical-patterns/pattern'
 import { entries, reduce } from '@musical-patterns/utilities'
 import { SpecValidationResult, ValidateSubmittedSpecParameters } from './types'
-import { validateSpecProperty } from './validateSpecProperty'
+import { validateProperty } from './validateProperty'
 
 const validateSubmittedSpec: (parameters: ValidateSubmittedSpecParameters) => SpecValidationResult =
     (parameters: ValidateSubmittedSpecParameters): SpecValidationResult => {
-        const { updatedDisplayedSpec, specAttributes, validationFunction, specKey } = parameters
+        const { updatedDisplayedSpec, attributes, validationFunction, property } = parameters
 
-        const reevaluatedSpecValidationResults: SpecValidationResults = reduce(
+        const reevaluatedValidationResults: ValidationResults = reduce(
             entries(updatedDisplayedSpec),
-            (accumulator: SpecValidationResults, [ key, val ]: [ string, DomSpecValue ]) => ({
+            (accumulator: ValidationResults, [ key, val ]: [ string, DomValue ]) => ({
                 ...accumulator,
-                [ key ]: validateSpecProperty(val, specAttributes[ key ]),
+                [ key ]: validateProperty(val, attributes[ key ]),
             }),
             {},
         )
 
-        const standardInvalidMessageForThisProperty: InvalidSpecMessage =
-            reevaluatedSpecValidationResults && reevaluatedSpecValidationResults[ specKey ]
+        const validationResultForThisPropertyInAndOfItself: ValidationResult =
+            reevaluatedValidationResults && reevaluatedValidationResults[ property ]
 
-        let customSpecValidationResultsBasedOnEntireSpec: SpecValidationResults
+        let validationResultsFromFunctionOfEntireSpec: ValidationResults
         if (validationFunction) {
-            customSpecValidationResultsBasedOnEntireSpec = validationFunction(updatedDisplayedSpec as Spec)
+            validationResultsFromFunctionOfEntireSpec = validationFunction(updatedDisplayedSpec as Spec)
         }
 
-        const updatedSpecValidationResults: SpecValidationResults = {
-            ...reevaluatedSpecValidationResults,
-            [ specKey ]: standardInvalidMessageForThisProperty,
-            ...customSpecValidationResultsBasedOnEntireSpec,
+        const updatedValidationResults: ValidationResults = {
+            ...reevaluatedValidationResults,
+            [ property ]: validationResultForThisPropertyInAndOfItself,
+            ...validationResultsFromFunctionOfEntireSpec,
         }
 
         return {
-            isValid: !standardInvalidMessageForThisProperty && !customSpecValidationResultsBasedOnEntireSpec,
-            updatedSpecValidationResults,
+            isValid: !validationResultForThisPropertyInAndOfItself && !validationResultsFromFunctionOfEntireSpec,
+            updatedValidationResults,
         }
     }
 

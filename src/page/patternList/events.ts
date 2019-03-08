@@ -1,4 +1,4 @@
-import { Id, isId, Pattern, Spec, SpecData } from '@musical-patterns/pattern'
+import { Data, Id, isId, Pattern, Spec } from '@musical-patterns/pattern'
 import { setTimePosition } from '@musical-patterns/performer'
 import { BEGINNING, doAsync, isUndefined, Maybe } from '@musical-patterns/utilities'
 import { BatchAction, batchActions } from 'redux-batched-actions'
@@ -32,16 +32,16 @@ const handlePatternChange: PatternChangeEventHandler =
             return
         }
 
-        const specData: SpecData = pattern.specData
-        const initialSpec: Spec = specData.initial
+        const data: Data = pattern.data
+        const initialSpec: Spec = data.initial
 
         const actions: Action[] = resetActions(initialSpec)
             .concat([
                 { type: SpecStateKey.INITIAL_SPEC, data: initialSpec },
                 { type: PageStateKey.PATTERN_ID, data: newId },
-                { type: SpecStateKey.SPEC_ATTRIBUTES, data: specData.attributes },
-                { type: SpecStateKey.VALIDATION_FUNCTION, data: specData.validationFunction },
-                { type: SpecStateKey.PRESETS, data: specData.presets },
+                { type: SpecStateKey.ATTRIBUTES, data: data.attributes },
+                { type: SpecStateKey.VALIDATION_FUNCTION, data: data.validationFunction },
+                { type: SpecStateKey.PRESETS, data: data.presets },
                 { type: PageStateKey.PAGE_NAME, data: undefined },
                 { type: PerformerStateKey.PERFORMER_DISABLED, data: false },
             ])

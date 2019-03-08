@@ -1,4 +1,4 @@
-import { ArrayedDomSpecValue, ArrayedPropertyInvalidSpecMessage, ArrayedSpecValue } from '@musical-patterns/pattern'
+import { ArrayedDomValue, ArrayedValidationResult, ArrayedValue } from '@musical-patterns/pattern'
 import { SpecControlPropsFromParent } from '../specControl'
 import { ImmutableSpecState } from '../types'
 
@@ -7,9 +7,9 @@ interface ArrayedSpecControlPropsFromState {
 }
 
 interface ArrayedSpecControlPropsFromParent extends SpecControlPropsFromParent {
-    displayedSpecValues: ArrayedDomSpecValue,
-    invalidSpecMessages: ArrayedPropertyInvalidSpecMessage,
-    submittedSpecValues: ArrayedSpecValue,
+    arrayedDisplayedValue: ArrayedDomValue,
+    arrayedSubmittedValue: ArrayedValue,
+    arrayedValidationResult: ArrayedValidationResult,
 }
 
 interface ArrayedSpecControlProps extends ArrayedSpecControlPropsFromParent, ArrayedSpecControlPropsFromState {}

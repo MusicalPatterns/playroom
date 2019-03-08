@@ -1,9 +1,10 @@
-import { SingularPropertyInvalidSpecMessage } from '@musical-patterns/pattern'
+import { SingularValidationResult } from '@musical-patterns/pattern'
+import { isUndefined } from '@musical-patterns/utilities'
 import { SpecControlStates } from '../types'
 
-const getValidityClass: (invalidSpecMessage: SingularPropertyInvalidSpecMessage) => SpecControlStates =
-    (invalidSpecMessage: SingularPropertyInvalidSpecMessage): SpecControlStates =>
-        !!invalidSpecMessage ? SpecControlStates.INVALID : SpecControlStates.VALID
+const getValidityClass: (singularValidationResult: SingularValidationResult) => SpecControlStates =
+    (singularValidationResult: SingularValidationResult): SpecControlStates =>
+        isUndefined(singularValidationResult) ? SpecControlStates.VALID : SpecControlStates.INVALID
 
 export {
     getValidityClass,

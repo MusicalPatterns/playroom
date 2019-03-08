@@ -1,13 +1,13 @@
 // tslint:disable variable-name file-name-casing no-default-export no-import-side-effect
 
-import { SpecAttributes, SpecPropertyAttributes } from '@musical-patterns/pattern'
-import { camelCaseToLowerCase, isUndefined, Maybe } from '@musical-patterns/utilities'
+import { Attributes, PropertyAttributes } from '@musical-patterns/pattern'
+import { camelCaseToLowerCase, isUndefined } from '@musical-patterns/utilities'
 import * as React from 'react'
 import { connect } from 'react-redux'
 import { Dispatch } from 'redux'
 import { EventHandler, ImmutableState, SecretSelectorsForTest, StateKey } from '../../types'
-import { Input, InputProps } from '../input'
-import { InvalidSpecMessage } from '../invalidSpecMessage'
+import { Inputs, InputsPropsFromParent } from '../inputs'
+import { InvalidMessage } from '../invalidMessage'
 import { stringifyIfNecessary } from '../stringifyIfNecessary'
 import { SpecStateKey } from '../types'
 import { Units } from '../units'
@@ -17,7 +17,8 @@ import './styles'
 import {
     SingularSpecControlProps,
     SingularSpecControlPropsFromDispatch,
-    SingularSpecControlPropsFromState, SpecChangeEventParameters,
+    SingularSpecControlPropsFromState,
+    SpecChangeEventParameters,
 } from './types'
 import { getValidityClass } from './validityClass'
 
@@ -34,40 +35,46 @@ const mapDispatchToProps: (dispatch: Dispatch) => SingularSpecControlPropsFromDi
 const SingularSpecControl: React.ComponentType<SingularSpecControlProps> =
     (singularSpecControlProps: SingularSpecControlProps): JSX.Element => {
         const {
-            arrayedPropertyIndex,
-            specKey,
+            arrayedFieldIndex,
+            property,
             handleSpecChange,
             specState,
-            invalidSpecMessage,
-            displayedSpecValue,
-            submittedSpecValue,
+            singularValidationResult,
+            singularDisplayedValue,
+            singularSubmittedValue,
         } = singularSpecControlProps
 
-        const specAttributes: SpecAttributes = specState.get(SpecStateKey.SPEC_ATTRIBUTES)
-        const specPropertyAttributes: Maybe<SpecPropertyAttributes> = specAttributes[ specKey ]
-        const { description, formattedName } = specPropertyAttributes
+        const attributes: Attributes = specState.get(SpecStateKey.ATTRIBUTES)
+        const propertyAttributes: PropertyAttributes = attributes[ property ]
+        const { description, formattedName } = propertyAttributes
 
-        const specChangeEventParameters: SpecChangeEventParameters = { arrayedPropertyIndex, specKey, specState }
+        const specChangeEventParameters: SpecChangeEventParameters = { arrayedFieldIndex, property, specState }
 
         const onChange: EventHandler = (event: React.SyntheticEvent): void => {
             handleSpecChange({ ...specChangeEventParameters, event })
         }
 
-        const isNotAnArrayedProperty: boolean = isUndefined(arrayedPropertyIndex)
-        const id: string = specControlId({ isNotAnArrayedProperty, arrayedPropertyIndex, specKey })
+        const isNotAnArrayedSpecControl: boolean = isUndefined(arrayedFieldIndex)
+        const id: string = specControlId({ isNotAnArrayedSpecControl, arrayedFieldIndex, property })
 
-        const validityClass: string = getValidityClass(invalidSpecMessage)
-        const inputProps: InputProps = { validityClass, onChange, id, value: displayedSpecValue }
+        const validityClass: string = getValidityClass(singularValidationResult)
+        const inputsProps: InputsPropsFromParent = {
+            id,
+            onChange,
+            property,
+            validityClass,
+            value: singularDisplayedValue,
+        }
 
         const secretClass: string = SecretSelectorsForTest.SECRET_SUBMITTED_SPEC_CONTROL
 
         return (
             <div {...{ className: 'singular-spec-control', id, title: description }}>
-                <span {...{ className: secretClass }}>{stringifyIfNecessary(submittedSpecValue)}</span>
-                {isNotAnArrayedProperty && <div>{formattedName || camelCaseToLowerCase(specKey)}</div>}
-                <Input {...{ specPropertyAttributes, inputProps }}/>
-                <Units {...{ specKey }}/>
-                {invalidSpecMessage && <InvalidSpecMessage {...{ invalidSpecMessage }}/>}
+                <span {...{ className: secretClass }}>{stringifyIfNecessary(singularSubmittedValue)}</span>
+                {isNotAnArrayedSpecControl && <div>{formattedName || camelCaseToLowerCase(property)}</div>}
+                <Inputs {...inputsProps}/>
+                <Units {...{ property }}/>
+                {singularValidationResult && <InvalidMessage {...{ invalidMessage: singularValidationResult }}/>}
             </div>
         )
     }

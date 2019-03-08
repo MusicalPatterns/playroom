@@ -1,7 +1,6 @@
 import {
     clickElement as utilitiesClickElement,
     deleteCharacterFromInput as utilitiesDeleteCharacterFromInput,
-    DomValue,
     elementChecked as utilitiesElementChecked,
     elementCount as utilitiesElementCount,
     elementExists as utilitiesElementExists,
@@ -9,6 +8,7 @@ import {
     elementInnerText as utilitiesElementInnerText,
     elementValue as utilitiesElementValue,
     findElement as utilitiesFindElement,
+    HtmlValue,
     loseFocus as utilitiesLoseFocus,
     press as utilitiesPress,
     selectOption as utilitiesSelectOption,
@@ -18,8 +18,8 @@ import {
 import { ElementHandle } from 'puppeteer'
 import { page } from '../setup'
 
-const elementValue: (selector: string) => Promise<DomValue> =
-    async (selector: string): Promise<DomValue> =>
+const elementValue: (selector: string) => Promise<HtmlValue> =
+    async (selector: string): Promise<HtmlValue> =>
         utilitiesElementValue(page, selector)
 
 const elementExists: (selector: string) => Promise<boolean> =

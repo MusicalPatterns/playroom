@@ -1,10 +1,5 @@
-import {
-    DomSpec,
-    SingularDomSpecValue,
-    SingularPropertyInvalidSpecMessage,
-    SingularSpecValue,
-} from '@musical-patterns/pattern'
-import { DomValueOrChecked, Maybe, Ordinal } from '@musical-patterns/utilities'
+import { DomSpec, SingularDomValue, SingularValidationResult, SingularValue } from '@musical-patterns/pattern'
+import { HtmlValueOrChecked, Maybe, Ordinal } from '@musical-patterns/utilities'
 import { DispatchAsProp, EventAsProp } from '../../types'
 import { SpecControlPropsFromParent } from '../specControl'
 import { ImmutableSpecState } from '../types'
@@ -18,24 +13,24 @@ interface SingularSpecControlPropsFromDispatch {
 }
 
 interface SingularSpecControlPropsFromParent extends SpecControlPropsFromParent {
-    arrayedPropertyIndex?: Ordinal,
-    displayedSpecValue: SingularDomSpecValue,
-    invalidSpecMessage: SingularPropertyInvalidSpecMessage,
-    submittedSpecValue: SingularSpecValue,
+    arrayedFieldIndex?: Ordinal,
+    singularDisplayedValue: SingularDomValue,
+    singularSubmittedValue: SingularValue,
+    singularValidationResult: SingularValidationResult,
 }
 
 interface SingularSpecControlProps extends SingularSpecControlPropsFromDispatch,
     SingularSpecControlPropsFromState, SingularSpecControlPropsFromParent {}
 
 interface SpecControlIdParameters {
-    arrayedPropertyIndex: Maybe<Ordinal>,
-    isNotAnArrayedProperty: boolean,
-    specKey: string,
+    arrayedFieldIndex: Maybe<Ordinal>,
+    isNotAnArrayedSpecControl: boolean,
+    property: string,
 }
 
 interface SpecChangeEventParameters {
-    arrayedPropertyIndex?: Ordinal,
-    specKey: string,
+    arrayedFieldIndex?: Ordinal,
+    property: string,
     specState: ImmutableSpecState,
 }
 
@@ -45,11 +40,11 @@ type SpecControlChangeHandler = (parameters: SpecControlChangeHandlerParameters)
 
 type BuildSpecControlChangeHandler = (parameters: DispatchAsProp) => SpecControlChangeHandler
 
-interface MergeEventValueIntoSpecValueParameters {
-    arrayedPropertyIndex: Ordinal,
+interface MergeEventValueIntoValueParameters {
+    arrayedFieldIndex: Ordinal,
     displayedSpec: DomSpec,
-    eventValue: DomValueOrChecked,
-    specKey: string,
+    eventValue: HtmlValueOrChecked,
+    property: string,
 }
 
 export {
@@ -62,5 +57,5 @@ export {
     SpecControlChangeHandler,
     BuildSpecControlChangeHandler,
     SpecControlChangeHandlerParameters,
-    MergeEventValueIntoSpecValueParameters,
+    MergeEventValueIntoValueParameters,
 }
