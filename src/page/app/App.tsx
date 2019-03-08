@@ -3,8 +3,10 @@
 import { isUndefined } from '@musical-patterns/utilities'
 import * as React from 'react'
 import { connect } from 'react-redux'
-import { ImmutablePageState, LeftColumn, MiddlePlusRightColumns, PageStateKey } from '../../page'
 import { ImmutableState, StateKey } from '../../types'
+import { LeftColumn } from '../leftColumn'
+import { MiddlePlusRightColumn } from '../middlePlusRightColumn'
+import { ImmutablePageState, PageStateKey } from '../types'
 import './styles'
 import { AppProps } from './types'
 
@@ -26,7 +28,7 @@ const App: React.ComponentType<AppProps> =
         return (
             <div {...{ id: 'app' }}>
                 <LeftColumn/>
-                <MiddlePlusRightColumns/>
+                <MiddlePlusRightColumn/>
             </div>
         )
     }

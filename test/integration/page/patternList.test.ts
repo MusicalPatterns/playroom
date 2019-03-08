@@ -120,7 +120,7 @@ describe('pattern list', () => {
         })
 
         it('opens the right column', async (done: DoneFn) => {
-            expect(await elementExists('#middle-plus-right-columns.right-column-open'))
+            expect(await elementExists('#middle-plus-right-column.right-column-open'))
                 .toBeTruthy('the right column was not open')
 
             done()

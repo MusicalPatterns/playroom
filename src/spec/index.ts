@@ -1,8 +1,6 @@
-export { SpecPanel } from './specPanel'
+export { resetActions, SpecPanel } from './panel'
 
 export { specReducer } from './reducer'
-
-export { resetActions } from './resetButton'
 
 export {
     ImmutableSpecState,

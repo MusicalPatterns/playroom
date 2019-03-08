@@ -1,7 +1,1 @@
-// tslint:disable no-default-import
-
-import LeftColumn from './LeftColumn'
-
-export {
-    LeftColumn,
-}
+export { LeftColumn } from './leftColumn'

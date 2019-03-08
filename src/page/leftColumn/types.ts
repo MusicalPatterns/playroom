@@ -1,7 +1,10 @@
-interface LeftColumnProps {
-    leftColumnOpen: boolean,
+import { Dispatch } from 'redux'
+
+interface ToggleRightColumnOpenParameters {
+    dispatch: Dispatch,
+    rightColumnOpen: boolean,
 }
 
 export {
-    LeftColumnProps,
+    ToggleRightColumnOpenParameters,
 }

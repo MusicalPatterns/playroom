@@ -33,11 +33,6 @@ interface GetPatternParameters {
     patterns: Maybe<Partial<Patterns>>
 }
 
-interface ToggleRightColumnOpenParameters {
-    dispatch: Dispatch,
-    rightColumnOpen: boolean,
-}
-
 export {
     PageName,
     ImmutablePageState,
@@ -45,5 +40,4 @@ export {
     PageAction,
     PageState,
     GetPatternParameters,
-    ToggleRightColumnOpenParameters,
 }

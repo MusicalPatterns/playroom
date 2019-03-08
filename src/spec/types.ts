@@ -1,17 +1,5 @@
-// tslint:disable max-file-line-count
-
-import {
-    Attributes,
-    DomSpec,
-    Preset,
-    Spec,
-    ValidationFunction,
-    ValidationResults,
-    Value,
-} from '@musical-patterns/pattern'
-import { ActionForState, DictionaryOf, HtmlValue, Maybe, TypedMap } from '@musical-patterns/utilities'
-import { DispatchAsProp, EventAsProp } from '../types'
-import { InputsPropsFromParent } from './inputs'
+import { Attributes, DomSpec, Preset, Spec, ValidationFunction, ValidationResults } from '@musical-patterns/pattern'
+import { ActionForState, DictionaryOf, Maybe, TypedMap } from '@musical-patterns/utilities'
 
 enum SpecStateKey {
     INITIAL_SPEC = 'INITIAL_SPEC',
@@ -39,60 +27,9 @@ type ImmutableSpecState = TypedMap<SpecState>
 
 type SpecAction = ActionForState<SpecState>
 
-interface AddOrRemoveButtonPropsFromParent {
-    property: string,
-}
-
-interface AddOrRemoveButtonPropsFromState {
-    specState: ImmutableSpecState,
-}
-
-interface AddOrRemoveButtonPropsFromDispatch {
-    handleAddOrRemove: (parameters: HandleAddOrRemoveParameters) => void,
-}
-
-interface AddOrRemoveButtonProps extends AddOrRemoveButtonPropsFromState,
-    AddOrRemoveButtonPropsFromDispatch, AddOrRemoveButtonPropsFromParent {}
-
-interface HandleAddOrRemoveParameters extends EventAsProp,
-    AddOrRemoveButtonPropsFromParent, AddOrRemoveButtonPropsFromState {}
-
-interface RangedInputsProps extends InputsPropsFromParent {
-    max: number,
-    min: number,
-    step: number,
-    value: HtmlValue,
-}
-
 enum SpecControlStates {
     INVALID = 'invalid',
     VALID = 'valid',
-}
-
-interface SpecPanelOpenAsProp {
-    specPanelOpen: boolean,
-}
-
-interface HandleArrayedSpecControlAddOrRemoveParameters extends EventAsProp,
-    DispatchAsProp, AddOrRemoveButtonPropsFromParent, AddOrRemoveButtonPropsFromState {}
-
-interface BuildAttemptSubmitActionsParameters {
-    property: string,
-    specState: ImmutableSpecState,
-    suppressReevaluatingValidationResults?: boolean,
-    updatedValue: Value,
-}
-
-interface ValidateSubmittedSpecParameters {
-    attributes: Attributes,
-    property: string,
-    updatedDisplayedSpec: DomSpec,
-    validationFunction?: ValidationFunction,
-}
-
-interface SpecValidationResult {
-    isValid: boolean,
-    updatedValidationResults: ValidationResults,
 }
 
 export {
@@ -100,16 +37,5 @@ export {
     ImmutableSpecState,
     SpecStateKey,
     SpecAction,
-    AddOrRemoveButtonPropsFromState,
-    AddOrRemoveButtonPropsFromDispatch,
-    AddOrRemoveButtonPropsFromParent,
-    AddOrRemoveButtonProps,
-    HandleAddOrRemoveParameters,
     SpecControlStates,
-    SpecPanelOpenAsProp,
-    RangedInputsProps,
-    HandleArrayedSpecControlAddOrRemoveParameters,
-    BuildAttemptSubmitActionsParameters,
-    SpecValidationResult,
-    ValidateSubmittedSpecParameters,
 }

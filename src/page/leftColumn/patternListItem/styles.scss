@@ -1,0 +1,44 @@
+@import '../../../colors';
+@import '../../../fonts';
+@import '../../sizes';
+
+li {
+  padding-bottom: $pattern-list-item-spacing;
+  width: $pattern-list-item-width;
+
+  div {
+    font-size: $detail-text-size;
+
+    &:first-child {
+      font-size: $important-text-size;
+      line-height: $important-text-size;
+
+      @extend .leipziger-antiqua-bold;
+    }
+  }
+
+  &:hover {
+    cursor: pointer;
+    color: $left-column-hover !important;
+
+    div:first-child {
+      color: $left-column-hover-with-emphasis !important;
+    }
+  }
+
+  &.selected {
+    color: $left-column-selected;
+
+    div:first-child {
+      color: $left-column-selected-with-emphasis;
+    }
+  }
+
+  &.not-selected {
+    color: $left-column-color;
+
+    div:first-child {
+      color: $left-column-color;
+    }
+  }
+}

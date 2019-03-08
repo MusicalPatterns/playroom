@@ -1,0 +1,51 @@
+@import '../../../effects';
+@import '../../../colors';
+@import '../../colors';
+@import '../../proportions';
+@import '../../sizes';
+
+.singular-spec-control {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  position: relative;
+  margin-bottom: $spec-panel-bottom-spacing;
+
+  div,
+  input,
+  select {
+    margin-left: $spec-controls-horizontal-spacing;
+    min-width: $control-width;
+    margin-bottom: $spec-panel-bottom-spacing;
+  }
+
+  div {
+    flex: $spec-control-name-proportion;
+    text-align: right;
+    font-size: $detail-text-size;
+  }
+
+  input,
+  select {
+    @include hoverable-background($control-background);
+
+    padding: 0 $spec-controls-horizontal-spacing;
+    flex: $spec-control-input-proportion;
+    height: $control-height;
+    border: none;
+    outline: none;
+    border-radius: $border-size;
+
+    &::selection {
+      background: $focus-color;
+    }
+
+    &.invalid {
+      @include glow($invalid-color);
+    }
+  }
+
+  &:hover .invalid-message {
+    opacity: $invalid-message-opacity;
+  }
+}

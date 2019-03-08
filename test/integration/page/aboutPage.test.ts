@@ -25,7 +25,7 @@ const selectAboutPageBySymbol: () => Promise<void> =
 
 const titleIs: (expectedTitle: string) => Promise<void> =
     async (expectedTitle: string): Promise<void> => {
-        expect(await elementInnerText('#middle-plus-right-columns h1'))
+        expect(await elementInnerText('#middle-plus-right-column h1'))
             .toBe(expectedTitle)
     }
 
@@ -62,7 +62,7 @@ describe('about page', () => {
 
     it('hides the right column', async (done: DoneFn) => {
         await selectAboutPage()
-        expect(await elementExists('#middle-plus-right-columns.right-column-closed'))
+        expect(await elementExists('#middle-plus-right-column.right-column-closed'))
             .toBeTruthy('right column was not hidden')
 
         done()

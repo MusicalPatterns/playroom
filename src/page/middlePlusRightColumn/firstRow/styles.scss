@@ -1,0 +1,12 @@
+@import '../../../effects';
+@import '../../sizes';
+
+#first-row {
+  min-height: $first-row-height;
+
+  @include animate(min-height);
+
+  &.closed {
+    min-height: 0;
+  }
+}
