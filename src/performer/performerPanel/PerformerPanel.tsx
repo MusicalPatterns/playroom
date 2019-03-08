@@ -4,8 +4,8 @@ import * as React from 'react'
 import { connect } from 'react-redux'
 import { PageStateKey } from '../../page'
 import { ImmutableState, StateKey } from '../../types'
-import { NoPatternMessage } from '../noPatternMessage'
-import { Performer } from '../performer'
+import { TimeControls } from '../timeControls'
+import { ToggleImmersiveAudioButton } from '../toggleImmersiveAudioButton'
 import './styles'
 import { PerformerPanelProps } from './types'
 
@@ -18,8 +18,8 @@ const mapStateToProps: (state: ImmutableState) => PerformerPanelProps =
 const PerformerPanel: React.ComponentType<PerformerPanelProps> =
     ({ pageName }: PerformerPanelProps): JSX.Element => (
         <div {...{ id: 'performer-panel', className: !pageName ? 'open' : 'closed' }}>
-            <Performer/>
-            <NoPatternMessage/>
+            <TimeControls/>
+            <ToggleImmersiveAudioButton/>
         </div>
     )
 

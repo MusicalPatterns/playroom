@@ -4,6 +4,7 @@ import * as React from 'react'
 import { connect } from 'react-redux'
 import { PerformerPanel } from '../../performer'
 import { ImmutableState, StateKey } from '../../types'
+import { NoPatternMessage } from '../noPatternMessage'
 import { PageStateKey } from '../types'
 import './styles'
 import { FirstRowProps } from './types'
@@ -19,6 +20,7 @@ const FirstRow: React.ComponentType<FirstRowProps> =
         <div {...{ className: `row ${!pageName ? 'open' : 'closed'}`, id: 'first-row' }}>
             <div {...{ className: 'middle' }} >
                 <PerformerPanel/>
+                <NoPatternMessage/>
             </div>
             <div {...{ className: 'right' }} />
         </div>
