@@ -1,7 +1,8 @@
 @import '../../../effects';
 @import '../../../colors';
-@import '../../proportions';
-@import '../../sizes';
+@import '../../../sizes';
+@import '../proportions';
+@import '../sizes';
 
 .invalid-message {
   @include animate(opacity);

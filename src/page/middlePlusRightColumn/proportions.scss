@@ -1,0 +1,7 @@
+@import '../../baseProportions';
+
+$middle-plus-right-columns-proportion: $phi + $phi + 1;
+
+$middle-proportion: $phi;
+$right-proportion: 1;
+$right-proportion-closed: ((((1 / $phi) / $phi) / $phi) / $phi) / $phi;

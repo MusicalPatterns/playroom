@@ -7,3 +7,6 @@ export { ToggledInput, ToggledInputsProps } from './toggledInput'
 export {
     RangedInputsProps,
 } from './types'
+
+// tslint:disable-next-line no-import-side-effect
+import './styles'

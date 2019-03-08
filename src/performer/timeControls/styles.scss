@@ -1,4 +1,5 @@
 @import '../../effects';
+@import '../../sizes';
 @import '../colors';
 @import '../sizes';
 
@@ -8,7 +9,7 @@
   display: flex;
   align-items: center;
   padding: $time-controls-vertical-spacing $time-controls-horizontal-spacing;
-  margin-right: $middle-plus-right-columns-spacing;
+  margin-right: $time-controls-margin-right;
   font-size: $important-text-size;
   border-radius: $border-size;
   border: $border-size solid $time-controls-border-and-track;

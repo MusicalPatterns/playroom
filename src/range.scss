@@ -39,7 +39,7 @@ input[type=range] {
     border-radius: $border-size;
     height: $thumb-height;
     width: $thumb-width;
-    margin-top: $timeline-translation;
+    margin-top: $thumb-translation;
   }
 
   &::-moz-range-thumb {
@@ -50,7 +50,7 @@ input[type=range] {
     border-radius: $border-size;
     height: $thumb-height;
     width: $thumb-width;
-    margin-top: $timeline-translation;
+    margin-top: $thumb-translation;
   }
 
   &::-ms-thumb {
@@ -61,7 +61,7 @@ input[type=range] {
     border-radius: $border-size;
     height: $thumb-height;
     width: $thumb-width;
-    margin-top: $timeline-translation;
+    margin-top: $thumb-translation;
   }
 
   &:disabled {

@@ -1,5 +1,5 @@
 @import '../../../effects';
-@import '../../sizes';
+@import '../sizes';
 
 #spec-panel-body {
   @include animate(max-height);

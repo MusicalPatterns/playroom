@@ -1,27 +1,18 @@
-@import './baseStyles';
+@import './baseSizes';
 
 $detail-text-size: $medium;
 $important-text-size: $big;
 $title-text-size: $huge;
 
-$box-shadow-size: $eency-weency;
 $border-size: $tiny;
 
 $track-width: $tiny;
 $thumb-width: $tiny;
 $thumb-height: $big;
-$timeline-translation: -$small;
+$thumb-translation: -$small;
 
 $control-height: $huge;
 $control-width: $enormous;
-
-$left-column-width: $big-area;
-$left-column-min-width: $medium-area;
-$left-column-width-closed: $enormous;
-
-$middle-plus-right-columns-horizontal-spacing: $enormous;
-$middle-plus-right-columns-spacing: $big;
-$middle-plus-right-columns-paragraph-spacing: $small;
 
 $mobile-size: $huge-area;
 $little-mobile-size: $big-area;

@@ -1,9 +1,10 @@
-@import '../baseStyles';
+@import '../baseSizes';
 
 $toggle-immersive-audio-button-width: 1px * nth($fibonacci-series, 9 + $fibonacci-series-size-translation);
 
 $time-controls-vertical-spacing: $small;
 $time-controls-horizontal-spacing: $medium;
+$time-controls-margin-right: $big;
 
 $time-control-size: $big;
 $time-control-spacing: $small;
@@ -13,3 +14,5 @@ $minutes-or-seconds-width: $big;
 $time-colon-width: $small;
 
 $performer-panel-max-height: $medium-area;
+$performer-panel-vertical-spacing: $small;
+$performer-panel-horizontal-spacing: $enormous;

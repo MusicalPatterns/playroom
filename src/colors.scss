@@ -1,5 +1,4 @@
-@import './baseStyles';
-@import './effects';
+@import './baseColors';
 
 $text-color: nth($greys, 2);
 
@@ -7,15 +6,3 @@ $button-background: $light-grey;
 
 $invalid-color: $some-random-orange-red;
 $focus-color: $some-random-green-blue;
-
-$left-column-background: nth($greys, 3);
-$left-column-color: nth($greys, 4);
-$left-column-color-with-emphasis: nth($greys, 5);
-$left-column-hover: nth($greys, 5);
-$left-column-hover-with-emphasis: nth($greys, 6);
-$left-column-selected: nth($greys, 6);
-$left-column-selected-with-emphasis: nth($greys, 7);
-
-$middle-column-background: nth($greys, 7);
-
-$right-column-background: nth($greys, 4);

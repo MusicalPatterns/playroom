@@ -1,6 +1,7 @@
-@import '../../../colors';
 @import '../../../fonts';
-@import '../../sizes';
+@import '../../../sizes';
+@import '../colors';
+@import '../sizes';
 
 li {
   padding-bottom: $pattern-list-item-spacing;

@@ -1,19 +1,20 @@
 @import '../../../effects';
 @import '../../../colors';
-@import '../../sizes';
+@import '../sizes';
 
 #spec-panel-header {
   display: flex;
   flex-direction: row;
   justify-content: flex-end;
   align-items: center;
+  font-weight: bold;
 
   @include hoverable-color($text-color);
 
   cursor: pointer;
 
   button {
-    background-color: $right-column-background;
+    background-color: Transparent;
 
     @include no-glow();
 

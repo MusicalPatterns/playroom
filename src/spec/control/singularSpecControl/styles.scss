@@ -1,22 +1,22 @@
 @import '../../../effects';
 @import '../../../colors';
-@import '../../colors';
-@import '../../proportions';
-@import '../../sizes';
+@import '../../../sizes';
+@import '../proportions';
+@import '../sizes';
 
 .singular-spec-control {
   display: flex;
   align-items: center;
   flex-wrap: wrap;
   position: relative;
-  margin-bottom: $spec-panel-bottom-spacing;
+  margin-bottom: $spec-control-bottom-spacing;
 
   div,
   input,
   select {
-    margin-left: $spec-controls-horizontal-spacing;
+    margin-left: $spec-control-horizontal-spacing;
     min-width: $control-width;
-    margin-bottom: $spec-panel-bottom-spacing;
+    margin-bottom: $spec-control-bottom-spacing;
   }
 
   div {
@@ -27,9 +27,7 @@
 
   input,
   select {
-    @include hoverable-background($control-background);
-
-    padding: 0 $spec-controls-horizontal-spacing;
+    padding: 0 $spec-control-horizontal-spacing;
     flex: $spec-control-input-proportion;
     height: $control-height;
     border: none;

@@ -1,6 +1,7 @@
-@import '../../../colors';
 @import '../../../effects';
-@import '../../proportions';
+@import '../colors';
+@import '../proportions';
+@import '../sizes';
 
 #left-column {
   background-color: $left-column-background;

@@ -8,7 +8,7 @@
   align-items: center;
   flex-wrap: wrap;
   justify-content: flex-start;
-  margin: $middle-plus-right-columns-paragraph-spacing $middle-plus-right-columns-horizontal-spacing;
+  margin: $performer-panel-vertical-spacing $performer-panel-horizontal-spacing;
 
   @include animate(max-height);
 

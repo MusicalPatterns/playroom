@@ -1,7 +1,8 @@
-@import '../colors';
-@import '../sizes';
-@import './proportions';
+@import '../../colors';
+@import '../../sizes';
+@import './colors';
 @import './sizes';
+@import './proportions';
 
 .row {
   display: flex;

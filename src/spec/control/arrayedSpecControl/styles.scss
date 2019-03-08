@@ -1,4 +1,5 @@
-@import '../../sizes';
+@import '../../../sizes';
+@import '../sizes';
 
 .arrayed-spec-control {
   .arrayed-fields {
@@ -9,7 +10,7 @@
     .numbered-spec-control {
       display: flex;
       flex-direction: column;
-      margin-left: $spec-controls-horizontal-spacing;
+      margin-left: $spec-control-horizontal-spacing;
 
       span {
         font-size: $detail-text-size;
@@ -37,7 +38,7 @@
 
   .add,
   .remove {
-    margin-left: $spec-controls-horizontal-spacing;
+    margin-left: $spec-control-horizontal-spacing;
     margin-bottom: $arrayed-control-spacing;
   }
 }

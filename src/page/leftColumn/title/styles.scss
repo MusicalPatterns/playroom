@@ -1,8 +1,8 @@
-@import '../../../colors';
 @import '../../../fonts';
 @import '../../../sizes';
-@import '../../proportions';
-@import '../../sizes';
+@import '../colors';
+@import '../proportions';
+@import '../sizes';
 
 #title {
   flex: $title-proportion;
