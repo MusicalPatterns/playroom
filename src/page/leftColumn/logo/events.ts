@@ -1,7 +1,7 @@
 import { standardAttributes } from '@musical-patterns/pattern'
 import { stop } from '@musical-patterns/performer'
 import { BatchAction, batchActions } from 'redux-batched-actions'
-import { PerformerStateKey, stopActions } from '../../../performer'
+import { MaterialStateKey, stopActions } from '../../../material'
 import { SpecStateKey } from '../../../spec'
 import { Action } from '../../../types'
 import { PageName, PageStateKey } from '../../types'
@@ -25,7 +25,7 @@ const handleLogoClick: HandleLogoClick =
                 { type: SpecStateKey.VALIDATION_FUNCTION, data: undefined },
                 { type: SpecStateKey.PRESETS, data: undefined },
                 { type: PageStateKey.PATTERN_ID, data: undefined },
-                { type: PerformerStateKey.PERFORMER_DISABLED, data: true },
+                { type: MaterialStateKey.PERFORMER_DISABLED, data: true },
             ])
 
         const batchedAction: BatchAction = batchActions(actions)

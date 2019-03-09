@@ -2,7 +2,7 @@
 
 import * as React from 'react'
 import { connect } from 'react-redux'
-import { PerformerPanel } from '../../../performer'
+import { PerformerPanel } from '../../../material'
 import { ImmutableState, StateKey } from '../../../types'
 import { PageStateKey } from '../../types'
 import { NoPatternMessage } from '../noPatternMessage'

@@ -2,11 +2,10 @@
 
 import * as React from 'react'
 import { connect } from 'react-redux'
+import { Title } from '../../../metadata'
 import { SpecPanel } from '../../../spec'
 import { ImmutableState, StateKey } from '../../../types'
 import { ImmutablePageState, PageStateKey } from '../../types'
-import { SpecAndPatternListener } from '../specAndPatternListener'
-import { Title } from '../title'
 import { getOpenClassName, getShowTitle } from './helpers'
 import './styles'
 import { SecondRowProps } from './types'
@@ -33,7 +32,6 @@ const SecondRow: React.ComponentType<SecondRowProps> =
                 </div>
                 <div {...{ className: 'right' }} >
                     {id && <SpecPanel/>}
-                    {id && <SpecAndPatternListener/>}
                 </div>
             </div>
         )

@@ -2,12 +2,12 @@
 
 import * as React from 'react'
 import { connect } from 'react-redux'
+import { Post } from '../../../metadata'
 import { ImmutableState, StateKey } from '../../../types'
 import { ImmutablePageState, PageStateKey } from '../../types'
 import { BottomRow } from '../bottomRow'
 import { FirstRow } from '../firstRow'
 import { Page } from '../page'
-import { Post } from '../post'
 import { SecondRow } from '../secondRow'
 import './styles'
 import { MiddlePlusRightColumnProps } from './types'
