@@ -5,11 +5,11 @@ import { camelCaseToLowerCase, isUndefined } from '@musical-patterns/utilities'
 import * as React from 'react'
 import { connect } from 'react-redux'
 import { Dispatch } from 'redux'
-import { EventHandler, ImmutableState, SecretTestSelectors, StateKey } from '../../../types'
+import { EventHandler, ImmutableState, StateKey } from '../../../types'
 import { ImmutableSpecState, SpecStateKey } from '../../types'
 import { Field, FieldPropsFromParent } from '../field'
 import { InvalidMessage } from '../invalidMessage'
-import { stringifyIfNecessary } from '../stringifyIfNecessary'
+import { SecretSubmittedSpecForTest } from '../secretSubmittedSpecForTest'
 import { Units } from '../units'
 import { buildHandleSpecControlChangeEvent } from './events'
 import { getFieldValidityClassName } from './fieldValidityClassName'
@@ -80,15 +80,13 @@ const SingularSpecControl: React.ComponentType<SingularSpecControlProps> =
             value: singularDisplayedValue,
         }
 
-        const secretClassName: string = SecretTestSelectors.SUBMITTED_SPEC
-
         return (
             <div {...{ className: 'singular-spec-control', id, title: description }}>
-                <span {...{ className: secretClassName }}>{stringifyIfNecessary(singularSubmittedValue)}</span>
                 {isNotAnArrayedSpecControl && <div>{formattedName || camelCaseToLowerCase(property)}</div>}
                 <Field {...fieldProps}/>
                 <Units {...{ property }}/>
                 {singularValidationResult && <InvalidMessage {...{ invalidMessage: singularValidationResult }}/>}
+                <SecretSubmittedSpecForTest {...{ submittedValue: singularSubmittedValue, id }}/>
             </div>
         )
     }

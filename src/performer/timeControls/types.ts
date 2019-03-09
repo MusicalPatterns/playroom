@@ -2,9 +2,7 @@ import { Ms } from '@musical-patterns/utilities'
 
 interface TimeControlsPropsFromState {
     disabled: boolean,
-    patternDuration: Ms,
     paused: boolean,
-    timePosition: Ms,
 }
 
 interface TimeControlsPropsFromDispatch {

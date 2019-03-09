@@ -1,15 +1,30 @@
-import { Value } from '@musical-patterns/pattern'
-import { HtmlValueOrChecked, isUndefined } from '@musical-patterns/utilities'
+import { ArrayedDomValue, ArrayedValue, Value } from '@musical-patterns/pattern'
+import { from, HtmlValueOrChecked, isUndefined } from '@musical-patterns/utilities'
 import { batchActions } from 'redux-batched-actions'
 import { extractValueOrCheckedFromEvent } from '../../../extractValueOrCheckedFromEvent'
 import { Action, DispatchParameter } from '../../../types'
 import { buildAttemptSubmitActions } from '../attemptSubmitActions'
-import { mergeEventValueIntoArrayedValue } from './mergeEventValueIntoArrayedValue'
+import { getArrayedDisplayedValue } from '../getArrayedDisplayedValue'
 import {
     BuildHandleSpecControlChangeEvent,
     HandleSpecControlChangeEvent,
     HandleSpecControlChangeEventParameters,
+    MergeEventValueIntoValueParameters,
 } from './types'
+
+const mergeEventValueIntoArrayedValue: (parameters: MergeEventValueIntoValueParameters) => ArrayedValue =
+    (parameters: MergeEventValueIntoValueParameters): ArrayedValue => {
+        const { displayedSpec, property, fieldIndex, eventValue } = parameters
+
+        const arrayedDisplayedValue: ArrayedDomValue = getArrayedDisplayedValue(displayedSpec, property)
+
+        while (arrayedDisplayedValue.length < from.Ordinal(fieldIndex)) {
+            arrayedDisplayedValue.push('')
+        }
+        arrayedDisplayedValue[ from.Ordinal(fieldIndex) ] = eventValue
+
+        return arrayedDisplayedValue
+    }
 
 const buildHandleSpecControlChangeEvent: BuildHandleSpecControlChangeEvent =
     ({ dispatch }: DispatchParameter): HandleSpecControlChangeEvent =>

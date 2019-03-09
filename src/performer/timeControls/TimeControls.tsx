@@ -5,8 +5,8 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import * as React from 'react'
 import { connect } from 'react-redux'
 import { Dispatch } from 'redux'
-import { ImmutableState, SecretTestSelectors, StateKey } from '../../types'
-import { formatTimesForDisplay } from '../formatTimesForDisplay'
+import { ImmutableState, StateKey } from '../../types'
+import { SecretTimeForTest } from '../secretTimeForTest'
 import { TimeInMinutesAndSeconds } from '../timeInMinutesAndSeconds'
 import { Timeline } from '../timeline'
 import { ImmutablePerformerState, PerformerStateKey } from '../types'
@@ -25,9 +25,7 @@ const mapStateToProps: (state: ImmutableState) => TimeControlsPropsFromState =
 
         return {
             disabled: performerState.get(PerformerStateKey.PERFORMER_DISABLED),
-            patternDuration: performerState.get(PerformerStateKey.PATTERN_DURATION),
             paused: performerState.get(PerformerStateKey.PAUSED),
-            timePosition: performerState.get(PerformerStateKey.TIME_POSITION),
         }
     }
 
@@ -48,17 +46,11 @@ const TimeControls: React.ComponentType<TimeControlsProps> =
             handlePlayClickEvent,
             handleStopClickEvent,
             paused,
-            patternDuration,
-            timePosition,
         } = timeControlsProps
-        const controlId: string = paused ? 'play' : 'pause'
+        const playOrPauseId: string = paused ? 'play' : 'pause'
         const playOrPauseIcon: IconDefinition = paused ? faPlay : faPause
+        const handlePlayOrPauseClickEvent: VoidFunction = paused ? handlePlayClickEvent : handlePauseClickEvent
         const disabledClassName: string = disabled ? 'disabled' : ''
-
-        const { timePositionForDisplay, patternDurationForDisplay } = formatTimesForDisplay({
-            patternDuration,
-            timePosition,
-        })
 
         return (
             <div {...{ id: 'time-controls', className: disabledClassName }}>
@@ -68,17 +60,12 @@ const TimeControls: React.ComponentType<TimeControlsProps> =
                 <button {...{ id: 'stop', onClick: handleStopClickEvent, disabled }}>
                     <FontAwesomeIcon {...{ icon: faStop }}/>
                 </button>
-                <button {...{
-                    disabled,
-                    id: controlId,
-                    onClick: paused ? handlePlayClickEvent : handlePauseClickEvent,
-                }}>
+                <button {...{ id: playOrPauseId, onClick: handlePlayOrPauseClickEvent, disabled }}>
                     <FontAwesomeIcon {...{ icon: playOrPauseIcon }}/>
                 </button>
                 <Timeline/>
                 <TimeInMinutesAndSeconds/>
-                <div {...{ id: SecretTestSelectors.TIME_POSITION }}>{timePositionForDisplay}</div>
-                <div {...{ id: SecretTestSelectors.PATTERN_DURATION }}>{patternDurationForDisplay}</div>
+                <SecretTimeForTest/>
             </div>
         )
     }

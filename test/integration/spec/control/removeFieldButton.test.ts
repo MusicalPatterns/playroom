@@ -32,7 +32,7 @@ const andTheIdThatIsMissingWasTheLastId: () => Promise<void> =
 const theSubmittedValueForTheArrayedSpecControlAsAWholeIsInItsInitialState: () => Promise<void> =
     async (): Promise<void> => {
         const submittedValueForTheArrayedSpecControlAsAWhole: string = await elementInnerText(
-            `#${ARRAYED_PROPERTY_KEY} .${SecretTestSelectors.SUBMITTED_SPEC}`,
+            `#${ARRAYED_PROPERTY_KEY}.${SecretTestSelectors.SUBMITTED_SPEC}`,
         )
         expect(submittedValueForTheArrayedSpecControlAsAWhole)
             .toBe(
@@ -44,7 +44,7 @@ const theSubmittedValueForTheArrayedSpecControlAsAWholeIsInItsInitialState: () =
 const theSubmittedValueForTheArrayedSpecControlAsAWholeIsInItsInitialStateJustWithItsLastElementGone: () => Promise<void> =
     async (): Promise<void> => {
         const submittedValueForTheArrayedSpecControlAsAWhole: string = await elementInnerText(
-            `#${ARRAYED_PROPERTY_KEY} .${SecretTestSelectors.SUBMITTED_SPEC}`,
+            `#${ARRAYED_PROPERTY_KEY}.${SecretTestSelectors.SUBMITTED_SPEC}`,
         )
         expect(submittedValueForTheArrayedSpecControlAsAWhole)
             .toBe(

@@ -4,12 +4,12 @@ import { PropertyAttributes } from '@musical-patterns/pattern'
 import { camelCaseToLowerCase, from, HtmlValueOrChecked, map, Ordinal } from '@musical-patterns/utilities'
 import * as React from 'react'
 import { connect } from 'react-redux'
-import { ImmutableState, SecretTestSelectors, StateKey } from '../../../types'
+import { ImmutableState, StateKey } from '../../../types'
 import { SpecStateKey } from '../../types'
 import { AddFieldButton } from '../addFieldButton'
 import { RemoveFieldButton } from '../removeFieldButton'
+import { SecretSubmittedSpecForTest } from '../secretSubmittedSpecForTest'
 import { SingularSpecControl } from '../singularSpecControl'
-import { stringifyIfNecessary } from '../stringifyIfNecessary'
 import { calculateSingularSubmittedValue, calculateSingularValidationResult } from './calculateSingular'
 import './styles'
 import { ArrayedSpecControlProps, ArrayedSpecControlPropsFromState } from './types'
@@ -55,9 +55,6 @@ const ArrayedSpecControl: React.ComponentType<ArrayedSpecControlProps> =
 
         return (
             <div {...{ id: property, className: 'arrayed-spec-control' }}>
-                <span {...{ className: SecretTestSelectors.SUBMITTED_SPEC }}>
-                    {stringifyIfNecessary(arrayedSubmittedValue)}
-                </span>
                 <div>{formattedName}</div>
                 <div {...{ className: 'arrayed-fields' }}>
                     {controls}
@@ -66,6 +63,7 @@ const ArrayedSpecControl: React.ComponentType<ArrayedSpecControlProps> =
                     <AddFieldButton {...{ property }}/>
                     <RemoveFieldButton {...{ property }}/>
                 </div>
+                <SecretSubmittedSpecForTest {...{ submittedValue: arrayedSubmittedValue, id: property }}/>
             </div>
         )
     }

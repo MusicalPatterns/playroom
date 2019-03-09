@@ -56,13 +56,13 @@ const andTheNewFieldHasTheNextIdAfterTheOthersForTheArrayedSpecControlWithTheIni
 
 const newFieldExistsButHasNotBeenSubmitted: () => Promise<void> =
     async (): Promise<void> => {
-        expect(await elementInnerText(`#${ARRAYED_PROPERTY_KEY}-5 .${SecretTestSelectors.SUBMITTED_SPEC}`))
+        expect(await elementInnerText(`#${ARRAYED_PROPERTY_KEY}-5.${SecretTestSelectors.SUBMITTED_SPEC}`))
             .toBe('', 'the new field was submitted')
     }
 
 const andTheOtherNewFieldExistsButHasNotBeenSubmitted: () => Promise<void> =
     async (): Promise<void> => {
-        expect(await elementInnerText(`#${ARRAYED_PROPERTY_KEY}-6 .${SecretTestSelectors.SUBMITTED_SPEC}`))
+        expect(await elementInnerText(`#${ARRAYED_PROPERTY_KEY}-6.${SecretTestSelectors.SUBMITTED_SPEC}`))
             .toBe('', 'the other new field was submitted')
     }
 
@@ -81,7 +81,7 @@ const invalidateNewField: () => Promise<void> =
 const newFieldHasBeenSubmitted: () => Promise<void> =
     async (): Promise<void> => {
         const updatedFieldValue: string = await elementInnerText(
-            `#${ARRAYED_PROPERTY_KEY}-5 .${SecretTestSelectors.SUBMITTED_SPEC}`,
+            `#${ARRAYED_PROPERTY_KEY}-5.${SecretTestSelectors.SUBMITTED_SPEC}`,
         )
         expect(updatedFieldValue)
             .toBe(VALID_TEST_MODIFICATION, `the new field was not submitted`)
@@ -120,16 +120,16 @@ const bothNewFieldsAreValidAndSubmitted: () => Promise<void> =
             .toBeTruthy('first new field was not valid')
         expect(await elementExists(`input[type=number]#${ARRAYED_PROPERTY_KEY}-6.${FieldValidity.VALID}`))
             .toBeTruthy('second new field was not valid')
-        expect(await elementInnerText(`#${ARRAYED_PROPERTY_KEY}-5 .${SecretTestSelectors.SUBMITTED_SPEC}`))
+        expect(await elementInnerText(`#${ARRAYED_PROPERTY_KEY}-5.${SecretTestSelectors.SUBMITTED_SPEC}`))
             .toBe(VALID_TEST_MODIFICATION, 'first new field was not submitted')
-        expect(await elementInnerText(`#${ARRAYED_PROPERTY_KEY}-6 .${SecretTestSelectors.SUBMITTED_SPEC}`))
+        expect(await elementInnerText(`#${ARRAYED_PROPERTY_KEY}-6.${SecretTestSelectors.SUBMITTED_SPEC}`))
             .toBe(VALID_TEST_MODIFICATION, 'second new field was not submitted')
     }
 
 const theSubmittedValueForTheArrayedSpecControlWithTheInitialFieldValueAsAWholeIsInItsInitialState: () => Promise<void> =
     async (): Promise<void> => {
         expect(await elementInnerText(
-            `#${ARRAYED_PROPERTY_WITH_INITIAL_FIELD_VALUE_KEY} .${SecretTestSelectors.SUBMITTED_SPEC}`,
+            `#${ARRAYED_PROPERTY_WITH_INITIAL_FIELD_VALUE_KEY}.${SecretTestSelectors.SUBMITTED_SPEC}`,
         ))
             .toBe(JSON.stringify(SPEC_CONTROLS_PATTERN_ARRAYED_PROPERTY_WITH_INITIAL_FIELD_VALUE_INITIAL_VALUE))
     }
@@ -137,7 +137,7 @@ const theSubmittedValueForTheArrayedSpecControlWithTheInitialFieldValueAsAWholeI
 const theSubmittedValueForTheArrayedSpecControlWithTheInitialFieldValueAsAWholeHasANewElementAtTheEndAndItHasTheInitialFieldValue: () => Promise<void> =
     async (): Promise<void> => {
         const submittedValueForTheArrayedSpecControlWithTheInitialFieldValueAsAWhole: string = await elementInnerText(
-            `#${ARRAYED_PROPERTY_WITH_INITIAL_FIELD_VALUE_KEY} .${SecretTestSelectors.SUBMITTED_SPEC}`,
+            `#${ARRAYED_PROPERTY_WITH_INITIAL_FIELD_VALUE_KEY}.${SecretTestSelectors.SUBMITTED_SPEC}`,
         )
         expect(submittedValueForTheArrayedSpecControlWithTheInitialFieldValueAsAWhole)
             .toBe(

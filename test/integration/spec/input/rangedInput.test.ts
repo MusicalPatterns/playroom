@@ -30,7 +30,7 @@ const modifyRangedInput: () => Promise<void> =
 
 const rangedInputIsModified: () => Promise<void> =
     async (): Promise<void> => {
-        expect(await elementInnerText(`#${RANGED_PROPERTY_ONE_KEY} .${SecretTestSelectors.SUBMITTED_SPEC}`))
+        expect(await elementInnerText(`#${RANGED_PROPERTY_ONE_KEY}.${SecretTestSelectors.SUBMITTED_SPEC}`))
             .toBe(
                 `${SPEC_CONTROLS_PATTERN_RANGED_PROPERTY_ONE_INITIAL_VALUE}${VALID_TEST_MODIFICATION}`,
                 'ranged input was not modified',
@@ -71,13 +71,13 @@ const modifyInputsForSomeOtherControls: () => Promise<void> =
 const theInputsForThoseOtherControlsAreStillModified: () => Promise<void> =
     async (): Promise<void> => {
         expect(await elementInnerText(
-            `#${RANGED_PROPERTY_TWO_KEY} .${SecretTestSelectors.SUBMITTED_SPEC}`,
+            `#${RANGED_PROPERTY_TWO_KEY}.${SecretTestSelectors.SUBMITTED_SPEC}`,
         ))
             .toBe(
                 `${SPEC_CONTROLS_PATTERN_RANGED_PROPERTY_TWO_INITIAL_VALUE}${VALID_TEST_MODIFICATION}`,
                 'the other control that was a ranged control - its input was not still modified',
             )
-        expect(await elementInnerText(`#${OPTIONED_PROPERTY_ONE_KEY} .${SecretTestSelectors.SUBMITTED_SPEC}`))
+        expect(await elementInnerText(`#${OPTIONED_PROPERTY_ONE_KEY}.${SecretTestSelectors.SUBMITTED_SPEC}`))
             .toBe(
                 SPEC_CONTROLS_PATTERN_OPTIONED_PROPERTY_ONE_MODIFIED_VALUE,
                 'the other control that was an optioned control - its input was not still modified',
@@ -118,7 +118,7 @@ const rangedInputIsMarkedAsValid: () => Promise<void> =
 
 const rangedInputWasNotSubmitted: () => Promise<void> =
     async (): Promise<void> => {
-        expect(await elementInnerText(`#${RANGED_PROPERTY_ONE_KEY} .${SecretTestSelectors.SUBMITTED_SPEC}`))
+        expect(await elementInnerText(`#${RANGED_PROPERTY_ONE_KEY}.${SecretTestSelectors.SUBMITTED_SPEC}`))
             .toBe(`${SPEC_CONTROLS_PATTERN_RANGED_PROPERTY_ONE_INITIAL_VALUE}`, 'ranged input was submitted')
     }
 

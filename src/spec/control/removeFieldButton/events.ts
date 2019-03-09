@@ -1,11 +1,20 @@
-import { ArrayedDomValue, ValidationResult, ValidationResults } from '@musical-patterns/pattern'
+import {
+    ArrayedDomValue,
+    ArrayedValidationResult,
+    ValidationResult,
+    ValidationResults,
+} from '@musical-patterns/pattern'
 import { indexOfLastElement, INITIAL, isUndefined, lastElement, slice } from '@musical-patterns/utilities'
 import { batchActions } from 'redux-batched-actions'
 import { Action } from '../../../types'
 import { buildAttemptSubmitActions } from '../attemptSubmitActions'
 import { getArrayedDisplayedValue } from '../getArrayedDisplayedValue'
-import { isArrayedValidationResult } from './isArrayedValidationResult'
 import { HandleFieldRemoveParameters } from './types'
+
+const isArrayedValidationResult:
+    (validationResult: ValidationResult) => validationResult is ArrayedValidationResult =
+    (validationResult: ValidationResult): validationResult is ArrayedValidationResult =>
+        validationResult instanceof Array
 
 const isNoInvalidMessageForRemovedField:
     (validationResults: ValidationResults, property: string) => boolean =

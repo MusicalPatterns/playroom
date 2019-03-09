@@ -30,7 +30,7 @@ const modifyStringedInput: () => Promise<void> =
 
 const stringedInputIsModified: () => Promise<void> =
     async (): Promise<void> => {
-        expect(await elementInnerText(`#${STRINGED_PROPERTY_KEY} .${SecretTestSelectors.SUBMITTED_SPEC}`))
+        expect(await elementInnerText(`#${STRINGED_PROPERTY_KEY}.${SecretTestSelectors.SUBMITTED_SPEC}`))
             .toBe(
                 `${SPEC_CONTROLS_PATTERN_STRINGED_PROPERTY_INITIAL_VALUE}${VALID_TEST_MODIFICATION}`,
                 'stringed control was not modified',
@@ -60,7 +60,7 @@ const stringedContolInputIsMarkedAsValid: () => Promise<void> =
 const stringedInputTooLongValueWasNotSubmittedAndItIsAtTheLastValidValueBeforeItGotTooLong: () => Promise<void> =
     async (): Promise<void> => {
         const stringedInputSubmittedValue: string = await elementInnerText(
-            `#${STRINGED_PROPERTY_KEY} .${SecretTestSelectors.SUBMITTED_SPEC}`,
+            `#${STRINGED_PROPERTY_KEY}.${SecretTestSelectors.SUBMITTED_SPEC}`,
         )
         expect(stringedInputSubmittedValue)
             .toBe(
@@ -72,7 +72,7 @@ const stringedInputTooLongValueWasNotSubmittedAndItIsAtTheLastValidValueBeforeIt
 const stringedInputWasNotSubmitted: () => Promise<void> =
     async (): Promise<void> => {
         const stringedInputSubmittedValue: string = await elementInnerText(
-            `#${STRINGED_PROPERTY_KEY} .${SecretTestSelectors.SUBMITTED_SPEC}`,
+            `#${STRINGED_PROPERTY_KEY}.${SecretTestSelectors.SUBMITTED_SPEC}`,
         )
         expect(stringedInputSubmittedValue)
             .toBe(
