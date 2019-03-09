@@ -4,9 +4,10 @@ import * as React from 'react'
 import { Field, FieldPropsFromParent } from '../../field'
 
 const SingularSpecControl: React.ComponentType<FieldPropsFromParent> =
-    (fieldProps: FieldPropsFromParent): JSX.Element =>
+    (fieldProps: FieldPropsFromParent): JSX.Element => (
         <div {...{ className: 'singular-spec-control' }} >
             <Field {...fieldProps}/>
         </div>
+    )
 
 export default SingularSpecControl

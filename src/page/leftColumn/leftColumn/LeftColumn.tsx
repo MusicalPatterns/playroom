@@ -15,9 +15,10 @@ const mapStateToProps: (state: ImmutableState) => LeftColumnProps =
     })
 
 const LeftColumn: React.ComponentType<LeftColumnProps> =
-    ({ leftColumnOpen }: LeftColumnProps): JSX.Element =>
+    ({ leftColumnOpen }: LeftColumnProps): JSX.Element => (
         <div {...{ id: 'left-column', className: leftColumnOpen ? 'open' : 'closed' }}>
             <PatternPanel/>
         </div>
+    )
 
 export default connect(mapStateToProps)(LeftColumn)

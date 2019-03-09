@@ -45,22 +45,30 @@ const SpecControl: React.ComponentType<SpecControlProps> =
         }
 
         if (propertyAttributes.isArrayed) {
-            return <ArrayedSpecControl {...{
-                arrayedDisplayedValue: displayedValue as ArrayedDomValue,
-                arrayedSubmittedValue: submittedValue as ArrayedValue,
-                arrayedValidationResult: validationResult as ArrayedValidationResult,
-                property,
-                propertyAttributes,
-            }}/>
+            return (
+                <ArrayedSpecControl
+                    {...{
+                        arrayedDisplayedValue: displayedValue as ArrayedDomValue,
+                        arrayedSubmittedValue: submittedValue as ArrayedValue,
+                        arrayedValidationResult: validationResult as ArrayedValidationResult,
+                        property,
+                        propertyAttributes,
+                    }}
+                />
+            )
         }
 
-        return <SingularSpecControl {...{
-            property,
-            propertyAttributes,
-            singularDisplayedValue: displayedValue as SingularDomValue,
-            singularSubmittedValue: submittedValue as SingularValue,
-            singularValidationResult: validationResult as SingularValidationResult,
-        }}/>
+        return (
+            <SingularSpecControl
+                {...{
+                    property,
+                    propertyAttributes,
+                    singularDisplayedValue: displayedValue as SingularDomValue,
+                    singularSubmittedValue: submittedValue as SingularValue,
+                    singularValidationResult: validationResult as SingularValidationResult,
+                }}
+            />
+        )
     }
 
 export default connect(mapStateToProps)(SpecControl)

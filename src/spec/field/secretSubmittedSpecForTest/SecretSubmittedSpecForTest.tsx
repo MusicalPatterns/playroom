@@ -14,11 +14,14 @@ const mapStateToProps: (state: ImmutableState) => SecretSubmittedSpecForTestProp
     })
 
 const SecretSubmittedSpecForTest: React.ComponentType<SecretSubmittedSpecForTestProps> =
-    ({ debugMode, fieldId, submittedValue }: SecretSubmittedSpecForTestProps): JSX.Element =>
-        <span>
-            {debugMode && <span {...{ id: fieldId, className: SecretTestSelectors.SUBMITTED_SPEC }}>
-                {stringifyIfNecessary(submittedValue)}
-            </span>}
-        </span>
+    ({ debugMode, fieldId, submittedValue }: SecretSubmittedSpecForTestProps): JSX.Element => {
+        const className: string = SecretTestSelectors.SUBMITTED_SPEC
+
+        return (
+            <span>
+                {debugMode && <span {...{ id: fieldId, className }}>{stringifyIfNecessary(submittedValue)}</span>}
+            </span>
+        )
+    }
 
 export default connect(mapStateToProps)(SecretSubmittedSpecForTest)

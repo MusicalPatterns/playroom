@@ -54,12 +54,17 @@ const ToggleImmersiveAudioButton: React.ComponentType<ToggleImmersiveAudioButton
         }
 
         return (
-            <button {...{
-                disabled: getToggleImmersiveAudioDisabled({ immersiveAudioReady, performerDisabled }),
-                id: 'toggle-immersive-audio',
-                onClick: getToggleImmersiveAudioButtonOnClick({ immersiveAudioEnabled, toggleImmersiveAudioHandlers }),
-                title: getToggleImmersiveAudioButtonHoverText({ immersiveAudioUnavailable }),
-            }}>
+            <button
+                {...{
+                    disabled: getToggleImmersiveAudioDisabled({ immersiveAudioReady, performerDisabled }),
+                    id: 'toggle-immersive-audio',
+                    onClick: getToggleImmersiveAudioButtonOnClick({
+                        immersiveAudioEnabled,
+                        toggleImmersiveAudioHandlers,
+                    }),
+                    title: getToggleImmersiveAudioButtonHoverText({ immersiveAudioUnavailable }),
+                }}
+            >
                 {getToggleImmersiveAudioButtonText({ immersiveAudioEnabled })}
             </button>
         )

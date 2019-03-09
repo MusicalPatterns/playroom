@@ -22,9 +22,7 @@ const mapStateToProps: (state: ImmutableState) => NoPatternMessageProps =
 const NoPatternMessage: React.ComponentType<NoPatternMessageProps> =
     ({ pageName, patternId }: NoPatternMessageProps): JSX.Element => {
         if (isUndefined(pageName) && isUndefined(patternId)) {
-            return <div {...{ id: 'no-pattern-message' }}>
-                {TO_BEGIN_MESSAGE}
-            </div>
+            return <div {...{ id: 'no-pattern-message' }}>{TO_BEGIN_MESSAGE}</div>
         }
 
         return <div/>

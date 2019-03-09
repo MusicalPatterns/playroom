@@ -13,16 +13,19 @@ const ArrayedFields: React.ComponentType<ArrayedSpecControlPropsFromParent> =
 
         const fields: JSX.Element[] = map(
             arrayedDisplayedValue,
-            (singularDisplayedValue: HtmlValueOrChecked, index: Ordinal): JSX.Element =>
-                <Field {...{
-                    fieldIndex: index,
-                    key: from.Ordinal(index),
-                    property,
-                    singularDisplayedValue,
-                    singularSubmittedValue:
-                        calculateSingularSubmittedValue(arrayedSubmittedValue, index),
-                    singularValidationResult: calculateSingularValidationResult(arrayedValidationResult, index),
-                }}/>,
+            (singularDisplayedValue: HtmlValueOrChecked, index: Ordinal): JSX.Element => (
+                <Field
+                    {...{
+                        fieldIndex: index,
+                        key: from.Ordinal(index),
+                        property,
+                        singularDisplayedValue,
+                        singularSubmittedValue:
+                            calculateSingularSubmittedValue(arrayedSubmittedValue, index),
+                        singularValidationResult: calculateSingularValidationResult(arrayedValidationResult, index),
+                    }}
+                />
+            ),
         )
 
         return (

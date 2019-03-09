@@ -31,12 +31,14 @@ const ArrayedSpecControl: React.ComponentType<ArrayedSpecControlProps> =
         return (
             <div {...{ id: property, className: 'arrayed-spec-control' }}>
                 <div>{attributes[ property ].formattedName || camelCaseToLowerCase(property)}</div>
-                <ArrayedFields {...{
-                    arrayedDisplayedValue,
-                    arrayedSubmittedValue,
-                    arrayedValidationResult,
-                    property,
-                }}/>
+                <ArrayedFields
+                    {...{
+                        arrayedDisplayedValue,
+                        arrayedSubmittedValue,
+                        arrayedValidationResult,
+                        property,
+                    }}
+                />
                 <div>
                     <AddFieldButton {...{ property }}/>
                     <RemoveFieldButton {...{ property }}/>

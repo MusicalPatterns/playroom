@@ -16,10 +16,11 @@ const mapStateToProps: (state: ImmutableState) => PerformerPanelProps =
     })
 
 const PerformerPanel: React.ComponentType<PerformerPanelProps> =
-    ({ pageName }: PerformerPanelProps): JSX.Element =>
+    ({ pageName }: PerformerPanelProps): JSX.Element => (
         <div {...{ id: 'performer-panel', className: !pageName ? 'open' : 'closed' }}>
             <TimeControls/>
             <ToggleImmersiveAudioButton/>
         </div>
+    )
 
 export default connect(mapStateToProps)(PerformerPanel)

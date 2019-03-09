@@ -7,11 +7,12 @@ import { PatternList } from '../patternList'
 import './styles'
 
 const PatternPanel: React.ComponentType =
-    (): JSX.Element =>
+    (): JSX.Element => (
         <div {...{ id: 'pattern-panel' }}>
             <Hamburger/>
             <PatternList/>
             <Logo/>
         </div>
+    )
 
 export default PatternPanel

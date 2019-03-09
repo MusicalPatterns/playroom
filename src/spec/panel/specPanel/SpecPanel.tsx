@@ -16,10 +16,11 @@ const mapStateToProps: (state: ImmutableState) => SpecPanelOpenParameter =
     })
 
 const SpecPanel: React.ComponentType<SpecPanelOpenParameter> =
-    ({ specPanelOpen }: SpecPanelOpenParameter): JSX.Element =>
+    ({ specPanelOpen }: SpecPanelOpenParameter): JSX.Element => (
         <div {...{ id: 'spec-panel', className: specPanelOpen ? 'open' : 'closed' }}>
             <SpecPanelHeader/>
             <SpecPanelBody/>
         </div>
+    )
 
 export default connect(mapStateToProps)(SpecPanel)

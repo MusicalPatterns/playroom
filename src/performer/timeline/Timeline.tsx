@@ -28,15 +28,17 @@ const Timeline: React.ComponentType<TimelineOrTimeInMinutesAndSecondsProps> =
         })
 
         return (
-            <input {...{
-                disabled: performerDisabled,
-                id: 'timeline',
-                max: from.Ms(patternDurationForDisplay || 0),
-                min: 0,
-                onChange: handleTimelineChangeEvent,
-                type: 'range',
-                value: from.Ms(timePositionForDisplay || 0),
-            }}/>
+            <input
+                {...{
+                    disabled: performerDisabled,
+                    id: 'timeline',
+                    max: from.Ms(patternDurationForDisplay || 0),
+                    min: 0,
+                    onChange: handleTimelineChangeEvent,
+                    type: 'range',
+                    value: from.Ms(timePositionForDisplay || 0),
+                }}
+            />
         )
     }
 

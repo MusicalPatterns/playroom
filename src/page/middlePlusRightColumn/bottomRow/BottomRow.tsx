@@ -4,10 +4,11 @@ import * as React from 'react'
 import './styles'
 
 const BottomRow: React.ComponentType =
-    (): JSX.Element =>
+    (): JSX.Element => (
         <div {...{ className: 'row', id: 'bottom-row' }} >
             <div {...{ className: 'middle' }} />
             <div {...{ className: 'right' }} />
         </div>
+    )
 
 export default BottomRow

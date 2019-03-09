@@ -11,15 +11,17 @@ const StringedInputs: React.ComponentType<StringedInputsProps> =
 
         return (
             <div {...{ className: 'inputs stringed-inputs' }}>
-                <input {...{
-                    className: fieldValidityClassName,
-                    id: fieldId,
-                    maxLength,
-                    minLength,
-                    onChange,
-                    type: 'text',
-                    value,
-                }}/>
+                <input
+                    {...{
+                        className: fieldValidityClassName,
+                        id: fieldId,
+                        maxLength,
+                        minLength,
+                        onChange,
+                        type: 'text',
+                        value,
+                    }}
+                />
             </div>
         )
     }
