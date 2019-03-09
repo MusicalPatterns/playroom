@@ -1,6 +1,6 @@
 export { PerformerPanel } from './performerPanel'
 
-export { performerReducer } from './reducer'
+export { initialPerformerState } from './state'
 
 export { stopActions } from './stopActions'
 

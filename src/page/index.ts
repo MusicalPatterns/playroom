@@ -1,6 +1,6 @@
 export { App } from './app'
 
-export { pageReducer } from './reducer'
+export { initialPageState } from './state'
 
 export {
     PageName,

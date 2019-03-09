@@ -1,19 +1,25 @@
-// tslint:disable no-any
-
-import { Map } from 'immutable'
-import { applyMiddleware, compose, createStore, Store } from 'redux'
+import { buildReducer } from '@musical-patterns/utilities'
+import { applyMiddleware, compose, createStore, Reducer, Store } from 'redux'
 import { batchDispatchMiddleware, enableBatching } from 'redux-batched-actions'
-import { rootReducer } from './reducer'
-import { Action, ImmutableState } from './types'
-
-const initialState: any = Map()
+import { combineReducers } from 'redux-immutable'
+import { initialPageState } from './page'
+import { initialPerformerState } from './performer'
+import { initialSpecState } from './spec'
+import { Action, ImmutableState, StateKey } from './types'
 
 // @ts-ignore
+// tslint:disable-next-line no-any
 const composeEnhancers: any = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose
+
+const rootReducer: Reducer = combineReducers({
+    [ StateKey.PAGE ]: buildReducer({ initialState: initialPageState }),
+    [ StateKey.PERFORMER ]: buildReducer({ initialState: initialPerformerState }),
+    [ StateKey.SPEC ]: buildReducer({ initialState: initialSpecState }),
+})
 
 const store: Store<ImmutableState, Action> = createStore(
     enableBatching(rootReducer),
-    initialState,
+    undefined,
     composeEnhancers(applyMiddleware(batchDispatchMiddleware)),
 )
 
