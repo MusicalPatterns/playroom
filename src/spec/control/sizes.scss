@@ -1,16 +1,10 @@
 @import '../../baseSizes';
 
-$arrayed-control-width: $enormous;
-$arrayed-control-input-width: $huge;
+$arrayed-field-width: $enormous;
+$arrayed-spec-control-input-width: $huge;
 $arrayed-control-spacing: $medium;
 
-$arrayed-control-input-horizontal-spacing: $small;
-$arrayed-control-input-vertical-spacing: $tiny;
+$arrayed-spec-control-input-horizontal-spacing: $small;
+$arrayed-spec-control-input-vertical-spacing: $tiny;
 
-$units-size: $big;
-
-$invalid-message-spacing: $small;
-$invalid-message-vertical-translation: $huge;
-
-$spec-control-horizontal-spacing: $medium;
-$spec-control-bottom-spacing: $tiny;
+$add-or-remove-field-horizontal-spacing: $medium;

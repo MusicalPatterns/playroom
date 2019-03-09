@@ -1,0 +1,20 @@
+@import '../../../effects';
+@import '../../../colors';
+@import '../proportions';
+@import '../sizes';
+
+.invalid-message {
+  @include animate(opacity);
+
+  opacity: 0;
+  z-index: 1;
+  content: attr(message);
+  position: absolute;
+  top: $invalid-message-vertical-translation;
+  right: $invalid-message-horizontal-translation-percentage;
+  padding: $invalid-message-spacing;
+  background: $invalid-color;
+  font-size: $detail-text-size;
+  border-radius: $border-size;
+  pointer-events: none;
+}

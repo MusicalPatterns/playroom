@@ -1,5 +1,5 @@
 import { ArrayedDomValue, ArrayedValidationResult, ArrayedValue, Attributes } from '@musical-patterns/pattern'
-import { PropertyParameter } from '../types'
+import { PropertyParameter } from '../../types'
 
 interface ArrayedSpecControlPropsFromState {
     attributes: Attributes,

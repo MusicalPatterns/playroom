@@ -14,7 +14,7 @@ export { selectAboutPageByClickingLogo } from './aboutPage'
 export { leftColumnIs } from './leftColumn'
 export { openSpecControlsIfNotOpen } from './caret'
 export { currentTime, patternDuration, isPlaying, isPaused, hasBeenReset } from './time'
-export { clickAdd, clickRemove, noInvalidMessagesAreShown } from './arrayedSpecControls'
+export { clickAddFieldButton, clickRemoveFieldButton, noInvalidMessagesAreShown } from './arrayedSpecControls'
 export {
     selectOption,
     elementIds,

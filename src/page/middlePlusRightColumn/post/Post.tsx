@@ -18,8 +18,7 @@ const mapStateToProps: (state: ImmutableState) => PostProps =
     }
 
 const Post: React.ComponentType<PostProps> =
-    (postProps: PostProps): JSX.Element => (
+    (postProps: PostProps): JSX.Element =>
         <div {...{ dangerouslySetInnerHTML: { __html: getPost(postProps) } }}/>
-    )
 
 export default connect(mapStateToProps)(Post)

@@ -7,9 +7,10 @@ import * as React from 'react'
 import { connect } from 'react-redux'
 import { Dispatch } from 'redux'
 import { EventHandler, ImmutableState, StateKey } from '../../../types'
+import { isArrayedDisplayedValue } from '../../isArrayedDisplayedValue'
 import { ImmutableSpecState, SpecStateKey } from '../../types'
-import { isArrayedDisplayedValue } from '../isArrayedDisplayedValue'
 import { handleFieldRemove } from './events'
+import './styles'
 import {
     HandleFieldRemoveEventParameters,
     RemoveFieldButtonProps,
@@ -38,26 +39,10 @@ const mapDispatchToProps: (dispatch: Dispatch) => RemoveFieldButtonPropsFromDisp
     })
 
 const RemoveFieldButton: React.ComponentType<RemoveFieldButtonProps> =
-    (props: RemoveFieldButtonProps): JSX.Element => {
-        const {
-            handleFieldRemoveEvent,
-            property,
-            attributes,
-            displayedSpec,
-            submittedSpec,
-            validationFunction,
-            validationResults,
-        } = props
+    (removeFieldButtonProps: RemoveFieldButtonProps): JSX.Element => {
+        const { handleFieldRemoveEvent, displayedSpec, property, ...otherProps } = removeFieldButtonProps
         const onClick: EventHandler = (event: React.SyntheticEvent): void => {
-            handleFieldRemoveEvent({
-                attributes,
-                displayedSpec,
-                event,
-                property,
-                submittedSpec,
-                validationFunction,
-                validationResults,
-            })
+            handleFieldRemoveEvent({ event, displayedSpec, property, ...otherProps })
         }
 
         const displayedValue: DomValue = displayedSpec[ property ]
@@ -67,7 +52,7 @@ const RemoveFieldButton: React.ComponentType<RemoveFieldButtonProps> =
         const disabled: boolean = !displayedValue.length
 
         return (
-            <button {...{ className: 'remove', onClick, disabled }}>
+            <button {...{ className: 'remove-field', onClick, disabled }}>
                 <FontAwesomeIcon {...{ icon: faMinus }}/>
             </button>
         )

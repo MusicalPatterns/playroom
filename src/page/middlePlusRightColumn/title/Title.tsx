@@ -19,8 +19,7 @@ const mapStateToProps: (state: ImmutableState) => TitleProps =
     }
 
 const Title: React.ComponentType<TitleProps> =
-    ({ pageName, patterns, id }: TitleProps): JSX.Element => (
+    ({ pageName, patterns, id }: TitleProps): JSX.Element =>
         <h1>{pageName || getPatternTitle({ patterns, id })}</h1>
-    )
 
 export default connect(mapStateToProps)(Title)

@@ -8,6 +8,7 @@ import { Dispatch } from 'redux'
 import { EventHandler, ImmutableState, StateKey } from '../../../types'
 import { ImmutableSpecState, SpecStateKey } from '../../types'
 import { handleFieldAdd } from './events'
+import './styles'
 import {
     AddFieldButtonProps,
     AddFieldButtonPropsFromDispatch,
@@ -35,21 +36,14 @@ const mapDispatchToProps: (dispatch: Dispatch) => AddFieldButtonPropsFromDispatc
     })
 
 const AddFieldButton: React.ComponentType<AddFieldButtonProps> =
-    (props: AddFieldButtonProps): JSX.Element => {
-        const { handleFieldAddEvent, property, attributes, displayedSpec, submittedSpec, validationFunction } = props
+    (addFieldButtonProps: AddFieldButtonProps): JSX.Element => {
+        const { handleFieldAddEvent, ...otherProps } = addFieldButtonProps
         const onClick: EventHandler = (event: React.SyntheticEvent): void => {
-            handleFieldAddEvent({
-                attributes,
-                displayedSpec,
-                event,
-                property,
-                submittedSpec,
-                validationFunction,
-            })
+            handleFieldAddEvent({ event, ...otherProps })
         }
 
         return (
-            <button {...{ className: 'add', onClick }}>
+            <button {...{ className: 'add-field', onClick }}>
                 <FontAwesomeIcon {...{ icon: faPlus }}/>
             </button>
         )

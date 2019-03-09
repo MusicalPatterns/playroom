@@ -1,6 +1,6 @@
 import { Ms, sleep } from '@musical-patterns/utilities'
 import { ElementHandle } from 'puppeteer'
-import { FieldValidity, SecretTestSelectors } from '../../../../src/indexForTest'
+import { FieldValidityClassName, SecretTestSelectors } from '../../../../src/indexForTest'
 import {
     currentTime,
     deleteCharacterFromInput,
@@ -30,25 +30,25 @@ const SECTION_HEADING: string = '#spec-controls h3'
 
 const rangedInputIsMarkedAsInvalid: () => Promise<void> =
     async (): Promise<void> => {
-        expect(await elementExists(`input[type=number]#${RANGED_PROPERTY_ONE_KEY}.${FieldValidity.INVALID}`))
+        expect(await elementExists(`input[type=number]#${RANGED_PROPERTY_ONE_KEY}.${FieldValidityClassName.INVALID}`))
             .toBeTruthy('ranged input was not marked as invalid')
     }
 
 const otherInputIsAlsoMarkedAsInvalid: () => Promise<void> =
     async (): Promise<void> => {
-        expect(await elementExists(`input[type=number]#${RANGED_PROPERTY_TWO_KEY}.${FieldValidity.INVALID}`))
+        expect(await elementExists(`input[type=number]#${RANGED_PROPERTY_TWO_KEY}.${FieldValidityClassName.INVALID}`))
             .toBeTruthy('other input was not market as invalid')
     }
 
 const rangedInputIsMarkedAsValid: () => Promise<void> =
     async (): Promise<void> => {
-        expect(await elementExists(`input[type=number]#${RANGED_PROPERTY_ONE_KEY}.${FieldValidity.VALID}`))
+        expect(await elementExists(`input[type=number]#${RANGED_PROPERTY_ONE_KEY}.${FieldValidityClassName.VALID}`))
             .toBeTruthy('ranged input was not marked as valid')
     }
 
 const otherInputIsAlsoMarkedAsValid: () => Promise<void> =
     async (): Promise<void> => {
-        expect(await elementExists(`input[type=number]#${RANGED_PROPERTY_TWO_KEY}.${FieldValidity.VALID}`))
+        expect(await elementExists(`input[type=number]#${RANGED_PROPERTY_TWO_KEY}.${FieldValidityClassName.VALID}`))
             .toBeTruthy('other ranged control input was not marked as valid')
     }
 

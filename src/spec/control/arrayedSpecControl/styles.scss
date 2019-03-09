@@ -1,44 +1,7 @@
 @import '../../../sizes';
-@import '../sizes';
 
 .arrayed-spec-control {
-  .arrayed-fields {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: flex-end;
-
-    .numbered-spec-control {
-      display: flex;
-      flex-direction: column;
-      margin-left: $spec-control-horizontal-spacing;
-
-      span {
-        font-size: $detail-text-size;
-        width: $arrayed-control-width;
-      }
-
-      .singular-spec-control {
-        width: $arrayed-control-width;
-        margin: 0 !important;
-
-        .field {
-          display: block;
-          margin: 0 !important;
-
-          input {
-            margin: 0 0 0 $arrayed-control-input-vertical-spacing;
-            padding: 0 $arrayed-control-input-horizontal-spacing;
-            width: $arrayed-control-input-width;
-            min-width: $arrayed-control-input-width;
-          }
-        }
-      }
-    }
-  }
-
-  .add,
-  .remove {
-    margin-left: $spec-control-horizontal-spacing;
-    margin-bottom: $arrayed-control-spacing;
+  div {
+    font-size: $detail-text-size;
   }
 }

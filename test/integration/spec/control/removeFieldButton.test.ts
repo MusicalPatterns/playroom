@@ -2,8 +2,8 @@ import { indexOfLastElement } from '@musical-patterns/utilities'
 import { SecretTestSelectors } from '../../../../src/indexForTest'
 import {
     ARRAYED_PROPERTY_KEY,
-    clickAdd,
-    clickRemove,
+    clickAddFieldButton,
+    clickRemoveFieldButton,
     elementCount,
     elementExists,
     elementInnerText,
@@ -60,17 +60,17 @@ const theSubmittedValueForTheArrayedSpecControlAsAWholeIsInItsInitialStateJustWi
 
 const removeAllTheFields: () => Promise<void> =
     async (): Promise<void> => {
-        await clickRemove()
-        await clickRemove()
-        await clickRemove()
-        await clickRemove()
-        await clickRemove()
+        await clickRemoveFieldButton()
+        await clickRemoveFieldButton()
+        await clickRemoveFieldButton()
+        await clickRemoveFieldButton()
+        await clickRemoveFieldButton()
     }
 
-const removeIsDisabled: () => Promise<void> =
+const removeFieldButtonIsDisabled: () => Promise<void> =
     async (): Promise<void> => {
-        expect(await elementExists(`#${ARRAYED_PROPERTY_KEY} .remove:disabled`))
-            .toBeTruthy('remove was not disabled')
+        expect(await elementExists(`#${ARRAYED_PROPERTY_KEY} .remove-field:disabled`))
+            .toBeTruthy('remove field button was not disabled')
     }
 
 const everyFieldHasAnInvalidMessage: () => Promise<void> =
@@ -92,10 +92,10 @@ describe('remove field button', () => {
         done()
     })
 
-    it('clicking the remove button removes the last field from the arrayed spec control', async (done: DoneFn) => {
+    it('clicking the remove field button removes the last field from the arrayed spec control', async (done: DoneFn) => {
         const originalFieldCount: number = await elementCount(`#${ARRAYED_PROPERTY_KEY} input[type=number]`)
 
-        await clickRemove()
+        await clickRemoveFieldButton()
         await thereIsOneFewerField(originalFieldCount)
         await andTheIdThatIsMissingWasTheLastId()
 
@@ -105,7 +105,7 @@ describe('remove field button', () => {
     it('removing the field immediately submits the modification to the arrayed spec control', async (done: DoneFn) => {
         await theSubmittedValueForTheArrayedSpecControlAsAWholeIsInItsInitialState()
 
-        await clickRemove()
+        await clickRemoveFieldButton()
         await theSubmittedValueForTheArrayedSpecControlAsAWholeIsInItsInitialStateJustWithItsLastElementGone()
 
         done()
@@ -114,24 +114,24 @@ describe('remove field button', () => {
     it('removing the field does not show invalid messages if the removed element was not yet defined', async (done: DoneFn) => {
         await theSubmittedValueForTheArrayedSpecControlAsAWholeIsInItsInitialState()
 
-        await clickAdd()
-        await clickAdd()
-        await clickRemove()
+        await clickAddFieldButton()
+        await clickAddFieldButton()
+        await clickRemoveFieldButton()
         await noInvalidMessagesAreShown()
 
         done()
     })
 
-    it('disables the remove button when there are no fields remaining in the arrayed spec control', async (done: DoneFn) => {
+    it('disables the remove field button when there are no fields remaining in the arrayed spec control', async (done: DoneFn) => {
         await removeAllTheFields()
-        await removeIsDisabled()
+        await removeFieldButtonIsDisabled()
 
         done()
     })
 
     it('runs validation when removing an element', async (done: DoneFn) => {
         await selectValidationPattern()
-        await clickRemove()
+        await clickRemoveFieldButton()
         await everyFieldHasAnInvalidMessage()
 
         done()

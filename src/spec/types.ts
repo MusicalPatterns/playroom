@@ -1,4 +1,12 @@
-import { Attributes, DomSpec, Preset, Spec, ValidationFunction, ValidationResults } from '@musical-patterns/pattern'
+import {
+    Attributes,
+    DomSpec,
+    Preset,
+    Spec,
+    ValidationFunction,
+    ValidationResults,
+    Value,
+} from '@musical-patterns/pattern'
 import { ActionForState, DictionaryOf, Maybe, TypedMap } from '@musical-patterns/utilities'
 
 enum SpecStateKey {
@@ -27,9 +35,28 @@ type ImmutableSpecState = TypedMap<SpecState>
 
 type SpecAction = ActionForState<SpecState>
 
-enum FieldValidity {
-    INVALID = 'invalid',
-    VALID = 'valid',
+interface PropertyParameter {
+    property: string,
+}
+
+interface BuildAttemptSubmitActionsParameters extends PropertyParameter {
+    attributes: Attributes,
+    displayedSpec: DomSpec,
+    submittedSpec: Spec,
+    suppressReevaluatingValidationResults?: boolean,
+    updatedValue: Value,
+    validationFunction: Maybe<ValidationFunction>,
+}
+
+interface ValidateSubmittedSpecParameters extends PropertyParameter {
+    attributes: Attributes,
+    updatedDisplayedSpec: DomSpec,
+    validationFunction?: ValidationFunction,
+}
+
+interface UpdatedValidationResultsPlusIsValid {
+    isValid: boolean,
+    updatedValidationResults: ValidationResults,
 }
 
 export {
@@ -37,5 +64,8 @@ export {
     ImmutableSpecState,
     SpecStateKey,
     SpecAction,
-    FieldValidity,
+    PropertyParameter,
+    BuildAttemptSubmitActionsParameters,
+    UpdatedValidationResultsPlusIsValid,
+    ValidateSubmittedSpecParameters,
 }

@@ -24,7 +24,7 @@ const mapStateToProps: (state: ImmutableState) => MiddlePlusRightColumnProps =
     }
 
 const MiddlePlusRightColumn: React.ComponentType<MiddlePlusRightColumnProps> =
-    ({ id, pageName, rightColumnOpen }: MiddlePlusRightColumnProps): JSX.Element => (
+    ({ id, pageName, rightColumnOpen }: MiddlePlusRightColumnProps): JSX.Element =>
         <div {...{ id: 'middle-plus-right-column', className: `right-column-${rightColumnOpen ? 'open' : 'closed'}` }}>
             <FirstRow/>
             <SecondRow/>
@@ -32,6 +32,5 @@ const MiddlePlusRightColumn: React.ComponentType<MiddlePlusRightColumnProps> =
             {pageName && <Page/>}
             <BottomRow/>
         </div>
-    )
 
 export default connect(mapStateToProps)(MiddlePlusRightColumn)

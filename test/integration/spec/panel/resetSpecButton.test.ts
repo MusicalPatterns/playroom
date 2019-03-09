@@ -1,5 +1,5 @@
 import { ElementHandle } from 'puppeteer'
-import { FieldValidity } from '../../../../src/indexForTest'
+import { FieldValidityClassName } from '../../../../src/indexForTest'
 import {
     BAD_FORMAT_INVALID_TEST_MODIFICATION,
     clickElement,
@@ -134,7 +134,7 @@ const modifyControlToBeInvalid: () => Promise<void> =
     async (): Promise<void> => {
         const controlToBeInvalid: ElementHandle = await findElement(`input[type=number]#${RANGED_PROPERTY_ONE_KEY}`)
         await controlToBeInvalid.type(BAD_FORMAT_INVALID_TEST_MODIFICATION)
-        expect(await elementExists(`input[type=number]#${RANGED_PROPERTY_ONE_KEY}.${FieldValidity.INVALID}`))
+        expect(await elementExists(`input[type=number]#${RANGED_PROPERTY_ONE_KEY}.${FieldValidityClassName.INVALID}`))
             .toBeTruthy('control was not invalid')
     }
 
@@ -146,7 +146,7 @@ const modifyAnotherControlJustSoThatTheResetButtonIsEnabled: () => Promise<void>
 
 const controlIsBackToValid: () => Promise<void> =
     async (): Promise<void> => {
-        expect(await elementExists(`input[type=number]#${RANGED_PROPERTY_ONE_KEY}.${FieldValidity.VALID}`))
+        expect(await elementExists(`input[type=number]#${RANGED_PROPERTY_ONE_KEY}.${FieldValidityClassName.VALID}`))
             .toBeTruthy('control was not back to valid')
     }
 

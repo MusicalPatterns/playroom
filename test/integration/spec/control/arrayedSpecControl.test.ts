@@ -1,5 +1,5 @@
 import { ElementHandle } from 'puppeteer'
-import { FieldValidity, SecretTestSelectors } from '../../../../src/indexForTest'
+import { FieldValidityClassName, SecretTestSelectors } from '../../../../src/indexForTest'
 import {
     ARRAYED_PROPERTY_KEY,
     BAD_FORMAT_INVALID_TEST_MODIFICATION,
@@ -54,15 +54,15 @@ const invalidateJustOneFieldOfAnArrayedSpecControl: () => Promise<void> =
 
 const justThatOneFieldIsMarkedIsInvalidAndTheOtherFieldsOfThatArrayedSpecControlAreStillMarkedAsValid: () => Promise<void> =
     async (): Promise<void> => {
-        expect(await elementExists(`input[type=number]#${ARRAYED_PROPERTY_KEY}-0.${FieldValidity.VALID}`))
+        expect(await elementExists(`input[type=number]#${ARRAYED_PROPERTY_KEY}-0.${FieldValidityClassName.VALID}`))
             .toBeTruthy('one of the other fields of the arrayed spec control was not valid, #0')
-        expect(await elementExists(`input[type=number]#${ARRAYED_PROPERTY_KEY}-1.${FieldValidity.VALID}`))
+        expect(await elementExists(`input[type=number]#${ARRAYED_PROPERTY_KEY}-1.${FieldValidityClassName.VALID}`))
             .toBeTruthy('one of the other fields of the arrayed spec control was not valid, #1')
-        expect(await elementExists(`input[type=number]#${ARRAYED_PROPERTY_KEY}-2.${FieldValidity.INVALID}`))
+        expect(await elementExists(`input[type=number]#${ARRAYED_PROPERTY_KEY}-2.${FieldValidityClassName.INVALID}`))
             .toBeTruthy('that one feild of the arrayed spec control was not marked as invalid')
-        expect(await elementExists(`input[type=number]#${ARRAYED_PROPERTY_KEY}-3.${FieldValidity.VALID}`))
+        expect(await elementExists(`input[type=number]#${ARRAYED_PROPERTY_KEY}-3.${FieldValidityClassName.VALID}`))
             .toBeTruthy('one of the other fields of the arrayed spec control was not valid, #3')
-        expect(await elementExists(`input[type=number]#${ARRAYED_PROPERTY_KEY}-4.${FieldValidity.VALID}`))
+        expect(await elementExists(`input[type=number]#${ARRAYED_PROPERTY_KEY}-4.${FieldValidityClassName.VALID}`))
             .toBeTruthy('one of the other fields of the arrayed spec control was not valid, #4')
     }
 

@@ -1,16 +1,14 @@
 // tslint:disable variable-name file-name-casing no-default-export no-import-side-effect
 
-import { PropertyAttributes } from '@musical-patterns/pattern'
-import { camelCaseToLowerCase, from, HtmlValueOrChecked, map, Ordinal } from '@musical-patterns/utilities'
+import { camelCaseToLowerCase } from '@musical-patterns/utilities'
 import * as React from 'react'
 import { connect } from 'react-redux'
 import { ImmutableState, StateKey } from '../../../types'
+import { SecretSubmittedSpecForTest } from '../../field'
 import { SpecStateKey } from '../../types'
 import { AddFieldButton } from '../addFieldButton'
+import { ArrayedFields } from '../arrayedFields'
 import { RemoveFieldButton } from '../removeFieldButton'
-import { SecretSubmittedSpecForTest } from '../secretSubmittedSpecForTest'
-import { SingularSpecControl } from '../singularSpecControl'
-import { calculateSingularSubmittedValue, calculateSingularValidationResult } from './calculateSingular'
 import './styles'
 import { ArrayedSpecControlProps, ArrayedSpecControlPropsFromState } from './types'
 
@@ -23,47 +21,27 @@ const mapStateToProps: (state: ImmutableState) => ArrayedSpecControlPropsFromSta
 const ArrayedSpecControl: React.ComponentType<ArrayedSpecControlProps> =
     (arrayedSpecControlProps: ArrayedSpecControlProps): JSX.Element => {
         const {
-            property,
             arrayedDisplayedValue,
-            arrayedValidationResult,
             arrayedSubmittedValue,
+            arrayedValidationResult,
             attributes,
+            property,
         } = arrayedSpecControlProps
-        const propertyAttributes: PropertyAttributes = attributes[ property ]
-        const formattedName: string = propertyAttributes.formattedName || camelCaseToLowerCase(property)
-
-        const controls: JSX.Element[] = map(
-            arrayedDisplayedValue,
-            (singularDisplayedValue: HtmlValueOrChecked, index: Ordinal): JSX.Element => {
-                const key: number = from.Ordinal(index)
-
-                return (
-                    <div {...{ className: 'numbered-spec-control', key }}>
-                        <span>{key}</span>
-                        <SingularSpecControl {...{
-                            fieldIndex: index,
-                            property,
-                            singularDisplayedValue,
-                            singularSubmittedValue:
-                                calculateSingularSubmittedValue(arrayedSubmittedValue, index),
-                            singularValidationResult: calculateSingularValidationResult(arrayedValidationResult, index),
-                        }}/>
-                    </div>
-                )
-            },
-        )
 
         return (
             <div {...{ id: property, className: 'arrayed-spec-control' }}>
-                <div>{formattedName}</div>
-                <div {...{ className: 'arrayed-fields' }}>
-                    {controls}
-                </div>
+                <div>{attributes[ property ].formattedName || camelCaseToLowerCase(property)}</div>
+                <ArrayedFields {...{
+                    arrayedDisplayedValue,
+                    arrayedSubmittedValue,
+                    arrayedValidationResult,
+                    property,
+                }}/>
                 <div>
                     <AddFieldButton {...{ property }}/>
                     <RemoveFieldButton {...{ property }}/>
                 </div>
-                <SecretSubmittedSpecForTest {...{ submittedValue: arrayedSubmittedValue, id: property }}/>
+                <SecretSubmittedSpecForTest {...{ submittedValue: arrayedSubmittedValue, fieldId: property }}/>
             </div>
         )
     }

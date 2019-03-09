@@ -5,3 +5,7 @@ import ArrayedSpecControl from './ArrayedSpecControl'
 export {
     ArrayedSpecControl,
 }
+
+export {
+    ArrayedSpecControlPropsFromParent,
+} from './types'

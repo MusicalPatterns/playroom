@@ -22,10 +22,9 @@ const mapDispatchToProps: (dispatch: Dispatch) => StopButtonPropsFromDispatch =
     })
 
 const StopButton: React.ComponentType<StopButtonProps> =
-    ({ handleStopClickEvent, performerDisabled }: StopButtonProps): JSX.Element => (
+    ({ handleStopClickEvent, performerDisabled }: StopButtonProps): JSX.Element =>
         <button {...{ id: 'stop', onClick: handleStopClickEvent, disabled: performerDisabled }}>
             <FontAwesomeIcon {...{ icon: faStop }}/>
         </button>
-    )
 
 export default connect(mapStateToProps, mapDispatchToProps)(StopButton)

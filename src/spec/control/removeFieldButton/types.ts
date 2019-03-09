@@ -1,7 +1,7 @@
 import { ValidationResults } from '@musical-patterns/pattern'
 import { DispatchParameter, EventParameter } from '../../../types'
+import { PropertyParameter } from '../../types'
 import { AddFieldButtonPropsFromState } from '../addFieldButton'
-import { PropertyParameter } from '../types'
 
 interface RemoveFieldButtonPropsFromState extends AddFieldButtonPropsFromState {
     validationResults: ValidationResults,

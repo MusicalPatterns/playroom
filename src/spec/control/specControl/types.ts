@@ -1,5 +1,5 @@
 import { Attributes, DomSpec, Spec, ValidationResults } from '@musical-patterns/pattern'
-import { PropertyParameter } from '../types'
+import { PropertyParameter } from '../../types'
 
 interface SpecControlPropsFromState {
     attributes: Attributes,

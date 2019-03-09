@@ -22,10 +22,9 @@ const mapDispatchToProps: (dispatch: Dispatch) => PauseButtonPropsFromDispatch =
     })
 
 const PauseButton: React.ComponentType<PauseButtonProps> =
-    ({ handlePauseClickEvent, performerDisabled }: PauseButtonProps): JSX.Element => (
+    ({ handlePauseClickEvent, performerDisabled }: PauseButtonProps): JSX.Element =>
         <button {...{ id: 'pause', onClick: handlePauseClickEvent, disabled: performerDisabled }}>
             <FontAwesomeIcon {...{ icon: faPause }}/>
         </button>
-    )
 
 export default connect(mapStateToProps, mapDispatchToProps)(PauseButton)

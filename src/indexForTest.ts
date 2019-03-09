@@ -1,7 +1,7 @@
 // tslint:disable no-reaching-imports
 
 export {
-    FieldValidity,
+    FieldValidityClassName,
 } from './spec/indexForTest'
 export {
     SecretTestSelectors,

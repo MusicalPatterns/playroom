@@ -22,10 +22,9 @@ const mapDispatchToProps: (dispatch: Dispatch) => PlayButtonPropsFromDispatch =
     })
 
 const PlayButton: React.ComponentType<PlayButtonProps> =
-    ({ handlePlayClickEvent, performerDisabled }: PlayButtonProps): JSX.Element => (
+    ({ handlePlayClickEvent, performerDisabled }: PlayButtonProps): JSX.Element =>
         <button {...{ id: 'play', onClick: handlePlayClickEvent, disabled: performerDisabled }}>
             <FontAwesomeIcon {...{ icon: faPlay }}/>
         </button>
-    )
 
 export default connect(mapStateToProps, mapDispatchToProps)(PlayButton)

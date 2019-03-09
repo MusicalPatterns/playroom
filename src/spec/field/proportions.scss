@@ -1,0 +1,7 @@
+@import '../../baseProportions';
+
+$field-label-proportion: $phi;
+$field-input-proportion: 1;
+
+$invalid-message-horizontal-translation-percentage: 100% * (1 - ($phi - 1));
+$invalid-message-opacity: $phi - 1;

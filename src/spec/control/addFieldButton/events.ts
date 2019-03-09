@@ -2,8 +2,8 @@ import { ArrayedDomValue } from '@musical-patterns/pattern'
 import { HtmlValueOrChecked, Maybe } from '@musical-patterns/utilities'
 import { batchActions } from 'redux-batched-actions'
 import { Action } from '../../../types'
-import { buildAttemptSubmitActions } from '../attemptSubmitActions'
-import { getArrayedDisplayedValue } from '../getArrayedDisplayedValue'
+import { buildAttemptSubmitActions } from '../../attemptSubmitActions'
+import { getArrayedDisplayedValue } from '../../getArrayedDisplayedValue'
 import { HandleFieldAddParameters } from './types'
 
 const handleFieldAdd: (parameters: HandleFieldAddParameters) => void =

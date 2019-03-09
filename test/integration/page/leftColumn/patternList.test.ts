@@ -1,6 +1,6 @@
 import { Ms, sleep } from '@musical-patterns/utilities'
 import { ElementHandle } from 'puppeteer'
-import { FieldValidity, SecretTestSelectors } from '../../../../src/indexForTest'
+import { FieldValidityClassName, SecretTestSelectors } from '../../../../src/indexForTest'
 import {
     A_BIT_LONGER,
     BAD_FORMAT_INVALID_TEST_MODIFICATION,
@@ -92,13 +92,13 @@ const invalidateControl: () => Promise<void> =
     async (): Promise<void> => {
         const control: ElementHandle = await findElement(`input[type=number]#${RANGED_PROPERTY_ONE_KEY}`)
         await control.type(BAD_FORMAT_INVALID_TEST_MODIFICATION)
-        expect(await elementExists(`input[type=number]#${RANGED_PROPERTY_ONE_KEY}.${FieldValidity.INVALID}`))
+        expect(await elementExists(`input[type=number]#${RANGED_PROPERTY_ONE_KEY}.${FieldValidityClassName.INVALID}`))
             .toBeTruthy('control was not invalidated')
     }
 
 const controlIsValid: () => Promise<void> =
     async (): Promise<void> => {
-        expect(await elementExists(`input[type=number]#${RANGED_PROPERTY_ONE_KEY}.${FieldValidity.VALID}`))
+        expect(await elementExists(`input[type=number]#${RANGED_PROPERTY_ONE_KEY}.${FieldValidityClassName.VALID}`))
             .toBeTruthy('control was not valid')
     }
 

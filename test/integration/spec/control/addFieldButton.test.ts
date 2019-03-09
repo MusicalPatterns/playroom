@@ -1,11 +1,11 @@
 import { ElementHandle } from 'puppeteer'
-import { FieldValidity, SecretTestSelectors } from '../../../../src/indexForTest'
+import { FieldValidityClassName, SecretTestSelectors } from '../../../../src/indexForTest'
 import {
     ARRAYED_PROPERTY_KEY,
     ARRAYED_PROPERTY_WITH_INITIAL_FIELD_VALUE_KEY,
-    clickAdd,
+    clickAddFieldButton,
     clickElement,
-    clickRemove,
+    clickRemoveFieldButton,
     elementCount,
     elementExists,
     elementInnerText,
@@ -19,7 +19,7 @@ import {
 
 const clickAddForTheArrayedSpecControlWithTheInitialFieldValue: () => Promise<void> =
     async (): Promise<void> => {
-        await clickElement(`#${ARRAYED_PROPERTY_WITH_INITIAL_FIELD_VALUE_KEY} .add`)
+        await clickElement(`#${ARRAYED_PROPERTY_WITH_INITIAL_FIELD_VALUE_KEY} .add-field`)
     }
 
 const thereIsAnAdditionalField: (originalFieldCount: number) => Promise<void> =
@@ -100,25 +100,25 @@ const modifyTheSecondOfTheTwoNewFields: () => Promise<void> =
 
 const theSecondOfTheTwoNewFieldsTheOneYouModifiedIsValidWhileTheFirstOfTheTwoNewFieldsIsBrieflyInvalid: () => Promise<void> =
     async (): Promise<void> => {
-        expect(await elementExists(`input[type=number]#${ARRAYED_PROPERTY_KEY}-5.${FieldValidity.INVALID}`))
+        expect(await elementExists(`input[type=number]#${ARRAYED_PROPERTY_KEY}-5.${FieldValidityClassName.INVALID}`))
             .toBeTruthy('the first new field was not invalid')
-        expect(await elementExists(`input[type=number]#${ARRAYED_PROPERTY_KEY}-6.${FieldValidity.VALID}`))
+        expect(await elementExists(`input[type=number]#${ARRAYED_PROPERTY_KEY}-6.${FieldValidityClassName.VALID}`))
             .toBeTruthy('the second new field was not valid')
     }
 
 const theFirstOfTheTwoNewFieldsTheOneYouModifiedIsValidWhileTheSecondOfTheTwoNewFieldsIsBrieflyInvalid: () => Promise<void> =
     async (): Promise<void> => {
-        expect(await elementExists(`input[type=number]#${ARRAYED_PROPERTY_KEY}-5.${FieldValidity.VALID}`))
+        expect(await elementExists(`input[type=number]#${ARRAYED_PROPERTY_KEY}-5.${FieldValidityClassName.VALID}`))
             .toBeTruthy('the first new field was not valid')
-        expect(await elementExists(`input[type=number]#${ARRAYED_PROPERTY_KEY}-6.${FieldValidity.INVALID}`))
+        expect(await elementExists(`input[type=number]#${ARRAYED_PROPERTY_KEY}-6.${FieldValidityClassName.INVALID}`))
             .toBeTruthy('the second new field was not invalid')
     }
 
 const bothNewFieldsAreValidAndSubmitted: () => Promise<void> =
     async (): Promise<void> => {
-        expect(await elementExists(`input[type=number]#${ARRAYED_PROPERTY_KEY}-5.${FieldValidity.VALID}`))
+        expect(await elementExists(`input[type=number]#${ARRAYED_PROPERTY_KEY}-5.${FieldValidityClassName.VALID}`))
             .toBeTruthy('first new field was not valid')
-        expect(await elementExists(`input[type=number]#${ARRAYED_PROPERTY_KEY}-6.${FieldValidity.VALID}`))
+        expect(await elementExists(`input[type=number]#${ARRAYED_PROPERTY_KEY}-6.${FieldValidityClassName.VALID}`))
             .toBeTruthy('second new field was not valid')
         expect(await elementInnerText(`#${ARRAYED_PROPERTY_KEY}-5.${SecretTestSelectors.SUBMITTED_SPEC}`))
             .toBe(VALID_TEST_MODIFICATION, 'first new field was not submitted')
@@ -158,10 +158,10 @@ describe('add field button', () => {
     })
 
     describe('for arrayed spec controls with no initial element value', () => {
-        it('clicking the add button displays a new blank field at the end of the arrayed spec control', async (done: DoneFn) => {
+        it('clicking the add field button displays a new blank field at the end of the arrayed spec control', async (done: DoneFn) => {
             const originalFieldCount: number = await elementCount(`#${ARRAYED_PROPERTY_KEY} input[type=number]`)
 
-            await clickAdd()
+            await clickAddFieldButton()
             await thereIsAnAdditionalField(originalFieldCount)
             await andTheNewFieldHasTheNextIdAfterTheOthers()
 
@@ -169,7 +169,7 @@ describe('add field button', () => {
         })
 
         it('does not submit the new field until you add something valid to it', async (done: DoneFn) => {
-            await clickAdd()
+            await clickAddFieldButton()
             await newFieldExistsButHasNotBeenSubmitted()
 
             await modifyNewField()
@@ -180,8 +180,8 @@ describe('add field button', () => {
 
         describe('adding two fields at once', () => {
             beforeEach(async (done: DoneFn) => {
-                await clickAdd()
-                await clickAdd()
+                await clickAddFieldButton()
+                await clickAddFieldButton()
 
                 done()
             })
@@ -225,10 +225,10 @@ describe('add field button', () => {
         })
 
         it('does not start out with an invalid message if had existed before with an invalid message then was removed', async (done: DoneFn) => {
-            await clickAdd()
+            await clickAddFieldButton()
             await invalidateNewField()
-            await clickRemove()
-            await clickAdd()
+            await clickRemoveFieldButton()
+            await clickAddFieldButton()
             await noInvalidMessagesAreShown()
 
             done()
@@ -236,7 +236,7 @@ describe('add field button', () => {
     })
 
     describe('for arrayed spec controls with an initial element value', () => {
-        it('clicking the add button displays a new field at the end of the arrayed spec control with that initial value', async (done: DoneFn) => {
+        it('clicking the add field button displays a new field at the end of the arrayed spec control with that initial value', async (done: DoneFn) => {
             const originalFieldCount: number = await elementCount(`#${ARRAYED_PROPERTY_WITH_INITIAL_FIELD_VALUE_KEY} input[type=range]`)
 
             await clickAddForTheArrayedSpecControlWithTheInitialFieldValue()

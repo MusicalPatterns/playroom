@@ -1,5 +1,5 @@
 // tslint:disable no-reaching-imports
 
 export {
-    FieldValidity,
-} from './types'
+    FieldValidityClassName,
+} from './field/indexForTest'

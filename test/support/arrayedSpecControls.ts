@@ -1,14 +1,14 @@
 import { ARRAYED_PROPERTY_KEY } from './constants'
 import { clickElement, elementExists } from './generic'
 
-const clickAdd: () => Promise<void> =
+const clickAddFieldButton: () => Promise<void> =
     async (): Promise<void> => {
-        await clickElement(`#${ARRAYED_PROPERTY_KEY} .add`)
+        await clickElement(`#${ARRAYED_PROPERTY_KEY} .add-field`)
     }
 
-const clickRemove: () => Promise<void> =
+const clickRemoveFieldButton: () => Promise<void> =
     async (): Promise<void> => {
-        await clickElement(`#${ARRAYED_PROPERTY_KEY} .remove`)
+        await clickElement(`#${ARRAYED_PROPERTY_KEY} .remove-field`)
     }
 
 const noInvalidMessagesAreShown: () => Promise<void> =
@@ -18,7 +18,7 @@ const noInvalidMessagesAreShown: () => Promise<void> =
     }
 
 export {
-    clickAdd,
-    clickRemove,
+    clickAddFieldButton,
+    clickRemoveFieldButton,
     noInvalidMessagesAreShown,
 }

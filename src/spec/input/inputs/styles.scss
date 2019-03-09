@@ -1,0 +1,33 @@
+@import '../../../effects';
+@import '../../../colors';
+@import '../../../sizes';
+@import '../colors';
+@import '../sizes';
+
+.inputs {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  margin-left: 13px;
+
+  input,
+  select {
+    @include hoverable-background($spec-control-background);
+
+    min-width: $control-width;
+    margin-bottom: $input-bottom-spacing;
+    padding: 0 $input-horizontal-spacing;
+    height: $control-height;
+    border: none;
+    outline: none;
+    border-radius: $border-size;
+
+    &::selection {
+      background: $focus-color;
+    }
+
+    &.invalid {
+      @include glow($invalid-color);
+    }
+  }
+}

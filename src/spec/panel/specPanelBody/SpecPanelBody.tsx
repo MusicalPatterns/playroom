@@ -17,7 +17,7 @@ const mapStateToProps: (state: ImmutableState) => SpecPanelOpenParameter =
     })
 
 const SpecPanelBody: React.ComponentType<SpecPanelOpenParameter> =
-    ({ specPanelOpen }: SpecPanelOpenParameter): JSX.Element => (
+    ({ specPanelOpen }: SpecPanelOpenParameter): JSX.Element =>
         <div {...{ id: 'spec-panel-body', className: specPanelOpen ? 'open' : 'closed' }}>
             <PresetSelect/>
             <hr/>
@@ -25,6 +25,5 @@ const SpecPanelBody: React.ComponentType<SpecPanelOpenParameter> =
             <hr/>
             <ResetSpecButton/>
         </div>
-    )
 
 export default connect(mapStateToProps)(SpecPanelBody)

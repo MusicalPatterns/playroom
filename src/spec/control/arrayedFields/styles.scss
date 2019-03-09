@@ -1,0 +1,25 @@
+@import '../../../sizes';
+@import '../sizes';
+
+.arrayed-fields {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+
+  .field {
+    flex-direction: column;
+    width: $arrayed-field-width;
+
+    .inputs {
+      display: block;
+      margin: 0 !important;
+
+      input {
+        margin: 0 0 0 $arrayed-spec-control-input-vertical-spacing;
+        padding: 0 $arrayed-spec-control-input-horizontal-spacing;
+        width: $arrayed-spec-control-input-width;
+        min-width: $arrayed-spec-control-input-width;
+      }
+    }
+  }
+}
