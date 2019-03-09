@@ -1,9 +1,13 @@
 @import '../../effects';
 @import '../colors';
+@import '../sizes';
 
 #timeline {
   @include animate(background);
 
+  flex: auto;
+  height: $time-control-size;
+  padding-right: $time-controls-horizontal-spacing;
   background: $time-controls-background;
 
   &::-webkit-slider-runnable-track {

@@ -1,47 +1,68 @@
 // tslint:disable variable-name file-name-casing no-default-export no-import-side-effect
 
+import { isUndefined } from '@musical-patterns/utilities'
 import * as React from 'react'
 import { connect } from 'react-redux'
-import { ENTER, EXIT, IMMERSIVE_AUDIO } from '../../copy'
+import { Dispatch } from 'redux'
 import { ImmutableState, StateKey } from '../../types'
 import { ImmutablePerformerState, PerformerStateKey } from '../types'
+import { buildSetToggleImmersiveAudioHandlers } from './events'
+import {
+    getToggleImmersiveAudioButtonHoverText,
+    getToggleImmersiveAudioButtonOnClick,
+    getToggleImmersiveAudioButtonText,
+    getToggleImmersiveAudioDisabled,
+} from './helpers'
 import './styles'
-import { ToggleImmersiveAudioButtonProps } from './types'
+import {
+    ToggleImmersiveAudioButtonProps,
+    ToggleImmersiveAudioButtonPropsFromDispatch,
+    ToggleImmersiveAudioButtonPropsFromState,
+} from './types'
 
-const mapStateToProps: (state: ImmutableState) => ToggleImmersiveAudioButtonProps =
-    (state: ImmutableState): ToggleImmersiveAudioButtonProps => {
+const mapStateToProps: (state: ImmutableState) => ToggleImmersiveAudioButtonPropsFromState =
+    (state: ImmutableState): ToggleImmersiveAudioButtonPropsFromState => {
         const performerState: ImmutablePerformerState = state.get(StateKey.PERFORMER)
 
         return {
-            disabled: performerState.get(PerformerStateKey.PERFORMER_DISABLED),
             immersiveAudioEnabled: performerState.get(PerformerStateKey.IMMERSIVE_AUDIO_ENABLED),
             immersiveAudioReady: performerState.get(PerformerStateKey.IMMERSIVE_AUDIO_READY),
-            immersiveAudioUnvailable: performerState.get(PerformerStateKey.IMMERSIVE_AUDIO_UNAVAILABLE),
+            immersiveAudioUnavailable: performerState.get(PerformerStateKey.IMMERSIVE_AUDIO_UNAVAILABLE),
+            performerDisabled: performerState.get(PerformerStateKey.PERFORMER_DISABLED),
             toggleImmersiveAudioHandlers: performerState.get(PerformerStateKey.TOGGLE_IMMERSIVE_AUDIO_HANDLERS),
         }
     }
 
+const mapDispatchToProps: (dispatch: Dispatch) => ToggleImmersiveAudioButtonPropsFromDispatch =
+    (dispatch: Dispatch): ToggleImmersiveAudioButtonPropsFromDispatch => ({
+        setToggleImmersiveAudioHandlers: buildSetToggleImmersiveAudioHandlers({ dispatch }),
+    })
+
 const ToggleImmersiveAudioButton: React.ComponentType<ToggleImmersiveAudioButtonProps> =
     (props: ToggleImmersiveAudioButtonProps): JSX.Element => {
         const {
-            disabled,
             immersiveAudioEnabled,
             immersiveAudioReady,
-            immersiveAudioUnvailable,
+            immersiveAudioUnavailable,
+            performerDisabled,
+            setToggleImmersiveAudioHandlers,
             toggleImmersiveAudioHandlers,
         } = props
-        const { enterImmersiveAudio, exitImmersiveAudio } = toggleImmersiveAudioHandlers
+
+        if (isUndefined(toggleImmersiveAudioHandlers)) {
+            setToggleImmersiveAudioHandlers()
+        }
 
         return (
             <button {...{
-                disabled: disabled || !immersiveAudioReady,
+                disabled: getToggleImmersiveAudioDisabled({ immersiveAudioReady, performerDisabled }),
                 id: 'toggle-immersive-audio',
-                onClick: immersiveAudioEnabled ? exitImmersiveAudio : enterImmersiveAudio,
-                title: immersiveAudioUnvailable ? 'Your system does not support VR.' : '',
+                onClick: getToggleImmersiveAudioButtonOnClick({ immersiveAudioEnabled, toggleImmersiveAudioHandlers }),
+                title: getToggleImmersiveAudioButtonHoverText({ immersiveAudioUnavailable }),
             }}>
-                {immersiveAudioEnabled ? EXIT : ENTER} {IMMERSIVE_AUDIO}
+                {getToggleImmersiveAudioButtonText({ immersiveAudioEnabled })}
             </button>
         )
     }
 
-export default connect(mapStateToProps)(ToggleImmersiveAudioButton)
+export default connect(mapStateToProps, mapDispatchToProps)(ToggleImmersiveAudioButton)

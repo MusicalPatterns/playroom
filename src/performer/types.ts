@@ -1,5 +1,5 @@
-import { ToggleImmersiveAudioHandlers } from '@musical-patterns/performer'
-import { ActionForState, Ms, TypedMap } from '@musical-patterns/utilities'
+import { OnUpdate, ToggleImmersiveAudioHandlers } from '@musical-patterns/performer'
+import { ActionForState, Maybe, Ms, TypedMap } from '@musical-patterns/utilities'
 
 enum PerformerStateKey {
     TIME_POSITION = 'TIME_POSITION',
@@ -10,39 +10,39 @@ enum PerformerStateKey {
     IMMERSIVE_AUDIO_UNAVAILABLE = 'IMMERSIVE_AUDIO_UNAVAILABLE',
     IMMERSIVE_AUDIO_ENABLED = 'IMMERSIVE_AUDIO_ENABLED',
     PERFORMER_DISABLED = 'PERFORMER_DISABLED',
+    ON_UPDATE = 'ON_UPDATE',
 }
 
 interface PerformerState {
     [ PerformerStateKey.TIME_POSITION ]: Ms,
     [ PerformerStateKey.PATTERN_DURATION ]: Ms,
     [ PerformerStateKey.PAUSED ]: boolean,
-    [ PerformerStateKey.TOGGLE_IMMERSIVE_AUDIO_HANDLERS ]: ToggleImmersiveAudioHandlers,
+    [ PerformerStateKey.TOGGLE_IMMERSIVE_AUDIO_HANDLERS ]: Maybe<ToggleImmersiveAudioHandlers>,
     [ PerformerStateKey.IMMERSIVE_AUDIO_READY ]: boolean,
     [ PerformerStateKey.IMMERSIVE_AUDIO_UNAVAILABLE ]: boolean,
     [ PerformerStateKey.IMMERSIVE_AUDIO_ENABLED ]: boolean,
     [ PerformerStateKey.PERFORMER_DISABLED ]: boolean,
+    [ PerformerStateKey.ON_UPDATE ]: Maybe<OnUpdate>,
 }
 
 type ImmutablePerformerState = TypedMap<PerformerState>
 
 type PerformerAction = ActionForState<PerformerState>
 
-enum KeyCodes {
-    SPACE = 32,
-    ESCAPE = 27,
-    HOME = 36,
-}
-
-interface TimelineOrTimeInMinutesAndSecondsProps {
-    disabled: boolean,
+interface TimelineOrTimeInMinutesAndSecondsProps extends PerformerDisabledParameter {
     patternDuration: Ms,
     timePosition: Ms,
 }
 
+interface PerformerDisabledParameter {
+    performerDisabled: boolean,
+}
+
 export {
     ImmutablePerformerState,
+    PerformerState,
     PerformerStateKey,
     PerformerAction,
-    KeyCodes,
     TimelineOrTimeInMinutesAndSecondsProps,
+    PerformerDisabledParameter,
 }

@@ -21,14 +21,14 @@ const mapStateToProps: (state: ImmutableState) => TimelineOrTimeInMinutesAndSeco
         const performerState: ImmutablePerformerState = state.get(StateKey.PERFORMER)
 
         return {
-            disabled: performerState.get(PerformerStateKey.PERFORMER_DISABLED),
             patternDuration: performerState.get(PerformerStateKey.PATTERN_DURATION),
+            performerDisabled: performerState.get(PerformerStateKey.PERFORMER_DISABLED),
             timePosition: performerState.get(PerformerStateKey.TIME_POSITION),
         }
     }
 
 const TimeInMinutesAndSeconds: React.ComponentType<TimelineOrTimeInMinutesAndSecondsProps> =
-    ({ disabled, patternDuration, timePosition }: TimelineOrTimeInMinutesAndSecondsProps): JSX.Element => {
+    ({ performerDisabled, patternDuration, timePosition }: TimelineOrTimeInMinutesAndSecondsProps): JSX.Element => {
         const { timePositionForDisplay } = formatTimesForDisplay({
             patternDuration,
             timePosition,
@@ -44,13 +44,13 @@ const TimeInMinutesAndSeconds: React.ComponentType<TimelineOrTimeInMinutesAndSec
             timeSecondsPart = `0${timeSecondsPart}`
         }
 
-        const disabledClassName: string = disabled ? 'disabled' : ''
+        const disabledClassName: string = performerDisabled ? 'disabled' : ''
 
         return (
             <div {...{ id: 'time-in-minutes-and-seconds', className: disabledClassName }}>
-                <div>{disabled ? '-' : timeMinutesPart}</div>
+                <div>{performerDisabled ? '-' : timeMinutesPart}</div>
                 <div>:</div>
-                <div>{disabled ? '--' : timeSecondsPart}</div>
+                <div>{performerDisabled ? '--' : timeSecondsPart}</div>
             </div>
         )
     }

@@ -1,15 +1,14 @@
-import { Ms } from '@musical-patterns/utilities'
+import { OnUpdate } from '@musical-patterns/performer'
+import { Maybe } from '@musical-patterns/utilities'
+import { PerformerDisabledParameter } from '../types'
 
-interface TimeControlsPropsFromState {
-    disabled: boolean,
+interface TimeControlsPropsFromState extends PerformerDisabledParameter {
+    onUpdate: Maybe<OnUpdate>,
     paused: boolean,
 }
 
 interface TimeControlsPropsFromDispatch {
-    handlePauseClickEvent: VoidFunction,
-    handlePlayClickEvent: VoidFunction,
-    handleRewindClickEvent: VoidFunction,
-    handleStopClickEvent: VoidFunction,
+    setOnUpdate: VoidFunction,
 }
 
 interface TimeControlsProps extends TimeControlsPropsFromState, TimeControlsPropsFromDispatch {}

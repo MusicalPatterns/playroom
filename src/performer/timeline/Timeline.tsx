@@ -14,14 +14,14 @@ const mapStateToProps: (state: ImmutableState) => TimelineOrTimeInMinutesAndSeco
         const performerState: ImmutablePerformerState = state.get(StateKey.PERFORMER)
 
         return {
-            disabled: performerState.get(PerformerStateKey.PERFORMER_DISABLED),
             patternDuration: performerState.get(PerformerStateKey.PATTERN_DURATION),
+            performerDisabled: performerState.get(PerformerStateKey.PERFORMER_DISABLED),
             timePosition: performerState.get(PerformerStateKey.TIME_POSITION),
         }
     }
 
 const Timeline: React.ComponentType<TimelineOrTimeInMinutesAndSecondsProps> =
-    ({ disabled, patternDuration, timePosition }: TimelineOrTimeInMinutesAndSecondsProps): JSX.Element => {
+    ({ performerDisabled, patternDuration, timePosition }: TimelineOrTimeInMinutesAndSecondsProps): JSX.Element => {
         const { timePositionForDisplay, patternDurationForDisplay } = formatTimesForDisplay({
             patternDuration,
             timePosition,
@@ -29,7 +29,7 @@ const Timeline: React.ComponentType<TimelineOrTimeInMinutesAndSecondsProps> =
 
         return (
             <input {...{
-                disabled,
+                disabled: performerDisabled,
                 id: 'timeline',
                 max: from.Ms(patternDurationForDisplay || 0),
                 min: 0,

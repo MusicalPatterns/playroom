@@ -31,11 +31,6 @@ const onKeyDown: (event: KeyboardEvent) => Promise<void> =
         }
     }
 
-const setupKeyboard: VoidFunction =
-    (): void => {
-        window.addEventListener('keydown', onKeyDown)
-    }
-
 export {
-    setupKeyboard,
+    onKeyDown,
 }
