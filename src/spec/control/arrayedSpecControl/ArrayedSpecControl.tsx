@@ -29,7 +29,7 @@ const ArrayedSpecControl: React.ComponentType<ArrayedSpecControlProps> =
         } = arrayedSpecControlProps
 
         return (
-            <div {...{ id: property, className: 'arrayed-spec-control' }}>
+            <div {...{ id: property, className: 'spec-control arrayed-spec-control' }}>
                 <div>{attributes[ property ].formattedName || camelCaseToLowerCase(property)}</div>
                 <ArrayedFields
                     {...{

@@ -5,7 +5,7 @@ import { Field, FieldPropsFromParent } from '../../field'
 
 const SingularSpecControl: React.ComponentType<FieldPropsFromParent> =
     (fieldProps: FieldPropsFromParent): JSX.Element => (
-        <div {...{ className: 'singular-spec-control' }} >
+        <div {...{ id: fieldProps.property, className: 'spec-control singular-spec-control' }} >
             <Field {...fieldProps}/>
         </div>
     )

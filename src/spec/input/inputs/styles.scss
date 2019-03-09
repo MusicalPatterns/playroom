@@ -8,14 +8,14 @@
   display: flex;
   align-items: center;
   justify-content: flex-end;
-  margin-left: 13px;
+  margin-left: $input-horizontal-spacing;
 
   input,
   select {
     @include hoverable-background($spec-control-background);
 
     min-width: $control-width;
-    margin-bottom: $input-bottom-spacing;
+    margin-left: $input-left-spacing !important;
     padding: 0 $input-horizontal-spacing;
     height: $control-height;
     border: none;

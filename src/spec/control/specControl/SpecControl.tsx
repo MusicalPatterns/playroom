@@ -19,6 +19,7 @@ import { ImmutableState, StateKey } from '../../../types'
 import { ImmutableSpecState, SpecStateKey } from '../../types'
 import { ArrayedSpecControl } from '../arrayedSpecControl'
 import { SingularSpecControl } from '../singularSpecControl'
+import './styles'
 import { SpecControlProps, SpecControlPropsFromState } from './types'
 
 const mapStateToProps: (state: ImmutableState) => SpecControlPropsFromState =

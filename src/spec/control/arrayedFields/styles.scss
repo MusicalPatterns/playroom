@@ -5,6 +5,7 @@
   display: flex;
   flex-wrap: wrap;
   justify-content: flex-end;
+  margin: 0 !important;
 
   .field {
     flex-direction: column;
@@ -15,7 +16,7 @@
       margin: 0 !important;
 
       input {
-        margin: 0 0 0 $arrayed-spec-control-input-vertical-spacing;
+        margin-bottom: $arrayed-spec-control-input-vertical-spacing;
         padding: 0 $arrayed-spec-control-input-horizontal-spacing;
         width: $arrayed-spec-control-input-width;
         min-width: $arrayed-spec-control-input-width;
