@@ -80,11 +80,11 @@ const SingularSpecControl: React.ComponentType<SingularSpecControlProps> =
             value: singularDisplayedValue,
         }
 
-        const secretClass: string = SecretTestSelectors.SUBMITTED_SPEC
+        const secretClassName: string = SecretTestSelectors.SUBMITTED_SPEC
 
         return (
             <div {...{ className: 'singular-spec-control', id, title: description }}>
-                <span {...{ className: secretClass }}>{stringifyIfNecessary(singularSubmittedValue)}</span>
+                <span {...{ className: secretClassName }}>{stringifyIfNecessary(singularSubmittedValue)}</span>
                 {isNotAnArrayedSpecControl && <div>{formattedName || camelCaseToLowerCase(property)}</div>}
                 <Field {...fieldProps}/>
                 <Units {...{ property }}/>

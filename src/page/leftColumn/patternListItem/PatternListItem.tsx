@@ -16,10 +16,10 @@ const PatternListItem: React.ComponentType<PatternListItemProps> =
             version,
         } = listedPattern.metadata
 
-        const selectedClass: string = !id ? '' : id === listedId ? 'selected' : 'not-selected'
+        const selectedClassName: string = !id ? '' : id === listedId ? 'selected' : 'not-selected'
 
         return (
-            <li {...{ className: selectedClass, id: listedId, onClick }} >
+            <li {...{ className: selectedClassName, id: listedId, onClick }} >
                 <div>{formattedName || constantCaseToUpperCase(listedId)}</div>
                 <div>{musicalIdeaIllustrated}</div>
                 <div>v{version}</div>

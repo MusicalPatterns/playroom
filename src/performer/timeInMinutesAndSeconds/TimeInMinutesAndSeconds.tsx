@@ -44,10 +44,10 @@ const TimeInMinutesAndSeconds: React.ComponentType<TimelineOrTimeInMinutesAndSec
             timeSecondsPart = `0${timeSecondsPart}`
         }
 
-        const disabledClass: string = disabled ? 'disabled' : ''
+        const disabledClassName: string = disabled ? 'disabled' : ''
 
         return (
-            <div {...{ id: 'time-in-minutes-and-seconds', className: disabledClass }}>
+            <div {...{ id: 'time-in-minutes-and-seconds', className: disabledClassName }}>
                 <div>{disabled ? '-' : timeMinutesPart}</div>
                 <div>:</div>
                 <div>{disabled ? '--' : timeSecondsPart}</div>

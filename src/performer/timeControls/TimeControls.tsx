@@ -52,8 +52,8 @@ const TimeControls: React.ComponentType<TimeControlsProps> =
             timePosition,
         } = timeControlsProps
         const controlId: string = paused ? 'play' : 'pause'
-        const icon: IconDefinition = paused ? faPlay : faPause
-        const disabledClass: string = disabled ? 'disabled' : ''
+        const playOrPauseIcon: IconDefinition = paused ? faPlay : faPause
+        const disabledClassName: string = disabled ? 'disabled' : ''
 
         const { timePositionForDisplay, patternDurationForDisplay } = formatTimesForDisplay({
             patternDuration,
@@ -61,7 +61,7 @@ const TimeControls: React.ComponentType<TimeControlsProps> =
         })
 
         return (
-            <div {...{ id: 'time-controls', className: disabledClass }}>
+            <div {...{ id: 'time-controls', className: disabledClassName }}>
                 <button {...{ id: 'rewind', onClick: handleRewindClickEvent, disabled }}>
                     <FontAwesomeIcon {...{ icon: faFastBackward }}/>
                 </button>
@@ -73,7 +73,7 @@ const TimeControls: React.ComponentType<TimeControlsProps> =
                     id: controlId,
                     onClick: paused ? handlePlayClickEvent : handlePauseClickEvent,
                 }}>
-                    <FontAwesomeIcon {...{ icon }}/>
+                    <FontAwesomeIcon {...{ icon: playOrPauseIcon }}/>
                 </button>
                 <Timeline/>
                 <TimeInMinutesAndSeconds/>
