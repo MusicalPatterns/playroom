@@ -23,7 +23,7 @@ const mapStateToProps: (state: ImmutableState) => PatternListPropsFromState =
         const pageState: ImmutablePageState = state.get(StateKey.PAGE)
 
         return {
-            id: pageState.get(PageStateKey.PATTERN_ID),
+            patternId: pageState.get(PageStateKey.PATTERN_ID),
             patterns: pageState.get(PageStateKey.PATTERNS),
             rightColumnOpen: pageState.get(PageStateKey.RIGHT_COLUMN_OPEN),
         }
@@ -38,20 +38,29 @@ const mapDispatchToProps: (dispatch: Dispatch) => PatternListPropsFromDispatch =
     })
 
 const PatternList: React.ComponentType<PatternListProps> =
-    ({ handlePatternChangeEvent, id, patterns, rightColumnOpen }: PatternListProps): JSX.Element => {
+    ({ handlePatternChangeEvent, patternId, patterns, rightColumnOpen }: PatternListProps): JSX.Element => {
         if (isUndefined(patterns)) {
             return <div/>
         }
 
         const onClick: EventHandler = (event: React.SyntheticEvent): void => {
-            handlePatternChangeEvent({ event, patterns, id, rightColumnOpen })
+            handlePatternChangeEvent({ event, patterns, patternId, rightColumnOpen })
         }
 
         const options: JSX.Element[] = map(
             entries(patterns)
                 .sort(sortByOrderOrPublishDate),
-            ([ listedId, listedPattern ]: [ Id, Pattern ], index: Ordinal): JSX.Element =>
-                <PatternListItem {...{ key: from.Ordinal(index), listedPattern, listedId, onClick, id }} />,
+            ([ listedPatternId, listedPattern ]: [ Id, Pattern ], index: Ordinal): JSX.Element => (
+                <PatternListItem
+                    {...{
+                        key: from.Ordinal(index),
+                        listedPattern,
+                        listedPatternId,
+                        onClick,
+                        patternId,
+                    }}
+                />
+            ),
         )
 
         return (

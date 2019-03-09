@@ -11,7 +11,7 @@ import { doAsync, isUndefined, Maybe, Ms } from '@musical-patterns/utilities'
 import * as React from 'react'
 import { connect } from 'react-redux'
 import { Dispatch } from 'redux'
-import { ImmutablePageState, maybePatternFromPatternsAndId, PageStateKey } from '../../page'
+import { ImmutablePageState, maybePatternFromPatternsAndPatternId, PageStateKey } from '../../page'
 import { SpecStateKey } from '../../spec'
 import { ImmutableState, StateKey } from '../../types'
 import { logDebugInfo } from './debug'
@@ -28,7 +28,7 @@ const mapStateToProps: (state: ImmutableState) => RecompileListenerPropsFromStat
 
         return {
             debugMode: pageState.get(PageStateKey.DEBUG_MODE),
-            id: pageState.get(PageStateKey.PATTERN_ID),
+            patternId: pageState.get(PageStateKey.PATTERN_ID),
             patterns: pageState.get(PageStateKey.PATTERNS),
             submittedSpec: state.get(StateKey.SPEC)
                 .get(SpecStateKey.SUBMITTED_SPEC),
@@ -43,9 +43,9 @@ const mapDispatchToProps: (dispatch: Dispatch) => RecompileListenerPropsFromDisp
 const RecompileListener: React.ComponentType<RecompileListenerProps> =
     (props: RecompileListenerProps): JSX.Element => {
         doAsync(async () => {
-            const { debugMode, id, patterns, submittedSpec, setPatternDuration } = props
+            const { debugMode, patternId, patterns, submittedSpec, setPatternDuration } = props
 
-            const pattern: Maybe<Pattern> = maybePatternFromPatternsAndId({ patterns, id })
+            const pattern: Maybe<Pattern> = maybePatternFromPatternsAndPatternId({ patterns, patternId })
             if (isUndefined(pattern)) {
                 return
             }

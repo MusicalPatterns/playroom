@@ -7,13 +7,13 @@ import { MaterialStateKey } from '../../../material'
 import { MetadataStateKey } from '../../../metadata'
 import { resetActions, SpecStateKey } from '../../../spec'
 import { Action } from '../../../types'
-import { maybePatternFromPatternsAndId } from '../../maybePatternFromPatternsAndId'
+import { maybePatternFromPatternsAndPatternId } from '../../maybePatternFromPatternsAndPatternId'
 import { PageStateKey } from '../../types'
 import { adjustWindowActionsWithSideEffects } from '../adjustWindowActions'
 import { openRightColumn } from '../rightColumnActions'
 import { HandlePatternChange, HandlePatternChangeParameters } from './types'
 
-const idFromEvent: (event: React.SyntheticEvent) => Id =
+const getPatternIdFromEvent: (event: React.SyntheticEvent) => Id =
     (event: React.SyntheticEvent): Id => {
         const target: EventTarget & Element = event.currentTarget
         if (isId(target.id)) {
@@ -30,30 +30,30 @@ const getPatternName: (parameters: { metadata: Metadata, newId: Id }) => string 
 
 const handlePatternChange: HandlePatternChange =
     async (parameters: HandlePatternChangeParameters): Promise<void> => {
-        const { dispatch, event, patterns, id: previousId, rightColumnOpen } = parameters
-        const newId: Id = idFromEvent(event)
-        if (newId === previousId) {
+        const { dispatch, event, patterns, patternId: previousPatternId, rightColumnOpen } = parameters
+        const newPatternId: Id = getPatternIdFromEvent(event)
+        if (newPatternId === previousPatternId) {
             return
         }
 
-        const pattern: Maybe<Pattern> = maybePatternFromPatternsAndId({ patterns, id: newId })
+        const pattern: Maybe<Pattern> = maybePatternFromPatternsAndPatternId({ patterns, patternId: newPatternId })
         if (isUndefined(pattern)) {
-            throw new Error(`pattern for id ${newId} was not found`)
+            throw new Error(`pattern for id ${newPatternId} was not found`)
         }
 
         const { data, metadata } = pattern
         const initialSpec: Spec = data.initial
         const post: string = metadata.description || ''
-        const patternName: string = getPatternName({ metadata, newId })
+        const patternName: string = getPatternName({ metadata, newId: newPatternId })
 
         const actions: Action[] = resetActions(initialSpec)
             .concat([
+                { type: PageStateKey.PATTERN_ID, data: newPatternId },
+                { type: PageStateKey.PAGE_NAME, data: undefined },
                 { type: SpecStateKey.INITIAL_SPEC, data: initialSpec },
-                { type: PageStateKey.PATTERN_ID, data: newId },
                 { type: SpecStateKey.ATTRIBUTES, data: data.attributes },
                 { type: SpecStateKey.VALIDATION_FUNCTION, data: data.validationFunction },
                 { type: SpecStateKey.PRESETS, data: data.presets },
-                { type: PageStateKey.PAGE_NAME, data: undefined },
                 { type: MaterialStateKey.PERFORMER_DISABLED, data: false },
                 { type: MetadataStateKey.POST, data: post },
                 { type: MetadataStateKey.PATTERN_NAME, data: patternName },

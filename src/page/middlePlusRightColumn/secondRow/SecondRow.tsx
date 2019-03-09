@@ -15,14 +15,14 @@ const mapStateToProps: (state: ImmutableState) => SecondRowProps =
         const pageState: ImmutablePageState = state.get(StateKey.PAGE)
 
         return {
-            id: pageState.get(PageStateKey.PATTERN_ID),
             pageName: pageState.get(PageStateKey.PAGE_NAME),
+            patternId: pageState.get(PageStateKey.PATTERN_ID),
         }
     }
 
 const SecondRow: React.ComponentType<SecondRowProps> =
-    ({ id, pageName }: SecondRowProps): JSX.Element => {
-        const showTitle: boolean = getShowTitle({ id, pageName })
+    ({ patternId, pageName }: SecondRowProps): JSX.Element => {
+        const showTitle: boolean = getShowTitle({ patternId, pageName })
         const openClassName: string = getOpenClassName({ showTitle })
 
         return (
@@ -31,7 +31,7 @@ const SecondRow: React.ComponentType<SecondRowProps> =
                     {showTitle && <Title/>}
                 </div>
                 <div {...{ className: 'right' }} >
-                    {id && <SpecPanel/>}
+                    {patternId && <SpecPanel/>}
                 </div>
             </div>
         )

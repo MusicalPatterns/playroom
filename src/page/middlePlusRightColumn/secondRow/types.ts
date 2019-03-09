@@ -3,8 +3,8 @@ import { Maybe } from '@musical-patterns/utilities'
 import { PageName } from '../../types'
 
 interface SecondRowProps {
-    id: Maybe<Id>,
     pageName: Maybe<PageName>,
+    patternId: Maybe<Id>,
 }
 
 export {

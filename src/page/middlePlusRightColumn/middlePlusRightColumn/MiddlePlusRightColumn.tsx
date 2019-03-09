@@ -17,18 +17,18 @@ const mapStateToProps: (state: ImmutableState) => MiddlePlusRightColumnProps =
         const pageState: ImmutablePageState = state.get(StateKey.PAGE)
 
         return {
-            id: pageState.get(PageStateKey.PATTERN_ID),
             pageName: pageState.get(PageStateKey.PAGE_NAME),
+            patternId: pageState.get(PageStateKey.PATTERN_ID),
             rightColumnOpen: pageState.get(PageStateKey.RIGHT_COLUMN_OPEN),
         }
     }
 
 const MiddlePlusRightColumn: React.ComponentType<MiddlePlusRightColumnProps> =
-    ({ id, pageName, rightColumnOpen }: MiddlePlusRightColumnProps): JSX.Element => (
+    ({ patternId, pageName, rightColumnOpen }: MiddlePlusRightColumnProps): JSX.Element => (
         <div {...{ id: 'middle-plus-right-column', className: `right-column-${rightColumnOpen ? 'open' : 'closed'}` }}>
             <FirstRow/>
             <SecondRow/>
-            {id && <Post/>}
+            {patternId && <Post/>}
             {pageName && <Page/>}
             <BottomRow/>
         </div>

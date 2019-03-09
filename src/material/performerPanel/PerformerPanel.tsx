@@ -15,19 +15,19 @@ const mapStateToProps: (state: ImmutableState) => PerformerPanelProps =
         const pageState: ImmutablePageState = state.get(StateKey.PAGE)
 
         return {
-            id: pageState
-                .get(PageStateKey.PATTERN_ID),
             pageName: pageState
                 .get(PageStateKey.PAGE_NAME),
+            patternId: pageState
+                .get(PageStateKey.PATTERN_ID),
         }
     }
 
 const PerformerPanel: React.ComponentType<PerformerPanelProps> =
-    ({ id, pageName }: PerformerPanelProps): JSX.Element => (
+    ({ patternId, pageName }: PerformerPanelProps): JSX.Element => (
         <div {...{ id: 'performer-panel', className: !pageName ? 'open' : 'closed' }}>
             <TimeControls/>
             <ToggleImmersiveAudioButton/>
-            {id && <RecompileListener/>}
+            {patternId && <RecompileListener/>}
         </div>
     )
 

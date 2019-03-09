@@ -3,7 +3,7 @@ import { Maybe } from '@musical-patterns/utilities'
 import { DispatchParameter, EventParameter } from '../../../types'
 
 interface PatternListPropsFromState {
-    id: Maybe<Id>,
+    patternId: Maybe<Id>,
     patterns: Maybe<Partial<Patterns>>,
     rightColumnOpen: boolean,
 }

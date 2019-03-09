@@ -28,7 +28,7 @@ type ImmutablePageState = TypedMap<PageState>
 type PageAction = ActionForState<PageState>
 
 interface GetPatternParameters {
-    id: Maybe<Id>,
+    patternId: Maybe<Id>,
     patterns: Maybe<Partial<Patterns>>
 }
 

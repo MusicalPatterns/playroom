@@ -3,7 +3,7 @@ import { Maybe, Ms } from '@musical-patterns/utilities'
 
 interface RecompileListenerPropsFromState {
     debugMode: boolean,
-    id: Maybe<Id>,
+    patternId: Maybe<Id>,
     patterns: Maybe<Partial<Patterns>>,
     submittedSpec: Spec,
 }
