@@ -2,8 +2,8 @@
 
 import * as React from 'react'
 import { Hamburger } from '../hamburger'
+import { Logo } from '../logo'
 import { PatternList } from '../patternList'
-import { Title } from '../title'
 import './styles'
 
 const PatternPanel: React.ComponentType =
@@ -11,7 +11,7 @@ const PatternPanel: React.ComponentType =
         <div {...{ id: 'pattern-panel' }}>
             <Hamburger/>
             <PatternList/>
-            <Title/>
+            <Logo/>
         </div>
     )
 

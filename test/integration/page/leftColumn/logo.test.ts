@@ -10,7 +10,7 @@ import {
     LONG_ENOUGH_FOR_TIME_TO_PASS,
     quickRefresh,
     refreshPage,
-    selectAboutPageByClickingTitle,
+    selectAboutPageByClickingLogo,
     selectLongDurationPattern,
     selectSpecControlsPattern,
     simulateDesktopViewport,
@@ -21,13 +21,13 @@ import { clickTimeControl } from '../../../support/time'
 
 const selectAboutPageWithoutAlsoSimulatingDesktopViewport: () => Promise<void> =
     async (): Promise<void> => {
-        await clickElement('#title h1')
+        await clickElement('#logo h1')
         await waitLongEnoughForAnimationToComplete()
     }
 
 const selectAboutPageBySymbol: () => Promise<void> =
     async (): Promise<void> => {
-        await clickElement('#title svg')
+        await clickElement('#logo svg')
         await waitLongEnoughForAnimationToComplete()
     }
 
@@ -37,7 +37,7 @@ const titleIs: (expectedTitle: string) => Promise<void> =
             .toBe(expectedTitle)
     }
 
-describe('title', () => {
+describe('logo', () => {
     beforeEach(async (done: DoneFn) => {
         await quickRefresh()
         await selectSpecControlsPattern()
@@ -45,39 +45,39 @@ describe('title', () => {
         done()
     })
 
-    it('clicking the title shows the about page', async (done: DoneFn) => {
-        await selectAboutPageByClickingTitle()
+    it('clicking the logo shows the about page', async (done: DoneFn) => {
+        await selectAboutPageByClickingLogo()
         await titleIs('About')
 
         done()
     })
 
-    it('clicking the title completely removes the spec panel', async (done: DoneFn) => {
-        await selectAboutPageByClickingTitle()
+    it('clicking the logo completely removes the spec panel', async (done: DoneFn) => {
+        await selectAboutPageByClickingLogo()
         expect(await elementExists('#spec-panel'))
             .toBeFalsy('spec panel was still shown')
 
         done()
     })
 
-    it('clicking the title hides the performer panel', async (done: DoneFn) => {
-        await selectAboutPageByClickingTitle()
+    it('clicking the logo hides the performer panel', async (done: DoneFn) => {
+        await selectAboutPageByClickingLogo()
         expect(await elementExists('#performer-panel.closed'))
             .toBeTruthy('performer panel was not hidden')
 
         done()
     })
 
-    it('clicking the title hides the right column', async (done: DoneFn) => {
-        await selectAboutPageByClickingTitle()
+    it('clicking the logo hides the right column', async (done: DoneFn) => {
+        await selectAboutPageByClickingLogo()
         expect(await elementExists('#middle-plus-right-column.right-column-closed'))
             .toBeTruthy('right column was not hidden')
 
         done()
     })
 
-    it('no longer shows the about page if you select a pattern from the list after clicking the title', async (done: DoneFn) => {
-        await selectAboutPageByClickingTitle()
+    it('no longer shows the about page if you select a pattern from the list after clicking the logo', async (done: DoneFn) => {
+        await selectAboutPageByClickingLogo()
 
         await selectSpecControlsPattern()
         await titleIs('Playroom Test Spec Controls')
@@ -100,7 +100,7 @@ describe('title', () => {
             done()
         })
 
-        it('collapses the left column when you click the title', async (done: DoneFn) => {
+        it('collapses the left column when you click the logo', async (done: DoneFn) => {
             await leftColumnIs('open')
 
             await selectAboutPageWithoutAlsoSimulatingDesktopViewport()
@@ -110,7 +110,7 @@ describe('title', () => {
         })
     })
 
-    it('can also access the about page by clicking on the symbol in the title', async (done: DoneFn) => {
+    it('can also access the about page by clicking on the symbol in the logo', async (done: DoneFn) => {
         await selectAboutPageBySymbol()
         await titleIs('About')
 
@@ -136,7 +136,7 @@ describe('title', () => {
 
         it('when you navigate to the about page, it stops playing and resets the time to the beginning', async (done: DoneFn) => {
             await sleep(A_BIT_LONGER)
-            await selectAboutPageByClickingTitle()
+            await selectAboutPageByClickingLogo()
 
             await hasBeenReset()
             await isPaused()

@@ -10,7 +10,7 @@ export {
 }from './selectPattern'
 export { quickRefresh, refreshPage, refreshForSpecControlsTest }from './refresh'
 export { waitForHeadfulQaing, waitLongEnoughForAnimationToComplete } from './wait'
-export { selectAboutPageByClickingTitle } from './aboutPage'
+export { selectAboutPageByClickingLogo } from './aboutPage'
 export { leftColumnIs } from './leftColumn'
 export { openSpecControlsIfNotOpen } from './caret'
 export { currentTime, patternDuration, isPlaying, isPaused, hasBeenReset } from './time'

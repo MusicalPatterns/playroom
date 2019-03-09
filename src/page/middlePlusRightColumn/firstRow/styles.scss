@@ -2,7 +2,7 @@
 @import '../sizes';
 
 #first-row {
-  min-height: $first-row-height;
+  min-height: $row-min-height;
 
   @include animate(min-height);
 

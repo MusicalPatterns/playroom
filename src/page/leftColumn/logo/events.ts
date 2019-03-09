@@ -7,11 +7,10 @@ import { Action } from '../../../types'
 import { PageName, PageStateKey } from '../../types'
 import { adjustWindowActionsWithSideEffects } from '../adjustWindowActions'
 import { closeRightColumn } from '../rightColumnActions'
-import { TitleClickEventHandler, TitleClickEventHandlerParameters } from './types'
+import { HandleLogoClick, HandleLogoClickParameters } from './types'
 
-const handleTitleClick: TitleClickEventHandler =
-    async ({ dispatch, titleClickEventParameters }: TitleClickEventHandlerParameters): Promise<void> => {
-        const { rightColumnOpen } = titleClickEventParameters
+const handleLogoClick: HandleLogoClick =
+    async ({ dispatch, rightColumnOpen }: HandleLogoClickParameters): Promise<void> => {
         await stop()
 
         const actions: Action[] = adjustWindowActionsWithSideEffects()
@@ -36,5 +35,5 @@ const handleTitleClick: TitleClickEventHandler =
     }
 
 export {
-    handleTitleClick,
+    handleLogoClick,
 }

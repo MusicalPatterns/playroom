@@ -9,11 +9,10 @@ import { maybePatternFromPatternsAndId } from '../../maybePatternFromPatternsAnd
 import { PageStateKey } from '../../types'
 import { adjustWindowActionsWithSideEffects } from '../adjustWindowActions'
 import { openRightColumn } from '../rightColumnActions'
-import { PatternChangeEventHandler, PatternChangeEventHandlerParameters } from './types'
+import { HandlePatternChange, HandlePatternChangeParameters } from './types'
 
-const handlePatternChange: PatternChangeEventHandler =
-    async ({ dispatch, patternChangeEventParameters }: PatternChangeEventHandlerParameters): Promise<void> => {
-        const { event, patterns, id, rightColumnOpen } = patternChangeEventParameters
+const handlePatternChange: HandlePatternChange =
+    async ({ dispatch, event, patterns, id, rightColumnOpen }: HandlePatternChangeParameters): Promise<void> => {
         const target: EventTarget & Element = event.currentTarget
         let newId: Id
         if (isId(target.id)) {

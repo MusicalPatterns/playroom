@@ -12,7 +12,7 @@ import { handlePatternChange } from './events'
 import { sortByOrderOrPublishDate } from './sort'
 import './styles'
 import {
-    PatternChangeEventParameters,
+    HandlePatternChangeEventParameters,
     PatternListProps,
     PatternListPropsFromDispatch,
     PatternListPropsFromState,
@@ -31,9 +31,10 @@ const mapStateToProps: (state: ImmutableState) => PatternListPropsFromState =
 
 const mapDispatchToProps: (dispatch: Dispatch) => PatternListPropsFromDispatch =
     (dispatch: Dispatch): PatternListPropsFromDispatch => ({
-        handlePatternChangeEvent: async (patternChangeEventParameters: PatternChangeEventParameters): Promise<void> => {
-            await handlePatternChange({ dispatch, patternChangeEventParameters })
-        },
+        handlePatternChangeEvent:
+            async (handlePatternChangeEventParameters: HandlePatternChangeEventParameters): Promise<void> => {
+                await handlePatternChange({ dispatch, ...handlePatternChangeEventParameters })
+            },
     })
 
 const PatternList: React.ComponentType<PatternListProps> =

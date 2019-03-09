@@ -1,12 +1,13 @@
 // tslint:disable variable-name file-name-casing no-default-export no-import-side-effect
 
+import { isUndefined } from '@musical-patterns/utilities'
 import * as React from 'react'
 import { connect } from 'react-redux'
 import { SpecPanel } from '../../../spec'
 import { ImmutableState, StateKey } from '../../../types'
 import { ImmutablePageState, PageStateKey } from '../../types'
-import { PatternTitle } from '../patternTitle'
 import { SpecAndPatternListener } from '../specAndPatternListener'
+import { Title } from '../title'
 import './styles'
 import { SecondRowProps } from './types'
 
@@ -22,25 +23,21 @@ const mapStateToProps: (state: ImmutableState) => SecondRowProps =
 
 const SecondRow: React.ComponentType<SecondRowProps> =
     ({ id, pageName }: SecondRowProps): JSX.Element => {
-        if (pageName || !id) {
-            return (
-                <div {...{ className: 'row closed', id: 'second-row' }} >
-                    <div {...{ className: 'middle' }} />
-                    <div {...{ className: 'right' }} >
-                    </div>
-                </div>
-            )
-        }
+        const stuffToShow: boolean = !isUndefined(pageName) || !isUndefined(id)
 
         return (
-            <div {...{ className: 'row open', id: 'second-row' }} >
+            <div {...{ className: `row ${stuffToShow ? 'open' : 'closed'}`, id: 'second-row' }} >
                 <div {...{ className: 'middle' }} >
-                    <PatternTitle/>
+                    {stuffToShow && <Title/>}
                 </div>
-                <div {...{ className: 'right' }} >
-                    <SpecPanel/>
-                    <SpecAndPatternListener/>
-                </div>
+                {
+                    id ?
+                        <div {...{ className: 'right' }} >
+                            <SpecPanel/>
+                            <SpecAndPatternListener/>
+                        </div> :
+                        <div {...{ className: 'right' }} />
+                }
             </div>
         )
     }

@@ -1,5 +1,5 @@
 import { page } from '../setup'
-import { selectAboutPageByClickingTitle } from './aboutPage'
+import { selectAboutPageByClickingLogo } from './aboutPage'
 import { openSpecControlsIfNotOpen } from './caret'
 import { APP_URL } from './constants'
 import { simulateDesktopViewport } from './generic'
@@ -13,7 +13,7 @@ const refreshPage: () => Promise<void> =
 
 const quickRefresh: () => Promise<void> =
     async (): Promise<void> => {
-        await selectAboutPageByClickingTitle()
+        await selectAboutPageByClickingLogo()
     }
 
 const refreshForSpecControlsTest: () => Promise<void> =

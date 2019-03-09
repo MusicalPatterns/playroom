@@ -5,25 +5,22 @@ import { connect } from 'react-redux'
 import { ImmutableState, StateKey } from '../../../types'
 import { ImmutablePageState, PageStateKey } from '../../types'
 import { getPatternTitle } from './getPatternTitle'
-import { PatternTitleProps } from './types'
+import { TitleProps } from './types'
 
-const mapStateToProps: (state: ImmutableState) => PatternTitleProps =
-    (state: ImmutableState): PatternTitleProps => {
+const mapStateToProps: (state: ImmutableState) => TitleProps =
+    (state: ImmutableState): TitleProps => {
         const pageState: ImmutablePageState = state.get(StateKey.PAGE)
 
         return {
             id: pageState.get(PageStateKey.PATTERN_ID),
+            pageName: pageState.get(PageStateKey.PAGE_NAME),
             patterns: pageState.get(PageStateKey.PATTERNS),
         }
     }
 
-const PatternTitle: React.ComponentType<PatternTitleProps> =
-    ({ patterns, id }: PatternTitleProps): JSX.Element => {
-        const patternTitle: string = getPatternTitle({ patterns, id })
+const Title: React.ComponentType<TitleProps> =
+    ({ pageName, patterns, id }: TitleProps): JSX.Element => (
+        <h1>{pageName || getPatternTitle({ patterns, id })}</h1>
+    )
 
-        return (
-            <h1>{patternTitle}</h1>
-        )
-    }
-
-export default connect(mapStateToProps)(PatternTitle)
+export default connect(mapStateToProps)(Title)

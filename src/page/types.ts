@@ -2,7 +2,7 @@ import { Id, Patterns } from '@musical-patterns/pattern'
 import { ActionForState, Maybe, TypedMap } from '@musical-patterns/utilities'
 
 enum PageName {
-    ABOUT = 'ABOUT',
+    ABOUT = 'About',
 }
 
 enum PageStateKey {

@@ -9,27 +9,25 @@ interface PatternListPropsFromState {
 }
 
 interface PatternListPropsFromDispatch {
-    handlePatternChangeEvent: PatternChangeEventExtractor,
+    handlePatternChangeEvent: HandlePatternChangeEvent,
 }
 
 interface PatternListProps extends PatternListPropsFromState, PatternListPropsFromDispatch {}
 
-interface PatternChangeEventHandlerParameters extends DispatchParameter {
-    patternChangeEventParameters: PatternChangeEventParameters,
-}
+interface HandlePatternChangeEventParameters extends EventParameter, PatternListPropsFromState {}
 
-type PatternChangeEventHandler = (parameters: PatternChangeEventHandlerParameters) => Promise<void>
+type HandlePatternChangeEvent = (parameters: HandlePatternChangeEventParameters) => void
 
-interface PatternChangeEventParameters extends EventParameter, PatternListPropsFromState {}
+interface HandlePatternChangeParameters extends DispatchParameter, HandlePatternChangeEventParameters {}
 
-type PatternChangeEventExtractor = (parameters: PatternChangeEventParameters) => void
+type HandlePatternChange = (parameters: HandlePatternChangeParameters) => Promise<void>
 
 export {
     PatternListPropsFromState,
     PatternListPropsFromDispatch,
     PatternListProps,
-    PatternChangeEventParameters,
-    PatternChangeEventExtractor,
-    PatternChangeEventHandler,
-    PatternChangeEventHandlerParameters,
+    HandlePatternChangeEventParameters,
+    HandlePatternChangeEvent,
+    HandlePatternChange,
+    HandlePatternChangeParameters,
 }

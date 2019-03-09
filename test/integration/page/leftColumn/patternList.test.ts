@@ -168,11 +168,11 @@ describe('pattern list', () => {
             done()
         })
 
-        it('shows a header for the pattern', async (done: DoneFn) => {
-            const patternTitle: string = await elementInnerText('#second-row h1')
+        it(`shows the pattern's name as the title`, async (done: DoneFn) => {
+            const title: string = await elementInnerText('#second-row h1')
 
-            expect(patternTitle)
-                .toBe('Playroom Test Spec Controls', 'header for the pattern\'s title was not shown')
+            expect(title)
+                .toBe('Playroom Test Spec Controls', `title was not the pattern's name`)
 
             done()
         })
@@ -191,7 +191,7 @@ describe('pattern list', () => {
                     done()
                 })
 
-                it('sets the spec to the new pattern\'s initial', async (done: DoneFn) => {
+                it(`sets the spec to the new pattern's initial`, async (done: DoneFn) => {
                     await expectInitial()
 
                     await selectPostPattern()

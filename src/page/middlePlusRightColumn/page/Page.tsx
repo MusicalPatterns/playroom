@@ -19,7 +19,6 @@ const Page: React.ComponentType<PageProps> =
                 return (
                     <div {...{ className: 'row' }}>
                         <div {...{ className: 'middle' }}>
-                            <h1>About</h1>
                             <p>
                                 Welcome to Musical Patterns. The music here
                                 has <a {...{ href: 'https://github.com/MusicalPatterns', target: '_blank' }}>all been

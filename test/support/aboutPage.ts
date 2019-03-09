@@ -1,13 +1,13 @@
 import { clickElement, simulateDesktopViewport } from './generic'
 import { waitLongEnoughForAnimationToComplete } from './wait'
 
-const selectAboutPageByClickingTitle: () => Promise<void> =
+const selectAboutPageByClickingLogo: () => Promise<void> =
     async (): Promise<void> => {
         await simulateDesktopViewport()
-        await clickElement('#title h1')
+        await clickElement('#logo h1')
         await waitLongEnoughForAnimationToComplete()
     }
 
 export {
-    selectAboutPageByClickingTitle,
+    selectAboutPageByClickingLogo,
 }

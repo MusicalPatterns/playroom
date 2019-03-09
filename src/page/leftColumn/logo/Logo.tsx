@@ -5,34 +5,34 @@ import { connect } from 'react-redux'
 import { Dispatch } from 'redux'
 import { EventHandler, ImmutableState, StateKey } from '../../../types'
 import { PageStateKey } from '../../types'
-import { handleTitleClick } from './events'
+import { handleLogoClick } from './events'
 import './styles'
 // @ts-ignore
 // tslint:disable-next-line no-default-import
 import SymbolSvg from './symbol.svg'
-import { TitleClickEventParameters, TitleProps, TitlePropsFromDispatch, TitlePropsFromState } from './types'
+import { HandleLogoClickEventParameters, LogoProps, LogoPropsFromDispatch, LogoPropsFromState } from './types'
 
-const mapStateToProps: (state: ImmutableState) => TitlePropsFromState =
-    (state: ImmutableState): TitlePropsFromState => ({
+const mapStateToProps: (state: ImmutableState) => LogoPropsFromState =
+    (state: ImmutableState): LogoPropsFromState => ({
         rightColumnOpen: state.get(StateKey.PAGE)
             .get(PageStateKey.RIGHT_COLUMN_OPEN),
     })
 
-const mapDispatchToProps: (dispatch: Dispatch) => TitlePropsFromDispatch =
-    (dispatch: Dispatch): TitlePropsFromDispatch => ({
-        handleTitleClickEvent: async (titleClickEventParameters: TitleClickEventParameters): Promise<void> => {
-            await handleTitleClick({ dispatch, titleClickEventParameters })
+const mapDispatchToProps: (dispatch: Dispatch) => LogoPropsFromDispatch =
+    (dispatch: Dispatch): LogoPropsFromDispatch => ({
+        handleLogoClickEvent: async (logoClickEventParameters: HandleLogoClickEventParameters): Promise<void> => {
+            await handleLogoClick({ dispatch, ...logoClickEventParameters })
         },
     })
 
-const Title: React.ComponentType<TitleProps> =
-    ({ handleTitleClickEvent, rightColumnOpen }: TitleProps): JSX.Element => {
+const Logo: React.ComponentType<LogoProps> =
+    ({ handleLogoClickEvent, rightColumnOpen }: LogoProps): JSX.Element => {
         const onClick: EventHandler = (event: React.SyntheticEvent): void => {
-            handleTitleClickEvent({ event, rightColumnOpen })
+            handleLogoClickEvent({ event, rightColumnOpen })
         }
 
         return (
-            <div {...{ id: 'title' }}>
+            <div {...{ id: 'logo' }}>
                 <div {...{ onClick }}>
                     <SymbolSvg/>
                 </div>
@@ -44,4 +44,4 @@ const Title: React.ComponentType<TitleProps> =
         )
     }
 
-export default connect(mapStateToProps, mapDispatchToProps)(Title)
+export default connect(mapStateToProps, mapDispatchToProps)(Logo)
