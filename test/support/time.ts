@@ -1,4 +1,4 @@
-import { DECIMAL, from, Ms, sleep, to } from '@musical-patterns/utilities'
+import { from, Ms, parseInteger, sleep, to } from '@musical-patterns/utilities'
 import { SecretTestSelectors } from '../../src/indexForTest'
 import { LONG_ENOUGH_FOR_TIME_TO_HAVE_BEEN_RESET, LONG_ENOUGH_FOR_TIME_TO_PASS } from './constants'
 import { clickElement, elementInnerText } from './generic'
@@ -40,17 +40,11 @@ const hasBeenReset: (options?: { toBefore?: Ms }) => Promise<void> =
 
 const currentTime: () => Promise<Ms> =
     async (): Promise<Ms> =>
-        to.Ms(parseInt(
-            await elementInnerText(`#${SecretTestSelectors.TIME_POSITION}`),
-            from.Integer(DECIMAL),
-        ))
+        to.Ms(parseInteger(await elementInnerText(`#${SecretTestSelectors.TIME_POSITION}`)))
 
 const patternDuration: () => Promise<Ms> =
     async (): Promise<Ms> =>
-        to.Ms(parseInt(
-            await elementInnerText(`#${SecretTestSelectors.PATTERN_DURATION}`),
-            from.Integer(DECIMAL),
-        ))
+        to.Ms(parseInteger(await elementInnerText(`#${SecretTestSelectors.PATTERN_DURATION}`)))
 
 const clickTimeControl: (control: string) => Promise<void> =
     async (control: string): Promise<void> => {
