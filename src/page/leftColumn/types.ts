@@ -1,7 +1,6 @@
-import { Dispatch } from 'redux'
+import { DispatchParameter } from '../../types'
 
-interface ToggleRightColumnOpenParameters {
-    dispatch: Dispatch,
+interface ToggleRightColumnOpenParameters extends DispatchParameter {
     rightColumnOpen: boolean,
 }
 

@@ -1,6 +1,7 @@
 import { TypedMap } from '@musical-patterns/utilities'
 import * as React from 'react'
 import { Dispatch } from 'redux'
+import { BatchAction } from 'redux-batched-actions'
 import { ImmutablePageState, PageAction } from './page'
 import { ImmutablePerformerState, PerformerAction } from './performer'
 import { ImmutableSpecState, SpecAction } from './spec'
@@ -12,7 +13,7 @@ enum SecretTestSelectors {
 }
 
 interface DispatchParameter {
-    dispatch: Dispatch,
+    dispatch: Dispatch<Action>,
 }
 
 interface EventParameter {
@@ -27,7 +28,7 @@ interface WithClickHandler {
 
 type AsyncEventHandler = (event: React.SyntheticEvent) => Promise<void>
 
-type Action = SpecAction | PerformerAction | PageAction
+type Action = SpecAction | PerformerAction | PageAction | BatchAction
 
 enum StateKey {
     PAGE = 'PAGE',
