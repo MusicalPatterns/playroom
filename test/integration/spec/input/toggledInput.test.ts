@@ -1,4 +1,4 @@
-import { SecretSelectorsForTest } from '../../../../src/indexForTest'
+import { SecretTestSelectors } from '../../../../src/indexForTest'
 import {
     clickElement,
     elementInnerText,
@@ -14,7 +14,7 @@ const modifyToggledInput: () => Promise<void> =
 
 const toggledInputIsModified: () => Promise<void> =
     async (): Promise<void> => {
-        expect(await elementInnerText(`#${TOGGLED_PROPERTY_KEY} .${SecretSelectorsForTest.SECRET_SUBMITTED_SPEC}`))
+        expect(await elementInnerText(`#${TOGGLED_PROPERTY_KEY} .${SecretTestSelectors.SUBMITTED_SPEC}`))
             .toBe(`${SPEC_CONTROLS_PATTERN_TOGGLED_PROPERTY_MODIFIED_VALUE}`, 'toggled input was not modified')
     }
 

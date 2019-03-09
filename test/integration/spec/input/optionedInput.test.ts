@@ -1,19 +1,23 @@
-import { SecretSelectorsForTest } from '../../../../src/indexForTest'
+import { SecretTestSelectors } from '../../../../src/indexForTest'
 import {
     elementInnerText,
-    OPTIONED_PROPERTY_TWO_KEY, refreshForSpecControlsTest,
+    OPTIONED_PROPERTY_TWO_KEY,
+    refreshForSpecControlsTest,
     selectOption,
     SPEC_CONTROLS_PATTERN_OPTIONED_PROPERTY_TWO_MODIFIED_VALUE,
 } from '../../../support'
 
 const modifyOptionedInput: () => Promise<void> =
     async (): Promise<void> => {
-        await selectOption(`select#${OPTIONED_PROPERTY_TWO_KEY}`, SPEC_CONTROLS_PATTERN_OPTIONED_PROPERTY_TWO_MODIFIED_VALUE)
+        await selectOption(
+            `select#${OPTIONED_PROPERTY_TWO_KEY}`,
+            SPEC_CONTROLS_PATTERN_OPTIONED_PROPERTY_TWO_MODIFIED_VALUE,
+        )
     }
 
 const optionedInputIsModified: () => Promise<void> =
     async (): Promise<void> => {
-        expect(await elementInnerText(`#${OPTIONED_PROPERTY_TWO_KEY} .${SecretSelectorsForTest.SECRET_SUBMITTED_SPEC}`))
+        expect(await elementInnerText(`#${OPTIONED_PROPERTY_TWO_KEY} .${SecretTestSelectors.SUBMITTED_SPEC}`))
             .toBe(SPEC_CONTROLS_PATTERN_OPTIONED_PROPERTY_TWO_MODIFIED_VALUE, 'optioned input was not modified')
     }
 

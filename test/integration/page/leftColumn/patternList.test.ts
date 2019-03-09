@@ -1,6 +1,6 @@
 import { Ms, sleep } from '@musical-patterns/utilities'
 import { ElementHandle } from 'puppeteer'
-import { FieldValidity, SecretSelectorsForTest } from '../../../../src/indexForTest'
+import { FieldValidity, SecretTestSelectors } from '../../../../src/indexForTest'
 import {
     A_BIT_LONGER,
     BAD_FORMAT_INVALID_TEST_MODIFICATION,
@@ -26,7 +26,8 @@ import {
     selectLongDurationPattern,
     selectOption,
     selectPostPattern,
-    selectSpecControlsPattern, selectTimeControlsPattern,
+    selectSpecControlsPattern,
+    selectTimeControlsPattern,
     simulateDesktopViewport,
     simulateMobileViewport,
     SPEC_CONTROLS_PATTERN_ID,
@@ -41,26 +42,50 @@ import { clickTimeControl } from '../../../support/time'
 
 const expectInitial: () => Promise<void> =
     async (): Promise<void> => {
-        expect(await elementInnerText(`#${RANGED_PROPERTY_ONE_KEY} .${SecretSelectorsForTest.SECRET_SUBMITTED_SPEC}`))
-            .toBe(`${SPEC_CONTROLS_PATTERN_RANGED_PROPERTY_ONE_INITIAL_VALUE}`, 'spec ranged property one was not in its initial state')
-        expect(await elementInnerText(`#${RANGED_PROPERTY_TWO_KEY} .${SecretSelectorsForTest.SECRET_SUBMITTED_SPEC}`))
-            .toBe(`${SPEC_CONTROLS_PATTERN_RANGED_PROPERTY_TWO_INITIAL_VALUE}`, 'spec ranged property two was not in its initial state')
-        expect(await elementInnerText(`#${OPTIONED_PROPERTY_ONE_KEY} .${SecretSelectorsForTest.SECRET_SUBMITTED_SPEC}`))
-            .toBe(`${SPEC_CONTROLS_PATTERN_OPTIONED_PROPERTY_ONE_INITIAL_VALUE}`, 'spec optioned property one was not in its initial state')
-        expect(await elementInnerText(`#${OPTIONED_PROPERTY_TWO_KEY} .${SecretSelectorsForTest.SECRET_SUBMITTED_SPEC}`))
-            .toBe(`${SPEC_CONTROLS_PATTERN_OPTIONED_PROPERTY_TWO_INITIAL_VALUE}`, 'spec optioned property one was not in its initial state')
+        expect(await elementInnerText(`#${RANGED_PROPERTY_ONE_KEY} .${SecretTestSelectors.SUBMITTED_SPEC}`))
+            .toBe(
+                `${SPEC_CONTROLS_PATTERN_RANGED_PROPERTY_ONE_INITIAL_VALUE}`,
+                'spec ranged property one was not in its initial state',
+            )
+        expect(await elementInnerText(`#${RANGED_PROPERTY_TWO_KEY} .${SecretTestSelectors.SUBMITTED_SPEC}`))
+            .toBe(
+                `${SPEC_CONTROLS_PATTERN_RANGED_PROPERTY_TWO_INITIAL_VALUE}`,
+                'spec ranged property two was not in its initial state',
+            )
+        expect(await elementInnerText(`#${OPTIONED_PROPERTY_ONE_KEY} .${SecretTestSelectors.SUBMITTED_SPEC}`))
+            .toBe(
+                `${SPEC_CONTROLS_PATTERN_OPTIONED_PROPERTY_ONE_INITIAL_VALUE}`,
+                'spec optioned property one was not in its initial state',
+            )
+        expect(await elementInnerText(`#${OPTIONED_PROPERTY_TWO_KEY} .${SecretTestSelectors.SUBMITTED_SPEC}`))
+            .toBe(
+                `${SPEC_CONTROLS_PATTERN_OPTIONED_PROPERTY_TWO_INITIAL_VALUE}`,
+                'spec optioned property one was not in its initial state',
+            )
     }
 
 const expectOtherInitial: () => Promise<void> =
     async (): Promise<void> => {
-        expect(await elementInnerText(`#${RANGED_PROPERTY_ONE_KEY} .${SecretSelectorsForTest.SECRET_SUBMITTED_SPEC}`))
-            .toBe(`${POST_PATTERN_RANGED_PROPERTY_ONE_INITIAL_VALUE}`, 'the other pattern\'s spec ranged property one was not in its initial state')
-        expect(await elementInnerText(`#${RANGED_PROPERTY_TWO_KEY} .${SecretSelectorsForTest.SECRET_SUBMITTED_SPEC}`))
-            .toBe(`${POST_PATTERN_RANGED_PROPERTY_TWO_INITIAL_VALUE}`, 'the other pattern\'s spec ranged property two was not in its initial state')
-        expect(await elementInnerText(`#${OPTIONED_PROPERTY_ONE_KEY} .${SecretSelectorsForTest.SECRET_SUBMITTED_SPEC}`))
-            .toBe(`${POST_PATTERN_OPTIONED_PROPERTY_ONE_INITIAL_VALUE}`, 'the other pattern\'s spec optioned property one was not in its initial state')
-        expect(await elementInnerText(`#${OPTIONED_PROPERTY_TWO_KEY} .${SecretSelectorsForTest.SECRET_SUBMITTED_SPEC}`))
-            .toBe(`${POST_PATTERN_OPTIONED_PROPERTY_TWO_INITIAL_VALUE}`, 'the other pattern\'s spec optioned property one was not in its initial state')
+        expect(await elementInnerText(`#${RANGED_PROPERTY_ONE_KEY} .${SecretTestSelectors.SUBMITTED_SPEC}`))
+            .toBe(
+                `${POST_PATTERN_RANGED_PROPERTY_ONE_INITIAL_VALUE}`,
+                'the other pattern\'s spec ranged property one was not in its initial state',
+            )
+        expect(await elementInnerText(`#${RANGED_PROPERTY_TWO_KEY} .${SecretTestSelectors.SUBMITTED_SPEC}`))
+            .toBe(
+                `${POST_PATTERN_RANGED_PROPERTY_TWO_INITIAL_VALUE}`,
+                'the other pattern\'s spec ranged property two was not in its initial state',
+            )
+        expect(await elementInnerText(`#${OPTIONED_PROPERTY_ONE_KEY} .${SecretTestSelectors.SUBMITTED_SPEC}`))
+            .toBe(
+                `${POST_PATTERN_OPTIONED_PROPERTY_ONE_INITIAL_VALUE}`,
+                'the other pattern\'s spec optioned property one was not in its initial state',
+            )
+        expect(await elementInnerText(`#${OPTIONED_PROPERTY_TWO_KEY} .${SecretTestSelectors.SUBMITTED_SPEC}`))
+            .toBe(
+                `${POST_PATTERN_OPTIONED_PROPERTY_TWO_INITIAL_VALUE}`,
+                'the other pattern\'s spec optioned property one was not in its initial state',
+            )
     }
 
 const invalidateControl: () => Promise<void> =
@@ -82,15 +107,24 @@ const modifySpec: () => Promise<void> =
         const input: ElementHandle = await findElement(`input[type=number]#${RANGED_PROPERTY_ONE_KEY}`)
         await input.type(VALID_TEST_MODIFICATION)
 
-        await selectOption(`select#${OPTIONED_PROPERTY_ONE_KEY}`, SPEC_CONTROLS_PATTERN_OPTIONED_PROPERTY_ONE_MODIFIED_VALUE)
+        await selectOption(
+            `select#${OPTIONED_PROPERTY_ONE_KEY}`,
+            SPEC_CONTROLS_PATTERN_OPTIONED_PROPERTY_ONE_MODIFIED_VALUE,
+        )
     }
 
 const specModificationsPreserved: () => Promise<void> =
     async (): Promise<void> => {
         expect(await elementValue(`input[type=number]#${RANGED_PROPERTY_ONE_KEY}`))
-            .toBe(`${SPEC_CONTROLS_PATTERN_RANGED_PROPERTY_ONE_INITIAL_VALUE}${VALID_TEST_MODIFICATION}`, 'spec ranged property modification was not preserved')
-        expect(await elementInnerText(`#${OPTIONED_PROPERTY_ONE_KEY} .${SecretSelectorsForTest.SECRET_SUBMITTED_SPEC}`))
-            .toBe(SPEC_CONTROLS_PATTERN_OPTIONED_PROPERTY_ONE_MODIFIED_VALUE, 'spec optioned property modification was not preserved')
+            .toBe(
+                `${SPEC_CONTROLS_PATTERN_RANGED_PROPERTY_ONE_INITIAL_VALUE}${VALID_TEST_MODIFICATION}`,
+                'spec ranged property modification was not preserved',
+            )
+        expect(await elementInnerText(`#${OPTIONED_PROPERTY_ONE_KEY} .${SecretTestSelectors.SUBMITTED_SPEC}`))
+            .toBe(
+                SPEC_CONTROLS_PATTERN_OPTIONED_PROPERTY_ONE_MODIFIED_VALUE,
+                'spec optioned property modification was not preserved',
+            )
     }
 
 describe('pattern list', () => {

@@ -5,7 +5,7 @@ import { camelCaseToLowerCase, isUndefined } from '@musical-patterns/utilities'
 import * as React from 'react'
 import { connect } from 'react-redux'
 import { Dispatch } from 'redux'
-import { EventHandler, ImmutableState, SecretSelectorsForTest, StateKey } from '../../../types'
+import { EventHandler, ImmutableState, SecretTestSelectors, StateKey } from '../../../types'
 import { ImmutableSpecState, SpecStateKey } from '../../types'
 import { Field, FieldPropsFromParent } from '../field'
 import { InvalidMessage } from '../invalidMessage'
@@ -80,7 +80,7 @@ const SingularSpecControl: React.ComponentType<SingularSpecControlProps> =
             value: singularDisplayedValue,
         }
 
-        const secretClass: string = SecretSelectorsForTest.SECRET_SUBMITTED_SPEC
+        const secretClass: string = SecretTestSelectors.SUBMITTED_SPEC
 
         return (
             <div {...{ className: 'singular-spec-control', id, title: description }}>

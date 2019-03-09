@@ -1,4 +1,4 @@
-import { SecretSelectorsForTest } from '../../../../src/indexForTest'
+import { SecretTestSelectors } from '../../../../src/indexForTest'
 import {
     elementExists,
     elementInnerText,
@@ -24,13 +24,19 @@ const PRESETS_SELECT: string = '#presets select'
 
 const bringSpecIntoConformityWithThePreset: () => Promise<void> =
     async (): Promise<void> => {
-        await selectOption(`select#${OPTIONED_PROPERTY_ONE_KEY}`, SPEC_CONTROLS_PATTERN_OPTIONED_PROPERTY_ONE_MODIFIED_VALUE)
+        await selectOption(
+            `select#${OPTIONED_PROPERTY_ONE_KEY}`,
+            SPEC_CONTROLS_PATTERN_OPTIONED_PROPERTY_ONE_MODIFIED_VALUE,
+        )
     }
 
 const currentSpecMatchesThePresetAndThusItIsDisplayedInThePresetSelect: () => Promise<void> =
     async (): Promise<void> => {
         expect(await elementValue(PRESETS_SELECT))
-            .toBe('presetOne', 'the preset name was not displayed in the preset select probably because the current spec did not match the preset')
+            .toBe(
+                'presetOne',
+                'the preset name was not displayed in the preset select probably because the current spec did not match the preset',
+            )
     }
 
 const currentSpecMatchesNoPresetsAndThusThePresetSelectDisplaysNothing: () => Promise<void> =
@@ -41,7 +47,10 @@ const currentSpecMatchesNoPresetsAndThusThePresetSelectDisplaysNothing: () => Pr
 
 const breakConformityWithThePreset: () => Promise<void> =
     async (): Promise<void> => {
-        await selectOption(`select#${OPTIONED_PROPERTY_ONE_KEY}`, SPEC_CONTROLS_PATTERN_OPTIONED_PROPERTY_ONE_INITIAL_VALUE)
+        await selectOption(
+            `select#${OPTIONED_PROPERTY_ONE_KEY}`,
+            SPEC_CONTROLS_PATTERN_OPTIONED_PROPERTY_ONE_INITIAL_VALUE,
+        )
     }
 
 const selectAPreset: () => Promise<void> =
@@ -56,17 +65,17 @@ const selectADifferentPreset: () => Promise<void> =
 
 const specIsInConformityWithThePreset: () => Promise<void> =
     async (): Promise<void> => {
-        expect(await elementInnerText(`#${OPTIONED_PROPERTY_ONE_KEY} .${SecretSelectorsForTest.SECRET_SUBMITTED_SPEC}`))
+        expect(await elementInnerText(`#${OPTIONED_PROPERTY_ONE_KEY} .${SecretTestSelectors.SUBMITTED_SPEC}`))
             .toBe(PRESET_ONE_PROPERTY_ONE_VALUE, 'property one value was not in conformity with the preset')
-        expect(await elementInnerText(`#${OPTIONED_PROPERTY_TWO_KEY} .${SecretSelectorsForTest.SECRET_SUBMITTED_SPEC}`))
+        expect(await elementInnerText(`#${OPTIONED_PROPERTY_TWO_KEY} .${SecretTestSelectors.SUBMITTED_SPEC}`))
             .toBe(PRESET_ONE_PROPERTY_TWO_VALUE, 'property two value was not in conformity with the preset')
     }
 
 const specIsInConformityWithTheDifferentPreset: () => Promise<void> =
     async (): Promise<void> => {
-        expect(await elementInnerText(`#${OPTIONED_PROPERTY_ONE_KEY} .${SecretSelectorsForTest.SECRET_SUBMITTED_SPEC}`))
+        expect(await elementInnerText(`#${OPTIONED_PROPERTY_ONE_KEY} .${SecretTestSelectors.SUBMITTED_SPEC}`))
             .toBe(PRESET_TWO_PROPERTY_ONE_VALUE, 'property one value was not in conformity with the different preset')
-        expect(await elementInnerText(`#${OPTIONED_PROPERTY_TWO_KEY} .${SecretSelectorsForTest.SECRET_SUBMITTED_SPEC}`))
+        expect(await elementInnerText(`#${OPTIONED_PROPERTY_TWO_KEY} .${SecretTestSelectors.SUBMITTED_SPEC}`))
             .toBe(PRESET_TWO_PROPERTY_TWO_VALUE, 'property two value was not in conformity with the different preset')
     }
 

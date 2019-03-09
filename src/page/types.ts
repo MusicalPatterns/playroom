@@ -1,6 +1,5 @@
 import { Id, Patterns } from '@musical-patterns/pattern'
 import { ActionForState, Maybe, TypedMap } from '@musical-patterns/utilities'
-import { Dispatch } from 'redux'
 
 enum PageName {
     ABOUT = 'ABOUT',

@@ -5,7 +5,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import * as React from 'react'
 import { connect } from 'react-redux'
 import { Dispatch } from 'redux'
-import { ImmutableState, SecretSelectorsForTest, StateKey } from '../../types'
+import { ImmutableState, SecretTestSelectors, StateKey } from '../../types'
 import { formatTimesForDisplay } from '../formatTimesForDisplay'
 import { TimeInMinutesAndSeconds } from '../timeInMinutesAndSeconds'
 import { Timeline } from '../timeline'
@@ -77,8 +77,8 @@ const TimeControls: React.ComponentType<TimeControlsProps> =
                 </button>
                 <Timeline/>
                 <TimeInMinutesAndSeconds/>
-                <div {...{ id: SecretSelectorsForTest.SECRET_TIME_POSITION }}>{timePositionForDisplay}</div>
-                <div {...{ id: SecretSelectorsForTest.SECRET_PATTERN_DURATION }}>{patternDurationForDisplay}</div>
+                <div {...{ id: SecretTestSelectors.TIME_POSITION }}>{timePositionForDisplay}</div>
+                <div {...{ id: SecretTestSelectors.PATTERN_DURATION }}>{patternDurationForDisplay}</div>
             </div>
         )
     }

@@ -1,5 +1,5 @@
 import { ElementHandle } from 'puppeteer'
-import { FieldValidity, SecretSelectorsForTest } from '../../../../src/indexForTest'
+import { FieldValidity, SecretTestSelectors } from '../../../../src/indexForTest'
 import {
     ARRAYED_PROPERTY_KEY,
     BAD_FORMAT_INVALID_TEST_MODIFICATION,
@@ -8,13 +8,17 @@ import {
     elementIds,
     elementInnerText,
     elementValue,
-    findElement, OPTIONED_PROPERTY_ONE_KEY,
+    findElement,
+    OPTIONED_PROPERTY_ONE_KEY,
     OUT_OF_RANGE_INVALID_TEST_MODIFICATION,
     RANGED_PROPERTY_ONE_KEY,
     RANGED_PROPERTY_TWO_KEY,
-    refreshForSpecControlsTest, selectOption, SPEC_CONTROLS_PATTERN_OPTIONED_PROPERTY_ONE_MODIFIED_VALUE,
+    refreshForSpecControlsTest,
+    selectOption,
+    SPEC_CONTROLS_PATTERN_OPTIONED_PROPERTY_ONE_MODIFIED_VALUE,
     SPEC_CONTROLS_PATTERN_RANGED_PROPERTY_ONE_INITIAL_VALUE,
-    SPEC_CONTROLS_PATTERN_RANGED_PROPERTY_ONE_MAX_VALUE, SPEC_CONTROLS_PATTERN_RANGED_PROPERTY_TWO_INITIAL_VALUE,
+    SPEC_CONTROLS_PATTERN_RANGED_PROPERTY_ONE_MAX_VALUE,
+    SPEC_CONTROLS_PATTERN_RANGED_PROPERTY_TWO_INITIAL_VALUE,
     VALID_TEST_MODIFICATION,
 } from '../../../support'
 
@@ -26,8 +30,11 @@ const modifyRangedInput: () => Promise<void> =
 
 const rangedInputIsModified: () => Promise<void> =
     async (): Promise<void> => {
-        expect(await elementInnerText(`#${RANGED_PROPERTY_ONE_KEY} .${SecretSelectorsForTest.SECRET_SUBMITTED_SPEC}`))
-            .toBe(`${SPEC_CONTROLS_PATTERN_RANGED_PROPERTY_ONE_INITIAL_VALUE}${VALID_TEST_MODIFICATION}`, 'ranged input was not modified')
+        expect(await elementInnerText(`#${RANGED_PROPERTY_ONE_KEY} .${SecretTestSelectors.SUBMITTED_SPEC}`))
+            .toBe(
+                `${SPEC_CONTROLS_PATTERN_RANGED_PROPERTY_ONE_INITIAL_VALUE}${VALID_TEST_MODIFICATION}`,
+                'ranged input was not modified',
+            )
     }
 
 const controlsAreInOrder: () => Promise<void> =
@@ -50,18 +57,31 @@ const controlsAreInOrder: () => Promise<void> =
 
 const modifyInputsForSomeOtherControls: () => Promise<void> =
     async (): Promise<void> => {
-        const previouslySubmittedControlInput: ElementHandle = await findElement(`input[type=number]#${RANGED_PROPERTY_TWO_KEY}`)
+        const previouslySubmittedControlInput: ElementHandle = await findElement(
+            `input[type=number]#${RANGED_PROPERTY_TWO_KEY}`,
+        )
         await previouslySubmittedControlInput.type(VALID_TEST_MODIFICATION)
 
-        await selectOption(`select#${OPTIONED_PROPERTY_ONE_KEY}`, SPEC_CONTROLS_PATTERN_OPTIONED_PROPERTY_ONE_MODIFIED_VALUE)
+        await selectOption(
+            `select#${OPTIONED_PROPERTY_ONE_KEY}`,
+            SPEC_CONTROLS_PATTERN_OPTIONED_PROPERTY_ONE_MODIFIED_VALUE,
+        )
     }
 
 const theInputsForThoseOtherControlsAreStillModified: () => Promise<void> =
     async (): Promise<void> => {
-        expect(await elementInnerText(`#${RANGED_PROPERTY_TWO_KEY} .${SecretSelectorsForTest.SECRET_SUBMITTED_SPEC}`))
-            .toBe(`${SPEC_CONTROLS_PATTERN_RANGED_PROPERTY_TWO_INITIAL_VALUE}${VALID_TEST_MODIFICATION}`, 'the other control that was a ranged control - its input was not still modified')
-        expect(await elementInnerText(`#${OPTIONED_PROPERTY_ONE_KEY} .${SecretSelectorsForTest.SECRET_SUBMITTED_SPEC}`))
-            .toBe(SPEC_CONTROLS_PATTERN_OPTIONED_PROPERTY_ONE_MODIFIED_VALUE, 'the other control that was an optioned control - its input was not still modified')
+        expect(await elementInnerText(
+            `#${RANGED_PROPERTY_TWO_KEY} .${SecretTestSelectors.SUBMITTED_SPEC}`,
+        ))
+            .toBe(
+                `${SPEC_CONTROLS_PATTERN_RANGED_PROPERTY_TWO_INITIAL_VALUE}${VALID_TEST_MODIFICATION}`,
+                'the other control that was a ranged control - its input was not still modified',
+            )
+        expect(await elementInnerText(`#${OPTIONED_PROPERTY_ONE_KEY} .${SecretTestSelectors.SUBMITTED_SPEC}`))
+            .toBe(
+                SPEC_CONTROLS_PATTERN_OPTIONED_PROPERTY_ONE_MODIFIED_VALUE,
+                'the other control that was an optioned control - its input was not still modified',
+            )
     }
 
 const modifyRangedInputToBeBadlyFormatted: () => Promise<void> =
@@ -78,7 +98,9 @@ const modifyRangedInputToBeOutOfRange: () => Promise<void> =
 
 const modifyInputForAnotherControlValidly: () => Promise<void> =
     async (): Promise<void> => {
-        const inputForAnotherControl: ElementHandle = await findElement(`input[type=number]#${RANGED_PROPERTY_TWO_KEY}`)
+        const inputForAnotherControl: ElementHandle = await findElement(
+            `input[type=number]#${RANGED_PROPERTY_TWO_KEY}`,
+        )
         await inputForAnotherControl.type(VALID_TEST_MODIFICATION)
     }
 
@@ -96,7 +118,7 @@ const rangedInputIsMarkedAsValid: () => Promise<void> =
 
 const rangedInputWasNotSubmitted: () => Promise<void> =
     async (): Promise<void> => {
-        expect(await elementInnerText(`#${RANGED_PROPERTY_ONE_KEY} .${SecretSelectorsForTest.SECRET_SUBMITTED_SPEC}`))
+        expect(await elementInnerText(`#${RANGED_PROPERTY_ONE_KEY} .${SecretTestSelectors.SUBMITTED_SPEC}`))
             .toBe(`${SPEC_CONTROLS_PATTERN_RANGED_PROPERTY_ONE_INITIAL_VALUE}`, 'ranged input was submitted')
     }
 
@@ -118,13 +140,19 @@ const rangedInputDisplayValueIsTheOutOfRangeValue: () => Promise<void> =
 const rangedInputHasBadFormatMessage: () => Promise<void> =
     async (): Promise<void> => {
         expect(await elementInnerText(`#${RANGED_PROPERTY_ONE_KEY} .invalid-message`))
-            .toBe('this property is formatted in a way which cannot be parsed', 'ranged input did not have the bad format message')
+            .toBe(
+                'this property is formatted in a way which cannot be parsed',
+                'ranged input did not have the bad format message',
+            )
     }
 
 const rangedInputHasOutOfRangeMessage: () => Promise<void> =
     async (): Promise<void> => {
         expect(await elementInnerText(`#${RANGED_PROPERTY_ONE_KEY} .invalid-message`))
-            .toBe(`must be less than ${SPEC_CONTROLS_PATTERN_RANGED_PROPERTY_ONE_MAX_VALUE}`, 'ranged input did not have out-of-range invalid message')
+            .toBe(
+                `must be less than ${SPEC_CONTROLS_PATTERN_RANGED_PROPERTY_ONE_MAX_VALUE}`,
+                'ranged input did not have out-of-range invalid message',
+            )
     }
 
 const undoRangedInputEitherModification: () => Promise<void> =

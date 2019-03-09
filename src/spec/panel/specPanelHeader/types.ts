@@ -1,4 +1,4 @@
-import { DispatchParameter, EventParameter } from '../../../types'
+import { DispatchParameter } from '../../../types'
 import { SpecPanelOpenParameter } from '../types'
 
 interface SpecPanelHeaderPropsFromDispatch {

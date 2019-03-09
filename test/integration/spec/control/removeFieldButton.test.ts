@@ -1,5 +1,5 @@
 import { indexOfLastElement } from '@musical-patterns/utilities'
-import { SecretSelectorsForTest } from '../../../../src/indexForTest'
+import { SecretTestSelectors } from '../../../../src/indexForTest'
 import {
     ARRAYED_PROPERTY_KEY,
     clickAdd,
@@ -8,7 +8,8 @@ import {
     elementExists,
     elementInnerText,
     noInvalidMessagesAreShown,
-    refreshForSpecControlsTest, selectValidationPattern,
+    refreshForSpecControlsTest,
+    selectValidationPattern,
     SPEC_CONTROLS_PATTERN_ARRAYED_PROPERTY_INITIAL_VALUE,
 } from '../../../support'
 
@@ -16,7 +17,10 @@ const thereIsOneFewerField: (originalFieldCount: number) => Promise<void> =
     async (originalFieldCount: number): Promise<void> => {
         const updatedFieldCount: number = await elementCount(`#${ARRAYED_PROPERTY_KEY} input[type=number]`)
         expect(updatedFieldCount)
-            .toBe(originalFieldCount - 1, `there was not one fewer field; original field count was ${originalFieldCount} and updated was ${updatedFieldCount}`)
+            .toBe(
+                originalFieldCount - 1,
+                `there was not one fewer field; original field count was ${originalFieldCount} and updated was ${updatedFieldCount}`,
+            )
     }
 
 const andTheIdThatIsMissingWasTheLastId: () => Promise<void> =
@@ -28,7 +32,7 @@ const andTheIdThatIsMissingWasTheLastId: () => Promise<void> =
 const theSubmittedValueForTheArrayedSpecControlAsAWholeIsInItsInitialState: () => Promise<void> =
     async (): Promise<void> => {
         const submittedValueForTheArrayedSpecControlAsAWhole: string = await elementInnerText(
-            `#${ARRAYED_PROPERTY_KEY} .${SecretSelectorsForTest.SECRET_SUBMITTED_SPEC}`,
+            `#${ARRAYED_PROPERTY_KEY} .${SecretTestSelectors.SUBMITTED_SPEC}`,
         )
         expect(submittedValueForTheArrayedSpecControlAsAWhole)
             .toBe(
@@ -40,11 +44,16 @@ const theSubmittedValueForTheArrayedSpecControlAsAWholeIsInItsInitialState: () =
 const theSubmittedValueForTheArrayedSpecControlAsAWholeIsInItsInitialStateJustWithItsLastElementGone: () => Promise<void> =
     async (): Promise<void> => {
         const submittedValueForTheArrayedSpecControlAsAWhole: string = await elementInnerText(
-            `#${ARRAYED_PROPERTY_KEY} .${SecretSelectorsForTest.SECRET_SUBMITTED_SPEC}`,
+            `#${ARRAYED_PROPERTY_KEY} .${SecretTestSelectors.SUBMITTED_SPEC}`,
         )
         expect(submittedValueForTheArrayedSpecControlAsAWhole)
             .toBe(
-                JSON.stringify(SPEC_CONTROLS_PATTERN_ARRAYED_PROPERTY_INITIAL_VALUE.slice(0, indexOfLastElement(SPEC_CONTROLS_PATTERN_ARRAYED_PROPERTY_INITIAL_VALUE))),
+                JSON.stringify(
+                    SPEC_CONTROLS_PATTERN_ARRAYED_PROPERTY_INITIAL_VALUE.slice(
+                        0,
+                        indexOfLastElement(SPEC_CONTROLS_PATTERN_ARRAYED_PROPERTY_INITIAL_VALUE),
+                    ),
+                ),
                 `the submitted value for the arrayed spec control as a whole was not in its initial state just with its last element gone`,
             )
     }

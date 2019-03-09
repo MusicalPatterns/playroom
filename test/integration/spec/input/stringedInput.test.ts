@@ -2,7 +2,7 @@
 
 import { indexOfLastCharacter } from '@musical-patterns/utilities'
 import { ElementHandle } from 'puppeteer'
-import { FieldValidity, SecretSelectorsForTest } from '../../../../src/indexForTest'
+import { FieldValidity, SecretTestSelectors } from '../../../../src/indexForTest'
 import {
     deleteCharacterFromInput,
     elementExists,
@@ -19,7 +19,8 @@ import {
 } from '../../../support'
 
 const MODIFICATION_CAUSING_STRINGED_INPUT_TO_EXCEED_ITS_MAX_LENGTH: string = 'HI'
-const PART_OF_MODIFICATION_WITHIN_MAX_LENGTH_OF_STRINGED_INPUT: string = MODIFICATION_CAUSING_STRINGED_INPUT_TO_EXCEED_ITS_MAX_LENGTH.slice(0, 1)
+const PART_OF_MODIFICATION_WITHIN_MAX_LENGTH_OF_STRINGED_INPUT: string =
+    MODIFICATION_CAUSING_STRINGED_INPUT_TO_EXCEED_ITS_MAX_LENGTH.slice(0, 1)
 
 const modifyStringedInput: () => Promise<void> =
     async (): Promise<void> => {
@@ -29,13 +30,18 @@ const modifyStringedInput: () => Promise<void> =
 
 const stringedInputIsModified: () => Promise<void> =
     async (): Promise<void> => {
-        expect(await elementInnerText(`#${STRINGED_PROPERTY_KEY} .${SecretSelectorsForTest.SECRET_SUBMITTED_SPEC}`))
-            .toBe(`${SPEC_CONTROLS_PATTERN_STRINGED_PROPERTY_INITIAL_VALUE}${VALID_TEST_MODIFICATION}`, 'stringed control was not modified')
+        expect(await elementInnerText(`#${STRINGED_PROPERTY_KEY} .${SecretTestSelectors.SUBMITTED_SPEC}`))
+            .toBe(
+                `${SPEC_CONTROLS_PATTERN_STRINGED_PROPERTY_INITIAL_VALUE}${VALID_TEST_MODIFICATION}`,
+                'stringed control was not modified',
+            )
     }
 
 const modifyInputForAnotherControlValidly: () => Promise<void> =
     async (): Promise<void> => {
-        const inputForAnotherControl: ElementHandle = await findElement(`input[type=number]#${RANGED_PROPERTY_TWO_KEY}`)
+        const inputForAnotherControl: ElementHandle = await findElement(
+            `input[type=number]#${RANGED_PROPERTY_TWO_KEY}`,
+        )
         await inputForAnotherControl.type(VALID_TEST_MODIFICATION)
     }
 
@@ -54,7 +60,7 @@ const stringedContolInputIsMarkedAsValid: () => Promise<void> =
 const stringedInputTooLongValueWasNotSubmittedAndItIsAtTheLastValidValueBeforeItGotTooLong: () => Promise<void> =
     async (): Promise<void> => {
         const stringedInputSubmittedValue: string = await elementInnerText(
-            `#${STRINGED_PROPERTY_KEY} .${SecretSelectorsForTest.SECRET_SUBMITTED_SPEC}`,
+            `#${STRINGED_PROPERTY_KEY} .${SecretTestSelectors.SUBMITTED_SPEC}`,
         )
         expect(stringedInputSubmittedValue)
             .toBe(
@@ -66,7 +72,7 @@ const stringedInputTooLongValueWasNotSubmittedAndItIsAtTheLastValidValueBeforeIt
 const stringedInputWasNotSubmitted: () => Promise<void> =
     async (): Promise<void> => {
         const stringedInputSubmittedValue: string = await elementInnerText(
-            `#${STRINGED_PROPERTY_KEY} .${SecretSelectorsForTest.SECRET_SUBMITTED_SPEC}`,
+            `#${STRINGED_PROPERTY_KEY} .${SecretTestSelectors.SUBMITTED_SPEC}`,
         )
         expect(stringedInputSubmittedValue)
             .toBe(
@@ -78,14 +84,20 @@ const stringedInputWasNotSubmitted: () => Promise<void> =
 const stringedInputDisplayValueIsTheTooLongValue: () => Promise<void> =
     async (): Promise<void> => {
         expect(await elementValue(`input[type=text]#${STRINGED_PROPERTY_KEY}`))
-            .toBe(`${SPEC_CONTROLS_PATTERN_STRINGED_PROPERTY_INITIAL_VALUE}${MODIFICATION_CAUSING_STRINGED_INPUT_TO_EXCEED_ITS_MAX_LENGTH}`, 'stringed control display value was not the too long value')
+            .toBe(
+                `${SPEC_CONTROLS_PATTERN_STRINGED_PROPERTY_INITIAL_VALUE}${MODIFICATION_CAUSING_STRINGED_INPUT_TO_EXCEED_ITS_MAX_LENGTH}`,
+                'stringed control display value was not the too long value',
+            )
     }
 
 const stringedInputDisplayValueIsTheTooShortValue: () => Promise<void> =
     async (): Promise<void> => {
         expect(await elementValue(`input[type=text]#${STRINGED_PROPERTY_KEY}`))
             .toBe(
-                `${SPEC_CONTROLS_PATTERN_STRINGED_PROPERTY_INITIAL_VALUE.slice(0, indexOfLastCharacter(SPEC_CONTROLS_PATTERN_STRINGED_PROPERTY_INITIAL_VALUE))}`,
+                SPEC_CONTROLS_PATTERN_STRINGED_PROPERTY_INITIAL_VALUE.slice(
+                    0,
+                    indexOfLastCharacter(SPEC_CONTROLS_PATTERN_STRINGED_PROPERTY_INITIAL_VALUE),
+                ),
                 'stringed input display value was not the too short value',
             )
     }
@@ -93,13 +105,19 @@ const stringedInputDisplayValueIsTheTooShortValue: () => Promise<void> =
 const stringedInputHasTooLongMessage: () => Promise<void> =
     async (): Promise<void> => {
         expect(await elementInnerText(`#${STRINGED_PROPERTY_KEY} .invalid-message`))
-            .toBe(`must be ${SPEC_CONTROLS_PATTERN_STRINGED_PROPERTY_ONE_MAX_LENGTH} characters or less`, 'stringed input did not have too-long invalid message')
+            .toBe(
+                `must be ${SPEC_CONTROLS_PATTERN_STRINGED_PROPERTY_ONE_MAX_LENGTH} characters or less`,
+                'stringed input did not have too-long invalid message',
+            )
     }
 
 const stringedInputHasTooShortMessage: () => Promise<void> =
     async (): Promise<void> => {
         expect(await elementInnerText(`#${STRINGED_PROPERTY_KEY} .invalid-message`))
-            .toBe(`must be ${SPEC_CONTROLS_PATTERN_STRINGED_PROPERTY_ONE_MIN_LENGTH} characters or more`, 'stringed input did not have too-short invalid message')
+            .toBe(
+                `must be ${SPEC_CONTROLS_PATTERN_STRINGED_PROPERTY_ONE_MIN_LENGTH} characters or more`,
+                'stringed input did not have too-short invalid message',
+            )
     }
 
 const undoStringedInputTooLongModification: () => Promise<void> =

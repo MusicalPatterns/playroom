@@ -4,5 +4,5 @@ export {
     FieldValidity,
 } from './spec/indexForTest'
 export {
-    SecretSelectorsForTest,
+    SecretTestSelectors,
 } from './types'

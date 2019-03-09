@@ -11,7 +11,6 @@ import {
     patternDuration,
     quickRefresh,
     refreshPage,
-    selectAboutPageByClickingTitle,
     selectLongDurationPattern,
     selectTimeControlsPattern,
 } from '../../support'
@@ -120,18 +119,24 @@ describe('time controls', () => {
             done()
         })
 
-        it('time back around to the beginning upon reaching the end of a pattern', async (done: DoneFn) => {
+        it('time wraps back around to the beginning upon reaching the end of a pattern', async (done: DoneFn) => {
             const initialTime: Ms = await currentTime()
 
             await playJustLongEnoughToBeAlmostAboutToWrapAround()
             const beforeWrappingTime: Ms = await currentTime()
             expect(beforeWrappingTime)
-                .toBeGreaterThan(from.Ms(initialTime))
+                .toBeGreaterThan(
+                    from.Ms(initialTime),
+                    'tried to play long enough to be just about to wrap around, but was still at the initial time',
+                )
 
             await playJustLongEnoughMoreToWrapAround()
             const afterWrappingTime: Ms = await currentTime()
             expect(afterWrappingTime)
-                .toBeLessThan(from.Ms(beforeWrappingTime))
+                .toBeLessThan(
+                    from.Ms(beforeWrappingTime),
+                    'tried to play just long enough more to wrap around, but the time was still after the last measurement',
+                )
 
             done()
         })

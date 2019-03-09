@@ -42,37 +42,61 @@ const ARRAYED_PROPERTY_WITH_INITIAL_FIELD_VALUE_KEY: string = 'arrayedPropertyWi
 
 const SPEC_CONTROLS_PATTERN_ID: Id = playroomTestSpecControls!.id
 const SPEC_CONTROLS_PATTERN_TITLE: string = playroomTestSpecControls!.metadata.formattedName as string
-const SPEC_CONTROLS_PATTERN_RANGED_PROPERTY_ONE_INITIAL_VALUE: number = playroomTestSpecControls!.data.initial[ RANGED_PROPERTY_ONE_KEY ] as number
+const SPEC_CONTROLS_PATTERN_RANGED_PROPERTY_ONE_INITIAL_VALUE: number =
+    playroomTestSpecControls!.data.initial[ RANGED_PROPERTY_ONE_KEY ] as number
 const specControlsPatternAttributes: Attributes = playroomTestSpecControls!.data.attributes
-const specControlsPatternRangedConstraint: RangedConstraint = specControlsPatternAttributes[ RANGED_PROPERTY_ONE_KEY ].constraint as RangedConstraint
+const specControlsPatternRangedConstraint: RangedConstraint =
+    specControlsPatternAttributes[ RANGED_PROPERTY_ONE_KEY ].constraint as RangedConstraint
 const SPEC_CONTROLS_PATTERN_RANGED_PROPERTY_ONE_MAX_VALUE: number = specControlsPatternRangedConstraint.max as number
-const SPEC_CONTROLS_PATTERN_RANGED_PROPERTY_TWO_INITIAL_VALUE: number = playroomTestSpecControls!.data.initial[ RANGED_PROPERTY_TWO_KEY ] as number
-const SPEC_CONTROLS_PATTERN_OPTIONED_PROPERTY_ONE_INITIAL_VALUE: string = playroomTestSpecControls!.data.initial[ OPTIONED_PROPERTY_ONE_KEY ] as string
-const specControlsPatternOptionedPropertyOneConstraint: OptionedConstraint = specControlsPatternAttributes[ OPTIONED_PROPERTY_ONE_KEY ].constraint as OptionedConstraint
-const SPEC_CONTROLS_PATTERN_OPTIONED_PROPERTY_ONE_MODIFIED_VALUE: string = specControlsPatternOptionedPropertyOneConstraint[ 0 ].key
-const SPEC_CONTROLS_PATTERN_OPTIONED_PROPERTY_TWO_INITIAL_VALUE: string = playroomTestSpecControls!.data.initial[ OPTIONED_PROPERTY_TWO_KEY ] as string
-const specControlsPatternOptionedPropertyTwoConstraint: OptionedConstraint = specControlsPatternAttributes[ OPTIONED_PROPERTY_TWO_KEY ].constraint as OptionedConstraint
-const SPEC_CONTROLS_PATTERN_OPTIONED_PROPERTY_TWO_MODIFIED_VALUE: string = specControlsPatternOptionedPropertyTwoConstraint[ 1 ].key
-const SPEC_CONTROLS_PATTERN_STRINGED_PROPERTY_INITIAL_VALUE: string = playroomTestSpecControls!.data.initial[ STRINGED_PROPERTY_KEY ] as string
-const specControlsPatternStringedPropertyConstraint: StringedConstraint = specControlsPatternAttributes[ STRINGED_PROPERTY_KEY ].constraint as StringedConstraint
-const SPEC_CONTROLS_PATTERN_STRINGED_PROPERTY_ONE_MAX_LENGTH: number = specControlsPatternStringedPropertyConstraint.maxLength as number
-const SPEC_CONTROLS_PATTERN_STRINGED_PROPERTY_ONE_MIN_LENGTH: number = specControlsPatternStringedPropertyConstraint.minLength as number
-const SPEC_CONTROLS_PATTERN_TOGGLED_PROPERTY_INITIAL_VALUE: boolean = playroomTestSpecControls!.data.initial[ TOGGLED_PROPERTY_KEY ] as boolean
-const SPEC_CONTROLS_PATTERN_TOGGLED_PROPERTY_MODIFIED_VALUE: boolean = !SPEC_CONTROLS_PATTERN_TOGGLED_PROPERTY_INITIAL_VALUE
-const SPEC_CONTROLS_PATTERN_ARRAYED_PROPERTY_INITIAL_VALUE: number[] = playroomTestSpecControls!.data.initial[ ARRAYED_PROPERTY_KEY ] as number[]
-const SPEC_CONTROLS_PATTERN_ARRAYED_PROPERTY_WITH_INITIAL_FIELD_VALUE_INITIAL_VALUE: number[] = playroomTestSpecControls!.data.initial[ ARRAYED_PROPERTY_WITH_INITIAL_FIELD_VALUE_KEY ] as number[]
-const SPEC_CONTROLS_PATTERN_ARRAYED_PROPERTY_WITH_INITIAL_FIELD_VALUE_INITIAL_FIELD_VALUE: number = playroomTestSpecControls!.data.attributes[ ARRAYED_PROPERTY_WITH_INITIAL_FIELD_VALUE_KEY ].arrayedNewFieldInitialValue as number
+const SPEC_CONTROLS_PATTERN_RANGED_PROPERTY_TWO_INITIAL_VALUE: number =
+    playroomTestSpecControls!.data.initial[ RANGED_PROPERTY_TWO_KEY ] as number
+const SPEC_CONTROLS_PATTERN_OPTIONED_PROPERTY_ONE_INITIAL_VALUE: string =
+    playroomTestSpecControls!.data.initial[ OPTIONED_PROPERTY_ONE_KEY ] as string
+const specControlsPatternOptionedPropertyOneConstraint: OptionedConstraint =
+    specControlsPatternAttributes[ OPTIONED_PROPERTY_ONE_KEY ].constraint as OptionedConstraint
+const SPEC_CONTROLS_PATTERN_OPTIONED_PROPERTY_ONE_MODIFIED_VALUE: string =
+    specControlsPatternOptionedPropertyOneConstraint[ 0 ].key
+const SPEC_CONTROLS_PATTERN_OPTIONED_PROPERTY_TWO_INITIAL_VALUE: string =
+    playroomTestSpecControls!.data.initial[ OPTIONED_PROPERTY_TWO_KEY ] as string
+const specControlsPatternOptionedPropertyTwoConstraint: OptionedConstraint =
+    specControlsPatternAttributes[ OPTIONED_PROPERTY_TWO_KEY ].constraint as OptionedConstraint
+const SPEC_CONTROLS_PATTERN_OPTIONED_PROPERTY_TWO_MODIFIED_VALUE: string =
+    specControlsPatternOptionedPropertyTwoConstraint[ 1 ].key
+const SPEC_CONTROLS_PATTERN_STRINGED_PROPERTY_INITIAL_VALUE: string =
+    playroomTestSpecControls!.data.initial[ STRINGED_PROPERTY_KEY ] as string
+const specControlsPatternStringedPropertyConstraint: StringedConstraint =
+    specControlsPatternAttributes[ STRINGED_PROPERTY_KEY ].constraint as StringedConstraint
+const SPEC_CONTROLS_PATTERN_STRINGED_PROPERTY_ONE_MAX_LENGTH: number =
+    specControlsPatternStringedPropertyConstraint.maxLength as number
+const SPEC_CONTROLS_PATTERN_STRINGED_PROPERTY_ONE_MIN_LENGTH: number =
+    specControlsPatternStringedPropertyConstraint.minLength as number
+const SPEC_CONTROLS_PATTERN_TOGGLED_PROPERTY_INITIAL_VALUE: boolean =
+    playroomTestSpecControls!.data.initial[ TOGGLED_PROPERTY_KEY ] as boolean
+const SPEC_CONTROLS_PATTERN_TOGGLED_PROPERTY_MODIFIED_VALUE: boolean =
+    !SPEC_CONTROLS_PATTERN_TOGGLED_PROPERTY_INITIAL_VALUE
+const SPEC_CONTROLS_PATTERN_ARRAYED_PROPERTY_INITIAL_VALUE: number[] =
+    playroomTestSpecControls!.data.initial[ ARRAYED_PROPERTY_KEY ] as number[]
+const SPEC_CONTROLS_PATTERN_ARRAYED_PROPERTY_WITH_INITIAL_FIELD_VALUE_INITIAL_VALUE: number[] =
+    playroomTestSpecControls!.data.initial[ ARRAYED_PROPERTY_WITH_INITIAL_FIELD_VALUE_KEY ] as number[]
+const SPEC_CONTROLS_PATTERN_ARRAYED_PROPERTY_WITH_INITIAL_FIELD_VALUE_INITIAL_FIELD_VALUE: number =
+    playroomTestSpecControls!.data.attributes[ ARRAYED_PROPERTY_WITH_INITIAL_FIELD_VALUE_KEY ].arrayedNewFieldInitialValue as number
 
 const POST_PATTERN_ID: Id = playroomTestPost!.id
 const POST_PATTERN_TITLE: string = playroomTestPost!.metadata.formattedName as string
-const POST_PATTERN_RANGED_PROPERTY_ONE_INITIAL_VALUE: number = playroomTestPost!.data.initial[ RANGED_PROPERTY_ONE_KEY ] as number
-const POST_PATTERN_RANGED_PROPERTY_TWO_INITIAL_VALUE: number = playroomTestPost!.data.initial[ RANGED_PROPERTY_TWO_KEY ] as number
-const POST_PATTERN_OPTIONED_PROPERTY_ONE_INITIAL_VALUE: string = playroomTestPost!.data.initial[ OPTIONED_PROPERTY_ONE_KEY ] as string
+const POST_PATTERN_RANGED_PROPERTY_ONE_INITIAL_VALUE: number =
+    playroomTestPost!.data.initial[ RANGED_PROPERTY_ONE_KEY ] as number
+const POST_PATTERN_RANGED_PROPERTY_TWO_INITIAL_VALUE: number =
+    playroomTestPost!.data.initial[ RANGED_PROPERTY_TWO_KEY ] as number
+const POST_PATTERN_OPTIONED_PROPERTY_ONE_INITIAL_VALUE: string =
+    playroomTestPost!.data.initial[ OPTIONED_PROPERTY_ONE_KEY ] as string
 const postPatternAttributes: Attributes = playroomTestPost!.data.attributes
-const postPatternOptionedPropertyOneConstraint: OptionedConstraint = postPatternAttributes[ OPTIONED_PROPERTY_ONE_KEY ].constraint as OptionedConstraint
+const postPatternOptionedPropertyOneConstraint: OptionedConstraint =
+    postPatternAttributes[ OPTIONED_PROPERTY_ONE_KEY ].constraint as OptionedConstraint
 const POST_PATTERN_OPTIONED_PROPERTY_ONE_MODIFIED_VALUE: string = postPatternOptionedPropertyOneConstraint[ 1 ].key
-const POST_PATTERN_OPTIONED_PROPERTY_TWO_INITIAL_VALUE: string = playroomTestPost!.data.initial[ OPTIONED_PROPERTY_TWO_KEY ] as string
-const postPatternOptionedPropertyTwoConstraint: OptionedConstraint = postPatternAttributes[ OPTIONED_PROPERTY_TWO_KEY ].constraint as OptionedConstraint
+const POST_PATTERN_OPTIONED_PROPERTY_TWO_INITIAL_VALUE: string =
+    playroomTestPost!.data.initial[ OPTIONED_PROPERTY_TWO_KEY ] as string
+const postPatternOptionedPropertyTwoConstraint: OptionedConstraint =
+    postPatternAttributes[ OPTIONED_PROPERTY_TWO_KEY ].constraint as OptionedConstraint
 const POST_PATTERN_OPTIONED_PROPERTY_TWO_MODIFIED_VALUE: string = postPatternOptionedPropertyTwoConstraint[ 0 ].key
 
 const LONG_DURATION_PATTERN_ID: string = playroomTestLongDuration!.id

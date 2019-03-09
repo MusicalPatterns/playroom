@@ -5,10 +5,10 @@ import { ImmutablePageState, PageAction } from './page'
 import { ImmutablePerformerState, PerformerAction } from './performer'
 import { ImmutableSpecState, SpecAction } from './spec'
 
-enum SecretSelectorsForTest {
-    SECRET_SUBMITTED_SPEC = 'secret-submitted-spec',
-    SECRET_TIME_POSITION = 'secret-time-position',
-    SECRET_PATTERN_DURATION = 'secret-pattern-duration',
+enum SecretTestSelectors {
+    SUBMITTED_SPEC = 'secret-submitted-spec',
+    TIME_POSITION = 'secret-time-position',
+    PATTERN_DURATION = 'secret-pattern-duration',
 }
 
 interface DispatchParameter {
@@ -45,7 +45,7 @@ type ImmutableState = TypedMap<State>
 
 export {
     DispatchParameter,
-    SecretSelectorsForTest,
+    SecretTestSelectors,
     EventHandler,
     AsyncEventHandler,
     EventParameter,
