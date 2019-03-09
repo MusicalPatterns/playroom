@@ -5,9 +5,9 @@ import { RangedInputsProps } from '../types'
 import './styles'
 
 const RangedRangeInput: React.ComponentType<RangedInputsProps> =
-    ({ onChange, id, value, validityClass, min, max, step }: RangedInputsProps): JSX.Element => (
+    ({ onChange, id, value, fieldValidityClassName, min, max, step }: RangedInputsProps): JSX.Element => (
         <input {...{
-            className: `ranged-spec-control-range-input ${validityClass}`,
+            className: `ranged-spec-control-range-input ${fieldValidityClassName}`,
             id,
             max,
             min,

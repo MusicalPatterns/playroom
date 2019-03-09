@@ -9,11 +9,11 @@ import {
 
 const IMMERSIVE_AUDIO_TOGGLE: string = '#toggle-immersive-audio'
 
-describe('immersive audio', () => {
+describe('toggle immersive audio button', () => {
     it('starts out not yet enabled', async (done: DoneFn) => {
         await refreshPage()
         expect(await elementExists('#toggle-immersive-audio:disabled'))
-            .toBeTruthy('immersive audio was not disabled')
+            .toBeTruthy('toggle immersive audio button was not disabled')
 
         done()
     })
@@ -32,7 +32,7 @@ describe('immersive audio', () => {
             done()
         })
 
-        it('changes the button to exit after entering', async (done: DoneFn) => {
+        it('sets the button to read \'exit\' after entering', async (done: DoneFn) => {
             await clickElement(IMMERSIVE_AUDIO_TOGGLE)
 
             expect(await elementInnerText(IMMERSIVE_AUDIO_TOGGLE))

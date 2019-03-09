@@ -1,7 +1,7 @@
 import { DECIMAL, from, Ms, sleep, to } from '@musical-patterns/utilities'
 import { SecretSelectorsForTest } from '../../src/indexForTest'
 import { LONG_ENOUGH_FOR_TIME_TO_HAVE_BEEN_RESET, LONG_ENOUGH_FOR_TIME_TO_PASS } from './constants'
-import { elementInnerText } from './generic'
+import { clickElement, elementInnerText } from './generic'
 
 const isPaused: () => Promise<void> =
     async (): Promise<void> => {
@@ -31,11 +31,24 @@ const hasBeenReset: (options?: { toBefore?: Ms }) => Promise<void> =
 
 const currentTime: () => Promise<Ms> =
     async (): Promise<Ms> =>
-        to.Ms(parseInt(await elementInnerText(`#${SecretSelectorsForTest.SECRET_TIMER}`), from.Integer(DECIMAL)))
+        to.Ms(parseInt(await elementInnerText(`#${SecretSelectorsForTest.SECRET_TIME_POSITION}`), from.Integer(DECIMAL)))
 
 const patternDuration: () => Promise<Ms> =
     async (): Promise<Ms> =>
         to.Ms(parseInt(await elementInnerText(`#${SecretSelectorsForTest.SECRET_PATTERN_DURATION}`), from.Integer(DECIMAL)))
+
+const clickTimeControl: (control: string) => Promise<void> =
+    async (control: string): Promise<void> => {
+        await clickElement(`#${control}`)
+    }
+
+const isAfter: (previousTime: Ms) => Promise<void> =
+    async (previousTime: Ms): Promise<void> => {
+        const newTime: Ms = await currentTime()
+
+        expect(newTime)
+            .toBeGreaterThan(from.Ms(previousTime), `time ${newTime} was not after ${previousTime}`)
+    }
 
 export {
     isPlaying,
@@ -43,4 +56,6 @@ export {
     hasBeenReset,
     currentTime,
     patternDuration,
+    clickTimeControl,
+    isAfter,
 }

@@ -1,15 +1,23 @@
+import { sleep } from '@musical-patterns/utilities'
 import {
+    A_BIT_LONGER,
     clickElement,
     elementExists,
     elementInnerText,
+    hasBeenReset,
+    isPaused,
     leftColumnIs,
+    LONG_ENOUGH_FOR_TIME_TO_PASS,
     quickRefresh,
-    selectAboutPage,
+    refreshPage,
+    selectAboutPageByClickingTitle,
+    selectLongDurationPattern,
     selectSpecControlsPattern,
     simulateDesktopViewport,
     simulateMobileViewport,
     waitLongEnoughForAnimationToComplete,
-} from '../../support'
+} from '../../../support'
+import { clickTimeControl } from '../../../support/time'
 
 const selectAboutPageWithoutAlsoSimulatingDesktopViewport: () => Promise<void> =
     async (): Promise<void> => {
@@ -29,7 +37,7 @@ const titleIs: (expectedTitle: string) => Promise<void> =
             .toBe(expectedTitle)
     }
 
-describe('about page', () => {
+describe('title', () => {
     beforeEach(async (done: DoneFn) => {
         await quickRefresh()
         await selectSpecControlsPattern()
@@ -37,39 +45,39 @@ describe('about page', () => {
         done()
     })
 
-    it('shows the about page', async (done: DoneFn) => {
-        await selectAboutPage()
+    it('clicking the title shows the about page', async (done: DoneFn) => {
+        await selectAboutPageByClickingTitle()
         await titleIs('About')
 
         done()
     })
 
-    it('completely removes the spec panel', async (done: DoneFn) => {
-        await selectAboutPage()
+    it('clicking the title completely removes the spec panel', async (done: DoneFn) => {
+        await selectAboutPageByClickingTitle()
         expect(await elementExists('#spec-panel'))
             .toBeFalsy('spec panel was still shown')
 
         done()
     })
 
-    it('hides the performer panel', async (done: DoneFn) => {
-        await selectAboutPage()
+    it('clicking the title hides the performer panel', async (done: DoneFn) => {
+        await selectAboutPageByClickingTitle()
         expect(await elementExists('#performer-panel.closed'))
             .toBeTruthy('performer panel was not hidden')
 
         done()
     })
 
-    it('hides the right column', async (done: DoneFn) => {
-        await selectAboutPage()
+    it('clicking the title hides the right column', async (done: DoneFn) => {
+        await selectAboutPageByClickingTitle()
         expect(await elementExists('#middle-plus-right-column.right-column-closed'))
             .toBeTruthy('right column was not hidden')
 
         done()
     })
 
-    it('no longer shows the about page after you select a pattern from the list', async (done: DoneFn) => {
-        await selectAboutPage()
+    it('no longer shows the about page if you select a pattern from the list after clicking the title', async (done: DoneFn) => {
+        await selectAboutPageByClickingTitle()
 
         await selectSpecControlsPattern()
         await titleIs('Playroom Test Spec Controls')
@@ -79,6 +87,7 @@ describe('about page', () => {
 
     describe('when the viewport is smaller than 1000px wide', () => {
         beforeEach(async (done: DoneFn) => {
+            await refreshPage()
             await simulateMobileViewport()
 
             done()
@@ -91,7 +100,7 @@ describe('about page', () => {
             done()
         })
 
-        it('collapses the left column when you select a pattern', async (done: DoneFn) => {
+        it('collapses the left column when you click the title', async (done: DoneFn) => {
             await leftColumnIs('open')
 
             await selectAboutPageWithoutAlsoSimulatingDesktopViewport()
@@ -106,5 +115,33 @@ describe('about page', () => {
         await titleIs('About')
 
         done()
+    })
+
+    describe('when a pattern is playing', () => {
+        beforeEach(async (done: DoneFn) => {
+            await quickRefresh()
+            await selectLongDurationPattern()
+            await clickTimeControl('play')
+            await sleep(LONG_ENOUGH_FOR_TIME_TO_PASS)
+
+            done()
+        })
+
+        afterEach(async (done: DoneFn) => {
+            if (await elementExists('#pause')) {
+                await clickTimeControl('pause')
+            }
+            done()
+        })
+
+        it('when you navigate to the about page, it stops playing and resets the time to the beginning', async (done: DoneFn) => {
+            await sleep(A_BIT_LONGER)
+            await selectAboutPageByClickingTitle()
+
+            await hasBeenReset()
+            await isPaused()
+
+            done()
+        })
     })
 })

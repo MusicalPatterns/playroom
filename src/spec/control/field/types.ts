@@ -8,9 +8,9 @@ interface FieldPropsFromState {
 }
 
 interface FieldPropsFromParent extends PropertyParameter {
+    fieldValidityClassName: string,
     id: string,
     onChange: EventHandler,
-    validityClass: string,
     value: HtmlValueOrChecked,
 }
 

@@ -1,6 +1,6 @@
-import { elementExists, openSpecControlsIfNotOpen, refreshPage, selectSpecControlsPattern } from '../../support'
+import { elementExists, openSpecControlsIfNotOpen, refreshPage, selectSpecControlsPattern } from '../../../support'
 
-describe('expanding and collapsing spec controls', () => {
+describe('spec panel header', () => {
     beforeEach(async (done: DoneFn) => {
         await refreshPage()
         await selectSpecControlsPattern()
@@ -8,14 +8,14 @@ describe('expanding and collapsing spec controls', () => {
     })
 
     describe('at the beginning', () => {
-        it('the controls begin closed', async (done: DoneFn) => {
+        it('the spec panel begins closed', async (done: DoneFn) => {
             expect(await elementExists('#spec-panel.closed'))
                 .toBeTruthy('spec panel was not closed')
 
             done()
         })
 
-        it('when the controls are closed, the sections, controls themselves, and reset button are not visible', async (done: DoneFn) => {
+        it('when the spec controls are closed, the sections, controls themselves, and reset button are not visible', async (done: DoneFn) => {
             expect(await elementExists('#spec-panel-body.closed'))
                 .toBeTruthy('spec panel body was not closed')
 
@@ -23,20 +23,20 @@ describe('expanding and collapsing spec controls', () => {
         })
     })
 
-    describe('after clicking the caret', () => {
+    describe('after clicking the spec panel header', () => {
         beforeEach(async (done: DoneFn) => {
             await openSpecControlsIfNotOpen()
             done()
         })
 
-        it('the controls open', async (done: DoneFn) => {
+        it('the spec panel opens', async (done: DoneFn) => {
             expect(await elementExists('#spec-panel.open'))
                 .toBeTruthy('spec panel was not open')
 
             done()
         })
 
-        it('the sections, controls themselves, and reset button are visible', async (done: DoneFn) => {
+        it('the sections, controls themselves, and reset button become visible', async (done: DoneFn) => {
             expect(await elementExists('#spec-panel-body.open'))
                 .toBeTruthy('spec panel body was not open')
 

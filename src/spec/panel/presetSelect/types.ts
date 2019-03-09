@@ -2,16 +2,16 @@ import { Preset, Spec } from '@musical-patterns/pattern'
 import { DictionaryOf, Maybe } from '@musical-patterns/utilities'
 import { EventParameter } from '../../../types'
 
-interface PresetsSelectPropsFromState {
+interface PresetSelectPropsFromState {
     presets: Maybe<DictionaryOf<Preset>>,
     submittedSpec: Spec,
 }
 
-interface PresetsSelectPropsFromDispatch {
+interface PresetSelectPropsFromDispatch {
     handlePresetChangeEvent: HandlePresetChangeEvent,
 }
 
-interface PresetsSelectProps extends PresetsSelectPropsFromState, PresetsSelectPropsFromDispatch {}
+interface PresetSelectProps extends PresetSelectPropsFromState, PresetSelectPropsFromDispatch {}
 
 interface HandlePresetChangeEventParameters extends EventParameter {
     presets: DictionaryOf<Preset>,
@@ -20,9 +20,9 @@ interface HandlePresetChangeEventParameters extends EventParameter {
 type HandlePresetChangeEvent = (parameters: HandlePresetChangeEventParameters) => void
 
 export {
-    PresetsSelectPropsFromState,
-    PresetsSelectPropsFromDispatch,
-    PresetsSelectProps,
+    PresetSelectPropsFromState,
+    PresetSelectPropsFromDispatch,
+    PresetSelectProps,
     HandlePresetChangeEvent,
     HandlePresetChangeEventParameters,
 }

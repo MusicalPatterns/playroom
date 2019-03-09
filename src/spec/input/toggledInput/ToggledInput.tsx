@@ -7,9 +7,9 @@ import './styles'
 import { ToggledInputsProps } from './types'
 
 const ToggledInput: React.ComponentType<ToggledInputsProps> =
-    ({ onChange, id, value: checked, validityClass }: ToggledInputsProps): JSX.Element => (
+    ({ onChange, id, value: checked, fieldValidityClassName }: ToggledInputsProps): JSX.Element => (
         <div {...{ className: 'toggled-spec-control-checkbox-input' }}>
-            <input {...{ checked, className: validityClass, id, onChange, type: 'checkbox' }}/>
+            <input {...{ checked, className: fieldValidityClassName, id, onChange, type: 'checkbox' }}/>
             <FontAwesomeIcon {...{ key: 1, icon: checked ? faCheckSquare : faSquare }}/>
         </div>
     )

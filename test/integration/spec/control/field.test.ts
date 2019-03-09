@@ -5,16 +5,16 @@ import {
     RANGED_PROPERTY_TWO_KEY,
     refreshForSpecControlsTest,
     selectPostPattern,
-} from '../../support'
+} from '../../../support'
 
-describe('hidden inputs', () => {
+describe('field', () => {
     beforeEach(async (done: DoneFn) => {
         await refreshForSpecControlsTest()
 
         done()
     })
 
-    it('some controls hide the range input', async (done: DoneFn) => {
+    it('some ranged fields hide the range input', async (done: DoneFn) => {
         expect(await elementExists(`input[type=number]#${RANGED_PROPERTY_TWO_KEY}`))
             .toBeTruthy('number input did not exist')
         expect(await elementExists(`input[type=range]#${RANGED_PROPERTY_TWO_KEY}`))
@@ -23,7 +23,7 @@ describe('hidden inputs', () => {
         done()
     })
 
-    it('some controls hide the number input', async (done: DoneFn) => {
+    it('some ranged fields hide the number input', async (done: DoneFn) => {
         await selectPostPattern()
 
         expect(await elementExists(`input[type=number]#${RANGED_PROPERTY_TWO_KEY}`))
@@ -34,7 +34,7 @@ describe('hidden inputs', () => {
         done()
     })
 
-    it('also works for arrayed controls - they can hide the range input', async (done: DoneFn) => {
+    it('also works for arrayed spec controls - their fields can hide the range input', async (done: DoneFn) => {
         expect(await elementExists(`input[type=number]#${ARRAYED_PROPERTY_KEY}-0`))
             .toBeTruthy('number input did not exist')
         expect(await elementExists(`input[type=range]#${ARRAYED_PROPERTY_KEY}-0`))
@@ -43,7 +43,7 @@ describe('hidden inputs', () => {
         done()
     })
 
-    it('also works for arrayed controls - they can hide the number input', async (done: DoneFn) => {
+    it('also works for arrayed spec controls - their fields can hide the number input', async (done: DoneFn) => {
         expect(await elementExists(`input[type=number]#${ARRAYED_PROPERTY_WITH_INITIAL_FIELD_VALUE_KEY}-0`))
             .toBeFalsy('number input existed')
         expect(await elementExists(`input[type=range]#${ARRAYED_PROPERTY_WITH_INITIAL_FIELD_VALUE_KEY}-0`))

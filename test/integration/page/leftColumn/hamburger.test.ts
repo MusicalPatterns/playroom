@@ -1,4 +1,4 @@
-import { clickElement, leftColumnIs, refreshPage } from '../../support'
+import { clickElement, leftColumnIs, refreshPage } from '../../../support'
 
 describe('hamburger', () => {
     it('collapses and expands the left column', async (done: DoneFn) => {

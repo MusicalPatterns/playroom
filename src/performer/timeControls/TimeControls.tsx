@@ -77,7 +77,7 @@ const TimeControls: React.ComponentType<TimeControlsProps> =
                 </button>
                 <Timeline/>
                 <TimeInMinutesAndSeconds/>
-                <div {...{ id: SecretSelectorsForTest.SECRET_TIMER }}>{timePositionForDisplay}</div>
+                <div {...{ id: SecretSelectorsForTest.SECRET_TIME_POSITION }}>{timePositionForDisplay}</div>
                 <div {...{ id: SecretSelectorsForTest.SECRET_PATTERN_DURATION }}>{patternDurationForDisplay}</div>
             </div>
         )

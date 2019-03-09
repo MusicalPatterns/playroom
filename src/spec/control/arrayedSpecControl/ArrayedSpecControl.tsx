@@ -55,7 +55,7 @@ const ArrayedSpecControl: React.ComponentType<ArrayedSpecControlProps> =
 
         return (
             <div {...{ id: property, className: 'arrayed-spec-control' }}>
-                <span {...{ className: SecretSelectorsForTest.SECRET_SUBMITTED_SPEC_CONTROL }}>
+                <span {...{ className: SecretSelectorsForTest.SECRET_SUBMITTED_SPEC }}>
                     {stringifyIfNecessary(arrayedSubmittedValue)}
                 </span>
                 <div>{formattedName}</div>

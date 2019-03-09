@@ -4,7 +4,7 @@ import * as React from 'react'
 import { RangedInputsProps } from '../types'
 
 const RangedNumberInput: React.ComponentType<RangedInputsProps> =
-    ({ onChange, id, value, validityClass, min, max, step }: RangedInputsProps): JSX.Element =>
-        <input {...{ className: validityClass, id, onChange, type: 'number', value, max, min, step }}/>
+    ({ onChange, id, value, fieldValidityClassName, min, max, step }: RangedInputsProps): JSX.Element =>
+        <input {...{ className: fieldValidityClassName, id, onChange, type: 'number', value, max, min, step }}/>
 
 export default RangedNumberInput

@@ -12,6 +12,7 @@ import { InvalidMessage } from '../invalidMessage'
 import { stringifyIfNecessary } from '../stringifyIfNecessary'
 import { Units } from '../units'
 import { buildHandleSpecControlChangeEvent } from './events'
+import { getFieldValidityClassName } from './fieldValidityClassName'
 import { specControlId } from './specControlId'
 import './styles'
 import {
@@ -19,7 +20,6 @@ import {
     SingularSpecControlPropsFromDispatch,
     SingularSpecControlPropsFromState,
 } from './types'
-import { getValidityClass } from './validityClass'
 
 const mapStateToProps: (state: ImmutableState) => SingularSpecControlPropsFromState =
     (state: ImmutableState): SingularSpecControlPropsFromState => {
@@ -71,16 +71,16 @@ const SingularSpecControl: React.ComponentType<SingularSpecControlProps> =
         const isNotAnArrayedSpecControl: boolean = isUndefined(fieldIndex)
         const id: string = specControlId({ isNotAnArrayedSpecControl, fieldIndex, property })
 
-        const validityClass: string = getValidityClass(singularValidationResult)
+        const fieldValidityClassName: string = getFieldValidityClassName(singularValidationResult)
         const fieldProps: FieldPropsFromParent = {
+            fieldValidityClassName,
             id,
             onChange,
             property,
-            validityClass,
             value: singularDisplayedValue,
         }
 
-        const secretClass: string = SecretSelectorsForTest.SECRET_SUBMITTED_SPEC_CONTROL
+        const secretClass: string = SecretSelectorsForTest.SECRET_SUBMITTED_SPEC
 
         return (
             <div {...{ className: 'singular-spec-control', id, title: description }}>

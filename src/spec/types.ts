@@ -27,7 +27,7 @@ type ImmutableSpecState = TypedMap<SpecState>
 
 type SpecAction = ActionForState<SpecState>
 
-enum SpecControlStates {
+enum FieldValidity {
     INVALID = 'invalid',
     VALID = 'valid',
 }
@@ -37,5 +37,5 @@ export {
     ImmutableSpecState,
     SpecStateKey,
     SpecAction,
-    SpecControlStates,
+    FieldValidity,
 }

@@ -14,7 +14,7 @@ import * as React from 'react'
 import { OptionedInputsProps } from './types'
 
 const OptionedInput: React.ComponentType<OptionedInputsProps> =
-    ({ onChange, id, value, validityClass, constraint }: OptionedInputsProps): JSX.Element => {
+    ({ onChange, id, value, fieldValidityClassName, constraint }: OptionedInputsProps): JSX.Element => {
         const optionElements: JSX.Element[] = map(
             constraint
                 .sort((option: OptionedConstraintOption, nextOption: OptionedConstraintOption): number => {
@@ -36,7 +36,7 @@ const OptionedInput: React.ComponentType<OptionedInputsProps> =
             })
 
         return (
-            <select {...{ className: validityClass, id, onChange, value }}>{optionElements}</select>
+            <select {...{ className: fieldValidityClassName, id, onChange, value }}>{optionElements}</select>
         )
     }
 

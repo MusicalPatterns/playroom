@@ -4,7 +4,7 @@ import * as React from 'react'
 import { connect } from 'react-redux'
 import { ImmutableState, StateKey } from '../../../types'
 import { SpecStateKey } from '../../types'
-import { PresetsSelect } from '../presetsSelect'
+import { PresetSelect } from '../presetSelect'
 import { ResetSpecButton } from '../resetSpecButton'
 import { SpecControls } from '../specControls'
 import { SpecPanelOpenParameter } from '../types'
@@ -19,7 +19,7 @@ const mapStateToProps: (state: ImmutableState) => SpecPanelOpenParameter =
 const SpecPanelBody: React.ComponentType<SpecPanelOpenParameter> =
     ({ specPanelOpen }: SpecPanelOpenParameter): JSX.Element => (
         <div {...{ id: 'spec-panel-body', className: specPanelOpen ? 'open' : 'closed' }}>
-            <PresetsSelect/>
+            <PresetSelect/>
             <hr/>
             <SpecControls/>
             <hr/>
