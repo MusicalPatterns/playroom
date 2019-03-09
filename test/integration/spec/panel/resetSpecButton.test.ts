@@ -180,7 +180,7 @@ describe('reset button', () => {
         done()
     })
 
-    it('resets the spec to the pattern\'s defaults', async (done: DoneFn) => {
+    it(`resets the spec to the pattern's defaults`, async (done: DoneFn) => {
         await modifyAllTheThings()
         await expectAllTheThingsToBeModified()
 

@@ -32,7 +32,7 @@ describe('toggle immersive audio button', () => {
             done()
         })
 
-        it('sets the button to read \'exit\' after entering', async (done: DoneFn) => {
+        it(`sets the button to read 'exit' after entering`, async (done: DoneFn) => {
             await clickElement(IMMERSIVE_AUDIO_TOGGLE)
 
             expect(await elementInnerText(IMMERSIVE_AUDIO_TOGGLE))
