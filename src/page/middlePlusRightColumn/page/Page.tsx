@@ -13,7 +13,7 @@ const mapStateToProps: (state: ImmutableState) => PageProps =
     })
 
 const Page: React.ComponentType<PageProps> =
-    ({ pageName }: PageProps): JSX.Element => {
+    ({ pageName }: PageProps): React.ReactElement | null => {
         switch (pageName) {
             case PageName.ABOUT:
                 return (
@@ -181,7 +181,7 @@ const Page: React.ComponentType<PageProps> =
                     </div>
                 )
             default:
-                return <div/>
+                return null
         }
     }
 

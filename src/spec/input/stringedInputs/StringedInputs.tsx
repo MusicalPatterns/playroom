@@ -1,11 +1,12 @@
-// tslint:disable variable-name file-name-casing no-default-export no-import-side-effect
+// tslint:disable variable-name file-name-casing no-default-export no-import-side-effect no-null-keyword
 
 import { StringedConstraint } from '@musical-patterns/pattern'
 import * as React from 'react'
 import { StringedInputsProps } from './types'
 
 const StringedInputs: React.ComponentType<StringedInputsProps> =
-    ({ fieldValidityClassName, fieldId, onChange, value, property, attributes }: StringedInputsProps): JSX.Element => {
+    (stringedInputsProps: StringedInputsProps): React.ReactElement | null => {
+        const { fieldValidityClassName, fieldId, onChange, value, property, attributes } = stringedInputsProps
         const { constraint } = attributes[ property ]
         const { minLength, maxLength } = constraint as StringedConstraint
 

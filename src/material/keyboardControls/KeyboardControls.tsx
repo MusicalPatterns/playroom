@@ -1,13 +1,13 @@
-// tslint:disable variable-name file-name-casing no-default-export no-import-side-effect
+// tslint:disable variable-name file-name-casing no-default-export no-import-side-effect no-null-keyword
 
 import * as React from 'react'
 import { onKeyDown } from './events'
 
 const KeyboardControls: React.ComponentType =
-    (): JSX.Element => {
+    (): React.ReactElement | null => {
         window.addEventListener('keydown', onKeyDown)
 
-        return <div/>
+        return null
     }
 
 export default KeyboardControls

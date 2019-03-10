@@ -1,4 +1,4 @@
-// tslint:disable variable-name file-name-casing no-default-export no-import-side-effect
+// tslint:disable variable-name file-name-casing no-default-export no-import-side-effect no-null-keyword
 
 import { faStop } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
@@ -22,7 +22,7 @@ const mapDispatchToProps: (dispatch: Dispatch) => StopButtonPropsFromDispatch =
     })
 
 const StopButton: React.ComponentType<StopButtonProps> =
-    ({ handleStopClickEvent, performerDisabled }: StopButtonProps): JSX.Element => (
+    ({ handleStopClickEvent, performerDisabled }: StopButtonProps): React.ReactElement | null => (
         <button {...{ id: 'stop', onClick: handleStopClickEvent, disabled: performerDisabled }}>
             <FontAwesomeIcon {...{ icon: faStop }}/>
         </button>

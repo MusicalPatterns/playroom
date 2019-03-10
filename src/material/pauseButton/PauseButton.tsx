@@ -1,4 +1,4 @@
-// tslint:disable variable-name file-name-casing no-default-export no-import-side-effect
+// tslint:disable variable-name file-name-casing no-default-export no-import-side-effect no-null-keyword
 
 import { faPause } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
@@ -22,7 +22,7 @@ const mapDispatchToProps: (dispatch: Dispatch) => PauseButtonPropsFromDispatch =
     })
 
 const PauseButton: React.ComponentType<PauseButtonProps> =
-    ({ handlePauseClickEvent, performerDisabled }: PauseButtonProps): JSX.Element => (
+    ({ handlePauseClickEvent, performerDisabled }: PauseButtonProps): React.ReactElement | null => (
         <button {...{ id: 'pause', onClick: handlePauseClickEvent, disabled: performerDisabled }}>
             <FontAwesomeIcon {...{ icon: faPause }}/>
         </button>

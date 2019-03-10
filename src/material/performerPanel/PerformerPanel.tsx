@@ -1,4 +1,4 @@
-// tslint:disable variable-name file-name-casing no-default-export no-import-side-effect
+// tslint:disable variable-name file-name-casing no-default-export no-import-side-effect no-null-keyword
 
 import * as React from 'react'
 import { connect } from 'react-redux'
@@ -23,11 +23,11 @@ const mapStateToProps: (state: ImmutableState) => PerformerPanelProps =
     }
 
 const PerformerPanel: React.ComponentType<PerformerPanelProps> =
-    ({ patternId, pageName }: PerformerPanelProps): JSX.Element => (
+    ({ patternId, pageName }: PerformerPanelProps): React.ReactElement | null => (
         <div {...{ id: 'performer-panel', className: !pageName ? 'open' : 'closed' }}>
             <TimeControls/>
             <ToggleImmersiveAudioButton/>
-            {patternId && <RecompileListener/>}
+            <RecompileListener/>
         </div>
     )
 

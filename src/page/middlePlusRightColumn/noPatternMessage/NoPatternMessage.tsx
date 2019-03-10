@@ -1,4 +1,4 @@
-// tslint:disable variable-name file-name-casing no-default-export no-import-side-effect
+// tslint:disable variable-name file-name-casing no-default-export no-import-side-effect no-null-keyword
 
 import { isUndefined } from '@musical-patterns/utilities'
 import * as React from 'react'
@@ -20,12 +20,12 @@ const mapStateToProps: (state: ImmutableState) => NoPatternMessageProps =
     }
 
 const NoPatternMessage: React.ComponentType<NoPatternMessageProps> =
-    ({ pageName, patternId }: NoPatternMessageProps): JSX.Element => {
+    ({ pageName, patternId }: NoPatternMessageProps): React.ReactElement | null => {
         if (isUndefined(pageName) && isUndefined(patternId)) {
             return <div {...{ id: 'no-pattern-message' }}>{TO_BEGIN_MESSAGE}</div>
         }
 
-        return <div/>
+        return null
     }
 
 export default connect(mapStateToProps)(NoPatternMessage)

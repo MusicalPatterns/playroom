@@ -1,4 +1,4 @@
-// tslint:disable variable-name file-name-casing no-default-export no-import-side-effect
+// tslint:disable variable-name file-name-casing no-default-export no-import-side-effect no-null-keyword
 
 import { faBars } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
@@ -25,7 +25,7 @@ const mapDispatchToProps: (dispatch: Dispatch) => HamburgerPropsFromDispatch =
     })
 
 const Hamburger: React.ComponentType<HamburgerProps> =
-    ({ handleHamburgerClickEvent, leftColumnOpen }: HamburgerProps): JSX.Element => {
+    ({ handleHamburgerClickEvent, leftColumnOpen }: HamburgerProps): React.ReactElement | null => {
         const onClick: VoidFunction = (): void => {
             handleHamburgerClickEvent({ leftColumnOpen })
         }

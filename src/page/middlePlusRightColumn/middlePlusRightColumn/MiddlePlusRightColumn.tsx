@@ -1,4 +1,4 @@
-// tslint:disable variable-name file-name-casing no-default-export no-import-side-effect
+// tslint:disable variable-name file-name-casing no-default-export no-import-side-effect no-null-keyword
 
 import * as React from 'react'
 import { connect } from 'react-redux'
@@ -24,7 +24,7 @@ const mapStateToProps: (state: ImmutableState) => MiddlePlusRightColumnProps =
     }
 
 const MiddlePlusRightColumn: React.ComponentType<MiddlePlusRightColumnProps> =
-    ({ patternId, pageName, rightColumnOpen }: MiddlePlusRightColumnProps): JSX.Element => (
+    ({ patternId, pageName, rightColumnOpen }: MiddlePlusRightColumnProps): React.ReactElement | null => (
         <div {...{ id: 'middle-plus-right-column', className: `right-column-${rightColumnOpen ? 'open' : 'closed'}` }}>
             <FirstRow/>
             <SecondRow/>

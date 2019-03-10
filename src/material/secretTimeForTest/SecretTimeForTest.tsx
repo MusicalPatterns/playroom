@@ -1,4 +1,4 @@
-// tslint:disable variable-name file-name-casing no-default-export no-import-side-effect
+// tslint:disable variable-name file-name-casing no-default-export no-import-side-effect no-null-keyword
 
 import * as React from 'react'
 import { connect } from 'react-redux'
@@ -21,7 +21,11 @@ const mapStateToProps: (state: ImmutableState) => SecretTimeForTestProps =
     }
 
 const SecretTimeForTest: React.ComponentType<SecretTimeForTestProps> =
-    ({ debugMode, patternDuration, timePosition }: SecretTimeForTestProps): JSX.Element => {
+    ({ debugMode, patternDuration, timePosition }: SecretTimeForTestProps): React.ReactElement | null => {
+        if (!debugMode) {
+            return null
+        }
+
         const { timePositionForDisplay, patternDurationForDisplay } = formatTimesForDisplay({
             patternDuration,
             timePosition,
@@ -29,8 +33,8 @@ const SecretTimeForTest: React.ComponentType<SecretTimeForTestProps> =
 
         return (
             <div>
-                {debugMode && <div {...{ id: SecretTestSelector.TIME_POSITION }}>{timePositionForDisplay}</div>}
-                {debugMode && <div {...{ id: SecretTestSelector.PATTERN_DURATION }}>{patternDurationForDisplay}</div>}
+                <div {...{ id: SecretTestSelector.TIME_POSITION }}>{timePositionForDisplay}</div>
+                <div {...{ id: SecretTestSelector.PATTERN_DURATION }}>{patternDurationForDisplay}</div>
             </div>
         )
     }

@@ -1,4 +1,4 @@
-// tslint:disable variable-name file-name-casing no-default-export no-import-side-effect
+// tslint:disable variable-name file-name-casing no-default-export no-import-side-effect no-null-keyword
 
 import { PropertyAttributes, PropertyType } from '@musical-patterns/pattern'
 import { HtmlValue } from '@musical-patterns/utilities'
@@ -20,7 +20,7 @@ const mapStateToProps: (state: ImmutableState) => InputsPropsFromState =
     })
 
 const Inputs: React.ComponentType<InputsProps> =
-    (inputsProps: InputsProps): JSX.Element => {
+    (inputsProps: InputsProps): React.ReactElement | null => {
         const { attributes, property, value, ...otherProps } = inputsProps
         const { propertyType }: PropertyAttributes = attributes[ property ]
 
@@ -38,7 +38,7 @@ const Inputs: React.ComponentType<InputsProps> =
                 return <StringedInputs {...{ attributes, property, value: value as string, ...otherProps }}/>
             }
             default: {
-                return <div/>
+                return null
             }
         }
     }

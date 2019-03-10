@@ -1,4 +1,4 @@
-// tslint:disable variable-name file-name-casing no-default-export no-import-side-effect
+// tslint:disable variable-name file-name-casing no-default-export no-import-side-effect no-null-keyword
 
 import { from } from '@musical-patterns/utilities'
 import * as React from 'react'
@@ -21,7 +21,8 @@ const mapStateToProps: (state: ImmutableState) => TimelineOrTimeInMinutesAndSeco
     }
 
 const Timeline: React.ComponentType<TimelineOrTimeInMinutesAndSecondsProps> =
-    ({ performerDisabled, patternDuration, timePosition }: TimelineOrTimeInMinutesAndSecondsProps): JSX.Element => {
+    (timelineProps: TimelineOrTimeInMinutesAndSecondsProps): React.ReactElement | null => {
+        const { performerDisabled, patternDuration, timePosition } = timelineProps
         const { timePositionForDisplay, patternDurationForDisplay } = formatTimesForDisplay({
             patternDuration,
             timePosition,

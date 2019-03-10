@@ -1,4 +1,4 @@
-// tslint:disable variable-name file-name-casing no-default-export no-import-side-effect
+// tslint:disable variable-name file-name-casing no-default-export no-import-side-effect no-null-keyword
 
 import * as React from 'react'
 import { connect } from 'react-redux'
@@ -16,7 +16,7 @@ const mapStateToProps: (state: ImmutableState) => TitleProps =
     })
 
 const Title: React.ComponentType<TitleProps> =
-    ({ pageName, patternName }: TitleProps): JSX.Element =>
+    ({ pageName, patternName }: TitleProps): React.ReactElement | null =>
         <h1>{pageName || patternName}</h1>
 
 export default connect(mapStateToProps)(Title)

@@ -1,4 +1,4 @@
-// tslint:disable variable-name file-name-casing no-default-export no-import-side-effect
+// tslint:disable variable-name file-name-casing no-default-export no-import-side-effect no-null-keyword
 
 import { Preset } from '@musical-patterns/pattern'
 import {
@@ -38,13 +38,13 @@ const mapDispatchToProps: (dispatch: Dispatch) => PresetSelectPropsFromDispatch 
     })
 
 const PresetSelect: React.ComponentType<PresetSelectProps> =
-    ({ handlePresetChangeEvent, presets, submittedSpec }: PresetSelectProps): JSX.Element => {
+    ({ handlePresetChangeEvent, presets, submittedSpec }: PresetSelectProps): React.ReactElement | null => {
         if (isUndefined(presets)) {
-            return <div/>
+            return null
         }
 
         let selectValue: string = ''
-        const options: JSX.Element[] = map(
+        const options: Array<React.ReactElement | null> = map(
             entries<string, Preset>(presets)
                 .sort(([ _, preset ]: [ string, Preset ], [ __, nextPreset ]: [ string, Preset ]): number => {
                     const order: number = isUndefined(preset.order) ? ARBITRARILY_LARGE_NUMBER : preset.order
@@ -54,7 +54,7 @@ const PresetSelect: React.ComponentType<PresetSelectProps> =
 
                     return order < nextOrder ? negative(1) : 1
                 }),
-            ([ presetKey, preset ]: [ string, Preset ], index: Ordinal): JSX.Element => {
+            ([ presetKey, preset ]: [ string, Preset ], index: Ordinal): React.ReactElement | null => {
                 const { description, formattedName, spec } = preset
                 if (deepEqual(spec, submittedSpec)) {
                     selectValue = presetKey

@@ -1,4 +1,4 @@
-// tslint:disable variable-name file-name-casing no-default-export no-import-side-effect
+// tslint:disable variable-name file-name-casing no-default-export no-import-side-effect no-null-keyword
 
 import { faPlay } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
@@ -22,7 +22,7 @@ const mapDispatchToProps: (dispatch: Dispatch) => PlayButtonPropsFromDispatch =
     })
 
 const PlayButton: React.ComponentType<PlayButtonProps> =
-    ({ handlePlayClickEvent, performerDisabled }: PlayButtonProps): JSX.Element => (
+    ({ handlePlayClickEvent, performerDisabled }: PlayButtonProps): React.ReactElement | null => (
         <button {...{ id: 'play', onClick: handlePlayClickEvent, disabled: performerDisabled }}>
             <FontAwesomeIcon {...{ icon: faPlay }}/>
         </button>

@@ -1,4 +1,4 @@
-// tslint:disable variable-name file-name-casing no-default-export no-import-side-effect
+// tslint:disable variable-name file-name-casing no-default-export no-import-side-effect no-null-keyword
 
 import { PropertyAttributes } from '@musical-patterns/pattern'
 import * as React from 'react'
@@ -33,7 +33,7 @@ const mapDispatchToProps: (dispatch: Dispatch) => FieldPropsFromDispatch =
     })
 
 const Field: React.ComponentType<FieldProps> =
-    (fieldProps: FieldProps): JSX.Element => {
+    (fieldProps: FieldProps): React.ReactElement | null => {
         const {
             attributes,
             fieldIndex,
@@ -60,7 +60,7 @@ const Field: React.ComponentType<FieldProps> =
                 <div>{fieldLabel}</div>
                 <Inputs {...{ fieldValidityClassName, fieldId, onChange, property, value: singularDisplayedValue }}/>
                 <Units {...{ property }}/>
-                {singularValidationResult && <InvalidMessage {...{ invalidMessage: singularValidationResult }}/>}
+                <InvalidMessage {...{ singularValidationResult }}/>
                 <SecretSubmittedSpecForTest {...{ submittedValue: singularSubmittedValue, fieldId }}/>
             </div>
         )

@@ -1,4 +1,4 @@
-// tslint:disable variable-name file-name-casing no-default-export no-import-side-effect
+// tslint:disable variable-name file-name-casing no-default-export no-import-side-effect no-null-keyword
 
 import { from, HtmlValueOrChecked, map, Ordinal } from '@musical-patterns/utilities'
 import * as React from 'react'
@@ -8,12 +8,12 @@ import { calculateSingularSubmittedValue, calculateSingularValidationResult } fr
 import './styles'
 
 const ArrayedFields: React.ComponentType<ArrayedSpecControlPropsFromParent> =
-    (arrayedFieldsProps: ArrayedSpecControlPropsFromParent): JSX.Element => {
+    (arrayedFieldsProps: ArrayedSpecControlPropsFromParent): React.ReactElement | null => {
         const { property, arrayedDisplayedValue, arrayedValidationResult, arrayedSubmittedValue } = arrayedFieldsProps
 
-        const fields: JSX.Element[] = map(
+        const fields: Array<React.ReactElement | null> = map(
             arrayedDisplayedValue,
-            (singularDisplayedValue: HtmlValueOrChecked, index: Ordinal): JSX.Element => (
+            (singularDisplayedValue: HtmlValueOrChecked, index: Ordinal): React.ReactElement | null => (
                 <Field
                     {...{
                         fieldIndex: index,

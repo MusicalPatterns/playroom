@@ -1,4 +1,4 @@
-// tslint:disable variable-name file-name-casing no-default-export no-import-side-effect
+// tslint:disable variable-name file-name-casing no-default-export no-import-side-effect no-null-keyword
 
 import { isUndefined } from '@musical-patterns/utilities'
 import * as React from 'react'
@@ -35,7 +35,8 @@ const mapDispatchToProps: (dispatch: Dispatch) => TimeControlsPropsFromDispatch 
     })
 
 const TimeControls: React.ComponentType<TimeControlsProps> =
-    ({ onPerformerUpdate, paused, performerDisabled, setOnPerformerUpdate }: TimeControlsProps): JSX.Element => {
+    (timeControlsProps: TimeControlsProps): React.ReactElement | null => {
+        const { onPerformerUpdate, paused, performerDisabled, setOnPerformerUpdate } = timeControlsProps
         if (isUndefined(onPerformerUpdate)) {
             setOnPerformerUpdate()
         }

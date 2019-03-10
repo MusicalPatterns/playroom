@@ -1,4 +1,4 @@
-// tslint:disable variable-name file-name-casing no-default-export no-import-side-effect
+// tslint:disable variable-name file-name-casing no-default-export no-import-side-effect no-null-keyword
 
 import { Spec } from '@musical-patterns/pattern'
 import { deepEqual } from '@musical-patterns/utilities'
@@ -30,7 +30,7 @@ const mapDispatchToProps: (dispatch: Dispatch) => ResetSpecButtonPropsFromDispat
     })
 
 const ResetSpecButton: React.ComponentType<ResetSpecButtonProps> =
-    ({ handleSpecResetEvent, submittedSpec, initialSpec }: ResetSpecButtonProps): JSX.Element => {
+    ({ handleSpecResetEvent, submittedSpec, initialSpec }: ResetSpecButtonProps): React.ReactElement | null => {
         const onClick: VoidFunction = (): void => {
             handleSpecResetEvent(initialSpec)
         }

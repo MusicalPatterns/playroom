@@ -1,4 +1,4 @@
-// tslint:disable variable-name file-name-casing no-default-export no-import-side-effect
+// tslint:disable variable-name file-name-casing no-default-export no-import-side-effect no-null-keyword
 
 import { isUndefined } from '@musical-patterns/utilities'
 import * as React from 'react'
@@ -39,7 +39,7 @@ const mapDispatchToProps: (dispatch: Dispatch) => ToggleImmersiveAudioButtonProp
     })
 
 const ToggleImmersiveAudioButton: React.ComponentType<ToggleImmersiveAudioButtonProps> =
-    (props: ToggleImmersiveAudioButtonProps): JSX.Element => {
+    (props: ToggleImmersiveAudioButtonProps): React.ReactElement | null => {
         const {
             immersiveAudioEnabled,
             immersiveAudioReady,

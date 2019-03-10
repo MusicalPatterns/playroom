@@ -1,4 +1,4 @@
-// tslint:disable variable-name file-name-casing no-default-export no-import-side-effect
+// tslint:disable variable-name file-name-casing no-default-export no-import-side-effect no-null-keyword
 
 import * as React from 'react'
 import { connect } from 'react-redux'
@@ -16,7 +16,7 @@ const mapStateToProps: (state: ImmutableState) => FirstRowProps =
     })
 
 const FirstRow: React.ComponentType<FirstRowProps> =
-    ({ pageName }: FirstRowProps): JSX.Element => (
+    ({ pageName }: FirstRowProps): React.ReactElement | null => (
         <div {...{ className: `row ${!pageName ? 'open' : 'closed'}`, id: 'first-row' }}>
             <div {...{ className: 'middle' }} >
                 <PerformerPanel/>

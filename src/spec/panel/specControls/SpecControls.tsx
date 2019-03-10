@@ -1,4 +1,4 @@
-// tslint:disable variable-name file-name-casing no-default-export no-import-side-effect
+// tslint:disable variable-name file-name-casing no-default-export no-import-side-effect no-null-keyword
 
 import { StandardProperty } from '@musical-patterns/pattern'
 import { from, keys, map, Ordinal } from '@musical-patterns/utilities'
@@ -23,25 +23,25 @@ const mapStateToProps: (state: ImmutableState) => SpecControlsProps =
     }
 
 const SpecControls: React.ComponentType<SpecControlsProps> =
-    ({ displayedSpec, attributes }: SpecControlsProps): JSX.Element => {
-        const standardSpecControls: JSX.Element[] = map(
+    ({ displayedSpec, attributes }: SpecControlsProps): React.ReactElement | null => {
+        const standardSpecControls: Array<React.ReactElement | null> = map(
             keys(displayedSpec)
                 .filter((property: string) =>
                     Object.values(StandardProperty)
                         .includes(property),
                 )
                 .sort(buildSortSpecControls(attributes)),
-            (property: string, index: Ordinal): JSX.Element =>
+            (property: string, index: Ordinal): React.ReactElement | null =>
                 <SpecControl {...{ key: from.Ordinal(index), property }} />,
         )
-        const patternParticularControls: JSX.Element[] = map(
+        const patternParticularControls: Array<React.ReactElement | null> = map(
             keys(displayedSpec)
                 .filter((property: string) =>
                     !Object.values(StandardProperty)
                         .includes(property),
                 )
                 .sort(buildSortSpecControls(attributes)),
-            (property: string, index: Ordinal): JSX.Element =>
+            (property: string, index: Ordinal): React.ReactElement | null =>
                 <SpecControl {...{ key: from.Ordinal(index), property }} />,
         )
 

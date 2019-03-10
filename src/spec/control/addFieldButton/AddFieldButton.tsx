@@ -1,4 +1,4 @@
-// tslint:disable variable-name file-name-casing no-default-export no-import-side-effect
+// tslint:disable variable-name file-name-casing no-default-export no-import-side-effect no-null-keyword
 
 import { faPlus } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
@@ -36,7 +36,7 @@ const mapDispatchToProps: (dispatch: Dispatch) => AddFieldButtonPropsFromDispatc
     })
 
 const AddFieldButton: React.ComponentType<AddFieldButtonProps> =
-    (addFieldButtonProps: AddFieldButtonProps): JSX.Element => {
+    (addFieldButtonProps: AddFieldButtonProps): React.ReactElement | null => {
         const { handleFieldAddEvent, ...otherProps } = addFieldButtonProps
         const onClick: EventHandler = (event: React.SyntheticEvent): void => {
             handleFieldAddEvent({ event, ...otherProps })

@@ -1,4 +1,4 @@
-// tslint:disable variable-name file-name-casing no-default-export no-import-side-effect
+// tslint:disable variable-name file-name-casing no-default-export no-import-side-effect no-null-keyword
 
 import { camelCaseToLowerCase } from '@musical-patterns/utilities'
 import * as React from 'react'
@@ -19,7 +19,7 @@ const mapStateToProps: (state: ImmutableState) => ArrayedSpecControlPropsFromSta
     })
 
 const ArrayedSpecControl: React.ComponentType<ArrayedSpecControlProps> =
-    (arrayedSpecControlProps: ArrayedSpecControlProps): JSX.Element => {
+    (arrayedSpecControlProps: ArrayedSpecControlProps): React.ReactElement | null => {
         const {
             arrayedDisplayedValue,
             arrayedSubmittedValue,

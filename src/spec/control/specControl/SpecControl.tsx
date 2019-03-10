@@ -1,4 +1,4 @@
-// tslint:disable variable-name file-name-casing no-default-export no-import-side-effect
+// tslint:disable variable-name file-name-casing no-default-export no-import-side-effect no-null-keyword
 
 import {
     ArrayedDomValue,
@@ -35,14 +35,15 @@ const mapStateToProps: (state: ImmutableState) => SpecControlPropsFromState =
     }
 
 const SpecControl: React.ComponentType<SpecControlProps> =
-    ({ property, displayedSpec, submittedSpec, validationResults, attributes }: SpecControlProps): JSX.Element => {
+    (specControlProps: SpecControlProps): React.ReactElement | null => {
+        const { property, displayedSpec, submittedSpec, validationResults, attributes } = specControlProps
         const displayedValue: Maybe<DomValue> = displayedSpec[ property ]
         const validationResult: ValidationResult = validationResults && validationResults[ property ]
         const submittedValue: Maybe<Value> = submittedSpec[ property ]
         const propertyAttributes: PropertyAttributes = attributes[ property ]
 
         if (isUndefined(submittedValue) || isUndefined(displayedValue)) {
-            return <div/>
+            return null
         }
 
         if (propertyAttributes.isArrayed) {

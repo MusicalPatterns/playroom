@@ -1,4 +1,4 @@
-// tslint:disable variable-name file-name-casing no-default-export no-import-side-effect
+// tslint:disable variable-name file-name-casing no-default-export no-import-side-effect no-null-keyword
 
 import { faMinus } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
@@ -39,7 +39,7 @@ const mapDispatchToProps: (dispatch: Dispatch) => RemoveFieldButtonPropsFromDisp
     })
 
 const RemoveFieldButton: React.ComponentType<RemoveFieldButtonProps> =
-    (removeFieldButtonProps: RemoveFieldButtonProps): JSX.Element => {
+    (removeFieldButtonProps: RemoveFieldButtonProps): React.ReactElement | null => {
         const { handleFieldRemoveEvent, displayedSpec, property, ...otherProps } = removeFieldButtonProps
         const onClick: EventHandler = (event: React.SyntheticEvent): void => {
             handleFieldRemoveEvent({ event, displayedSpec, property, ...otherProps })

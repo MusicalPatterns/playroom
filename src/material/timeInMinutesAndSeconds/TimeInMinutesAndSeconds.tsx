@@ -1,4 +1,4 @@
-// tslint:disable variable-name file-name-casing no-default-export no-import-side-effect
+// tslint:disable variable-name file-name-casing no-default-export no-import-side-effect no-null-keyword
 
 import {
     floor,
@@ -28,7 +28,8 @@ const mapStateToProps: (state: ImmutableState) => TimelineOrTimeInMinutesAndSeco
     }
 
 const TimeInMinutesAndSeconds: React.ComponentType<TimelineOrTimeInMinutesAndSecondsProps> =
-    ({ performerDisabled, patternDuration, timePosition }: TimelineOrTimeInMinutesAndSecondsProps): JSX.Element => {
+    (timeInMinutesAndSecondsProps: TimelineOrTimeInMinutesAndSecondsProps): React.ReactElement | null => {
+        const { performerDisabled, patternDuration, timePosition } = timeInMinutesAndSecondsProps
         const { timePositionForDisplay } = formatTimesForDisplay({
             patternDuration,
             timePosition,

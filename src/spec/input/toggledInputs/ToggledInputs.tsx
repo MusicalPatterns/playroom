@@ -1,4 +1,4 @@
-// tslint:disable variable-name file-name-casing no-default-export no-import-side-effect
+// tslint:disable variable-name file-name-casing no-default-export no-import-side-effect no-null-keyword
 
 import { faCheckSquare, faSquare } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
@@ -7,7 +7,7 @@ import './styles'
 import { ToggledInputsProps } from './types'
 
 const ToggledInputs: React.ComponentType<ToggledInputsProps> =
-    ({ onChange, fieldId, value: checked, fieldValidityClassName }: ToggledInputsProps): JSX.Element => (
+    ({ onChange, fieldId, value: checked, fieldValidityClassName }: ToggledInputsProps): React.ReactElement | null => (
         <div {...{ className: 'inputs toggled-inputs' }}>
             <input
                 {...{

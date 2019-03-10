@@ -1,4 +1,4 @@
-// tslint:disable variable-name file-name-casing no-default-export no-import-side-effect
+// tslint:disable variable-name file-name-casing no-default-export no-import-side-effect no-null-keyword
 
 import * as React from 'react'
 import { connect } from 'react-redux'
@@ -17,7 +17,7 @@ const mapStateToProps: (state: ImmutableState) => SpecPanelOpenParameter =
     })
 
 const SpecPanelBody: React.ComponentType<SpecPanelOpenParameter> =
-    ({ specPanelOpen }: SpecPanelOpenParameter): JSX.Element => (
+    ({ specPanelOpen }: SpecPanelOpenParameter): React.ReactElement | null => (
         <div {...{ id: 'spec-panel-body', className: specPanelOpen ? 'open' : 'closed' }}>
             <PresetSelect/>
             <hr/>

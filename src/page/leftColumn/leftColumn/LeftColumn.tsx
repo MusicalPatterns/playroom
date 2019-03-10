@@ -1,4 +1,4 @@
-// tslint:disable variable-name file-name-casing no-default-export no-import-side-effect
+// tslint:disable variable-name file-name-casing no-default-export no-import-side-effect no-null-keyword
 
 import * as React from 'react'
 import { connect } from 'react-redux'
@@ -15,7 +15,7 @@ const mapStateToProps: (state: ImmutableState) => LeftColumnProps =
     })
 
 const LeftColumn: React.ComponentType<LeftColumnProps> =
-    ({ leftColumnOpen }: LeftColumnProps): JSX.Element => (
+    ({ leftColumnOpen }: LeftColumnProps): React.ReactElement | null => (
         <div {...{ id: 'left-column', className: leftColumnOpen ? 'open' : 'closed' }}>
             <PatternPanel/>
         </div>

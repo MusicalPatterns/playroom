@@ -1,4 +1,4 @@
-// tslint:disable variable-name file-name-casing no-default-export no-import-side-effect
+// tslint:disable variable-name file-name-casing no-default-export no-import-side-effect no-null-keyword
 
 import { constantCaseToUpperCase } from '@musical-patterns/utilities'
 import * as React from 'react'
@@ -7,7 +7,7 @@ import './styles'
 import { PatternListItemProps } from './types'
 
 const PatternListItem: React.ComponentType<PatternListItemProps> =
-    ({ listedPattern, listedPatternId, patternId, onClick }: PatternListItemProps): JSX.Element => {
+    ({ listedPattern, listedPatternId, patternId, onClick }: PatternListItemProps): React.ReactElement | null => {
         const {
             formattedName,
             musicalIdeaIllustrated,

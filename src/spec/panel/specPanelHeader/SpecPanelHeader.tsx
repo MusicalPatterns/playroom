@@ -1,4 +1,4 @@
-// tslint:disable variable-name file-name-casing no-default-export no-import-side-effect
+// tslint:disable variable-name file-name-casing no-default-export no-import-side-effect no-null-keyword
 
 import { faCaretDown, faCaretRight } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
@@ -27,7 +27,7 @@ const mapDispatchToProps: (dispatch: Dispatch) => SpecPanelHeaderPropsFromDispat
     })
 
 const SpecPanelHeader: React.ComponentType<SpecPanelHeaderProps> =
-    ({ handleSpecPanelHeaderClickEvent, specPanelOpen }: SpecPanelHeaderProps): JSX.Element => {
+    ({ handleSpecPanelHeaderClickEvent, specPanelOpen }: SpecPanelHeaderProps): React.ReactElement | null => {
         const onClick: VoidFunction = (): void => {
             handleSpecPanelHeaderClickEvent({ specPanelOpen })
         }

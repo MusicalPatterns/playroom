@@ -1,4 +1,4 @@
-// tslint:disable variable-name file-name-casing no-default-export no-import-side-effect
+// tslint:disable variable-name file-name-casing no-default-export no-import-side-effect no-null-keyword
 
 import { Id, Pattern } from '@musical-patterns/pattern'
 import { entries, from, isUndefined, map, Ordinal } from '@musical-patterns/utilities'
@@ -38,19 +38,20 @@ const mapDispatchToProps: (dispatch: Dispatch) => PatternListPropsFromDispatch =
     })
 
 const PatternList: React.ComponentType<PatternListProps> =
-    ({ handlePatternChangeEvent, patternId, patterns, rightColumnOpen }: PatternListProps): JSX.Element => {
+    (patternListProps: PatternListProps): React.ReactElement | null => {
+        const { handlePatternChangeEvent, patternId, patterns, rightColumnOpen } = patternListProps
         if (isUndefined(patterns)) {
-            return <div/>
+            return null
         }
 
         const onClick: EventHandler = (event: React.SyntheticEvent): void => {
             handlePatternChangeEvent({ event, patterns, patternId, rightColumnOpen })
         }
 
-        const options: JSX.Element[] = map(
+        const options: Array<React.ReactElement | null> = map(
             entries(patterns)
                 .sort(sortByOrderOrPublishDate),
-            ([ listedPatternId, listedPattern ]: [ Id, Pattern ], index: Ordinal): JSX.Element => (
+            ([ listedPatternId, listedPattern ]: [ Id, Pattern ], index: Ordinal): React.ReactElement | null => (
                 <PatternListItem
                     {...{
                         key: from.Ordinal(index),

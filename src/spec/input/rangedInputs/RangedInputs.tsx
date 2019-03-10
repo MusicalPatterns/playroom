@@ -1,4 +1,4 @@
-// tslint:disable variable-name file-name-casing no-default-export no-import-side-effect
+// tslint:disable variable-name file-name-casing no-default-export no-import-side-effect no-null-keyword
 
 import { RangedInputType, RangedPropertyAttributes } from '@musical-patterns/pattern'
 import * as React from 'react'
@@ -7,7 +7,8 @@ import './styles'
 import { RangedInputProps, RangedInputsProps } from './types'
 
 const RangedInputs: React.ComponentType<RangedInputsProps> =
-    ({ property, attributes, fieldValidityClassName, fieldId, onChange, value }: RangedInputsProps): JSX.Element => {
+    (rangedInputsProps: RangedInputsProps): React.ReactElement | null => {
+        const { property, attributes, fieldValidityClassName, fieldId, onChange, value } = rangedInputsProps
         const { constraint, hideInput } = attributes[ property ] as RangedPropertyAttributes
         const { min, max } = calculateMinAndMax(constraint)
 

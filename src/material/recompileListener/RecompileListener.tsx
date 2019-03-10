@@ -1,4 +1,4 @@
-// tslint:disable variable-name file-name-casing no-default-export no-import-side-effect
+// tslint:disable variable-name file-name-casing no-default-export no-import-side-effect no-null-keyword
 
 import {
     calculatePatternTotalCompiledDuration,
@@ -41,7 +41,7 @@ const mapDispatchToProps: (dispatch: Dispatch) => RecompileListenerPropsFromDisp
     })
 
 const RecompileListener: React.ComponentType<RecompileListenerProps> =
-    (props: RecompileListenerProps): JSX.Element => {
+    (props: RecompileListenerProps): React.ReactElement | null => {
         doAsync(async () => {
             const { debugMode, patternId, patterns, submittedSpec, setPatternDuration } = props
 
@@ -62,7 +62,7 @@ const RecompileListener: React.ComponentType<RecompileListenerProps> =
             }
         })
 
-        return <div/>
+        return null
     }
 
 export default connect(mapStateToProps, mapDispatchToProps)(RecompileListener)

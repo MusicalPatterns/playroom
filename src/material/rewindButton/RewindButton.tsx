@@ -1,4 +1,4 @@
-// tslint:disable variable-name file-name-casing no-default-export no-import-side-effect
+// tslint:disable variable-name file-name-casing no-default-export no-import-side-effect no-null-keyword
 
 import { faFastBackward } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
@@ -16,7 +16,7 @@ const mapStateToProps: (state: ImmutableState) => PerformerDisabledParameter =
     })
 
 const RewindButton: React.ComponentType<PerformerDisabledParameter> =
-    ({ performerDisabled }: PerformerDisabledParameter): JSX.Element => {
+    ({ performerDisabled }: PerformerDisabledParameter): React.ReactElement | null => {
         const onClick: () => Promise<void> = async (): Promise<void> =>
             setTimePosition(BEGINNING)
 

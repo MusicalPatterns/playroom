@@ -1,5 +1,7 @@
+import { SingularValidationResult } from '@musical-patterns/pattern'
+
 interface InvalidMessageProps {
-    invalidMessage: string,
+    singularValidationResult: SingularValidationResult,
 }
 
 export {

@@ -1,4 +1,4 @@
-// tslint:disable variable-name file-name-casing no-default-export no-import-side-effect
+// tslint:disable variable-name file-name-casing no-default-export no-import-side-effect no-null-keyword
 
 import * as React from 'react'
 import { connect } from 'react-redux'
@@ -14,12 +14,19 @@ const mapStateToProps: (state: ImmutableState) => SecretSubmittedSpecForTestProp
     })
 
 const SecretSubmittedSpecForTest: React.ComponentType<SecretSubmittedSpecForTestProps> =
-    ({ debugMode, fieldId, submittedValue }: SecretSubmittedSpecForTestProps): JSX.Element => {
-        const className: string = SecretTestSelector.SUBMITTED_SPEC
+    ({ debugMode, fieldId, submittedValue }: SecretSubmittedSpecForTestProps): React.ReactElement | null => {
+        if (!debugMode) {
+            return null
+        }
 
         return (
-            <span>
-                {debugMode && <span {...{ id: fieldId, className }}>{stringifyIfNecessary(submittedValue)}</span>}
+            <span
+                {...{
+                    className: SecretTestSelector.SUBMITTED_SPEC,
+                    id: fieldId,
+                }}
+            >
+                {stringifyIfNecessary(submittedValue)}
             </span>
         )
     }

@@ -1,4 +1,4 @@
-// tslint:disable variable-name file-name-casing no-default-export no-import-side-effect
+// tslint:disable variable-name file-name-casing no-default-export no-import-side-effect no-null-keyword
 
 import { isUndefined } from '@musical-patterns/utilities'
 import * as React from 'react'
@@ -15,11 +15,11 @@ const mapStateToProps: (state: ImmutableState) => UnitsPropsFromState =
     })
 
 const Units: React.ComponentType<UnitsProps> =
-    ({ attributes, property }: UnitsProps): JSX.Element => {
+    ({ attributes, property }: UnitsProps): React.ReactElement | null => {
         const { units } = attributes[ property ]
 
         if (isUndefined(units)) {
-            return <span/>
+            return null
         }
 
         return (

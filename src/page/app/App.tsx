@@ -1,4 +1,4 @@
-// tslint:disable variable-name file-name-casing no-default-export no-import-side-effect
+// tslint:disable variable-name file-name-casing no-default-export no-import-side-effect no-null-keyword
 
 import { isUndefined } from '@musical-patterns/utilities'
 import * as React from 'react'
@@ -17,9 +17,9 @@ const mapStateToProps: (state: ImmutableState) => AppProps =
     })
 
 const App: React.ComponentType<AppProps> =
-    ({ patterns }: AppProps): JSX.Element => {
+    ({ patterns }: AppProps): React.ReactElement | null => {
         if (isUndefined(patterns)) {
-            return <div/>
+            return null
         }
 
         return (

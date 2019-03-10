@@ -141,8 +141,8 @@ describe('pattern list', () => {
     })
 
     it('does not show a header for a pattern before you select a pattern', async (done: DoneFn) => {
-        expect(await elementExists('#second-row h1'))
-            .toBeFalsy('header was shown for pattern before selecting one')
+        expect(await elementInnerText('#second-row h1'))
+            .toBe('')
 
         done()
     })
