@@ -27,7 +27,7 @@ document.body.appendChild(playroom)
 
 ```
 
-The second optional argument to `setupPlayroom` is debug mode, a boolean defaulting to false, which will log compiled thread specs to the developer console.
+The second optional argument to `setupPlayroom` is debug mode, a boolean defaulting to false, which will log information about the compiled pattern to the developer console.
 
 ## cli
 
