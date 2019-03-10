@@ -2,12 +2,11 @@
 
 import { faFastBackward } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { setTimePosition } from '@musical-patterns/performer'
-import { BEGINNING } from '@musical-patterns/utilities'
 import * as React from 'react'
 import { connect } from 'react-redux'
 import { ImmutableState, StateKey } from '../../types'
 import { MaterialStateKey, PerformerDisabledParameter } from '../types'
+import { handleRewindClickEvent } from './events'
 
 const mapStateToProps: (state: ImmutableState) => PerformerDisabledParameter =
     (state: ImmutableState): PerformerDisabledParameter => ({
@@ -16,15 +15,10 @@ const mapStateToProps: (state: ImmutableState) => PerformerDisabledParameter =
     })
 
 const RewindButton: React.ComponentType<PerformerDisabledParameter> =
-    ({ performerDisabled }: PerformerDisabledParameter): React.ReactElement | null => {
-        const onClick: () => Promise<void> = async (): Promise<void> =>
-            setTimePosition(BEGINNING)
-
-        return (
-            <button {...{ id: 'rewind', onClick, disabled: performerDisabled }}>
-                <FontAwesomeIcon {...{ icon: faFastBackward }}/>
-            </button>
-        )
-    }
+    ({ performerDisabled }: PerformerDisabledParameter): React.ReactElement | null => (
+        <button {...{ id: 'rewind', onClick: handleRewindClickEvent, disabled: performerDisabled }}>
+            <FontAwesomeIcon {...{ icon: faFastBackward }}/>
+        </button>
+    )
 
 export default connect(mapStateToProps)(RewindButton)

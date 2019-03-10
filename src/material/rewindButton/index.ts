@@ -5,3 +5,5 @@ import RewindButton from './RewindButton'
 export {
     RewindButton,
 }
+
+export { handleRewindClickEvent } from './events'

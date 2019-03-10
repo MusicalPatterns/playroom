@@ -1,36 +1,39 @@
-import { KeyCode } from './types'
+import { DispatchParameter } from '../../types'
+import { buildHandlePauseClickEvent } from '../pauseButton'
+import { buildHandlePlayClickEvent } from '../playButton'
+import { handleRewindClickEvent } from '../rewindButton'
+import { buildHandleStopClickEvent } from '../stopButton'
+import { HandleKeyDownEvent, HandleKeyDownEventParameters, KeyCode } from './types'
 
-const clickTimeControl: (timeControlName: string) => boolean =
-    (timeControlName: string): boolean => {
-        const timeControl: HTMLDivElement | null = document.querySelector(`#${timeControlName}`)
-        if (timeControl) {
-            timeControl.click()
-        }
+const buildHandleKeyDownEvent: (parameters: DispatchParameter) => HandleKeyDownEvent =
+    ({ dispatch }: DispatchParameter): HandleKeyDownEvent => {
+        const handlePlayClickEvent: VoidFunction = buildHandlePlayClickEvent({ dispatch })
+        const handlePauseClickEvent: VoidFunction = buildHandlePauseClickEvent({ dispatch })
+        const handleStopClickEvent: VoidFunction = buildHandleStopClickEvent({ dispatch })
 
-        return !!timeControl
-    }
-
-const onKeyDown: (event: KeyboardEvent) => Promise<void> =
-    async (event: KeyboardEvent): Promise<void> => {
-        // tslint:disable-next-line deprecation
-        switch (event.keyCode) {
-            case KeyCode.SPACE:
-                event.preventDefault()
-
-                if (!clickTimeControl('play')) {
-                    clickTimeControl('pause')
-                }
-                break
-            case KeyCode.ESCAPE:
-                clickTimeControl('stop')
-                break
-            case KeyCode.HOME:
-                clickTimeControl('rewind')
-                break
-            default:
+        return async ({ event, paused }: HandleKeyDownEventParameters): Promise<void> => {
+            // tslint:disable-next-line deprecation
+            switch (event.keyCode) {
+                case KeyCode.SPACE:
+                    event.preventDefault()
+                    if (paused) {
+                        handlePlayClickEvent()
+                    }
+                    else {
+                        handlePauseClickEvent()
+                    }
+                    break
+                case KeyCode.ESCAPE:
+                    handleStopClickEvent()
+                    break
+                case KeyCode.HOME:
+                    await handleRewindClickEvent()
+                    break
+                default:
+            }
         }
     }
 
 export {
-    onKeyDown,
+    buildHandleKeyDownEvent,
 }

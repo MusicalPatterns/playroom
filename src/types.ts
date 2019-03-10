@@ -23,6 +23,8 @@ interface EventParameter {
 
 type EventHandler = (event: React.SyntheticEvent) => void
 
+type KeyboardEventHandler = (event: KeyboardEvent) => Promise<void>
+
 interface WithClickHandler {
     onClick: EventHandler,
 }
@@ -51,6 +53,7 @@ export {
     DispatchParameter,
     SecretTestSelector,
     EventHandler,
+    KeyboardEventHandler,
     AsyncEventHandler,
     EventParameter,
     WithClickHandler,

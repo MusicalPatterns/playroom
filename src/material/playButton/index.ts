@@ -5,3 +5,5 @@ import PlayButton from './PlayButton'
 export {
     PlayButton,
 }
+
+export { buildHandlePlayClickEvent } from './events'
