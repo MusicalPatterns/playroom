@@ -3,7 +3,7 @@
 import * as React from 'react'
 import { connect } from 'react-redux'
 import { PageStateKey } from '../../../page'
-import { ImmutableState, SecretTestSelectors, StateKey } from '../../../types'
+import { ImmutableState, SecretTestSelector, StateKey } from '../../../types'
 import { stringifyIfNecessary } from './stringifyIfNecessary'
 import { SecretSubmittedSpecForTestProps, SecretSubmittedSpecForTestPropsFromState } from './types'
 
@@ -15,7 +15,7 @@ const mapStateToProps: (state: ImmutableState) => SecretSubmittedSpecForTestProp
 
 const SecretSubmittedSpecForTest: React.ComponentType<SecretSubmittedSpecForTestProps> =
     ({ debugMode, fieldId, submittedValue }: SecretSubmittedSpecForTestProps): JSX.Element => {
-        const className: string = SecretTestSelectors.SUBMITTED_SPEC
+        const className: string = SecretTestSelector.SUBMITTED_SPEC
 
         return (
             <span>

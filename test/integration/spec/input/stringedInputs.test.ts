@@ -2,7 +2,7 @@
 
 import { indexOfLastCharacter } from '@musical-patterns/utilities'
 import { ElementHandle } from 'puppeteer'
-import { FieldValidityClassName, SecretTestSelectors } from '../../../../src/indexForTest'
+import { FieldValidityClassName, SecretTestSelector } from '../../../../src/indexForTest'
 import {
     deleteCharacterFromInput,
     elementExists,
@@ -28,7 +28,7 @@ const modifyStringedInput: () => Promise<void> =
 
 const stringedInputIsModified: () => Promise<void> =
     async (): Promise<void> => {
-        expect(await elementInnerText(`#${STRINGED_PROPERTY_KEY}.${SecretTestSelectors.SUBMITTED_SPEC}`))
+        expect(await elementInnerText(`#${STRINGED_PROPERTY_KEY}.${SecretTestSelector.SUBMITTED_SPEC}`))
             .toBe(
                 `${SPEC_CONTROLS_PATTERN_STRINGED_PROPERTY_INITIAL_VALUE}${VALID_TEST_MODIFICATION}`,
                 'stringed control was not modified',
@@ -58,7 +58,7 @@ const stringedInputIsMarkedAsValid: () => Promise<void> =
 const stringedInputWasNotSubmitted: () => Promise<void> =
     async (): Promise<void> => {
         const stringedInputSubmittedValue: string = await elementInnerText(
-            `#${STRINGED_PROPERTY_KEY}.${SecretTestSelectors.SUBMITTED_SPEC}`,
+            `#${STRINGED_PROPERTY_KEY}.${SecretTestSelector.SUBMITTED_SPEC}`,
         )
         expect(stringedInputSubmittedValue)
             .toBe(
@@ -70,7 +70,7 @@ const stringedInputWasNotSubmitted: () => Promise<void> =
 const stringedInputIsInItsLastValidStateBeforeItWouldHaveGottenTooLong: () => Promise<void> =
     async (): Promise<void> => {
         const stringedInputSubmittedValue: string = await elementInnerText(
-            `#${STRINGED_PROPERTY_KEY}.${SecretTestSelectors.SUBMITTED_SPEC}`,
+            `#${STRINGED_PROPERTY_KEY}.${SecretTestSelector.SUBMITTED_SPEC}`,
         )
         expect(stringedInputSubmittedValue)
             .toBe(

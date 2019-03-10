@@ -1,5 +1,5 @@
 import { ElementHandle } from 'puppeteer'
-import { FieldValidityClassName, SecretTestSelectors } from '../../../../src/indexForTest'
+import { FieldValidityClassName, SecretTestSelector } from '../../../../src/indexForTest'
 import {
     ARRAYED_PROPERTY_KEY,
     BAD_FORMAT_INVALID_TEST_MODIFICATION,
@@ -19,27 +19,27 @@ const modifyFieldOfArrayedSpecControl: () => Promise<void> =
 
 const onlyThatOneFieldOfTheArrayedSpecControlIsModified: () => Promise<void> =
     async (): Promise<void> => {
-        expect(await elementInnerText(`#${ARRAYED_PROPERTY_KEY}-0.${SecretTestSelectors.SUBMITTED_SPEC}`))
+        expect(await elementInnerText(`#${ARRAYED_PROPERTY_KEY}-0.${SecretTestSelector.SUBMITTED_SPEC}`))
             .toBe(
                 `${SPEC_CONTROLS_PATTERN_ARRAYED_PROPERTY_INITIAL_VALUE[ 0 ]}`,
                 'one of the other fields of the arrayed spec control was not in its initial state, #0',
             )
-        expect(await elementInnerText(`#${ARRAYED_PROPERTY_KEY}-1.${SecretTestSelectors.SUBMITTED_SPEC}`))
+        expect(await elementInnerText(`#${ARRAYED_PROPERTY_KEY}-1.${SecretTestSelector.SUBMITTED_SPEC}`))
             .toBe(
                 `${SPEC_CONTROLS_PATTERN_ARRAYED_PROPERTY_INITIAL_VALUE[ 1 ]}`,
                 'one of the other fields of the arrayed spec control was not in its initial state, #1',
             )
-        expect(await elementInnerText(`#${ARRAYED_PROPERTY_KEY}-2.${SecretTestSelectors.SUBMITTED_SPEC}`))
+        expect(await elementInnerText(`#${ARRAYED_PROPERTY_KEY}-2.${SecretTestSelector.SUBMITTED_SPEC}`))
             .toBe(
                 `${SPEC_CONTROLS_PATTERN_ARRAYED_PROPERTY_INITIAL_VALUE[ 2 ]}${VALID_TEST_MODIFICATION}`,
                 'that one field of the arrayed spec control was not modified',
             )
-        expect(await elementInnerText(`#${ARRAYED_PROPERTY_KEY}-3.${SecretTestSelectors.SUBMITTED_SPEC}`))
+        expect(await elementInnerText(`#${ARRAYED_PROPERTY_KEY}-3.${SecretTestSelector.SUBMITTED_SPEC}`))
             .toBe(
                 `${SPEC_CONTROLS_PATTERN_ARRAYED_PROPERTY_INITIAL_VALUE[ 3 ]}`,
                 'one of the other fields of the arrayed spec control was not in its initial state, #3',
             )
-        expect(await elementInnerText(`#${ARRAYED_PROPERTY_KEY}-4.${SecretTestSelectors.SUBMITTED_SPEC}`))
+        expect(await elementInnerText(`#${ARRAYED_PROPERTY_KEY}-4.${SecretTestSelector.SUBMITTED_SPEC}`))
             .toBe(
                 `${SPEC_CONTROLS_PATTERN_ARRAYED_PROPERTY_INITIAL_VALUE[ 4 ]}`,
                 'one of the other fields of the arrayed spec control was not in its initial state, #4',

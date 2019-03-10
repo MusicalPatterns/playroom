@@ -1,6 +1,6 @@
 import { Ms, sleep } from '@musical-patterns/utilities'
 import { ElementHandle } from 'puppeteer'
-import { FieldValidityClassName, SecretTestSelectors } from '../../../../src/indexForTest'
+import { FieldValidityClassName, SecretTestSelector } from '../../../../src/indexForTest'
 import {
     currentTime,
     deleteCharacterFromInput,
@@ -56,7 +56,7 @@ const enterCustomInvalidityStateAndGetLastStillValidValue: () => Promise<string>
     async (): Promise<string> => {
         await deleteCharacterFromInput(`input[type=number]#${RANGED_PROPERTY_TWO_KEY}`)
         const lastStillValidValue: string = await elementInnerText(
-            `#${RANGED_PROPERTY_TWO_KEY}.${SecretTestSelectors.SUBMITTED_SPEC}`,
+            `#${RANGED_PROPERTY_TWO_KEY}.${SecretTestSelector.SUBMITTED_SPEC}`,
         )
         await deleteCharacterFromInput(`input[type=number]#${RANGED_PROPERTY_TWO_KEY}`)
         const SELECT_ANYTHING_ELSE: string = '#first-row .right'
@@ -67,7 +67,7 @@ const enterCustomInvalidityStateAndGetLastStillValidValue: () => Promise<string>
 
 const theSubmittedValueIsTheLastStillValidValue: (lastStillValidValue: string) => Promise<void> =
     async (lastStillValidValue: string): Promise<void> => {
-        expect(await elementInnerText(`#${RANGED_PROPERTY_TWO_KEY}.${SecretTestSelectors.SUBMITTED_SPEC}`))
+        expect(await elementInnerText(`#${RANGED_PROPERTY_TWO_KEY}.${SecretTestSelector.SUBMITTED_SPEC}`))
             .toBe(lastStillValidValue, 'the submitted value was not the last still valid value')
     }
 

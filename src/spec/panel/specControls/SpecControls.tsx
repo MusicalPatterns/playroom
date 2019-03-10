@@ -1,6 +1,6 @@
 // tslint:disable variable-name file-name-casing no-default-export no-import-side-effect
 
-import { StandardProperties } from '@musical-patterns/pattern'
+import { StandardProperty } from '@musical-patterns/pattern'
 import { from, keys, map, Ordinal } from '@musical-patterns/utilities'
 import * as React from 'react'
 import { connect } from 'react-redux'
@@ -27,7 +27,7 @@ const SpecControls: React.ComponentType<SpecControlsProps> =
         const standardSpecControls: JSX.Element[] = map(
             keys(displayedSpec)
                 .filter((property: string) =>
-                    Object.values(StandardProperties)
+                    Object.values(StandardProperty)
                         .includes(property),
                 )
                 .sort(buildSortSpecControls(attributes)),
@@ -37,7 +37,7 @@ const SpecControls: React.ComponentType<SpecControlsProps> =
         const patternParticularControls: JSX.Element[] = map(
             keys(displayedSpec)
                 .filter((property: string) =>
-                    !Object.values(StandardProperties)
+                    !Object.values(StandardProperty)
                         .includes(property),
                 )
                 .sort(buildSortSpecControls(attributes)),

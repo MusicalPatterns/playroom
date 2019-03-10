@@ -6,7 +6,7 @@ import {
     OptionedConstraint,
     Preset,
     RangedConstraint,
-    StandardProperties,
+    StandardProperty,
     StringedConstraint,
 } from '@musical-patterns/pattern'
 import { patterns } from '@musical-patterns/pattern-playroom-test'
@@ -31,8 +31,8 @@ const VALID_TEST_MODIFICATION: string = '2'
 const OUT_OF_RANGE_INVALID_TEST_MODIFICATION: string = '3'
 const BAD_FORMAT_INVALID_TEST_MODIFICATION: string = 'e'
 
-const RANGED_PROPERTY_ONE_KEY: string = StandardProperties.BASE_DURATION
-const RANGED_PROPERTY_TWO_KEY: string = StandardProperties.BASE_FREQUENCY
+const RANGED_PROPERTY_ONE_KEY: string = StandardProperty.BASE_DURATION
+const RANGED_PROPERTY_TWO_KEY: string = StandardProperty.BASE_FREQUENCY
 const OPTIONED_PROPERTY_ONE_KEY: string = 'optionedPropertyOne'
 const OPTIONED_PROPERTY_TWO_KEY: string = 'optionedPropertyTwo'
 const STRINGED_PROPERTY_KEY: string = 'stringedProperty'
@@ -55,13 +55,13 @@ const SPEC_CONTROLS_PATTERN_OPTIONED_PROPERTY_ONE_INITIAL_VALUE: string =
 const specControlsPatternOptionedPropertyOneConstraint: OptionedConstraint =
     specControlsPatternAttributes[ OPTIONED_PROPERTY_ONE_KEY ].constraint as OptionedConstraint
 const SPEC_CONTROLS_PATTERN_OPTIONED_PROPERTY_ONE_MODIFIED_VALUE: string =
-    specControlsPatternOptionedPropertyOneConstraint[ 0 ].key
+    specControlsPatternOptionedPropertyOneConstraint[ 0 ].value
 const SPEC_CONTROLS_PATTERN_OPTIONED_PROPERTY_TWO_INITIAL_VALUE: string =
     playroomTestSpecControls!.data.initial[ OPTIONED_PROPERTY_TWO_KEY ] as string
 const specControlsPatternOptionedPropertyTwoConstraint: OptionedConstraint =
     specControlsPatternAttributes[ OPTIONED_PROPERTY_TWO_KEY ].constraint as OptionedConstraint
 const SPEC_CONTROLS_PATTERN_OPTIONED_PROPERTY_TWO_MODIFIED_VALUE: string =
-    specControlsPatternOptionedPropertyTwoConstraint[ 1 ].key
+    specControlsPatternOptionedPropertyTwoConstraint[ 1 ].value
 const SPEC_CONTROLS_PATTERN_STRINGED_PROPERTY_INITIAL_VALUE: string =
     playroomTestSpecControls!.data.initial[ STRINGED_PROPERTY_KEY ] as string
 const specControlsPatternStringedPropertyConstraint: StringedConstraint =
@@ -92,12 +92,12 @@ const POST_PATTERN_OPTIONED_PROPERTY_ONE_INITIAL_VALUE: string =
 const postPatternAttributes: Attributes = playroomTestPost!.data.attributes
 const postPatternOptionedPropertyOneConstraint: OptionedConstraint =
     postPatternAttributes[ OPTIONED_PROPERTY_ONE_KEY ].constraint as OptionedConstraint
-const POST_PATTERN_OPTIONED_PROPERTY_ONE_MODIFIED_VALUE: string = postPatternOptionedPropertyOneConstraint[ 1 ].key
+const POST_PATTERN_OPTIONED_PROPERTY_ONE_MODIFIED_VALUE: string = postPatternOptionedPropertyOneConstraint[ 1 ].value
 const POST_PATTERN_OPTIONED_PROPERTY_TWO_INITIAL_VALUE: string =
     playroomTestPost!.data.initial[ OPTIONED_PROPERTY_TWO_KEY ] as string
 const postPatternOptionedPropertyTwoConstraint: OptionedConstraint =
     postPatternAttributes[ OPTIONED_PROPERTY_TWO_KEY ].constraint as OptionedConstraint
-const POST_PATTERN_OPTIONED_PROPERTY_TWO_MODIFIED_VALUE: string = postPatternOptionedPropertyTwoConstraint[ 0 ].key
+const POST_PATTERN_OPTIONED_PROPERTY_TWO_MODIFIED_VALUE: string = postPatternOptionedPropertyTwoConstraint[ 0 ].value
 
 const LONG_DURATION_PATTERN_ID: string = playroomTestLongDuration!.id
 

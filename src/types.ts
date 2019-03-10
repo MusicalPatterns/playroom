@@ -7,7 +7,7 @@ import { ImmutableMetadataState, MetadataAction } from './metadata'
 import { ImmutablePageState, PageAction } from './page'
 import { ImmutableSpecState, SpecAction } from './spec'
 
-enum SecretTestSelectors {
+enum SecretTestSelector {
     SUBMITTED_SPEC = 'secret-submitted-spec',
     TIME_POSITION = 'secret-time-position',
     PATTERN_DURATION = 'secret-pattern-duration',
@@ -49,7 +49,7 @@ type ImmutableState = TypedMap<State>
 
 export {
     DispatchParameter,
-    SecretTestSelectors,
+    SecretTestSelector,
     EventHandler,
     AsyncEventHandler,
     EventParameter,

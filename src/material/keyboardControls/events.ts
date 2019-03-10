@@ -1,4 +1,4 @@
-import { KeyCodes } from './types'
+import { KeyCode } from './types'
 
 const clickTimeControl: (timeControlName: string) => boolean =
     (timeControlName: string): boolean => {
@@ -14,17 +14,17 @@ const onKeyDown: (event: KeyboardEvent) => Promise<void> =
     async (event: KeyboardEvent): Promise<void> => {
         // tslint:disable-next-line deprecation
         switch (event.keyCode) {
-            case KeyCodes.SPACE:
+            case KeyCode.SPACE:
                 event.preventDefault()
 
                 if (!clickTimeControl('play')) {
                     clickTimeControl('pause')
                 }
                 break
-            case KeyCodes.ESCAPE:
+            case KeyCode.ESCAPE:
                 clickTimeControl('stop')
                 break
-            case KeyCodes.HOME:
+            case KeyCode.HOME:
                 clickTimeControl('rewind')
                 break
             default:

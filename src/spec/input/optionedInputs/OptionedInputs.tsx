@@ -12,9 +12,11 @@ const OptionedInputs: React.ComponentType<OptionedInputsProps> =
 
         const optionElements: JSX.Element[] = map(
             constraint.sort(sortOptions),
-            ({ key, description, formattedName }: OptionedConstraintOption, index: Ordinal): JSX.Element => (
-                <option {...{ key: from.Ordinal(index), value: key, title: description }}>
-                    {formattedName || constantCaseToUpperCase(key)}
+            (
+                { value: optionValue, description, formattedName }: OptionedConstraintOption, index: Ordinal,
+            ): JSX.Element => (
+                <option {...{ key: from.Ordinal(index), value: optionValue, title: description }}>
+                    {formattedName || constantCaseToUpperCase(optionValue)}
                 </option>
             ),
         )

@@ -3,7 +3,7 @@
 import * as React from 'react'
 import { connect } from 'react-redux'
 import { PageStateKey } from '../../page'
-import { ImmutableState, SecretTestSelectors, StateKey } from '../../types'
+import { ImmutableState, SecretTestSelector, StateKey } from '../../types'
 import { formatTimesForDisplay } from '../formatTimesForDisplay'
 import { ImmutableMaterialState, MaterialStateKey } from '../types'
 import { SecretTimeForTestProps } from './types'
@@ -29,8 +29,8 @@ const SecretTimeForTest: React.ComponentType<SecretTimeForTestProps> =
 
         return (
             <div>
-                {debugMode && <div {...{ id: SecretTestSelectors.TIME_POSITION }}>{timePositionForDisplay}</div>}
-                {debugMode && <div {...{ id: SecretTestSelectors.PATTERN_DURATION }}>{patternDurationForDisplay}</div>}
+                {debugMode && <div {...{ id: SecretTestSelector.TIME_POSITION }}>{timePositionForDisplay}</div>}
+                {debugMode && <div {...{ id: SecretTestSelector.PATTERN_DURATION }}>{patternDurationForDisplay}</div>}
             </div>
         )
     }
