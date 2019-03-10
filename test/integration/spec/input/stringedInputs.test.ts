@@ -12,13 +12,15 @@ import {
     RANGED_PROPERTY_TWO_KEY,
     refreshForSpecControlsTest,
     SPEC_CONTROLS_PATTERN_STRINGED_PROPERTY_INITIAL_VALUE,
+    SPEC_CONTROLS_PATTERN_STRINGED_PROPERTY_ONE_MAX_LENGTH,
     SPEC_CONTROLS_PATTERN_STRINGED_PROPERTY_ONE_MIN_LENGTH,
     STRINGED_PROPERTY_KEY,
     VALID_TEST_MODIFICATION,
 } from '../../../support'
 
-const MODIFICATION_WITHIN_MAX_LENGTH: string = 'H'
-const ADDITIONAL_MODIFICATION_CAUSING_EXCESSION_OF_MAX_LENGTH: string = 'I'
+const MODIFICATION_CAUSING_STRINGED_INPUT_TO_EXCEED_ITS_MAX_LENGTH: string = 'HI'
+const PART_OF_MODIFICATION_WITHIN_MAX_LENGTH_OF_STRINGED_INPUT: string =
+    MODIFICATION_CAUSING_STRINGED_INPUT_TO_EXCEED_ITS_MAX_LENGTH.slice(0, 1)
 
 const modifyStringedInput: () => Promise<void> =
     async (): Promise<void> => {
@@ -49,10 +51,22 @@ const stringedInputIsMarkedAsInvalid: () => Promise<void> =
             .toBeTruthy('stringed input was not marked as invalid')
     }
 
-const stringedInputIsMarkedAsValid: () => Promise<void> =
+const stringedContolInputIsMarkedAsValid: () => Promise<void> =
     async (): Promise<void> => {
         expect(await elementExists(`input[type=text]#${STRINGED_PROPERTY_KEY}.${FieldValidityClassName.VALID}`))
             .toBeTruthy('stringed input was not marked as valid')
+    }
+
+const stringedInputTooLongValueWasNotSubmittedAndItIsAtTheLastValidValueBeforeItGotTooLong: () => Promise<void> =
+    async (): Promise<void> => {
+        const stringedInputSubmittedValue: string = await elementInnerText(
+            `#${STRINGED_PROPERTY_KEY}.${SecretTestSelector.SUBMITTED_SPEC}`,
+        )
+        expect(stringedInputSubmittedValue)
+            .toBe(
+                `${SPEC_CONTROLS_PATTERN_STRINGED_PROPERTY_INITIAL_VALUE}${PART_OF_MODIFICATION_WITHIN_MAX_LENGTH_OF_STRINGED_INPUT}`,
+                `stringed input was not at the last valid value before it got too long`,
+            )
     }
 
 const stringedInputWasNotSubmitted: () => Promise<void> =
@@ -62,29 +76,17 @@ const stringedInputWasNotSubmitted: () => Promise<void> =
         )
         expect(stringedInputSubmittedValue)
             .toBe(
-                SPEC_CONTROLS_PATTERN_STRINGED_PROPERTY_INITIAL_VALUE,
-                'stringed input was not in its initial state',
+                `${SPEC_CONTROLS_PATTERN_STRINGED_PROPERTY_INITIAL_VALUE}`,
+                `stringed input was submitted`,
             )
     }
 
-const stringedInputIsInItsLastValidStateBeforeItWouldHaveGottenTooLong: () => Promise<void> =
-    async (): Promise<void> => {
-        const stringedInputSubmittedValue: string = await elementInnerText(
-            `#${STRINGED_PROPERTY_KEY}.${SecretTestSelector.SUBMITTED_SPEC}`,
-        )
-        expect(stringedInputSubmittedValue)
-            .toBe(
-                `${SPEC_CONTROLS_PATTERN_STRINGED_PROPERTY_INITIAL_VALUE}${MODIFICATION_WITHIN_MAX_LENGTH}`,
-                `stringed input was not in the last valid state before it would have gotten too long`,
-            )
-    }
-
-const stringedInputDisplayValueIsInItsLastValidStateBeforeItWouldHaveGottenTooLong: () => Promise<void> =
+const stringedInputDisplayValueIsTheTooLongValue: () => Promise<void> =
     async (): Promise<void> => {
         expect(await elementValue(`input[type=text]#${STRINGED_PROPERTY_KEY}`))
             .toBe(
-                `${SPEC_CONTROLS_PATTERN_STRINGED_PROPERTY_INITIAL_VALUE}${MODIFICATION_WITHIN_MAX_LENGTH}`,
-                'stringed control display value was not in the last valid state before it would have gotten too long',
+                `${SPEC_CONTROLS_PATTERN_STRINGED_PROPERTY_INITIAL_VALUE}${MODIFICATION_CAUSING_STRINGED_INPUT_TO_EXCEED_ITS_MAX_LENGTH}`,
+                'stringed control display value was not the too long value',
             )
     }
 
@@ -100,11 +102,12 @@ const stringedInputDisplayValueIsTheTooShortValue: () => Promise<void> =
             )
     }
 
-const stringedInputHasNoInvalidMessage: () => Promise<void> =
+const stringedInputHasTooLongMessage: () => Promise<void> =
     async (): Promise<void> => {
-        expect(await elementExists(`#${STRINGED_PROPERTY_KEY} .invalid-message`))
-            .toBeFalsy(
-                'stringed input had an invalid message',
+        expect(await elementInnerText(`#${STRINGED_PROPERTY_KEY} .invalid-message`))
+            .toBe(
+                `must be ${SPEC_CONTROLS_PATTERN_STRINGED_PROPERTY_ONE_MAX_LENGTH} characters or less`,
+                'stringed input did not have too-long invalid message',
             )
     }
 
@@ -115,6 +118,12 @@ const stringedInputHasTooShortMessage: () => Promise<void> =
                 `must be ${SPEC_CONTROLS_PATTERN_STRINGED_PROPERTY_ONE_MIN_LENGTH} characters or more`,
                 'stringed input did not have too-short invalid message',
             )
+    }
+
+const undoStringedInputTooLongModification: () => Promise<void> =
+    async (): Promise<void> => {
+        await deleteCharacterFromInput(`input[type=text]#${STRINGED_PROPERTY_KEY}`)
+        await deleteCharacterFromInput(`input[type=text]#${STRINGED_PROPERTY_KEY}`)
     }
 
 const undoStringedInputTooShortModification: () => Promise<void> =
@@ -128,11 +137,10 @@ const modifyStringedInputToBeTooShort: () => Promise<void> =
         await deleteCharacterFromInput(`input[type=text]#${STRINGED_PROPERTY_KEY}`)
     }
 
-const attemptToModifyStringedInputToBeTooLong: () => Promise<void> =
+const modifyStringedInputToBeTooLong: () => Promise<void> =
     async (): Promise<void> => {
         const stringedInput: ElementHandle = await findElement(`input[type=text]#${STRINGED_PROPERTY_KEY}`)
-        await stringedInput.type(MODIFICATION_WITHIN_MAX_LENGTH)
-        await stringedInput.type(ADDITIONAL_MODIFICATION_CAUSING_EXCESSION_OF_MAX_LENGTH)
+        await stringedInput.type(MODIFICATION_CAUSING_STRINGED_INPUT_TO_EXCEED_ITS_MAX_LENGTH)
     }
 
 describe('stringed input', () => {
@@ -185,7 +193,7 @@ describe('stringed input', () => {
 
             it('resets the input to valid after typing something valid into it', async (done: DoneFn) => {
                 await undoStringedInputTooShortModification()
-                await stringedInputIsMarkedAsValid()
+                await stringedContolInputIsMarkedAsValid()
 
                 done()
             })
@@ -200,38 +208,55 @@ describe('stringed input', () => {
                 done()
             })
         })
-    })
 
-    describe('cannot become too long', () => {
-        beforeEach(async (done: DoneFn) => {
-            await refreshForSpecControlsTest()
-            await attemptToModifyStringedInputToBeTooLong()
+        describe('too long', () => {
+            beforeEach(async (done: DoneFn) => {
+                await refreshForSpecControlsTest()
+                await modifyStringedInputToBeTooLong()
 
-            done()
-        })
+                done()
+            })
 
-        it('the input is not marked as invalid', async (done: DoneFn) => {
-            await stringedInputIsMarkedAsValid()
+            it('marks the input as invalid', async (done: DoneFn) => {
+                await stringedInputIsMarkedAsInvalid()
 
-            done()
-        })
+                done()
+            })
 
-        it('does not show an invalid message', async (done: DoneFn) => {
-            await stringedInputHasNoInvalidMessage()
+            it('it does not submit the invalid data which could crash things', async (done: DoneFn) => {
+                await stringedInputTooLongValueWasNotSubmittedAndItIsAtTheLastValidValueBeforeItGotTooLong()
 
-            done()
-        })
+                done()
+            })
 
-        it('the submitted state is the last valid state before it would have gotten too long', async (done: DoneFn) => {
-            await stringedInputIsInItsLastValidStateBeforeItWouldHaveGottenTooLong()
+            it('displays the too-long value in the input', async (done: DoneFn) => {
+                await stringedInputDisplayValueIsTheTooLongValue()
 
-            done()
-        })
+                done()
+            })
 
-        it('displays the last valid state before it would have gotten too long in the input', async (done: DoneFn) => {
-            await stringedInputDisplayValueIsInItsLastValidStateBeforeItWouldHaveGottenTooLong()
+            it('shows an invalid message', async (done: DoneFn) => {
+                await stringedInputHasTooLongMessage()
 
-            done()
+                done()
+            })
+
+            it('resets the input to valid after typing something valid into it', async (done: DoneFn) => {
+                await undoStringedInputTooLongModification()
+                await stringedContolInputIsMarkedAsValid()
+
+                done()
+            })
+
+            it('preserves the invalid state, displayed value, and invalid message, and still withholds submitting, if you modify an input for another control', async (done: DoneFn) => {
+                await modifyInputForAnotherControlValidly()
+                await stringedInputIsMarkedAsInvalid()
+                await stringedInputDisplayValueIsTheTooLongValue()
+                await stringedInputTooLongValueWasNotSubmittedAndItIsAtTheLastValidValueBeforeItGotTooLong()
+                await stringedInputHasTooLongMessage()
+
+                done()
+            })
         })
     })
 })
