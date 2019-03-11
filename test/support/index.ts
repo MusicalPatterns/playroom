@@ -9,7 +9,7 @@ export {
     selectOnlyPatternParticularSpecPattern,
 }from './selectPattern'
 export { quickRefresh, refreshPage, refreshForSpecControlsTest }from './refresh'
-export { waitForHeadfulQaing, waitLongEnoughForAnimationToComplete } from './wait'
+export { waitLongEnoughForAnimationToComplete } from './wait'
 export { selectAboutPageByClickingLogo } from './aboutPage'
 export { leftColumnIs } from './leftColumn'
 export { openSpecControlsIfNotOpen } from './caret'
