@@ -7,7 +7,7 @@ import {
     ValidationResults,
     Value,
 } from '@musical-patterns/pattern'
-import { ActionForState, DictionaryOf, Maybe, TypedMap } from '@musical-patterns/utilities'
+import { ActionForState, Maybe, ObjectOf, TypedMap } from '@musical-patterns/utilities'
 
 enum SpecStateKey {
     INITIAL_SPEC = 'INITIAL_SPEC',
@@ -27,7 +27,7 @@ interface SpecState {
     [ SpecStateKey.SUBMITTED_SPEC ]: Spec,
     [ SpecStateKey.ATTRIBUTES ]: Attributes,
     [ SpecStateKey.VALIDATION_FUNCTION ]: Maybe<ValidationFunction>,
-    [ SpecStateKey.PRESETS ]: Maybe<DictionaryOf<Preset>>,
+    [ SpecStateKey.PRESETS ]: Maybe<ObjectOf<Preset>>,
     [ SpecStateKey.SPEC_PANEL_OPEN ]: boolean,
 }
 

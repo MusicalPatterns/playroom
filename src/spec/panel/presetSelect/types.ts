@@ -1,9 +1,9 @@
 import { Preset, Spec } from '@musical-patterns/pattern'
-import { DictionaryOf, Maybe } from '@musical-patterns/utilities'
+import { Maybe, ObjectOf } from '@musical-patterns/utilities'
 import { EventParameter } from '../../../types'
 
 interface PresetSelectPropsFromState {
-    presets: Maybe<DictionaryOf<Preset>>,
+    presets: Maybe<ObjectOf<Preset>>,
     submittedSpec: Spec,
 }
 
@@ -14,7 +14,7 @@ interface PresetSelectPropsFromDispatch {
 interface PresetSelectProps extends PresetSelectPropsFromState, PresetSelectPropsFromDispatch {}
 
 interface HandlePresetChangeEventParameters extends EventParameter {
-    presets: DictionaryOf<Preset>,
+    presets: ObjectOf<Preset>,
 }
 
 type HandlePresetChangeEvent = (parameters: HandlePresetChangeEventParameters) => void

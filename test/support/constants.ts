@@ -10,7 +10,7 @@ import {
     StringedConstraint,
 } from '@musical-patterns/pattern'
 import { patterns } from '@musical-patterns/pattern-playroom-test'
-import { DictionaryOf, Ms, to } from '@musical-patterns/utilities'
+import { Ms, ObjectOf, to } from '@musical-patterns/utilities'
 // @ts-ignore
 import { port } from '../../webpack.port'
 
@@ -116,7 +116,7 @@ const VALIDATION_PATTERN_ID: Id = playroomTestValidation!.id
 const PRESETS_PATTERN_ID: Id = playroomTestPresets!.id
 const PRESET_ONE_NAME: string = 'presetOne'
 const PRESET_TWO_NAME: string = 'presetTwo'
-const presets: DictionaryOf<Preset> = playroomTestPresets!.data.presets as DictionaryOf<Preset>
+const presets: ObjectOf<Preset> = playroomTestPresets!.data.presets as ObjectOf<Preset>
 const PRESET_ONE_PROPERTY_ONE_VALUE: string = presets.presetOne.spec[ OPTIONED_PROPERTY_ONE_KEY ] as string
 const PRESET_ONE_PROPERTY_TWO_VALUE: string = presets.presetOne.spec[ OPTIONED_PROPERTY_TWO_KEY ] as string
 const PRESET_TWO_PROPERTY_ONE_VALUE: string = presets.presetTwo.spec[ OPTIONED_PROPERTY_ONE_KEY ] as string
