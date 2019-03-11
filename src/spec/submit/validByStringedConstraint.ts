@@ -1,8 +1,8 @@
-import { SingularValidationResult, StringedConstraint } from '@musical-patterns/pattern'
+import { SingularValidation, StringedConstraint } from '@musical-patterns/pattern'
 import { isUndefined, Maybe } from '@musical-patterns/utilities'
 
-const validByMaxLength: (textValue: string, maxLength: Maybe<number>) => SingularValidationResult =
-    (textValue: string, maxLength: Maybe<number>): SingularValidationResult => {
+const validByMaxLength: (textValue: string, maxLength: Maybe<number>) => SingularValidation =
+    (textValue: string, maxLength: Maybe<number>): SingularValidation => {
         if (!isUndefined(maxLength) && textValue.length > maxLength) {
             return `must be ${maxLength} characters or less`
         }
@@ -10,8 +10,8 @@ const validByMaxLength: (textValue: string, maxLength: Maybe<number>) => Singula
         return undefined
     }
 
-const validByMinLength: (textValue: string, minLength: Maybe<number>) => SingularValidationResult =
-    (textValue: string, minLength: Maybe<number>): SingularValidationResult => {
+const validByMinLength: (textValue: string, minLength: Maybe<number>) => SingularValidation =
+    (textValue: string, minLength: Maybe<number>): SingularValidation => {
         if (!isUndefined(minLength) && textValue.length < minLength) {
             return `must be ${minLength} characters or more`
         }
@@ -20,8 +20,8 @@ const validByMinLength: (textValue: string, minLength: Maybe<number>) => Singula
     }
 
 const validByStringedConstraint:
-    (textValue: string, constraint: Maybe<StringedConstraint>) => SingularValidationResult =
-    (textValue: string, constraint: Maybe<StringedConstraint>): SingularValidationResult => {
+    (textValue: string, constraint: Maybe<StringedConstraint>) => SingularValidation =
+    (textValue: string, constraint: Maybe<StringedConstraint>): SingularValidation => {
         if (isUndefined(constraint)) {
             return undefined
         }

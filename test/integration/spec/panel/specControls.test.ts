@@ -11,17 +11,17 @@ import {
     LONG_ENOUGH_FOR_TIME_TO_PASS,
     loseFocus,
     openSpecControlsIfNotOpen,
-    OPTIONED_PROPERTY_ONE_KEY,
+    OPTIONED_SPEC_ONE_KEY,
     quickRefresh,
-    RANGED_PROPERTY_ONE_KEY,
-    RANGED_PROPERTY_TWO_KEY,
+    RANGED_SPEC_ONE_KEY,
+    RANGED_SPEC_TWO_KEY,
     selectLongDurationPattern,
-    selectOnlyPatternParticularSpecPattern,
-    selectOnlyStandardSpecPattern,
+    selectOnlyPatternParticularSpecsPattern,
+    selectOnlyStandardSpecsPattern,
     selectOption,
     selectSpecControlsPattern,
     selectValidationPattern,
-    SPEC_CONTROLS_PATTERN_OPTIONED_PROPERTY_ONE_MODIFIED_VALUE,
+    SPEC_CONTROLS_PATTERN_OPTIONED_SPEC_ONE_MODIFIED_VALUE,
     VALID_TEST_MODIFICATION,
 } from '../../../support'
 import { clickTimeControl, isAfter } from '../../../support/time'
@@ -30,35 +30,35 @@ const SECTION_HEADING: string = '#spec-controls h3'
 
 const rangedInputIsMarkedAsInvalid: () => Promise<void> =
     async (): Promise<void> => {
-        expect(await elementExists(`input[type=number]#${RANGED_PROPERTY_ONE_KEY}.${FieldValidityClassName.INVALID}`))
+        expect(await elementExists(`input[type=number]#${RANGED_SPEC_ONE_KEY}.${FieldValidityClassName.INVALID}`))
             .toBeTruthy('ranged input was not marked as invalid')
     }
 
 const otherInputIsAlsoMarkedAsInvalid: () => Promise<void> =
     async (): Promise<void> => {
-        expect(await elementExists(`input[type=number]#${RANGED_PROPERTY_TWO_KEY}.${FieldValidityClassName.INVALID}`))
+        expect(await elementExists(`input[type=number]#${RANGED_SPEC_TWO_KEY}.${FieldValidityClassName.INVALID}`))
             .toBeTruthy('other input was not market as invalid')
     }
 
 const rangedInputIsMarkedAsValid: () => Promise<void> =
     async (): Promise<void> => {
-        expect(await elementExists(`input[type=number]#${RANGED_PROPERTY_ONE_KEY}.${FieldValidityClassName.VALID}`))
+        expect(await elementExists(`input[type=number]#${RANGED_SPEC_ONE_KEY}.${FieldValidityClassName.VALID}`))
             .toBeTruthy('ranged input was not marked as valid')
     }
 
 const otherInputIsAlsoMarkedAsValid: () => Promise<void> =
     async (): Promise<void> => {
-        expect(await elementExists(`input[type=number]#${RANGED_PROPERTY_TWO_KEY}.${FieldValidityClassName.VALID}`))
+        expect(await elementExists(`input[type=number]#${RANGED_SPEC_TWO_KEY}.${FieldValidityClassName.VALID}`))
             .toBeTruthy('other ranged control input was not marked as valid')
     }
 
 const enterCustomInvalidityStateAndStoreLastStillValidValue: () => Promise<string> =
     async (): Promise<string> => {
-        await deleteCharacterFromInput(`input[type=number]#${RANGED_PROPERTY_TWO_KEY}`)
+        await deleteCharacterFromInput(`input[type=number]#${RANGED_SPEC_TWO_KEY}`)
         const lastStillValidValue: string = await elementInnerText(
-            `#${RANGED_PROPERTY_TWO_KEY}.${SecretTestSelector.SUBMITTED_SPEC}`,
+            `#${RANGED_SPEC_TWO_KEY}.${SecretTestSelector.SUBMITTED_SPEC}`,
         )
-        await deleteCharacterFromInput(`input[type=number]#${RANGED_PROPERTY_TWO_KEY}`)
+        await deleteCharacterFromInput(`input[type=number]#${RANGED_SPEC_TWO_KEY}`)
         const SELECT_ANYTHING_ELSE: string = '#first-row .right'
         await loseFocus(SELECT_ANYTHING_ELSE)
 
@@ -67,27 +67,27 @@ const enterCustomInvalidityStateAndStoreLastStillValidValue: () => Promise<strin
 
 const theSubmittedValueIsTheLastStillValidValue: (lastStillValidValue: string) => Promise<void> =
     async (lastStillValidValue: string): Promise<void> => {
-        expect(await elementInnerText(`#${RANGED_PROPERTY_TWO_KEY}.${SecretTestSelector.SUBMITTED_SPEC}`))
+        expect(await elementInnerText(`#${RANGED_SPEC_TWO_KEY}.${SecretTestSelector.SUBMITTED_SPEC}`))
             .toBe(lastStillValidValue, 'the submitted value was not the last still valid value')
     }
 
 const invalidMessagesForAllControlsInvolvedInCustomInvalidity: () => Promise<void> =
     async (): Promise<void> => {
-        expect(await elementInnerText(`#${RANGED_PROPERTY_ONE_KEY} .invalid-message`))
+        expect(await elementInnerText(`#${RANGED_SPEC_ONE_KEY} .invalid-message`))
             .toBe(
                 'duration must be less than pitch, obvs',
-                'spec ranged property one did not have the custom invalid message',
+                'ranged spec one did not have the custom invalid message',
             )
-        expect(await elementInnerText(`#${RANGED_PROPERTY_TWO_KEY} .invalid-message`))
+        expect(await elementInnerText(`#${RANGED_SPEC_TWO_KEY} .invalid-message`))
             .toBe(
                 'pitch must be more than duration, obvs',
-                'spec ranged property two did not have the custom invalid message',
+                'ranged spec two did not have the custom invalid message',
             )
     }
 
 const fixCustomValidity: () => Promise<void> =
     async (): Promise<void> => {
-        const control: ElementHandle = await findElement(`input[type=number]#${RANGED_PROPERTY_TWO_KEY}`)
+        const control: ElementHandle = await findElement(`input[type=number]#${RANGED_SPEC_TWO_KEY}`)
         const MODIFICATION_RETURNING_INPUT_TO_CUSTOM_VALID_STATE: string = '86'
         await control.type(MODIFICATION_RETURNING_INPUT_TO_CUSTOM_VALID_STATE)
     }
@@ -95,14 +95,14 @@ const fixCustomValidity: () => Promise<void> =
 const modifyAControlNotInvolvedInTheCustomValidityCheck: () => Promise<void> =
     async (): Promise<void> => {
         await selectOption(
-            `select#${OPTIONED_PROPERTY_ONE_KEY}`,
-            SPEC_CONTROLS_PATTERN_OPTIONED_PROPERTY_ONE_MODIFIED_VALUE,
+            `select#${OPTIONED_SPEC_ONE_KEY}`,
+            SPEC_CONTROLS_PATTERN_OPTIONED_SPEC_ONE_MODIFIED_VALUE,
         )
     }
 
-const modifySpec: () => Promise<void> =
+const modifySpecs: () => Promise<void> =
     async (): Promise<void> => {
-        const input: ElementHandle = await findElement(`input[type=number]#${RANGED_PROPERTY_ONE_KEY}`)
+        const input: ElementHandle = await findElement(`input[type=number]#${RANGED_SPEC_ONE_KEY}`)
         await input.type(VALID_TEST_MODIFICATION)
     }
 
@@ -118,7 +118,7 @@ describe('spec controls', () => {
     })
 
     it('shows no sub-heading when only standard controls are present', async (done: DoneFn) => {
-        await selectOnlyStandardSpecPattern()
+        await selectOnlyStandardSpecsPattern()
         await openSpecControlsIfNotOpen()
 
         expect(await elementExists(SECTION_HEADING))
@@ -128,7 +128,7 @@ describe('spec controls', () => {
     })
 
     it('shows no sub-heading when only pattern-particular controls are present', async (done: DoneFn) => {
-        await selectOnlyPatternParticularSpecPattern()
+        await selectOnlyPatternParticularSpecsPattern()
         await openSpecControlsIfNotOpen()
 
         expect(await elementExists(SECTION_HEADING))
@@ -155,7 +155,7 @@ describe('spec controls', () => {
             done()
         })
 
-        it('it does not submit the invalid data which could crash things', async (done: DoneFn) => {
+        it('it does not submit the invalid value which could crash things', async (done: DoneFn) => {
             await theSubmittedValueIsTheLastStillValidValue(lastStillValidValue)
 
             done()
@@ -202,11 +202,11 @@ describe('spec controls', () => {
         })
 
         it('keeps playing when you modify the spec but does not reset time to the beginning', async (done: DoneFn) => {
-            const timeOfModifyingSpec: Ms = await currentTime()
+            const timeOfModifyingSpecs: Ms = await currentTime()
 
             await openSpecControlsIfNotOpen()
-            await modifySpec()
-            await isAfter(timeOfModifyingSpec)
+            await modifySpecs()
+            await isAfter(timeOfModifyingSpecs)
             await isPlaying()
 
             done()

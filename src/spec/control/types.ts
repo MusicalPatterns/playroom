@@ -1,5 +1,5 @@
 interface ControlParentProps {
-    property: string,
+    specKey: string,
 }
 
 export {

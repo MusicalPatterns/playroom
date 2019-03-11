@@ -1,7 +1,7 @@
-import { AttributesParameter } from '../../types'
+import { ConfigurationsParameter } from '../../types'
 import { ControlParentProps } from '../types'
 
-interface UnitsProps extends AttributesParameter, ControlParentProps {}
+interface UnitsProps extends ConfigurationsParameter, ControlParentProps {}
 
 export {
     UnitsProps,

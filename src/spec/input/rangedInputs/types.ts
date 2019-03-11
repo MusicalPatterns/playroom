@@ -1,7 +1,7 @@
 import { HtmlValue } from '@musical-patterns/utilities'
-import { InputProps } from '../types'
+import { SharedInputProps } from '../types'
 
-interface RangedInputProps extends InputProps {
+interface RangedInputProps extends SharedInputProps {
     max: number,
     min: number,
     step: number,

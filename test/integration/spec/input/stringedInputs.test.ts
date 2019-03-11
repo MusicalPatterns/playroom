@@ -9,12 +9,12 @@ import {
     elementInnerText,
     elementValue,
     findElement,
-    RANGED_PROPERTY_TWO_KEY,
+    RANGED_SPEC_TWO_KEY,
     refreshForSpecControlsTest,
-    SPEC_CONTROLS_PATTERN_STRINGED_PROPERTY_INITIAL_VALUE,
-    SPEC_CONTROLS_PATTERN_STRINGED_PROPERTY_ONE_MAX_LENGTH,
-    SPEC_CONTROLS_PATTERN_STRINGED_PROPERTY_ONE_MIN_LENGTH,
-    STRINGED_PROPERTY_KEY,
+    SPEC_CONTROLS_PATTERN_STRINGED_SPEC_INITIAL_VALUE,
+    SPEC_CONTROLS_PATTERN_STRINGED_SPEC_ONE_MAX_LENGTH,
+    SPEC_CONTROLS_PATTERN_STRINGED_SPEC_ONE_MIN_LENGTH,
+    STRINGED_SPEC_KEY,
     VALID_TEST_MODIFICATION,
 } from '../../../support'
 
@@ -24,15 +24,15 @@ const PART_OF_MODIFICATION_WITHIN_MAX_LENGTH_OF_STRINGED_INPUT: string =
 
 const modifyStringedInput: () => Promise<void> =
     async (): Promise<void> => {
-        const stringedInput: ElementHandle = await findElement(`input[type=text]#${STRINGED_PROPERTY_KEY}`)
+        const stringedInput: ElementHandle = await findElement(`input[type=text]#${STRINGED_SPEC_KEY}`)
         await stringedInput.type(VALID_TEST_MODIFICATION)
     }
 
 const stringedInputIsModified: () => Promise<void> =
     async (): Promise<void> => {
-        expect(await elementInnerText(`#${STRINGED_PROPERTY_KEY}.${SecretTestSelector.SUBMITTED_SPEC}`))
+        expect(await elementInnerText(`#${STRINGED_SPEC_KEY}.${SecretTestSelector.SUBMITTED_SPEC}`))
             .toBe(
-                `${SPEC_CONTROLS_PATTERN_STRINGED_PROPERTY_INITIAL_VALUE}${VALID_TEST_MODIFICATION}`,
+                `${SPEC_CONTROLS_PATTERN_STRINGED_SPEC_INITIAL_VALUE}${VALID_TEST_MODIFICATION}`,
                 'stringed control was not modified',
             )
     }
@@ -40,31 +40,31 @@ const stringedInputIsModified: () => Promise<void> =
 const modifyInputForAnotherControlValidly: () => Promise<void> =
     async (): Promise<void> => {
         const inputForAnotherControl: ElementHandle = await findElement(
-            `input[type=number]#${RANGED_PROPERTY_TWO_KEY}`,
+            `input[type=number]#${RANGED_SPEC_TWO_KEY}`,
         )
         await inputForAnotherControl.type(VALID_TEST_MODIFICATION)
     }
 
 const stringedInputIsMarkedAsInvalid: () => Promise<void> =
     async (): Promise<void> => {
-        expect(await elementExists(`input[type=text]#${STRINGED_PROPERTY_KEY}.${FieldValidityClassName.INVALID}`))
+        expect(await elementExists(`input[type=text]#${STRINGED_SPEC_KEY}.${FieldValidityClassName.INVALID}`))
             .toBeTruthy('stringed input was not marked as invalid')
     }
 
 const stringedContolInputIsMarkedAsValid: () => Promise<void> =
     async (): Promise<void> => {
-        expect(await elementExists(`input[type=text]#${STRINGED_PROPERTY_KEY}.${FieldValidityClassName.VALID}`))
+        expect(await elementExists(`input[type=text]#${STRINGED_SPEC_KEY}.${FieldValidityClassName.VALID}`))
             .toBeTruthy('stringed input was not marked as valid')
     }
 
 const stringedInputTooLongValueWasNotSubmittedAndItIsAtTheLastValidValueBeforeItGotTooLong: () => Promise<void> =
     async (): Promise<void> => {
         const stringedInputSubmittedValue: string = await elementInnerText(
-            `#${STRINGED_PROPERTY_KEY}.${SecretTestSelector.SUBMITTED_SPEC}`,
+            `#${STRINGED_SPEC_KEY}.${SecretTestSelector.SUBMITTED_SPEC}`,
         )
         expect(stringedInputSubmittedValue)
             .toBe(
-                `${SPEC_CONTROLS_PATTERN_STRINGED_PROPERTY_INITIAL_VALUE}${PART_OF_MODIFICATION_WITHIN_MAX_LENGTH_OF_STRINGED_INPUT}`,
+                `${SPEC_CONTROLS_PATTERN_STRINGED_SPEC_INITIAL_VALUE}${PART_OF_MODIFICATION_WITHIN_MAX_LENGTH_OF_STRINGED_INPUT}`,
                 `stringed input was not at the last valid value before it got too long`,
             )
     }
@@ -72,31 +72,31 @@ const stringedInputTooLongValueWasNotSubmittedAndItIsAtTheLastValidValueBeforeIt
 const stringedInputWasNotSubmitted: () => Promise<void> =
     async (): Promise<void> => {
         const stringedInputSubmittedValue: string = await elementInnerText(
-            `#${STRINGED_PROPERTY_KEY}.${SecretTestSelector.SUBMITTED_SPEC}`,
+            `#${STRINGED_SPEC_KEY}.${SecretTestSelector.SUBMITTED_SPEC}`,
         )
         expect(stringedInputSubmittedValue)
             .toBe(
-                `${SPEC_CONTROLS_PATTERN_STRINGED_PROPERTY_INITIAL_VALUE}`,
+                `${SPEC_CONTROLS_PATTERN_STRINGED_SPEC_INITIAL_VALUE}`,
                 `stringed input was submitted`,
             )
     }
 
 const stringedInputDisplayValueIsTheTooLongValue: () => Promise<void> =
     async (): Promise<void> => {
-        expect(await elementValue(`input[type=text]#${STRINGED_PROPERTY_KEY}`))
+        expect(await elementValue(`input[type=text]#${STRINGED_SPEC_KEY}`))
             .toBe(
-                `${SPEC_CONTROLS_PATTERN_STRINGED_PROPERTY_INITIAL_VALUE}${MODIFICATION_CAUSING_STRINGED_INPUT_TO_EXCEED_ITS_MAX_LENGTH}`,
+                `${SPEC_CONTROLS_PATTERN_STRINGED_SPEC_INITIAL_VALUE}${MODIFICATION_CAUSING_STRINGED_INPUT_TO_EXCEED_ITS_MAX_LENGTH}`,
                 'stringed control display value was not the too long value',
             )
     }
 
 const stringedInputDisplayValueIsTheTooShortValue: () => Promise<void> =
     async (): Promise<void> => {
-        expect(await elementValue(`input[type=text]#${STRINGED_PROPERTY_KEY}`))
+        expect(await elementValue(`input[type=text]#${STRINGED_SPEC_KEY}`))
             .toBe(
-                SPEC_CONTROLS_PATTERN_STRINGED_PROPERTY_INITIAL_VALUE.slice(
+                SPEC_CONTROLS_PATTERN_STRINGED_SPEC_INITIAL_VALUE.slice(
                     0,
-                    indexOfLastCharacter(SPEC_CONTROLS_PATTERN_STRINGED_PROPERTY_INITIAL_VALUE),
+                    indexOfLastCharacter(SPEC_CONTROLS_PATTERN_STRINGED_SPEC_INITIAL_VALUE),
                 ),
                 'stringed input display value was not the too short value',
             )
@@ -104,42 +104,42 @@ const stringedInputDisplayValueIsTheTooShortValue: () => Promise<void> =
 
 const stringedInputHasTooLongMessage: () => Promise<void> =
     async (): Promise<void> => {
-        expect(await elementInnerText(`#${STRINGED_PROPERTY_KEY} .invalid-message`))
+        expect(await elementInnerText(`#${STRINGED_SPEC_KEY} .invalid-message`))
             .toBe(
-                `must be ${SPEC_CONTROLS_PATTERN_STRINGED_PROPERTY_ONE_MAX_LENGTH} characters or less`,
+                `must be ${SPEC_CONTROLS_PATTERN_STRINGED_SPEC_ONE_MAX_LENGTH} characters or less`,
                 'stringed input did not have too-long invalid message',
             )
     }
 
 const stringedInputHasTooShortMessage: () => Promise<void> =
     async (): Promise<void> => {
-        expect(await elementInnerText(`#${STRINGED_PROPERTY_KEY} .invalid-message`))
+        expect(await elementInnerText(`#${STRINGED_SPEC_KEY} .invalid-message`))
             .toBe(
-                `must be ${SPEC_CONTROLS_PATTERN_STRINGED_PROPERTY_ONE_MIN_LENGTH} characters or more`,
+                `must be ${SPEC_CONTROLS_PATTERN_STRINGED_SPEC_ONE_MIN_LENGTH} characters or more`,
                 'stringed input did not have too-short invalid message',
             )
     }
 
 const undoStringedInputTooLongModification: () => Promise<void> =
     async (): Promise<void> => {
-        await deleteCharacterFromInput(`input[type=text]#${STRINGED_PROPERTY_KEY}`)
-        await deleteCharacterFromInput(`input[type=text]#${STRINGED_PROPERTY_KEY}`)
+        await deleteCharacterFromInput(`input[type=text]#${STRINGED_SPEC_KEY}`)
+        await deleteCharacterFromInput(`input[type=text]#${STRINGED_SPEC_KEY}`)
     }
 
 const undoStringedInputTooShortModification: () => Promise<void> =
     async (): Promise<void> => {
-        const stringedInput: ElementHandle = await findElement(`input[type=text]#${STRINGED_PROPERTY_KEY}`)
+        const stringedInput: ElementHandle = await findElement(`input[type=text]#${STRINGED_SPEC_KEY}`)
         await stringedInput.type(VALID_TEST_MODIFICATION)
     }
 
 const modifyStringedInputToBeTooShort: () => Promise<void> =
     async (): Promise<void> => {
-        await deleteCharacterFromInput(`input[type=text]#${STRINGED_PROPERTY_KEY}`)
+        await deleteCharacterFromInput(`input[type=text]#${STRINGED_SPEC_KEY}`)
     }
 
 const modifyStringedInputToBeTooLong: () => Promise<void> =
     async (): Promise<void> => {
-        const stringedInput: ElementHandle = await findElement(`input[type=text]#${STRINGED_PROPERTY_KEY}`)
+        const stringedInput: ElementHandle = await findElement(`input[type=text]#${STRINGED_SPEC_KEY}`)
         await stringedInput.type(MODIFICATION_CAUSING_STRINGED_INPUT_TO_EXCEED_ITS_MAX_LENGTH)
     }
 
@@ -173,7 +173,7 @@ describe('stringed input', () => {
                 done()
             })
 
-            it('it does not submit the invalid data which could crash things', async (done: DoneFn) => {
+            it('it does not submit the invalid value which could crash things', async (done: DoneFn) => {
                 await stringedInputWasNotSubmitted()
 
                 done()
@@ -223,7 +223,7 @@ describe('stringed input', () => {
                 done()
             })
 
-            it('it does not submit the invalid data which could crash things', async (done: DoneFn) => {
+            it('it does not submit the invalid value which could crash things', async (done: DoneFn) => {
                 await stringedInputTooLongValueWasNotSubmittedAndItIsAtTheLastValidValueBeforeItGotTooLong()
 
                 done()

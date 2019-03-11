@@ -28,7 +28,7 @@ const mapStateToProps: (state: ImmutableState) => PresetSelectPropsFromState =
 
         return {
             presets: specState.get(SpecStateKey.PRESETS),
-            submittedSpec: specState.get(SpecStateKey.SUBMITTED_SPEC),
+            submittedSpecs: specState.get(SpecStateKey.SUBMITTED_SPECS),
         }
     }
 
@@ -38,7 +38,7 @@ const mapDispatchToProps: (dispatch: Dispatch) => PresetSelectPropsFromDispatch 
     })
 
 const PresetSelect: React.ComponentType<PresetSelectProps> =
-    ({ handlePresetChangeEvent, presets, submittedSpec }: PresetSelectProps): React.ReactElement | null => {
+    ({ handlePresetChangeEvent, presets, submittedSpecs }: PresetSelectProps): React.ReactElement | null => {
         if (isUndefined(presets)) {
             return null
         }
@@ -55,8 +55,8 @@ const PresetSelect: React.ComponentType<PresetSelectProps> =
                     return order < nextOrder ? negative(1) : 1
                 }),
             ([ presetKey, preset ]: [ string, Preset ], index: Ordinal): React.ReactElement | null => {
-                const { description, formattedName, spec } = preset
-                if (deepEqual(spec, submittedSpec)) {
+                const { description, formattedName, specs } = preset
+                if (deepEqual(specs, submittedSpecs)) {
                     selectValue = presetKey
                 }
                 const displayName: string = formattedName || camelCaseToLowerCase(presetKey)

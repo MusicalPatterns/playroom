@@ -1,8 +1,8 @@
-import { DomSpec } from '@musical-patterns/pattern'
+import { DomSpecs } from '@musical-patterns/pattern'
 import { ControlParentProps } from '../types'
 
 interface ArrayedFieldsPropsFromState {
-    displayedSpec: DomSpec,
+    displayedSpecs: DomSpecs,
 }
 
 interface ArrayedFieldsProps extends ArrayedFieldsPropsFromState, ControlParentProps {}

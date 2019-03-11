@@ -1,6 +1,6 @@
 // tslint:disable variable-name file-name-casing no-default-export no-import-side-effect no-null-keyword
 
-import { StandardProperty } from '@musical-patterns/pattern'
+import { StandardSpec } from '@musical-patterns/pattern'
 import { from, keys, map, Ordinal } from '@musical-patterns/utilities'
 import * as React from 'react'
 import { connect } from 'react-redux'
@@ -17,32 +17,32 @@ const mapStateToProps: (state: ImmutableState) => SpecControlsProps =
         const specState: ImmutableSpecState = state.get(StateKey.SPEC)
 
         return {
-            attributes: specState.get(SpecStateKey.ATTRIBUTES),
-            displayedSpec: specState.get(SpecStateKey.DISPLAYED_SPEC),
+            configurations: specState.get(SpecStateKey.CONFIGURATIONS),
+            displayedSpecs: specState.get(SpecStateKey.DISPLAYED_SPECS),
         }
     }
 
 const SpecControls: React.ComponentType<SpecControlsProps> =
-    ({ displayedSpec, attributes }: SpecControlsProps): React.ReactElement | null => {
+    ({ displayedSpecs, configurations }: SpecControlsProps): React.ReactElement | null => {
         const standardSpecControls: Array<React.ReactElement | null> = map(
-            keys(displayedSpec)
-                .filter((property: string) =>
-                    Object.values(StandardProperty)
-                        .includes(property),
+            keys(displayedSpecs)
+                .filter((specKey: string) =>
+                    Object.values(StandardSpec)
+                        .includes(specKey),
                 )
-                .sort(computeSortSpecControls(attributes)),
-            (property: string, index: Ordinal): React.ReactElement | null =>
-                <SpecControl {...{ key: from.Ordinal(index), property }} />,
+                .sort(computeSortSpecControls(configurations)),
+            (specKey: string, index: Ordinal): React.ReactElement | null =>
+                <SpecControl {...{ key: from.Ordinal(index), specKey }} />,
         )
         const patternParticularControls: Array<React.ReactElement | null> = map(
-            keys(displayedSpec)
-                .filter((property: string) =>
-                    !Object.values(StandardProperty)
-                        .includes(property),
+            keys(displayedSpecs)
+                .filter((specKey: string) =>
+                    !Object.values(StandardSpec)
+                        .includes(specKey),
                 )
-                .sort(computeSortSpecControls(attributes)),
-            (property: string, index: Ordinal): React.ReactElement | null =>
-                <SpecControl {...{ key: from.Ordinal(index), property }} />,
+                .sort(computeSortSpecControls(configurations)),
+            (specKey: string, index: Ordinal): React.ReactElement | null =>
+                <SpecControl {...{ key: from.Ordinal(index), specKey }} />,
         )
 
         const bothPatternParticularAndStandardControlsArePresent: boolean = !!standardSpecControls.length &&

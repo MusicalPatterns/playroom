@@ -1,4 +1,4 @@
-import { Id, isId, Metadata, Pattern, Spec } from '@musical-patterns/pattern'
+import { Id, isId, Metadata, Pattern, Specs } from '@musical-patterns/pattern'
 import { setTimePosition } from '@musical-patterns/performer'
 import { BEGINNING, constantCaseToUpperCase, doAsync, isUndefined, Maybe } from '@musical-patterns/utilities'
 import * as React from 'react'
@@ -41,19 +41,19 @@ const handlePatternChange: HandlePatternChange =
             throw new Error(`pattern for id ${newPatternId} was not found`)
         }
 
-        const { data, metadata } = pattern
-        const initialSpec: Spec = data.initial
+        const { spec, metadata } = pattern
+        const { initial: initialSpecs, configurations, computeValidations } = spec
         const post: string = metadata.description || ''
         const patternName: string = computePatternName({ metadata, newId: newPatternId })
 
-        const actions: Action[] = resetActions(initialSpec)
+        const actions: Action[] = resetActions(initialSpecs)
             .concat([
                 { type: PageStateKey.PATTERN_ID, data: newPatternId },
                 { type: PageStateKey.PAGE_NAME, data: undefined },
-                { type: SpecStateKey.INITIAL_SPEC, data: initialSpec },
-                { type: SpecStateKey.ATTRIBUTES, data: data.attributes },
-                { type: SpecStateKey.VALIDATION_FUNCTION, data: data.validationFunction },
-                { type: SpecStateKey.PRESETS, data: data.presets },
+                { type: SpecStateKey.INITIAL_SPECS, data: initialSpecs },
+                { type: SpecStateKey.CONFIGURATIONS, data: configurations },
+                { type: SpecStateKey.COMPUTE_VALIDATIONS, data: computeValidations },
+                { type: SpecStateKey.PRESETS, data: spec.presets },
                 { type: MaterialStateKey.PERFORMER_DISABLED, data: false },
                 { type: MetadataStateKey.POST, data: post },
                 { type: MetadataStateKey.PATTERN_NAME, data: patternName },

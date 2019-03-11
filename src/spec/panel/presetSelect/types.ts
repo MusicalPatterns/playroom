@@ -1,10 +1,10 @@
-import { Preset, Spec } from '@musical-patterns/pattern'
+import { Preset, Specs } from '@musical-patterns/pattern'
 import { Maybe, ObjectOf } from '@musical-patterns/utilities'
 import { EventParameter } from '../../../types'
 
 interface PresetSelectPropsFromState {
     presets: Maybe<ObjectOf<Preset>>,
-    submittedSpec: Spec,
+    submittedSpecs: Specs,
 }
 
 interface PresetSelectPropsFromDispatch {

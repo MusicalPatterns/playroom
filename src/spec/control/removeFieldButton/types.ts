@@ -1,10 +1,10 @@
-import { ValidationResults } from '@musical-patterns/pattern'
+import { Validations } from '@musical-patterns/pattern'
 import { DispatchParameter, EventParameter } from '../../../types'
 import { SubmissionProps } from '../../submit'
 import { ControlParentProps } from '../types'
 
 interface RemoveFieldButtonPropsFromState extends SubmissionProps {
-    validationResults: ValidationResults,
+    validations: Validations,
 }
 
 interface RemoveFieldButtonPropsFromDispatch {

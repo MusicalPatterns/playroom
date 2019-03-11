@@ -1,9 +1,8 @@
-import { RangedConstraint, SingularValidationResult } from '@musical-patterns/pattern'
+import { RangedConstraint, SingularValidation } from '@musical-patterns/pattern'
 import { isUndefined, Maybe } from '@musical-patterns/utilities'
 
-const validByMin:
-    (numericValue: number, min: Maybe<number>, excludeMin: boolean) => SingularValidationResult =
-    (numericValue: number, min: Maybe<number>, excludeMin: boolean): SingularValidationResult => {
+const validByMin: (numericValue: number, min: Maybe<number>, excludeMin: boolean) => SingularValidation =
+    (numericValue: number, min: Maybe<number>, excludeMin: boolean): SingularValidation => {
         if (isUndefined(min)) {
             return undefined
         }
@@ -22,9 +21,8 @@ const validByMin:
         return undefined
     }
 
-const validByMax:
-    (numericValue: number, max: Maybe<number>, excludeMax: boolean) => SingularValidationResult =
-    (numericValue: number, max: Maybe<number>, excludeMax: boolean): SingularValidationResult => {
+const validByMax: (numericValue: number, max: Maybe<number>, excludeMax: boolean) => SingularValidation =
+    (numericValue: number, max: Maybe<number>, excludeMax: boolean): SingularValidation => {
         if (isUndefined(max)) {
             return undefined
         }
@@ -43,8 +41,8 @@ const validByMax:
         return undefined
     }
 
-const validByStep: (numericValue: number, integer: Maybe<boolean>) => SingularValidationResult =
-    (numericValue: number, integer: Maybe<boolean>): SingularValidationResult => {
+const validByStep: (numericValue: number, integer: Maybe<boolean>) => SingularValidation =
+    (numericValue: number, integer: Maybe<boolean>): SingularValidation => {
         if (!integer) {
             return undefined
         }
@@ -56,9 +54,8 @@ const validByStep: (numericValue: number, integer: Maybe<boolean>) => SingularVa
         return undefined
     }
 
-const validByRangedConstraint:
-    (numericValue: number, constraint: Maybe<RangedConstraint>) => SingularValidationResult =
-    (numericValue: number, constraint: Maybe<RangedConstraint>): SingularValidationResult => {
+const validByRangedConstraint: (numericValue: number, constraint: Maybe<RangedConstraint>) => SingularValidation =
+    (numericValue: number, constraint: Maybe<RangedConstraint>): SingularValidation => {
         if (isUndefined(constraint)) {
             return undefined
         }

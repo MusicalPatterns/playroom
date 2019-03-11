@@ -1,41 +1,41 @@
-import { DomSpec, DomValue, Spec } from '@musical-patterns/pattern'
+import { DomSpecs, DomSpecValue, Specs } from '@musical-patterns/pattern'
 import { Action } from '../../types'
 import { SpecStateKey } from '../types'
 import { ComputeAttemptSubmitActionsParameters } from './types'
-import { validateSubmittedSpec } from './validateSubmittedSpec'
+import { validateSubmittedSpecs } from './validateSubmittedSpecs'
 
 const computeAttemptSubmitActions: (parameters: ComputeAttemptSubmitActionsParameters) => Action[] =
     (parameters: ComputeAttemptSubmitActionsParameters): Action[] => {
         const {
-            displayedSpec,
-            submittedSpec,
-            attributes,
-            validationFunction,
-            property,
+            displayedSpecs,
+            submittedSpecs,
+            configurations,
+            computeValidations,
+            specKey,
             updatedValue,
-            suppressReevaluatingValidationResults,
+            suppressReevaluatingValidations,
         } = parameters
 
-        const updatedSubmittedSpec: Spec = { ...submittedSpec, [ property ]: updatedValue }
-        const updatedDisplayedSpec: DomSpec = { ...displayedSpec, [ property ]: updatedValue as DomValue }
+        const updatedSubmittedSpecs: Specs = { ...submittedSpecs, [ specKey ]: updatedValue }
+        const updatedDisplayedSpecs: DomSpecs = { ...displayedSpecs, [ specKey ]: updatedValue as DomSpecValue }
 
-        const { isValid, updatedValidationResults } = validateSubmittedSpec({
-            attributes,
-            property,
-            updatedDisplayedSpec,
-            validationFunction,
+        const { isValid, updatedValidations } = validateSubmittedSpecs({
+            computeValidations,
+            configurations,
+            specKey,
+            updatedDisplayedSpecs,
         })
 
         const actions: Action[] = [
-            { type: SpecStateKey.DISPLAYED_SPEC, data: updatedDisplayedSpec },
+            { type: SpecStateKey.DISPLAYED_SPECS, data: updatedDisplayedSpecs },
         ]
 
-        if (!suppressReevaluatingValidationResults) {
-            actions.push({ type: SpecStateKey.VALIDATION_RESULTS, data: updatedValidationResults })
+        if (!suppressReevaluatingValidations) {
+            actions.push({ type: SpecStateKey.VALIDATIONS, data: updatedValidations })
         }
 
         if (isValid) {
-            actions.push({ type: SpecStateKey.SUBMITTED_SPEC, data: updatedSubmittedSpec })
+            actions.push({ type: SpecStateKey.SUBMITTED_SPECS, data: updatedSubmittedSpecs })
         }
 
         return actions

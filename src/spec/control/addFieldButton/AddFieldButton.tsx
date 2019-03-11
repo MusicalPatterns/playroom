@@ -17,10 +17,10 @@ const mapStateToProps: (state: ImmutableState) => SubmissionProps =
         const specState: ImmutableSpecState = state.get(StateKey.SPEC)
 
         return {
-            attributes: specState.get(SpecStateKey.ATTRIBUTES),
-            displayedSpec: specState.get(SpecStateKey.DISPLAYED_SPEC),
-            submittedSpec: specState.get(SpecStateKey.SUBMITTED_SPEC),
-            validationFunction: specState.get(SpecStateKey.VALIDATION_FUNCTION),
+            computeValidations: specState.get(SpecStateKey.COMPUTE_VALIDATIONS),
+            configurations: specState.get(SpecStateKey.CONFIGURATIONS),
+            displayedSpecs: specState.get(SpecStateKey.DISPLAYED_SPECS),
+            submittedSpecs: specState.get(SpecStateKey.SUBMITTED_SPECS),
         }
     }
 

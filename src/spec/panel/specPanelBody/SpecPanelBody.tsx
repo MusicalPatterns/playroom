@@ -5,7 +5,7 @@ import { connect } from 'react-redux'
 import { ImmutableState, StateKey } from '../../../types'
 import { SpecStateKey } from '../../types'
 import { PresetSelect } from '../presetSelect'
-import { ResetSpecButton } from '../resetSpecButton'
+import { ResetSpecsButton } from '../resetSpecsButton'
 import { SpecControls } from '../specControls'
 import { SpecPanelOpenParameter } from '../types'
 import './styles'
@@ -23,7 +23,7 @@ const SpecPanelBody: React.ComponentType<SpecPanelOpenParameter> =
             <hr/>
             <SpecControls/>
             <hr/>
-            <ResetSpecButton/>
+            <ResetSpecsButton/>
         </div>
     )
 

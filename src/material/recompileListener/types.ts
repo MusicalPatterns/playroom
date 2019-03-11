@@ -1,11 +1,11 @@
-import { Id, Patterns, Spec } from '@musical-patterns/pattern'
+import { Id, Patterns, Specs } from '@musical-patterns/pattern'
 import { Maybe, Ms } from '@musical-patterns/utilities'
 
 interface RecompileListenerPropsFromState {
     debugMode: boolean,
     patternId: Maybe<Id>,
     patterns: Maybe<Partial<Patterns>>,
-    submittedSpec: Spec,
+    submittedSpecs: Specs,
 }
 
 interface RecompileListenerPropsFromDispatch {

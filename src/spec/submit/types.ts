@@ -1,32 +1,32 @@
-import { DomSpec, Spec, ValidationFunction, ValidationResults, Value } from '@musical-patterns/pattern'
+import { ComputeValidations, DomSpecs, Specs, SpecValue, Validations } from '@musical-patterns/pattern'
 import { Maybe } from '@musical-patterns/utilities'
 import { ControlParentProps } from '../control'
-import { AttributesParameter } from '../types'
+import { ConfigurationsParameter } from '../types'
 
-interface SubmissionProps extends AttributesParameter {
-    displayedSpec: DomSpec,
-    submittedSpec: Spec,
-    validationFunction: Maybe<ValidationFunction>,
+interface SubmissionProps extends ConfigurationsParameter {
+    computeValidations: Maybe<ComputeValidations>,
+    displayedSpecs: DomSpecs,
+    submittedSpecs: Specs,
 }
 
 interface ComputeAttemptSubmitActionsParameters extends SubmissionProps, ControlParentProps {
-    suppressReevaluatingValidationResults?: boolean,
-    updatedValue: Value,
+    suppressReevaluatingValidations?: boolean,
+    updatedValue: SpecValue,
 }
 
-interface ValidateSubmittedSpecParameters extends AttributesParameter, ControlParentProps {
-    updatedDisplayedSpec: DomSpec,
-    validationFunction: Maybe<ValidationFunction>,
+interface ValidateSubmittedSpecsParameters extends ConfigurationsParameter, ControlParentProps {
+    computeValidations: Maybe<ComputeValidations>,
+    updatedDisplayedSpecs: DomSpecs,
 }
 
-interface UpdatedValidationResultsPlusIsValid {
+interface UpdatedValidationsPlusIsValid {
     isValid: boolean,
-    updatedValidationResults: ValidationResults,
+    updatedValidations: Validations,
 }
 
 export {
     SubmissionProps,
     ComputeAttemptSubmitActionsParameters,
-    UpdatedValidationResultsPlusIsValid,
-    ValidateSubmittedSpecParameters,
+    UpdatedValidationsPlusIsValid,
+    ValidateSubmittedSpecsParameters,
 }

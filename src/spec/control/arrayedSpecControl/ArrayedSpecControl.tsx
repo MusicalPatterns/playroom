@@ -5,7 +5,7 @@ import * as React from 'react'
 import { connect } from 'react-redux'
 import { ImmutableState, StateKey } from '../../../types'
 import { SecretSubmittedSpecForTest } from '../../field'
-import { AttributesParameter, SpecStateKey } from '../../types'
+import { ConfigurationsParameter, SpecStateKey } from '../../types'
 import { AddFieldButton } from '../addFieldButton'
 import { ArrayedFields } from '../arrayedFields'
 import { RemoveFieldButton } from '../removeFieldButton'
@@ -13,23 +13,23 @@ import { Units } from '../units'
 import './styles'
 import { ArrayedSpecControlProps } from './types'
 
-const mapStateToProps: (state: ImmutableState) => AttributesParameter =
-    (state: ImmutableState): AttributesParameter => ({
-        attributes: state.get(StateKey.SPEC)
-            .get(SpecStateKey.ATTRIBUTES),
+const mapStateToProps: (state: ImmutableState) => ConfigurationsParameter =
+    (state: ImmutableState): ConfigurationsParameter => ({
+        configurations: state.get(StateKey.SPEC)
+            .get(SpecStateKey.CONFIGURATIONS),
     })
 
 const ArrayedSpecControl: React.ComponentType<ArrayedSpecControlProps> =
-    ({ attributes, property }: ArrayedSpecControlProps): React.ReactElement | null => (
-        <div {...{ id: property, className: 'spec-control arrayed-spec-control' }}>
-            <div>{attributes[ property ].formattedName || camelCaseToLowerCase(property)}</div>
-            <ArrayedFields {...{ property }}/>
+    ({ configurations, specKey }: ArrayedSpecControlProps): React.ReactElement | null => (
+        <div {...{ id: specKey, className: 'spec-control arrayed-spec-control' }}>
+            <div>{configurations[ specKey ].formattedName || camelCaseToLowerCase(specKey)}</div>
+            <ArrayedFields {...{ specKey }}/>
             <div>
-                <AddFieldButton {...{ property }}/>
-                <RemoveFieldButton {...{ property }}/>
+                <AddFieldButton {...{ specKey }}/>
+                <RemoveFieldButton {...{ specKey }}/>
             </div>
-            <Units {...{ property }}/>
-            <SecretSubmittedSpecForTest {...{ property }}/>
+            <Units {...{ specKey }}/>
+            <SecretSubmittedSpecForTest {...{ specKey }}/>
         </div>
     )
 

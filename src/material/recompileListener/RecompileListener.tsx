@@ -26,8 +26,8 @@ const mapStateToProps: (state: ImmutableState) => RecompileListenerPropsFromStat
             debugMode: pageState.get(PageStateKey.DEBUG_MODE),
             patternId: pageState.get(PageStateKey.PATTERN_ID),
             patterns: pageState.get(PageStateKey.PATTERNS),
-            submittedSpec: state.get(StateKey.SPEC)
-                .get(SpecStateKey.SUBMITTED_SPEC),
+            submittedSpecs: state.get(StateKey.SPEC)
+                .get(SpecStateKey.SUBMITTED_SPECS),
         }
     }
 
@@ -39,14 +39,14 @@ const mapDispatchToProps: (dispatch: Dispatch) => RecompileListenerPropsFromDisp
 const RecompileListener: React.ComponentType<RecompileListenerProps> =
     (props: RecompileListenerProps): React.ReactElement | null => {
         doAsync(async () => {
-            const { debugMode, patternId, patterns, submittedSpec, setPatternDuration } = props
+            const { debugMode, patternId, patterns, submittedSpecs, setPatternDuration } = props
 
             const pattern: Maybe<Pattern> = computeMaybePattern({ patterns, patternId })
             if (isUndefined(pattern)) {
                 return
             }
 
-            const compilePatternParameters: CompilePatternParameters = { ...pattern, spec: submittedSpec }
+            const compilePatternParameters: CompilePatternParameters = { ...pattern, specs: submittedSpecs }
             const voices: Voice[] = await compilePattern(compilePatternParameters)
             const patternDuration: Ms = await computePatternTotalCompiledDuration(compilePatternParameters)
             setPatternDuration(patternDuration)

@@ -4,27 +4,21 @@ import { isUndefined } from '@musical-patterns/utilities'
 import * as React from 'react'
 import { connect } from 'react-redux'
 import { ImmutableState, StateKey } from '../../../types'
-import { AttributesParameter, SpecStateKey } from '../../types'
+import { ConfigurationsParameter, SpecStateKey } from '../../types'
 import './styles'
 import { UnitsProps } from './types'
 
-const mapStateToProps: (state: ImmutableState) => AttributesParameter =
-    (state: ImmutableState): AttributesParameter => ({
-        attributes: state.get(StateKey.SPEC)
-            .get(SpecStateKey.ATTRIBUTES),
+const mapStateToProps: (state: ImmutableState) => ConfigurationsParameter =
+    (state: ImmutableState): ConfigurationsParameter => ({
+        configurations: state.get(StateKey.SPEC)
+            .get(SpecStateKey.CONFIGURATIONS),
     })
 
 const Units: React.ComponentType<UnitsProps> =
-    ({ attributes, property }: UnitsProps): React.ReactElement | null => {
-        const { units } = attributes[ property ]
+    ({ configurations, specKey }: UnitsProps): React.ReactElement | null => {
+        const { units } = configurations[ specKey ]
 
-        if (isUndefined(units)) {
-            return null
-        }
-
-        return (
-            <div {...{ className: 'units' }}>{units}</div>
-        )
+        return isUndefined(units) ? null : <div {...{ className: 'units' }}>{units}</div>
     }
 
 export default connect(mapStateToProps)(Units)

@@ -7,10 +7,10 @@ import { Units } from '../units'
 import './styles'
 
 const SingularSpecControl: React.ComponentType<ControlParentProps> =
-    ({ property }: ControlParentProps): React.ReactElement | null => (
-        <div {...{ id: property, className: 'spec-control singular-spec-control' }} >
-            <Field {...{ property }}/>
-            <Units {...{ property }}/>
+    ({ specKey }: ControlParentProps): React.ReactElement | null => (
+        <div {...{ id: specKey, className: 'spec-control singular-spec-control' }} >
+            <Field {...{ specKey }}/>
+            <Units {...{ specKey }}/>
         </div>
     )
 

@@ -1,7 +1,7 @@
-import { AttributesParameter } from '../../types'
+import { ConfigurationsParameter } from '../../types'
 import { ControlParentProps } from '../types'
 
-interface ArrayedSpecControlProps extends AttributesParameter, ControlParentProps {}
+interface ArrayedSpecControlProps extends ConfigurationsParameter, ControlParentProps {}
 
 export {
     ArrayedSpecControlProps,

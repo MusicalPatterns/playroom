@@ -1,15 +1,15 @@
 // tslint:disable variable-name file-name-casing no-default-export no-import-side-effect no-null-keyword
 
-import { RangedInputType, RangedPropertyAttributes } from '@musical-patterns/pattern'
+import { RangedConfiguration, RangedInputType } from '@musical-patterns/pattern'
 import { HtmlValue } from '@musical-patterns/utilities'
 import * as React from 'react'
 import { connect } from 'react-redux'
 import { Dispatch } from 'redux'
 import { ImmutableState, StateKey } from '../../../types'
 import { ImmutableSpecState, SpecStateKey } from '../../types'
+import { computeSharedInputAttributes } from '../attributes'
 import { computeHandleFieldChangeEvent } from '../events'
-import { computeInputStuff } from '../helpers'
-import { InputsProps, InputsPropsFromDispatch, InputsPropsFromState } from '../types'
+import { InputsPropsFromDispatch, InputsPropsFromState, SharedInputsProps } from '../types'
 import { computeMinAndMax, computeStep } from './helpers'
 import './styles'
 import { RangedInputProps } from './types'
@@ -19,16 +19,11 @@ const mapStateToProps: (state: ImmutableState) => InputsPropsFromState =
         const specState: ImmutableSpecState = state.get(StateKey.SPEC)
 
         return {
-            attributes: specState
-                .get(SpecStateKey.ATTRIBUTES),
-            displayedSpec: specState
-                .get(SpecStateKey.DISPLAYED_SPEC),
-            submittedSpec: specState
-                .get(SpecStateKey.SUBMITTED_SPEC),
-            validationFunction: specState
-                .get(SpecStateKey.VALIDATION_FUNCTION),
-            validationResults: specState
-                .get(SpecStateKey.VALIDATION_RESULTS),
+            computeValidations: specState.get(SpecStateKey.COMPUTE_VALIDATIONS),
+            configurations: specState.get(SpecStateKey.CONFIGURATIONS),
+            displayedSpecs: specState.get(SpecStateKey.DISPLAYED_SPECS),
+            submittedSpecs: specState.get(SpecStateKey.SUBMITTED_SPECS),
+            validations: specState.get(SpecStateKey.VALIDATIONS),
         }
     }
 
@@ -37,12 +32,12 @@ const mapDispatchToProps: (dispatch: Dispatch) => InputsPropsFromDispatch =
         handleFieldChangeEvent: computeHandleFieldChangeEvent({ dispatch }),
     })
 
-const RangedInputs: React.ComponentType<InputsProps> =
-    (inputsProps: InputsProps): React.ReactElement | null => {
-        const { fieldId, fieldValidityClassName, onChange, value } = computeInputStuff(inputsProps)
+const RangedInputs: React.ComponentType<SharedInputsProps> =
+    (sharedInputsProps: SharedInputsProps): React.ReactElement | null => {
+        const { fieldId, fieldValidityClassName, onChange, value } = computeSharedInputAttributes(sharedInputsProps)
 
-        const { attributes, property } = inputsProps
-        const { constraint, hideInput } = attributes[ property ] as RangedPropertyAttributes
+        const { configurations, specKey } = sharedInputsProps
+        const { constraint, hideInput } = configurations[ specKey ] as RangedConfiguration
         const { min, max } = computeMinAndMax(constraint)
         const step: number = computeStep(constraint)
         const rangedInputProps: RangedInputProps = {

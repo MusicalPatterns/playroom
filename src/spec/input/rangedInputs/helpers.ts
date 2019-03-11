@@ -1,19 +1,14 @@
 import { RangedConstraint } from '@musical-patterns/pattern'
 import { apply, Maybe, negative } from '@musical-patterns/utilities'
-import {
-    DEFAULT_SPEC_BOUND,
-    SPEC_NON_INTEGER_STEP,
-    TRANSLATION_TO_EXCLUDE_MAX,
-    TRANSLATION_TO_EXCLUDE_MIN,
-} from './constants'
+import { DEFAULT_BOUND, NON_INTEGER_STEP, TRANSLATION_TO_EXCLUDE_MAX, TRANSLATION_TO_EXCLUDE_MIN } from './constants'
 
 const computeMinAndMax: (constraint: Maybe<RangedConstraint>) => { max: number, min: number } =
     (constraint: Maybe<RangedConstraint>): { max: number, min: number } => {
         const {
             excludeMax = false,
             excludeMin = false,
-            max = DEFAULT_SPEC_BOUND,
-            min = negative(DEFAULT_SPEC_BOUND),
+            max = DEFAULT_BOUND,
+            min = negative(DEFAULT_BOUND),
         } = constraint || {}
 
         return {
@@ -24,7 +19,7 @@ const computeMinAndMax: (constraint: Maybe<RangedConstraint>) => { max: number, 
 
 const computeStep: (constraint: Maybe<RangedConstraint>) => number =
     (constraint: Maybe<RangedConstraint>): number =>
-        constraint && constraint.integer ? 1 : SPEC_NON_INTEGER_STEP
+        constraint && constraint.integer ? 1 : NON_INTEGER_STEP
 
 export {
     computeMinAndMax,

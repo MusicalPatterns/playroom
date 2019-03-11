@@ -1,7 +1,7 @@
-import { AttributesParameter } from '../../types'
+import { ConfigurationsParameter } from '../../types'
 import { FieldParentProps } from '../types'
 
-interface FieldProps extends AttributesParameter, FieldParentProps {}
+interface FieldProps extends ConfigurationsParameter, FieldParentProps {}
 
 export {
     FieldProps,

@@ -1,6 +1,6 @@
-import { InputProps } from '../types'
+import { SharedInputProps } from '../types'
 
-interface ToggledInputProps extends InputProps {
+interface ToggledInputProps extends SharedInputProps {
     checked: boolean,
     type: string,
 }

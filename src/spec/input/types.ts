@@ -1,4 +1,4 @@
-import { DomSpec, DomValue, ValidationResults } from '@musical-patterns/pattern'
+import { DomSpecs, DomSpecValue, Validations } from '@musical-patterns/pattern'
 import { HtmlValueOrChecked, Ordinal } from '@musical-patterns/utilities'
 import { DispatchParameter, EventHandler, EventParameter } from '../../types'
 import { FieldParentProps } from '../field'
@@ -11,29 +11,29 @@ type HandleFieldChangeEvent = (parameters: HandleFieldChangeEventParameters) => 
 type ComputeHandleFieldChangeEvent = (parameters: DispatchParameter) => HandleFieldChangeEvent
 
 interface MergeEventValueIntoValueParameters extends FieldParentProps {
-    displayedSpec: DomSpec,
+    displayedSpecs: DomSpecs,
     eventValue: HtmlValueOrChecked,
     fieldIndex: Ordinal,
 }
 
 interface InputsPropsFromState extends SubmissionProps {
-    validationResults: ValidationResults,
+    validations: Validations,
 }
 
 interface InputsPropsFromDispatch {
     handleFieldChangeEvent: HandleFieldChangeEvent,
 }
 
-interface InputsProps extends InputsPropsFromState, InputsPropsFromDispatch, FieldParentProps {}
+interface SharedInputsProps extends InputsPropsFromState, InputsPropsFromDispatch, FieldParentProps {}
 
-interface InputStuff {
+interface SharedInputAttributes {
     fieldId: string,
     fieldValidityClassName: string,
     onChange: EventHandler,
-    value: DomValue,
+    value: DomSpecValue,
 }
 
-interface InputProps {
+interface SharedInputProps {
     className: string,
     id: string,
     onChange: EventHandler,
@@ -46,7 +46,7 @@ export {
     MergeEventValueIntoValueParameters,
     InputsPropsFromState,
     InputsPropsFromDispatch,
-    InputsProps,
-    InputStuff,
-    InputProps,
+    SharedInputsProps,
+    SharedInputAttributes,
+    SharedInputProps,
 }

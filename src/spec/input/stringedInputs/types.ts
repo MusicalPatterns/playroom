@@ -1,6 +1,6 @@
-import { InputProps } from '../types'
+import { SharedInputProps } from '../types'
 
-interface StringedInputProps extends InputProps {
+interface StringedInputProps extends SharedInputProps {
     type: string,
     value: string,
 }

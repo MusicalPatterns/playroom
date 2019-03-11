@@ -1,6 +1,6 @@
 // tslint:disable variable-name file-name-casing no-default-export no-import-side-effect no-null-keyword
 
-import { Value } from '@musical-patterns/pattern'
+import { SpecValue } from '@musical-patterns/pattern'
 import { isUndefined } from '@musical-patterns/utilities'
 import * as React from 'react'
 import { connect } from 'react-redux'
@@ -10,29 +10,30 @@ import { computeArrayedSubmittedValue } from '../../arrayedValues'
 import { computeSingularSubmittedValue } from '../../singularValues'
 import { isArrayedSubmittedValue } from '../../typeGuards'
 import { SpecStateKey } from '../../types'
-import { computeFieldId } from '../helpers'
+import { computeFieldId } from '../attributes'
 import { stringifyIfNecessary } from './stringifyIfNecessary'
-import { SecretSubmittedSpecForTestProps, SecretSubmittedSpecForTestPropsFromState } from './types'
+import { SecretSubmittedSpecsForTestProps, SecretSubmittedSpecsForTestPropsFromState } from './types'
 
-const mapStateToProps: (state: ImmutableState) => SecretSubmittedSpecForTestPropsFromState =
-    (state: ImmutableState): SecretSubmittedSpecForTestPropsFromState => ({
+const mapStateToProps: (state: ImmutableState) => SecretSubmittedSpecsForTestPropsFromState =
+    (state: ImmutableState): SecretSubmittedSpecsForTestPropsFromState => ({
         debugMode: state.get(StateKey.PAGE)
             .get(PageStateKey.DEBUG_MODE),
-        submittedSpec: state.get(StateKey.SPEC)
-            .get(SpecStateKey.SUBMITTED_SPEC),
+        submittedSpecs: state.get(StateKey.SPEC)
+            .get(SpecStateKey.SUBMITTED_SPECS),
     })
 
-const SecretSubmittedSpecForTest: React.ComponentType<SecretSubmittedSpecForTestProps> =
-    (secretSubmittedSpecForTestProps: SecretSubmittedSpecForTestProps): React.ReactElement | null => {
-        const { debugMode, property, submittedSpec, fieldIndex } = secretSubmittedSpecForTestProps
+const SecretSubmittedSpecForTest: React.ComponentType<SecretSubmittedSpecsForTestProps> =
+    (secretSubmittedSpecsForTestProps: SecretSubmittedSpecsForTestProps): React.ReactElement | null => {
+        const { debugMode, specKey, submittedSpecs, fieldIndex } = secretSubmittedSpecsForTestProps
         if (!debugMode) {
             return null
         }
-        const fieldId: string = computeFieldId({ fieldIndex, property })
+        const fieldId: string = computeFieldId({ fieldIndex, specKey })
 
-        const submittedValue: Value = isArrayedSubmittedValue(submittedSpec[ property ]) && isUndefined(fieldIndex) ?
-            computeArrayedSubmittedValue(submittedSpec, property) :
-            computeSingularSubmittedValue({ submittedSpec, property, fieldIndex })
+        const submittedValue: SpecValue =
+            isArrayedSubmittedValue(submittedSpecs[ specKey ]) && isUndefined(fieldIndex) ?
+                computeArrayedSubmittedValue(submittedSpecs, specKey) :
+                computeSingularSubmittedValue({ submittedSpecs, specKey, fieldIndex })
 
         return (
             <span{...{ className: SecretTestSelector.SUBMITTED_SPEC, id: fieldId }}>

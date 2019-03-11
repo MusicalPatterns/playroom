@@ -1,1 +1,1 @@
-export { InputsPropertyTypeSwitch as Inputs } from './inputsPropertyTypeSwitch'
+export { Inputs } from './inputs'

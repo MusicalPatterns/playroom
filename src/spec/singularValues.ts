@@ -1,27 +1,27 @@
 import {
-    ArrayedDomValue,
-    ArrayedValidationResult,
+    ArrayedDomSpecValue,
+    ArrayedValidation,
     ArrayedValue,
-    DomValue,
-    SingularDomValue,
-    SingularValidationResult,
+    DomSpecValue,
+    SingularDomSpecValue,
+    SingularValidation,
     SingularValue,
-    ValidationResult,
-    Value,
+    SpecValue,
+    Validation,
 } from '@musical-patterns/pattern'
 import { apply, indexOfLastElement, isUndefined, Ordinal } from '@musical-patterns/utilities'
 import {
     isArrayedDisplayedValue,
     isArrayedSubmittedValue,
-    isArrayedValidationResult,
+    isArrayedValidation,
     isSingularDisplayedValue,
     isSingularSubmittedValue,
-    isSingularValidationResult,
+    isSingularValidation,
 } from './typeGuards'
 import {
     ComputeSingularDisplayedValueParameters,
     ComputeSingularSubmittedValueParameters,
-    ComputeSingularValidationResultParameters,
+    ComputeSingularValidationParameters,
 } from './types'
 
 const computeSingularSubmittedValueFromArrayedSubmittedValue:
@@ -35,8 +35,8 @@ const computeSingularSubmittedValueFromArrayedSubmittedValue:
     }
 
 const computeSingularDisplayedValueFromArrayedDisplayedValue:
-    (arrayedDisplayedValue: ArrayedDomValue, fieldIndex: Ordinal) => SingularDomValue =
-    (arrayedDisplayedValue: ArrayedDomValue, fieldIndex: Ordinal): SingularDomValue => {
+    (arrayedDisplayedValue: ArrayedDomSpecValue, fieldIndex: Ordinal) => SingularDomSpecValue =
+    (arrayedDisplayedValue: ArrayedDomSpecValue, fieldIndex: Ordinal): SingularDomSpecValue => {
         if (fieldIndex > indexOfLastElement(arrayedDisplayedValue)) {
             return undefined
         }
@@ -44,20 +44,20 @@ const computeSingularDisplayedValueFromArrayedDisplayedValue:
         return apply.Ordinal(arrayedDisplayedValue, fieldIndex)
     }
 
-const computeSingularValidationResultFromArrayedValidationResult:
-    (arrayedValidationResult: ArrayedValidationResult, fieldIndex: Ordinal) => SingularValidationResult =
-    (arrayedValidationResult: ArrayedValidationResult, fieldIndex: Ordinal): SingularValidationResult => {
-        if (isUndefined(arrayedValidationResult) || fieldIndex > indexOfLastElement(arrayedValidationResult)) {
+const computeSingularValidationFromArrayedValidation:
+    (arrayedValidation: ArrayedValidation, fieldIndex: Ordinal) => SingularValidation =
+    (arrayedValidation: ArrayedValidation, fieldIndex: Ordinal): SingularValidation => {
+        if (isUndefined(arrayedValidation) || fieldIndex > indexOfLastElement(arrayedValidation)) {
             return undefined
         }
 
-        return apply.Ordinal(arrayedValidationResult, fieldIndex)
+        return apply.Ordinal(arrayedValidation, fieldIndex)
     }
 
 const computeSingularSubmittedValue:
     (computeSingularSubmittedValueParameters: ComputeSingularSubmittedValueParameters) => SingularValue =
-    ({ submittedSpec, property, fieldIndex }: ComputeSingularSubmittedValueParameters): SingularValue => {
-        const submittedValue: Value = submittedSpec && submittedSpec[ property ]
+    ({ submittedSpecs, specKey, fieldIndex }: ComputeSingularSubmittedValueParameters): SingularValue => {
+        const submittedValue: SpecValue = submittedSpecs && submittedSpecs[ specKey ]
 
         return !isUndefined(fieldIndex) && isArrayedSubmittedValue(submittedValue) ?
             computeSingularSubmittedValueFromArrayedSubmittedValue(submittedValue, fieldIndex) :
@@ -65,29 +65,27 @@ const computeSingularSubmittedValue:
     }
 
 const computeSingularDisplayedValue:
-    (computeSingularDisplayedValueParameters: ComputeSingularDisplayedValueParameters) => SingularDomValue =
-    ({ displayedSpec, property, fieldIndex }: ComputeSingularDisplayedValueParameters): SingularDomValue => {
-        const displayedValue: DomValue = displayedSpec && displayedSpec[ property ]
+    (computeSingularDisplayedValueParameters: ComputeSingularDisplayedValueParameters) => SingularDomSpecValue =
+    ({ displayedSpecs, specKey, fieldIndex }: ComputeSingularDisplayedValueParameters): SingularDomSpecValue => {
+        const displayedValue: DomSpecValue = displayedSpecs && displayedSpecs[ specKey ]
 
         return !isUndefined(fieldIndex) && isArrayedDisplayedValue(displayedValue) ?
             computeSingularDisplayedValueFromArrayedDisplayedValue(displayedValue, fieldIndex) :
             isSingularDisplayedValue(displayedValue) ? displayedValue : undefined
     }
 
-const computeSingularValidationResult:
-    (computeSingularValidationResultParameters: ComputeSingularValidationResultParameters) => SingularValidationResult =
-    (
-        { validationResults, property, fieldIndex }: ComputeSingularValidationResultParameters,
-    ): SingularValidationResult => {
-        const validationResult: ValidationResult = validationResults && validationResults[ property ]
+const computeSingularValidation:
+    (computeSingularValidationParameters: ComputeSingularValidationParameters) => SingularValidation =
+    ({ validations, specKey, fieldIndex }: ComputeSingularValidationParameters): SingularValidation => {
+        const validation: Validation = validations && validations[ specKey ]
 
-        return !isUndefined(fieldIndex) && isArrayedValidationResult(validationResult) ?
-            computeSingularValidationResultFromArrayedValidationResult(validationResult, fieldIndex) :
-            isSingularValidationResult(validationResult) ? validationResult : undefined
+        return !isUndefined(fieldIndex) && isArrayedValidation(validation) ?
+            computeSingularValidationFromArrayedValidation(validation, fieldIndex) :
+            isSingularValidation(validation) ? validation : undefined
     }
 
 export {
-    computeSingularValidationResult,
+    computeSingularValidation,
     computeSingularDisplayedValue,
     computeSingularSubmittedValue,
 }

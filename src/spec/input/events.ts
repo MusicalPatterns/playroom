@@ -1,4 +1,4 @@
-import { ArrayedDomValue, ArrayedValue, Value } from '@musical-patterns/pattern'
+import { ArrayedDomSpecValue, ArrayedValue, SpecValue } from '@musical-patterns/pattern'
 import { from, HtmlValueOrChecked, isUndefined } from '@musical-patterns/utilities'
 import { batchActions } from 'redux-batched-actions'
 import { extractValueOrCheckedFromEvent } from '../../extractValueOrCheckedFromEvent'
@@ -14,9 +14,9 @@ import {
 
 const mergeEventValueIntoArrayedValue: (parameters: MergeEventValueIntoValueParameters) => ArrayedValue =
     (parameters: MergeEventValueIntoValueParameters): ArrayedValue => {
-        const { displayedSpec, property, fieldIndex, eventValue } = parameters
+        const { displayedSpecs, specKey, fieldIndex, eventValue } = parameters
 
-        const arrayedDisplayedValue: ArrayedDomValue = computeArrayedDisplayedValue(displayedSpec, property)
+        const arrayedDisplayedValue: ArrayedDomSpecValue = computeArrayedDisplayedValue(displayedSpecs, specKey)
 
         while (arrayedDisplayedValue.length < from.Ordinal(fieldIndex)) {
             arrayedDisplayedValue.push('')
@@ -32,32 +32,32 @@ const computeHandleFieldChangeEvent: ComputeHandleFieldChangeEvent =
             const {
                 fieldIndex,
                 event,
-                property,
-                displayedSpec,
-                submittedSpec,
-                validationFunction,
-                attributes,
+                specKey,
+                displayedSpecs,
+                submittedSpecs,
+                computeValidations,
+                configurations,
             } = parameters
 
             const eventValue: HtmlValueOrChecked = extractValueOrCheckedFromEvent(event)
 
-            let updatedValue: Value = eventValue
+            let updatedValue: SpecValue = eventValue
             if (!isUndefined(fieldIndex)) {
                 updatedValue = mergeEventValueIntoArrayedValue({
-                    displayedSpec,
+                    displayedSpecs,
                     eventValue,
                     fieldIndex,
-                    property,
+                    specKey,
                 })
             }
 
             const actions: Action[] = computeAttemptSubmitActions({
-                attributes,
-                displayedSpec,
-                property,
-                submittedSpec,
+                computeValidations,
+                configurations,
+                displayedSpecs,
+                specKey,
+                submittedSpecs,
                 updatedValue,
-                validationFunction,
             })
 
             dispatch(batchActions(actions))

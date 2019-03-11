@@ -1,8 +1,8 @@
-import { ValidationResults } from '@musical-patterns/pattern'
+import { Validations } from '@musical-patterns/pattern'
 import { FieldParentProps } from '../types'
 
 interface InvalidMessagePropsFromState {
-    validationResults: ValidationResults,
+    validations: Validations,
 }
 
 interface InvalidMessageProps extends InvalidMessagePropsFromState, FieldParentProps {}

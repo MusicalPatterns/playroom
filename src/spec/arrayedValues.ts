@@ -1,10 +1,20 @@
-import { ArrayedDomValue, ArrayedValue, DomSpec, DomValue, Spec, Value } from '@musical-patterns/pattern'
+import {
+    ArrayedDomSpecValue,
+    ArrayedValidation,
+    ArrayedValue,
+    DomSpecs,
+    DomSpecValue,
+    Specs,
+    SpecValue,
+    Validation,
+    Validations,
+} from '@musical-patterns/pattern'
 import { deepClone, isUndefined, Maybe } from '@musical-patterns/utilities'
-import { isArrayedDisplayedValue, isArrayedSubmittedValue } from './typeGuards'
+import { isArrayedDisplayedValue, isArrayedSubmittedValue, isArrayedValidation } from './typeGuards'
 
-const computeArrayedDisplayedValue: (displayedSpec: DomSpec, property: string) => ArrayedDomValue =
-    (displayedSpec: DomSpec, property: string): ArrayedDomValue => {
-        const maybeDisplayedValue: Maybe<DomValue> = deepClone(displayedSpec[ property ])
+const computeArrayedDisplayedValue: (displayedSpecs: DomSpecs, specKey: string) => ArrayedDomSpecValue =
+    (displayedSpecs: DomSpecs, specKey: string): ArrayedDomSpecValue => {
+        const maybeDisplayedValue: Maybe<DomSpecValue> = deepClone(displayedSpecs[ specKey ])
         if (isUndefined(maybeDisplayedValue)) {
             throw new Error('displayed value was undefined')
         }
@@ -16,9 +26,9 @@ const computeArrayedDisplayedValue: (displayedSpec: DomSpec, property: string) =
         return maybeDisplayedValue
     }
 
-const computeArrayedSubmittedValue: (submittedSpec: Spec, property: string) => ArrayedValue =
-    (submittedSpec: Spec, property: string): ArrayedValue => {
-        const maybeSubmittedValue: Maybe<Value> = deepClone(submittedSpec[ property ])
+const computeArrayedSubmittedValue: (submittedSpecs: Specs, specKey: string) => ArrayedValue =
+    (submittedSpecs: Specs, specKey: string): ArrayedValue => {
+        const maybeSubmittedValue: Maybe<SpecValue> = deepClone(submittedSpecs[ specKey ])
         if (isUndefined(maybeSubmittedValue)) {
             throw new Error('submitted value was undefined')
         }
@@ -30,7 +40,19 @@ const computeArrayedSubmittedValue: (submittedSpec: Spec, property: string) => A
         return maybeSubmittedValue
     }
 
+const computeArrayedValidation: (validations: Validations, specKey: string) => ArrayedValidation =
+    (validations: Validations, specKey: string): ArrayedValidation => {
+        const validation: Validation = validations && validations[ specKey ]
+
+        if (!isArrayedValidation(validation)) {
+            throw new Error('cannot treat a singular validation as arrayed')
+        }
+
+        return validation
+    }
+
 export {
     computeArrayedSubmittedValue,
     computeArrayedDisplayedValue,
+    computeArrayedValidation,
 }

@@ -2,7 +2,7 @@
 
 import { faMinus } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { DomValue } from '@musical-patterns/pattern'
+import { DomSpecValue } from '@musical-patterns/pattern'
 import * as React from 'react'
 import { connect } from 'react-redux'
 import { Dispatch } from 'redux'
@@ -23,11 +23,11 @@ const mapStateToProps: (state: ImmutableState) => RemoveFieldButtonPropsFromStat
         const specState: ImmutableSpecState = state.get(StateKey.SPEC)
 
         return {
-            attributes: specState.get(SpecStateKey.ATTRIBUTES),
-            displayedSpec: specState.get(SpecStateKey.DISPLAYED_SPEC),
-            submittedSpec: specState.get(SpecStateKey.SUBMITTED_SPEC),
-            validationFunction: specState.get(SpecStateKey.VALIDATION_FUNCTION),
-            validationResults: specState.get(SpecStateKey.VALIDATION_RESULTS),
+            computeValidations: specState.get(SpecStateKey.COMPUTE_VALIDATIONS),
+            configurations: specState.get(SpecStateKey.CONFIGURATIONS),
+            displayedSpecs: specState.get(SpecStateKey.DISPLAYED_SPECS),
+            submittedSpecs: specState.get(SpecStateKey.SUBMITTED_SPECS),
+            validations: specState.get(SpecStateKey.VALIDATIONS),
         }
     }
 
@@ -40,12 +40,12 @@ const mapDispatchToProps: (dispatch: Dispatch) => RemoveFieldButtonPropsFromDisp
 
 const RemoveFieldButton: React.ComponentType<RemoveFieldButtonProps> =
     (removeFieldButtonProps: RemoveFieldButtonProps): React.ReactElement | null => {
-        const { handleFieldRemoveEvent, displayedSpec, property, ...otherProps } = removeFieldButtonProps
+        const { handleFieldRemoveEvent, displayedSpecs, specKey, ...otherProps } = removeFieldButtonProps
         const onClick: EventHandler = (event: React.SyntheticEvent): void => {
-            handleFieldRemoveEvent({ event, displayedSpec, property, ...otherProps })
+            handleFieldRemoveEvent({ event, displayedSpecs, specKey, ...otherProps })
         }
 
-        const displayedValue: DomValue = displayedSpec[ property ]
+        const displayedValue: DomSpecValue = displayedSpecs[ specKey ]
         if (!isArrayedDisplayedValue(displayedValue)) {
             throw new Error('cannot treat a singular spec control as arrayed')
         }

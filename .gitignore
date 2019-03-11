@@ -19,6 +19,7 @@ running
 .idea/jsLinters/tslint.xml
 .idea/misc.xml
 .idea/watcherTasks.xml
+bin/update.sh
 Makefile
 test/jasmine.js
 test/mockDom.ts

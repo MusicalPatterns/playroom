@@ -1,44 +1,45 @@
 import {
-    ArrayedDomValue,
-    ArrayedValidationResult,
+    ArrayedDomSpecValue,
+    ArrayedValidation,
     ArrayedValue,
-    DomValue,
-    SingularDomValue,
-    SingularValidationResult,
+    DomSpecValue,
+    SingularDomSpecValue,
+    SingularValidation,
     SingularValue,
-    ValidationResult,
-    Value,
+    SpecValue,
+    Validation,
 } from '@musical-patterns/pattern'
+import { isUndefined } from '@musical-patterns/utilities'
 
-const isArrayedSubmittedValue: (submittedValue: Value) => submittedValue is ArrayedValue =
-    (submittedValue: Value): submittedValue is ArrayedValue =>
+const isArrayedSubmittedValue: (submittedValue: SpecValue) => submittedValue is ArrayedValue =
+    (submittedValue: SpecValue): submittedValue is ArrayedValue =>
         submittedValue instanceof Array
 
-const isArrayedDisplayedValue: (displayedValue: DomValue) => displayedValue is ArrayedDomValue =
-    (displayedValue: DomValue): displayedValue is ArrayedDomValue =>
+const isArrayedDisplayedValue: (displayedValue: DomSpecValue) => displayedValue is ArrayedDomSpecValue =
+    (displayedValue: DomSpecValue): displayedValue is ArrayedDomSpecValue =>
         displayedValue instanceof Array
 
-const isArrayedValidationResult: (validationResult: ValidationResult) => validationResult is ArrayedValidationResult =
-    (validationResult: ValidationResult): validationResult is ArrayedValidationResult =>
-        validationResult instanceof Array
+const isArrayedValidation: (validation: Validation) => validation is ArrayedValidation =
+    (validation: Validation): validation is ArrayedValidation =>
+        isUndefined(validation) || validation instanceof Array
 
-const isSingularSubmittedValue: (submittedValue: Value) => submittedValue is SingularValue =
-    (submittedValue: Value): submittedValue is SingularValue =>
+const isSingularSubmittedValue: (submittedValue: SpecValue) => submittedValue is SingularValue =
+    (submittedValue: SpecValue): submittedValue is SingularValue =>
         !isArrayedSubmittedValue(submittedValue)
 
-const isSingularDisplayedValue: (displayedValue: DomValue) => displayedValue is SingularDomValue =
-    (displayedValue: DomValue): displayedValue is SingularDomValue =>
+const isSingularDisplayedValue: (displayedValue: DomSpecValue) => displayedValue is SingularDomSpecValue =
+    (displayedValue: DomSpecValue): displayedValue is SingularDomSpecValue =>
         !isArrayedDisplayedValue(displayedValue)
 
-const isSingularValidationResult: (validationResult: ValidationResult) => validationResult is SingularValidationResult =
-    (validationResult: ValidationResult): validationResult is SingularValidationResult =>
-        !isArrayedValidationResult(validationResult)
+const isSingularValidation: (validation: Validation) => validation is SingularValidation =
+    (validation: Validation): validation is SingularValidation =>
+        isUndefined(validation) || !isArrayedValidation(validation)
 
 export {
     isArrayedSubmittedValue,
     isArrayedDisplayedValue,
-    isArrayedValidationResult,
+    isArrayedValidation,
     isSingularDisplayedValue,
     isSingularSubmittedValue,
-    isSingularValidationResult,
+    isSingularValidation,
 }

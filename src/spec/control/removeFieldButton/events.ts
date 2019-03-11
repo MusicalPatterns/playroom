@@ -1,72 +1,58 @@
-import {
-    ArrayedDomValue,
-    ArrayedValidationResult,
-    ValidationResult,
-    ValidationResults,
-} from '@musical-patterns/pattern'
+import { ArrayedDomSpecValue, ArrayedValidation, Validations } from '@musical-patterns/pattern'
 import { indexOfLastElement, INITIAL, isUndefined, lastElement, slice } from '@musical-patterns/utilities'
 import { batchActions } from 'redux-batched-actions'
 import { Action } from '../../../types'
-import { computeArrayedDisplayedValue } from '../../arrayedValues'
+import { computeArrayedDisplayedValue, computeArrayedValidation } from '../../arrayedValues'
 import { computeAttemptSubmitActions } from '../../submit'
 import { HandleFieldRemoveParameters } from './types'
 
-const isArrayedValidationResult:
-    (validationResult: ValidationResult) => validationResult is ArrayedValidationResult =
-    (validationResult: ValidationResult): validationResult is ArrayedValidationResult =>
-        validationResult instanceof Array
-
-const isNoInvalidMessageForRemovedField:
-    (validationResults: ValidationResults, property: string) => boolean =
-    (validationResults: ValidationResults, property: string): boolean => {
-        if (isUndefined(validationResults)) {
+const isNoInvalidMessageForRemovedField: (validations: Validations, specKey: string) => boolean =
+    (validations: Validations, specKey: string): boolean => {
+        if (isUndefined(validations)) {
             return true
         }
 
-        const validationResult: ValidationResult = validationResults[ property ]
-        if (isUndefined(validationResult)) {
+        const arrayedValidation: ArrayedValidation = computeArrayedValidation(validations, specKey)
+        if (isUndefined(arrayedValidation)) {
             return true
         }
-        if (!isArrayedValidationResult(validationResult)) {
-            throw new Error('cannot treat a singular spec control as arrayed')
-        }
 
-        return isUndefined(lastElement(validationResult))
+        return isUndefined(lastElement(arrayedValidation))
     }
 
 const handleFieldRemove: (parameters: HandleFieldRemoveParameters) => void =
     (parameters: HandleFieldRemoveParameters): void => {
         const {
             dispatch,
-            property,
-            attributes,
-            displayedSpec,
-            submittedSpec,
-            validationFunction,
-            validationResults,
+            specKey,
+            configurations,
+            displayedSpecs,
+            submittedSpecs,
+            computeValidations,
+            validations,
         } = parameters
-        const arrayedDisplayedValue: ArrayedDomValue = computeArrayedDisplayedValue(displayedSpec, property)
+        const arrayedDisplayedValue: ArrayedDomSpecValue = computeArrayedDisplayedValue(displayedSpecs, specKey)
 
-        const updatedArrayedDisplayedValue: ArrayedDomValue = slice(
+        const updatedArrayedDisplayedValue: ArrayedDomSpecValue = slice(
             arrayedDisplayedValue,
             INITIAL,
             indexOfLastElement(arrayedDisplayedValue),
         )
 
         const removedFieldHasNoInvalidMessages: boolean =
-            isNoInvalidMessageForRemovedField(validationResults, property)
+            isNoInvalidMessageForRemovedField(validations, specKey)
 
         const removedFieldIsEmpty: boolean = lastElement(arrayedDisplayedValue) === ''
-        const suppressReevaluatingValidationResults: boolean = removedFieldIsEmpty && removedFieldHasNoInvalidMessages
+        const suppressReevaluatingValidations: boolean = removedFieldIsEmpty && removedFieldHasNoInvalidMessages
 
         const actions: Action[] = computeAttemptSubmitActions({
-            attributes,
-            displayedSpec,
-            property,
-            submittedSpec,
-            suppressReevaluatingValidationResults,
+            computeValidations,
+            configurations,
+            displayedSpecs,
+            specKey,
+            submittedSpecs,
+            suppressReevaluatingValidations,
             updatedValue: updatedArrayedDisplayedValue,
-            validationFunction,
         })
 
         dispatch(batchActions(actions))

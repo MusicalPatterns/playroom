@@ -1,7 +1,7 @@
 import { HtmlValue } from '@musical-patterns/utilities'
-import { InputProps } from '../types'
+import { SharedInputProps } from '../types'
 
-interface OptionedInputProps extends InputProps {
+interface OptionedInputProps extends SharedInputProps {
     value: HtmlValue,
 }
 

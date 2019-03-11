@@ -1,14 +1,14 @@
-import { Spec } from '@musical-patterns/pattern'
+import { Specs } from '@musical-patterns/pattern'
 import { FieldParentProps } from '../types'
 
-interface SecretSubmittedSpecForTestPropsFromState {
+interface SecretSubmittedSpecsForTestPropsFromState {
     debugMode: boolean,
-    submittedSpec: Spec,
+    submittedSpecs: Specs,
 }
 
-interface SecretSubmittedSpecForTestProps extends SecretSubmittedSpecForTestPropsFromState, FieldParentProps {}
+interface SecretSubmittedSpecsForTestProps extends SecretSubmittedSpecsForTestPropsFromState, FieldParentProps {}
 
 export {
-    SecretSubmittedSpecForTestPropsFromState,
-    SecretSubmittedSpecForTestProps,
+    SecretSubmittedSpecsForTestPropsFromState,
+    SecretSubmittedSpecsForTestProps,
 }

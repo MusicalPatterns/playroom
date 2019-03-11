@@ -3,7 +3,7 @@ export { SecretSubmittedSpecForTest } from './secretSubmittedSpecForTest'
 export {
     computeFieldId,
     computeFieldValidityClassName,
-} from './helpers'
+} from './attributes'
 
 export {
     FieldParentProps,

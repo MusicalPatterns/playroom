@@ -1,7 +1,7 @@
 import {
     LONG_DURATION_PATTERN_ID,
-    ONLY_PATTERN_PARTICULAR_SPEC_PATTERN_ID,
-    ONLY_STANDARD_SPEC_PATTERN_ID,
+    ONLY_PATTERN_PARTICULAR_SPECS_PATTERN_ID,
+    ONLY_STANDARD_SPECS_PATTERN_ID,
     POST_PATTERN_ID,
     PRESETS_PATTERN_ID,
     SPEC_CONTROLS_PATTERN_ID,
@@ -47,15 +47,15 @@ const selectPresetsPattern: () => Promise<void> =
         await waitLongEnoughForAnimationToComplete()
     }
 
-const selectOnlyStandardSpecPattern: () => Promise<void> =
+const selectOnlyStandardSpecsPattern: () => Promise<void> =
     async (): Promise<void> => {
-        await clickElement(`#${ONLY_STANDARD_SPEC_PATTERN_ID}`)
+        await clickElement(`#${ONLY_STANDARD_SPECS_PATTERN_ID}`)
         await waitLongEnoughForAnimationToComplete()
     }
 
-const selectOnlyPatternParticularSpecPattern: () => Promise<void> =
+const selectOnlyPatternParticularSpecsPattern: () => Promise<void> =
     async (): Promise<void> => {
-        await clickElement(`#${ONLY_PATTERN_PARTICULAR_SPEC_PATTERN_ID}`)
+        await clickElement(`#${ONLY_PATTERN_PARTICULAR_SPECS_PATTERN_ID}`)
         await waitLongEnoughForAnimationToComplete()
     }
 
@@ -66,6 +66,6 @@ export {
     selectTimeControlsPattern,
     selectValidationPattern,
     selectPresetsPattern,
-    selectOnlyStandardSpecPattern,
-    selectOnlyPatternParticularSpecPattern,
+    selectOnlyStandardSpecsPattern,
+    selectOnlyPatternParticularSpecsPattern,
 }
