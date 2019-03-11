@@ -45,7 +45,7 @@ const validByMax:
 
 const validByStep: (numericValue: number, integer: Maybe<boolean>) => SingularValidationResult =
     (numericValue: number, integer: Maybe<boolean>): SingularValidationResult => {
-        if (isUndefined(integer)) {
+        if (!integer) {
             return undefined
         }
 
