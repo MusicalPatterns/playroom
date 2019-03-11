@@ -1,10 +1,10 @@
 import { HtmlValue } from '@musical-patterns/utilities'
-import { InputsProps } from '../inputs'
+import { InputProps } from '../types'
 
-interface OptionedInputsProps extends InputsProps {
+interface OptionedInputProps extends InputProps {
     value: HtmlValue,
 }
 
 export {
-    OptionedInputsProps,
+    OptionedInputProps,
 }

@@ -7,13 +7,13 @@ import {
     ValidationResult,
 } from '@musical-patterns/pattern'
 import { isUndefined, Maybe } from '@musical-patterns/utilities'
-import { isArrayedDisplayedValue } from './isArrayedDisplayedValue'
+import { isArrayedDisplayedValue } from '../typeGuards'
 import { validateArrayedProperty } from './validateArrayedProperty'
 import { validByRangedConstraint } from './validByRangedConstraint'
 import { validByStringedConstraint } from './validByStringedConstraint'
 
-const validationRequired: (propertyAttributes: Maybe<PropertyAttributes>) => boolean =
-    (propertyAttributes: Maybe<PropertyAttributes>): boolean => {
+const validationRequired: (propertyAttributes: Maybe<PropertyAttributes>) => propertyAttributes is PropertyAttributes =
+    (propertyAttributes: Maybe<PropertyAttributes>): propertyAttributes is PropertyAttributes => {
         if (isUndefined(propertyAttributes)) {
             return false
         }
@@ -28,13 +28,10 @@ const validateProperty:
         if (!validationRequired(propertyAttributes)) {
             return undefined
         }
-        const { constraint, propertyType } = propertyAttributes as PropertyAttributes
+        const { constraint, propertyType } = propertyAttributes
 
         if (isArrayedDisplayedValue(displayedValue)) {
-            return validateArrayedProperty(
-                displayedValue,
-                propertyAttributes as PropertyAttributes,
-            )
+            return validateArrayedProperty(displayedValue, propertyAttributes)
         }
 
         if (propertyType === PropertyType.STRINGED) {

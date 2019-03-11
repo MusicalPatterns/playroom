@@ -20,6 +20,7 @@
   input,
   select {
     flex: $field-input-proportion;
+    //text-align: right;
   }
 
   &:hover .invalid-message {

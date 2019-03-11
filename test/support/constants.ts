@@ -41,7 +41,7 @@ const ARRAYED_PROPERTY_KEY: string = 'arrayedProperty'
 const ARRAYED_PROPERTY_WITH_INITIAL_FIELD_VALUE_KEY: string = 'arrayedPropertyWithInitialFieldValue'
 
 const SPEC_CONTROLS_PATTERN_ID: Id = playroomTestSpecControls!.id
-const SPEC_CONTROLS_PATTERN_TITLE: string = playroomTestSpecControls!.metadata.formattedName as string
+const SPEC_CONTROLS_PATTERN_TITLE: string = playroomTestSpecControls!.metadata.formattedName!
 const SPEC_CONTROLS_PATTERN_RANGED_PROPERTY_ONE_INITIAL_VALUE: number =
     playroomTestSpecControls!.data.initial[ RANGED_PROPERTY_ONE_KEY ] as number
 const specControlsPatternAttributes: Attributes = playroomTestSpecControls!.data.attributes
@@ -82,7 +82,7 @@ const SPEC_CONTROLS_PATTERN_ARRAYED_PROPERTY_WITH_INITIAL_FIELD_VALUE_INITIAL_FI
     playroomTestSpecControls!.data.attributes[ ARRAYED_PROPERTY_WITH_INITIAL_FIELD_VALUE_KEY ].arrayedNewFieldInitialValue as number
 
 const POST_PATTERN_ID: Id = playroomTestPost!.id
-const POST_PATTERN_TITLE: string = playroomTestPost!.metadata.formattedName as string
+const POST_PATTERN_TITLE: string = playroomTestPost!.metadata.formattedName!
 const POST_PATTERN_RANGED_PROPERTY_ONE_INITIAL_VALUE: number =
     playroomTestPost!.data.initial[ RANGED_PROPERTY_ONE_KEY ] as number
 const POST_PATTERN_RANGED_PROPERTY_TWO_INITIAL_VALUE: number =

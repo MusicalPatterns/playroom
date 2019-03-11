@@ -2,4 +2,6 @@
 
 .spec-control {
   margin-bottom: $spec-control-spacing !important;
+  display: flex;
+  justify-content: flex-end;
 }

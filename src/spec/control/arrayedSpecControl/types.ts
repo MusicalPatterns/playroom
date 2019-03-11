@@ -1,20 +1,8 @@
-import { ArrayedDomValue, ArrayedValidationResult, ArrayedValue, Attributes } from '@musical-patterns/pattern'
-import { PropertyParameter } from '../../types'
+import { AttributesParameter } from '../../types'
+import { ControlParentProps } from '../types'
 
-interface ArrayedSpecControlPropsFromState {
-    attributes: Attributes,
-}
-
-interface ArrayedSpecControlPropsFromParent extends PropertyParameter {
-    arrayedDisplayedValue: ArrayedDomValue,
-    arrayedSubmittedValue: ArrayedValue,
-    arrayedValidationResult: ArrayedValidationResult,
-}
-
-interface ArrayedSpecControlProps extends ArrayedSpecControlPropsFromParent, ArrayedSpecControlPropsFromState {}
+interface ArrayedSpecControlProps extends AttributesParameter, ControlParentProps {}
 
 export {
-    ArrayedSpecControlPropsFromState,
-    ArrayedSpecControlPropsFromParent,
     ArrayedSpecControlProps,
 }

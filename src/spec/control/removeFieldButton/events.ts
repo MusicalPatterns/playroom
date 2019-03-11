@@ -7,8 +7,8 @@ import {
 import { indexOfLastElement, INITIAL, isUndefined, lastElement, slice } from '@musical-patterns/utilities'
 import { batchActions } from 'redux-batched-actions'
 import { Action } from '../../../types'
-import { computeArrayedDisplayedValue } from '../../arrayedDisplayedValue'
-import { computeAttemptSubmitActions } from '../../attemptSubmitActions'
+import { computeArrayedDisplayedValue } from '../../arrayedValues'
+import { computeAttemptSubmitActions } from '../../submit'
 import { HandleFieldRemoveParameters } from './types'
 
 const isArrayedValidationResult:

@@ -7,6 +7,7 @@ import {
     ValidationResult,
 } from '@musical-patterns/pattern'
 import { isUndefined } from '@musical-patterns/utilities'
+import { isSingularValidationResult } from '../typeGuards'
 import { validateProperty } from './validateProperty'
 
 const validateArrayedProperty:
@@ -15,13 +16,15 @@ const validateArrayedProperty:
         let isValid: boolean = true
         const results: ArrayedValidationResult = arrayedDisplayedValue.map(
             (singularDisplayedValue: SingularDomValue): SingularValidationResult => {
-                const singularValidationResult: SingularValidationResult =
-                    validateProperty(singularDisplayedValue, propertyAttributes) as SingularValidationResult
-                if (!isUndefined(singularValidationResult)) {
+                const validationResult: ValidationResult = validateProperty(singularDisplayedValue, propertyAttributes)
+                if (!isSingularValidationResult(validationResult)) {
+                    throw new Error('validation result for singular value was not singular')
+                }
+                if (!isUndefined(validationResult)) {
                     isValid = false
                 }
 
-                return singularValidationResult
+                return validationResult
             })
 
         if (isValid) {

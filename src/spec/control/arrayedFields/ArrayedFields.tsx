@@ -1,32 +1,50 @@
 // tslint:disable variable-name file-name-casing no-default-export no-import-side-effect no-null-keyword
 
-import { from, HtmlValueOrChecked, map, Ordinal } from '@musical-patterns/utilities'
+import { ArrayedDomValue, DomValue } from '@musical-patterns/pattern'
+import {
+    apply,
+    from,
+    indexOfLastElement,
+    INITIAL,
+    isUndefined,
+    Maybe,
+    NEXT,
+    Ordinal,
+} from '@musical-patterns/utilities'
 import * as React from 'react'
+import { connect } from 'react-redux'
+import { ImmutableState, StateKey } from '../../../types'
 import { Field } from '../../field'
-import { ArrayedSpecControlPropsFromParent } from '../arrayedSpecControl'
-import { computeSingularSubmittedValue, computeSingularValidationResult } from './singularValues'
+import { isArrayedDisplayedValue } from '../../typeGuards'
+import { SpecStateKey } from '../../types'
 import './styles'
+import { ArrayedFieldsProps, ArrayedFieldsPropsFromState } from './types'
 
-const ArrayedFields: React.ComponentType<ArrayedSpecControlPropsFromParent> =
-    (arrayedFieldsProps: ArrayedSpecControlPropsFromParent): React.ReactElement | null => {
-        const { property, arrayedDisplayedValue, arrayedValidationResult, arrayedSubmittedValue } = arrayedFieldsProps
+const mapStateToProps: (state: ImmutableState) => ArrayedFieldsPropsFromState =
+    (state: ImmutableState): ArrayedFieldsPropsFromState => ({
+        displayedSpec: state.get(StateKey.SPEC)
+            .get(SpecStateKey.DISPLAYED_SPEC),
+    })
 
-        const fields: Array<React.ReactElement | null> = map(
-            arrayedDisplayedValue,
-            (singularDisplayedValue: HtmlValueOrChecked, index: Ordinal): React.ReactElement | null => (
-                <Field
-                    {...{
-                        fieldIndex: index,
-                        key: from.Ordinal(index),
-                        property,
-                        singularDisplayedValue,
-                        singularSubmittedValue:
-                            computeSingularSubmittedValue(arrayedSubmittedValue, index),
-                        singularValidationResult: computeSingularValidationResult(arrayedValidationResult, index),
-                    }}
-                />
-            ),
-        )
+const ArrayedFields: React.ComponentType<ArrayedFieldsProps> =
+    ({ displayedSpec, property }: ArrayedFieldsProps): React.ReactElement | null => {
+        const displayedValue: Maybe<DomValue> = displayedSpec[ property ]
+        if (isUndefined(displayedValue)) {
+            return null
+        }
+        if (!isArrayedDisplayedValue(displayedValue)) {
+            return null
+        }
+        const arrayedDisplayedValue: ArrayedDomValue = displayedValue
+
+        const fields: Array<React.ReactElement | null> = []
+        for (
+            let fieldIndex: Ordinal = INITIAL;
+            fieldIndex <= indexOfLastElement(arrayedDisplayedValue);
+            fieldIndex = apply.Translation(fieldIndex, NEXT)
+        ) {
+            fields.push(<Field {...{ fieldIndex, key: from.Ordinal(fieldIndex), property }}/>)
+        }
 
         return (
             <div {...{ className: 'arrayed-fields' }}>
@@ -35,4 +53,4 @@ const ArrayedFields: React.ComponentType<ArrayedSpecControlPropsFromParent> =
         )
     }
 
-export default ArrayedFields
+export default connect(mapStateToProps)(ArrayedFields)

@@ -5,7 +5,3 @@ import Field from './Field'
 export {
     Field,
 }
-
-export {
-    FieldPropsFromParent,
-} from './types'

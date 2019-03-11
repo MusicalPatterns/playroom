@@ -1,13 +1,6 @@
-import {
-    Attributes,
-    DomSpec,
-    Preset,
-    Spec,
-    ValidationFunction,
-    ValidationResults,
-    Value,
-} from '@musical-patterns/pattern'
+import { Attributes, DomSpec, Preset, Spec, ValidationFunction, ValidationResults } from '@musical-patterns/pattern'
 import { ActionForState, Maybe, ObjectOf, TypedMap } from '@musical-patterns/utilities'
+import { FieldParentProps } from './field'
 
 enum SpecStateKey {
     INITIAL_SPEC = 'INITIAL_SPEC',
@@ -35,28 +28,20 @@ type ImmutableSpecState = TypedMap<SpecState>
 
 type SpecAction = ActionForState<SpecState>
 
-interface PropertyParameter {
-    property: string,
+interface AttributesParameter {
+    attributes: Attributes,
 }
 
-interface ComputeAttemptSubmitActionsParameters extends PropertyParameter {
-    attributes: Attributes,
+interface ComputeSingularDisplayedValueParameters extends FieldParentProps {
     displayedSpec: DomSpec,
+}
+
+interface ComputeSingularSubmittedValueParameters extends FieldParentProps {
     submittedSpec: Spec,
-    suppressReevaluatingValidationResults?: boolean,
-    updatedValue: Value,
-    validationFunction: Maybe<ValidationFunction>,
 }
 
-interface ValidateSubmittedSpecParameters extends PropertyParameter {
-    attributes: Attributes,
-    updatedDisplayedSpec: DomSpec,
-    validationFunction?: ValidationFunction,
-}
-
-interface UpdatedValidationResultsPlusIsValid {
-    isValid: boolean,
-    updatedValidationResults: ValidationResults,
+interface ComputeSingularValidationResultParameters extends FieldParentProps {
+    validationResults: ValidationResults,
 }
 
 export {
@@ -64,8 +49,8 @@ export {
     ImmutableSpecState,
     SpecStateKey,
     SpecAction,
-    PropertyParameter,
-    ComputeAttemptSubmitActionsParameters,
-    UpdatedValidationResultsPlusIsValid,
-    ValidateSubmittedSpecParameters,
+    AttributesParameter,
+    ComputeSingularValidationResultParameters,
+    ComputeSingularSubmittedValueParameters,
+    ComputeSingularDisplayedValueParameters,
 }

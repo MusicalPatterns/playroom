@@ -9,7 +9,7 @@
   flex-direction: column;
 
   .right {
-    overflow-x: auto;
+    overflow-x: hidden;
 
     @include animate(flex, min-width);
 

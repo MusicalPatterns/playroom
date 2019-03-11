@@ -1,7 +1,7 @@
-import { Attributes, DomSpec } from '@musical-patterns/pattern'
+import { DomSpec } from '@musical-patterns/pattern'
+import { AttributesParameter } from '../../types'
 
-interface SpecControlsProps {
-    attributes: Attributes,
+interface SpecControlsProps extends AttributesParameter {
     displayedSpec: DomSpec,
 }
 

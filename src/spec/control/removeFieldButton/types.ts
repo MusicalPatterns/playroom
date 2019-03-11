@@ -1,9 +1,9 @@
 import { ValidationResults } from '@musical-patterns/pattern'
 import { DispatchParameter, EventParameter } from '../../../types'
-import { PropertyParameter } from '../../types'
-import { AddFieldButtonPropsFromState } from '../addFieldButton'
+import { SubmissionProps } from '../../submit'
+import { ControlParentProps } from '../types'
 
-interface RemoveFieldButtonPropsFromState extends AddFieldButtonPropsFromState {
+interface RemoveFieldButtonPropsFromState extends SubmissionProps {
     validationResults: ValidationResults,
 }
 
@@ -12,11 +12,12 @@ interface RemoveFieldButtonPropsFromDispatch {
 }
 
 interface RemoveFieldButtonProps extends RemoveFieldButtonPropsFromState,
-    RemoveFieldButtonPropsFromDispatch, PropertyParameter {}
+    RemoveFieldButtonPropsFromDispatch, ControlParentProps {}
 
-interface HandleFieldRemoveEventParameters extends EventParameter, PropertyParameter, RemoveFieldButtonPropsFromState {}
+interface HandleFieldRemoveEventParameters extends EventParameter,
+    ControlParentProps, RemoveFieldButtonPropsFromState {}
 
-interface HandleFieldRemoveParameters extends PropertyParameter, RemoveFieldButtonPropsFromState, DispatchParameter {}
+interface HandleFieldRemoveParameters extends ControlParentProps, RemoveFieldButtonPropsFromState, DispatchParameter {}
 
 export {
     RemoveFieldButtonPropsFromState,

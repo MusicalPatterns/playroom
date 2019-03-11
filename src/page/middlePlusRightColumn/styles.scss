@@ -11,6 +11,9 @@
   .middle,
   .right {
     color: $text-color;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
 
     p,
     img {

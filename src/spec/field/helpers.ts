@@ -1,9 +1,9 @@
 import { SingularValidationResult } from '@musical-patterns/pattern'
 import { camelCaseToLowerCase, isUndefined } from '@musical-patterns/utilities'
-import { ComputeFieldIdParameters, ComputeFieldLabelParameters, FieldValidityClassName } from './types'
+import { ComputeFieldLabelParameters, FieldParentProps, FieldValidityClassName } from './types'
 
-const computeFieldId: (parameters: ComputeFieldIdParameters) => string =
-    ({ property, fieldIndex }: ComputeFieldIdParameters): string =>
+const computeFieldId: (parameters: FieldParentProps) => string =
+    ({ property, fieldIndex }: FieldParentProps): string =>
         isUndefined(fieldIndex) ? property : `${property}-${fieldIndex}`
 
 const computeFieldLabel: (parameters: ComputeFieldLabelParameters) => string =

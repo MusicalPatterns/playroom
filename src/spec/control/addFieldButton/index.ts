@@ -5,7 +5,3 @@ import AddFieldButton from './AddFieldButton'
 export {
     AddFieldButton,
 }
-
-export {
-    AddFieldButtonPropsFromState,
-} from './types'

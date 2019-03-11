@@ -1,28 +1,18 @@
-import { Attributes, DomSpec, Spec, ValidationFunction } from '@musical-patterns/pattern'
-import { Maybe } from '@musical-patterns/utilities'
 import { DispatchParameter, EventParameter } from '../../../types'
-import { PropertyParameter } from '../../types'
-
-interface AddFieldButtonPropsFromState {
-    attributes: Attributes,
-    displayedSpec: DomSpec,
-    submittedSpec: Spec,
-    validationFunction: Maybe<ValidationFunction>,
-}
+import { SubmissionProps } from '../../submit'
+import { ControlParentProps } from '../types'
 
 interface AddFieldButtonPropsFromDispatch {
     handleFieldAddEvent: (parameters: HandleFieldAddEventParameters) => void,
 }
 
-interface AddFieldButtonProps extends AddFieldButtonPropsFromState,
-    AddFieldButtonPropsFromDispatch, PropertyParameter {}
+interface AddFieldButtonProps extends SubmissionProps, AddFieldButtonPropsFromDispatch, ControlParentProps {}
 
-interface HandleFieldAddEventParameters extends EventParameter, PropertyParameter, AddFieldButtonPropsFromState {}
+interface HandleFieldAddEventParameters extends SubmissionProps, ControlParentProps, EventParameter {}
 
-interface HandleFieldAddParameters extends PropertyParameter, AddFieldButtonPropsFromState, DispatchParameter {}
+interface HandleFieldAddParameters extends SubmissionProps, ControlParentProps, DispatchParameter {}
 
 export {
-    AddFieldButtonPropsFromState,
     AddFieldButtonPropsFromDispatch,
     AddFieldButtonProps,
     HandleFieldAddEventParameters,

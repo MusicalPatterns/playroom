@@ -1,9 +1,13 @@
-import { SingularValidationResult } from '@musical-patterns/pattern'
+import { ValidationResults } from '@musical-patterns/pattern'
+import { FieldParentProps } from '../types'
 
-interface InvalidMessageProps {
-    singularValidationResult: SingularValidationResult,
+interface InvalidMessagePropsFromState {
+    validationResults: ValidationResults,
 }
 
+interface InvalidMessageProps extends InvalidMessagePropsFromState, FieldParentProps {}
+
 export {
+    InvalidMessagePropsFromState,
     InvalidMessageProps,
 }

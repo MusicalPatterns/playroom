@@ -1,10 +1,10 @@
 import { ArrayedDomValue, ArrayedValue, Value } from '@musical-patterns/pattern'
 import { from, HtmlValueOrChecked, isUndefined } from '@musical-patterns/utilities'
 import { batchActions } from 'redux-batched-actions'
-import { extractValueOrCheckedFromEvent } from '../../../extractValueOrCheckedFromEvent'
-import { Action, DispatchParameter } from '../../../types'
-import { computeArrayedDisplayedValue } from '../../arrayedDisplayedValue'
-import { computeAttemptSubmitActions } from '../../attemptSubmitActions'
+import { extractValueOrCheckedFromEvent } from '../../extractValueOrCheckedFromEvent'
+import { Action, DispatchParameter } from '../../types'
+import { computeArrayedDisplayedValue } from '../arrayedValues'
+import { computeAttemptSubmitActions } from '../submit'
 import {
     ComputeHandleFieldChangeEvent,
     HandleFieldChangeEvent,

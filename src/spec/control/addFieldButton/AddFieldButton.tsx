@@ -6,18 +6,14 @@ import * as React from 'react'
 import { connect } from 'react-redux'
 import { Dispatch } from 'redux'
 import { EventHandler, ImmutableState, StateKey } from '../../../types'
+import { SubmissionProps } from '../../submit'
 import { ImmutableSpecState, SpecStateKey } from '../../types'
 import { handleFieldAdd } from './events'
 import './styles'
-import {
-    AddFieldButtonProps,
-    AddFieldButtonPropsFromDispatch,
-    AddFieldButtonPropsFromState,
-    HandleFieldAddEventParameters,
-} from './types'
+import { AddFieldButtonProps, AddFieldButtonPropsFromDispatch, HandleFieldAddEventParameters } from './types'
 
-const mapStateToProps: (state: ImmutableState) => AddFieldButtonPropsFromState =
-    (state: ImmutableState): AddFieldButtonPropsFromState => {
+const mapStateToProps: (state: ImmutableState) => SubmissionProps =
+    (state: ImmutableState): SubmissionProps => {
         const specState: ImmutableSpecState = state.get(StateKey.SPEC)
 
         return {

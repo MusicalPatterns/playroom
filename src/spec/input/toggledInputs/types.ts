@@ -1,9 +1,10 @@
-import { InputsProps } from '../inputs'
+import { InputProps } from '../types'
 
-interface ToggledInputsProps extends InputsProps {
-    value: boolean,
+interface ToggledInputProps extends InputProps {
+    checked: boolean,
+    type: string,
 }
 
 export {
-    ToggledInputsProps,
+    ToggledInputProps,
 }

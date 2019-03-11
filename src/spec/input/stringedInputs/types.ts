@@ -1,9 +1,10 @@
-import { InputsProps } from '../inputs'
+import { InputProps } from '../types'
 
-interface StringedInputsProps extends InputsProps {
+interface StringedInputProps extends InputProps {
+    type: string,
     value: string,
 }
 
 export {
-    StringedInputsProps,
+    StringedInputProps,
 }

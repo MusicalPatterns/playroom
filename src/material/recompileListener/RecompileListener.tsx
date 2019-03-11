@@ -16,11 +16,7 @@ import { SpecStateKey } from '../../spec'
 import { ImmutableState, StateKey } from '../../types'
 import { logDebugInfo } from './debug'
 import { computeSetPatternDuration } from './events'
-import {
-    RecompileListenerProps,
-    RecompileListenerPropsFromDispatch,
-    RecompileListenerPropsFromState,
-} from './types'
+import { RecompileListenerProps, RecompileListenerPropsFromDispatch, RecompileListenerPropsFromState } from './types'
 
 const mapStateToProps: (state: ImmutableState) => RecompileListenerPropsFromState =
     (state: ImmutableState): RecompileListenerPropsFromState => {

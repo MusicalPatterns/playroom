@@ -1,6 +1,7 @@
 import { DomSpec, DomValue, Spec } from '@musical-patterns/pattern'
-import { Action } from '../types'
-import { ComputeAttemptSubmitActionsParameters, SpecStateKey } from './types'
+import { Action } from '../../types'
+import { SpecStateKey } from '../types'
+import { ComputeAttemptSubmitActionsParameters } from './types'
 import { validateSubmittedSpec } from './validateSubmittedSpec'
 
 const computeAttemptSubmitActions: (parameters: ComputeAttemptSubmitActionsParameters) => Action[] =

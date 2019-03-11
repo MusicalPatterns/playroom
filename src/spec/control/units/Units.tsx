@@ -4,12 +4,12 @@ import { isUndefined } from '@musical-patterns/utilities'
 import * as React from 'react'
 import { connect } from 'react-redux'
 import { ImmutableState, StateKey } from '../../../types'
-import { SpecStateKey } from '../../types'
+import { AttributesParameter, SpecStateKey } from '../../types'
 import './styles'
-import { UnitsProps, UnitsPropsFromState } from './types'
+import { UnitsProps } from './types'
 
-const mapStateToProps: (state: ImmutableState) => UnitsPropsFromState =
-    (state: ImmutableState): UnitsPropsFromState => ({
+const mapStateToProps: (state: ImmutableState) => AttributesParameter =
+    (state: ImmutableState): AttributesParameter => ({
         attributes: state.get(StateKey.SPEC)
             .get(SpecStateKey.ATTRIBUTES),
     })

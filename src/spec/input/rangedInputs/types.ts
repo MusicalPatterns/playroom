@@ -1,22 +1,13 @@
 import { HtmlValue } from '@musical-patterns/utilities'
-import { EventHandler } from '../../../types'
-import { InputsProps } from '../inputs'
+import { InputProps } from '../types'
 
-interface RangedInputsProps extends InputsProps {
-    value: HtmlValue,
-}
-
-interface RangedInputProps {
-    className: string,
-    id: string,
+interface RangedInputProps extends InputProps {
     max: number,
     min: number,
-    onChange: EventHandler,
     step: number,
     value: HtmlValue,
 }
 
 export {
-    RangedInputsProps,
     RangedInputProps,
 }
