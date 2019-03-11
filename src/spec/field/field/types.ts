@@ -32,11 +32,11 @@ interface FieldPropsFromParent extends PropertyParameter {
 interface FieldProps extends FieldPropsFromDispatch,
     FieldPropsFromState, FieldPropsFromParent {}
 
-interface GetFieldIdParameters extends PropertyParameter {
+interface ComputeFieldIdParameters extends PropertyParameter {
     fieldIndex: Maybe<Ordinal>,
 }
 
-interface GetFieldLabelParameters extends PropertyParameter {
+interface ComputeFieldLabelParameters extends PropertyParameter {
     fieldIndex: Maybe<Ordinal>,
     formattedName: Maybe<string>,
 }
@@ -48,7 +48,7 @@ interface HandleFieldChangeEventParameters extends PropertyParameter,
 
 type HandleFieldChangeEvent = (parameters: HandleFieldChangeEventParameters) => void
 
-type BuildHandleFieldChangeEvent = (parameters: DispatchParameter) => HandleFieldChangeEvent
+type ComputeHandleFieldChangeEvent = (parameters: DispatchParameter) => HandleFieldChangeEvent
 
 interface MergeEventValueIntoValueParameters extends PropertyParameter {
     displayedSpec: DomSpec,
@@ -66,10 +66,10 @@ export {
     FieldPropsFromDispatch,
     FieldPropsFromParent,
     FieldProps,
-    GetFieldIdParameters,
-    GetFieldLabelParameters,
+    ComputeFieldIdParameters,
+    ComputeFieldLabelParameters,
     HandleFieldChangeEvent,
-    BuildHandleFieldChangeEvent,
+    ComputeHandleFieldChangeEvent,
     HandleFieldChangeEventParameters,
     MergeEventValueIntoValueParameters,
     FieldValidityClassName,

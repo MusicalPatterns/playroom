@@ -1,9 +1,9 @@
 // tslint:disable variable-name file-name-casing no-default-export no-import-side-effect no-null-keyword
 
 import {
-    calculatePatternTotalCompiledDuration,
     compilePattern,
     CompilePatternParameters,
+    computePatternTotalCompiledDuration,
 } from '@musical-patterns/compiler'
 import { Pattern } from '@musical-patterns/pattern'
 import { setVoices, Voice } from '@musical-patterns/performer'
@@ -11,11 +11,11 @@ import { doAsync, isUndefined, Maybe, Ms } from '@musical-patterns/utilities'
 import * as React from 'react'
 import { connect } from 'react-redux'
 import { Dispatch } from 'redux'
-import { ImmutablePageState, maybePatternFromPatternsAndPatternId, PageStateKey } from '../../page'
+import { computeMaybePattern, ImmutablePageState, PageStateKey } from '../../page'
 import { SpecStateKey } from '../../spec'
 import { ImmutableState, StateKey } from '../../types'
 import { logDebugInfo } from './debug'
-import { buildSetPatternDuration } from './events'
+import { computeSetPatternDuration } from './events'
 import {
     RecompileListenerProps,
     RecompileListenerPropsFromDispatch,
@@ -37,7 +37,7 @@ const mapStateToProps: (state: ImmutableState) => RecompileListenerPropsFromStat
 
 const mapDispatchToProps: (dispatch: Dispatch) => RecompileListenerPropsFromDispatch =
     (dispatch: Dispatch): RecompileListenerPropsFromDispatch => ({
-        setPatternDuration: buildSetPatternDuration({ dispatch }),
+        setPatternDuration: computeSetPatternDuration({ dispatch }),
     })
 
 const RecompileListener: React.ComponentType<RecompileListenerProps> =
@@ -45,14 +45,14 @@ const RecompileListener: React.ComponentType<RecompileListenerProps> =
         doAsync(async () => {
             const { debugMode, patternId, patterns, submittedSpec, setPatternDuration } = props
 
-            const pattern: Maybe<Pattern> = maybePatternFromPatternsAndPatternId({ patterns, patternId })
+            const pattern: Maybe<Pattern> = computeMaybePattern({ patterns, patternId })
             if (isUndefined(pattern)) {
                 return
             }
 
             const compilePatternParameters: CompilePatternParameters = { ...pattern, spec: submittedSpec }
             const voices: Voice[] = await compilePattern(compilePatternParameters)
-            const patternDuration: Ms = await calculatePatternTotalCompiledDuration(compilePatternParameters)
+            const patternDuration: Ms = await computePatternTotalCompiledDuration(compilePatternParameters)
             setPatternDuration(patternDuration)
 
             await setVoices(voices)

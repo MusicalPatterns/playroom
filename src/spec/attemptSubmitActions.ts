@@ -1,10 +1,10 @@
 import { DomSpec, DomValue, Spec } from '@musical-patterns/pattern'
 import { Action } from '../types'
-import { BuildAttemptSubmitActionsParameters, SpecStateKey } from './types'
+import { ComputeAttemptSubmitActionsParameters, SpecStateKey } from './types'
 import { validateSubmittedSpec } from './validateSubmittedSpec'
 
-const buildAttemptSubmitActions: (parameters: BuildAttemptSubmitActionsParameters) => Action[] =
-    (parameters: BuildAttemptSubmitActionsParameters): Action[] => {
+const computeAttemptSubmitActions: (parameters: ComputeAttemptSubmitActionsParameters) => Action[] =
+    (parameters: ComputeAttemptSubmitActionsParameters): Action[] => {
         const {
             displayedSpec,
             submittedSpec,
@@ -41,5 +41,5 @@ const buildAttemptSubmitActions: (parameters: BuildAttemptSubmitActionsParameter
     }
 
 export {
-    buildAttemptSubmitActions,
+    computeAttemptSubmitActions,
 }

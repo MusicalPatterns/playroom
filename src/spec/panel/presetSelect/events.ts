@@ -9,7 +9,7 @@ const keyIsString: (key: HtmlValueOrChecked) => key is string =
     (key: HtmlValueOrChecked): key is string =>
         typeof key === 'string'
 
-const buildHandlePresetChangeEvent: (parameters: DispatchParameter) => HandlePresetChangeEvent =
+const computeHandlePresetChangeEvent: (parameters: DispatchParameter) => HandlePresetChangeEvent =
     ({ dispatch }: DispatchParameter): HandlePresetChangeEvent =>
         ({ event, presets }: HandlePresetChangeEventParameters): void => {
             const presetKey: HtmlValueOrChecked = extractValueOrCheckedFromEvent(event)
@@ -24,5 +24,5 @@ const buildHandlePresetChangeEvent: (parameters: DispatchParameter) => HandlePre
         }
 
 export {
-    buildHandlePresetChangeEvent,
+    computeHandlePresetChangeEvent,
 }

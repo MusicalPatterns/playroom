@@ -7,7 +7,7 @@ import { connect } from 'react-redux'
 import { Dispatch } from 'redux'
 import { ImmutableState, StateKey } from '../../types'
 import { MaterialStateKey, PerformerDisabledParameter } from '../types'
-import { buildHandlePlayClickEvent } from './events'
+import { computeHandlePlayClickEvent } from './events'
 import { PlayButtonProps, PlayButtonPropsFromDispatch } from './types'
 
 const mapStateToProps: (state: ImmutableState) => PerformerDisabledParameter =
@@ -18,7 +18,7 @@ const mapStateToProps: (state: ImmutableState) => PerformerDisabledParameter =
 
 const mapDispatchToProps: (dispatch: Dispatch) => PlayButtonPropsFromDispatch =
     (dispatch: Dispatch): PlayButtonPropsFromDispatch => ({
-        handlePlayClickEvent: buildHandlePlayClickEvent({ dispatch }),
+        handlePlayClickEvent: computeHandlePlayClickEvent({ dispatch }),
     })
 
 const PlayButton: React.ComponentType<PlayButtonProps> =

@@ -18,7 +18,7 @@ import { connect } from 'react-redux'
 import { Dispatch } from 'redux'
 import { EventHandler, ImmutableState, StateKey } from '../../../types'
 import { ImmutableSpecState, SpecStateKey } from '../../types'
-import { buildHandlePresetChangeEvent } from './events'
+import { computeHandlePresetChangeEvent } from './events'
 import './styles'
 import { PresetSelectProps, PresetSelectPropsFromDispatch, PresetSelectPropsFromState } from './types'
 
@@ -34,7 +34,7 @@ const mapStateToProps: (state: ImmutableState) => PresetSelectPropsFromState =
 
 const mapDispatchToProps: (dispatch: Dispatch) => PresetSelectPropsFromDispatch =
     (dispatch: Dispatch): PresetSelectPropsFromDispatch => ({
-        handlePresetChangeEvent: buildHandlePresetChangeEvent({ dispatch }),
+        handlePresetChangeEvent: computeHandlePresetChangeEvent({ dispatch }),
     })
 
 const PresetSelect: React.ComponentType<PresetSelectProps> =

@@ -27,7 +27,7 @@ type ImmutablePageState = TypedMap<PageState>
 
 type PageAction = ActionForState<PageState>
 
-interface GetPatternParameters {
+interface ComputeMaybePatternParameters {
     patternId: Maybe<Id>,
     patterns: Maybe<Partial<Patterns>>
 }
@@ -38,5 +38,5 @@ export {
     PageStateKey,
     PageAction,
     PageState,
-    GetPatternParameters,
+    ComputeMaybePatternParameters,
 }

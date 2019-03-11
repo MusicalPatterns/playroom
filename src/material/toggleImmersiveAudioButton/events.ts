@@ -2,29 +2,29 @@ import { enableImmersiveAudio, ToggleImmersiveAudioHandlers } from '@musical-pat
 import { DispatchParameter } from '../../types'
 import { MaterialStateKey } from '../types'
 
-const buildOnImmersiveAudioReady: (parameters: DispatchParameter) => VoidFunction =
+const computeOnImmersiveAudioReady: (parameters: DispatchParameter) => VoidFunction =
     ({ dispatch }: DispatchParameter): VoidFunction =>
         (): void => {
             dispatch({ type: MaterialStateKey.IMMERSIVE_AUDIO_READY, data: true })
         }
 
-const buildOnImmersiveAudioUnavailable: (parameters: DispatchParameter) => VoidFunction =
+const computeOnImmersiveAudioUnavailable: (parameters: DispatchParameter) => VoidFunction =
     ({ dispatch }: DispatchParameter): VoidFunction =>
         (): void => {
             dispatch({ type: MaterialStateKey.IMMERSIVE_AUDIO_UNAVAILABLE, data: true })
         }
 
-const buildSetToggleImmersiveAudioHandlers: (parameters: DispatchParameter) => VoidFunction =
+const computeSetToggleImmersiveAudioHandlers: (parameters: DispatchParameter) => VoidFunction =
     ({ dispatch }: DispatchParameter): VoidFunction =>
         (): void => {
             const { enterImmersiveAudio, exitImmersiveAudio }: ToggleImmersiveAudioHandlers =
                 enableImmersiveAudio({
-                    onNoVr: buildOnImmersiveAudioUnavailable({ dispatch }),
-                    onReady: buildOnImmersiveAudioReady({ dispatch }),
+                    onNoVr: computeOnImmersiveAudioUnavailable({ dispatch }),
+                    onReady: computeOnImmersiveAudioReady({ dispatch }),
                 })
 
             if (process.env.NODE_ENV === 'test') {
-                buildOnImmersiveAudioReady({ dispatch })()
+                computeOnImmersiveAudioReady({ dispatch })()
             }
 
             const toggleImmersiveAudioHandlers: ToggleImmersiveAudioHandlers = {
@@ -42,5 +42,5 @@ const buildSetToggleImmersiveAudioHandlers: (parameters: DispatchParameter) => V
         }
 
 export {
-    buildSetToggleImmersiveAudioHandlers,
+    computeSetToggleImmersiveAudioHandlers,
 }

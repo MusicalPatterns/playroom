@@ -2,7 +2,7 @@ import { ArrayedDomValue, DomSpec, DomValue } from '@musical-patterns/pattern'
 import { deepClone, isUndefined, Maybe } from '@musical-patterns/utilities'
 import { isArrayedDisplayedValue } from './isArrayedDisplayedValue'
 
-const getArrayedDisplayedValue: (displayedSpec: DomSpec, property: string) => ArrayedDomValue =
+const computeArrayedDisplayedValue: (displayedSpec: DomSpec, property: string) => ArrayedDomValue =
     (displayedSpec: DomSpec, property: string): ArrayedDomValue => {
         const maybeDisplayedValue: Maybe<DomValue> = deepClone(displayedSpec[ property ])
         if (isUndefined(maybeDisplayedValue)) {
@@ -17,5 +17,5 @@ const getArrayedDisplayedValue: (displayedSpec: DomSpec, property: string) => Ar
     }
 
 export {
-    getArrayedDisplayedValue,
+    computeArrayedDisplayedValue,
 }

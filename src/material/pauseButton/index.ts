@@ -6,4 +6,4 @@ export {
     PauseButton,
 }
 
-export { buildHandlePauseClickEvent } from './events'
+export { computeHandlePauseClickEvent } from './events'

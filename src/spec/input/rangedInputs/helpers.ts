@@ -7,7 +7,7 @@ import {
     TRANSLATION_TO_EXCLUDE_MIN,
 } from './constants'
 
-const calculateMinAndMax: (constraint: Maybe<RangedConstraint>) => { max: number, min: number } =
+const computeMinAndMax: (constraint: Maybe<RangedConstraint>) => { max: number, min: number } =
     (constraint: Maybe<RangedConstraint>): { max: number, min: number } => {
         const {
             excludeMax = false,
@@ -22,11 +22,11 @@ const calculateMinAndMax: (constraint: Maybe<RangedConstraint>) => { max: number
         }
     }
 
-const calculateStep: (constraint: Maybe<RangedConstraint>) => number =
+const computeStep: (constraint: Maybe<RangedConstraint>) => number =
     (constraint: Maybe<RangedConstraint>): number =>
         constraint && constraint.integer ? 1 : SPEC_NON_INTEGER_STEP
 
 export {
-    calculateMinAndMax,
-    calculateStep,
+    computeMinAndMax,
+    computeStep,
 }

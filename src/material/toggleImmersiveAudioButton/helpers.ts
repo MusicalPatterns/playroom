@@ -1,34 +1,35 @@
 import { noop } from '@musical-patterns/utilities'
 import { ENTER, EXIT, IMMERSIVE_AUDIO } from '../../copy'
 import {
-    GetToggleImmersiveAudioButtonDisabledParameters,
-    GetToggleImmersiveAudioButtonOnClickParameters,
+    ComputeToggleImmersiveAudioButtonDisabledParameters,
+    ComputeToggleImmersiveAudioButtonOnClickParameters,
 } from './types'
 
-const getToggleImmersiveAudioDisabled: (parameters: GetToggleImmersiveAudioButtonDisabledParameters) => boolean =
-    ({ immersiveAudioReady, performerDisabled }: GetToggleImmersiveAudioButtonDisabledParameters): boolean =>
+const computeToggleImmersiveAudioDisabled:
+    (parameters: ComputeToggleImmersiveAudioButtonDisabledParameters) => boolean =
+    ({ immersiveAudioReady, performerDisabled }: ComputeToggleImmersiveAudioButtonDisabledParameters): boolean =>
         performerDisabled || !immersiveAudioReady
 
-const getToggleImmersiveAudioButtonOnClick:
-    (parameters: GetToggleImmersiveAudioButtonOnClickParameters) => VoidFunction =
-    (parameters: GetToggleImmersiveAudioButtonOnClickParameters): VoidFunction => {
+const computeToggleImmersiveAudioButtonOnClick:
+    (parameters: ComputeToggleImmersiveAudioButtonOnClickParameters) => VoidFunction =
+    (parameters: ComputeToggleImmersiveAudioButtonOnClickParameters): VoidFunction => {
         const { immersiveAudioEnabled, toggleImmersiveAudioHandlers } = parameters
         const { enterImmersiveAudio = noop, exitImmersiveAudio = noop } = toggleImmersiveAudioHandlers || {}
 
         return immersiveAudioEnabled ? exitImmersiveAudio : enterImmersiveAudio
     }
 
-const getToggleImmersiveAudioButtonText: (parameters: { immersiveAudioEnabled: boolean }) => string =
+const computeToggleImmersiveAudioButtonText: (parameters: { immersiveAudioEnabled: boolean }) => string =
     ({ immersiveAudioEnabled }: { immersiveAudioEnabled: boolean }): string =>
         `${immersiveAudioEnabled ? EXIT : ENTER} ${IMMERSIVE_AUDIO}`
 
-const getToggleImmersiveAudioButtonHoverText: (parameters: { immersiveAudioUnavailable: boolean }) => string =
+const computeToggleImmersiveAudioButtonHoverText: (parameters: { immersiveAudioUnavailable: boolean }) => string =
     ({ immersiveAudioUnavailable }: { immersiveAudioUnavailable: boolean }): string =>
         immersiveAudioUnavailable ? 'Your system does not support VR.' : ''
 
 export {
-    getToggleImmersiveAudioDisabled,
-    getToggleImmersiveAudioButtonOnClick,
-    getToggleImmersiveAudioButtonHoverText,
-    getToggleImmersiveAudioButtonText,
+    computeToggleImmersiveAudioDisabled,
+    computeToggleImmersiveAudioButtonOnClick,
+    computeToggleImmersiveAudioButtonHoverText,
+    computeToggleImmersiveAudioButtonText,
 }

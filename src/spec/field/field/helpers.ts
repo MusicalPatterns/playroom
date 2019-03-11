@@ -1,21 +1,21 @@
 import { SingularValidationResult } from '@musical-patterns/pattern'
 import { camelCaseToLowerCase, isUndefined } from '@musical-patterns/utilities'
-import { FieldValidityClassName, GetFieldIdParameters, GetFieldLabelParameters } from './types'
+import { ComputeFieldIdParameters, ComputeFieldLabelParameters, FieldValidityClassName } from './types'
 
-const getFieldId: (parameters: GetFieldIdParameters) => string =
-    ({ property, fieldIndex }: GetFieldIdParameters): string =>
+const computeFieldId: (parameters: ComputeFieldIdParameters) => string =
+    ({ property, fieldIndex }: ComputeFieldIdParameters): string =>
         isUndefined(fieldIndex) ? property : `${property}-${fieldIndex}`
 
-const getFieldLabel: (parameters: GetFieldLabelParameters) => string =
-    ({ fieldIndex, formattedName, property }: GetFieldLabelParameters): string =>
+const computeFieldLabel: (parameters: ComputeFieldLabelParameters) => string =
+    ({ fieldIndex, formattedName, property }: ComputeFieldLabelParameters): string =>
         isUndefined(fieldIndex) ? formattedName || camelCaseToLowerCase(property) : `${fieldIndex}`
 
-const getFieldValidityClassName: (singularValidationResult: SingularValidationResult) => FieldValidityClassName =
+const computeFieldValidityClassName: (singularValidationResult: SingularValidationResult) => FieldValidityClassName =
     (singularValidationResult: SingularValidationResult): FieldValidityClassName =>
         isUndefined(singularValidationResult) ? FieldValidityClassName.VALID : FieldValidityClassName.INVALID
 
 export {
-    getFieldLabel,
-    getFieldId,
-    getFieldValidityClassName,
+    computeFieldLabel,
+    computeFieldId,
+    computeFieldValidityClassName,
 }

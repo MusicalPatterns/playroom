@@ -6,4 +6,4 @@ export {
     StopButton,
 }
 
-export { buildHandleStopClickEvent } from './events'
+export { computeHandleStopClickEvent } from './events'

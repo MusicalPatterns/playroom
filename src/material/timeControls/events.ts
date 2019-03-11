@@ -3,7 +3,7 @@ import { Ms } from '@musical-patterns/utilities'
 import { DispatchParameter } from '../../types'
 import { MaterialStateKey } from '../types'
 
-const buildSetOnPerformerUpdate: (parameters: DispatchParameter) => () => Promise<void> =
+const computeSetOnPerformerUpdate: (parameters: DispatchParameter) => () => Promise<void> =
     ({ dispatch }: DispatchParameter): () => Promise<void> =>
         async (): Promise<void> => {
             const onPerformerUpdate: OnUpdate = (timePosition: Ms): void => {
@@ -14,5 +14,5 @@ const buildSetOnPerformerUpdate: (parameters: DispatchParameter) => () => Promis
         }
 
 export {
-    buildSetOnPerformerUpdate,
+    computeSetOnPerformerUpdate,
 }

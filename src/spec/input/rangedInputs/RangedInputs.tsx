@@ -2,7 +2,7 @@
 
 import { RangedInputType, RangedPropertyAttributes } from '@musical-patterns/pattern'
 import * as React from 'react'
-import { calculateMinAndMax, calculateStep } from './helpers'
+import { computeMinAndMax, computeStep } from './helpers'
 import './styles'
 import { RangedInputProps, RangedInputsProps } from './types'
 
@@ -10,7 +10,7 @@ const RangedInputs: React.ComponentType<RangedInputsProps> =
     (rangedInputsProps: RangedInputsProps): React.ReactElement | null => {
         const { property, attributes, fieldValidityClassName, fieldId, onChange, value } = rangedInputsProps
         const { constraint, hideInput } = attributes[ property ] as RangedPropertyAttributes
-        const { min, max } = calculateMinAndMax(constraint)
+        const { min, max } = computeMinAndMax(constraint)
 
         const rangedInputProps: RangedInputProps = {
             className: fieldValidityClassName,
@@ -18,7 +18,7 @@ const RangedInputs: React.ComponentType<RangedInputsProps> =
             max,
             min,
             onChange,
-            step: calculateStep(constraint),
+            step: computeStep(constraint),
             value,
         }
 

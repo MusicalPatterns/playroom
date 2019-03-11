@@ -3,10 +3,10 @@ import { from, HtmlValueOrChecked, isUndefined } from '@musical-patterns/utiliti
 import { batchActions } from 'redux-batched-actions'
 import { extractValueOrCheckedFromEvent } from '../../../extractValueOrCheckedFromEvent'
 import { Action, DispatchParameter } from '../../../types'
-import { buildAttemptSubmitActions } from '../../attemptSubmitActions'
-import { getArrayedDisplayedValue } from '../../getArrayedDisplayedValue'
+import { computeArrayedDisplayedValue } from '../../arrayedDisplayedValue'
+import { computeAttemptSubmitActions } from '../../attemptSubmitActions'
 import {
-    BuildHandleFieldChangeEvent,
+    ComputeHandleFieldChangeEvent,
     HandleFieldChangeEvent,
     HandleFieldChangeEventParameters,
     MergeEventValueIntoValueParameters,
@@ -16,7 +16,7 @@ const mergeEventValueIntoArrayedValue: (parameters: MergeEventValueIntoValuePara
     (parameters: MergeEventValueIntoValueParameters): ArrayedValue => {
         const { displayedSpec, property, fieldIndex, eventValue } = parameters
 
-        const arrayedDisplayedValue: ArrayedDomValue = getArrayedDisplayedValue(displayedSpec, property)
+        const arrayedDisplayedValue: ArrayedDomValue = computeArrayedDisplayedValue(displayedSpec, property)
 
         while (arrayedDisplayedValue.length < from.Ordinal(fieldIndex)) {
             arrayedDisplayedValue.push('')
@@ -26,7 +26,7 @@ const mergeEventValueIntoArrayedValue: (parameters: MergeEventValueIntoValuePara
         return arrayedDisplayedValue
     }
 
-const buildHandleFieldChangeEvent: BuildHandleFieldChangeEvent =
+const computeHandleFieldChangeEvent: ComputeHandleFieldChangeEvent =
     ({ dispatch }: DispatchParameter): HandleFieldChangeEvent =>
         async (parameters: HandleFieldChangeEventParameters): Promise<void> => {
             const {
@@ -51,7 +51,7 @@ const buildHandleFieldChangeEvent: BuildHandleFieldChangeEvent =
                 })
             }
 
-            const actions: Action[] = buildAttemptSubmitActions({
+            const actions: Action[] = computeAttemptSubmitActions({
                 attributes,
                 displayedSpec,
                 property,
@@ -64,5 +64,5 @@ const buildHandleFieldChangeEvent: BuildHandleFieldChangeEvent =
         }
 
 export {
-    buildHandleFieldChangeEvent,
+    computeHandleFieldChangeEvent,
 }

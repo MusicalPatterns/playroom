@@ -16,12 +16,12 @@ interface ToggleImmersiveAudioButtonPropsFromDispatch {
 interface ToggleImmersiveAudioButtonProps extends ToggleImmersiveAudioButtonPropsFromState,
     ToggleImmersiveAudioButtonPropsFromDispatch {}
 
-interface GetToggleImmersiveAudioButtonOnClickParameters {
+interface ComputeToggleImmersiveAudioButtonOnClickParameters {
     immersiveAudioEnabled: boolean,
     toggleImmersiveAudioHandlers: Maybe<ToggleImmersiveAudioHandlers>
 }
 
-interface GetToggleImmersiveAudioButtonDisabledParameters {
+interface ComputeToggleImmersiveAudioButtonDisabledParameters {
     immersiveAudioReady: boolean,
     performerDisabled: boolean,
 }
@@ -30,6 +30,6 @@ export {
     ToggleImmersiveAudioButtonPropsFromState,
     ToggleImmersiveAudioButtonPropsFromDispatch,
     ToggleImmersiveAudioButtonProps,
-    GetToggleImmersiveAudioButtonOnClickParameters,
-    GetToggleImmersiveAudioButtonDisabledParameters,
+    ComputeToggleImmersiveAudioButtonOnClickParameters,
+    ComputeToggleImmersiveAudioButtonDisabledParameters,
 }

@@ -2,7 +2,7 @@ import { pause } from '@musical-patterns/performer'
 import { DispatchParameter } from '../../types'
 import { MaterialStateKey } from '../types'
 
-const buildHandlePauseClickEvent: (parameters: DispatchParameter) => VoidFunction =
+const computeHandlePauseClickEvent: (parameters: DispatchParameter) => VoidFunction =
     ({ dispatch }: DispatchParameter): VoidFunction =>
         (): void => {
             dispatch({ type: MaterialStateKey.PAUSED, data: true })
@@ -10,5 +10,5 @@ const buildHandlePauseClickEvent: (parameters: DispatchParameter) => VoidFunctio
         }
 
 export {
-    buildHandlePauseClickEvent,
+    computeHandlePauseClickEvent,
 }

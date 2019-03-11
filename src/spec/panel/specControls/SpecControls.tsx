@@ -8,7 +8,7 @@ import { PATTERN_PARTICULAR, STANDARD } from '../../../copy'
 import { ImmutableState, StateKey } from '../../../types'
 import { SpecControl } from '../../control'
 import { ImmutableSpecState, SpecStateKey } from '../../types'
-import { buildSortSpecControls } from './sortSpecControls'
+import { computeSortSpecControls } from './sortSpecControls'
 import './styles'
 import { SpecControlsProps } from './types'
 
@@ -30,7 +30,7 @@ const SpecControls: React.ComponentType<SpecControlsProps> =
                     Object.values(StandardProperty)
                         .includes(property),
                 )
-                .sort(buildSortSpecControls(attributes)),
+                .sort(computeSortSpecControls(attributes)),
             (property: string, index: Ordinal): React.ReactElement | null =>
                 <SpecControl {...{ key: from.Ordinal(index), property }} />,
         )
@@ -40,7 +40,7 @@ const SpecControls: React.ComponentType<SpecControlsProps> =
                     !Object.values(StandardProperty)
                         .includes(property),
                 )
-                .sort(buildSortSpecControls(attributes)),
+                .sort(computeSortSpecControls(attributes)),
             (property: string, index: Ordinal): React.ReactElement | null =>
                 <SpecControl {...{ key: from.Ordinal(index), property }} />,
         )

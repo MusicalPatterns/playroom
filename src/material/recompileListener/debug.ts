@@ -1,7 +1,7 @@
 import {
-    calculatePatternTotalCompiledDuration,
     compilePattern,
     CompilePatternParameters,
+    computePatternTotalCompiledDuration,
 } from '@musical-patterns/compiler'
 import { Sound, Voice } from '@musical-patterns/performer'
 import { logMessageToConsole, Ms, sum, to } from '@musical-patterns/utilities'
@@ -21,7 +21,7 @@ const logDebugInfo: (compilePatternParameters: CompilePatternParameters) => Prom
         )
         logMessageToConsole(
             'total compiled duration: ',
-            await calculatePatternTotalCompiledDuration(compilePatternParameters),
+            await computePatternTotalCompiledDuration(compilePatternParameters),
         )
     }
 

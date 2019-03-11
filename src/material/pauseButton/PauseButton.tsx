@@ -7,7 +7,7 @@ import { connect } from 'react-redux'
 import { Dispatch } from 'redux'
 import { ImmutableState, StateKey } from '../../types'
 import { MaterialStateKey, PerformerDisabledParameter } from '../types'
-import { buildHandlePauseClickEvent } from './events'
+import { computeHandlePauseClickEvent } from './events'
 import { PauseButtonProps, PauseButtonPropsFromDispatch } from './types'
 
 const mapStateToProps: (state: ImmutableState) => PerformerDisabledParameter =
@@ -18,7 +18,7 @@ const mapStateToProps: (state: ImmutableState) => PerformerDisabledParameter =
 
 const mapDispatchToProps: (dispatch: Dispatch) => PauseButtonPropsFromDispatch =
     (dispatch: Dispatch): PauseButtonPropsFromDispatch => ({
-        handlePauseClickEvent: buildHandlePauseClickEvent({ dispatch }),
+        handlePauseClickEvent: computeHandlePauseClickEvent({ dispatch }),
     })
 
 const PauseButton: React.ComponentType<PauseButtonProps> =

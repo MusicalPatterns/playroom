@@ -4,7 +4,7 @@ import { from, HtmlValueOrChecked, map, Ordinal } from '@musical-patterns/utilit
 import * as React from 'react'
 import { Field } from '../../field'
 import { ArrayedSpecControlPropsFromParent } from '../arrayedSpecControl'
-import { calculateSingularSubmittedValue, calculateSingularValidationResult } from './calculateSingular'
+import { computeSingularSubmittedValue, computeSingularValidationResult } from './singularValues'
 import './styles'
 
 const ArrayedFields: React.ComponentType<ArrayedSpecControlPropsFromParent> =
@@ -21,8 +21,8 @@ const ArrayedFields: React.ComponentType<ArrayedSpecControlPropsFromParent> =
                         property,
                         singularDisplayedValue,
                         singularSubmittedValue:
-                            calculateSingularSubmittedValue(arrayedSubmittedValue, index),
-                        singularValidationResult: calculateSingularValidationResult(arrayedValidationResult, index),
+                            computeSingularSubmittedValue(arrayedSubmittedValue, index),
+                        singularValidationResult: computeSingularValidationResult(arrayedValidationResult, index),
                     }}
                 />
             ),

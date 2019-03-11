@@ -52,7 +52,7 @@ const otherInputIsAlsoMarkedAsValid: () => Promise<void> =
             .toBeTruthy('other ranged control input was not marked as valid')
     }
 
-const enterCustomInvalidityStateAndGetLastStillValidValue: () => Promise<string> =
+const enterCustomInvalidityStateAndStoreLastStillValidValue: () => Promise<string> =
     async (): Promise<string> => {
         await deleteCharacterFromInput(`input[type=number]#${RANGED_PROPERTY_TWO_KEY}`)
         const lastStillValidValue: string = await elementInnerText(
@@ -143,7 +143,7 @@ describe('spec controls', () => {
             await quickRefresh()
             await selectValidationPattern()
             await openSpecControlsIfNotOpen()
-            lastStillValidValue = await enterCustomInvalidityStateAndGetLastStillValidValue()
+            lastStillValidValue = await enterCustomInvalidityStateAndStoreLastStillValidValue()
 
             done()
         })

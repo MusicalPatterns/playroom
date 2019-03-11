@@ -6,7 +6,7 @@ import { Title } from '../../../metadata'
 import { SpecPanel } from '../../../spec'
 import { ImmutableState, StateKey } from '../../../types'
 import { ImmutablePageState, PageStateKey } from '../../types'
-import { getOpenClassName } from './helpers'
+import { computeOpenClassName } from './helpers'
 import './styles'
 import { SecondRowProps } from './types'
 
@@ -22,7 +22,7 @@ const mapStateToProps: (state: ImmutableState) => SecondRowProps =
 
 const SecondRow: React.ComponentType<SecondRowProps> =
     ({ patternId, pageName }: SecondRowProps): React.ReactElement | null => (
-        <div {...{ className: `row ${getOpenClassName({ patternId, pageName })}`, id: 'second-row' }} >
+        <div {...{ className: `row ${computeOpenClassName({ patternId, pageName })}`, id: 'second-row' }} >
             <div {...{ className: 'middle' }} >
                 <Title/>
             </div>

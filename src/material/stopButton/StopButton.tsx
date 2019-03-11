@@ -7,7 +7,7 @@ import { connect } from 'react-redux'
 import { Dispatch } from 'redux'
 import { ImmutableState, StateKey } from '../../types'
 import { MaterialStateKey, PerformerDisabledParameter } from '../types'
-import { buildHandleStopClickEvent } from './events'
+import { computeHandleStopClickEvent } from './events'
 import { StopButtonProps, StopButtonPropsFromDispatch } from './types'
 
 const mapStateToProps: (state: ImmutableState) => PerformerDisabledParameter =
@@ -18,7 +18,7 @@ const mapStateToProps: (state: ImmutableState) => PerformerDisabledParameter =
 
 const mapDispatchToProps: (dispatch: Dispatch) => StopButtonPropsFromDispatch =
     (dispatch: Dispatch): StopButtonPropsFromDispatch => ({
-        handleStopClickEvent: buildHandleStopClickEvent({ dispatch }),
+        handleStopClickEvent: computeHandleStopClickEvent({ dispatch }),
     })
 
 const StopButton: React.ComponentType<StopButtonProps> =

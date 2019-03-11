@@ -6,12 +6,12 @@ import { connect } from 'react-redux'
 import { Dispatch } from 'redux'
 import { ImmutableState, StateKey } from '../../types'
 import { ImmutableMaterialState, MaterialStateKey } from '../types'
-import { buildSetToggleImmersiveAudioHandlers } from './events'
+import { computeSetToggleImmersiveAudioHandlers } from './events'
 import {
-    getToggleImmersiveAudioButtonHoverText,
-    getToggleImmersiveAudioButtonOnClick,
-    getToggleImmersiveAudioButtonText,
-    getToggleImmersiveAudioDisabled,
+    computeToggleImmersiveAudioButtonHoverText,
+    computeToggleImmersiveAudioButtonOnClick,
+    computeToggleImmersiveAudioButtonText,
+    computeToggleImmersiveAudioDisabled,
 } from './helpers'
 import './styles'
 import {
@@ -35,7 +35,7 @@ const mapStateToProps: (state: ImmutableState) => ToggleImmersiveAudioButtonProp
 
 const mapDispatchToProps: (dispatch: Dispatch) => ToggleImmersiveAudioButtonPropsFromDispatch =
     (dispatch: Dispatch): ToggleImmersiveAudioButtonPropsFromDispatch => ({
-        setToggleImmersiveAudioHandlers: buildSetToggleImmersiveAudioHandlers({ dispatch }),
+        setToggleImmersiveAudioHandlers: computeSetToggleImmersiveAudioHandlers({ dispatch }),
     })
 
 const ToggleImmersiveAudioButton: React.ComponentType<ToggleImmersiveAudioButtonProps> =
@@ -56,16 +56,16 @@ const ToggleImmersiveAudioButton: React.ComponentType<ToggleImmersiveAudioButton
         return (
             <button
                 {...{
-                    disabled: getToggleImmersiveAudioDisabled({ immersiveAudioReady, performerDisabled }),
+                    disabled: computeToggleImmersiveAudioDisabled({ immersiveAudioReady, performerDisabled }),
                     id: 'toggle-immersive-audio',
-                    onClick: getToggleImmersiveAudioButtonOnClick({
+                    onClick: computeToggleImmersiveAudioButtonOnClick({
                         immersiveAudioEnabled,
                         toggleImmersiveAudioHandlers,
                     }),
-                    title: getToggleImmersiveAudioButtonHoverText({ immersiveAudioUnavailable }),
+                    title: computeToggleImmersiveAudioButtonHoverText({ immersiveAudioUnavailable }),
                 }}
             >
-                {getToggleImmersiveAudioButtonText({ immersiveAudioEnabled })}
+                {computeToggleImmersiveAudioButtonText({ immersiveAudioEnabled })}
             </button>
         )
     }

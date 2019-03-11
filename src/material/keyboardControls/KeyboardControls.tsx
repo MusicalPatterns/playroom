@@ -5,7 +5,7 @@ import { connect } from 'react-redux'
 import { Dispatch } from 'redux'
 import { ImmutableState, KeyboardEventHandler, StateKey } from '../../types'
 import { MaterialStateKey } from '../types'
-import { buildHandleKeyDownEvent } from './events'
+import { computeHandleKeyDownEvent } from './events'
 import { KeyboardControlsProps, KeyboardControlsPropsFromDispatch, KeyboardControlsPropsFromState } from './types'
 
 const mapStateToProps: (state: ImmutableState) => KeyboardControlsPropsFromState =
@@ -16,7 +16,7 @@ const mapStateToProps: (state: ImmutableState) => KeyboardControlsPropsFromState
 
 const mapDispatchToProps: (dispatch: Dispatch) => KeyboardControlsPropsFromDispatch =
     (dispatch: Dispatch): KeyboardControlsPropsFromDispatch => ({
-        handleKeyDownEvent: buildHandleKeyDownEvent({ dispatch }),
+        handleKeyDownEvent: computeHandleKeyDownEvent({ dispatch }),
     })
 
 let oldOnKeyDown: KeyboardEventHandler

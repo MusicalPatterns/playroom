@@ -6,4 +6,4 @@ export {
     PlayButton,
 }
 
-export { buildHandlePlayClickEvent } from './events'
+export { computeHandlePlayClickEvent } from './events'

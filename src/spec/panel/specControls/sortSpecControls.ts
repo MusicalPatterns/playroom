@@ -1,7 +1,7 @@
 import { Attributes } from '@musical-patterns/pattern'
 import { ARBITRARILY_LARGE_NUMBER, isUndefined, Maybe, negative } from '@musical-patterns/utilities'
 
-const buildSortSpecControls: (attributes: Attributes) => (property: string, nextProperty: string) => number =
+const computeSortSpecControls: (attributes: Attributes) => (property: string, nextProperty: string) => number =
     (attributes: Attributes): (property: string, nextProperty: string) => number =>
         (property: string, nextProperty: string): number => {
             const order: Maybe<number> = attributes[ property ].order
@@ -14,5 +14,5 @@ const buildSortSpecControls: (attributes: Attributes) => (property: string, next
         }
 
 export {
-    buildSortSpecControls,
+    computeSortSpecControls,
 }

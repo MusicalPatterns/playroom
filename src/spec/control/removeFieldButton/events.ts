@@ -7,8 +7,8 @@ import {
 import { indexOfLastElement, INITIAL, isUndefined, lastElement, slice } from '@musical-patterns/utilities'
 import { batchActions } from 'redux-batched-actions'
 import { Action } from '../../../types'
-import { buildAttemptSubmitActions } from '../../attemptSubmitActions'
-import { getArrayedDisplayedValue } from '../../getArrayedDisplayedValue'
+import { computeArrayedDisplayedValue } from '../../arrayedDisplayedValue'
+import { computeAttemptSubmitActions } from '../../attemptSubmitActions'
 import { HandleFieldRemoveParameters } from './types'
 
 const isArrayedValidationResult:
@@ -45,7 +45,7 @@ const handleFieldRemove: (parameters: HandleFieldRemoveParameters) => void =
             validationFunction,
             validationResults,
         } = parameters
-        const arrayedDisplayedValue: ArrayedDomValue = getArrayedDisplayedValue(displayedSpec, property)
+        const arrayedDisplayedValue: ArrayedDomValue = computeArrayedDisplayedValue(displayedSpec, property)
 
         const updatedArrayedDisplayedValue: ArrayedDomValue = slice(
             arrayedDisplayedValue,
@@ -59,7 +59,7 @@ const handleFieldRemove: (parameters: HandleFieldRemoveParameters) => void =
         const removedFieldIsEmpty: boolean = lastElement(arrayedDisplayedValue) === ''
         const suppressReevaluatingValidationResults: boolean = removedFieldIsEmpty && removedFieldHasNoInvalidMessages
 
-        const actions: Action[] = buildAttemptSubmitActions({
+        const actions: Action[] = computeAttemptSubmitActions({
             attributes,
             displayedSpec,
             property,

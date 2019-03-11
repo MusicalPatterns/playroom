@@ -7,13 +7,13 @@ import { MaterialStateKey } from '../../../material'
 import { MetadataStateKey } from '../../../metadata'
 import { resetActions, SpecStateKey } from '../../../spec'
 import { Action } from '../../../types'
-import { maybePatternFromPatternsAndPatternId } from '../../maybePatternFromPatternsAndPatternId'
+import { computeMaybePattern } from '../../maybePattern'
 import { PageStateKey } from '../../types'
 import { adjustWindowActionsWithSideEffects } from '../adjustWindowActions'
 import { openRightColumn } from '../rightColumnActions'
 import { HandlePatternChange, HandlePatternChangeParameters } from './types'
 
-const getPatternIdFromEvent: (event: React.SyntheticEvent) => Id =
+const computePatternIdFromEvent: (event: React.SyntheticEvent) => Id =
     (event: React.SyntheticEvent): Id => {
         const target: EventTarget & Element = event.currentTarget
         if (isId(target.id)) {
@@ -24,19 +24,19 @@ const getPatternIdFromEvent: (event: React.SyntheticEvent) => Id =
         }
     }
 
-const getPatternName: (parameters: { metadata: Metadata, newId: Id }) => string =
+const computePatternName: (parameters: { metadata: Metadata, newId: Id }) => string =
     ({ metadata, newId }: { metadata: Metadata, newId: Id }): string =>
         metadata.formattedName || constantCaseToUpperCase(newId || '')
 
 const handlePatternChange: HandlePatternChange =
     async (parameters: HandlePatternChangeParameters): Promise<void> => {
         const { dispatch, event, patterns, patternId: previousPatternId, rightColumnOpen } = parameters
-        const newPatternId: Id = getPatternIdFromEvent(event)
+        const newPatternId: Id = computePatternIdFromEvent(event)
         if (newPatternId === previousPatternId) {
             return
         }
 
-        const pattern: Maybe<Pattern> = maybePatternFromPatternsAndPatternId({ patterns, patternId: newPatternId })
+        const pattern: Maybe<Pattern> = computeMaybePattern({ patterns, patternId: newPatternId })
         if (isUndefined(pattern)) {
             throw new Error(`pattern for id ${newPatternId} was not found`)
         }
@@ -44,7 +44,7 @@ const handlePatternChange: HandlePatternChange =
         const { data, metadata } = pattern
         const initialSpec: Spec = data.initial
         const post: string = metadata.description || ''
-        const patternName: string = getPatternName({ metadata, newId: newPatternId })
+        const patternName: string = computePatternName({ metadata, newId: newPatternId })
 
         const actions: Action[] = resetActions(initialSpec)
             .concat([

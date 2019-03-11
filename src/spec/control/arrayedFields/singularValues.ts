@@ -6,7 +6,7 @@ import {
 } from '@musical-patterns/pattern'
 import { apply, indexOfLastElement, isUndefined, Ordinal } from '@musical-patterns/utilities'
 
-const calculateSingularSubmittedValue:
+const computeSingularSubmittedValue:
     (arrayedSubmittedValue: ArrayedValue, index: Ordinal) => SingularValue =
     (arrayedSubmittedValue: ArrayedValue, index: Ordinal): SingularValue => {
         if (index > indexOfLastElement(arrayedSubmittedValue)) {
@@ -16,7 +16,7 @@ const calculateSingularSubmittedValue:
         return apply.Ordinal(arrayedSubmittedValue, index)
     }
 
-const calculateSingularValidationResult:
+const computeSingularValidationResult:
     (arrayedValidationResult: ArrayedValidationResult, index: Ordinal) => SingularValidationResult =
     (arrayedValidationResult: ArrayedValidationResult, index: Ordinal): SingularValidationResult => {
         if (isUndefined(arrayedValidationResult) || index > indexOfLastElement(arrayedValidationResult)) {
@@ -27,6 +27,6 @@ const calculateSingularValidationResult:
     }
 
 export {
-    calculateSingularSubmittedValue,
-    calculateSingularValidationResult,
+    computeSingularSubmittedValue,
+    computeSingularValidationResult,
 }

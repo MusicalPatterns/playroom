@@ -2,8 +2,8 @@ import { ArrayedDomValue } from '@musical-patterns/pattern'
 import { HtmlValueOrChecked, Maybe } from '@musical-patterns/utilities'
 import { batchActions } from 'redux-batched-actions'
 import { Action } from '../../../types'
-import { buildAttemptSubmitActions } from '../../attemptSubmitActions'
-import { getArrayedDisplayedValue } from '../../getArrayedDisplayedValue'
+import { computeArrayedDisplayedValue } from '../../arrayedDisplayedValue'
+import { computeAttemptSubmitActions } from '../../attemptSubmitActions'
 import { HandleFieldAddParameters } from './types'
 
 const handleFieldAdd: (parameters: HandleFieldAddParameters) => void =
@@ -11,12 +11,12 @@ const handleFieldAdd: (parameters: HandleFieldAddParameters) => void =
         const { dispatch, property, displayedSpec, attributes, validationFunction, submittedSpec } = parameters
         const initialFieldValue: Maybe<HtmlValueOrChecked> = attributes[ property ].arrayedNewFieldInitialValue
 
-        const arrayedDisplayedValue: ArrayedDomValue = getArrayedDisplayedValue(displayedSpec, property)
+        const arrayedDisplayedValue: ArrayedDomValue = computeArrayedDisplayedValue(displayedSpec, property)
 
         const updatedArrayedDisplayedValue: ArrayedDomValue =
             arrayedDisplayedValue.concat([ initialFieldValue || '' ])
 
-        const actions: Action[] = buildAttemptSubmitActions({
+        const actions: Action[] = computeAttemptSubmitActions({
             attributes,
             displayedSpec,
             property,

@@ -14,7 +14,7 @@ import { StopButton } from '../stopButton'
 import { TimeInMinutesAndSeconds } from '../timeInMinutesAndSeconds'
 import { Timeline } from '../timeline'
 import { ImmutableMaterialState, MaterialStateKey } from '../types'
-import { buildSetOnPerformerUpdate } from './events'
+import { computeSetOnPerformerUpdate } from './events'
 import './styles'
 import { TimeControlsProps, TimeControlsPropsFromDispatch, TimeControlsPropsFromState } from './types'
 
@@ -31,7 +31,7 @@ const mapStateToProps: (state: ImmutableState) => TimeControlsPropsFromState =
 
 const mapDispatchToProps: (dispatch: Dispatch) => TimeControlsPropsFromDispatch =
     (dispatch: Dispatch): TimeControlsPropsFromDispatch => ({
-        setOnPerformerUpdate: buildSetOnPerformerUpdate({ dispatch }),
+        setOnPerformerUpdate: computeSetOnPerformerUpdate({ dispatch }),
     })
 
 const TimeControls: React.ComponentType<TimeControlsProps> =

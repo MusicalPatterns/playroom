@@ -10,8 +10,8 @@ import { ImmutableSpecState, SpecStateKey } from '../../types'
 import { InvalidMessage } from '../invalidMessage'
 import { SecretSubmittedSpecForTest } from '../secretSubmittedSpecForTest'
 import { Units } from '../units'
-import { buildHandleFieldChangeEvent } from './events'
-import { getFieldId, getFieldLabel, getFieldValidityClassName } from './helpers'
+import { computeHandleFieldChangeEvent } from './events'
+import { computeFieldId, computeFieldLabel, computeFieldValidityClassName } from './helpers'
 import './styles'
 import { FieldProps, FieldPropsFromDispatch, FieldPropsFromState } from './types'
 
@@ -29,7 +29,7 @@ const mapStateToProps: (state: ImmutableState) => FieldPropsFromState =
 
 const mapDispatchToProps: (dispatch: Dispatch) => FieldPropsFromDispatch =
     (dispatch: Dispatch): FieldPropsFromDispatch => ({
-        handleFieldChangeEvent: buildHandleFieldChangeEvent({ dispatch }),
+        handleFieldChangeEvent: computeHandleFieldChangeEvent({ dispatch }),
     })
 
 const Field: React.ComponentType<FieldProps> =
@@ -51,9 +51,9 @@ const Field: React.ComponentType<FieldProps> =
             handleFieldChangeEvent({ attributes, event, fieldIndex, property, ...otherProps })
         }
 
-        const fieldId: string = getFieldId({ fieldIndex, property })
-        const fieldLabel: string = getFieldLabel({ fieldIndex, formattedName, property })
-        const fieldValidityClassName: string = getFieldValidityClassName(singularValidationResult)
+        const fieldId: string = computeFieldId({ fieldIndex, property })
+        const fieldLabel: string = computeFieldLabel({ fieldIndex, formattedName, property })
+        const fieldValidityClassName: string = computeFieldValidityClassName(singularValidationResult)
 
         return (
             <div {...{ className: 'field', id: fieldId, title: description }}>

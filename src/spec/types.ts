@@ -39,7 +39,7 @@ interface PropertyParameter {
     property: string,
 }
 
-interface BuildAttemptSubmitActionsParameters extends PropertyParameter {
+interface ComputeAttemptSubmitActionsParameters extends PropertyParameter {
     attributes: Attributes,
     displayedSpec: DomSpec,
     submittedSpec: Spec,
@@ -65,7 +65,7 @@ export {
     SpecStateKey,
     SpecAction,
     PropertyParameter,
-    BuildAttemptSubmitActionsParameters,
+    ComputeAttemptSubmitActionsParameters,
     UpdatedValidationResultsPlusIsValid,
     ValidateSubmittedSpecParameters,
 }

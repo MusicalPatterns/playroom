@@ -85,7 +85,7 @@ const Page: React.ComponentType<PageProps> =
                             <p>
                                 Test-driving music allows you to work even less intuitively, which leads to even less
                                 familiar-sounding, less song-like music. The tests enable you to pick back up after
-                                several months of inactivity. For the past few years I would build the occasional little
+                                several months of inactivity. For the past few years I would make the occasional little
                                 musical experiment in code but did not test-drive it. Whenever I would try to pick one
                                 of them back up, I found I'd lost too much context on the components of the code, and I
                                 didn't know how to contribute any further to it. I learned to feel pressured to start
@@ -135,7 +135,7 @@ const Page: React.ComponentType<PageProps> =
                             </p>
                             <p>
                                 I nonetheless consider this output to be proof-of-concept. Electronic music production
-                                is not an art I aspire to master. I did not choose to build this project for the web
+                                is not an art I aspire to master. I did not choose to develop this project for the web
                                 because browsers offer the finest digital audio palette, but rather because they offer
                                 free and instantaneous content delivery anywhere.
                             </p>
