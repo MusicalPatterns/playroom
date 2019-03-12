@@ -1,18 +1,18 @@
 import {
     ArrayedDomSpecValue,
+    ArrayedSpecValue,
     ArrayedValidation,
-    ArrayedValue,
     DomSpecValue,
     SingularDomSpecValue,
+    SingularSpecValue,
     SingularValidation,
-    SingularValue,
     SpecValue,
     Validation,
 } from '@musical-patterns/pattern'
 import { isUndefined } from '@musical-patterns/utilities'
 
-const isArrayedSubmittedValue: (submittedValue: SpecValue) => submittedValue is ArrayedValue =
-    (submittedValue: SpecValue): submittedValue is ArrayedValue =>
+const isArrayedSubmittedValue: (submittedValue: SpecValue) => submittedValue is ArrayedSpecValue =
+    (submittedValue: SpecValue): submittedValue is ArrayedSpecValue =>
         submittedValue instanceof Array
 
 const isArrayedDisplayedValue: (displayedValue: DomSpecValue) => displayedValue is ArrayedDomSpecValue =
@@ -23,8 +23,8 @@ const isArrayedValidation: (validation: Validation) => validation is ArrayedVali
     (validation: Validation): validation is ArrayedValidation =>
         isUndefined(validation) || validation instanceof Array
 
-const isSingularSubmittedValue: (submittedValue: SpecValue) => submittedValue is SingularValue =
-    (submittedValue: SpecValue): submittedValue is SingularValue =>
+const isSingularSubmittedValue: (submittedValue: SpecValue) => submittedValue is SingularSpecValue =
+    (submittedValue: SpecValue): submittedValue is SingularSpecValue =>
         !isArrayedSubmittedValue(submittedValue)
 
 const isSingularDisplayedValue: (displayedValue: DomSpecValue) => displayedValue is SingularDomSpecValue =

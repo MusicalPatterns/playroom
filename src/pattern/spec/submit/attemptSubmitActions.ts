@@ -17,7 +17,7 @@ const computeAttemptSubmitActions: (parameters: ComputeAttemptSubmitActionsParam
         } = parameters
 
         const updatedSubmittedSpecs: Specs = { ...submittedSpecs, [ specKey ]: updatedValue }
-        const updatedDisplayedSpecs: DomSpecs = { ...displayedSpecs, [ specKey ]: updatedValue as DomSpecValue }
+        const updatedDisplayedSpecs: DomSpecs = { ...displayedSpecs, [ specKey ]: updatedValue }
 
         const { isValid, updatedValidations } = validateSubmittedSpecs({
             computeValidations,

@@ -1,11 +1,11 @@
 import {
     ArrayedDomSpecValue,
+    ArrayedSpecValue,
     ArrayedValidation,
-    ArrayedValue,
     DomSpecValue,
     SingularDomSpecValue,
+    SingularSpecValue,
     SingularValidation,
-    SingularValue,
     SpecValue,
     Validation,
 } from '@musical-patterns/pattern'
@@ -25,8 +25,8 @@ import {
 } from './types'
 
 const computeSingularSubmittedValueFromArrayedSubmittedValue:
-    (arrayedSubmittedValue: ArrayedValue, fieldIndex: Ordinal) => SingularValue =
-    (arrayedSubmittedValue: ArrayedValue, fieldIndex: Ordinal): SingularValue => {
+    (arrayedSubmittedValue: ArrayedSpecValue, fieldIndex: Ordinal) => SingularSpecValue =
+    (arrayedSubmittedValue: ArrayedSpecValue, fieldIndex: Ordinal): SingularSpecValue => {
         if (fieldIndex > indexOfLastElement(arrayedSubmittedValue)) {
             return undefined
         }
@@ -55,8 +55,8 @@ const computeSingularValidationFromArrayedValidation:
     }
 
 const computeSingularSubmittedValue:
-    (computeSingularSubmittedValueParameters: ComputeSingularSubmittedValueParameters) => SingularValue =
-    ({ submittedSpecs, specKey, fieldIndex }: ComputeSingularSubmittedValueParameters): SingularValue => {
+    (computeSingularSubmittedValueParameters: ComputeSingularSubmittedValueParameters) => SingularSpecValue =
+    ({ submittedSpecs, specKey, fieldIndex }: ComputeSingularSubmittedValueParameters): SingularSpecValue => {
         const submittedValue: SpecValue = submittedSpecs && submittedSpecs[ specKey ]
 
         return !isUndefined(fieldIndex) && isArrayedSubmittedValue(submittedValue) ?

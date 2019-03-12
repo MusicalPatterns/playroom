@@ -1,4 +1,4 @@
-import { ArrayedDomSpecValue, ArrayedValue, SpecValue } from '@musical-patterns/pattern'
+import { ArrayedDomSpecValue, ArrayedSpecValue, DomSpecValue } from '@musical-patterns/pattern'
 import { from, HtmlValueOrChecked, isUndefined } from '@musical-patterns/utilities'
 import { batchActions } from 'redux-batched-actions'
 import { extractValueOrCheckedFromEvent } from '../../../extractValueOrCheckedFromEvent'
@@ -12,8 +12,8 @@ import {
     MergeEventValueIntoValueParameters,
 } from './types'
 
-const mergeEventValueIntoArrayedValue: (parameters: MergeEventValueIntoValueParameters) => ArrayedValue =
-    (parameters: MergeEventValueIntoValueParameters): ArrayedValue => {
+const mergeEventValueIntoArrayedValue: (parameters: MergeEventValueIntoValueParameters) => ArrayedDomSpecValue =
+    (parameters: MergeEventValueIntoValueParameters): ArrayedDomSpecValue => {
         const { displayedSpecs, specKey, fieldIndex, eventValue } = parameters
 
         const arrayedDisplayedValue: ArrayedDomSpecValue = computeArrayedDisplayedValue(displayedSpecs, specKey)
@@ -41,7 +41,7 @@ const computeHandleFieldChangeEvent: ComputeHandleFieldChangeEvent =
 
             const eventValue: HtmlValueOrChecked = extractValueOrCheckedFromEvent(event)
 
-            let updatedValue: SpecValue = eventValue
+            let updatedValue: DomSpecValue = eventValue
             if (!isUndefined(fieldIndex)) {
                 updatedValue = mergeEventValueIntoArrayedValue({
                     displayedSpecs,

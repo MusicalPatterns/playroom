@@ -1,7 +1,7 @@
 import {
     ArrayedDomSpecValue,
+    ArrayedSpecValue,
     ArrayedValidation,
-    ArrayedValue,
     DomSpecs,
     DomSpecValue,
     Specs,
@@ -26,8 +26,8 @@ const computeArrayedDisplayedValue: (displayedSpecs: DomSpecs, specKey: string) 
         return maybeDisplayedValue
     }
 
-const computeArrayedSubmittedValue: (submittedSpecs: Specs, specKey: string) => ArrayedValue =
-    (submittedSpecs: Specs, specKey: string): ArrayedValue => {
+const computeArrayedSubmittedValue: (submittedSpecs: Specs, specKey: string) => ArrayedSpecValue =
+    (submittedSpecs: Specs, specKey: string): ArrayedSpecValue => {
         const maybeSubmittedValue: Maybe<SpecValue> = deepClone(submittedSpecs[ specKey ])
         if (isUndefined(maybeSubmittedValue)) {
             throw new Error('submitted value was undefined')
