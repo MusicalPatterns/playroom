@@ -2,13 +2,12 @@
 
 import { faMinus } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { DomSpecValue } from '@musical-patterns/pattern'
+import { DomSpecValue, isArrayedDomSpecValue } from '@musical-patterns/pattern'
 import * as React from 'react'
 import { connect } from 'react-redux'
 import { Dispatch } from 'redux'
 import { EventHandler, ImmutableState, StateKey } from '../../../../types'
 import { PatternStateKey } from '../../../types'
-import { isArrayedDisplayedValue } from '../../typeGuards'
 import { ImmutableSpecState, SpecStateKey } from '../../types'
 import { handleFieldRemove } from './events'
 import './styles'
@@ -48,7 +47,7 @@ const RemoveFieldButton: React.ComponentType<RemoveFieldButtonProps> =
         }
 
         const displayedValue: DomSpecValue = displayedSpecs[ specKey ]
-        if (!isArrayedDisplayedValue(displayedValue)) {
+        if (!isArrayedDomSpecValue(displayedValue)) {
             throw new Error('cannot treat a singular spec control as arrayed')
         }
         const disabled: boolean = !displayedValue.length

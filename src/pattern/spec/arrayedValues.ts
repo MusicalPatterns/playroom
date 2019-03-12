@@ -4,13 +4,15 @@ import {
     ArrayedValidation,
     DomSpecs,
     DomSpecValue,
+    isArrayedDomSpecValue,
+    isArrayedSpecValue,
+    isArrayedValidation,
     Specs,
     SpecValue,
     Validation,
     Validations,
 } from '@musical-patterns/pattern'
 import { deepClone, isUndefined, Maybe } from '@musical-patterns/utilities'
-import { isArrayedDisplayedValue, isArrayedSubmittedValue, isArrayedValidation } from './typeGuards'
 
 const computeArrayedDisplayedValue: (displayedSpecs: DomSpecs, specKey: string) => ArrayedDomSpecValue =
     (displayedSpecs: DomSpecs, specKey: string): ArrayedDomSpecValue => {
@@ -19,7 +21,7 @@ const computeArrayedDisplayedValue: (displayedSpecs: DomSpecs, specKey: string) 
             throw new Error('displayed value was undefined')
         }
 
-        if (!isArrayedDisplayedValue(maybeDisplayedValue)) {
+        if (!isArrayedDomSpecValue(maybeDisplayedValue)) {
             throw new Error('displayed value was not arrayed')
         }
 
@@ -33,7 +35,7 @@ const computeArrayedSubmittedValue: (submittedSpecs: Specs, specKey: string) => 
             throw new Error('submitted value was undefined')
         }
 
-        if (!isArrayedSubmittedValue(maybeSubmittedValue)) {
+        if (!isArrayedSpecValue(maybeSubmittedValue)) {
             throw new Error('submitted value was not arrayed')
         }
 

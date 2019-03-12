@@ -1,6 +1,6 @@
 // tslint:disable variable-name file-name-casing no-default-export no-import-side-effect no-null-keyword
 
-import { SpecValue } from '@musical-patterns/pattern'
+import { isArrayedSpecValue, SpecValue } from '@musical-patterns/pattern'
 import { isUndefined } from '@musical-patterns/utilities'
 import * as React from 'react'
 import { connect } from 'react-redux'
@@ -9,7 +9,6 @@ import { ImmutableState, SecretTestSelector, StateKey } from '../../../../types'
 import { PatternStateKey } from '../../../types'
 import { computeArrayedSubmittedValue } from '../../arrayedValues'
 import { computeSingularSubmittedValue } from '../../singularValues'
-import { isArrayedSubmittedValue } from '../../typeGuards'
 import { SpecStateKey } from '../../types'
 import { computeFieldId } from '../attributes'
 import { stringifyIfNecessary } from './stringifyIfNecessary'
@@ -33,7 +32,7 @@ const SecretSubmittedSpecForTest: React.ComponentType<SecretSubmittedSpecsForTes
         const fieldId: string = computeFieldId({ fieldIndex, specKey })
 
         const submittedValue: SpecValue =
-            isArrayedSubmittedValue(submittedSpecs[ specKey ]) && isUndefined(fieldIndex) ?
+            isArrayedSpecValue(submittedSpecs[ specKey ]) && isUndefined(fieldIndex) ?
                 computeArrayedSubmittedValue(submittedSpecs, specKey) :
                 computeSingularSubmittedValue({ submittedSpecs, specKey, fieldIndex })
 

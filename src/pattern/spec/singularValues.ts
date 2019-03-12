@@ -3,6 +3,12 @@ import {
     ArrayedSpecValue,
     ArrayedValidation,
     DomSpecValue,
+    isArrayedDomSpecValue,
+    isArrayedSpecValue,
+    isArrayedValidation,
+    isSingularDomSpecValue,
+    isSingularSpecValue,
+    isSingularValidation,
     SingularDomSpecValue,
     SingularSpecValue,
     SingularValidation,
@@ -10,14 +16,6 @@ import {
     Validation,
 } from '@musical-patterns/pattern'
 import { apply, indexOfLastElement, isUndefined, Ordinal } from '@musical-patterns/utilities'
-import {
-    isArrayedDisplayedValue,
-    isArrayedSubmittedValue,
-    isArrayedValidation,
-    isSingularDisplayedValue,
-    isSingularSubmittedValue,
-    isSingularValidation,
-} from './typeGuards'
 import {
     ComputeSingularDisplayedValueParameters,
     ComputeSingularSubmittedValueParameters,
@@ -59,9 +57,9 @@ const computeSingularSubmittedValue:
     ({ submittedSpecs, specKey, fieldIndex }: ComputeSingularSubmittedValueParameters): SingularSpecValue => {
         const submittedValue: SpecValue = submittedSpecs && submittedSpecs[ specKey ]
 
-        return !isUndefined(fieldIndex) && isArrayedSubmittedValue(submittedValue) ?
+        return !isUndefined(fieldIndex) && isArrayedSpecValue(submittedValue) ?
             computeSingularSubmittedValueFromArrayedSubmittedValue(submittedValue, fieldIndex) :
-            isSingularSubmittedValue(submittedValue) ? submittedValue : undefined
+            isSingularSpecValue(submittedValue) ? submittedValue : undefined
     }
 
 const computeSingularDisplayedValue:
@@ -69,9 +67,9 @@ const computeSingularDisplayedValue:
     ({ displayedSpecs, specKey, fieldIndex }: ComputeSingularDisplayedValueParameters): SingularDomSpecValue => {
         const displayedValue: DomSpecValue = displayedSpecs && displayedSpecs[ specKey ]
 
-        return !isUndefined(fieldIndex) && isArrayedDisplayedValue(displayedValue) ?
+        return !isUndefined(fieldIndex) && isArrayedDomSpecValue(displayedValue) ?
             computeSingularDisplayedValueFromArrayedDisplayedValue(displayedValue, fieldIndex) :
-            isSingularDisplayedValue(displayedValue) ? displayedValue : undefined
+            isSingularDomSpecValue(displayedValue) ? displayedValue : undefined
     }
 
 const computeSingularValidation:

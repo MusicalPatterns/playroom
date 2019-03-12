@@ -1,5 +1,14 @@
-import { ComputeValidations, Configurations, DomSpecs, Preset, Specs, Validations } from '@musical-patterns/pattern'
+import {
+    ComputeValidations,
+    Configurations,
+    DomSpecs,
+    DomSpecValue,
+    Preset,
+    Specs,
+    Validations,
+} from '@musical-patterns/pattern'
 import { ActionForState, Maybe, ObjectOf, TypedMap } from '@musical-patterns/utilities'
+import { ControlParentProps } from './control'
 import { FieldParentProps } from './field'
 
 enum SpecStateKey {
@@ -44,6 +53,17 @@ interface ComputeSingularValidationParameters extends FieldParentProps {
     validations: Validations,
 }
 
+interface SubmissionProps extends ConfigurationsParameter {
+    computeValidations: Maybe<ComputeValidations>,
+    displayedSpecs: DomSpecs,
+    submittedSpecs: Specs,
+}
+
+interface ComputeAttemptSubmitActionsParameters extends SubmissionProps, ControlParentProps {
+    suppressReevaluatingValidations?: boolean,
+    updatedValue: DomSpecValue,
+}
+
 export {
     SpecState,
     ImmutableSpecState,
@@ -53,4 +73,6 @@ export {
     ComputeSingularValidationParameters,
     ComputeSingularSubmittedValueParameters,
     ComputeSingularDisplayedValueParameters,
+    SubmissionProps,
+    ComputeAttemptSubmitActionsParameters,
 }

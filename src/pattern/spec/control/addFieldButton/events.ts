@@ -3,7 +3,7 @@ import { HtmlValueOrChecked, Maybe } from '@musical-patterns/utilities'
 import { batchActions } from 'redux-batched-actions'
 import { Action } from '../../../../types'
 import { computeArrayedDisplayedValue } from '../../arrayedValues'
-import { computeAttemptSubmitActions } from '../../submit'
+import { computeAttemptSubmitActions } from '../../attemptSubmitActions'
 import { HandleFieldAddParameters } from './types'
 
 const handleFieldAdd: (parameters: HandleFieldAddParameters) => void =

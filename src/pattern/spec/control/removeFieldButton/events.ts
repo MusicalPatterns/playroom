@@ -3,7 +3,7 @@ import { indexOfLastElement, INITIAL, isUndefined, lastElement, slice } from '@m
 import { batchActions } from 'redux-batched-actions'
 import { Action } from '../../../../types'
 import { computeArrayedDisplayedValue, computeArrayedValidation } from '../../arrayedValues'
-import { computeAttemptSubmitActions } from '../../submit'
+import { computeAttemptSubmitActions } from '../../attemptSubmitActions'
 import { HandleFieldRemoveParameters } from './types'
 
 const isNoInvalidMessageForRemovedField: (validations: Validations, specKey: string) => boolean =

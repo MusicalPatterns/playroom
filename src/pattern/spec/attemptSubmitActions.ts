@@ -1,8 +1,6 @@
-import { DomSpecs, DomSpecValue, Specs } from '@musical-patterns/pattern'
-import { Action } from '../../../types'
-import { SpecStateKey } from '../types'
-import { ComputeAttemptSubmitActionsParameters } from './types'
-import { validateSubmittedSpecs } from './validateSubmittedSpecs'
+import { DomSpecs, Specs, validateSpecs } from '@musical-patterns/pattern'
+import { Action } from '../../types'
+import { ComputeAttemptSubmitActionsParameters, SpecStateKey } from './types'
 
 const computeAttemptSubmitActions: (parameters: ComputeAttemptSubmitActionsParameters) => Action[] =
     (parameters: ComputeAttemptSubmitActionsParameters): Action[] => {
@@ -19,11 +17,11 @@ const computeAttemptSubmitActions: (parameters: ComputeAttemptSubmitActionsParam
         const updatedSubmittedSpecs: Specs = { ...submittedSpecs, [ specKey ]: updatedValue }
         const updatedDisplayedSpecs: DomSpecs = { ...displayedSpecs, [ specKey ]: updatedValue }
 
-        const { isValid, updatedValidations } = validateSubmittedSpecs({
+        const { isValid, validations } = validateSpecs({
             computeValidations,
             configurations,
             specKey,
-            updatedDisplayedSpecs,
+            specs: updatedDisplayedSpecs,
         })
 
         const actions: Action[] = [
@@ -31,7 +29,7 @@ const computeAttemptSubmitActions: (parameters: ComputeAttemptSubmitActionsParam
         ]
 
         if (!suppressReevaluatingValidations) {
-            actions.push({ type: SpecStateKey.VALIDATIONS, data: updatedValidations })
+            actions.push({ type: SpecStateKey.VALIDATIONS, data: validations })
         }
 
         if (isValid) {

@@ -1,5 +1,5 @@
 import { DispatchParameter, EventParameter } from '../../../../types'
-import { SubmissionProps } from '../../submit'
+import { SubmissionProps } from '../../types'
 import { ControlParentProps } from '../types'
 
 interface AddFieldButtonPropsFromDispatch {

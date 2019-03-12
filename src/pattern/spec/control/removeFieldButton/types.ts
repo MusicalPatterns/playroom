@@ -1,6 +1,6 @@
 import { Validations } from '@musical-patterns/pattern'
 import { DispatchParameter, EventParameter } from '../../../../types'
-import { SubmissionProps } from '../../submit'
+import { SubmissionProps } from '../../types'
 import { ControlParentProps } from '../types'
 
 interface RemoveFieldButtonPropsFromState extends SubmissionProps {
