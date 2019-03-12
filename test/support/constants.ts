@@ -12,7 +12,7 @@ import {
 import { patterns } from '@musical-patterns/pattern-playroom-test'
 import { Ms, ObjectOf, to } from '@musical-patterns/utilities'
 // @ts-ignore
-import { port } from '../../webpack.port'
+import { port } from '../../bin/port'
 
 const {
     [ Id.PLAYROOM_TEST_SPEC_CONTROLS ]: playroomTestSpecControls,
