@@ -3,17 +3,18 @@
 import { isUndefined } from '@musical-patterns/utilities'
 import * as React from 'react'
 import { connect } from 'react-redux'
+import { IdStateKey, PatternStateKey } from '../../pattern'
 import { ImmutableState, StateKey } from '../../types'
 import { LeftColumn } from '../leftColumn'
 import { MiddlePlusRightColumn } from '../middlePlusRightColumn'
-import { PageStateKey } from '../types'
 import './styles'
 import { AppProps } from './types'
 
 const mapStateToProps: (state: ImmutableState) => AppProps =
     (state: ImmutableState): AppProps => ({
-        patterns: state.get(StateKey.PAGE)
-            .get(PageStateKey.PATTERNS),
+        patterns: state.get(StateKey.PATTERN)
+            .get(PatternStateKey.ID)
+            .get(IdStateKey.PATTERNS),
     })
 
 const App: React.ComponentType<AppProps> =

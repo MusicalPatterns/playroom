@@ -4,6 +4,7 @@ import { render } from 'react-dom'
 import { Provider } from 'react-redux'
 import { BatchAction, batchActions } from 'redux-batched-actions'
 import { App, PageStateKey } from './page'
+import { IdStateKey } from './pattern'
 import { store } from './store'
 
 // tslint:disable-next-line bool-param-default
@@ -17,7 +18,7 @@ const setupPlayroom: (patterns: Partial<Patterns>, debugMode?: boolean) => Promi
         render(createElement(Provider, { store }, createElement(App)), root)
 
         const batchedAction: BatchAction = batchActions([
-            { type: PageStateKey.PATTERNS, data: patterns },
+            { type: IdStateKey.PATTERNS, data: patterns },
             { type: PageStateKey.DEBUG_MODE, data: debugMode },
         ])
         store.dispatch(batchedAction)

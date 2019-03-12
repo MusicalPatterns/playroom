@@ -1,11 +1,13 @@
-import { Id } from '@musical-patterns/pattern'
+import { Id, Patterns } from '@musical-patterns/pattern'
 import { ActionForState, Maybe, TypedMap } from '@musical-patterns/utilities'
 
 enum IdStateKey {
+    PATTERNS = 'PATTERNS',
     PATTERN_ID = 'PATTERN_ID',
 }
 
 interface IdState {
+    [ IdStateKey.PATTERNS ]: Maybe<Partial<Patterns>>,
     [ IdStateKey.PATTERN_ID ]: Maybe<Id>,
 }
 

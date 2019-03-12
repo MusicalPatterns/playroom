@@ -2,7 +2,6 @@ import { typedMap } from '@musical-patterns/utilities'
 import { ImmutablePageState, PageState, PageStateKey } from './types'
 
 const initialPageState: ImmutablePageState = typedMap<PageState>({
-    [ PageStateKey.PATTERNS ]: undefined,
     [ PageStateKey.DEBUG_MODE ]: false,
     [ PageStateKey.LEFT_COLUMN_OPEN ]: true,
     [ PageStateKey.RIGHT_COLUMN_OPEN ]: false,

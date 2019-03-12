@@ -13,7 +13,7 @@ import { connect } from 'react-redux'
 import { Dispatch } from 'redux'
 import { computeMaybePattern, ImmutablePageState, PageStateKey } from '../../../page'
 import { ImmutableState, StateKey } from '../../../types'
-import { IdStateKey } from '../../id'
+import { IdStateKey, ImmutableIdState } from '../../id'
 import { SpecStateKey } from '../../spec'
 import { ImmutablePatternState, PatternStateKey } from '../../types'
 import { logDebugInfo } from './debug'
@@ -24,12 +24,12 @@ const mapStateToProps: (state: ImmutableState) => RecompileListenerPropsFromStat
     (state: ImmutableState): RecompileListenerPropsFromState => {
         const pageState: ImmutablePageState = state.get(StateKey.PAGE)
         const patternState: ImmutablePatternState = state.get(StateKey.PATTERN)
+        const idState: ImmutableIdState = patternState.get(PatternStateKey.ID)
 
         return {
             debugMode: pageState.get(PageStateKey.DEBUG_MODE),
-            patternId: patternState.get(PatternStateKey.ID)
-                .get(IdStateKey.PATTERN_ID),
-            patterns: pageState.get(PageStateKey.PATTERNS),
+            patternId: idState.get(IdStateKey.PATTERN_ID),
+            patterns: idState.get(IdStateKey.PATTERNS),
             submittedSpecs: patternState.get(PatternStateKey.SPEC)
                 .get(SpecStateKey.SUBMITTED_SPECS),
         }

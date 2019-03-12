@@ -5,10 +5,11 @@ import { entries, from, isUndefined, map, Ordinal } from '@musical-patterns/util
 import * as React from 'react'
 import { connect } from 'react-redux'
 import { Dispatch } from 'redux'
-import { ImmutablePageState, PageStateKey } from '../../../page'
+import { PageStateKey } from '../../../page'
 import { IdStateKey, PatternStateKey } from '../../../pattern'
 import { EventHandler, ImmutableState, StateKey } from '../../../types'
 import { PatternListItem } from '../patternListItem'
+import { ImmutableIdState } from '../types'
 import { handlePatternChange } from './events'
 import { sortByOrderOrPublishDate } from './sort'
 import './styles'
@@ -21,14 +22,14 @@ import {
 
 const mapStateToProps: (state: ImmutableState) => PatternListPropsFromState =
     (state: ImmutableState): PatternListPropsFromState => {
-        const pageState: ImmutablePageState = state.get(StateKey.PAGE)
+        const idState: ImmutableIdState = state.get(StateKey.PATTERN)
+            .get(PatternStateKey.ID)
 
         return {
-            patternId: state.get(StateKey.PATTERN)
-                .get(PatternStateKey.ID)
-                .get(IdStateKey.PATTERN_ID),
-            patterns: pageState.get(PageStateKey.PATTERNS),
-            rightColumnOpen: pageState.get(PageStateKey.RIGHT_COLUMN_OPEN),
+            patternId: idState.get(IdStateKey.PATTERN_ID),
+            patterns: idState.get(IdStateKey.PATTERNS),
+            rightColumnOpen: state.get(StateKey.PAGE)
+                .get(PageStateKey.RIGHT_COLUMN_OPEN),
         }
     }
 
