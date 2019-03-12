@@ -2,7 +2,8 @@
 
 # Musical Patterns - Playroom
 
-The web-based UI for enjoying and experimenting with the patterns.
+The web-based UI for playing (with) the patterns.
+Just call `setupPlayroom` with whichever patterns you want.
 
 Similar to the `@musical-patterns/cli` repo, upon installation, copies playroom files into the pattern repo.
 
