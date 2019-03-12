@@ -2,6 +2,10 @@ module.exports = {
     module: {
         rules: [
             {
+                test: /\.html$/,
+                loader: 'html-loader',
+            },
+            {
                 test: /\.svg$/,
                 use: 'svg-react-loader',
             },
