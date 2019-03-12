@@ -22,7 +22,7 @@
     "@fortawesome/react-fontawesome": "^0.1.4",
     "@musical-patterns/cli": "^1.0.481",
     "@musical-patterns/compiler": "^1.0.115",
-    "@musical-patterns/pattern": "^1.0.214",
+    "@musical-patterns/pattern": "^1.0.216",
     "@musical-patterns/pattern-playroom-test": "^1.0.169",
     "@musical-patterns/performer": "^1.0.206",
     "@musical-patterns/utilities": "^1.0.329",
