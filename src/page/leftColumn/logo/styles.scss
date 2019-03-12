@@ -1,6 +1,6 @@
-@import '../../../sizes';
+@import '../../../colors';
 @import '../../../fonts';
-@import '../colors';
+@import '../../../sizes';
 @import '../proportions';
 @import '../sizes';
 
@@ -12,7 +12,7 @@
   text-align: center;
   display: flex;
   align-items: center;
-  box-shadow: $pattern-list-fade-horizontal-translation $pattern-list-fade-vertical-translation-for-bottom $pattern-list-fade-size $left-column-background;
+  box-shadow: $fade-horizontal-translation $fade-vertical-translation-for-bottom $fade-size $dark-area-background;
   z-index: 1;
 
   & > div {
@@ -32,14 +32,14 @@
     h1 {
       line-height: $logo-line-height;
       font-size: $title-text-size;
-      width: $pattern-list-item-width;
+      width: $title-width;
       text-align: center;
       margin-bottom: 0;
-      color: $left-column-color-with-emphasis;
+      color: $dark-area-color-with-emphasis;
       cursor: pointer;
 
       &:hover {
-        color: $left-column-hover-with-emphasis;
+        color: $dark-area-hover-with-emphasis;
       }
     }
   }
@@ -56,10 +56,10 @@
       cursor: pointer;
 
       polygon {
-        fill: $left-column-color-with-emphasis;
+        fill: $dark-area-color-with-emphasis;
 
         &:hover {
-          color: $left-column-hover-with-emphasis;
+          color: $dark-area-hover-with-emphasis;
         }
       }
     }
@@ -71,7 +71,7 @@
     font-family: inherit;
 
     &:hover {
-      color: $left-column-hover-with-emphasis;
+      color: $dark-area-hover-with-emphasis;
     }
   }
 }

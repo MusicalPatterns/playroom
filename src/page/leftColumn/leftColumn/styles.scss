@@ -1,11 +1,11 @@
+@import '../../../colors';
 @import '../../../effects';
-@import '../colors';
 @import '../proportions';
 @import '../sizes';
 
 #left-column {
-  background-color: $left-column-background;
-  color: $left-column-color;
+  background-color: $dark-area-background;
+  color: $dark-area-color;
   overflow-x: hidden;
 
   @include animate(flex, min-width);

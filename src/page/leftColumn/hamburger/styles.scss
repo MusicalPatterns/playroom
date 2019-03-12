@@ -1,21 +1,21 @@
+@import '../../../colors';
 @import '../../../effects';
 @import '../../../sizes';
-@import '../colors';
 @import '../proportions';
 @import '../sizes';
 
 #hamburger {
   flex: $hamburger-proportion;
-  background-color: $left-column-background;
+  background-color: $dark-area-background;
 
-  @include hoverable-color($left-column-color);
+  @include hoverable-color($dark-area-color);
 
   display: flex;
   align-items: flex-end;
   flex-direction: column;
   padding: 0;
   width: $left-column-width;
-  box-shadow: $pattern-list-fade-horizontal-translation $pattern-list-fade-vertical-translation-for-top $pattern-list-fade-size $left-column-background;
+  box-shadow: $fade-horizontal-translation $fade-vertical-translation-for-top $fade-size $dark-area-background;
   z-index: 1;
 
   svg {

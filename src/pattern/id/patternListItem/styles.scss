@@ -1,6 +1,6 @@
+@import '../../../colors';
 @import '../../../fonts';
 @import '../../../sizes';
-@import '../colors';
 @import '../sizes';
 
 li {
@@ -20,26 +20,26 @@ li {
 
   &:hover {
     cursor: pointer;
-    color: $left-column-hover !important;
+    color: $dark-area-hover !important;
 
     div:first-child {
-      color: $left-column-hover-with-emphasis !important;
+      color: $dark-area-hover-with-emphasis !important;
     }
   }
 
   &.selected {
-    color: $left-column-selected;
+    color: $dark-area-selected;
 
     div:first-child {
-      color: $left-column-selected-with-emphasis;
+      color: $dark-area-selected-with-emphasis;
     }
   }
 
   &.not-selected {
-    color: $left-column-color;
+    color: $dark-area-color;
 
     div:first-child {
-      color: $left-column-color;
+      color: $dark-area-color;
     }
   }
 }
