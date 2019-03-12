@@ -1,5 +1,5 @@
 export { PatternAction, ImmutablePatternState, PatternStateKey } from './types'
-export { patternReducer } from './reducer'
+export { patternReducer } from './reducers'
 
 export { IdStateKey, PatternList, NoPatternMessage } from './id'
 export { MaterialStateKey, stopActions, PerformerPanel } from './material'
