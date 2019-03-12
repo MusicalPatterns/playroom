@@ -11,6 +11,7 @@ import { computeMaybePattern } from '../../maybePattern'
 import { PageStateKey } from '../../types'
 import { adjustWindowActionsWithSideEffects } from '../adjustWindowActions'
 import { openRightColumn } from '../rightColumnActions'
+import { computePost } from './post'
 import { HandlePatternChange, HandlePatternChangeParameters } from './types'
 
 const computePatternIdFromEvent: (event: React.SyntheticEvent) => Id =
@@ -43,7 +44,7 @@ const handlePatternChange: HandlePatternChange =
 
         const { spec, metadata } = pattern
         const { initial: initialSpecs, configurations, computeValidations } = spec
-        const post: string = metadata.description || ''
+        const post: string = computePost(metadata)
         const patternName: string = computePatternName({ metadata, newId: newPatternId })
 
         const actions: Action[] = resetActions(initialSpecs)

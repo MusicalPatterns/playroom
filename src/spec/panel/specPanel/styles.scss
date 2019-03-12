@@ -4,6 +4,7 @@
 #spec-panel {
   padding: $spec-panel-spacing;
   max-width: $spec-panel-max-width;
+  overflow: hidden;
 
   @media screen and (max-width: $mobile-size) {
     max-width: $mobile-spec-panel-max-width;
