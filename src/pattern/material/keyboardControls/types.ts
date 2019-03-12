@@ -1,9 +1,15 @@
+import { Maybe } from '@musical-patterns/utilities'
+import { KeyboardEventHandler } from '../../../types'
+
 interface KeyboardControlsPropsFromState {
+    copyOfPausedUsedToPreventUpdatingOnKeyDownUnlessPausedChanges: boolean,
+    onKeyDown: Maybe<KeyboardEventHandler>,
     paused: boolean,
 }
 
 interface KeyboardControlsPropsFromDispatch {
     handleKeyDownEvent: HandleKeyDownEvent,
+    updateOnKeyDown: UpdateOnKeyDown,
 }
 
 interface KeyboardControlsProps extends KeyboardControlsPropsFromState, KeyboardControlsPropsFromDispatch {}
@@ -21,6 +27,8 @@ enum KeyCode {
     HOME = 36,
 }
 
+type UpdateOnKeyDown = (newOnKeyDown: KeyboardEventHandler, paused: boolean) => void
+
 export {
     KeyboardControlsPropsFromState,
     KeyboardControlsPropsFromDispatch,
@@ -28,4 +36,5 @@ export {
     HandleKeyDownEventParameters,
     HandleKeyDownEvent,
     KeyCode,
+    UpdateOnKeyDown,
 }

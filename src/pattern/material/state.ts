@@ -11,6 +11,8 @@ const initialMaterialState: ImmutableMaterialState = typedMap<MaterialState>({
     [ MaterialStateKey.IMMERSIVE_AUDIO_ENABLED ]: false,
     [ MaterialStateKey.PERFORMER_DISABLED ]: true,
     [ MaterialStateKey.ON_PERFORMER_UPDATE ]: undefined,
+    [ MaterialStateKey.ON_KEY_DOWN ]: undefined,
+    [ MaterialStateKey.COPY_OF_PAUSED_USED_TO_PREVENT_UPDATING_ON_KEY_DOWN_UNLESS_PAUSED_CHANGES ]: false,
 })
 
 export {

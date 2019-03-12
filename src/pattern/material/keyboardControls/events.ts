@@ -1,9 +1,11 @@
-import { DispatchParameter } from '../../../types'
+import { batchActions } from 'redux-batched-actions'
+import { Action, DispatchParameter, KeyboardEventHandler } from '../../../types'
 import { computeHandlePauseClickEvent } from '../pauseButton'
 import { computeHandlePlayClickEvent } from '../playButton'
 import { handleRewindClickEvent } from '../rewindButton'
 import { computeHandleStopClickEvent } from '../stopButton'
-import { HandleKeyDownEvent, HandleKeyDownEventParameters, KeyCode } from './types'
+import { MaterialStateKey } from '../types'
+import { HandleKeyDownEvent, HandleKeyDownEventParameters, KeyCode, UpdateOnKeyDown } from './types'
 
 const computeHandleKeyDownEvent: (parameters: DispatchParameter) => HandleKeyDownEvent =
     ({ dispatch }: DispatchParameter): HandleKeyDownEvent => {
@@ -34,6 +36,21 @@ const computeHandleKeyDownEvent: (parameters: DispatchParameter) => HandleKeyDow
         }
     }
 
+const computeUpdateOnKeyDown: (parameters: DispatchParameter) => UpdateOnKeyDown =
+    ({ dispatch }: DispatchParameter): UpdateOnKeyDown =>
+        (newOnKeyDown: KeyboardEventHandler, paused: boolean): void => {
+            const actions: Action[] = [
+                { type: MaterialStateKey.ON_KEY_DOWN, data: newOnKeyDown },
+                {
+                    data: paused,
+                    type: MaterialStateKey.COPY_OF_PAUSED_USED_TO_PREVENT_UPDATING_ON_KEY_DOWN_UNLESS_PAUSED_CHANGES,
+                },
+            ]
+
+            dispatch(batchActions(actions))
+        }
+
 export {
     computeHandleKeyDownEvent,
+    computeUpdateOnKeyDown,
 }
