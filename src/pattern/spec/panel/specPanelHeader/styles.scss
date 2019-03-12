@@ -1,0 +1,31 @@
+@import '../../../../effects';
+@import '../../../../colors';
+@import '../../../../sizes';
+@import '../sizes';
+
+#spec-panel-header {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  align-items: center;
+  font-size: $important-text-size;
+
+  @include hoverable-color($text-color);
+
+  cursor: pointer;
+
+  button {
+    background-color: Transparent;
+
+    @include no-glow();
+
+    height: $spec-panel-caret-size;
+    min-width: $spec-panel-caret-size;
+
+    svg.fa-caret-down,
+    svg.fa-caret-right {
+      width: $spec-panel-caret-size;
+      height: $spec-panel-caret-size;
+    }
+  }
+}

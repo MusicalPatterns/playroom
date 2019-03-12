@@ -1,0 +1,97 @@
+@import '../sizes';
+@import '../colors';
+@import '../effects';
+
+input[type=range] {
+  @include animate(background);
+
+  -webkit-appearance: none;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  margin: 0;
+
+  &::-webkit-slider-runnable-track {
+    @include animate(background);
+
+    border-radius: $border-size;
+    height: $track-width;
+  }
+
+  &::-moz-range-track {
+    @include animate(background);
+
+    border-radius: $border-size;
+    height: $track-width;
+  }
+
+  &::-ms-track {
+    @include animate(background);
+
+    border-radius: $border-size;
+    height: $track-width;
+  }
+
+  &::-webkit-slider-thumb {
+    @include animate(background);
+
+    -webkit-appearance: none;
+    border: none;
+    border-radius: $border-size;
+    height: $thumb-height;
+    width: $thumb-width;
+    margin-top: $thumb-translation;
+  }
+
+  &::-moz-range-thumb {
+    @include animate(background);
+
+    -webkit-appearance: none;
+    border: none;
+    border-radius: $border-size;
+    height: $thumb-height;
+    width: $thumb-width;
+    margin-top: $thumb-translation;
+  }
+
+  &::-ms-thumb {
+    @include animate(background);
+
+    -webkit-appearance: none;
+    border: none;
+    border-radius: $border-size;
+    height: $thumb-height;
+    width: $thumb-width;
+    margin-top: $thumb-translation;
+  }
+
+  &:disabled {
+    cursor: inherit;
+  }
+
+  &:enabled:hover {
+    &::-webkit-slider-runnable-track {
+      @include no-animate();
+    }
+
+    &::-moz-range-track {
+      @include no-animate();
+    }
+
+    &::-ms-track {
+      @include no-animate();
+    }
+
+    &::-webkit-slider-thumb {
+      @include no-animate();
+    }
+
+    &::-moz-range-thumb {
+      @include no-animate();
+    }
+
+    &::-ms-thumb {
+      @include no-animate();
+    }
+  }
+}

@@ -1,0 +1,29 @@
+@import '../../../../sizes';
+@import '../proportions';
+@import '../sizes';
+
+.field {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  position: relative;
+  margin-bottom: $field-bottom-spacing;
+  margin-left: $field-horizontal-spacing;
+
+  div {
+    min-width: $control-width;
+    margin-bottom: $field-bottom-spacing;
+    text-align: right;
+    font-size: $detail-text-size;
+    flex: $field-label-proportion;
+  }
+
+  input,
+  select {
+    flex: $field-input-proportion;
+  }
+
+  &:hover .invalid-message {
+    opacity: $invalid-message-opacity;
+  }
+}

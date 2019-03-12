@@ -1,0 +1,10 @@
+@import '../../../baseColors';
+
+$spec-control-track: nth($greys, 4);
+$spec-control-thumb: nth($greys, 2);
+
+$spec-control-track-hover: nth($greys, 5);
+$spec-control-thumb-hover: nth($greys, 3);
+
+$spec-control-background: nth($greys, 6);
+$spec-control-background-hover: nth($greys, 7);

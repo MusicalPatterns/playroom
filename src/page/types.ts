@@ -7,7 +7,6 @@ enum PageName {
 
 enum PageStateKey {
     PATTERNS = 'PATTERNS',
-    PATTERN_ID = 'PATTERN_ID',
     DEBUG_MODE = 'DEBUG_MODE',
     LEFT_COLUMN_OPEN = 'LEFT_COLUMN_OPEN',
     RIGHT_COLUMN_OPEN = 'RIGHT_COLUMN_OPEN',
@@ -16,7 +15,6 @@ enum PageStateKey {
 
 interface PageState {
     [ PageStateKey.PATTERNS ]: Maybe<Partial<Patterns>>,
-    [ PageStateKey.PATTERN_ID ]: Maybe<Id>,
     [ PageStateKey.DEBUG_MODE ]: boolean,
     [ PageStateKey.LEFT_COLUMN_OPEN ]: boolean,
     [ PageStateKey.RIGHT_COLUMN_OPEN ]: boolean,

@@ -1,0 +1,8 @@
+@import '../../../sizes';
+@import '../sizes';
+
+#no-pattern-message {
+  padding: $no-pattern-message-spacing $no-pattern-message-horizontal-spacing;
+  font-size: $detail-text-size;
+  width: $no-pattern-message-width;
+}

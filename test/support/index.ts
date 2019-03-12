@@ -13,7 +13,7 @@ export { waitLongEnoughForAnimationToComplete } from './wait'
 export { selectAboutPageByClickingLogo } from './aboutPage'
 export { leftColumnIs } from './leftColumn'
 export { openSpecControlsIfNotOpen } from './caret'
-export { currentTime, patternDuration, isPlaying, isPaused, hasBeenReset } from './time'
+export { clickTimeControl, currentTime, patternDuration, isPlaying, isPaused, hasBeenReset, isAfter } from './time'
 export { clickAddFieldButton, clickRemoveFieldButton, noInvalidMessagesAreShown } from './arrayedSpecControls'
 export {
     selectOption,

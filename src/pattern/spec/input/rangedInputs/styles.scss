@@ -1,0 +1,64 @@
+@import '../colors';
+
+.ranged-inputs input {
+  background: $spec-control-background !important;
+
+  &::-webkit-slider-runnable-track {
+    background: $spec-control-track !important;
+  }
+
+  &::-moz-range-track {
+    background: $spec-control-track !important;
+  }
+
+  &::-ms-track {
+    background: $spec-control-track !important;
+  }
+
+  &::-webkit-slider-thumb {
+    background: $spec-control-thumb !important;
+  }
+
+  &::-moz-range-thumb {
+    background: $spec-control-thumb !important;
+  }
+
+  &::-ms-thumb {
+    background: $spec-control-thumb !important;
+  }
+
+  &:hover:enabled {
+    transition: none;
+    background: $spec-control-background-hover !important;
+
+    &::-webkit-slider-runnable-track {
+      transition: none;
+      background: $spec-control-track-hover !important;
+    }
+
+    &::-moz-range-track {
+      transition: none;
+      background: $spec-control-track-hover !important;
+    }
+
+    &::-ms-track {
+      transition: none;
+      background: $spec-control-track-hover !important;
+    }
+
+    &::-webkit-slider-thumb {
+      transition: none;
+      background: $spec-control-thumb-hover !important;
+    }
+
+    &::-moz-range-thumb {
+      transition: none;
+      background: $spec-control-thumb-hover !important;
+    }
+
+    &::-ms-thumb {
+      transition: none;
+      background: $spec-control-thumb-hover !important;
+    }
+  }
+}

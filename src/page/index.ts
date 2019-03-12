@@ -2,6 +2,7 @@ export { App } from './app'
 
 export { initialPageState } from './state'
 export { computeMaybePattern } from './maybePattern'
+export { adjustWindowActionsWithSideEffects, openRightColumn } from './leftColumn'
 
 export {
     PageName,
@@ -9,3 +10,10 @@ export {
     PageStateKey,
     PageAction,
 } from './types'
+
+// tslint:disable no-import-side-effect
+import './button'
+import './fontFaces'
+import './image'
+import './layout'
+import './range'

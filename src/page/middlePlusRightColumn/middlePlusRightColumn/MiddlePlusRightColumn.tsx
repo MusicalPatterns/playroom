@@ -2,7 +2,7 @@
 
 import * as React from 'react'
 import { connect } from 'react-redux'
-import { Post } from '../../../metadata'
+import { IdStateKey, PatternStateKey, Post } from '../../../pattern'
 import { ImmutableState, StateKey } from '../../../types'
 import { ImmutablePageState, PageStateKey } from '../../types'
 import { BottomRow } from '../bottomRow'
@@ -18,7 +18,9 @@ const mapStateToProps: (state: ImmutableState) => MiddlePlusRightColumnProps =
 
         return {
             pageName: pageState.get(PageStateKey.PAGE_NAME),
-            patternId: pageState.get(PageStateKey.PATTERN_ID),
+            patternId: state.get(StateKey.PATTERN)
+                .get(PatternStateKey.ID)
+                .get(IdStateKey.PATTERN_ID),
             rightColumnOpen: pageState.get(PageStateKey.RIGHT_COLUMN_OPEN),
         }
     }

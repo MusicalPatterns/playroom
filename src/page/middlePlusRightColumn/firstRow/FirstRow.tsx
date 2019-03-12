@@ -2,10 +2,9 @@
 
 import * as React from 'react'
 import { connect } from 'react-redux'
-import { PerformerPanel } from '../../../material'
+import { NoPatternMessage, PerformerPanel } from '../../../pattern'
 import { ImmutableState, StateKey } from '../../../types'
 import { PageStateKey } from '../../types'
-import { NoPatternMessage } from '../noPatternMessage'
 import './styles'
 import { FirstRowProps } from './types'
 

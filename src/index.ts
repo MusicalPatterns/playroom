@@ -5,8 +5,6 @@ import { Provider } from 'react-redux'
 import { BatchAction, batchActions } from 'redux-batched-actions'
 import { App, PageStateKey } from './page'
 import { store } from './store'
-// tslint:disable-next-line no-import-side-effect
-import './styles'
 
 // tslint:disable-next-line bool-param-default
 const setupPlayroom: (patterns: Partial<Patterns>, debugMode?: boolean) => Promise<HTMLDivElement> =

@@ -2,10 +2,8 @@ import { TypedMap } from '@musical-patterns/utilities'
 import * as React from 'react'
 import { Dispatch } from 'redux'
 import { BatchAction } from 'redux-batched-actions'
-import { ImmutableMaterialState, PerformerAction } from './material'
-import { ImmutableMetadataState, MetadataAction } from './metadata'
 import { ImmutablePageState, PageAction } from './page'
-import { ImmutableSpecState, SpecAction } from './spec'
+import { ImmutablePatternState, PatternAction } from './pattern'
 
 enum SecretTestSelector {
     SUBMITTED_SPEC = 'secret-submitted-spec',
@@ -31,20 +29,16 @@ interface WithClickHandler {
 
 type AsyncEventHandler = (event: React.SyntheticEvent) => Promise<void>
 
-type Action = MetadataAction | PageAction | PerformerAction | SpecAction | BatchAction
+type Action = PatternAction | PageAction | BatchAction
 
 enum StateKey {
-    METADATA = 'METADATA',
+    PATTERN = 'PATTERN',
     PAGE = 'PAGE',
-    MATERIAL = 'MATERIAL',
-    SPEC = 'SPEC',
 }
 
 interface State {
-    [ StateKey.METADATA ]: ImmutableMetadataState,
+    [ StateKey.PATTERN ]: ImmutablePatternState,
     [ StateKey.PAGE ]: ImmutablePageState,
-    [ StateKey.MATERIAL ]: ImmutableMaterialState,
-    [ StateKey.SPEC ]: ImmutableSpecState,
 }
 
 type ImmutableState = TypedMap<State>

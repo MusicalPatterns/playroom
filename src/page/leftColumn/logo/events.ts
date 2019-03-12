@@ -1,8 +1,7 @@
 import { standardConfigurations } from '@musical-patterns/pattern'
 import { stop } from '@musical-patterns/performer'
 import { BatchAction, batchActions } from 'redux-batched-actions'
-import { MaterialStateKey, stopActions } from '../../../material'
-import { SpecStateKey } from '../../../spec'
+import { IdStateKey, MaterialStateKey, SpecStateKey, stopActions } from '../../../pattern'
 import { Action } from '../../../types'
 import { PageName, PageStateKey } from '../../types'
 import { adjustWindowActionsWithSideEffects } from '../adjustWindowActions'
@@ -24,7 +23,7 @@ const handleLogoClick: HandleLogoClick =
                 { type: SpecStateKey.CONFIGURATIONS, data: standardConfigurations },
                 { type: SpecStateKey.COMPUTE_VALIDATIONS, data: undefined },
                 { type: SpecStateKey.PRESETS, data: undefined },
-                { type: PageStateKey.PATTERN_ID, data: undefined },
+                { type: IdStateKey.PATTERN_ID, data: undefined },
                 { type: MaterialStateKey.PERFORMER_DISABLED, data: true },
             ])
 

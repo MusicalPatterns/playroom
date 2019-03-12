@@ -2,10 +2,8 @@ import { computeReducer } from '@musical-patterns/utilities'
 import { applyMiddleware, compose, createStore, Reducer, Store } from 'redux'
 import { batchDispatchMiddleware, enableBatching } from 'redux-batched-actions'
 import { combineReducers } from 'redux-immutable'
-import { initialMaterialState } from './material'
-import { initialMetadataState } from './metadata'
 import { initialPageState } from './page'
-import { initialSpecState } from './spec'
+import { patternReducer } from './pattern'
 import { Action, ImmutableState, StateKey } from './types'
 
 // @ts-ignore
@@ -13,10 +11,8 @@ import { Action, ImmutableState, StateKey } from './types'
 const composeEnhancers: any = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose
 
 const rootReducer: Reducer = combineReducers({
-    [ StateKey.METADATA ]: computeReducer({ initialState: initialMetadataState }),
+    [ StateKey.PATTERN ]: patternReducer,
     [ StateKey.PAGE ]: computeReducer({ initialState: initialPageState }),
-    [ StateKey.MATERIAL ]: computeReducer({ initialState: initialMaterialState }),
-    [ StateKey.SPEC ]: computeReducer({ initialState: initialSpecState }),
 })
 
 const store: Store<ImmutableState, Action> = createStore(

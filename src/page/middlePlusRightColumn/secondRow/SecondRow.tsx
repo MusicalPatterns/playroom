@@ -2,8 +2,7 @@
 
 import * as React from 'react'
 import { connect } from 'react-redux'
-import { Title } from '../../../metadata'
-import { SpecPanel } from '../../../spec'
+import { IdStateKey, PatternStateKey, SpecPanel, Title } from '../../../pattern'
 import { ImmutableState, StateKey } from '../../../types'
 import { ImmutablePageState, PageStateKey } from '../../types'
 import { computeOpenClassName } from './helpers'
@@ -16,7 +15,9 @@ const mapStateToProps: (state: ImmutableState) => SecondRowProps =
 
         return {
             pageName: pageState.get(PageStateKey.PAGE_NAME),
-            patternId: pageState.get(PageStateKey.PATTERN_ID),
+            patternId: state.get(StateKey.PATTERN)
+                .get(PatternStateKey.ID)
+                .get(IdStateKey.PATTERN_ID),
         }
     }
 

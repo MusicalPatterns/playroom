@@ -1,0 +1,18 @@
+@import '../../../effects';
+@import '../sizes';
+
+#performer-panel {
+  max-height: $performer-panel-max-height;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  margin: $performer-panel-vertical-spacing $performer-panel-horizontal-spacing;
+
+  @include animate(max-height);
+
+  &.closed {
+    max-height: 0;
+  }
+}

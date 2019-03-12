@@ -2,7 +2,7 @@
 
 export {
     FieldValidityClassName,
-} from './spec/indexForTest'
+} from './pattern/indexForTest'
 export {
     SecretTestSelector,
 } from './types'
