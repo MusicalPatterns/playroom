@@ -17,13 +17,15 @@ const PatternListItem: React.ComponentType<PatternListItemProps> =
         } = listedPattern.metadata
 
         const selectedClassName: string = !patternId ? '' : patternId === listedPatternId ? 'selected' : 'not-selected'
+        const originalPublishLine: string = `${formatDate(originalPublish)} to`
 
         return (
             <li {...{ className: selectedClassName, id: listedPatternId, onClick }} >
                 <div>{formattedName || constantCaseToUpperCase(listedPatternId)}</div>
                 <div>{musicalIdeaIllustrated}</div>
                 <div>v{version}</div>
-                <div>{formatDate(originalPublish)} - {formatDate(mostRecentPublish)}</div>
+                <div>{originalPublishLine}</div>
+                <div>{formatDate(mostRecentPublish)}</div>
             </li>
         )
     }
