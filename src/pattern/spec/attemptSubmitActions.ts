@@ -19,18 +19,25 @@ const computeAttemptSubmitActions: (parameters: ComputeAttemptSubmitActionsParam
             { type: SpecStateKey.DISPLAYED_SPECS, data: updatedDisplayedSpecs },
         ]
 
-        const { specsShouldBeSubmitted, validations }: ValidationsResult = validateSpecs({
-            computeValidations,
-            configurations,
-            displayedSpecs: updatedDisplayedSpecs,
-            keyOfSpecTriggeringValidation: specKey,
-        })
+        const { shouldSubmitUpdateToSpecTriggeringValidation, validations }: ValidationsResult =
+            validateSpecs({
+                computeValidations,
+                configurations,
+                displayedSpecs: updatedDisplayedSpecs as Specs,
+                keyOfSpecTriggeringValidation: specKey,
+            })
         if (!suppressUpdatingValidations) {
             actions.push({ type: SpecStateKey.VALIDATIONS, data: validations })
         }
-        if (specsShouldBeSubmitted) {
-            const updatedSubmittedSpecs: Specs = { ...submittedSpecs, [ specKey ]: updatedValue }
-            actions.push({ type: SpecStateKey.SUBMITTED_SPECS, data: updatedSubmittedSpecs })
+        if (shouldSubmitUpdateToSpecTriggeringValidation) {
+            const updatedSubmittedSpecsWhichWillNeverHaveInvalidSpecValues: Specs = {
+                ...submittedSpecs,
+                [ specKey ]: updatedValue,
+            }
+            actions.push({
+                data: updatedSubmittedSpecsWhichWillNeverHaveInvalidSpecValues,
+                type: SpecStateKey.SUBMITTED_SPECS,
+            })
         }
 
         return actions
