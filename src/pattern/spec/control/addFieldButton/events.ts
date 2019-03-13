@@ -22,7 +22,7 @@ const handleFieldAdd: (parameters: HandleFieldAddParameters) => void =
             displayedSpecs,
             specKey,
             submittedSpecs,
-            suppressReevaluatingValidations: true,
+            suppressUpdatingValidations: true,
             updatedValue: updatedArrayedDisplayedValue,
         })
 

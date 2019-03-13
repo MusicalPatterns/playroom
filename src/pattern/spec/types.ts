@@ -60,7 +60,7 @@ interface SubmissionProps extends ConfigurationsParameter {
 }
 
 interface ComputeAttemptSubmitActionsParameters extends SubmissionProps, ControlParentProps {
-    suppressReevaluatingValidations?: boolean,
+    suppressUpdatingValidations?: boolean,
     updatedValue: DomSpecValue,
 }
 

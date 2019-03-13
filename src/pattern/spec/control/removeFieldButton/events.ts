@@ -43,7 +43,7 @@ const handleFieldRemove: (parameters: HandleFieldRemoveParameters) => void =
             isNoInvalidMessageForRemovedField(validations, specKey)
 
         const removedFieldIsEmpty: boolean = lastElement(arrayedDisplayedValue) === ''
-        const suppressReevaluatingValidations: boolean = removedFieldIsEmpty && removedFieldHasNoInvalidMessages
+        const suppressUpdatingValidations: boolean = removedFieldIsEmpty && removedFieldHasNoInvalidMessages
 
         const actions: Action[] = computeAttemptSubmitActions({
             computeValidations,
@@ -51,7 +51,7 @@ const handleFieldRemove: (parameters: HandleFieldRemoveParameters) => void =
             displayedSpecs,
             specKey,
             submittedSpecs,
-            suppressReevaluatingValidations,
+            suppressUpdatingValidations,
             updatedValue: updatedArrayedDisplayedValue,
         })
 
