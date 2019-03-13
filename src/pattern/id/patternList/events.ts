@@ -3,7 +3,12 @@ import { setTimePosition } from '@musical-patterns/performer'
 import { BEGINNING, constantCaseToUpperCase, doAsync, isUndefined, Maybe } from '@musical-patterns/utilities'
 import * as React from 'react'
 import { BatchAction, batchActions } from 'redux-batched-actions'
-import { adjustWindowActionsWithSideEffects, computeMaybePattern, openRightColumn, PageStateKey } from '../../../page'
+import {
+    computeMaybePattern,
+    maybeCloseLeftColumnToSaveSpaceWhenScreenWidthIsSmallAndScrollToTopActions,
+    openRightColumn,
+    PageStateKey,
+} from '../../../page'
 import { IdStateKey, MaterialStateKey, MetadataStateKey, resetActions, SpecStateKey } from '../../../pattern'
 import { Action } from '../../../types'
 import { computePost } from './post'
@@ -54,7 +59,7 @@ const handlePatternChange: HandlePatternChange =
                 { type: MetadataStateKey.POST, data: post },
                 { type: MetadataStateKey.PATTERN_NAME, data: patternName },
             ])
-            .concat(adjustWindowActionsWithSideEffects())
+            .concat(maybeCloseLeftColumnToSaveSpaceWhenScreenWidthIsSmallAndScrollToTopActions())
 
         const batchedAction: BatchAction = batchActions(actions)
         dispatch(batchedAction)

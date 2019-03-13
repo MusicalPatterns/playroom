@@ -2,7 +2,10 @@ export { App } from './app'
 
 export { initialPageState } from './state'
 export { computeMaybePattern } from './maybePattern'
-export { adjustWindowActionsWithSideEffects, openRightColumn } from './leftColumn'
+export {
+    maybeCloseLeftColumnToSaveSpaceWhenScreenWidthIsSmallAndScrollToTopActions,
+    openRightColumn,
+}from './leftColumn'
 
 export {
     PageName,

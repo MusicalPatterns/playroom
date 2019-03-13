@@ -2,7 +2,7 @@ import { Action } from '../../types'
 import { PageStateKey } from '../types'
 import { WIDTH_BELOW_WHICH_PATTERNS_LIST_CLOSES_UPON_PATTERN_SELECTION } from './constants'
 
-const adjustWindowActionsWithSideEffects: () => Action[] =
+const maybeCloseLeftColumnToSaveSpaceWhenScreenWidthIsSmallAndScrollToTopActions: () => Action[] =
     (): Action[] => {
         window.scrollTo(0, 0)
 
@@ -14,5 +14,5 @@ const adjustWindowActionsWithSideEffects: () => Action[] =
     }
 
 export {
-    adjustWindowActionsWithSideEffects,
+    maybeCloseLeftColumnToSaveSpaceWhenScreenWidthIsSmallAndScrollToTopActions,
 }

@@ -4,15 +4,15 @@ import { BatchAction, batchActions } from 'redux-batched-actions'
 import { IdStateKey, MaterialStateKey, SpecStateKey, stopActions } from '../../../pattern'
 import { Action } from '../../../types'
 import { PageName, PageStateKey } from '../../types'
-import { adjustWindowActionsWithSideEffects } from '../adjustWindowActions'
 import { closeRightColumn } from '../rightColumnActions'
+import { maybeCloseLeftColumnToSaveSpaceWhenScreenWidthIsSmallAndScrollToTopActions } from '../windowActions'
 import { HandleLogoClick, HandleLogoClickParameters } from './types'
 
 const handleLogoClick: HandleLogoClick =
     async ({ dispatch, rightColumnOpen }: HandleLogoClickParameters): Promise<void> => {
         await stop()
 
-        const actions: Action[] = adjustWindowActionsWithSideEffects()
+        const actions: Action[] = maybeCloseLeftColumnToSaveSpaceWhenScreenWidthIsSmallAndScrollToTopActions()
             .concat(stopActions())
             .concat([
                 { type: PageStateKey.PAGE_NAME, data: PageName.ABOUT },
