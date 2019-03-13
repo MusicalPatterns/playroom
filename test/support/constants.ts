@@ -43,27 +43,27 @@ const ARRAYED_SPEC_WITH_INITIAL_FIELD_VALUE_KEY: string = 'arrayedSpecWithInitia
 const SPEC_CONTROLS_PATTERN_ID: Id = playroomTestSpecControls!.id
 const SPEC_CONTROLS_PATTERN_TITLE: string = playroomTestSpecControls!.metadata.formattedName!
 const SPEC_CONTROLS_PATTERN_RANGED_SPEC_ONE_INITIAL_VALUE: number =
-    playroomTestSpecControls!.spec.initial[ RANGED_SPEC_ONE_KEY ] as number
+    playroomTestSpecControls!.spec.initialSpecs[ RANGED_SPEC_ONE_KEY ] as number
 const specControlsPatternConfigurations: Configurations = playroomTestSpecControls!.spec.configurations
 const specControlsPatternRangedConstraint: RangedConstraint =
     specControlsPatternConfigurations[ RANGED_SPEC_ONE_KEY ].constraint as RangedConstraint
 const SPEC_CONTROLS_PATTERN_RANGED_SPEC_ONE_MAX_VALUE: number = specControlsPatternRangedConstraint.max as number
 const SPEC_CONTROLS_PATTERN_RANGED_SPEC_TWO_INITIAL_VALUE: number =
-    playroomTestSpecControls!.spec.initial[ RANGED_SPEC_TWO_KEY ] as number
+    playroomTestSpecControls!.spec.initialSpecs[ RANGED_SPEC_TWO_KEY ] as number
 const SPEC_CONTROLS_PATTERN_OPTIONED_SPEC_ONE_INITIAL_VALUE: string =
-    playroomTestSpecControls!.spec.initial[ OPTIONED_SPEC_ONE_KEY ] as string
+    playroomTestSpecControls!.spec.initialSpecs[ OPTIONED_SPEC_ONE_KEY ] as string
 const specControlsPatternOptionedSpecOneConstraint: OptionedConstraint =
     specControlsPatternConfigurations[ OPTIONED_SPEC_ONE_KEY ].constraint as OptionedConstraint
 const SPEC_CONTROLS_PATTERN_OPTIONED_SPEC_ONE_MODIFIED_VALUE: string =
     specControlsPatternOptionedSpecOneConstraint[ 0 ].value
 const SPEC_CONTROLS_PATTERN_OPTIONED_SPEC_TWO_INITIAL_VALUE: string =
-    playroomTestSpecControls!.spec.initial[ OPTIONED_SPEC_TWO_KEY ] as string
+    playroomTestSpecControls!.spec.initialSpecs[ OPTIONED_SPEC_TWO_KEY ] as string
 const specControlsPatternOptionedSpecTwoConstraint: OptionedConstraint =
     specControlsPatternConfigurations[ OPTIONED_SPEC_TWO_KEY ].constraint as OptionedConstraint
 const SPEC_CONTROLS_PATTERN_OPTIONED_SPEC_TWO_MODIFIED_VALUE: string =
     specControlsPatternOptionedSpecTwoConstraint[ 1 ].value
 const SPEC_CONTROLS_PATTERN_STRINGED_SPEC_INITIAL_VALUE: string =
-    playroomTestSpecControls!.spec.initial[ STRINGED_SPEC_KEY ] as string
+    playroomTestSpecControls!.spec.initialSpecs[ STRINGED_SPEC_KEY ] as string
 const specControlsPatternStringedSpecConstraint: StringedConstraint =
     specControlsPatternConfigurations[ STRINGED_SPEC_KEY ].constraint as StringedConstraint
 const SPEC_CONTROLS_PATTERN_STRINGED_SPEC_ONE_MAX_LENGTH: number =
@@ -71,30 +71,30 @@ const SPEC_CONTROLS_PATTERN_STRINGED_SPEC_ONE_MAX_LENGTH: number =
 const SPEC_CONTROLS_PATTERN_STRINGED_SPEC_ONE_MIN_LENGTH: number =
     specControlsPatternStringedSpecConstraint.minLength as number
 const SPEC_CONTROLS_PATTERN_TOGGLED_SPEC_INITIAL_VALUE: boolean =
-    playroomTestSpecControls!.spec.initial[ TOGGLED_SPEC_KEY ] as boolean
+    playroomTestSpecControls!.spec.initialSpecs[ TOGGLED_SPEC_KEY ] as boolean
 const SPEC_CONTROLS_PATTERN_TOGGLED_SPEC_MODIFIED_VALUE: boolean =
     !SPEC_CONTROLS_PATTERN_TOGGLED_SPEC_INITIAL_VALUE
 const SPEC_CONTROLS_PATTERN_ARRAYED_SPEC_INITIAL_VALUE: number[] =
-    playroomTestSpecControls!.spec.initial[ ARRAYED_SPEC_KEY ] as number[]
+    playroomTestSpecControls!.spec.initialSpecs[ ARRAYED_SPEC_KEY ] as number[]
 const SPEC_CONTROLS_PATTERN_ARRAYED_SPEC_WITH_INITIAL_FIELD_VALUE_INITIAL_VALUE: number[] =
-    playroomTestSpecControls!.spec.initial[ ARRAYED_SPEC_WITH_INITIAL_FIELD_VALUE_KEY ] as number[]
+    playroomTestSpecControls!.spec.initialSpecs[ ARRAYED_SPEC_WITH_INITIAL_FIELD_VALUE_KEY ] as number[]
 const SPEC_CONTROLS_PATTERN_ARRAYED_SPEC_WITH_INITIAL_FIELD_VALUE_INITIAL_FIELD_VALUE: number =
     playroomTestSpecControls!.spec.configurations[ ARRAYED_SPEC_WITH_INITIAL_FIELD_VALUE_KEY ].arrayedNewFieldInitialValue as number
 
 const POST_PATTERN_ID: Id = playroomTestPost!.id
 const POST_PATTERN_TITLE: string = playroomTestPost!.metadata.formattedName!
 const POST_PATTERN_RANGED_SPEC_ONE_INITIAL_VALUE: number =
-    playroomTestPost!.spec.initial[ RANGED_SPEC_ONE_KEY ] as number
+    playroomTestPost!.spec.initialSpecs[ RANGED_SPEC_ONE_KEY ] as number
 const POST_PATTERN_RANGED_SPEC_TWO_INITIAL_VALUE: number =
-    playroomTestPost!.spec.initial[ RANGED_SPEC_TWO_KEY ] as number
+    playroomTestPost!.spec.initialSpecs[ RANGED_SPEC_TWO_KEY ] as number
 const POST_PATTERN_OPTIONED_SPEC_ONE_INITIAL_VALUE: string =
-    playroomTestPost!.spec.initial[ OPTIONED_SPEC_ONE_KEY ] as string
+    playroomTestPost!.spec.initialSpecs[ OPTIONED_SPEC_ONE_KEY ] as string
 const postPatternConfigurations: Configurations = playroomTestPost!.spec.configurations
 const postPatternOptionedSpecOneConstraint: OptionedConstraint =
     postPatternConfigurations[ OPTIONED_SPEC_ONE_KEY ].constraint as OptionedConstraint
 const POST_PATTERN_OPTIONED_SPEC_ONE_MODIFIED_VALUE: string = postPatternOptionedSpecOneConstraint[ 1 ].value
 const POST_PATTERN_OPTIONED_SPEC_TWO_INITIAL_VALUE: string =
-    playroomTestPost!.spec.initial[ OPTIONED_SPEC_TWO_KEY ] as string
+    playroomTestPost!.spec.initialSpecs[ OPTIONED_SPEC_TWO_KEY ] as string
 const postPatternOptionedSpecTwoConstraint: OptionedConstraint =
     postPatternConfigurations[ OPTIONED_SPEC_TWO_KEY ].constraint as OptionedConstraint
 const POST_PATTERN_OPTIONED_SPEC_TWO_MODIFIED_VALUE: string = postPatternOptionedSpecTwoConstraint[ 0 ].value

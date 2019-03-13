@@ -38,7 +38,7 @@ const handlePatternChange: HandlePatternChange =
         }
 
         const { spec, metadata } = pattern
-        const { initial: initialSpecs, configurations, computeValidations } = spec
+        const { initialSpecs, configurations, computeValidations } = spec
         const post: string = computePost(metadata)
         const patternName: string = computePatternName({ metadata, newId: newPatternId })
 
