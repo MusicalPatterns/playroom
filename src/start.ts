@@ -1,4 +1,4 @@
-import { patterns } from '@musical-patterns/pattern-playroom-test'
+import { patterns } from '@musical-patterns/pattern-beaten-path'
 import { setupPlayroom } from './index'
 
 const debugMode: boolean = process.env.NODE_ENV !== 'production'
