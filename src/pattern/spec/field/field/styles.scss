@@ -3,9 +3,9 @@
 @import '../sizes';
 
 .field {
+  width: 100%;
   display: flex;
   align-items: center;
-  flex-wrap: wrap;
   position: relative;
   margin-bottom: $field-bottom-spacing;
   margin-left: $field-horizontal-spacing;

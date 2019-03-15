@@ -54,8 +54,8 @@ const RangedInputs: React.ComponentType<SharedInputsProps> =
 
         return (
             <div {...{ className: 'inputs ranged-inputs' }}>
-                {hideInput !== RangedInputType.NUMBER && <input {...{ ...rangedInputProps, type: 'number' }} />}
                 {hideInput !== RangedInputType.RANGE && <input {...{ ...rangedInputProps, type: 'range' }} />}
+                {hideInput !== RangedInputType.NUMBER && <input {...{ ...rangedInputProps, type: 'number' }} />}
             </div>
         )
     }
