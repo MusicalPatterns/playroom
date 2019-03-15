@@ -235,8 +235,8 @@ describe('add field button', () => {
         })
     })
 
-    describe('for arrayed spec controls with an initial element value', () => {
-        it('clicking the add field button displays a new field at the end of the arrayed spec control with that initial value', async (done: DoneFn) => {
+    describe('for arrayed spec controls with an initial field value', () => {
+        it('clicking the add field button displays a new field at the end of the arrayed spec control with that initial value, even if it is zero', async (done: DoneFn) => {
             const originalFieldCount: number = await elementCount(`#${ARRAYED_SPEC_WITH_INITIAL_FIELD_VALUE_KEY} input[type=range]`)
 
             await clickAddForTheArrayedSpecControlWithTheInitialFieldValue()
@@ -246,7 +246,7 @@ describe('add field button', () => {
             done()
         })
 
-        it('immediately submits the arrayed spec control with the new element with the initial value added to the end', async (done: DoneFn) => {
+        it('immediately submits the arrayed spec control with the new field with the initial value added to the end', async (done: DoneFn) => {
             await theSubmittedValueForTheArrayedSpecControlWithTheInitialFieldValueAsAWholeIsInItsInitialState()
 
             await clickAddForTheArrayedSpecControlWithTheInitialFieldValue()

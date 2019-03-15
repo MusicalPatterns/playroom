@@ -1,5 +1,5 @@
 import { ArrayedDomSpecValue } from '@musical-patterns/pattern'
-import { HtmlValueOrChecked, Maybe } from '@musical-patterns/utilities'
+import { HtmlValueOrChecked, isUndefined, Maybe } from '@musical-patterns/utilities'
 import { batchActions } from 'redux-batched-actions'
 import { Action } from '../../../../types'
 import { computeArrayedDisplayedValue } from '../../arrayedValues'
@@ -14,7 +14,7 @@ const handleFieldAdd: (parameters: HandleFieldAddParameters) => void =
         const arrayedDisplayedValue: ArrayedDomSpecValue = computeArrayedDisplayedValue(displayedSpecs, specKey)
 
         const updatedArrayedDisplayedValue: ArrayedDomSpecValue =
-            arrayedDisplayedValue.concat([ initialFieldValue || '' ])
+            arrayedDisplayedValue.concat([ isUndefined(initialFieldValue) ? '' : initialFieldValue ])
 
         const actions: Action[] = computeAttemptSubmitActions({
             computeValidations,
