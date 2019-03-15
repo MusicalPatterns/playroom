@@ -1,6 +1,6 @@
 // tslint:disable no-duplicate-string
 
-import { indexOfLastCharacter } from '@musical-patterns/utilities'
+import { indexOfLastElement } from '@musical-patterns/utilities'
 import { ElementHandle } from 'puppeteer'
 import { FieldValidityClassName, SecretTestSelector } from '../../../../../src/indexForTest'
 import {
@@ -96,7 +96,7 @@ const stringedInputDisplayValueIsTheTooShortValue: () => Promise<void> =
             .toBe(
                 SPEC_CONTROLS_PATTERN_STRINGED_SPEC_INITIAL_VALUE.slice(
                     0,
-                    indexOfLastCharacter(SPEC_CONTROLS_PATTERN_STRINGED_SPEC_INITIAL_VALUE),
+                    indexOfLastElement(SPEC_CONTROLS_PATTERN_STRINGED_SPEC_INITIAL_VALUE),
                 ),
                 'stringed input display value was not the too short value',
             )
