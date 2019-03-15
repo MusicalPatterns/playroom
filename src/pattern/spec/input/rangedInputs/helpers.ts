@@ -18,12 +18,8 @@ const computeMinAndMax: (constraint: Maybe<RangedConstraint>) => { max: number, 
     }
 
 const computeStep: (constraint: Maybe<RangedConstraint>) => number =
-    (constraint: Maybe<RangedConstraint>): number => {
-        let result = constraint && constraint.integer ? 1 : NON_INTEGER_STEP
-
-        console.log('ok got constraint', constraint, 'so we are going with', result)
-        return result
-    }
+    (constraint: Maybe<RangedConstraint>): number =>
+        constraint && constraint.integer ? 1 : NON_INTEGER_STEP
 
 export {
     computeMinAndMax,

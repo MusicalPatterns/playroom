@@ -1,6 +1,6 @@
 {
   "name": "@musical-patterns/playroom",
-  "version": "1.0.326",
+  "version": "1.0.327",
   "main": "dist/index.js",
   "typings": "dist/index.d.ts",
   "repository": {

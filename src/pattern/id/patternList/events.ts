@@ -47,8 +47,6 @@ const handlePatternChange: HandlePatternChange =
         const post: string = computePost(metadata)
         const patternName: string = computePatternName({ metadata, newId: newPatternId })
 
-        console.log('what configuraitons???', configurations)
-        
         const actions: Action[] = resetActions(initialSpecs)
             .concat([
                 { type: IdStateKey.PATTERN_ID, data: newPatternId },
