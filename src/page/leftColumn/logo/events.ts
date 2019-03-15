@@ -1,5 +1,6 @@
-import { standardConfigurations } from '@musical-patterns/pattern'
+import { Configuration, Specs, standardConfigurations } from '@musical-patterns/pattern'
 import { stop } from '@musical-patterns/performer'
+import { KeyMap } from '@musical-patterns/utilities'
 import { BatchAction, batchActions } from 'redux-batched-actions'
 import { IdStateKey, MaterialStateKey, SpecStateKey, stopActions } from '../../../pattern'
 import { Action } from '../../../types'
@@ -20,7 +21,7 @@ const handleLogoClick: HandleLogoClick =
                 { type: SpecStateKey.DISPLAYED_SPECS, data: {} },
                 { type: SpecStateKey.VALIDATIONS, data: {} },
                 { type: SpecStateKey.SUBMITTED_SPECS, data: {} },
-                { type: SpecStateKey.CONFIGURATIONS, data: standardConfigurations },
+                { type: SpecStateKey.CONFIGURATIONS, data: standardConfigurations as KeyMap<Specs, Configuration> },
                 { type: SpecStateKey.COMPUTE_VALIDATIONS, data: undefined },
                 { type: SpecStateKey.PRESETS, data: undefined },
                 { type: IdStateKey.PATTERN_ID, data: undefined },

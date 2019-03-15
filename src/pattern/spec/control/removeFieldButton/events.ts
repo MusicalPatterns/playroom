@@ -1,5 +1,12 @@
 import { ArrayedDomSpecValue, ArrayedValidation, Validations } from '@musical-patterns/pattern'
-import { indexOfLastElement, INITIAL, isUndefined, lastElement, slice } from '@musical-patterns/utilities'
+import {
+    HtmlValueOrChecked,
+    indexOfLastElement,
+    INITIAL,
+    isUndefined,
+    lastElement,
+    slice,
+} from '@musical-patterns/utilities'
 import { batchActions } from 'redux-batched-actions'
 import { Action } from '../../../../types'
 import { computeArrayedDisplayedValue, computeArrayedValidation } from '../../arrayedValues'

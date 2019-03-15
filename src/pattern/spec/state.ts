@@ -1,5 +1,5 @@
-import { standardConfigurations } from '@musical-patterns/pattern'
-import { typedMap } from '@musical-patterns/utilities'
+import { Configuration, Specs, standardConfigurations } from '@musical-patterns/pattern'
+import { KeyMap, typedMap } from '@musical-patterns/utilities'
 import { ImmutableSpecState, SpecState, SpecStateKey } from './types'
 
 const initialSpecState: ImmutableSpecState = typedMap<SpecState>({
@@ -7,7 +7,7 @@ const initialSpecState: ImmutableSpecState = typedMap<SpecState>({
     [ SpecStateKey.DISPLAYED_SPECS ]: {},
     [ SpecStateKey.VALIDATIONS ]: {},
     [ SpecStateKey.SUBMITTED_SPECS ]: {},
-    [ SpecStateKey.CONFIGURATIONS ]: standardConfigurations,
+    [ SpecStateKey.CONFIGURATIONS ]: standardConfigurations as KeyMap<Specs, Configuration>,
     [ SpecStateKey.COMPUTE_VALIDATIONS ]: undefined,
     [ SpecStateKey.PRESETS ]: undefined,
     [ SpecStateKey.SPEC_PANEL_OPEN ]: false,
