@@ -11,12 +11,11 @@ const sortByOrder: (pattern: Pattern, nextPattern: Pattern) => number =
         if (first < second) {
             return negative(1)
         }
-        else if (first > second) {
+        if (first > second) {
             return 1
         }
-        else {
-            return 0
-        }
+
+        return 0
     }
 
 const sortByPublishDate: (pattern: Pattern, nextPattern: Pattern) => number =

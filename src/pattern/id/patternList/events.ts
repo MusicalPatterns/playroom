@@ -20,9 +20,7 @@ const computePatternIdFromEvent: (event: React.SyntheticEvent) => Id =
         if (isId(target.id)) {
             return target.id
         }
-        else {
-            throw new Error('target id was not a pattern Id')
-        }
+        throw new Error('target id was not a pattern Id')
     }
 
 const computePatternName: (parameters: { metadata: Metadata, newId: Id }) => string =
