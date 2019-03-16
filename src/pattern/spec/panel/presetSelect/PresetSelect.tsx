@@ -3,7 +3,7 @@
 import { Preset } from '@musical-patterns/pattern'
 import {
     ARBITRARILY_LARGE_NUMBER,
-    camelCaseToLowerCase,
+    camelCaseToUpperCase,
     deepEqual,
     entries,
     from,
@@ -61,7 +61,7 @@ const PresetSelect: React.ComponentType<PresetSelectProps> =
                 if (deepEqual(specs, submittedSpecs)) {
                     selectValue = presetKey
                 }
-                const displayName: string = formattedName || camelCaseToLowerCase(presetKey)
+                const displayName: string = formattedName || camelCaseToUpperCase(presetKey)
                 const key: number = from.Ordinal(translateFromZeroIndexedToOneIndexed(index))
 
                 return <option {...{ key, value: presetKey, title: description }}>{displayName}</option>
