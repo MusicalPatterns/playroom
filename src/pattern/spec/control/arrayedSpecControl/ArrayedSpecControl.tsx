@@ -1,6 +1,6 @@
 // tslint:disable variable-name file-name-casing no-default-export no-import-side-effect no-null-keyword
 
-import { camelCaseToLowerCase } from '@musical-patterns/utilities'
+import { camelCaseToUpperCase } from '@musical-patterns/utilities'
 import * as React from 'react'
 import { connect } from 'react-redux'
 import { ImmutableState, StateKey } from '../../../../types'
@@ -25,7 +25,7 @@ const ArrayedSpecControl: React.ComponentType<ArrayedSpecControlProps> =
     ({ configurations, specKey }: ArrayedSpecControlProps): React.ReactElement | null => (
         <div {...{ id: specKey, className: 'spec-control arrayed-spec-control' }}>
             <div>
-                {configurations[ specKey ].formattedName || camelCaseToLowerCase(specKey)}
+                {configurations[ specKey ].formattedName || camelCaseToUpperCase(specKey)}
                 <Units {...{ specKey }}/>
             </div>
             <ArrayedFields {...{ specKey }}/>
