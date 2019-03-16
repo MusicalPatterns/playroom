@@ -1,7 +1,7 @@
 // tslint:disable variable-name file-name-casing no-default-export no-import-side-effect no-null-keyword
 
 import { StandardSpec } from '@musical-patterns/pattern'
-import { from, keys, map, Ordinal } from '@musical-patterns/utilities'
+import { from, isEmpty, keys, map, Ordinal } from '@musical-patterns/utilities'
 import * as React from 'react'
 import { connect } from 'react-redux'
 import { PATTERN_PARTICULAR, STANDARD } from '../../../../copy'
@@ -46,8 +46,8 @@ const SpecControls: React.ComponentType<SpecControlsProps> =
                 <SpecControl {...{ key: from.Ordinal(index), specKey }} />,
         )
 
-        const bothPatternParticularAndStandardControlsArePresent: boolean = !!standardSpecControls.length &&
-            !!patternParticularControls.length
+        const bothPatternParticularAndStandardControlsArePresent: boolean = !isEmpty(standardSpecControls) &&
+            !isEmpty(patternParticularControls)
 
         return (
             <div {...{ id: 'spec-controls' }}>

@@ -1,11 +1,22 @@
-import { Patterns } from '@musical-patterns/pattern'
+import { Pattern, Patterns } from '@musical-patterns/pattern'
+import { isSingleton } from '@musical-patterns/utilities'
 import { createElement } from 'react'
 import { render } from 'react-dom'
 import { Provider } from 'react-redux'
 import { BatchAction, batchActions } from 'redux-batched-actions'
 import { App, PageStateKey } from './page'
-import { IdStateKey } from './pattern'
+import { changePattern, IdStateKey, SpecStateKey } from './pattern'
 import { store } from './store'
+import { Action } from './types'
+
+const autoSelectOnlyPattern: (onlyPattern: Pattern, actions: Action[]) => Promise<void> =
+    (onlyPattern: Pattern, actions: Action[]): Promise<void> =>
+        changePattern({
+            additionalActions: actions.concat({ type: SpecStateKey.SPEC_PANEL_OPEN, data: true }),
+            dispatch: store.dispatch,
+            pattern: onlyPattern,
+            rightColumnOpen: false,
+        })
 
 // tslint:disable-next-line bool-param-default
 const setupPlayroom: (patterns: Partial<Patterns>, debugMode?: boolean) => Promise<HTMLDivElement> =
@@ -17,11 +28,20 @@ const setupPlayroom: (patterns: Partial<Patterns>, debugMode?: boolean) => Promi
 
         render(createElement(Provider, { store }, createElement(App)), root)
 
-        const batchedAction: BatchAction = batchActions([
+        const actions: Action[] = [
             { type: IdStateKey.PATTERNS, data: patterns },
             { type: PageStateKey.DEBUG_MODE, data: debugMode },
-        ])
-        store.dispatch(batchedAction)
+        ]
+
+        if (isSingleton(Object.keys(patterns))) {
+            // @ts-ignore
+            const onlyPattern: Pattern = patterns[ Object.keys(patterns)[ 0 ] ]
+            await autoSelectOnlyPattern(onlyPattern, actions)
+        }
+        else {
+            const batchedAction: BatchAction = batchActions(actions)
+            store.dispatch(batchedAction)
+        }
 
         return root
     }

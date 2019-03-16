@@ -3,6 +3,7 @@
 import { faMinus } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { DomSpecValue, isArrayedDomSpecValue } from '@musical-patterns/pattern'
+import { isEmpty } from '@musical-patterns/utilities'
 import * as React from 'react'
 import { connect } from 'react-redux'
 import { Dispatch } from 'redux'
@@ -50,7 +51,7 @@ const RemoveFieldButton: React.ComponentType<RemoveFieldButtonProps> =
         if (!isArrayedDomSpecValue(displayedValue)) {
             throw new Error('cannot treat a singular spec control as arrayed')
         }
-        const disabled: boolean = !displayedValue.length
+        const disabled: boolean = isEmpty(displayedValue)
 
         return (
             <button {...{ className: 'remove-field', onClick, disabled }}>
