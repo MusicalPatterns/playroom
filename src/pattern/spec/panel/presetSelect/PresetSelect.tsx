@@ -74,7 +74,7 @@ const PresetSelect: React.ComponentType<PresetSelectProps> =
 
         return (
             <div {...{ id: 'presets' }}>
-                presets
+                <h3>presets</h3>
                 <select {...{ onChange, value: selectValue }}>
                     {options}
                 </select>

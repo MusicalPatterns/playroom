@@ -24,13 +24,15 @@ const mapStateToProps: (state: ImmutableState) => ConfigurationsParameter =
 const ArrayedSpecControl: React.ComponentType<ArrayedSpecControlProps> =
     ({ configurations, specKey }: ArrayedSpecControlProps): React.ReactElement | null => (
         <div {...{ id: specKey, className: 'spec-control arrayed-spec-control' }}>
-            <div>{configurations[ specKey ].formattedName || camelCaseToLowerCase(specKey)}</div>
+            <div>
+                {configurations[ specKey ].formattedName || camelCaseToLowerCase(specKey)}
+                <Units {...{ specKey }}/>
+            </div>
             <ArrayedFields {...{ specKey }}/>
             <div>
                 <AddFieldButton {...{ specKey }}/>
                 <RemoveFieldButton {...{ specKey }}/>
             </div>
-            <Units {...{ specKey }}/>
             <SecretSubmittedSpecForTest {...{ specKey }}/>
         </div>
     )

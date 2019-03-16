@@ -8,6 +8,7 @@
   select {
     margin-left: $presets-spacing;
     min-width: $control-width;
+    max-width: $presets-width;
     margin-bottom: $spec-panel-bottom-spacing;
     padding: 0 $presets-spacing;
     height: $control-height;

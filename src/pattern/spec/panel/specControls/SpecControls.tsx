@@ -10,6 +10,7 @@ import { PatternStateKey } from '../../../types'
 import { SpecControl } from '../../control'
 import { ImmutableSpecState, SpecStateKey } from '../../types'
 import { computeSortSpecControls } from './sortSpecControls'
+import './styles.scss'
 import { SpecControlsProps } from './types'
 
 const mapStateToProps: (state: ImmutableState) => SpecControlsProps =
@@ -51,10 +52,10 @@ const SpecControls: React.ComponentType<SpecControlsProps> =
 
         return (
             <div {...{ id: 'spec-controls' }}>
-                {bothPatternParticularAndStandardControlsArePresent && <h3>{PATTERN_PARTICULAR}</h3>}
+                {bothPatternParticularAndStandardControlsArePresent ? <h3>{PATTERN_PARTICULAR}</h3> : <h3/>}
                 {patternParticularControls}
                 {bothPatternParticularAndStandardControlsArePresent && <hr/>}
-                {bothPatternParticularAndStandardControlsArePresent && <h3>{STANDARD}</h3>}
+                {bothPatternParticularAndStandardControlsArePresent ? <h3>{STANDARD}</h3> : <h3/>}
                 {standardSpecControls}
             </div>
         )

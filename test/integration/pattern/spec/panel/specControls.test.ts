@@ -122,8 +122,8 @@ describe('spec controls', () => {
         await selectOnlyStandardSpecsPattern()
         await openSpecControlsIfNotOpen()
 
-        expect(await elementExists(SECTION_HEADING))
-            .toBeFalsy('section headings were shown')
+        expect(await elementInnerText(SECTION_HEADING))
+            .toBe('')
 
         done()
     })
@@ -132,8 +132,8 @@ describe('spec controls', () => {
         await selectOnlyPatternParticularSpecsPattern()
         await openSpecControlsIfNotOpen()
 
-        expect(await elementExists(SECTION_HEADING))
-            .toBeFalsy('section headings were shown')
+        expect(await elementInnerText(SECTION_HEADING))
+            .toBe('')
 
         done()
     })

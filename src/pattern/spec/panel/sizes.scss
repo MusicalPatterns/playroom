@@ -8,12 +8,12 @@ $littlest-mobile-spec-panel-max-width: $tiny-area;
 
 $spec-panel-closed-height: $enormous;
 $spec-panel-spacing: $huge;
-$spec-panel-max-width: $huge-area - $spec-panel-spacing - $spec-panel-spacing;
 $spec-panel-bottom-spacing: $tiny;
 $spec-panel-caret-size: $big;
 $spec-panel-max-height-for-animation: $phi * $enormous-area;
-$spec-panel-scroll-bar-hiding-translation: -17px;
+$spec-panel-scroll-bar-hiding-translation: 17px;
 $spec-panel-height: $huge-area;
+$spec-panel-max-width: $huge-area - $spec-panel-spacing - $spec-panel-spacing;
 
 $spec-panel-footer-fade-vertical-translation: -$enormous;
 $spec-panel-footer-height: $tiny-area;
@@ -21,3 +21,5 @@ $spec-panel-footer-height: $tiny-area;
 $presets-spacing: $medium;
 
 $spec-controls-vertical-spacing: $big;
+
+$presets-width: $medium-area;

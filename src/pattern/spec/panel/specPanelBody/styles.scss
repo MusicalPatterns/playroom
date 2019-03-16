@@ -7,13 +7,14 @@
   > div {
     @include animate(max-height, padding);
 
-    width: $mobile-spec-panel-max-width - $spec-panel-spacing;
+    width: $mobile-spec-panel-max-width - $spec-panel-scroll-bar-hiding-translation;
     top: $spec-panel-spacing;
-    right: $spec-panel-scroll-bar-hiding-translation;
+    right: -$spec-panel-scroll-bar-hiding-translation;
     bottom: 0;
     padding: $spec-controls-vertical-spacing 0;
     position: absolute;
-    overflow: auto;
+    overflow-y: auto;
+    overflow-x: hidden;
     list-style: square;
     margin-block-start: 0;
     margin-block-end: 0;
