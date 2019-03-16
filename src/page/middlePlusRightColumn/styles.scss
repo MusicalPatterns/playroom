@@ -1,6 +1,5 @@
 @import '../../colors';
 @import '../../sizes';
-@import './colors';
 @import './sizes';
 @import './proportions';
 
@@ -13,29 +12,24 @@
     color: $text-color;
     display: flex;
     flex-direction: column;
-    align-items: flex-start;
 
     p,
     img,
     iframe {
       padding: $middle-plus-right-columns-paragraph-spacing $middle-plus-right-columns-horizontal-spacing;
     }
-
-    iframe {
-      width: $right-min-width;
-      height: $iframe-height;
-    }
   }
 
   .middle {
     flex: $middle-proportion;
+    align-items: flex-start;
     min-width: $middle-min-width;
 
     @media screen and (max-width: $mobile-size) {
       min-width: $middle-min-width-mobile;
     }
 
-    background-color: $middle-column-background;
+    background-color: $light-area-background;
 
     h1,
     h2,
@@ -45,7 +39,8 @@
   }
 
   .right {
-    background-color: $right-column-background;
+    background-color: $medium-area-background;
     text-align: right;
+    align-items: flex-end;
   }
 }

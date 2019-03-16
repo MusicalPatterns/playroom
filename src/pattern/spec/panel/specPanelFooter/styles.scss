@@ -1,0 +1,10 @@
+@import '../../../../colors';
+@import '../../../../sizes';
+@import '../sizes';
+
+#spec-panel-footer {
+  box-shadow: $fade-horizontal-translation $spec-panel-footer-fade-vertical-translation $fade-size $medium-area-background;
+  z-index: 1;
+  height: $spec-panel-footer-height;
+  position: relative;
+}

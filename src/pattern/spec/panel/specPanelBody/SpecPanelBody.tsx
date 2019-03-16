@@ -21,11 +21,12 @@ const mapStateToProps: (state: ImmutableState) => SpecPanelOpenParameter =
 const SpecPanelBody: React.ComponentType<SpecPanelOpenParameter> =
     ({ specPanelOpen }: SpecPanelOpenParameter): React.ReactElement | null => (
         <div {...{ id: 'spec-panel-body', className: specPanelOpen ? 'open' : 'closed' }}>
-            <PresetSelect/>
-            <hr/>
-            <SpecControls/>
-            <hr/>
-            <ResetSpecsButton/>
+            <div>
+                <PresetSelect/>
+                <SpecControls/>
+                <hr/>
+                <ResetSpecsButton/>
+            </div>
         </div>
     )
 

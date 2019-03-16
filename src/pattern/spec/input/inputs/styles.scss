@@ -8,7 +8,7 @@
   display: flex;
   align-items: center;
   justify-content: flex-end;
-  margin-left: $input-horizontal-spacing;
+  margin-left: $input-left-spacing;
 
   input,
   select {
@@ -16,7 +16,7 @@
 
     min-width: $control-width;
     margin-left: $input-left-spacing !important;
-    padding: 0 $input-horizontal-spacing;
+    padding: 0 $input-left-spacing;
     height: $control-height;
     border: none;
     outline: none;

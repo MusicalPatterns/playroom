@@ -2,6 +2,8 @@
 @import '../sizes';
 
 #presets {
+  margin-bottom: $spec-controls-vertical-spacing !important;
+
   div,
   select {
     margin-left: $presets-spacing;

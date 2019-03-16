@@ -1,10 +1,16 @@
+@import '../../../../colors';
+@import '../../../../effects';
 @import '../../../../sizes';
 @import '../sizes';
 
 #spec-panel {
-  padding: $spec-panel-spacing;
+  margin: $spec-panel-spacing;
   max-width: $spec-panel-max-width;
   overflow: hidden;
+  position: relative;
+  width: 100%;
+
+  @include animate(height);
 
   @media screen and (max-width: $mobile-size) {
     max-width: $mobile-spec-panel-max-width;
@@ -24,5 +30,13 @@
 
   div {
     margin-bottom: $spec-panel-bottom-spacing;
+  }
+
+  &.open {
+    min-height: $spec-panel-height;
+  }
+
+  &.closed {
+    height: $spec-panel-closed-height;
   }
 }

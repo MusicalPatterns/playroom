@@ -8,6 +8,7 @@ import { IdStateKey } from '../../../id'
 import { ImmutablePatternState, PatternStateKey } from '../../../types'
 import { SpecStateKey } from '../../types'
 import { SpecPanelBody } from '../specPanelBody'
+import { SpecPanelFooter } from '../specPanelFooter'
 import { SpecPanelHeader } from '../specPanelHeader'
 import './styles'
 import { SpecPanelProps } from './types'
@@ -36,6 +37,7 @@ const SpecPanel: React.ComponentType<SpecPanelProps> =
             <div {...{ id: 'spec-panel', className: specPanelOpen ? 'open' : 'closed' }}>
                 <SpecPanelHeader/>
                 <SpecPanelBody/>
+                <SpecPanelFooter/>
             </div>
         )
     }
