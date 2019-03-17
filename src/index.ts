@@ -10,7 +10,7 @@ import { store } from './store'
 import { Action } from './types'
 
 const autoSelectOnlyPattern: (onlyPattern: Pattern, actions: Action[]) => Promise<void> =
-    (onlyPattern: Pattern, actions: Action[]): Promise<void> =>
+    async (onlyPattern: Pattern, actions: Action[]): Promise<void> =>
         changePattern({
             additionalActions: actions.concat({ type: SpecStateKey.SPEC_PANEL_OPEN, data: true }),
             dispatch: store.dispatch,
