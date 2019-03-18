@@ -5,7 +5,7 @@ import {
     elementExists,
     elementInnerText,
     hasBeenReset,
-    isPaused,
+    isPaused, isPlaying,
     leftColumnIs,
     LONG_ENOUGH_FOR_TIME_TO_PASS,
     quickRefresh,
@@ -134,12 +134,11 @@ describe('logo', () => {
             done()
         })
 
-        it('when you navigate to the about page, it stops playing and resets the time to the beginning', async (done: DoneFn) => {
+        it('when you navigate to the about page, keeps playing in the background', async (done: DoneFn) => {
             await sleep(A_BIT_LONGER)
             await selectAboutPageByClickingLogo()
 
-            await hasBeenReset()
-            await isPaused()
+            await isPlaying()
 
             done()
         })
