@@ -1,10 +1,10 @@
 import { ArrayedDomSpecValue, ArrayedValidation, Validations } from '@musical-patterns/pattern'
 import {
+    finalElement,
     HtmlValueOrChecked,
-    indexOfLastElement,
+    indexOfFinalElement,
     INITIAL,
     isUndefined,
-    lastElement,
     slice,
 } from '@musical-patterns/utilities'
 import { batchActions } from 'redux-batched-actions'
@@ -24,7 +24,7 @@ const isNoInvalidMessageForRemovedField: (validations: Validations, specKey: str
             return true
         }
 
-        return isUndefined(lastElement(arrayedValidation))
+        return isUndefined(finalElement(arrayedValidation))
     }
 
 const handleFieldRemove: (parameters: HandleFieldRemoveParameters) => void =
@@ -43,13 +43,13 @@ const handleFieldRemove: (parameters: HandleFieldRemoveParameters) => void =
         const updatedArrayedDisplayedValue: ArrayedDomSpecValue = slice(
             arrayedDisplayedValue,
             INITIAL,
-            indexOfLastElement(arrayedDisplayedValue),
+            indexOfFinalElement(arrayedDisplayedValue),
         )
 
         const removedFieldHasNoInvalidMessages: boolean =
             isNoInvalidMessageForRemovedField(validations, specKey)
 
-        const removedFieldIsEmpty: boolean = lastElement(arrayedDisplayedValue) === ''
+        const removedFieldIsEmpty: boolean = finalElement(arrayedDisplayedValue) === ''
         const suppressUpdatingValidations: boolean = removedFieldIsEmpty && removedFieldHasNoInvalidMessages
 
         const actions: Action[] = computeAttemptSubmitActions({

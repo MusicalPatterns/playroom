@@ -53,23 +53,23 @@ const otherInputIsAlsoMarkedAsValid: () => Promise<void> =
             .toBeTruthy('other ranged control input was not marked as valid')
     }
 
-const enterCustomInvalidityStateAndStoreLastStillValidValue: () => Promise<string> =
+const enterCustomInvalidityStateAndStoreFinalStillValidValue: () => Promise<string> =
     async (): Promise<string> => {
         await deleteCharacterFromInput(`input[type=number]#${RANGED_SPEC_TWO_KEY}`)
-        const lastStillValidValue: string = await elementInnerText(
+        const finalStillValidValue: string = await elementInnerText(
             `#${RANGED_SPEC_TWO_KEY}.${SecretTestSelector.SUBMITTED_SPEC}`,
         )
         await deleteCharacterFromInput(`input[type=number]#${RANGED_SPEC_TWO_KEY}`)
         const SELECT_ANYTHING_ELSE: string = '#first-row .right'
         await loseFocus(SELECT_ANYTHING_ELSE)
 
-        return lastStillValidValue
+        return finalStillValidValue
     }
 
-const theSubmittedValueIsTheLastStillValidValue: (lastStillValidValue: string) => Promise<void> =
-    async (lastStillValidValue: string): Promise<void> => {
+const theSubmittedValueIsTheFinalStillValidValue: (finalStillValidValue: string) => Promise<void> =
+    async (finalStillValidValue: string): Promise<void> => {
         expect(await elementInnerText(`#${RANGED_SPEC_TWO_KEY}.${SecretTestSelector.SUBMITTED_SPEC}`))
-            .toBe(lastStillValidValue, 'the submitted value was not the last still valid value')
+            .toBe(finalStillValidValue, 'the submitted value was not the final still valid value')
     }
 
 const invalidMessagesForAllControlsInvolvedInCustomInvalidity: () => Promise<void> =
@@ -139,12 +139,12 @@ describe('spec controls', () => {
     })
 
     describe('breaking custom validity across controls', () => {
-        let lastStillValidValue: string
+        let finalStillValidValue: string
         beforeEach(async (done: DoneFn) => {
             await quickRefresh()
             await selectValidationPattern()
             await openSpecControlsIfNotOpen()
-            lastStillValidValue = await enterCustomInvalidityStateAndStoreLastStillValidValue()
+            finalStillValidValue = await enterCustomInvalidityStateAndStoreFinalStillValidValue()
 
             done()
         })
@@ -157,7 +157,7 @@ describe('spec controls', () => {
         })
 
         it('it does not submit the invalid value which could crash things', async (done: DoneFn) => {
-            await theSubmittedValueIsTheLastStillValidValue(lastStillValidValue)
+            await theSubmittedValueIsTheFinalStillValidValue(finalStillValidValue)
 
             done()
         })

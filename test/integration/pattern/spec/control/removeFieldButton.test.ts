@@ -1,4 +1,4 @@
-import { indexOfLastElement } from '@musical-patterns/utilities'
+import { indexOfFinalElement } from '@musical-patterns/utilities'
 import { SecretTestSelector } from '../../../../../src/indexForTest'
 import {
     ARRAYED_SPEC_KEY,
@@ -23,10 +23,10 @@ const thereIsOneFewerField: (originalFieldCount: number) => Promise<void> =
             )
     }
 
-const andTheIdThatIsMissingWasTheLastId: () => Promise<void> =
+const andTheIdThatIsMissingWasTheFinalId: () => Promise<void> =
     async (): Promise<void> => {
         expect(await elementExists(`#${ARRAYED_SPEC_KEY}-4`))
-            .toBeFalsy('the id that was missing was not the last id')
+            .toBeFalsy('the id that was missing was not the final id')
     }
 
 const theSubmittedValueForTheArrayedSpecControlAsAWholeIsInItsInitialState: () => Promise<void> =
@@ -41,7 +41,7 @@ const theSubmittedValueForTheArrayedSpecControlAsAWholeIsInItsInitialState: () =
             )
     }
 
-const theSubmittedValueForTheArrayedSpecControlAsAWholeIsInItsInitialStateJustWithItsLastElementGone: () => Promise<void> =
+const theSubmittedValueForTheArrayedSpecControlAsAWholeIsInItsInitialStateJustWithItsFinalElementGone: () => Promise<void> =
     async (): Promise<void> => {
         const submittedValueForTheArrayedSpecControlAsAWhole: string = await elementInnerText(
             `#${ARRAYED_SPEC_KEY}.${SecretTestSelector.SUBMITTED_SPEC}`,
@@ -51,10 +51,10 @@ const theSubmittedValueForTheArrayedSpecControlAsAWholeIsInItsInitialStateJustWi
                 JSON.stringify(
                     SPEC_CONTROLS_PATTERN_ARRAYED_SPEC_INITIAL_VALUE.slice(
                         0,
-                        indexOfLastElement(SPEC_CONTROLS_PATTERN_ARRAYED_SPEC_INITIAL_VALUE),
+                        indexOfFinalElement(SPEC_CONTROLS_PATTERN_ARRAYED_SPEC_INITIAL_VALUE),
                     ),
                 ),
-                `the submitted value for the arrayed spec control as a whole was not in its initial state just with its last element gone`,
+                `the submitted value for the arrayed spec control as a whole was not in its initial state just with its final element gone`,
             )
     }
 
@@ -92,12 +92,12 @@ describe('remove field button', () => {
         done()
     })
 
-    it('clicking the remove field button removes the last field from the arrayed spec control', async (done: DoneFn) => {
+    it('clicking the remove field button removes the final field from the arrayed spec control', async (done: DoneFn) => {
         const originalFieldCount: number = await elementCount(`#${ARRAYED_SPEC_KEY} input[type=number]`)
 
         await clickRemoveFieldButton()
         await thereIsOneFewerField(originalFieldCount)
-        await andTheIdThatIsMissingWasTheLastId()
+        await andTheIdThatIsMissingWasTheFinalId()
 
         done()
     })
@@ -106,7 +106,7 @@ describe('remove field button', () => {
         await theSubmittedValueForTheArrayedSpecControlAsAWholeIsInItsInitialState()
 
         await clickRemoveFieldButton()
-        await theSubmittedValueForTheArrayedSpecControlAsAWholeIsInItsInitialStateJustWithItsLastElementGone()
+        await theSubmittedValueForTheArrayedSpecControlAsAWholeIsInItsInitialStateJustWithItsFinalElementGone()
 
         done()
     })

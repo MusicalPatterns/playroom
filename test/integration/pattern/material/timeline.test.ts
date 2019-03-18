@@ -51,7 +51,7 @@ describe('timeline', () => {
             expect(afterWrappingTime)
                 .toBeLessThan(
                     from.Ms(beforeWrappingTime),
-                    'tried to play just long enough more to wrap around, but the time was still after the last measurement',
+                    'tried to play just long enough more to wrap around, but the time was still after the most recent measurement',
                 )
 
             done()

@@ -1,7 +1,7 @@
 // tslint:disable variable-name file-name-casing no-default-export no-import-side-effect no-null-keyword
 
 import { ArrayedDomSpecValue } from '@musical-patterns/pattern'
-import { apply, from, indexOfLastElement, INITIAL, NEXT, Ordinal } from '@musical-patterns/utilities'
+import { apply, from, indexOfFinalElement, INITIAL, NEXT, Ordinal } from '@musical-patterns/utilities'
 import * as React from 'react'
 import { connect } from 'react-redux'
 import { ImmutableState, StateKey } from '../../../../types'
@@ -25,7 +25,7 @@ const ArrayedFields: React.ComponentType<ArrayedFieldsProps> =
         const fields: Array<React.ReactElement | null> = []
         for (
             let fieldIndex: Ordinal = INITIAL;
-            fieldIndex <= indexOfLastElement(arrayedDisplayedValue);
+            fieldIndex <= indexOfFinalElement(arrayedDisplayedValue);
             fieldIndex = apply.Translation(fieldIndex, NEXT)
         ) {
             fields.push(<Field {...{ fieldIndex, key: from.Ordinal(fieldIndex), specKey }}/>)

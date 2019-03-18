@@ -56,7 +56,7 @@ const stringedContolInputIsMarkedAsValid: () => Promise<void> =
             .toBeTruthy('stringed input was not marked as valid')
     }
 
-const stringedInputTooLongValueWasNotSubmittedAndItIsAtTheLastValidValueBeforeItGotTooLong: () => Promise<void> =
+const stringedInputTooLongValueWasNotSubmittedAndItIsAtTheFinalValidValueBeforeItGotTooLong: () => Promise<void> =
     async (): Promise<void> => {
         const stringedInputSubmittedValue: string = await elementInnerText(
             `#${STRINGED_SPEC_KEY}.${SecretTestSelector.SUBMITTED_SPEC}`,
@@ -64,7 +64,7 @@ const stringedInputTooLongValueWasNotSubmittedAndItIsAtTheLastValidValueBeforeIt
         expect(stringedInputSubmittedValue)
             .toBe(
                 `${SPEC_CONTROLS_PATTERN_STRINGED_SPEC_INITIAL_VALUE}${PART_OF_MODIFICATION_WITHIN_MAX_LENGTH_OF_STRINGED_INPUT}`,
-                `stringed input was not at the last valid value before it got too long`,
+                `stringed input was not at the final valid value before it got too long`,
             )
     }
 
@@ -223,7 +223,7 @@ describe('stringed input', () => {
             })
 
             it('it does not submit the invalid value which could crash things', async (done: DoneFn) => {
-                await stringedInputTooLongValueWasNotSubmittedAndItIsAtTheLastValidValueBeforeItGotTooLong()
+                await stringedInputTooLongValueWasNotSubmittedAndItIsAtTheFinalValidValueBeforeItGotTooLong()
 
                 done()
             })
@@ -251,7 +251,7 @@ describe('stringed input', () => {
                 await modifyInputForAnotherControlValidly()
                 await stringedInputIsMarkedAsInvalid()
                 await stringedInputDisplayValueIsTheTooLongValue()
-                await stringedInputTooLongValueWasNotSubmittedAndItIsAtTheLastValidValueBeforeItGotTooLong()
+                await stringedInputTooLongValueWasNotSubmittedAndItIsAtTheFinalValidValueBeforeItGotTooLong()
                 await stringedInputHasTooLongMessage()
 
                 done()

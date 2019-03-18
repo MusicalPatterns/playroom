@@ -15,7 +15,7 @@ import {
     SpecValue,
     Validation,
 } from '@musical-patterns/pattern'
-import { apply, indexOfLastElement, isUndefined, Ordinal } from '@musical-patterns/utilities'
+import { apply, indexOfFinalElement, isUndefined, Ordinal } from '@musical-patterns/utilities'
 import {
     ComputeSingularDisplayedValueParameters,
     ComputeSingularSubmittedValueParameters,
@@ -25,7 +25,7 @@ import {
 const computeSingularSubmittedValueFromArrayedSubmittedValue:
     (arrayedSubmittedValue: ArrayedSpecValue, fieldIndex: Ordinal) => SingularSpecValue =
     (arrayedSubmittedValue: ArrayedSpecValue, fieldIndex: Ordinal): SingularSpecValue => {
-        if (fieldIndex > indexOfLastElement(arrayedSubmittedValue)) {
+        if (fieldIndex > indexOfFinalElement(arrayedSubmittedValue)) {
             return undefined
         }
 
@@ -35,7 +35,7 @@ const computeSingularSubmittedValueFromArrayedSubmittedValue:
 const computeSingularDisplayedValueFromArrayedDisplayedValue:
     (arrayedDisplayedValue: ArrayedDomSpecValue, fieldIndex: Ordinal) => SingularDomSpecValue =
     (arrayedDisplayedValue: ArrayedDomSpecValue, fieldIndex: Ordinal): SingularDomSpecValue => {
-        if (fieldIndex > indexOfLastElement(arrayedDisplayedValue)) {
+        if (fieldIndex > indexOfFinalElement(arrayedDisplayedValue)) {
             return undefined
         }
 
@@ -45,7 +45,7 @@ const computeSingularDisplayedValueFromArrayedDisplayedValue:
 const computeSingularValidationFromArrayedValidation:
     (arrayedValidation: ArrayedValidation, fieldIndex: Ordinal) => SingularValidation =
     (arrayedValidation: ArrayedValidation, fieldIndex: Ordinal): SingularValidation => {
-        if (isUndefined(arrayedValidation) || fieldIndex > indexOfLastElement(arrayedValidation)) {
+        if (isUndefined(arrayedValidation) || fieldIndex > indexOfFinalElement(arrayedValidation)) {
             return undefined
         }
 
