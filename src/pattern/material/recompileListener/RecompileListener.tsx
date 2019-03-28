@@ -3,7 +3,7 @@
 import {
     compilePattern,
     CompilePatternParameters,
-    computePatternTotalCompiledDuration,
+    computeVoicesDuration,
 } from '@musical-patterns/compiler'
 import { Pattern } from '@musical-patterns/pattern'
 import { setVoices, Voice } from '@musical-patterns/performer'
@@ -52,13 +52,13 @@ const RecompileListener: React.ComponentType<RecompileListenerProps> =
 
             const compilePatternParameters: CompilePatternParameters = { ...pattern, specs: submittedSpecs }
             const voices: Voice[] = await compilePattern(compilePatternParameters)
-            const patternDuration: Ms = await computePatternTotalCompiledDuration(compilePatternParameters)
+            const patternDuration: Ms = computeVoicesDuration(voices)
             setPatternDuration(patternDuration)
 
             await setVoices(voices)
 
             if (debugMode) {
-                await logDebugInfo(compilePatternParameters)
+                await logDebugInfo(voices, patternDuration)
             }
         })
 

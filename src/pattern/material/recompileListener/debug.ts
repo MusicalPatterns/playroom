@@ -1,14 +1,8 @@
-import {
-    compilePattern,
-    CompilePatternParameters,
-    computePatternTotalCompiledDuration,
-} from '@musical-patterns/compiler'
 import { Sound, Voice } from '@musical-patterns/performer'
 import { logMessageToConsole, Ms, sum, to } from '@musical-patterns/utilities'
 
-const logDebugInfo: (compilePatternParameters: CompilePatternParameters) => Promise<void> =
-    async (compilePatternParameters: CompilePatternParameters): Promise<void> => {
-        const voices: Voice[] = await compilePattern(compilePatternParameters)
+const logDebugInfo: (voices: Voice[], patternDuration: Ms) => Promise<void> =
+    async (voices: Voice[], patternDuration: Ms): Promise<void> => {
         logMessageToConsole('voices: ', voices)
         logMessageToConsole(
             'compiled durations per voice: ',
@@ -21,7 +15,7 @@ const logDebugInfo: (compilePatternParameters: CompilePatternParameters) => Prom
         )
         logMessageToConsole(
             'total compiled duration: ',
-            await computePatternTotalCompiledDuration(compilePatternParameters),
+            patternDuration,
         )
     }
 
