@@ -1,4 +1,5 @@
-import { DomSpecs, Specs, validateSpecs, ValidationsResult } from '@musical-patterns/pattern'
+import { DomSpecs, Specs, validateSpecs, Validation, Validations } from '@musical-patterns/pattern'
+import { isUndefined, objectSet } from '@musical-patterns/utilities'
 import { Action } from '../../types'
 import { ComputeAttemptSubmitActionsParameters, SpecStateKey } from './types'
 
@@ -19,26 +20,31 @@ const computeAttemptSubmitActions: (parameters: ComputeAttemptSubmitActionsParam
             { type: SpecStateKey.DISPLAYED_SPECS, data: updatedDisplayedSpecs },
         ]
 
-        const { shouldSubmitUpdateToSpecTriggeringValidation, validations }: ValidationsResult =
-            validateSpecs({
-                computeValidations,
-                configurations,
-                displayedSpecs: updatedDisplayedSpecs as Specs,
-                keyOfSpecTriggeringValidation: specKey,
-            })
+        const validations: Validations = validateSpecs({
+            computeValidations,
+            configurations,
+            displayedSpecs: updatedDisplayedSpecs as Specs,
+        })
         if (!suppressUpdatingValidations) {
             actions.push({ type: SpecStateKey.VALIDATIONS, data: validations })
         }
-        if (shouldSubmitUpdateToSpecTriggeringValidation) {
-            const updatedSubmittedSpecsWhichWillNeverHaveInvalidSpecValues: Specs = {
-                ...submittedSpecs,
-                [ specKey ]: updatedValue,
-            }
-            actions.push({
-                data: updatedSubmittedSpecsWhichWillNeverHaveInvalidSpecValues,
-                type: SpecStateKey.SUBMITTED_SPECS,
-            })
+        const updatedSubmittedSpecsWhichWillNeverHaveInvalidSpecValues: Specs = { ...submittedSpecs }
+        if (!isUndefined(validations)) {
+            Object.entries(validations)
+                .forEach(([ validationSpecKey, validation ]: [ string, Validation ]) => {
+                    if (isUndefined(validation)) {
+                        objectSet(
+                            updatedSubmittedSpecsWhichWillNeverHaveInvalidSpecValues,
+                            validationSpecKey,
+                            updatedDisplayedSpecs[ validationSpecKey ],
+                        )
+                    }
+                })
         }
+        actions.push({
+            data: updatedSubmittedSpecsWhichWillNeverHaveInvalidSpecValues,
+            type: SpecStateKey.SUBMITTED_SPECS,
+        })
 
         return actions
     }

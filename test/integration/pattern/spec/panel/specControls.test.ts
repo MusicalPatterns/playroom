@@ -24,32 +24,34 @@ import {
     selectSpecControlsPattern,
     selectValidationPattern,
     SPEC_CONTROLS_PATTERN_OPTIONED_SPEC_ONE_MODIFIED_VALUE,
+    SPEC_CONTROLS_PATTERN_RANGED_SPEC_ONE_INITIAL_VALUE,
     VALID_TEST_MODIFICATION,
 } from '../../../../support'
 
 const SECTION_HEADING: string = '#spec-controls h3'
+const MODIFICATION_WHICH_STILL_LEAVES_THINGS_CUSTOM_INVALID_BUT_WILL_ALSO_BE_FIXED_BY_THE_FIX_THE_TEST_USES: string = '0'
 
 const rangedInputIsMarkedAsInvalid: () => Promise<void> =
     async (): Promise<void> => {
-        expect(await elementExists(`input[type=number]#${RANGED_SPEC_ONE_KEY}.${FieldValidityClassName.INVALID}`))
+        expect(await elementExists(`input[type=number]#${RANGED_SPEC_TWO_KEY}.${FieldValidityClassName.INVALID}`))
             .toBeTruthy('ranged input was not marked as invalid')
     }
 
 const otherInputIsAlsoMarkedAsInvalid: () => Promise<void> =
     async (): Promise<void> => {
-        expect(await elementExists(`input[type=number]#${RANGED_SPEC_TWO_KEY}.${FieldValidityClassName.INVALID}`))
+        expect(await elementExists(`input[type=number]#${RANGED_SPEC_ONE_KEY}.${FieldValidityClassName.INVALID}`))
             .toBeTruthy('other input was not market as invalid')
     }
 
 const rangedInputIsMarkedAsValid: () => Promise<void> =
     async (): Promise<void> => {
-        expect(await elementExists(`input[type=number]#${RANGED_SPEC_ONE_KEY}.${FieldValidityClassName.VALID}`))
+        expect(await elementExists(`input[type=number]#${RANGED_SPEC_TWO_KEY}.${FieldValidityClassName.VALID}`))
             .toBeTruthy('ranged input was not marked as valid')
     }
 
 const otherInputIsAlsoMarkedAsValid: () => Promise<void> =
     async (): Promise<void> => {
-        expect(await elementExists(`input[type=number]#${RANGED_SPEC_TWO_KEY}.${FieldValidityClassName.VALID}`))
+        expect(await elementExists(`input[type=number]#${RANGED_SPEC_ONE_KEY}.${FieldValidityClassName.VALID}`))
             .toBeTruthy('other ranged control input was not marked as valid')
     }
 
@@ -105,6 +107,21 @@ const modifySpecs: () => Promise<void> =
     async (): Promise<void> => {
         const input: ElementHandle = await findElement(`input[type=number]#${RANGED_SPEC_ONE_KEY}`)
         await input.type(VALID_TEST_MODIFICATION)
+    }
+
+const modifyTheOtherInvalidControl: () => Promise<void> =
+    async (): Promise<void> => {
+        const otherControl: ElementHandle = await findElement(`input[type=number]#${RANGED_SPEC_ONE_KEY}`)
+        await otherControl.type(MODIFICATION_WHICH_STILL_LEAVES_THINGS_CUSTOM_INVALID_BUT_WILL_ALSO_BE_FIXED_BY_THE_FIX_THE_TEST_USES)
+    }
+
+const modificationToTheOtherControlThatWasInvalidHasBeenSubmitted: () => Promise<void> =
+    async (): Promise<void> => {
+        const otherControlSubmittedValue: string = await elementInnerText(
+            `#${RANGED_SPEC_ONE_KEY}.${SecretTestSelector.SUBMITTED_SPEC}`,
+        )
+        expect(otherControlSubmittedValue)
+            .toBe(`${SPEC_CONTROLS_PATTERN_RANGED_SPEC_ONE_INITIAL_VALUE}${MODIFICATION_WHICH_STILL_LEAVES_THINGS_CUSTOM_INVALID_BUT_WILL_ALSO_BE_FIXED_BY_THE_FIX_THE_TEST_USES}`)
     }
 
 describe('spec controls', () => {
@@ -168,6 +185,14 @@ describe('spec controls', () => {
             done()
         })
 
+        it('preserves the invalid states if you modify another control', async (done: DoneFn) => {
+            await modifyAControlNotInvolvedInTheCustomValidityCheck()
+            await rangedInputIsMarkedAsInvalid()
+            await otherInputIsAlsoMarkedAsInvalid()
+
+            done()
+        })
+
         it('resets all involved controls to valid state after typing a fix', async (done: DoneFn) => {
             await fixCustomValidity()
             await rangedInputIsMarkedAsValid()
@@ -176,10 +201,10 @@ describe('spec controls', () => {
             done()
         })
 
-        it('preserves the invalid states if you modify another control', async (done: DoneFn) => {
-            await modifyAControlNotInvolvedInTheCustomValidityCheck()
-            await rangedInputIsMarkedAsInvalid()
-            await otherInputIsAlsoMarkedAsInvalid()
+        it('if you have modified the other spec while both were invalid, it submits both it and the one you changed', async (done: DoneFn) => {
+            await modifyTheOtherInvalidControl()
+            await fixCustomValidity()
+            await modificationToTheOtherControlThatWasInvalidHasBeenSubmitted()
 
             done()
         })
