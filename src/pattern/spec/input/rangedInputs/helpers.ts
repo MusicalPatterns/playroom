@@ -1,19 +1,32 @@
 import { RangedConstraint } from '@musical-patterns/pattern'
-import { apply, Maybe, negative } from '@musical-patterns/utilities'
+import { apply, Maybe, negative, round, Translation } from '@musical-patterns/utilities'
 import { DEFAULT_BOUND, NON_INTEGER_STEP, TRANSLATION_TO_EXCLUDE_MAX, TRANSLATION_TO_EXCLUDE_MIN } from './constants'
+
+const computeAdjustedMinOrMax:
+    (minOrMax: number, exclude: boolean, translation: Translation, integer: boolean) => number =
+    (minOrMax: number, exclude: boolean, translation: Translation, integer: boolean): number => {
+        const maybeExcludedMinOrMax: number = exclude ?
+            apply.Translation(minOrMax, TRANSLATION_TO_EXCLUDE_MAX) :
+            minOrMax
+
+        return integer ?
+            round(maybeExcludedMinOrMax) :
+            maybeExcludedMinOrMax
+    }
 
 const computeMinAndMax: (constraint: Maybe<RangedConstraint>) => { max: number, min: number } =
     (constraint: Maybe<RangedConstraint>): { max: number, min: number } => {
         const {
             excludeMax = false,
             excludeMin = false,
+            integer = false,
             max = DEFAULT_BOUND,
             min = negative(DEFAULT_BOUND),
         } = constraint || {}
 
         return {
-            max: excludeMax ? apply.Translation(max, TRANSLATION_TO_EXCLUDE_MAX) : max,
-            min: excludeMin ? apply.Translation(min, TRANSLATION_TO_EXCLUDE_MIN) : min,
+            max: computeAdjustedMinOrMax(max, excludeMax, TRANSLATION_TO_EXCLUDE_MAX, integer),
+            min: computeAdjustedMinOrMax(min, excludeMin, TRANSLATION_TO_EXCLUDE_MIN, integer),
         }
     }
 

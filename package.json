@@ -23,7 +23,7 @@
     "@musical-patterns/cli": "^1.0.504",
     "@musical-patterns/compiler": "^1.0.125",
     "@musical-patterns/pattern": "^1.0.236",
-    "@musical-patterns/pattern-playroom-test": "^1.0.180",
+    "@musical-patterns/pattern-playroom-test": "^1.0.181",
     "@musical-patterns/performer": "^1.0.220",
     "@musical-patterns/utilities": "^1.0.391",
     "@types/node": "^10.12.27",
