@@ -42,7 +42,7 @@ const RangedInputs: React.ComponentType<SharedInputsProps> =
         const { constraint, hideInput } = configurations[ specKey ] as RangedConfiguration
         const { min, max } = computeMinAndMax(constraint)
         const step: number = computeStep(constraint)
-        console.log('hello step', step, 'hello constraint', constraint, 'constraint && constraint.integer', constraint && constraint.integer)
+        console.log('hello step', step, 'for field id', fieldId, 'constraint', constraint, 'constraint && constraint.integer', constraint && constraint.integer)
         const rangedInputProps: RangedInputProps = {
             className: fieldValidityClassName,
             id: fieldId,
