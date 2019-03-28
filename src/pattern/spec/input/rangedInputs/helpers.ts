@@ -1,5 +1,6 @@
 import { RangedConstraint } from '@musical-patterns/pattern'
-import { apply, Maybe, negative, round, Translation } from '@musical-patterns/utilities'
+import { apply, isUndefined, Maybe, negative, round, Translation } from '@musical-patterns/utilities'
+import { is } from 'immutable'
 import { DEFAULT_BOUND, NON_INTEGER_STEP, TRANSLATION_TO_EXCLUDE_MAX, TRANSLATION_TO_EXCLUDE_MIN } from './constants'
 
 const computeAdjustedMinOrMax:
@@ -31,9 +32,17 @@ const computeMinAndMax: (constraint: Maybe<RangedConstraint>) => { max: number, 
     }
 
 const computeStep: (constraint: Maybe<RangedConstraint>) => number =
-    // tslint:disable-next-line arrow-return-shorthand
     (constraint: Maybe<RangedConstraint>): number => {
-        return constraint && constraint.integer ? 1 : NON_INTEGER_STEP
+        if (isUndefined(constraint)) {
+            console.log('constraint was undefined, returning non-integer step')
+
+            return NON_INTEGER_STEP
+        }
+        const maybeIntegerConstraint: Maybe<boolean> = constraint.integer
+        const isInteger: boolean = isUndefined(maybeIntegerConstraint) ? false : maybeIntegerConstraint
+        console.log('isInteger', isInteger, 'isUndefined(maybeIntegerConstraint)', isUndefined(maybeIntegerConstraint), 'maybeIntegerConstraint', maybeIntegerConstraint)
+
+        return isInteger ? 1 : NON_INTEGER_STEP
     }
 
 export {
