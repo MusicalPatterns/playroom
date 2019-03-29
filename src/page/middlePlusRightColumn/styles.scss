@@ -47,5 +47,9 @@
     background-color: $medium-area-background;
     text-align: right;
     align-items: flex-end;
+
+    p {
+      font-size: $detail-text-size;
+    }
   }
 }
