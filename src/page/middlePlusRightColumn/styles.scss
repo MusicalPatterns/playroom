@@ -47,6 +47,9 @@
     background-color: $medium-area-background;
     text-align: right;
     align-items: flex-end;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
 
     p {
       font-size: $detail-text-size;
