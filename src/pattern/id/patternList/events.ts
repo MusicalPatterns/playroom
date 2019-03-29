@@ -1,9 +1,11 @@
-import { Id, isId, Pattern } from '@musical-patterns/pattern'
+import { Id, isId, Pattern, Patterns } from '@musical-patterns/pattern'
 import { isUndefined, Maybe } from '@musical-patterns/utilities'
 import * as React from 'react'
+import { Dispatch } from 'redux'
 import { computeMaybePattern } from '../../../page'
+import { Action } from '../../../types'
 import { changePattern } from '../actions'
-import { HandlePatternChange, HandlePatternChangeParameters } from './types'
+import { HandlePatternChangeParameters } from './types'
 
 const computePatternIdFromEvent: (event: React.SyntheticEvent) => Id =
     (event: React.SyntheticEvent): Id => {
@@ -14,7 +16,13 @@ const computePatternIdFromEvent: (event: React.SyntheticEvent) => Id =
         throw new Error('target id was not a pattern Id')
     }
 
-const handlePatternChange: HandlePatternChange =
+const handlePatternChange: (parameters: {
+    dispatch: Dispatch<Action>,
+    event: React.SyntheticEvent,
+    patternId: Maybe<Id>,
+    patterns: Maybe<Partial<Patterns>>,
+    rightColumnOpen: boolean,
+}) => Promise<void> =
     async (parameters: HandlePatternChangeParameters): Promise<void> => {
         const { dispatch, event, patterns, patternId: previousPatternId, rightColumnOpen } = parameters
         const newPatternId: Id = computePatternIdFromEvent(event)

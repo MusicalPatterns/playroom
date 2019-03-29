@@ -1,7 +1,10 @@
+// tslint:disable max-file-line-count
+
 import {
     ArrayedDomSpecValue,
     ArrayedSpecValue,
     ArrayedValidation,
+    DomSpecs,
     DomSpecValue,
     isArrayedDomSpecValue,
     isArrayedSpecValue,
@@ -12,8 +15,10 @@ import {
     SingularDomSpecValue,
     SingularSpecValue,
     SingularValidation,
+    Specs,
     SpecValue,
     Validation,
+    Validations,
 } from '@musical-patterns/pattern'
 import { apply, indexOfFinalElement, isUndefined, Ordinal } from '@musical-patterns/utilities'
 import {
@@ -52,8 +57,11 @@ const computeSingularValidationFromArrayedValidation:
         return apply.Ordinal(arrayedValidation, fieldIndex)
     }
 
-const computeSingularSubmittedValue:
-    (computeSingularSubmittedValueParameters: ComputeSingularSubmittedValueParameters) => SingularSpecValue =
+const computeSingularSubmittedValue: (computeSingularSubmittedValueParameters: {
+    fieldIndex?: Ordinal,
+    specKey: string,
+    submittedSpecs: Specs,
+}) => SingularSpecValue =
     ({ submittedSpecs, specKey, fieldIndex }: ComputeSingularSubmittedValueParameters): SingularSpecValue => {
         const submittedValue: SpecValue = submittedSpecs && submittedSpecs[ specKey ]
 
@@ -62,8 +70,11 @@ const computeSingularSubmittedValue:
             isSingularSpecValue(submittedValue) ? submittedValue : undefined
     }
 
-const computeSingularDisplayedValue:
-    (computeSingularDisplayedValueParameters: ComputeSingularDisplayedValueParameters) => SingularDomSpecValue =
+const computeSingularDisplayedValue: (computeSingularDisplayedValueParameters: {
+    displayedSpecs: DomSpecs,
+    fieldIndex?: Ordinal,
+    specKey: string,
+}) => SingularDomSpecValue =
     ({ displayedSpecs, specKey, fieldIndex }: ComputeSingularDisplayedValueParameters): SingularDomSpecValue => {
         const displayedValue: DomSpecValue = displayedSpecs && displayedSpecs[ specKey ]
 
@@ -72,8 +83,11 @@ const computeSingularDisplayedValue:
             isSingularDomSpecValue(displayedValue) ? displayedValue : undefined
     }
 
-const computeSingularValidation:
-    (computeSingularValidationParameters: ComputeSingularValidationParameters) => SingularValidation =
+const computeSingularValidation: (computeSingularValidationParameters: {
+    fieldIndex?: Ordinal,
+    specKey: string,
+    validations: Validations,
+}) => SingularValidation =
     ({ validations, specKey, fieldIndex }: ComputeSingularValidationParameters): SingularValidation => {
         const validation: Validation = validations && validations[ specKey ]
 

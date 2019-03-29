@@ -1,10 +1,12 @@
 import { doAsync } from '@musical-patterns/utilities'
+import { Dispatch } from 'redux'
+import { Action } from '../../types'
 import { PageStateKey } from '../types'
 import { ToggleRightColumnOpenParameters } from './types'
 
 const allowNewComponentsToMountUnderPreviousRightColumnStateSoThatTheyAnimate: (fn: VoidFunction) => void = doAsync
 
-const openRightColumn: (parameters: ToggleRightColumnOpenParameters) => void =
+const openRightColumn: (parameters: { dispatch: Dispatch<Action>, rightColumnOpen: boolean }) => void =
     ({ rightColumnOpen, dispatch }: ToggleRightColumnOpenParameters): void => {
         if (!rightColumnOpen) {
             allowNewComponentsToMountUnderPreviousRightColumnStateSoThatTheyAnimate(() => {
@@ -13,7 +15,7 @@ const openRightColumn: (parameters: ToggleRightColumnOpenParameters) => void =
         }
     }
 
-const closeRightColumn: (parameters: ToggleRightColumnOpenParameters) => void =
+const closeRightColumn: (parameters: { dispatch: Dispatch<Action>, rightColumnOpen: boolean }) => void =
     ({ rightColumnOpen, dispatch }: ToggleRightColumnOpenParameters): void => {
         if (rightColumnOpen) {
             allowNewComponentsToMountUnderPreviousRightColumnStateSoThatTheyAnimate(() => {

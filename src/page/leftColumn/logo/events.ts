@@ -1,15 +1,18 @@
-import { Configuration, Specs, standardConfigurations } from '@musical-patterns/pattern'
-import { stop } from '@musical-patterns/performer'
-import { KeyMap } from '@musical-patterns/utilities'
+import * as React from 'react'
+import { Dispatch } from 'redux'
 import { BatchAction, batchActions } from 'redux-batched-actions'
-import { IdStateKey, MaterialStateKey, SpecStateKey, stopActions } from '../../../pattern'
+import { IdStateKey } from '../../../pattern'
 import { Action } from '../../../types'
 import { PageName, PageStateKey } from '../../types'
 import { closeRightColumn } from '../rightColumnActions'
 import { maybeCloseLeftColumnToSaveSpaceWhenScreenWidthIsSmallAndScrollToTopActions } from '../windowActions'
-import { HandleLogoClick, HandleLogoClickParameters } from './types'
+import { HandleLogoClickParameters } from './types'
 
-const handleLogoClick: HandleLogoClick =
+const handleLogoClick: (parameters: {
+    dispatch: Dispatch<Action>,
+    event: React.SyntheticEvent,
+    rightColumnOpen: boolean,
+}) => Promise<void> =
     async ({ dispatch, rightColumnOpen }: HandleLogoClickParameters): Promise<void> => {
         const actions: Action[] = maybeCloseLeftColumnToSaveSpaceWhenScreenWidthIsSmallAndScrollToTopActions()
             .concat([

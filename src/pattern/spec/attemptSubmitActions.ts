@@ -1,9 +1,25 @@
-import { DomSpecs, Specs, validateSpecs, Validation, Validations } from '@musical-patterns/pattern'
-import { isUndefined, objectSet } from '@musical-patterns/utilities'
+import {
+    ComputeValidations, Configurations,
+    DomSpecs,
+    DomSpecValue,
+    Specs,
+    validateSpecs,
+    Validation,
+    Validations,
+} from '@musical-patterns/pattern'
+import { isUndefined, Maybe, objectSet } from '@musical-patterns/utilities'
 import { Action } from '../../types'
 import { ComputeAttemptSubmitActionsParameters, SpecStateKey } from './types'
 
-const computeAttemptSubmitActions: (parameters: ComputeAttemptSubmitActionsParameters) => Action[] =
+const computeAttemptSubmitActions: (parameters: {
+    computeValidations: Maybe<ComputeValidations>,
+    configurations: Configurations,
+    displayedSpecs: DomSpecs,
+    specKey: string,
+    submittedSpecs: Specs,
+    suppressUpdatingValidations?: boolean,
+    updatedValue: DomSpecValue,
+}) => Action[] =
     (parameters: ComputeAttemptSubmitActionsParameters): Action[] => {
         const {
             displayedSpecs,

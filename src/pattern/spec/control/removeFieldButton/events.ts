@@ -1,12 +1,19 @@
-import { ArrayedDomSpecValue, ArrayedValidation, Validations } from '@musical-patterns/pattern'
+import {
+    ArrayedDomSpecValue,
+    ArrayedValidation,
+    ComputeValidations, Configurations,
+    DomSpecs, Specs,
+    Validations,
+} from '@musical-patterns/pattern'
 import {
     finalElement,
     HtmlValueOrChecked,
     indexOfFinalElement,
     INITIAL,
-    isUndefined,
+    isUndefined, Maybe,
     slice,
 } from '@musical-patterns/utilities'
+import { Dispatch } from 'redux'
 import { batchActions } from 'redux-batched-actions'
 import { Action } from '../../../../types'
 import { computeArrayedDisplayedValue, computeArrayedValidation } from '../../arrayedValues'
@@ -27,7 +34,15 @@ const isNoInvalidMessageForRemovedField: (validations: Validations, specKey: str
         return isUndefined(finalElement(arrayedValidation))
     }
 
-const handleFieldRemove: (parameters: HandleFieldRemoveParameters) => void =
+const handleFieldRemove: (parameters: {
+    computeValidations: Maybe<ComputeValidations>,
+    configurations: Configurations,
+    dispatch: Dispatch<Action>,
+    displayedSpecs: DomSpecs,
+    specKey: string,
+    submittedSpecs: Specs,
+    validations: Validations,
+}) => void =
     (parameters: HandleFieldRemoveParameters): void => {
         const {
             dispatch,

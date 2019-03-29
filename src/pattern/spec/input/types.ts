@@ -8,8 +8,6 @@ interface HandleFieldChangeEventParameters extends FieldParentProps, EventParame
 
 type HandleFieldChangeEvent = (parameters: HandleFieldChangeEventParameters) => void
 
-type ComputeHandleFieldChangeEvent = (parameters: DispatchParameter) => HandleFieldChangeEvent
-
 interface MergeEventValueIntoValueParameters extends FieldParentProps {
     displayedSpecs: DomSpecs,
     eventValue: HtmlValueOrChecked,
@@ -41,7 +39,6 @@ interface SharedInputProps {
 
 export {
     HandleFieldChangeEvent,
-    ComputeHandleFieldChangeEvent,
     HandleFieldChangeEventParameters,
     MergeEventValueIntoValueParameters,
     InputsPropsFromState,

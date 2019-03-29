@@ -1,18 +1,19 @@
-import { ArrayedDomSpecValue, DomSpecValue } from '@musical-patterns/pattern'
-import { arraySet, from, HtmlValueOrChecked, isUndefined } from '@musical-patterns/utilities'
+import { ArrayedDomSpecValue, DomSpecs, DomSpecValue } from '@musical-patterns/pattern'
+import { arraySet, from, HtmlValueOrChecked, isUndefined, Ordinal } from '@musical-patterns/utilities'
+import { Dispatch } from 'redux'
 import { batchActions } from 'redux-batched-actions'
 import { extractValueOrCheckedFromEvent } from '../../../extractValueOrCheckedFromEvent'
 import { Action, DispatchParameter } from '../../../types'
 import { computeArrayedDisplayedValue } from '../arrayedValues'
 import { computeAttemptSubmitActions } from '../attemptSubmitActions'
-import {
-    ComputeHandleFieldChangeEvent,
-    HandleFieldChangeEvent,
-    HandleFieldChangeEventParameters,
-    MergeEventValueIntoValueParameters,
-} from './types'
+import { HandleFieldChangeEvent, HandleFieldChangeEventParameters, MergeEventValueIntoValueParameters } from './types'
 
-const mergeEventValueIntoArrayedValue: (parameters: MergeEventValueIntoValueParameters) => ArrayedDomSpecValue =
+const mergeEventValueIntoArrayedValue: (parameters: {
+    displayedSpecs: DomSpecs,
+    eventValue: HtmlValueOrChecked,
+    fieldIndex: Ordinal,
+    specKey: string,
+}) => ArrayedDomSpecValue =
     (parameters: MergeEventValueIntoValueParameters): ArrayedDomSpecValue => {
         const { displayedSpecs, specKey, fieldIndex, eventValue } = parameters
 
@@ -26,7 +27,7 @@ const mergeEventValueIntoArrayedValue: (parameters: MergeEventValueIntoValuePara
         return arrayedDisplayedValue
     }
 
-const computeHandleFieldChangeEvent: ComputeHandleFieldChangeEvent =
+const computeHandleFieldChangeEvent: (parameters: { dispatch: Dispatch<Action> }) => HandleFieldChangeEvent =
     ({ dispatch }: DispatchParameter): HandleFieldChangeEvent =>
         async (parameters: HandleFieldChangeEventParameters): Promise<void> => {
             const {
