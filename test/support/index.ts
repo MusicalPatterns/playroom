@@ -7,8 +7,8 @@ export {
     selectPresetsPattern,
     selectOnlyStandardSpecsPattern,
     selectOnlyPatternParticularSpecsPattern,
-}from './selectPattern'
-export { quickRefresh, refreshPage, refreshForSpecControlsTest }from './refresh'
+} from './selectPattern'
+export { quickRefresh, refreshPage, refreshForSpecControlsTest } from './refresh'
 export { waitLongEnoughForAnimationToComplete } from './wait'
 export { selectAboutPageByClickingLogo } from './aboutPage'
 export { leftColumnIs } from './leftColumn'

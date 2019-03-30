@@ -5,7 +5,7 @@ export { computeMaybePattern } from './maybePattern'
 export {
     maybeCloseLeftColumnToSaveSpaceWhenScreenWidthIsSmallAndScrollToTopActions,
     openRightColumn,
-}from './leftColumn'
+} from './leftColumn'
 
 export {
     PageName,
