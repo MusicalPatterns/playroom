@@ -9,19 +9,19 @@ import {
     selectTimeControlsPattern,
 } from '../../../support'
 
-const playJustLongEnoughToBeAlmostAboutToWrapAround: () => Promise<void> =
+const playJustLongEnoughToBeAlmostAboutToRepeat: () => Promise<void> =
     async (): Promise<void> => {
         const totalTime: Ms = await patternDuration()
         await sleep(difference(totalTime, A_BIT_LONGER))
     }
 
-const playJustLongEnoughMoreToWrapAround: () => Promise<void> =
+const playJustLongEnoughMoreToRepeat: () => Promise<void> =
     async (): Promise<void> => {
         await sleep(sum(A_BIT_LONGER, LONG_ENOUGH_FOR_TIME_TO_PASS))
     }
 
 describe('timeline', () => {
-    describe('wrapping', () => {
+    describe('repeating', () => {
         beforeEach(async (done: DoneFn) => {
             await quickRefresh()
             await selectTimeControlsPattern()
@@ -35,23 +35,23 @@ describe('timeline', () => {
             done()
         })
 
-        it('time wraps back around to the beginning upon reaching the end of a pattern', async (done: DoneFn) => {
+        it('time repeats from the beginning upon reaching the end of a pattern', async (done: DoneFn) => {
             const initialTime: Ms = await currentTime()
 
-            await playJustLongEnoughToBeAlmostAboutToWrapAround()
-            const beforeWrappingTime: Ms = await currentTime()
-            expect(beforeWrappingTime)
+            await playJustLongEnoughToBeAlmostAboutToRepeat()
+            const beforeRepeatingTime: Ms = await currentTime()
+            expect(beforeRepeatingTime)
                 .toBeGreaterThan(
                     from.Ms(initialTime),
-                    'tried to play long enough to be just about to wrap around, but was still at the initial time',
+                    'tried to play long enough to be just about to repeat, but was still at the initial time',
                 )
 
-            await playJustLongEnoughMoreToWrapAround()
-            const afterWrappingTime: Ms = await currentTime()
-            expect(afterWrappingTime)
+            await playJustLongEnoughMoreToRepeat()
+            const afterRepeatingTime: Ms = await currentTime()
+            expect(afterRepeatingTime)
                 .toBeLessThan(
-                    from.Ms(beforeWrappingTime),
-                    'tried to play just long enough more to wrap around, but the time was still after the most recent measurement',
+                    from.Ms(beforeRepeatingTime),
+                    'tried to play just long enough more to repeat, but the time was still after the most recent measurement',
                 )
 
             done()
