@@ -1,13 +1,9 @@
 // tslint:disable variable-name file-name-casing no-default-export no-import-side-effect no-null-keyword
 
-import {
-    compilePattern,
-    CompilePatternParameters,
-    computeVoicesDuration,
-} from '@musical-patterns/compiler'
+import { compilePattern, CompilePatternParameters } from '@musical-patterns/compiler'
 import { Pattern } from '@musical-patterns/pattern'
-import { setVoices, Voice } from '@musical-patterns/performer'
-import { doAsync, isUndefined, Maybe, Ms } from '@musical-patterns/utilities'
+import { setVoices } from '@musical-patterns/performer'
+import { doAsync, isUndefined, Maybe } from '@musical-patterns/utilities'
 import * as React from 'react'
 import { connect } from 'react-redux'
 import { Dispatch } from 'redux'
@@ -51,14 +47,13 @@ const RecompileListener: React.ComponentType<RecompileListenerProps> =
             }
 
             const compilePatternParameters: CompilePatternParameters = { ...pattern, specs: submittedSpecs }
-            const voices: Voice[] = await compilePattern(compilePatternParameters)
-            const patternDuration: Ms = computeVoicesDuration(voices)
-            setPatternDuration(patternDuration)
+            const { voices, totalDuration, segnoTime } = await compilePattern(compilePatternParameters)
+            setPatternDuration(totalDuration)
 
             await setVoices(voices)
 
             if (debugMode) {
-                await logDebugInfo(voices, patternDuration)
+                await logDebugInfo(voices, totalDuration, segnoTime)
             }
         })
 
