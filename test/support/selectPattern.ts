@@ -1,9 +1,11 @@
 import {
+    FINITE_PATTERN_ID,
     LONG_DURATION_PATTERN_ID,
     ONLY_PATTERN_PARTICULAR_SPECS_PATTERN_ID,
     ONLY_STANDARD_SPECS_PATTERN_ID,
     POST_PATTERN_ID,
     PRESETS_PATTERN_ID,
+    REPETEND_PATTERN_ID,
     SPEC_CONTROLS_PATTERN_ID,
     TIME_CONTROLS_PATTERN_ID,
     VALIDATION_PATTERN_ID,
@@ -59,6 +61,18 @@ const selectOnlyPatternParticularSpecsPattern: () => Promise<void> =
         await waitLongEnoughForAnimationToComplete()
     }
 
+const selectFinitePattern: () => Promise<void> =
+    async (): Promise<void> => {
+        await clickElement(`#${FINITE_PATTERN_ID}`)
+        await waitLongEnoughForAnimationToComplete()
+    }
+
+const selectRepetendPattern: () => Promise<void> =
+    async (): Promise<void> => {
+        await clickElement(`#${REPETEND_PATTERN_ID}`)
+        await waitLongEnoughForAnimationToComplete()
+    }
+
 export {
     selectSpecControlsPattern,
     selectPostPattern,
@@ -68,4 +82,6 @@ export {
     selectPresetsPattern,
     selectOnlyStandardSpecsPattern,
     selectOnlyPatternParticularSpecsPattern,
+    selectFinitePattern,
+    selectRepetendPattern,
 }

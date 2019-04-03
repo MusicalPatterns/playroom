@@ -23,6 +23,8 @@ const {
     [ Id.PLAYROOM_TEST_VALIDATION ]: playroomTestValidation,
     [ Id.PLAYROOM_TEST_PRESETS ]: playroomTestPresets,
     [ Id.PLAYROOM_TEST_LONG_DURATION ]: playroomTestLongDuration,
+    [ Id.PLAYROOM_TEST_FINITE ]: playroomTestFinite,
+    [ Id.PLAYROOM_TEST_REPETEND ]: playroomTestRepetend,
 } = patterns
 
 const APP_URL: string = `http://localhost:${port}`
@@ -122,6 +124,10 @@ const PRESET_ONE_SPEC_TWO_VALUE: string = presets.presetOne.specs[ OPTIONED_SPEC
 const PRESET_TWO_SPEC_ONE_VALUE: string = presets.presetTwo.specs[ OPTIONED_SPEC_ONE_KEY ] as string
 const PRESET_TWO_SPEC_TWO_VALUE: string = presets.presetTwo.specs[ OPTIONED_SPEC_TWO_KEY ] as string
 
+const REPETEND_PATTERN_ID: Id = playroomTestRepetend!.id
+
+const FINITE_PATTERN_ID: Id = playroomTestFinite!.id
+
 export {
     APP_URL,
     SPEC_CONTROLS_PATTERN_ID,
@@ -176,4 +182,6 @@ export {
     PRESET_ONE_NAME,
     PRESET_TWO_NAME,
     EVEN_A_BIT_LONGER,
+    REPETEND_PATTERN_ID,
+    FINITE_PATTERN_ID,
 }

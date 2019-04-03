@@ -2,7 +2,7 @@
 
 import { compilePattern, CompilePatternParameters } from '@musical-patterns/compiler'
 import { Pattern } from '@musical-patterns/pattern'
-import { setVoices } from '@musical-patterns/performer'
+import { CompiledPattern, setPattern } from '@musical-patterns/performer'
 import { doAsync, isUndefined, Maybe } from '@musical-patterns/utilities'
 import * as React from 'react'
 import { connect } from 'react-redux'
@@ -47,13 +47,13 @@ const RecompileListener: React.ComponentType<RecompileListenerProps> =
             }
 
             const compilePatternParameters: CompilePatternParameters = { ...pattern, specs: submittedSpecs }
-            const { voices, totalDuration, segnoTime } = await compilePattern(compilePatternParameters)
-            setPatternDuration(totalDuration)
+            const compiledPattern: CompiledPattern = await compilePattern(compilePatternParameters)
+            setPatternDuration(compiledPattern.totalDuration)
 
-            await setVoices(voices)
+            await setPattern(compiledPattern)
 
             if (debugMode) {
-                await logDebugInfo(voices, totalDuration, segnoTime)
+                await logDebugInfo(compiledPattern)
             }
         })
 
