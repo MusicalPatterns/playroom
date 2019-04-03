@@ -1,9 +1,9 @@
-import { Ms, ObjectOf, round, to } from '@musical-patterns/utilities'
+import { BEGINNING, Ms, NO_DURATION, ObjectOf, round, to } from '@musical-patterns/utilities'
 
 const formatTimesForDisplay: (times: ObjectOf<Ms>) => ObjectOf<Ms> =
     ({ patternDuration, timePosition }: ObjectOf<Ms>): ObjectOf<Ms> => ({
-        patternDurationForDisplay: round(patternDuration) || to.Ms(0),
-        timePositionForDisplay: round(timePosition) || to.Ms(0),
+        patternDurationForDisplay: round(patternDuration) || NO_DURATION,
+        timePositionForDisplay: round(timePosition) || BEGINNING,
     })
 
 export {
