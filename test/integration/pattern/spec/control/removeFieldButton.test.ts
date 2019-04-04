@@ -2,8 +2,11 @@ import { indexOfFinalElement } from '@musical-patterns/utilities'
 import { SecretTestSelector } from '../../../../../src/indexForTest'
 import {
     ARRAYED_SPEC_KEY,
+    ARRAYED_SPEC_WITH_INITIAL_FIELD_VALUE_KEY,
     clickAddFieldButton,
     clickRemoveFieldButton,
+    clickRemoveFieldButtonForOtherArrayedSpecControl,
+    elementAttribute,
     elementCount,
     elementExists,
     elementInnerText,
@@ -58,13 +61,19 @@ const theSubmittedValueForTheArrayedSpecControlAsAWholeIsInItsInitialStateJustWi
             )
     }
 
-const removeAllTheFields: () => Promise<void> =
+const removeAllTheFieldsForOtherArrayedSpecControl: () => Promise<void> =
     async (): Promise<void> => {
-        await clickRemoveFieldButton()
-        await clickRemoveFieldButton()
-        await clickRemoveFieldButton()
-        await clickRemoveFieldButton()
-        await clickRemoveFieldButton()
+        await clickRemoveFieldButtonForOtherArrayedSpecControl()
+        await clickRemoveFieldButtonForOtherArrayedSpecControl()
+        await clickRemoveFieldButtonForOtherArrayedSpecControl()
+        await clickRemoveFieldButtonForOtherArrayedSpecControl()
+        await clickRemoveFieldButtonForOtherArrayedSpecControl()
+    }
+
+const removeFieldButtonForOtherArrayedSpecControlIsDisabled: () => Promise<void> =
+    async (): Promise<void> => {
+        expect(await elementExists(`#${ARRAYED_SPEC_WITH_INITIAL_FIELD_VALUE_KEY} .remove-field:disabled`))
+            .toBeTruthy('remove field button for other arrayed spec control was not disabled')
     }
 
 const removeFieldButtonIsDisabled: () => Promise<void> =
@@ -73,17 +82,24 @@ const removeFieldButtonIsDisabled: () => Promise<void> =
             .toBeTruthy('remove field button was not disabled')
     }
 
-const everyFieldHasAnInvalidMessage: () => Promise<void> =
+const removeFieldButtonForHasHoverTextExplainingArrayedConstraintMinLengthHasBeenReached: () => Promise<void> =
+    async (): Promise<void> => {
+        const removeFieldButtonHoverText: string = await elementAttribute(`#${ARRAYED_SPEC_KEY} .remove-field:disabled`, 'title') as string
+        expect(removeFieldButtonHoverText)
+            .toBe('This arrayed spec control has a minimum length of 4.')
+    }
+
+const everyFieldHasACustomInvalidityMessage: () => Promise<void> =
     async (): Promise<void> => {
         const expectedInvalidMessage: string = 'arrays can only be odd in length, duoy'
         expect(await elementInnerText(`#${ARRAYED_SPEC_KEY}-0 .invalid-message`))
-            .toBe(expectedInvalidMessage, `field 0 did not have an invalid message`)
+            .toBe(expectedInvalidMessage, `field 0 did not have an custom invalidity message`)
         expect(await elementInnerText(`#${ARRAYED_SPEC_KEY}-1 .invalid-message`))
-            .toBe(expectedInvalidMessage, `field 1 did not have an invalid message`)
+            .toBe(expectedInvalidMessage, `field 1 did not have an custom invalidity message`)
         expect(await elementInnerText(`#${ARRAYED_SPEC_KEY}-2 .invalid-message`))
-            .toBe(expectedInvalidMessage, `field 2 did not have an invalid message`)
+            .toBe(expectedInvalidMessage, `field 2 did not have an custom invalidity message`)
         expect(await elementInnerText(`#${ARRAYED_SPEC_KEY}-3 .invalid-message`))
-            .toBe(expectedInvalidMessage, `field 3 did not have an invalid message`)
+            .toBe(expectedInvalidMessage, `field 3 did not have an custom invalidity message`)
     }
 
 describe('remove field button', () => {
@@ -122,18 +138,28 @@ describe('remove field button', () => {
         done()
     })
 
-    it('disables the remove field button when there are no fields remaining in the arrayed spec control', async (done: DoneFn) => {
-        await removeAllTheFields()
-        await removeFieldButtonIsDisabled()
+    it('runs validation when removing an element', async (done: DoneFn) => {
+        await selectValidationPattern()
+        await clickRemoveFieldButton()
+        await everyFieldHasACustomInvalidityMessage()
 
         done()
     })
 
-    it('runs validation when removing an element', async (done: DoneFn) => {
-        await selectValidationPattern()
+    it('does not allow you to remove elements past the minimum length of the arrayed constraint', async (done: DoneFn) => {
         await clickRemoveFieldButton()
-        await everyFieldHasAnInvalidMessage()
+        await removeFieldButtonIsDisabled()
+        await removeFieldButtonForHasHoverTextExplainingArrayedConstraintMinLengthHasBeenReached()
 
         done()
+    })
+
+    describe('need to use the other arrayed spec control which has no minimum length constraint for this test', () => {
+        it('disables the remove field button when there are no fields remaining in the arrayed spec control', async (done: DoneFn) => {
+            await removeAllTheFieldsForOtherArrayedSpecControl()
+            await removeFieldButtonForOtherArrayedSpecControlIsDisabled()
+
+            done()
+        })
     })
 })

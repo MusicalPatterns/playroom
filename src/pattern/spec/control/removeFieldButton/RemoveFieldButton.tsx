@@ -2,8 +2,8 @@
 
 import { faMinus } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { DomSpecValue, isArrayedDomSpecValue } from '@musical-patterns/pattern'
-import { isEmpty } from '@musical-patterns/utilities'
+import { ArrayedConstraint, DomSpecValue, isArrayedDomSpecValue } from '@musical-patterns/pattern'
+import { isEmpty, isUndefined, Maybe, totalElements } from '@musical-patterns/utilities'
 import * as React from 'react'
 import { connect } from 'react-redux'
 import { Dispatch } from 'redux'
@@ -11,6 +11,7 @@ import { EventHandler, ImmutableState, StateKey } from '../../../../types'
 import { PatternStateKey } from '../../../types'
 import { ImmutableSpecState, SpecStateKey } from '../../types'
 import { handleFieldRemove } from './events'
+import { computeRemoveFieldButtonAttributes } from './helpers'
 import './styles'
 import {
     HandleFieldRemoveEventParameters,
@@ -41,20 +42,26 @@ const mapDispatchToProps: (dispatch: Dispatch) => RemoveFieldButtonPropsFromDisp
     })
 
 const RemoveFieldButton: React.ComponentType<RemoveFieldButtonProps> =
-    (removeFieldButtonProps: RemoveFieldButtonProps): React.ReactElement | null => {
-        const { handleFieldRemoveEvent, displayedSpecs, specKey, ...otherProps } = removeFieldButtonProps
+    ({
+         handleFieldRemoveEvent,
+         displayedSpecs,
+         specKey,
+         configurations,
+         ...otherProps
+     }: RemoveFieldButtonProps): React.ReactElement | null => {
         const onClick: EventHandler = (event: React.SyntheticEvent): void => {
-            handleFieldRemoveEvent({ event, displayedSpecs, specKey, ...otherProps })
+            handleFieldRemoveEvent({ event, displayedSpecs, specKey, configurations, ...otherProps })
         }
 
         const displayedValue: DomSpecValue = displayedSpecs[ specKey ]
         if (!isArrayedDomSpecValue(displayedValue)) {
             throw new Error('cannot treat a singular spec control as arrayed')
         }
-        const disabled: boolean = isEmpty(displayedValue)
+
+        const { disabled, title } = computeRemoveFieldButtonAttributes({ configurations, displayedValue, specKey })
 
         return (
-            <button {...{ className: 'remove-field', onClick, disabled }}>
+            <button {...{ className: 'remove-field', onClick, disabled, title }}>
                 <FontAwesomeIcon {...{ icon: faMinus }}/>
             </button>
         )

@@ -5,7 +5,7 @@ import {
     ARRAYED_SPEC_WITH_INITIAL_FIELD_VALUE_KEY,
     clickAddFieldButton,
     clickElement,
-    clickRemoveFieldButton,
+    clickRemoveFieldButton, elementAttribute,
     elementCount,
     elementExists,
     elementInnerText,
@@ -151,6 +151,19 @@ const theSubmittedValueForTheArrayedSpecControlWithTheInitialFieldValueAsAWholeH
             )
     }
 
+const addFieldButtonIsDisabled: () => Promise<void> =
+    async (): Promise<void> => {
+        expect(await elementExists(`#${ARRAYED_SPEC_KEY} .add-field:disabled`))
+            .toBeTruthy('add field button was not disabled')
+    }
+
+const addFieldButtonHasHoverTextExplainingArrayedConstraintMaxLengthHasBeenReached: () => Promise<void> =
+    async (): Promise<void> => {
+        const addFieldButtonHoverText: string = await elementAttribute(`#${ARRAYED_SPEC_KEY} .add-field:disabled`, 'title') as string
+        expect(addFieldButtonHoverText)
+            .toBe('This arrayed spec control has a maximum length of 7.')
+    }
+
 describe('add field button', () => {
     beforeEach(async (done: DoneFn) => {
         await refreshForSpecControlsTest()
@@ -254,5 +267,14 @@ describe('add field button', () => {
 
             done()
         })
+    })
+
+    it('does not allow you to add elements past the maximum length of the arrayed constraint', async (done: DoneFn) => {
+        await clickAddFieldButton()
+        await clickAddFieldButton()
+        await addFieldButtonIsDisabled()
+        await addFieldButtonHasHoverTextExplainingArrayedConstraintMaxLengthHasBeenReached()
+
+        done()
     })
 })

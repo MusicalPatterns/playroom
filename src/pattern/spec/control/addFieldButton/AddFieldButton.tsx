@@ -2,6 +2,8 @@
 
 import { faPlus } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { ArrayedConstraint, DomSpecValue, isArrayedDomSpecValue } from '@musical-patterns/pattern'
+import { isUndefined, Maybe, totalElements } from '@musical-patterns/utilities'
 import * as React from 'react'
 import { connect } from 'react-redux'
 import { Dispatch } from 'redux'
@@ -34,13 +36,24 @@ const mapDispatchToProps: (dispatch: Dispatch) => AddFieldButtonPropsFromDispatc
 
 const AddFieldButton: React.ComponentType<AddFieldButtonProps> =
     (addFieldButtonProps: AddFieldButtonProps): React.ReactElement | null => {
-        const { handleFieldAddEvent, ...otherProps } = addFieldButtonProps
+        const { handleFieldAddEvent, configurations, specKey, displayedSpecs, ...otherProps } = addFieldButtonProps
         const onClick: EventHandler = (event: React.SyntheticEvent): void => {
-            handleFieldAddEvent({ event, ...otherProps })
+            handleFieldAddEvent({ event, configurations, specKey, displayedSpecs, ...otherProps })
         }
 
+        const displayedValue: DomSpecValue = displayedSpecs[ specKey ]
+        if (!isArrayedDomSpecValue(displayedValue)) {
+            throw new Error('cannot treat a singular spec control as arrayed')
+        }
+
+        const arrayedConstraint: Maybe<ArrayedConstraint> = configurations[ specKey ].arrayedConstraint
+        const maxLength: Maybe<number> = !isUndefined(arrayedConstraint) ? arrayedConstraint.maxLength : undefined
+        const isAtMaxLength: boolean = !!maxLength && totalElements(displayedValue) >= maxLength
+        const disabled: boolean = isAtMaxLength
+        const title: string = disabled ? `This arrayed spec control has a maximum length of ${maxLength}.` : ''
+
         return (
-            <button {...{ className: 'add-field', onClick }}>
+            <button {...{ className: 'add-field', onClick, disabled, title }}>
                 <FontAwesomeIcon {...{ icon: faPlus }}/>
             </button>
         )

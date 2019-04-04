@@ -1,5 +1,6 @@
 import {
-    ComputeValidations, Configurations,
+    ComputeValidations,
+    Configurations,
     DomSpecs,
     DomSpecValue,
     Specs,

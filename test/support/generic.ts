@@ -1,6 +1,7 @@
 import {
     clickElement as utilitiesClickElement,
     deleteCharacterFromInput as utilitiesDeleteCharacterFromInput,
+    elementAttribute as utilitiesElementAttribute,
     elementChecked as utilitiesElementChecked,
     elementCount as utilitiesElementCount,
     elementExists as utilitiesElementExists,
@@ -42,6 +43,10 @@ const elementIds: (selector: string) => Promise<string[]> =
     async (selector: string): Promise<string[]> =>
         utilitiesElementIds(page, selector)
 
+const elementAttribute: (selector: string, attribute: string) => Promise<unknown> =
+    async (selector: string, attribute: string): Promise<unknown> =>
+        utilitiesElementAttribute(page, selector, attribute)
+
 const findElement: (selector: string) => Promise<ElementHandle> =
     async (selector: string): Promise<ElementHandle> =>
         utilitiesFindElement(page, selector)
@@ -81,6 +86,7 @@ export {
     elementChecked,
     elementCount,
     elementIds,
+    elementAttribute,
     findElement,
     press,
     loseFocus,

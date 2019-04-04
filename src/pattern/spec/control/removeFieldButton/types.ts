@@ -1,4 +1,4 @@
-import { Validations } from '@musical-patterns/pattern'
+import { ArrayedDomSpecValue, Configurations, Validations } from '@musical-patterns/pattern'
 import { DispatchParameter, EventParameter } from '../../../../types'
 import { SubmissionProps } from '../../types'
 import { ControlParentProps } from '../types'
@@ -19,10 +19,23 @@ interface HandleFieldRemoveEventParameters extends EventParameter,
 
 interface HandleFieldRemoveParameters extends ControlParentProps, RemoveFieldButtonPropsFromState, DispatchParameter {}
 
+interface RemoveFieldButtonAttributes {
+    disabled: boolean,
+    title: string,
+}
+
+interface ComputeRemoveFieldButtonAttributesParameters {
+    configurations: Configurations,
+    displayedValue: ArrayedDomSpecValue,
+    specKey: string
+}
+
 export {
     RemoveFieldButtonPropsFromState,
     RemoveFieldButtonPropsFromDispatch,
     RemoveFieldButtonProps,
     HandleFieldRemoveEventParameters,
     HandleFieldRemoveParameters,
+    RemoveFieldButtonAttributes,
+    ComputeRemoveFieldButtonAttributesParameters,
 }

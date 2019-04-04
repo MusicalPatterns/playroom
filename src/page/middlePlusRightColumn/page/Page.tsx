@@ -5,6 +5,7 @@ import { connect } from 'react-redux'
 import { ImmutableState, StateKey } from '../../../types'
 import { PageName, PageStateKey } from '../../types'
 import { PageProps } from './types'
+
 const aboutPage: string = require('./about.html')
 
 const mapStateToProps: (state: ImmutableState) => PageProps =

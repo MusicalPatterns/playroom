@@ -1,18 +1,13 @@
 import {
     ArrayedDomSpecValue,
     ArrayedValidation,
-    ComputeValidations, Configurations,
-    DomSpecs, Specs,
+    ComputeValidations,
+    Configurations,
+    DomSpecs,
+    Specs,
     Validations,
 } from '@musical-patterns/pattern'
-import {
-    finalElement,
-    HtmlValueOrChecked,
-    indexOfFinalElement,
-    INITIAL,
-    isUndefined, Maybe,
-    slice,
-} from '@musical-patterns/utilities'
+import { finalElement, indexOfFinalElement, INITIAL, isUndefined, Maybe, slice } from '@musical-patterns/utilities'
 import { Dispatch } from 'redux'
 import { batchActions } from 'redux-batched-actions'
 import { Action } from '../../../../types'

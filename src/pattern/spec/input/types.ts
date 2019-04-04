@@ -1,6 +1,6 @@
 import { DomSpecs, DomSpecValue, Validations } from '@musical-patterns/pattern'
 import { HtmlValueOrChecked, Ordinal } from '@musical-patterns/utilities'
-import { DispatchParameter, EventHandler, EventParameter } from '../../../types'
+import { EventHandler, EventParameter } from '../../../types'
 import { FieldParentProps } from '../field'
 import { SubmissionProps } from '../types'
 

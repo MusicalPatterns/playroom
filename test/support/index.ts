@@ -16,7 +16,12 @@ export { selectAboutPageByClickingLogo } from './aboutPage'
 export { leftColumnIs } from './leftColumn'
 export { openSpecControlsIfNotOpen } from './caret'
 export { clickTimeControl, currentTime, patternDuration, isPlaying, isPaused, hasBeenReset, isAfter } from './time'
-export { clickAddFieldButton, clickRemoveFieldButton, noInvalidMessagesAreShown } from './arrayedSpecControls'
+export {
+    clickAddFieldButton,
+    clickRemoveFieldButton,
+    clickRemoveFieldButtonForOtherArrayedSpecControl,
+    noInvalidMessagesAreShown,
+} from './arrayedSpecControls'
 export {
     selectOption,
     elementIds,
@@ -25,6 +30,7 @@ export {
     elementInnerText,
     elementValue,
     elementChecked,
+    elementAttribute,
     press,
     loseFocus,
     findElement,
