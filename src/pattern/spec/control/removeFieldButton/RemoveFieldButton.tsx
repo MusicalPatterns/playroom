@@ -2,8 +2,7 @@
 
 import { faMinus } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { ArrayedConstraint, DomSpecValue, isArrayedDomSpecValue } from '@musical-patterns/pattern'
-import { isEmpty, isUndefined, Maybe, totalElements } from '@musical-patterns/utilities'
+import { DomSpecValue, isArrayedDomSpecValue } from '@musical-patterns/pattern'
 import * as React from 'react'
 import { connect } from 'react-redux'
 import { Dispatch } from 'redux'
@@ -29,6 +28,7 @@ const mapStateToProps: (state: ImmutableState) => RemoveFieldButtonPropsFromStat
             computeValidations: specState.get(SpecStateKey.COMPUTE_VALIDATIONS),
             configurations: specState.get(SpecStateKey.CONFIGURATIONS),
             displayedSpecs: specState.get(SpecStateKey.DISPLAYED_SPECS),
+            restartOnModify: specState.get(SpecStateKey.RESTART_ON_MODIFY),
             submittedSpecs: specState.get(SpecStateKey.SUBMITTED_SPECS),
             validations: specState.get(SpecStateKey.VALIDATIONS),
         }
@@ -43,14 +43,15 @@ const mapDispatchToProps: (dispatch: Dispatch) => RemoveFieldButtonPropsFromDisp
 
 const RemoveFieldButton: React.ComponentType<RemoveFieldButtonProps> =
     ({
-         handleFieldRemoveEvent,
-         displayedSpecs,
-         specKey,
          configurations,
+         displayedSpecs,
+         handleFieldRemoveEvent,
+         restartOnModify,
+         specKey,
          ...otherProps
      }: RemoveFieldButtonProps): React.ReactElement | null => {
         const onClick: EventHandler = (event: React.SyntheticEvent): void => {
-            handleFieldRemoveEvent({ event, displayedSpecs, specKey, configurations, ...otherProps })
+            handleFieldRemoveEvent({ event, displayedSpecs, specKey, configurations, restartOnModify, ...otherProps })
         }
 
         const displayedValue: DomSpecValue = displayedSpecs[ specKey ]

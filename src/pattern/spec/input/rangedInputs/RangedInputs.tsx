@@ -24,6 +24,7 @@ const mapStateToProps: (state: ImmutableState) => InputsPropsFromState =
             computeValidations: specState.get(SpecStateKey.COMPUTE_VALIDATIONS),
             configurations: specState.get(SpecStateKey.CONFIGURATIONS),
             displayedSpecs: specState.get(SpecStateKey.DISPLAYED_SPECS),
+            restartOnModify: specState.get(SpecStateKey.RESTART_ON_MODIFY),
             submittedSpecs: specState.get(SpecStateKey.SUBMITTED_SPECS),
             validations: specState.get(SpecStateKey.VALIDATIONS),
         }

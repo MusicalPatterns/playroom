@@ -6,6 +6,7 @@ import {
     POST_PATTERN_ID,
     PRESETS_PATTERN_ID,
     REPETEND_PATTERN_ID,
+    RESTART_PATTERN_ID,
     SPEC_CONTROLS_PATTERN_ID,
     TIME_CONTROLS_PATTERN_ID,
     VALIDATION_PATTERN_ID,
@@ -73,6 +74,12 @@ const selectRepetendPattern: () => Promise<void> =
         await waitLongEnoughForAnimationToComplete()
     }
 
+const selectRestartPattern: () => Promise<void> =
+    async (): Promise<void> => {
+        await clickElement(`#${RESTART_PATTERN_ID}`)
+        await waitLongEnoughForAnimationToComplete()
+    }
+
 export {
     selectSpecControlsPattern,
     selectPostPattern,
@@ -84,4 +91,5 @@ export {
     selectOnlyPatternParticularSpecsPattern,
     selectFinitePattern,
     selectRepetendPattern,
+    selectRestartPattern,
 }

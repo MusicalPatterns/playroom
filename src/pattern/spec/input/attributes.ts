@@ -8,14 +8,15 @@ import { SharedInputAttributes, SharedInputsProps } from './types'
 const computeSharedInputAttributes: (sharedInputsProps: SharedInputsProps) => SharedInputAttributes =
     (sharedInputsProps: SharedInputsProps): SharedInputAttributes => {
         const {
+            computeValidations,
             configurations,
             displayedSpecs,
-            handleFieldChangeEvent,
-            specKey,
             fieldIndex,
-            validations,
+            handleFieldChangeEvent,
+            restartOnModify,
+            specKey,
             submittedSpecs,
-            computeValidations,
+            validations,
         } = sharedInputsProps
         const onChange: EventHandler = (event: React.SyntheticEvent): void => {
             handleFieldChangeEvent({
@@ -24,6 +25,7 @@ const computeSharedInputAttributes: (sharedInputsProps: SharedInputsProps) => Sh
                 displayedSpecs,
                 event,
                 fieldIndex,
+                restartOnModify,
                 specKey,
                 submittedSpecs,
             })

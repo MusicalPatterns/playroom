@@ -10,6 +10,7 @@ const initialSpecState: ImmutableSpecState = typedMap<SpecState>({
     [ SpecStateKey.CONFIGURATIONS ]: standardConfigurations as KeyMap<Specs, Configuration>,
     [ SpecStateKey.COMPUTE_VALIDATIONS ]: undefined,
     [ SpecStateKey.PRESETS ]: undefined,
+    [ SpecStateKey.RESTART_ON_MODIFY ]: false,
     [ SpecStateKey.SPEC_PANEL_OPEN ]: false,
 })
 

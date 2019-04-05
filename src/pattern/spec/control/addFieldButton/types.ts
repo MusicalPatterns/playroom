@@ -10,7 +10,9 @@ interface AddFieldButtonProps extends SubmissionProps, AddFieldButtonPropsFromDi
 
 interface HandleFieldAddEventParameters extends SubmissionProps, ControlParentProps, EventParameter {}
 
-interface HandleFieldAddParameters extends SubmissionProps, ControlParentProps, DispatchParameter {}
+interface HandleFieldAddParameters extends SubmissionProps, ControlParentProps, DispatchParameter {
+    restartOnModify: boolean,
+}
 
 export {
     AddFieldButtonPropsFromDispatch,

@@ -31,7 +31,7 @@ const computePatternName: (parameters: { metadata: Metadata, newId: Id }) => str
 const computePatternChangeActions: (pattern: Pattern) => Action[] =
     (pattern: Pattern): Action[] => {
         const { id, spec, metadata } = pattern
-        const { initialSpecs, configurations, computeValidations } = spec
+        const { initialSpecs, configurations, computeValidations, restartOnModify = false } = spec
         const post: string = computePost(metadata)
         const patternName: string = computePatternName({ metadata, newId: id })
 
@@ -40,6 +40,7 @@ const computePatternChangeActions: (pattern: Pattern) => Action[] =
             { type: SpecStateKey.INITIAL_SPECS, data: initialSpecs },
             { type: SpecStateKey.CONFIGURATIONS, data: configurations },
             { type: SpecStateKey.COMPUTE_VALIDATIONS, data: computeValidations },
+            { type: SpecStateKey.RESTART_ON_MODIFY, data: restartOnModify },
             { type: SpecStateKey.PRESETS, data: spec.presets },
             { type: MaterialStateKey.PERFORMER_DISABLED, data: false },
             { type: MetadataStateKey.POST, data: post },

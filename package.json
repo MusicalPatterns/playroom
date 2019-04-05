@@ -1,6 +1,6 @@
 {
   "name": "@musical-patterns/playroom",
-  "version": "1.0.372",
+  "version": "1.0.373",
   "main": "dist/index.js",
   "typings": "dist/index.d.ts",
   "repository": {
@@ -22,8 +22,8 @@
     "@fortawesome/react-fontawesome": "^0.1.4",
     "@musical-patterns/cli": "^1.0.524",
     "@musical-patterns/compiler": "^1.0.147",
-    "@musical-patterns/pattern": "^1.0.248",
-    "@musical-patterns/pattern-playroom-test": "^1.0.191",
+    "@musical-patterns/pattern": "^1.0.250",
+    "@musical-patterns/pattern-playroom-test": "^1.0.192",
     "@musical-patterns/performer": "^1.0.243",
     "@musical-patterns/utilities": "^1.0.408",
     "@types/node": "^10.12.27",

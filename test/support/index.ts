@@ -9,6 +9,7 @@ export {
     selectOnlyPatternParticularSpecsPattern,
     selectFinitePattern,
     selectRepetendPattern,
+    selectRestartPattern,
 } from './selectPattern'
 export { quickRefresh, refreshPage, refreshForSpecControlsTest } from './refresh'
 export { waitLongEnoughForAnimationToComplete } from './wait'

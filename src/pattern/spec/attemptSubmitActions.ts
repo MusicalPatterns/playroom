@@ -8,7 +8,8 @@ import {
     Validation,
     Validations,
 } from '@musical-patterns/pattern'
-import { isUndefined, Maybe, objectSet } from '@musical-patterns/utilities'
+import { setTimePosition } from '@musical-patterns/performer'
+import { BEGINNING, doAsync, isUndefined, Maybe, objectSet } from '@musical-patterns/utilities'
 import { Action } from '../../types'
 import { ComputeAttemptSubmitActionsParameters, SpecStateKey } from './types'
 
@@ -16,6 +17,7 @@ const computeAttemptSubmitActions: (parameters: {
     computeValidations: Maybe<ComputeValidations>,
     configurations: Configurations,
     displayedSpecs: DomSpecs,
+    restartOnModify: boolean,
     specKey: string,
     submittedSpecs: Specs,
     suppressUpdatingValidations?: boolean,
@@ -23,13 +25,14 @@ const computeAttemptSubmitActions: (parameters: {
 }) => Action[] =
     (parameters: ComputeAttemptSubmitActionsParameters): Action[] => {
         const {
-            displayedSpecs,
-            submittedSpecs,
-            configurations,
             computeValidations,
+            configurations,
+            displayedSpecs,
+            restartOnModify,
             specKey,
-            updatedValue,
+            submittedSpecs,
             suppressUpdatingValidations,
+            updatedValue,
         } = parameters
 
         const updatedDisplayedSpecs: DomSpecs = { ...displayedSpecs, [ specKey ]: updatedValue }
@@ -61,6 +64,12 @@ const computeAttemptSubmitActions: (parameters: {
         actions.push({
             data: updatedSubmittedSpecsWhichWillNeverHaveInvalidSpecValues,
             type: SpecStateKey.SUBMITTED_SPECS,
+        })
+
+        doAsync(async () => {
+            if (restartOnModify) {
+                await setTimePosition(BEGINNING)
+            }
         })
 
         return actions

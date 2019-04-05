@@ -25,6 +25,7 @@ const {
     [ Id.PLAYROOM_TEST_LONG_DURATION ]: playroomTestLongDuration,
     [ Id.PLAYROOM_TEST_FINITE ]: playroomTestFinite,
     [ Id.PLAYROOM_TEST_REPETEND ]: playroomTestRepetend,
+    [ Id.PLAYROOM_TEST_RESTART ]: playroomTestRestart,
 } = patterns
 
 const APP_URL: string = `http://localhost:${port}`
@@ -128,6 +129,8 @@ const REPETEND_PATTERN_ID: Id = playroomTestRepetend!.id
 
 const FINITE_PATTERN_ID: Id = playroomTestFinite!.id
 
+const RESTART_PATTERN_ID: Id = playroomTestRestart!.id
+
 export {
     APP_URL,
     SPEC_CONTROLS_PATTERN_ID,
@@ -184,4 +187,5 @@ export {
     EVEN_A_BIT_LONGER,
     REPETEND_PATTERN_ID,
     FINITE_PATTERN_ID,
+    RESTART_PATTERN_ID,
 }

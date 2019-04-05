@@ -19,6 +19,7 @@ enum SpecStateKey {
     CONFIGURATIONS = 'CONFIGURATIONS',
     COMPUTE_VALIDATIONS = 'COMPUTE_VALIDATIONS',
     PRESETS = 'PRESETS',
+    RESTART_ON_MODIFY = 'RESTART_ON_MODIFY',
     SPEC_PANEL_OPEN = 'SPEC_PANEL_OPEN',
 }
 
@@ -30,6 +31,7 @@ interface SpecState {
     [ SpecStateKey.CONFIGURATIONS ]: Configurations,
     [ SpecStateKey.COMPUTE_VALIDATIONS ]: Maybe<ComputeValidations>,
     [ SpecStateKey.PRESETS ]: Maybe<ObjectOf<Preset>>,
+    [ SpecStateKey.RESTART_ON_MODIFY ]: boolean,
     [ SpecStateKey.SPEC_PANEL_OPEN ]: boolean,
 }
 
@@ -56,6 +58,7 @@ interface ComputeSingularValidationParameters extends FieldParentProps {
 interface SubmissionProps extends ConfigurationsParameter {
     computeValidations: Maybe<ComputeValidations>,
     displayedSpecs: DomSpecs,
+    restartOnModify: boolean,
     submittedSpecs: Specs,
 }
 

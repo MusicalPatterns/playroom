@@ -2,12 +2,14 @@ import { Ms, sleep } from '@musical-patterns/utilities'
 import { ElementHandle } from 'puppeteer'
 import { FieldValidityClassName, SecretTestSelector } from '../../../../../src/indexForTest'
 import {
+    A_BIT_LONGER,
     clickTimeControl,
     currentTime,
     deleteCharacterFromInput,
     elementExists,
     elementInnerText,
     findElement,
+    hasBeenReset,
     isAfter,
     isPlaying,
     LONG_ENOUGH_FOR_TIME_TO_PASS,
@@ -21,6 +23,7 @@ import {
     selectOnlyPatternParticularSpecsPattern,
     selectOnlyStandardSpecsPattern,
     selectOption,
+    selectRestartPattern,
     selectSpecControlsPattern,
     selectValidationPattern,
     SPEC_CONTROLS_PATTERN_OPTIONED_SPEC_ONE_MODIFIED_VALUE,
@@ -233,6 +236,35 @@ describe('spec controls', () => {
             await openSpecControlsIfNotOpen()
             await modifySpecs()
             await isAfter(timeOfModifyingSpecs)
+            await isPlaying()
+
+            done()
+        })
+    })
+
+    describe('when a pattern is playing that restarts upon spec modification', () => {
+        beforeEach(async (done: DoneFn) => {
+            await quickRefresh()
+            await selectRestartPattern()
+            await clickTimeControl('play')
+            await sleep(LONG_ENOUGH_FOR_TIME_TO_PASS)
+
+            done()
+        })
+
+        afterEach(async (done: DoneFn) => {
+            if (await elementExists('#pause')) {
+                await clickTimeControl('pause')
+            }
+            done()
+        })
+
+        it('keeps playing when you modify the spec and resets time to the beginning', async (done: DoneFn) => {
+            await openSpecControlsIfNotOpen()
+            await sleep(A_BIT_LONGER)
+            const timeOfModifyingSpecs: Ms = await currentTime()
+            await modifySpecs()
+            await hasBeenReset({ toBefore: timeOfModifyingSpecs })
             await isPlaying()
 
             done()

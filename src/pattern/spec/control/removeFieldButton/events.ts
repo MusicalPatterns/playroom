@@ -34,18 +34,20 @@ const handleFieldRemove: (parameters: {
     configurations: Configurations,
     dispatch: Dispatch<Action>,
     displayedSpecs: DomSpecs,
+    restartOnModify: boolean,
     specKey: string,
     submittedSpecs: Specs,
     validations: Validations,
 }) => void =
     (parameters: HandleFieldRemoveParameters): void => {
         const {
-            dispatch,
-            specKey,
-            configurations,
-            displayedSpecs,
-            submittedSpecs,
             computeValidations,
+            configurations,
+            dispatch,
+            displayedSpecs,
+            restartOnModify,
+            specKey,
+            submittedSpecs,
             validations,
         } = parameters
         const arrayedDisplayedValue: ArrayedDomSpecValue = computeArrayedDisplayedValue(displayedSpecs, specKey)
@@ -66,6 +68,7 @@ const handleFieldRemove: (parameters: {
             computeValidations,
             configurations,
             displayedSpecs,
+            restartOnModify,
             specKey,
             submittedSpecs,
             suppressUpdatingValidations,

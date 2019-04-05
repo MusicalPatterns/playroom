@@ -31,13 +31,14 @@ const computeHandleFieldChangeEvent: (parameters: { dispatch: Dispatch<Action> }
     ({ dispatch }: DispatchParameter): HandleFieldChangeEvent =>
         async (parameters: HandleFieldChangeEventParameters): Promise<void> => {
             const {
-                fieldIndex,
-                event,
-                specKey,
-                displayedSpecs,
-                submittedSpecs,
                 computeValidations,
                 configurations,
+                displayedSpecs,
+                event,
+                fieldIndex,
+                restartOnModify,
+                specKey,
+                submittedSpecs,
             } = parameters
 
             const eventValue: HtmlValueOrChecked = extractValueOrCheckedFromEvent(event)
@@ -56,6 +57,7 @@ const computeHandleFieldChangeEvent: (parameters: { dispatch: Dispatch<Action> }
                 computeValidations,
                 configurations,
                 displayedSpecs,
+                restartOnModify,
                 specKey,
                 submittedSpecs,
                 updatedValue,
