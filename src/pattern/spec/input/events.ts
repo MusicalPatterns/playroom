@@ -14,9 +14,7 @@ const mergeEventValueIntoArrayedValue: (parameters: {
     fieldIndex: Ordinal,
     specKey: string,
 }) => ArrayedDomSpecValue =
-    (parameters: MergeEventValueIntoValueParameters): ArrayedDomSpecValue => {
-        const { displayedSpecs, specKey, fieldIndex, eventValue } = parameters
-
+    ({ displayedSpecs, specKey, fieldIndex, eventValue }: MergeEventValueIntoValueParameters): ArrayedDomSpecValue => {
         const arrayedDisplayedValue: ArrayedDomSpecValue = computeArrayedDisplayedValue(displayedSpecs, specKey)
 
         while (arrayedDisplayedValue.length < from.Ordinal(fieldIndex)) {
@@ -29,8 +27,8 @@ const mergeEventValueIntoArrayedValue: (parameters: {
 
 const computeHandleFieldChangeEvent: (parameters: { dispatch: Dispatch<Action> }) => HandleFieldChangeEvent =
     ({ dispatch }: DispatchParameter): HandleFieldChangeEvent =>
-        async (parameters: HandleFieldChangeEventParameters): Promise<void> => {
-            const {
+        async (
+            {
                 computeValidations,
                 configurations,
                 displayedSpecs,
@@ -39,7 +37,8 @@ const computeHandleFieldChangeEvent: (parameters: { dispatch: Dispatch<Action> }
                 restartOnModify,
                 specKey,
                 submittedSpecs,
-            } = parameters
+            }: HandleFieldChangeEventParameters,
+        ): Promise<void> => {
 
             const eventValue: HtmlValueOrChecked = extractValueOrCheckedFromEvent(event)
 

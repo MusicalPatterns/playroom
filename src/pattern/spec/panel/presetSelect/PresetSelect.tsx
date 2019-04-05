@@ -30,6 +30,7 @@ const mapStateToProps: (state: ImmutableState) => PresetSelectPropsFromState =
 
         return {
             presets: specState.get(SpecStateKey.PRESETS),
+            restartOnModify: specState.get(SpecStateKey.RESTART_ON_MODIFY),
             submittedSpecs: specState.get(SpecStateKey.SUBMITTED_SPECS),
         }
     }
@@ -40,7 +41,12 @@ const mapDispatchToProps: (dispatch: Dispatch) => PresetSelectPropsFromDispatch 
     })
 
 const PresetSelect: React.ComponentType<PresetSelectProps> =
-    ({ handlePresetChangeEvent, presets, submittedSpecs }: PresetSelectProps): React.ReactElement | null => {
+    ({
+         handlePresetChangeEvent,
+         presets,
+         submittedSpecs,
+         restartOnModify,
+     }: PresetSelectProps): React.ReactElement | null => {
         if (isUndefined(presets)) {
             return null
         }
@@ -69,7 +75,7 @@ const PresetSelect: React.ComponentType<PresetSelectProps> =
         options.unshift(<option {...{ disabled: true, key: 0 }}/>)
 
         const onChange: EventHandler = (event: React.SyntheticEvent): void => {
-            handlePresetChangeEvent({ presets, event })
+            handlePresetChangeEvent({ presets, event, restartOnModify })
         }
 
         return (

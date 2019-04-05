@@ -24,8 +24,14 @@ const mapStateToProps: (state: ImmutableState) => SecretSubmittedSpecsForTestPro
     })
 
 const SecretSubmittedSpecForTest: React.ComponentType<SecretSubmittedSpecsForTestProps> =
-    (secretSubmittedSpecsForTestProps: SecretSubmittedSpecsForTestProps): React.ReactElement | null => {
-        const { debugMode, specKey, submittedSpecs, fieldIndex } = secretSubmittedSpecsForTestProps
+    (
+        {
+            debugMode,
+            specKey,
+            submittedSpecs,
+            fieldIndex,
+        }: SecretSubmittedSpecsForTestProps,
+    ): React.ReactElement | null => {
         if (!debugMode) {
             return null
         }

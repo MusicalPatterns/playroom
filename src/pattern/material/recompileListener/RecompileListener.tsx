@@ -37,10 +37,16 @@ const mapDispatchToProps: (dispatch: Dispatch) => RecompileListenerPropsFromDisp
     })
 
 const RecompileListener: React.ComponentType<RecompileListenerProps> =
-    (props: RecompileListenerProps): React.ReactElement | null => {
+    (
+        {
+            debugMode,
+            patternId,
+            patterns,
+            submittedSpecs,
+            setPatternDuration,
+        }: RecompileListenerProps,
+    ): React.ReactElement | null => {
         doAsync(async () => {
-            const { debugMode, patternId, patterns, submittedSpecs, setPatternDuration } = props
-
             const pattern: Maybe<Pattern> = computeMaybePattern({ patterns, patternId })
             if (isUndefined(pattern)) {
                 return

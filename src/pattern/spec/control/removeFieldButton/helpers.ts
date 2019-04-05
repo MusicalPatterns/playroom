@@ -7,11 +7,13 @@ const computeRemoveFieldButtonAttributes: (parameters: {
     displayedValue: ArrayedDomSpecValue,
     specKey: string,
 }) => RemoveFieldButtonAttributes =
-    ({
-         configurations,
-         displayedValue,
-         specKey,
-     }: ComputeRemoveFieldButtonAttributesParameters): RemoveFieldButtonAttributes => {
+    (
+        {
+            configurations,
+            displayedValue,
+            specKey,
+        }: ComputeRemoveFieldButtonAttributesParameters,
+    ): RemoveFieldButtonAttributes => {
         const arrayedConstraint: Maybe<ArrayedConstraint> = configurations[ specKey ].arrayedConstraint
         const minLength: Maybe<number> = !isUndefined(arrayedConstraint) ? arrayedConstraint.minLength : undefined
         const isAtMinLength: boolean = !!minLength && totalElements(displayedValue) <= minLength

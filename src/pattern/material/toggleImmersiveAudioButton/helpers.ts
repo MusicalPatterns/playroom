@@ -17,8 +17,12 @@ const computeToggleImmersiveAudioButtonOnClick: (parameters: {
     immersiveAudioEnabled: boolean,
     toggleImmersiveAudioHandlers: Maybe<ToggleImmersiveAudioHandlers>,
 }) => VoidFunction =
-    (parameters: ComputeToggleImmersiveAudioButtonOnClickParameters): VoidFunction => {
-        const { immersiveAudioEnabled, toggleImmersiveAudioHandlers } = parameters
+    (
+        {
+            immersiveAudioEnabled,
+            toggleImmersiveAudioHandlers,
+        }: ComputeToggleImmersiveAudioButtonOnClickParameters,
+    ): VoidFunction => {
         const { enterImmersiveAudio = noop, exitImmersiveAudio = noop } = toggleImmersiveAudioHandlers || {}
 
         return immersiveAudioEnabled ? exitImmersiveAudio : enterImmersiveAudio

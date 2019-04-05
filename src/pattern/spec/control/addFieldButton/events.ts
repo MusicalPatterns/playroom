@@ -1,6 +1,5 @@
 import { ArrayedDomSpecValue, ComputeValidations, Configurations, DomSpecs, Specs } from '@musical-patterns/pattern'
-import { setTimePosition } from '@musical-patterns/performer'
-import { BEGINNING, HtmlValueOrChecked, isUndefined, Maybe } from '@musical-patterns/utilities'
+import { HtmlValueOrChecked, isUndefined, Maybe } from '@musical-patterns/utilities'
 import { Dispatch } from 'redux'
 import { batchActions } from 'redux-batched-actions'
 import { Action } from '../../../../types'
@@ -17,15 +16,17 @@ const handleFieldAdd: (parameters: {
     specKey: string,
     submittedSpecs: Specs,
 }) => void =
-    ({
-         dispatch,
-         specKey,
-         displayedSpecs,
-         configurations,
-         computeValidations,
-         restartOnModify,
-         submittedSpecs,
-     }: HandleFieldAddParameters): void => {
+    (
+        {
+            dispatch,
+            specKey,
+            displayedSpecs,
+            configurations,
+            computeValidations,
+            restartOnModify,
+            submittedSpecs,
+        }: HandleFieldAddParameters,
+    ): void => {
         const initialFieldValue: Maybe<HtmlValueOrChecked> = configurations[ specKey ].arrayedNewFieldInitialValue
 
         const arrayedDisplayedValue: ArrayedDomSpecValue = computeArrayedDisplayedValue(displayedSpecs, specKey)

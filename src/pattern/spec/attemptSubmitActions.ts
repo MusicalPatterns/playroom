@@ -23,8 +23,8 @@ const computeAttemptSubmitActions: (parameters: {
     suppressUpdatingValidations?: boolean,
     updatedValue: DomSpecValue,
 }) => Action[] =
-    (parameters: ComputeAttemptSubmitActionsParameters): Action[] => {
-        const {
+    (
+        {
             computeValidations,
             configurations,
             displayedSpecs,
@@ -33,8 +33,8 @@ const computeAttemptSubmitActions: (parameters: {
             submittedSpecs,
             suppressUpdatingValidations,
             updatedValue,
-        } = parameters
-
+        }: ComputeAttemptSubmitActionsParameters,
+    ): Action[] => {
         const updatedDisplayedSpecs: DomSpecs = { ...displayedSpecs, [ specKey ]: updatedValue }
         const actions: Action[] = [
             { type: SpecStateKey.DISPLAYED_SPECS, data: updatedDisplayedSpecs },

@@ -6,8 +6,8 @@ import { computeSingularDisplayedValue, computeSingularValidation } from '../sin
 import { SharedInputAttributes, SharedInputsProps } from './types'
 
 const computeSharedInputAttributes: (sharedInputsProps: SharedInputsProps) => SharedInputAttributes =
-    (sharedInputsProps: SharedInputsProps): SharedInputAttributes => {
-        const {
+    (
+        {
             computeValidations,
             configurations,
             displayedSpecs,
@@ -17,7 +17,8 @@ const computeSharedInputAttributes: (sharedInputsProps: SharedInputsProps) => Sh
             specKey,
             submittedSpecs,
             validations,
-        } = sharedInputsProps
+        }: SharedInputsProps,
+    ): SharedInputAttributes => {
         const onChange: EventHandler = (event: React.SyntheticEvent): void => {
             handleFieldChangeEvent({
                 computeValidations,

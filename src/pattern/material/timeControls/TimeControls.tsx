@@ -37,8 +37,14 @@ const mapDispatchToProps: (dispatch: Dispatch) => TimeControlsPropsFromDispatch 
     })
 
 const TimeControls: React.ComponentType<TimeControlsProps> =
-    (timeControlsProps: TimeControlsProps): React.ReactElement | null => {
-        const { onPerformerUpdate, paused, performerDisabled, setOnPerformerUpdate } = timeControlsProps
+    (
+        {
+            onPerformerUpdate,
+            paused,
+            performerDisabled,
+            setOnPerformerUpdate,
+        }: TimeControlsProps,
+    ): React.ReactElement | null => {
         if (isUndefined(onPerformerUpdate)) {
             setOnPerformerUpdate()
         }

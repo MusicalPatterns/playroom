@@ -23,8 +23,15 @@ const handlePatternChange: (parameters: {
     patterns: Maybe<Partial<Patterns>>,
     rightColumnOpen: boolean,
 }) => Promise<void> =
-    async (parameters: HandlePatternChangeParameters): Promise<void> => {
-        const { dispatch, event, patterns, patternId: previousPatternId, rightColumnOpen } = parameters
+    async (
+        {
+            dispatch,
+            event,
+            patterns,
+            patternId: previousPatternId,
+            rightColumnOpen,
+        }: HandlePatternChangeParameters,
+    ): Promise<void> => {
         const newPatternId: Id = computePatternIdFromEvent(event)
         if (newPatternId === previousPatternId) {
             return

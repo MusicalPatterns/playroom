@@ -36,8 +36,15 @@ const mapDispatchToProps: (dispatch: Dispatch) => AddFieldButtonPropsFromDispatc
     })
 
 const AddFieldButton: React.ComponentType<AddFieldButtonProps> =
-    (addFieldButtonProps: AddFieldButtonProps): React.ReactElement | null => {
-        const { handleFieldAddEvent, configurations, specKey, displayedSpecs, ...otherProps } = addFieldButtonProps
+    (
+        {
+            handleFieldAddEvent,
+            configurations,
+            specKey,
+            displayedSpecs,
+            ...otherProps
+        }: AddFieldButtonProps,
+    ): React.ReactElement | null => {
         const onClick: EventHandler = (event: React.SyntheticEvent): void => {
             handleFieldAddEvent({ event, configurations, specKey, displayedSpecs, ...otherProps })
         }

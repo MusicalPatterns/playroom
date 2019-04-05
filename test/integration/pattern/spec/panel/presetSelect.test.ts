@@ -1,8 +1,11 @@
+import { Ms, sleep } from '@musical-patterns/utilities'
 import { SecretTestSelector } from '../../../../../src/indexForTest'
 import {
+    A_BIT_LONGER,
+    clickTimeControl, currentTime,
     elementExists,
     elementInnerText,
-    elementValue,
+    elementValue, hasBeenReset, isAfter, isPlaying, LONG_ENOUGH_FOR_TIME_TO_PASS,
     openSpecControlsIfNotOpen,
     OPTIONED_SPEC_ONE_KEY,
     OPTIONED_SPEC_TWO_KEY,
@@ -13,9 +16,9 @@ import {
     PRESET_TWO_SPEC_ONE_VALUE,
     PRESET_TWO_SPEC_TWO_VALUE,
     quickRefresh,
-    refreshForSpecControlsTest,
+    refreshForSpecControlsTest, selectLongDurationPattern,
     selectOption,
-    selectPresetsPattern,
+    selectPresetsPattern, selectRestartPattern,
     SPEC_CONTROLS_PATTERN_OPTIONED_SPEC_ONE_INITIAL_VALUE,
     SPEC_CONTROLS_PATTERN_OPTIONED_SPEC_ONE_MODIFIED_VALUE,
 } from '../../../../support'
@@ -139,6 +142,64 @@ describe('preset select', () => {
 
                 await breakConformityWithThePreset()
                 await currentSpecsMatchesNoPresetsAndThusThePresetSelectDisplaysNothing()
+
+                done()
+            })
+        })
+
+        describe('when a pattern is playing', () => {
+            beforeEach(async (done: DoneFn) => {
+                await quickRefresh()
+                await selectLongDurationPattern()
+                await clickTimeControl('play')
+                await sleep(LONG_ENOUGH_FOR_TIME_TO_PASS)
+
+                done()
+            })
+
+            afterEach(async (done: DoneFn) => {
+                if (await elementExists('#pause')) {
+                    await clickTimeControl('pause')
+                }
+                done()
+            })
+
+            it('keeps playing when you select a preset but does not reset time to the beginning', async (done: DoneFn) => {
+                const timeOfSelectingPreset: Ms = await currentTime()
+
+                await openSpecControlsIfNotOpen()
+                await selectAPreset()
+                await isAfter(timeOfSelectingPreset)
+                await isPlaying()
+
+                done()
+            })
+        })
+
+        describe('when a pattern is playing that restarts upon spec modification', () => {
+            beforeEach(async (done: DoneFn) => {
+                await quickRefresh()
+                await selectRestartPattern()
+                await clickTimeControl('play')
+                await sleep(LONG_ENOUGH_FOR_TIME_TO_PASS)
+
+                done()
+            })
+
+            afterEach(async (done: DoneFn) => {
+                if (await elementExists('#pause')) {
+                    await clickTimeControl('pause')
+                }
+                done()
+            })
+
+            it('keeps playing when you select a preset and resets time to the beginning', async (done: DoneFn) => {
+                await openSpecControlsIfNotOpen()
+                await sleep(A_BIT_LONGER)
+                const timeOfSelectingPreset: Ms = await currentTime()
+                await selectAPreset()
+                await hasBeenReset({ toBefore: timeOfSelectingPreset })
+                await isPlaying()
 
                 done()
             })

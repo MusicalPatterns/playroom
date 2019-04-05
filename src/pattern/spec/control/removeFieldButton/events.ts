@@ -39,8 +39,8 @@ const handleFieldRemove: (parameters: {
     submittedSpecs: Specs,
     validations: Validations,
 }) => void =
-    (parameters: HandleFieldRemoveParameters): void => {
-        const {
+    (
+        {
             computeValidations,
             configurations,
             dispatch,
@@ -49,7 +49,8 @@ const handleFieldRemove: (parameters: {
             specKey,
             submittedSpecs,
             validations,
-        } = parameters
+        }: HandleFieldRemoveParameters,
+    ): void => {
         const arrayedDisplayedValue: ArrayedDomSpecValue = computeArrayedDisplayedValue(displayedSpecs, specKey)
 
         const updatedArrayedDisplayedValue: ArrayedDomSpecValue = slice(

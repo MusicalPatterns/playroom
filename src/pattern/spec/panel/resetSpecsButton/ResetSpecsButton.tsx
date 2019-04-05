@@ -1,6 +1,5 @@
 // tslint:disable variable-name file-name-casing no-default-export no-import-side-effect no-null-keyword
 
-import { Specs } from '@musical-patterns/pattern'
 import { deepEqual } from '@musical-patterns/utilities'
 import * as React from 'react'
 import { connect } from 'react-redux'
@@ -11,7 +10,12 @@ import { PatternStateKey } from '../../../types'
 import { ImmutableSpecState, SpecStateKey } from '../../types'
 import { handleSpecsReset } from './events'
 import './styles'
-import { ResetSpecsButtonProps, ResetSpecsButtonPropsFromDispatch, ResetSpecsButtonPropsFromState } from './types'
+import {
+    HandleSpecsResetEventParameters,
+    ResetSpecsButtonProps,
+    ResetSpecsButtonPropsFromDispatch,
+    ResetSpecsButtonPropsFromState,
+} from './types'
 
 const mapStateToProps: (state: ImmutableState) => ResetSpecsButtonPropsFromState =
     (state: ImmutableState): ResetSpecsButtonPropsFromState => {
@@ -20,21 +24,27 @@ const mapStateToProps: (state: ImmutableState) => ResetSpecsButtonPropsFromState
 
         return {
             initialSpecs: specState.get(SpecStateKey.INITIAL_SPECS),
+            restartOnModify: specState.get(SpecStateKey.RESTART_ON_MODIFY),
             submittedSpecs: specState.get(SpecStateKey.SUBMITTED_SPECS),
         }
     }
 
 const mapDispatchToProps: (dispatch: Dispatch) => ResetSpecsButtonPropsFromDispatch =
     (dispatch: Dispatch): ResetSpecsButtonPropsFromDispatch => ({
-        handleSpecsResetEvent: (specs: Specs): void => {
-            handleSpecsReset({ dispatch, specs })
+        handleSpecsResetEvent: ({ specs, restartOnModify }: HandleSpecsResetEventParameters): void => {
+            handleSpecsReset({ dispatch, specs, restartOnModify })
         },
     })
 
 const ResetSpecsButton: React.ComponentType<ResetSpecsButtonProps> =
-    ({ handleSpecsResetEvent, submittedSpecs, initialSpecs }: ResetSpecsButtonProps): React.ReactElement | null => {
+    ({
+         handleSpecsResetEvent,
+         submittedSpecs,
+         initialSpecs,
+         restartOnModify,
+     }: ResetSpecsButtonProps): React.ReactElement | null => {
         const onClick: VoidFunction = (): void => {
-            handleSpecsResetEvent(initialSpecs)
+            handleSpecsResetEvent({ specs: initialSpecs, restartOnModify })
         }
 
         const disabled: boolean = deepEqual(submittedSpecs, initialSpecs)

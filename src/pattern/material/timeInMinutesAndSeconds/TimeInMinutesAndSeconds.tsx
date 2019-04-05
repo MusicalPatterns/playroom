@@ -30,8 +30,13 @@ const mapStateToProps: (state: ImmutableState) => TimelineOrTimeInMinutesAndSeco
     }
 
 const TimeInMinutesAndSeconds: React.ComponentType<TimelineOrTimeInMinutesAndSecondsProps> =
-    (timeInMinutesAndSecondsProps: TimelineOrTimeInMinutesAndSecondsProps): React.ReactElement | null => {
-        const { performerDisabled, patternDuration, timePosition } = timeInMinutesAndSecondsProps
+    (
+        {
+            performerDisabled,
+            patternDuration,
+            timePosition,
+        }: TimelineOrTimeInMinutesAndSecondsProps,
+    ): React.ReactElement | null => {
         const { timePositionForDisplay } = formatTimesForDisplay({
             patternDuration,
             timePosition,

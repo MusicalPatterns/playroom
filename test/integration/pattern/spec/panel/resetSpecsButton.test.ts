@@ -1,18 +1,20 @@
+import { Ms, sleep, waitForHeadfulQaing } from '@musical-patterns/utilities'
 import { ElementHandle } from 'puppeteer'
 import { FieldValidityClassName } from '../../../../../src/indexForTest'
 import {
+    A_BIT_LONGER,
     BAD_FORMAT_INVALID_TEST_MODIFICATION,
-    clickElement,
+    clickElement, clickTimeControl, currentTime,
     deleteCharacterFromInput,
     elementChecked,
     elementExists,
     elementValue,
-    findElement,
-    OPTIONED_SPEC_ONE_KEY,
+    findElement, hasBeenReset, isAfter, isPlaying, LONG_ENOUGH_FOR_TIME_TO_PASS, openSpecControlsIfNotOpen,
+    OPTIONED_SPEC_ONE_KEY, quickRefresh,
     RANGED_SPEC_ONE_KEY,
     RANGED_SPEC_TWO_KEY,
-    refreshForSpecControlsTest,
-    selectOption,
+    refreshForSpecControlsTest, selectLongDurationPattern,
+    selectOption, selectRestartPattern,
     SPEC_CONTROLS_PATTERN_OPTIONED_SPEC_ONE_INITIAL_VALUE,
     SPEC_CONTROLS_PATTERN_OPTIONED_SPEC_ONE_MODIFIED_VALUE,
     SPEC_CONTROLS_PATTERN_RANGED_SPEC_ONE_INITIAL_VALUE,
@@ -44,13 +46,13 @@ const resetSpecsButtonIsEnabled: () => Promise<void> =
 
 const modifyControl: () => Promise<void> =
     async (): Promise<void> => {
-        const control: ElementHandle = await findElement(`input[type=number]#${RANGED_SPEC_ONE_KEY}`)
+        const control: ElementHandle = await findElement(`input[type=number]#${RANGED_SPEC_TWO_KEY}`)
         await control.type(VALID_TEST_MODIFICATION)
     }
 
 const returnControlBackToItsDefault: () => Promise<void> =
     async (): Promise<void> => {
-        await deleteCharacterFromInput(`input[type=number]#${RANGED_SPEC_ONE_KEY}`)
+        await deleteCharacterFromInput(`input[type=number]#${RANGED_SPEC_TWO_KEY}`)
     }
 
 const modifyAllTheThings: () => Promise<void> =
@@ -132,15 +134,15 @@ const expectAllTheThingsToBeBackToTheirInitialStates: () => Promise<void> =
 
 const modifyControlToBeInvalid: () => Promise<void> =
     async (): Promise<void> => {
-        const controlToBeInvalid: ElementHandle = await findElement(`input[type=number]#${RANGED_SPEC_ONE_KEY}`)
+        const controlToBeInvalid: ElementHandle = await findElement(`input[type=number]#${RANGED_SPEC_TWO_KEY}`)
         await controlToBeInvalid.type(BAD_FORMAT_INVALID_TEST_MODIFICATION)
-        expect(await elementExists(`input[type=number]#${RANGED_SPEC_ONE_KEY}.${FieldValidityClassName.INVALID}`))
+        expect(await elementExists(`input[type=number]#${RANGED_SPEC_TWO_KEY}.${FieldValidityClassName.INVALID}`))
             .toBeTruthy('control was not invalid')
     }
 
 const modifyAnotherControlJustSoThatTheResetButtonIsEnabled: () => Promise<void> =
     async (): Promise<void> => {
-        const inputToBeChangedSuchThatResetButtonIsEnabled: ElementHandle = await findElement(`input[type=number]#${RANGED_SPEC_TWO_KEY}`)
+        const inputToBeChangedSuchThatResetButtonIsEnabled: ElementHandle = await findElement(`input[type=number]#${RANGED_SPEC_ONE_KEY}`)
         await inputToBeChangedSuchThatResetButtonIsEnabled.type(VALID_TEST_MODIFICATION)
     }
 
@@ -199,5 +201,66 @@ describe('reset specs button', () => {
         await controlIsBackToValid()
 
         done()
+    })
+
+    describe('when a pattern is playing', () => {
+        beforeEach(async (done: DoneFn) => {
+            await quickRefresh()
+            await selectLongDurationPattern()
+            await clickTimeControl('play')
+            await sleep(LONG_ENOUGH_FOR_TIME_TO_PASS)
+
+            done()
+        })
+
+        afterEach(async (done: DoneFn) => {
+            if (await elementExists('#pause')) {
+                await clickTimeControl('pause')
+            }
+            done()
+        })
+
+        it('keeps playing when you reset the spec but does not reset time to the beginning', async (done: DoneFn) => {
+            await openSpecControlsIfNotOpen()
+            await modifyControl()
+            await resetSpecsButtonIsEnabled()
+            const timeOfResettingSpec: Ms = await currentTime()
+            await clickResetSpecsButton()
+            await isAfter(timeOfResettingSpec)
+            await isPlaying()
+
+            done()
+        })
+    })
+
+    describe('when a pattern is playing that restarts upon spec modification', () => {
+        beforeEach(async (done: DoneFn) => {
+            await quickRefresh()
+            await selectRestartPattern()
+            await clickTimeControl('play')
+            await sleep(LONG_ENOUGH_FOR_TIME_TO_PASS)
+
+            done()
+        })
+
+        afterEach(async (done: DoneFn) => {
+            if (await elementExists('#pause')) {
+                await clickTimeControl('pause')
+            }
+            done()
+        })
+
+        it('keeps playing when you reset the spec and resets time to the beginning', async (done: DoneFn) => {
+            await openSpecControlsIfNotOpen()
+            await modifyControl()
+            await resetSpecsButtonIsEnabled()
+            await sleep(A_BIT_LONGER)
+            const timeOfResettingSpecs: Ms = await currentTime()
+            await clickResetSpecsButton()
+            await hasBeenReset({ toBefore: timeOfResettingSpecs })
+            await isPlaying()
+
+            done()
+        })
     })
 })

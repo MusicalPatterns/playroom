@@ -42,8 +42,14 @@ const mapDispatchToProps: (dispatch: Dispatch) => PatternListPropsFromDispatch =
     })
 
 const PatternList: React.ComponentType<PatternListProps> =
-    (patternListProps: PatternListProps): React.ReactElement | null => {
-        const { handlePatternChangeEvent, patternId, patterns, rightColumnOpen } = patternListProps
+    (
+        {
+            handlePatternChangeEvent,
+            patternId,
+            patterns,
+            rightColumnOpen,
+        }: PatternListProps,
+    ): React.ReactElement | null => {
         if (isUndefined(patterns)) {
             return null
         }

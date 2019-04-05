@@ -32,15 +32,15 @@ const mapDispatchToProps: (dispatch: Dispatch) => KeyboardControlsPropsFromDispa
     })
 
 const KeyboardControls: React.ComponentType<KeyboardControlsProps> =
-    (keyboardControlsProps: KeyboardControlsProps): React.ReactElement | null => {
-        const {
+    (
+        {
             copyOfPausedUsedToPreventUpdatingOnKeyDownUnlessPausedChanges,
             onKeyDown,
             paused,
             handleKeyDownEvent,
             updateOnKeyDown,
-        } = keyboardControlsProps
-
+        }: KeyboardControlsProps,
+    ): React.ReactElement | null => {
         if (copyOfPausedUsedToPreventUpdatingOnKeyDownUnlessPausedChanges === paused) {
             return null
         }

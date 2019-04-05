@@ -41,16 +41,16 @@ const mapDispatchToProps: (dispatch: Dispatch) => ToggleImmersiveAudioButtonProp
     })
 
 const ToggleImmersiveAudioButton: React.ComponentType<ToggleImmersiveAudioButtonProps> =
-    (props: ToggleImmersiveAudioButtonProps): React.ReactElement | null => {
-        const {
+    (
+        {
             immersiveAudioEnabled,
             immersiveAudioReady,
             immersiveAudioUnavailable,
             performerDisabled,
             setToggleImmersiveAudioHandlers,
             toggleImmersiveAudioHandlers,
-        } = props
-
+        }: ToggleImmersiveAudioButtonProps,
+    ): React.ReactElement | null => {
         if (isUndefined(toggleImmersiveAudioHandlers)) {
             setToggleImmersiveAudioHandlers()
         }

@@ -11,7 +11,7 @@ const keyIsString: (key: HtmlValueOrChecked) => key is string =
 
 const computeHandlePresetChangeEvent: (parameters: { dispatch: Dispatch<Action> }) => HandlePresetChangeEvent =
     ({ dispatch }: DispatchParameter): HandlePresetChangeEvent =>
-        ({ event, presets }: HandlePresetChangeEventParameters): void => {
+        ({ event, presets, restartOnModify }: HandlePresetChangeEventParameters): void => {
             const presetKey: HtmlValueOrChecked = extractValueOrCheckedFromEvent(event)
             if (!keyIsString(presetKey)) {
                 throw new Error('preset click event value was not a string')
@@ -19,7 +19,7 @@ const computeHandlePresetChangeEvent: (parameters: { dispatch: Dispatch<Action> 
 
             const { specs } = presets[ presetKey ]
 
-            handleSpecsReset({ dispatch, specs })
+            handleSpecsReset({ dispatch, specs, restartOnModify })
         }
 
 export {

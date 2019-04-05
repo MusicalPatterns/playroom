@@ -3,16 +3,20 @@ import { DispatchParameter } from '../../../../types'
 
 interface ResetSpecsButtonPropsFromState {
     initialSpecs: Specs,
+    restartOnModify: boolean,
     submittedSpecs: Specs,
 }
 
 interface ResetSpecsButtonPropsFromDispatch {
-    handleSpecsResetEvent: (specs: Specs) => void,
+    handleSpecsResetEvent: (parameters: HandleSpecsResetEventParameters) => void,
 }
 
 interface ResetSpecsButtonProps extends ResetSpecsButtonPropsFromState, ResetSpecsButtonPropsFromDispatch {}
 
-interface HandleSpecsResetParameters extends DispatchParameter {
+interface HandleSpecsResetParameters extends DispatchParameter, HandleSpecsResetEventParameters {}
+
+interface HandleSpecsResetEventParameters {
+    restartOnModify: boolean,
     specs: Specs,
 }
 
@@ -21,4 +25,5 @@ export {
     ResetSpecsButtonPropsFromDispatch,
     ResetSpecsButtonProps,
     HandleSpecsResetParameters,
+    HandleSpecsResetEventParameters,
 }

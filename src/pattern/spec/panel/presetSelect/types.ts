@@ -4,6 +4,7 @@ import { EventParameter } from '../../../../types'
 
 interface PresetSelectPropsFromState {
     presets: Maybe<ObjectOf<Preset>>,
+    restartOnModify: boolean,
     submittedSpecs: Specs,
 }
 
@@ -15,6 +16,7 @@ interface PresetSelectProps extends PresetSelectPropsFromState, PresetSelectProp
 
 interface HandlePresetChangeEventParameters extends EventParameter {
     presets: ObjectOf<Preset>,
+    restartOnModify: boolean,
 }
 
 type HandlePresetChangeEvent = (parameters: HandlePresetChangeEventParameters) => void
