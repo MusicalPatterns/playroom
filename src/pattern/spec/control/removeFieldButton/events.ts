@@ -6,7 +6,7 @@ import {
     DomSpecs,
     Specs,
     Validations,
-} from '@musical-patterns/pattern'
+} from '@musical-patterns/spec'
 import { finalElement, indexOfFinalElement, INITIAL, isUndefined, Maybe, slice } from '@musical-patterns/utilities'
 import { Dispatch } from 'redux'
 import { batchActions } from 'redux-batched-actions'

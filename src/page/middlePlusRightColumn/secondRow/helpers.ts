@@ -1,4 +1,4 @@
-import { Id } from '@musical-patterns/pattern'
+import { Id } from '@musical-patterns/id'
 import { isUndefined, Maybe } from '@musical-patterns/utilities'
 import { PageName } from '../../types'
 

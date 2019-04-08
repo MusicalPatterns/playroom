@@ -1,4 +1,4 @@
-import { ArrayedConstraint, ArrayedDomSpecValue, Configurations } from '@musical-patterns/pattern'
+import { ArrayedConstraint, ArrayedDomSpecValue, Configurations } from '@musical-patterns/spec'
 import { isEmpty, isUndefined, Maybe, totalElements } from '@musical-patterns/utilities'
 import { ComputeRemoveFieldButtonAttributesParameters, RemoveFieldButtonAttributes } from './types'
 

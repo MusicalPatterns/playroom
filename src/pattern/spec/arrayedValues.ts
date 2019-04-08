@@ -11,7 +11,7 @@ import {
     SpecValue,
     Validation,
     Validations,
-} from '@musical-patterns/pattern'
+} from '@musical-patterns/spec'
 import { deepClone, isUndefined, Maybe } from '@musical-patterns/utilities'
 
 const computeArrayedDisplayedValue: (displayedSpecs: DomSpecs, specKey: string) => ArrayedDomSpecValue =

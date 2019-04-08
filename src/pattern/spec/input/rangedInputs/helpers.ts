@@ -1,4 +1,4 @@
-import { RangedConstraint } from '@musical-patterns/pattern'
+import { RangedConstraint } from '@musical-patterns/spec'
 import { apply, isUndefined, Maybe, negative, round, Translation } from '@musical-patterns/utilities'
 import { DEFAULT_BOUND, NON_INTEGER_STEP, TRANSLATION_TO_EXCLUDE_MAX, TRANSLATION_TO_EXCLUDE_MIN } from './constants'
 

@@ -1,4 +1,5 @@
-import { Id, isId, Pattern, Patterns } from '@musical-patterns/pattern'
+import { Id, isId } from '@musical-patterns/id'
+import { Pattern, Patterns } from '@musical-patterns/pattern'
 import { isUndefined, Maybe } from '@musical-patterns/utilities'
 import * as React from 'react'
 import { Dispatch } from 'redux'

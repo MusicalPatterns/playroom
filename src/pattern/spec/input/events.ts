@@ -1,4 +1,4 @@
-import { ArrayedDomSpecValue, DomSpecs, DomSpecValue } from '@musical-patterns/pattern'
+import { ArrayedDomSpecValue, DomSpecs, DomSpecValue } from '@musical-patterns/spec'
 import { arraySet, from, HtmlValueOrChecked, isUndefined, Ordinal } from '@musical-patterns/utilities'
 import { Dispatch } from 'redux'
 import { batchActions } from 'redux-batched-actions'

@@ -1,4 +1,4 @@
-import { OnUpdate, ToggleImmersiveAudioHandlers } from '@musical-patterns/performer'
+import { OnUpdate, ToggleImmersiveAudioHandlers } from '@musical-patterns/material'
 import { ActionForState, Maybe, Ms, TypedMap } from '@musical-patterns/utilities'
 import { KeyboardEventHandler } from '../../types'
 

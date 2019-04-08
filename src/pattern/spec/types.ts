@@ -6,7 +6,7 @@ import {
     Preset,
     Specs,
     Validations,
-} from '@musical-patterns/pattern'
+} from '@musical-patterns/spec'
 import { ActionForState, Maybe, ObjectOf, TypedMap } from '@musical-patterns/utilities'
 import { ControlParentProps } from './control'
 import { FieldParentProps } from './field'

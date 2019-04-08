@@ -1,4 +1,4 @@
-import { Configuration, Specs, standardConfigurations } from '@musical-patterns/pattern'
+import { Configuration, Specs, standardConfigurations } from '@musical-patterns/spec'
 import { KeyMap, typedMap } from '@musical-patterns/utilities'
 import { ImmutableSpecState, SpecState, SpecStateKey } from './types'
 

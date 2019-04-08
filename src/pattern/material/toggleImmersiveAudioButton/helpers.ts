@@ -1,4 +1,4 @@
-import { ToggleImmersiveAudioHandlers } from '@musical-patterns/performer'
+import { ToggleImmersiveAudioHandlers } from '@musical-patterns/material'
 import { Maybe, noop } from '@musical-patterns/utilities'
 import { ENTER, EXIT, IMMERSIVE_AUDIO } from '../../../copy'
 import {

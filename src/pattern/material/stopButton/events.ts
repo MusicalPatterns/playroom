@@ -1,4 +1,4 @@
-import { stop } from '@musical-patterns/performer'
+import { stop } from '@musical-patterns/material'
 import { BatchAction, batchActions } from 'redux-batched-actions'
 import { DispatchParameter } from '../../../types'
 import { stopActions } from '../stopActions'

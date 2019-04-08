@@ -1,4 +1,4 @@
-import { OnUpdate, setupPerformer } from '@musical-patterns/performer'
+import { OnUpdate, setupPerformer } from '@musical-patterns/material'
 import { Ms } from '@musical-patterns/utilities'
 import { DispatchParameter } from '../../../types'
 import { MaterialStateKey } from '../types'

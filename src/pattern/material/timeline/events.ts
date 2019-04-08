@@ -1,4 +1,4 @@
-import { setTimePosition } from '@musical-patterns/performer'
+import { setTimePosition } from '@musical-patterns/material'
 import { HtmlValueOrChecked, Ms, round, to } from '@musical-patterns/utilities'
 import * as React from 'react'
 import { extractValueOrCheckedFromEvent } from '../../../extractValueOrCheckedFromEvent'

@@ -24,6 +24,7 @@ Makefile
 ports.txt
 test/jasmine.js
 test/mockDom.ts
+test/noFailureOnNonEmptySuite.ts
 test/reporter.ts
 test/setup.ts
 test/tslint.json
@@ -40,3 +41,5 @@ webpack.local.js
 webpack.prod.js
 webpack.publish.js
 webpack.qa.js
+Makefile.snapshots
+test/snapshots.test.ts

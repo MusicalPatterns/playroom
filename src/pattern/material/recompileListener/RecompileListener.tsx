@@ -1,8 +1,7 @@
 // tslint:disable variable-name file-name-casing no-default-export no-import-side-effect no-null-keyword
 
-import { compilePattern, CompilePatternParameters } from '@musical-patterns/compiler'
+import { CompiledPattern, compilePattern, CompilePatternParameters, setPattern } from '@musical-patterns/material'
 import { Pattern } from '@musical-patterns/pattern'
-import { CompiledPattern, setPattern } from '@musical-patterns/performer'
 import { doAsync, isUndefined, Maybe } from '@musical-patterns/utilities'
 import * as React from 'react'
 import { connect } from 'react-redux'

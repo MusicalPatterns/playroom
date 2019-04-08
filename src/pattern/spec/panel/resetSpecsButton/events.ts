@@ -1,5 +1,5 @@
-import { Specs } from '@musical-patterns/pattern'
-import { setTimePosition } from '@musical-patterns/performer'
+import { setTimePosition } from '@musical-patterns/material'
+import { Specs } from '@musical-patterns/spec'
 import { BEGINNING, doAsync } from '@musical-patterns/utilities'
 import { Dispatch } from 'redux'
 import { BatchAction, batchActions } from 'redux-batched-actions'

@@ -1,4 +1,4 @@
-import { DomSpecs, Specs } from '@musical-patterns/pattern'
+import { DomSpecs, Specs } from '@musical-patterns/spec'
 import { Action } from '../../../../types'
 import { SpecStateKey } from '../../types'
 

@@ -1,4 +1,4 @@
-import { DomSpecs } from '@musical-patterns/pattern'
+import { DomSpecs } from '@musical-patterns/spec'
 import { ConfigurationsParameter } from '../../types'
 
 interface SpecControlsProps extends ConfigurationsParameter {

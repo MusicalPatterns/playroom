@@ -1,4 +1,5 @@
-import { Id, Patterns } from '@musical-patterns/pattern'
+import { Id } from '@musical-patterns/id'
+import { Patterns } from '@musical-patterns/pattern'
 import { Maybe } from '@musical-patterns/utilities'
 import { DispatchParameter, EventParameter } from '../../../types'
 

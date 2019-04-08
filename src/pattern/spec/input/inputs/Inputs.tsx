@@ -1,6 +1,6 @@
 // tslint:disable variable-name file-name-casing no-default-export no-import-side-effect no-null-keyword
 
-import { Configuration, InputType } from '@musical-patterns/pattern'
+import { Configuration, InputType } from '@musical-patterns/spec'
 import * as React from 'react'
 import { connect } from 'react-redux'
 import { ImmutableState, StateKey } from '../../../../types'

@@ -19,7 +19,7 @@ import {
     SpecValue,
     Validation,
     Validations,
-} from '@musical-patterns/pattern'
+} from '@musical-patterns/spec'
 import { apply, indexOfFinalElement, isUndefined, Ordinal } from '@musical-patterns/utilities'
 import {
     ComputeSingularDisplayedValueParameters,

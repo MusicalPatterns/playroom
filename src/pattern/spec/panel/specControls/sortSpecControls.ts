@@ -1,4 +1,4 @@
-import { Configurations } from '@musical-patterns/pattern'
+import { Configurations } from '@musical-patterns/spec'
 import { ARBITRARILY_LARGE_NUMBER, isUndefined, Maybe, negative } from '@musical-patterns/utilities'
 
 const computeSortSpecControls: (configurations: Configurations) => (specKey: string, nextSpecKey: string) => number =

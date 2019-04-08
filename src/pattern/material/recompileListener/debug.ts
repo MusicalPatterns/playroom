@@ -1,5 +1,4 @@
-import { computeSoundsDuration } from '@musical-patterns/compiler'
-import { CompiledPattern, Voice } from '@musical-patterns/performer'
+import { CompiledPattern, computeSoundsDuration, Voice } from '@musical-patterns/material'
 import { logMessageToConsole, Ms, NO_DURATION } from '@musical-patterns/utilities'
 
 const logDebugInfo: (compiledPattern: CompiledPattern) => Promise<void> =

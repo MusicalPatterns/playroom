@@ -1,4 +1,4 @@
-import { OptionedConstraintOption } from '@musical-patterns/pattern'
+import { OptionedConstraintOption } from '@musical-patterns/spec'
 import { ARBITRARILY_LARGE_NUMBER, isUndefined, negative } from '@musical-patterns/utilities'
 
 const sortOptions: (option: OptionedConstraintOption, nextOption: OptionedConstraintOption) => number =

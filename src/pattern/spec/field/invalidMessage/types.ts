@@ -1,4 +1,4 @@
-import { Validations } from '@musical-patterns/pattern'
+import { Validations } from '@musical-patterns/spec'
 import { FieldParentProps } from '../types'
 
 interface InvalidMessagePropsFromState {

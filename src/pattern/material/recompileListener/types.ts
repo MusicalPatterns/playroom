@@ -1,4 +1,6 @@
-import { Id, Patterns, Specs } from '@musical-patterns/pattern'
+import { Id } from '@musical-patterns/id'
+import { Patterns } from '@musical-patterns/pattern'
+import { Specs } from '@musical-patterns/spec'
 import { Maybe, Ms } from '@musical-patterns/utilities'
 
 interface RecompileListenerPropsFromState {

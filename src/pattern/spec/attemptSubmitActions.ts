@@ -1,3 +1,4 @@
+import { setTimePosition } from '@musical-patterns/material'
 import {
     ComputeValidations,
     Configurations,
@@ -7,8 +8,7 @@ import {
     validateSpecs,
     Validation,
     Validations,
-} from '@musical-patterns/pattern'
-import { setTimePosition } from '@musical-patterns/performer'
+} from '@musical-patterns/spec'
 import { BEGINNING, doAsync, isUndefined, Maybe, objectSet } from '@musical-patterns/utilities'
 import { Action } from '../../types'
 import { ComputeAttemptSubmitActionsParameters, SpecStateKey } from './types'

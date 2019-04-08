@@ -1,4 +1,4 @@
-import { DomSpecs } from '@musical-patterns/pattern'
+import { DomSpecs } from '@musical-patterns/spec'
 import { ControlParentProps } from '../types'
 
 interface ArrayedFieldsPropsFromState {

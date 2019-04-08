@@ -2,7 +2,7 @@
 
 import { faPlus } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { ArrayedConstraint, DomSpecValue, isArrayedDomSpecValue } from '@musical-patterns/pattern'
+import { ArrayedConstraint, DomSpecValue, isArrayedDomSpecValue } from '@musical-patterns/spec'
 import { isUndefined, Maybe, totalElements } from '@musical-patterns/utilities'
 import * as React from 'react'
 import { connect } from 'react-redux'

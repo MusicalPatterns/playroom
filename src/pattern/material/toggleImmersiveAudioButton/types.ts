@@ -1,4 +1,4 @@
-import { ToggleImmersiveAudioHandlers } from '@musical-patterns/performer'
+import { ToggleImmersiveAudioHandlers } from '@musical-patterns/material'
 import { Maybe } from '@musical-patterns/utilities'
 import { PerformerDisabledParameter } from '../types'
 

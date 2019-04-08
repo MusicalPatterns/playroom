@@ -1,4 +1,4 @@
-import { Specs } from '@musical-patterns/pattern'
+import { Specs } from '@musical-patterns/spec'
 import { DispatchParameter } from '../../../../types'
 
 interface ResetSpecsButtonPropsFromState {

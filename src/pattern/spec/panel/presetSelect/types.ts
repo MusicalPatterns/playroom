@@ -1,4 +1,4 @@
-import { Preset, Specs } from '@musical-patterns/pattern'
+import { Preset, Specs } from '@musical-patterns/spec'
 import { Maybe, ObjectOf } from '@musical-patterns/utilities'
 import { EventParameter } from '../../../../types'
 

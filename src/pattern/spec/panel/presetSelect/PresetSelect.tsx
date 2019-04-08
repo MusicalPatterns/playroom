@@ -1,6 +1,6 @@
 // tslint:disable variable-name file-name-casing no-default-export no-import-side-effect no-null-keyword
 
-import { Preset } from '@musical-patterns/pattern'
+import { Preset } from '@musical-patterns/spec'
 import {
     ARBITRARILY_LARGE_NUMBER,
     camelCaseToUpperCase,

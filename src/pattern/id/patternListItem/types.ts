@@ -1,4 +1,5 @@
-import { Id, Pattern } from '@musical-patterns/pattern'
+import { Id } from '@musical-patterns/id'
+import { Pattern } from '@musical-patterns/pattern'
 import { WithClickHandler } from '../../../types'
 
 interface PatternListItemProps extends WithClickHandler {

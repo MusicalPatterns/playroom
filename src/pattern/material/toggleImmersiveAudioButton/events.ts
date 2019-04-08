@@ -1,4 +1,4 @@
-import { enableImmersiveAudio, ToggleImmersiveAudioHandlers } from '@musical-patterns/performer'
+import { enableImmersiveAudio, ToggleImmersiveAudioHandlers } from '@musical-patterns/material'
 import { DispatchParameter } from '../../../types'
 import { MaterialStateKey } from '../types'
 

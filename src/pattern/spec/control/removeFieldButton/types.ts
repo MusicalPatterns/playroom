@@ -1,4 +1,4 @@
-import { ArrayedDomSpecValue, Configurations, Validations } from '@musical-patterns/pattern'
+import { ArrayedDomSpecValue, Configurations, Validations } from '@musical-patterns/spec'
 import { DispatchParameter, EventParameter } from '../../../../types'
 import { SubmissionProps } from '../../types'
 import { ControlParentProps } from '../types'

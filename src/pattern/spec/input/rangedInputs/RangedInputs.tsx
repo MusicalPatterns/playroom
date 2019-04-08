@@ -1,6 +1,6 @@
 // tslint:disable variable-name file-name-casing no-default-export no-import-side-effect no-null-keyword
 
-import { RangedConfiguration, RangedInputType } from '@musical-patterns/pattern'
+import { RangedConfiguration, RangedInputType } from '@musical-patterns/spec'
 import { HtmlValue } from '@musical-patterns/utilities'
 import * as React from 'react'
 import { connect } from 'react-redux'

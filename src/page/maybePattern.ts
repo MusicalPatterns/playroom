@@ -1,4 +1,5 @@
-import { Id, Pattern, Patterns } from '@musical-patterns/pattern'
+import { Id } from '@musical-patterns/id'
+import { Pattern, Patterns } from '@musical-patterns/pattern'
 import { Maybe } from '@musical-patterns/utilities'
 import { ComputeMaybePatternParameters } from './types'
 

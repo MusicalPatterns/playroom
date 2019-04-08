@@ -1,6 +1,7 @@
 // tslint:disable variable-name file-name-casing no-default-export no-import-side-effect no-null-keyword
 
-import { Id, Pattern } from '@musical-patterns/pattern'
+import { Id } from '@musical-patterns/id'
+import { Pattern } from '@musical-patterns/pattern'
 import { entries, from, isUndefined, map, Ordinal } from '@musical-patterns/utilities'
 import * as React from 'react'
 import { connect } from 'react-redux'

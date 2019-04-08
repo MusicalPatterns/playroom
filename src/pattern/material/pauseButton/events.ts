@@ -1,4 +1,4 @@
-import { pause } from '@musical-patterns/performer'
+import { pause } from '@musical-patterns/material'
 import { DispatchParameter } from '../../../types'
 import { MaterialStateKey } from '../types'
 

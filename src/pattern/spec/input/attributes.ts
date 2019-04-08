@@ -1,4 +1,4 @@
-import { DomSpecValue, SingularValidation } from '@musical-patterns/pattern'
+import { DomSpecValue, SingularValidation } from '@musical-patterns/spec'
 import * as React from 'react'
 import { EventHandler } from '../../../types'
 import { computeFieldId, computeFieldValidityClassName } from '../field'

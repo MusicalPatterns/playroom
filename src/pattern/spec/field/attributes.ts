@@ -1,4 +1,4 @@
-import { SingularValidation } from '@musical-patterns/pattern'
+import { SingularValidation } from '@musical-patterns/spec'
 import { camelCaseToUpperCase, isUndefined, Maybe, Ordinal } from '@musical-patterns/utilities'
 import { ComputeFieldLabelParameters, FieldParentProps, FieldValidityClassName } from './types'
 

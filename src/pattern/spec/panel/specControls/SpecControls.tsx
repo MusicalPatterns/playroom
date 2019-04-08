@@ -1,6 +1,6 @@
 // tslint:disable variable-name file-name-casing no-default-export no-import-side-effect no-null-keyword
 
-import { StandardSpec } from '@musical-patterns/pattern'
+import { StandardSpec } from '@musical-patterns/spec'
 import { from, isEmpty, keys, map, Ordinal } from '@musical-patterns/utilities'
 import * as React from 'react'
 import { connect } from 'react-redux'

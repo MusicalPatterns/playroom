@@ -1,4 +1,4 @@
-import { OnUpdate } from '@musical-patterns/performer'
+import { OnUpdate } from '@musical-patterns/material'
 import { Maybe } from '@musical-patterns/utilities'
 import { PerformerDisabledParameter } from '../types'
 

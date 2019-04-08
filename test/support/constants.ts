@@ -1,15 +1,15 @@
 // tslint:disable no-magic-numbers
 
+import { Id } from '@musical-patterns/id'
+import { patterns } from '@musical-patterns/pattern-playroom-test'
 import {
     Configurations,
-    Id,
     OptionedConstraint,
     Preset,
     RangedConstraint,
     StandardSpec,
     StringedConstraint,
-} from '@musical-patterns/pattern'
-import { patterns } from '@musical-patterns/pattern-playroom-test'
+} from '@musical-patterns/spec'
 import { Ms, ObjectOf, to } from '@musical-patterns/utilities'
 // @ts-ignore
 import { port } from '../../bin/port'
