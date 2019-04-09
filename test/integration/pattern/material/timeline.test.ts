@@ -1,14 +1,4 @@
-import {
-    apply,
-    difference,
-    from,
-    Ms,
-    ONE_HALF,
-    sleep,
-    sum,
-    testIsGreaterThan,
-    testIsLessThan,
-} from '@musical-patterns/utilities'
+import { apply, difference, from, Ms, ONE_HALF, sleep, sum } from '@musical-patterns/utilities'
 import {
     A_BIT_LONGER,
     clickTimeControl,
@@ -63,25 +53,25 @@ describe('timeline', () => {
 
             await playJustLongEnoughToBeAlmostAboutToRepeat()
             const beforeRepeatingTime: Ms = await currentTime()
-            testIsGreaterThan(
-                beforeRepeatingTime,
-                initialTime,
-                'tried to play long enough to be just about to repeat, but was still at the initial time',
-            )
+            expect(beforeRepeatingTime)
+                .toBeGreaterThanTyped(
+                    initialTime,
+                    'tried to play long enough to be just about to repeat, but was still at the initial time',
+                )
 
             await playJustLongEnoughMoreToRepeat()
             const afterRepeatingTime: Ms = await currentTime()
-            testIsLessThan(
-                afterRepeatingTime,
-                beforeRepeatingTime,
-                'tried to play just long enough more to repeat, but the time was still after the most recent measurement',
-            )
+            expect(afterRepeatingTime)
+                .toBeLessThanTyped(
+                    beforeRepeatingTime,
+                    'tried to play just long enough more to repeat, but the time was still after the most recent measurement',
+                )
 
-            testIsLessThan(
-                afterRepeatingTime,
-                apply.Scalar(await patternDuration(), ONE_HALF),
-                'pattern did not repeat from the beginning, because it was past halfway done after repeating',
-            )
+            expect(afterRepeatingTime)
+                .toBeLessThanTyped(
+                    apply.Scalar(await patternDuration(), ONE_HALF),
+                    'pattern did not repeat from the beginning, because it was past halfway done after repeating',
+                )
 
             done()
         })
@@ -114,17 +104,17 @@ describe('timeline', () => {
 
             await playJustLongEnoughMoreToRepeat()
             const afterRepeatingTime: Ms = await currentTime()
-            testIsLessThan(
-                afterRepeatingTime,
-                beforeRepeatingTime,
-                'tried to play just long enough more to repeat, but the time was still after the most recent measurement',
-            )
+            expect(afterRepeatingTime)
+                .toBeLessThanTyped(
+                    beforeRepeatingTime,
+                    'tried to play just long enough more to repeat, but the time was still after the most recent measurement',
+                )
 
-            testIsGreaterThan(
-                afterRepeatingTime,
-                apply.Scalar(await patternDuration(), ONE_HALF),
-                'pattern did not repeat from the segno time, because it was before the halfway point after repeating',
-            )
+            expect(afterRepeatingTime)
+                .toBeGreaterThanTyped(
+                    apply.Scalar(await patternDuration(), ONE_HALF),
+                    'pattern did not repeat from the segno time, because it was before the halfway point after repeating',
+                )
 
             done()
         })

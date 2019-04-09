@@ -28,6 +28,7 @@ test/noFailureOnNonEmptySuite.ts
 test/reporter.ts
 test/setup.ts
 test/tslint.json
+tsconfig.build.json
 tsconfig.common.json
 tsconfig.json
 tsconfig.node.json
@@ -41,5 +42,7 @@ webpack.local.js
 webpack.prod.js
 webpack.publish.js
 webpack.qa.js
+test/customMatchers.ts
+test/types/index.d.ts
 Makefile.snapshots
 test/snapshots.test.ts
