@@ -52,10 +52,9 @@ const RecompileListener: React.ComponentType<RecompileListenerProps> =
             }
 
             const compilePatternParameters: CompilePatternParameters = { ...pattern, specs: submittedSpecs }
-            const compiledPattern: CompiledPattern = await compilePattern(compilePatternParameters)
-            setPatternDuration(compiledPattern.totalDuration)
+            const compiledPattern: CompiledPattern = await setPattern(compilePatternParameters)
 
-            await setPattern(compiledPattern)
+            setPatternDuration(compiledPattern.totalDuration)
 
             if (debugMode) {
                 await logDebugInfo(compiledPattern)
