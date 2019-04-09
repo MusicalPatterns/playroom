@@ -1,6 +1,6 @@
 // tslint:disable variable-name file-name-casing no-default-export no-import-side-effect no-null-keyword
 
-import { OptionedConfiguration, OptionedConstraintOption } from '@musical-patterns/spec'
+import { OptionedConfiguration, OptionedConstraintOption, sortOptions } from '@musical-patterns/spec'
 import { constantCaseToUpperCase, from, HtmlValue, map, Ordinal } from '@musical-patterns/utilities'
 import * as React from 'react'
 import { connect } from 'react-redux'
@@ -11,7 +11,6 @@ import { ImmutableSpecState, SpecStateKey } from '../../types'
 import { computeSharedInputAttributes } from '../attributes'
 import { computeHandleFieldChangeEvent } from '../events'
 import { InputsPropsFromDispatch, InputsPropsFromState, SharedInputsProps } from '../types'
-import { sortOptions } from './sort'
 import { OptionedInputProps } from './types'
 
 const mapStateToProps: (state: ImmutableState) => InputsPropsFromState =

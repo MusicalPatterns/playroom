@@ -1,8 +1,7 @@
-import { Id } from '@musical-patterns/id'
 import { setTimePosition } from '@musical-patterns/material'
-import { Metadata } from '@musical-patterns/metadata'
+import { computePatternName, computePost } from '@musical-patterns/metadata'
 import { Pattern } from '@musical-patterns/pattern'
-import { BEGINNING, constantCaseToUpperCase, doAsync } from '@musical-patterns/utilities'
+import { BEGINNING, doAsync } from '@musical-patterns/utilities'
 import { Dispatch } from 'redux'
 import { BatchAction, batchActions } from 'redux-batched-actions'
 import {
@@ -15,20 +14,6 @@ import { MaterialStateKey } from '../material'
 import { MetadataStateKey } from '../metadata'
 import { resetActions, SpecStateKey } from '../spec'
 import { IdStateKey } from './types'
-
-const computePost: (metadata: Metadata) => string =
-    (metadata: Metadata): string => {
-        let post: string = metadata.description || ''
-        if (!post.startsWith('<div class="row">')) {
-            post = `<div class="row"><div class="middle"><p>${post}</p></div><div class="right"></div></div>`
-        }
-
-        return post
-    }
-
-const computePatternName: (parameters: { metadata: Metadata, newId: Id }) => string =
-    ({ metadata, newId }: { metadata: Metadata, newId: Id }): string =>
-        metadata.formattedName || constantCaseToUpperCase(newId || '')
 
 const computePatternChangeActions: (pattern: Pattern) => Action[] =
     (pattern: Pattern): Action[] => {

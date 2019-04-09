@@ -1,8 +1,8 @@
 // tslint:disable variable-name file-name-casing no-default-export no-import-side-effect no-null-keyword
 
+import { formatDate } from '@musical-patterns/metadata'
 import { constantCaseToUpperCase } from '@musical-patterns/utilities'
 import * as React from 'react'
-import { formatDate } from './formatDate'
 import './styles'
 import { PatternListItemProps } from './types'
 

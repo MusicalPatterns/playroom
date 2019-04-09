@@ -1,9 +1,15 @@
-import { ArrayedDomSpecValue, ComputeValidations, Configurations, DomSpecs, Specs } from '@musical-patterns/spec'
+import {
+    ArrayedDomSpecValue,
+    computeArrayedDomSpecValue,
+    ComputeValidations,
+    Configurations,
+    DomSpecs,
+    Specs,
+} from '@musical-patterns/spec'
 import { HtmlValueOrChecked, isUndefined, Maybe } from '@musical-patterns/utilities'
 import { Dispatch } from 'redux'
 import { batchActions } from 'redux-batched-actions'
 import { Action } from '../../../../types'
-import { computeArrayedDisplayedValue } from '../../arrayedValues'
 import { computeAttemptSubmitActions } from '../../attemptSubmitActions'
 import { HandleFieldAddParameters } from './types'
 
@@ -29,7 +35,7 @@ const handleFieldAdd: (parameters: {
     ): void => {
         const initialFieldValue: Maybe<HtmlValueOrChecked> = configurations[ specKey ].arrayedNewFieldInitialValue
 
-        const arrayedDisplayedValue: ArrayedDomSpecValue = computeArrayedDisplayedValue(displayedSpecs, specKey)
+        const arrayedDisplayedValue: ArrayedDomSpecValue = computeArrayedDomSpecValue(displayedSpecs, specKey)
 
         const updatedArrayedDisplayedValue: ArrayedDomSpecValue =
             arrayedDisplayedValue.concat([ isUndefined(initialFieldValue) ? '' : initialFieldValue ])

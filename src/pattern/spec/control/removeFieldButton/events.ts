@@ -1,6 +1,8 @@
 import {
     ArrayedDomSpecValue,
     ArrayedValidation,
+    computeArrayedDomSpecValue,
+    computeArrayedValidation,
     ComputeValidations,
     Configurations,
     DomSpecs,
@@ -11,7 +13,6 @@ import { finalElement, indexOfFinalElement, INITIAL, isUndefined, Maybe, slice }
 import { Dispatch } from 'redux'
 import { batchActions } from 'redux-batched-actions'
 import { Action } from '../../../../types'
-import { computeArrayedDisplayedValue, computeArrayedValidation } from '../../arrayedValues'
 import { computeAttemptSubmitActions } from '../../attemptSubmitActions'
 import { HandleFieldRemoveParameters } from './types'
 
@@ -51,7 +52,7 @@ const handleFieldRemove: (parameters: {
             validations,
         }: HandleFieldRemoveParameters,
     ): void => {
-        const arrayedDisplayedValue: ArrayedDomSpecValue = computeArrayedDisplayedValue(displayedSpecs, specKey)
+        const arrayedDisplayedValue: ArrayedDomSpecValue = computeArrayedDomSpecValue(displayedSpecs, specKey)
 
         const updatedArrayedDisplayedValue: ArrayedDomSpecValue = slice(
             arrayedDisplayedValue,

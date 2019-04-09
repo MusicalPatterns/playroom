@@ -1,6 +1,6 @@
 // tslint:disable variable-name file-name-casing no-default-export no-import-side-effect no-null-keyword
 
-import { StandardSpec } from '@musical-patterns/spec'
+import { computeSortSpecs, StandardSpec } from '@musical-patterns/spec'
 import { from, isEmpty, keys, map, Ordinal } from '@musical-patterns/utilities'
 import * as React from 'react'
 import { connect } from 'react-redux'
@@ -9,7 +9,6 @@ import { ImmutableState, StateKey } from '../../../../types'
 import { PatternStateKey } from '../../../types'
 import { SpecControl } from '../../control'
 import { ImmutableSpecState, SpecStateKey } from '../../types'
-import { computeSortSpecControls } from './sortSpecControls'
 import './styles.scss'
 import { SpecControlsProps } from './types'
 
@@ -32,7 +31,7 @@ const SpecControls: React.ComponentType<SpecControlsProps> =
                     Object.values(StandardSpec)
                         .includes(specKey),
                 )
-                .sort(computeSortSpecControls(configurations)),
+                .sort(computeSortSpecs(configurations)),
             (specKey: string, index: Ordinal): React.ReactElement | null =>
                 <SpecControl {...{ key: from.Ordinal(index), specKey }} />,
         )
@@ -42,7 +41,7 @@ const SpecControls: React.ComponentType<SpecControlsProps> =
                     !Object.values(StandardSpec)
                         .includes(specKey),
                 )
-                .sort(computeSortSpecControls(configurations)),
+                .sort(computeSortSpecs(configurations)),
             (specKey: string, index: Ordinal): React.ReactElement | null =>
                 <SpecControl {...{ key: from.Ordinal(index), specKey }} />,
         )

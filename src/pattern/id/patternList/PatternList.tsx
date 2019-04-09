@@ -1,7 +1,7 @@
 // tslint:disable variable-name file-name-casing no-default-export no-import-side-effect no-null-keyword
 
 import { Id } from '@musical-patterns/id'
-import { Pattern } from '@musical-patterns/pattern'
+import { Pattern, sortByOrderOrPublishDate } from '@musical-patterns/pattern'
 import { entries, from, isUndefined, map, Ordinal } from '@musical-patterns/utilities'
 import * as React from 'react'
 import { connect } from 'react-redux'
@@ -12,7 +12,6 @@ import { EventHandler, ImmutableState, StateKey } from '../../../types'
 import { PatternListItem } from '../patternListItem'
 import { ImmutableIdState } from '../types'
 import { handlePatternChange } from './events'
-import { sortByOrderOrPublishDate } from './sort'
 import './styles'
 import {
     HandlePatternChangeEventParameters,

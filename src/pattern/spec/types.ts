@@ -9,7 +9,6 @@ import {
 } from '@musical-patterns/spec'
 import { ActionForState, Maybe, ObjectOf, TypedMap } from '@musical-patterns/utilities'
 import { ControlParentProps } from './control'
-import { FieldParentProps } from './field'
 
 enum SpecStateKey {
     INITIAL_SPECS = 'INITIAL_SPECS',
@@ -43,18 +42,6 @@ interface ConfigurationsParameter {
     configurations: Configurations,
 }
 
-interface ComputeSingularDisplayedValueParameters extends FieldParentProps {
-    displayedSpecs: DomSpecs,
-}
-
-interface ComputeSingularSubmittedValueParameters extends FieldParentProps {
-    submittedSpecs: Specs,
-}
-
-interface ComputeSingularValidationParameters extends FieldParentProps {
-    validations: Validations,
-}
-
 interface SubmissionProps extends ConfigurationsParameter {
     computeValidations: Maybe<ComputeValidations>,
     displayedSpecs: DomSpecs,
@@ -73,9 +60,6 @@ export {
     SpecStateKey,
     SpecAction,
     ConfigurationsParameter,
-    ComputeSingularValidationParameters,
-    ComputeSingularSubmittedValueParameters,
-    ComputeSingularDisplayedValueParameters,
     SubmissionProps,
     ComputeAttemptSubmitActionsParameters,
 }

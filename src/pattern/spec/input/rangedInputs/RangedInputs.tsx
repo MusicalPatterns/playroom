@@ -1,6 +1,6 @@
 // tslint:disable variable-name file-name-casing no-default-export no-import-side-effect no-null-keyword
 
-import { RangedConfiguration, RangedInputType } from '@musical-patterns/spec'
+import { computeMinAndMax, computeStep, RangedConfiguration, RangedInputType } from '@musical-patterns/spec'
 import { HtmlValue } from '@musical-patterns/utilities'
 import * as React from 'react'
 import { connect } from 'react-redux'
@@ -11,7 +11,6 @@ import { ImmutableSpecState, SpecStateKey } from '../../types'
 import { computeSharedInputAttributes } from '../attributes'
 import { computeHandleFieldChangeEvent } from '../events'
 import { InputsPropsFromDispatch, InputsPropsFromState, SharedInputsProps } from '../types'
-import { computeMinAndMax, computeStep } from './helpers'
 import './styles'
 import { RangedInputProps } from './types'
 
