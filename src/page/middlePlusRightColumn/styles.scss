@@ -18,7 +18,7 @@
     iframe,
     ul,
     ol {
-      padding: $middle-plus-right-columns-paragraph-spacing $middle-plus-right-columns-horizontal-spacing;
+      padding: 0 $middle-plus-right-columns-horizontal-spacing;
     }
   }
 
@@ -39,11 +39,11 @@
     h4,
     h5,
     h6 {
-      padding: $middle-plus-right-columns-spacing $middle-plus-right-columns-horizontal-spacing;
+      padding: $middle-plus-right-columns-vertical-spacing $middle-plus-right-columns-horizontal-spacing 0 $middle-plus-right-columns-horizontal-spacing;
     }
 
     p {
-      line-height: $middle-plus-right-columns-vertical-spacing;
+      line-height: $middle-plus-right-columns-line-height;
     }
   }
 
