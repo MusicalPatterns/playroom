@@ -4,12 +4,12 @@ import {
     Configurations,
     DomSpecs,
     DomSpecValue,
+    mergeValidations,
     Specs,
     validateSpecs,
-    Validation,
     Validations,
 } from '@musical-patterns/spec'
-import { BEGINNING, doAsync, isUndefined, Maybe, objectSet } from '@musical-patterns/utilities'
+import { BEGINNING, doAsync, Maybe } from '@musical-patterns/utilities'
 import { Action } from '../../types'
 import { ComputeAttemptSubmitActionsParameters, SpecStateKey } from './types'
 
@@ -48,19 +48,12 @@ const computeAttemptSubmitActions: (parameters: {
         if (!suppressUpdatingValidations) {
             actions.push({ type: SpecStateKey.VALIDATIONS, data: validations })
         }
-        const updatedSubmittedSpecsWhichWillNeverHaveInvalidSpecValues: Specs = { ...submittedSpecs }
-        if (!isUndefined(validations)) {
-            Object.entries(validations)
-                .forEach(([ validationSpecKey, validation ]: [ string, Validation ]) => {
-                    if (isUndefined(validation)) {
-                        objectSet(
-                            updatedSubmittedSpecsWhichWillNeverHaveInvalidSpecValues,
-                            validationSpecKey,
-                            updatedDisplayedSpecs[ validationSpecKey ],
-                        )
-                    }
-                })
-        }
+        let updatedSubmittedSpecsWhichWillNeverHaveInvalidSpecValues: Specs = { ...submittedSpecs }
+        updatedSubmittedSpecsWhichWillNeverHaveInvalidSpecValues = mergeValidations({
+            updatedDisplayedSpecs,
+            updatedSubmittedSpecs: updatedSubmittedSpecsWhichWillNeverHaveInvalidSpecValues,
+            validations,
+        })
         actions.push({
             data: updatedSubmittedSpecsWhichWillNeverHaveInvalidSpecValues,
             type: SpecStateKey.SUBMITTED_SPECS,
