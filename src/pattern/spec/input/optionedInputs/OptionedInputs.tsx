@@ -1,7 +1,7 @@
 // tslint:disable variable-name file-name-casing no-default-export no-import-side-effect no-null-keyword
 
 import { OptionedConfiguration, OptionedConstraintOption, sortOptions } from '@musical-patterns/spec'
-import { constantCaseToUpperCase, from, HtmlValue, map, Ordinal } from '@musical-patterns/utilities'
+import { constantCaseToUpperCase, from, HtmlValue, Index, map } from '@musical-patterns/utilities'
 import * as React from 'react'
 import { connect } from 'react-redux'
 import { Dispatch } from 'redux'
@@ -42,9 +42,9 @@ const OptionedInputs: React.ComponentType<SharedInputsProps> =
         const optionElements: Array<React.ReactElement | null> = map(
             constraint.sort(sortOptions),
             (
-                { value: optionValue, description, formattedName }: OptionedConstraintOption, index: Ordinal,
+                { value: optionValue, description, formattedName }: OptionedConstraintOption, index: Index,
             ): React.ReactElement | null => (
-                <option {...{ key: from.Ordinal(index), value: optionValue, title: description }}>
+                <option {...{ key: from.Index(index), value: optionValue, title: description }}>
                     {formattedName || constantCaseToUpperCase(optionValue)}
                 </option>
             ),

@@ -2,7 +2,7 @@
 
 import { Id } from '@musical-patterns/id'
 import { Pattern, sortByOrderOrPublishDate } from '@musical-patterns/pattern'
-import { entries, from, isUndefined, map, Ordinal } from '@musical-patterns/utilities'
+import { entries, from, Index, isUndefined, map } from '@musical-patterns/utilities'
 import * as React from 'react'
 import { connect } from 'react-redux'
 import { Dispatch } from 'redux'
@@ -61,10 +61,10 @@ const PatternList: React.ComponentType<PatternListProps> =
         const options: Array<React.ReactElement | null> = map(
             entries(patterns)
                 .sort(sortByOrderOrPublishDate),
-            ([ listedPatternId, listedPattern ]: [ Id, Pattern ], index: Ordinal): React.ReactElement | null => (
+            ([ listedPatternId, listedPattern ]: [ Id, Pattern ], index: Index): React.ReactElement | null => (
                 <PatternListItem
                     {...{
-                        key: from.Ordinal(index),
+                        key: from.Index(index),
                         listedPattern,
                         listedPatternId,
                         onClick,

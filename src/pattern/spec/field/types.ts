@@ -1,4 +1,4 @@
-import { Maybe, Ordinal } from '@musical-patterns/utilities'
+import { Index, Maybe } from '@musical-patterns/utilities'
 import { ControlParentProps } from '../control'
 
 interface ComputeFieldLabelParameters extends FieldParentProps {
@@ -11,7 +11,7 @@ enum FieldValidityClassName {
 }
 
 interface FieldParentProps extends ControlParentProps {
-    fieldIndex?: Ordinal,
+    fieldIndex?: Index,
 }
 
 export {

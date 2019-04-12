@@ -19,11 +19,6 @@ interface HandleFieldRemoveEventParameters extends EventParameter,
 
 interface HandleFieldRemoveParameters extends ControlParentProps, RemoveFieldButtonPropsFromState, DispatchParameter {}
 
-interface RemoveFieldButtonAttributes {
-    disabled: boolean,
-    title: string,
-}
-
 interface ComputeRemoveFieldButtonAttributesParameters {
     configurations: Configurations,
     displayedValue: ArrayedDomSpecValue,
@@ -36,6 +31,5 @@ export {
     RemoveFieldButtonProps,
     HandleFieldRemoveEventParameters,
     HandleFieldRemoveParameters,
-    RemoveFieldButtonAttributes,
     ComputeRemoveFieldButtonAttributesParameters,
 }

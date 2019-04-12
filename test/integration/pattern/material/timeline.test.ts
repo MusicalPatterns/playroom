@@ -1,4 +1,4 @@
-import { apply, difference, from, Ms, ONE_HALF, sleep, sum } from '@musical-patterns/utilities'
+import { apply, difference, from, Ms, ONE_HALF, Scalar, sleep, sum, to } from '@musical-patterns/utilities'
 import {
     A_BIT_LONGER,
     clickTimeControl,
@@ -14,7 +14,7 @@ import {
 const playJustLongEnoughToBeAlmostAboutToRepeat: () => Promise<void> =
     async (): Promise<void> => {
         const totalTime: Ms = await patternDuration()
-        await sleep(difference(totalTime, A_BIT_LONGER))
+        await sleep(from.Translation(difference(totalTime, A_BIT_LONGER)))
     }
 
 const playJustLongEnoughMoreToRepeat: () => Promise<void> =
@@ -69,7 +69,7 @@ describe('timeline', () => {
 
             expect(afterRepeatingTime)
                 .toBeLessThanTyped(
-                    apply.Scalar(await patternDuration(), ONE_HALF),
+                    apply.Scalar(await patternDuration(), ONE_HALF as Scalar<Ms>),
                     'pattern did not repeat from the beginning, because it was past halfway done after repeating',
                 )
 
@@ -112,7 +112,7 @@ describe('timeline', () => {
 
             expect(afterRepeatingTime)
                 .toBeGreaterThanTyped(
-                    apply.Scalar(await patternDuration(), ONE_HALF),
+                    apply.Scalar(await patternDuration(), ONE_HALF as Scalar<Ms>),
                     'pattern did not repeat from the segno time, because it was before the halfway point after repeating',
                 )
 

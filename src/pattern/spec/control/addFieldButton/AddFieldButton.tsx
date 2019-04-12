@@ -2,8 +2,7 @@
 
 import { faPlus } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { ArrayedConstraint, DomSpecValue, isArrayedDomSpecValue } from '@musical-patterns/spec'
-import { isUndefined, Maybe, totalElements } from '@musical-patterns/utilities'
+import { DomSpecValue, isArrayedDomSpecValue } from '@musical-patterns/spec'
 import * as React from 'react'
 import { connect } from 'react-redux'
 import { Dispatch } from 'redux'
@@ -11,6 +10,7 @@ import { EventHandler, ImmutableState, StateKey } from '../../../../types'
 import { PatternStateKey } from '../../../types'
 import { ImmutableSpecState, SpecStateKey, SubmissionProps } from '../../types'
 import { handleFieldAdd } from './events'
+import { computeAddFieldButtonAttributes } from './helpers'
 import './styles'
 import { AddFieldButtonProps, AddFieldButtonPropsFromDispatch, HandleFieldAddEventParameters } from './types'
 
@@ -54,11 +54,7 @@ const AddFieldButton: React.ComponentType<AddFieldButtonProps> =
             throw new Error('cannot treat a singular spec control as arrayed')
         }
 
-        const arrayedConstraint: Maybe<ArrayedConstraint> = configurations[ specKey ].arrayedConstraint
-        const maxLength: Maybe<number> = !isUndefined(arrayedConstraint) ? arrayedConstraint.maxLength : undefined
-        const isAtMaxLength: boolean = !!maxLength && totalElements(displayedValue) >= maxLength
-        const disabled: boolean = isAtMaxLength
-        const title: string = disabled ? `This arrayed spec control has a maximum length of ${maxLength}.` : ''
+        const { disabled, title } = computeAddFieldButtonAttributes({ configurations, displayedValue, specKey })
 
         return (
             <button {...{ className: 'add-field', onClick, disabled, title }}>

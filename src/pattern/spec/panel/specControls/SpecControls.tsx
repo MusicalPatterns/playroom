@@ -1,7 +1,7 @@
 // tslint:disable variable-name file-name-casing no-default-export no-import-side-effect no-null-keyword
 
 import { computeSortSpecs, StandardSpec } from '@musical-patterns/spec'
-import { from, isEmpty, keys, map, Ordinal } from '@musical-patterns/utilities'
+import { from, Index, isEmpty, keys, map } from '@musical-patterns/utilities'
 import * as React from 'react'
 import { connect } from 'react-redux'
 import { PATTERN_PARTICULAR, STANDARD } from '../../../../copy'
@@ -32,8 +32,8 @@ const SpecControls: React.ComponentType<SpecControlsProps> =
                         .includes(specKey),
                 )
                 .sort(computeSortSpecs(configurations)),
-            (specKey: string, index: Ordinal): React.ReactElement | null =>
-                <SpecControl {...{ key: from.Ordinal(index), specKey }} />,
+            (specKey: string, index: Index): React.ReactElement | null =>
+                <SpecControl {...{ key: from.Index(index), specKey }} />,
         )
         const patternParticularControls: Array<React.ReactElement | null> = map(
             keys(displayedSpecs)
@@ -42,8 +42,8 @@ const SpecControls: React.ComponentType<SpecControlsProps> =
                         .includes(specKey),
                 )
                 .sort(computeSortSpecs(configurations)),
-            (specKey: string, index: Ordinal): React.ReactElement | null =>
-                <SpecControl {...{ key: from.Ordinal(index), specKey }} />,
+            (specKey: string, index: Index): React.ReactElement | null =>
+                <SpecControl {...{ key: from.Index(index), specKey }} />,
         )
 
         const bothPatternParticularAndStandardControlsArePresent: boolean = !isEmpty(standardSpecControls) &&
