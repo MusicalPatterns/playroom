@@ -14,7 +14,7 @@ import {
 const playJustLongEnoughToBeAlmostAboutToRepeat: () => Promise<void> =
     async (): Promise<void> => {
         const totalTime: Ms = await patternDuration()
-        await sleep(from.Translation(difference(totalTime, A_BIT_LONGER)))
+        await sleep(difference(totalTime, A_BIT_LONGER))
     }
 
 const playJustLongEnoughMoreToRepeat: () => Promise<void> =

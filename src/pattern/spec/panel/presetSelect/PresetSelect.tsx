@@ -62,13 +62,16 @@ const PresetSelect: React.ComponentType<PresetSelectProps> =
 
                     return order < nextOrder ? negative(1) : 1
                 }),
-            ([ presetKey, preset ]: [ string, Preset ], index: Index): React.ReactElement | null => {
+            (
+                [ presetKey, preset ]: [ string, Preset ],
+                index: Index<[ string, Preset ]>,
+            ): React.ReactElement | null => {
                 const { description, formattedName, specs } = preset
                 if (deepEqual(specs, submittedSpecs)) {
                     selectValue = presetKey
                 }
                 const displayName: string = formattedName || camelCaseToUpperCase(presetKey)
-                const key: number = from.Index(translateFromZeroIndexedToOneIndexed(index))
+                const key: number = from.Index<[ string, Preset ]>(translateFromZeroIndexedToOneIndexed(index))
 
                 return <option {...{ key, value: presetKey, title: description }}>{displayName}</option>
             })

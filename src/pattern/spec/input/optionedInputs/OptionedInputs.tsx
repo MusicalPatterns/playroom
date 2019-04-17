@@ -42,9 +42,16 @@ const OptionedInputs: React.ComponentType<SharedInputsProps> =
         const optionElements: Array<React.ReactElement | null> = map(
             constraint.sort(sortOptions),
             (
-                { value: optionValue, description, formattedName }: OptionedConstraintOption, index: Index,
+                { value: optionValue, description, formattedName }: OptionedConstraintOption,
+                index: Index<OptionedConstraintOption>,
             ): React.ReactElement | null => (
-                <option {...{ key: from.Index(index), value: optionValue, title: description }}>
+                <option
+                    {...{
+                        key: from.Index<OptionedConstraintOption>(index),
+                        title: description,
+                        value: optionValue,
+                    }}
+                >
                     {formattedName || constantCaseToUpperCase(optionValue)}
                 </option>
             ),

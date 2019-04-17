@@ -61,10 +61,12 @@ const PatternList: React.ComponentType<PatternListProps> =
         const options: Array<React.ReactElement | null> = map(
             entries(patterns)
                 .sort(sortByOrderOrPublishDate),
-            ([ listedPatternId, listedPattern ]: [ Id, Pattern ], index: Index): React.ReactElement | null => (
+            (
+                [ listedPatternId, listedPattern ]: [ Id, Pattern ], index: Index<[ Id, Pattern ]>,
+            ): React.ReactElement | null => (
                 <PatternListItem
                     {...{
-                        key: from.Index(index),
+                        key: from.Index<[ Id, Pattern ]>(index),
                         listedPattern,
                         listedPatternId,
                         onClick,
