@@ -1,13 +1,13 @@
 import { SingularValidation } from '@musical-patterns/spec'
-import { camelCaseToUpperCase, Index, isUndefined, Maybe } from '@musical-patterns/utilities'
+import { camelCaseToUpperCase, isUndefined, Maybe, Ordinal } from '@musical-patterns/utilities'
 import { ComputeFieldLabelParameters, FieldParentProps, FieldValidityClassName } from './types'
 
-const computeFieldId: (parameters: { fieldIndex?: Index, specKey: string }) => string =
+const computeFieldId: (parameters: { fieldIndex?: Ordinal, specKey: string }) => string =
     ({ specKey, fieldIndex }: FieldParentProps): string =>
         isUndefined(fieldIndex) ? specKey : `${specKey}-${fieldIndex}`
 
 const computeFieldLabel: (parameters: {
-    fieldIndex?: Index,
+    fieldIndex?: Ordinal,
     formattedName: Maybe<string>,
     specKey: string,
 }) => string =

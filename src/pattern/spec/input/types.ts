@@ -1,5 +1,5 @@
 import { DomSpecs, DomSpecValue, Validations } from '@musical-patterns/spec'
-import { HtmlValueOrChecked, Index } from '@musical-patterns/utilities'
+import { HtmlValueOrChecked, Ordinal } from '@musical-patterns/utilities'
 import { EventHandler, EventParameter } from '../../../types'
 import { FieldParentProps } from '../field'
 import { SubmissionProps } from '../types'
@@ -11,7 +11,7 @@ type HandleFieldChangeEvent = (parameters: HandleFieldChangeEventParameters) => 
 interface MergeEventValueIntoValueParameters extends FieldParentProps {
     displayedSpecs: DomSpecs,
     eventValue: HtmlValueOrChecked,
-    fieldIndex: Index,
+    fieldIndex: Ordinal,
 }
 
 interface InputsPropsFromState extends SubmissionProps {
