@@ -1,5 +1,5 @@
 import { ArrayedConstraint, ArrayedDomSpecValue, Configurations } from '@musical-patterns/spec'
-import { Cardinal, isEmpty, isUndefined, Maybe, to, totalElements } from '@musical-patterns/utilities'
+import { Cardinal, isEmpty, isUndefined, length, Maybe, to } from '@musical-patterns/utilities'
 import { FieldButtonAttributes } from '../types'
 import { ComputeRemoveFieldButtonAttributesParameters } from './types'
 
@@ -23,7 +23,7 @@ const computeRemoveFieldButtonAttributes: (parameters: {
     ): FieldButtonAttributes => {
         const arrayedConstraint: Maybe<ArrayedConstraint> = configurations[ specKey ].arrayedConstraint
         const minLength: Maybe<Cardinal> = computeMinLength(arrayedConstraint)
-        const isAtMinLength: boolean = !!minLength && totalElements(displayedValue) <= minLength
+        const isAtMinLength: boolean = !!minLength && length(displayedValue) <= minLength
         const disabled: boolean = isEmpty(displayedValue) || isAtMinLength
         const title: string = isAtMinLength ? `This arrayed spec control has a minimum length of ${minLength}.` : ''
 
