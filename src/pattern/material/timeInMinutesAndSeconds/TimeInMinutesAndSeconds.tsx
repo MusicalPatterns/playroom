@@ -2,10 +2,10 @@
 
 import {
     floor,
-    from,
     MILLISECONDS_PER_SECOND,
     modulus,
     Ms,
+    notAs,
     quotient,
     round,
     SECONDS_PER_MINUTE,
@@ -44,10 +44,10 @@ const TimeInMinutesAndSeconds: React.ComponentType<TimelineOrTimeInMinutesAndSec
         })
 
         const totalSeconds: number =
-            round(quotient(from.Ms(timePositionForDisplay), from.Cardinal<Ms>(MILLISECONDS_PER_SECOND)))
-        const timeMinutesPart: string = floor(quotient(totalSeconds, from.Cardinal(SECONDS_PER_MINUTE)))
+            round(quotient(notAs.Ms(timePositionForDisplay), notAs.Cardinal<Ms>(MILLISECONDS_PER_SECOND)))
+        const timeMinutesPart: string = floor(quotient(totalSeconds, notAs.Cardinal(SECONDS_PER_MINUTE)))
             .toString()
-        let timeSecondsPart: string = modulus(totalSeconds, from.Cardinal(SECONDS_PER_MINUTE))
+        let timeSecondsPart: string = modulus(totalSeconds, notAs.Cardinal(SECONDS_PER_MINUTE))
             .toString()
         if (timeSecondsPart.length === 1) {
             timeSecondsPart = `0${timeSecondsPart}`

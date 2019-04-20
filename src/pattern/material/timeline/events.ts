@@ -1,5 +1,5 @@
 import { setTimePosition } from '@musical-patterns/material'
-import { HtmlValueOrChecked, Ms, round, to } from '@musical-patterns/utilities'
+import { as, HtmlValueOrChecked, Ms, round } from '@musical-patterns/utilities'
 import * as React from 'react'
 import { extractValueOrCheckedFromEvent } from '../../../extractValueOrCheckedFromEvent'
 import { AsyncEventHandler } from '../../../types'
@@ -15,7 +15,7 @@ const handleTimelineChangeEvent: AsyncEventHandler =
             throw new Error('time position was not a number')
         }
         const roundedTimePosition: number = round(timePosition)
-        const typedTimePosition: Ms = to.Ms(roundedTimePosition)
+        const typedTimePosition: Ms = as.Ms(roundedTimePosition)
         await setTimePosition(typedTimePosition)
     }
 

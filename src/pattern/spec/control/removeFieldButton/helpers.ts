@@ -1,12 +1,12 @@
 import { ArrayedConstraint, ArrayedDomSpecValue, Configurations } from '@musical-patterns/spec'
-import { Cardinal, isEmpty, isUndefined, length, Maybe, to } from '@musical-patterns/utilities'
+import { as, Cardinal, isEmpty, isUndefined, length, Maybe } from '@musical-patterns/utilities'
 import { FieldButtonAttributes } from '../types'
 import { ComputeRemoveFieldButtonAttributesParameters } from './types'
 
 const computeMinLength: (arrayedConstraint: Maybe<ArrayedConstraint>) => Maybe<Cardinal> =
     (arrayedConstraint: Maybe<ArrayedConstraint>): Maybe<Cardinal> =>
         !isUndefined(arrayedConstraint) && !isUndefined(arrayedConstraint.minLength) ?
-            to.Cardinal(arrayedConstraint.minLength) :
+            as.Cardinal(arrayedConstraint.minLength) :
             undefined
 
 const computeRemoveFieldButtonAttributes: (parameters: {

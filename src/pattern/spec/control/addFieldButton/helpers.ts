@@ -1,12 +1,12 @@
 import { ArrayedConstraint, ArrayedDomSpecValue, Configurations } from '@musical-patterns/spec'
-import { Cardinal, isUndefined, length, Maybe, to } from '@musical-patterns/utilities'
+import { as, Cardinal, isUndefined, length, Maybe } from '@musical-patterns/utilities'
 import { FieldButtonAttributes } from '../types'
 import { ComputeAddFieldButtonAttributesParameters } from './types'
 
 const computeMaxLength: (arrayedConstraint: Maybe<ArrayedConstraint>) => Maybe<Cardinal> =
     (arrayedConstraint: Maybe<ArrayedConstraint>): Maybe<Cardinal> =>
         !isUndefined(arrayedConstraint) && !isUndefined(arrayedConstraint.maxLength) ?
-            to.Cardinal(arrayedConstraint.maxLength) :
+            as.Cardinal(arrayedConstraint.maxLength) :
             undefined
 
 const computeAddFieldButtonAttributes: (parameters: {

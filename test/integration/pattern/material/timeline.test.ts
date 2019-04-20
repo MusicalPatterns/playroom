@@ -1,4 +1,4 @@
-import { apply, difference, from, Ms, ONE_HALF, Scalar, sleep, sum, to } from '@musical-patterns/utilities'
+import { difference, Ms, notAs, ONE_HALF, Scalar, sleep, sum, use } from '@musical-patterns/utilities'
 import {
     A_BIT_LONGER,
     clickTimeControl,
@@ -69,7 +69,7 @@ describe('timeline', () => {
 
             expect(afterRepeatingTime)
                 .toBeLessThanTyped(
-                    apply.Scalar(await patternDuration(), ONE_HALF as Scalar<Ms>),
+                    use.Scalar(await patternDuration(), ONE_HALF as Scalar<Ms>),
                     'pattern did not repeat from the beginning, because it was past halfway done after repeating',
                 )
 
@@ -98,7 +98,7 @@ describe('timeline', () => {
             const beforeRepeatingTime: Ms = await currentTime()
             expect(beforeRepeatingTime)
                 .toBeGreaterThan(
-                    from.Ms(initialTime),
+                    notAs.Ms(initialTime),
                     'tried to play long enough to be just about to repeat, but was still at the initial time',
                 )
 
@@ -112,7 +112,7 @@ describe('timeline', () => {
 
             expect(afterRepeatingTime)
                 .toBeGreaterThanTyped(
-                    apply.Scalar(await patternDuration(), ONE_HALF as Scalar<Ms>),
+                    use.Scalar(await patternDuration(), ONE_HALF as Scalar<Ms>),
                     'pattern did not repeat from the segno time, because it was before the halfway point after repeating',
                 )
 
@@ -141,7 +141,7 @@ describe('timeline', () => {
             const endTime: Ms = await currentTime()
             expect(endTime)
                 .toBeGreaterThan(
-                    from.Ms(initialTime),
+                    notAs.Ms(initialTime),
                     'does not seem to have played',
                 )
 

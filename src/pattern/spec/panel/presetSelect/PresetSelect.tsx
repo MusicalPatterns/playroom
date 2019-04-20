@@ -6,10 +6,10 @@ import {
     camelCaseToUpperCase,
     deepEqual,
     entries,
-    from,
     isUndefined,
     map,
     negative,
+    notAs,
     Ordinal,
     translateFromZeroIndexedToOneIndexed,
 } from '@musical-patterns/utilities'
@@ -71,7 +71,7 @@ const PresetSelect: React.ComponentType<PresetSelectProps> =
                     selectValue = presetKey
                 }
                 const displayName: string = formattedName || camelCaseToUpperCase(presetKey)
-                const key: number = from.Ordinal<[ string, Preset ]>(translateFromZeroIndexedToOneIndexed(index))
+                const key: number = notAs.Ordinal<[ string, Preset ]>(translateFromZeroIndexedToOneIndexed(index))
 
                 return <option {...{ key, value: presetKey, title: description }}>{displayName}</option>
             })

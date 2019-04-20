@@ -1,6 +1,6 @@
 // tslint:disable variable-name file-name-casing no-default-export no-import-side-effect no-null-keyword
 
-import { CompiledPattern, compilePattern, CompilePatternParameters, setPattern } from '@musical-patterns/material'
+import { CompiledPattern, CompilePatternParameters, setPattern } from '@musical-patterns/material'
 import { Pattern } from '@musical-patterns/pattern'
 import { doAsync, isUndefined, Maybe } from '@musical-patterns/utilities'
 import * as React from 'react'
