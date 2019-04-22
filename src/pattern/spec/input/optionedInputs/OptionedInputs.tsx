@@ -43,11 +43,11 @@ const OptionedInputs: React.ComponentType<SharedInputsProps> =
             constraint.sort(sortOptions),
             (
                 { value: optionValue, description, formattedName }: OptionedConstraintOption,
-                index: Ordinal<OptionedConstraintOption>,
+                index: Ordinal<OptionedConstraintOption[]>,
             ): React.ReactElement | null => (
                 <option
                     {...{
-                        key: notAs.Ordinal<OptionedConstraintOption>(index),
+                        key: notAs.Ordinal<OptionedConstraintOption[]>(index),
                         title: description,
                         value: optionValue,
                     }}

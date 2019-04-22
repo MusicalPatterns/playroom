@@ -25,7 +25,7 @@ const ArrayedFields: React.ComponentType<ArrayedFieldsProps> =
         for (
             let fieldIndex: Ordinal = INITIAL;
             fieldIndex <= indexOfFinalElement(arrayedDisplayedValue);
-            fieldIndex = use.Translation(fieldIndex, NEXT)
+            fieldIndex = use.Cardinal(fieldIndex, NEXT)
         ) {
             fields.push(<Field {...{ fieldIndex, key: notAs.Ordinal(fieldIndex), specKey }}/>)
         }

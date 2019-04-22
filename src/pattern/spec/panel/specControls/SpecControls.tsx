@@ -32,8 +32,8 @@ const SpecControls: React.ComponentType<SpecControlsProps> =
                         .includes(specKey),
                 )
                 .sort(computeSortSpecs(configurations)),
-            (specKey: string, index: Ordinal<string>): React.ReactElement | null =>
-                <SpecControl {...{ key: notAs.Ordinal<string>(index), specKey }} />,
+            (specKey: string, index: Ordinal<string[]>): React.ReactElement | null =>
+                <SpecControl {...{ key: notAs.Ordinal<string[]>(index), specKey }} />,
         )
         const patternParticularControls: Array<React.ReactElement | null> = map(
             keys(displayedSpecs)
@@ -42,8 +42,8 @@ const SpecControls: React.ComponentType<SpecControlsProps> =
                         .includes(specKey),
                 )
                 .sort(computeSortSpecs(configurations)),
-            (specKey: string, index: Ordinal<string>): React.ReactElement | null =>
-                <SpecControl {...{ key: notAs.Ordinal<string>(index), specKey }} />,
+            (specKey: string, index: Ordinal<string[]>): React.ReactElement | null =>
+                <SpecControl {...{ key: notAs.Ordinal<string[]>(index), specKey }} />,
         )
 
         const bothPatternParticularAndStandardControlsArePresent: boolean = !isEmpty(standardSpecControls) &&

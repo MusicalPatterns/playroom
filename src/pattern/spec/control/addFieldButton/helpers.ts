@@ -1,12 +1,12 @@
 import { ArrayedConstraint, ArrayedDomSpecValue, Configurations } from '@musical-patterns/spec'
-import { as, Cardinal, isUndefined, length, Maybe } from '@musical-patterns/utilities'
+import { as, Cardinal, HtmlValueOrChecked, isUndefined, length, Maybe } from '@musical-patterns/utilities'
 import { FieldButtonAttributes } from '../types'
 import { ComputeAddFieldButtonAttributesParameters } from './types'
 
-const computeMaxLength: (arrayedConstraint: Maybe<ArrayedConstraint>) => Maybe<Cardinal> =
-    (arrayedConstraint: Maybe<ArrayedConstraint>): Maybe<Cardinal> =>
+const computeMaxLength: (arrayedConstraint: Maybe<ArrayedConstraint>) => Maybe<Cardinal<HtmlValueOrChecked[]>> =
+    (arrayedConstraint: Maybe<ArrayedConstraint>): Maybe<Cardinal<HtmlValueOrChecked[]>> =>
         !isUndefined(arrayedConstraint) && !isUndefined(arrayedConstraint.maxLength) ?
-            as.Cardinal(arrayedConstraint.maxLength) :
+            as.Cardinal<HtmlValueOrChecked[]>(arrayedConstraint.maxLength) :
             undefined
 
 const computeAddFieldButtonAttributes: (parameters: {
@@ -22,7 +22,7 @@ const computeAddFieldButtonAttributes: (parameters: {
         }: ComputeAddFieldButtonAttributesParameters,
     ): FieldButtonAttributes => {
         const arrayedConstraint: Maybe<ArrayedConstraint> = configurations[ specKey ].arrayedConstraint
-        const maxLength: Maybe<Cardinal> =
+        const maxLength: Maybe<Cardinal<HtmlValueOrChecked[]>> =
             computeMaxLength(arrayedConstraint)
         const isAtMaxLength: boolean = !!maxLength && length(displayedValue) >= maxLength
         const disabled: boolean = isAtMaxLength
