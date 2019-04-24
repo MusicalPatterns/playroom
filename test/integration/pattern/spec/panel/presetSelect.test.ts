@@ -1,4 +1,4 @@
-import { Ms, sleep } from '@musical-patterns/utilities'
+import { Ms, Point, sleep } from '@musical-patterns/utilities'
 import { SecretTestSelector } from '../../../../../src/indexForTest'
 import {
     A_BIT_LONGER,
@@ -172,7 +172,7 @@ describe('preset select', () => {
             })
 
             it('keeps playing when you select a preset but does not reset time to the beginning', async (done: DoneFn) => {
-                const timeOfSelectingPreset: Ms = await currentTime()
+                const timeOfSelectingPreset: Point<Ms> = await currentTime()
 
                 await openSpecControlsIfNotOpen()
                 await selectAPreset()
@@ -203,7 +203,7 @@ describe('preset select', () => {
             it('keeps playing when you select a preset and resets time to the beginning', async (done: DoneFn) => {
                 await openSpecControlsIfNotOpen()
                 await sleep(A_BIT_LONGER)
-                const timeOfSelectingPreset: Ms = await currentTime()
+                const timeOfSelectingPreset: Point<Ms> = await currentTime()
                 await selectAPreset()
                 await hasBeenReset({ toBefore: timeOfSelectingPreset })
                 await isPlaying()

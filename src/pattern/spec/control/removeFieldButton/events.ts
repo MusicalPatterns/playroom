@@ -6,6 +6,7 @@ import {
     ComputeValidations,
     Configurations,
     DomSpecs,
+    SingularDomSpecValue,
     Specs,
     Validations,
 } from '@musical-patterns/spec'
@@ -57,7 +58,7 @@ const handleFieldRemove: (parameters: {
         const updatedArrayedDisplayedValue: ArrayedDomSpecValue = slice(
             arrayedDisplayedValue,
             INITIAL,
-            indexOfFinalElement(arrayedDisplayedValue),
+            indexOfFinalElement<SingularDomSpecValue, ArrayedDomSpecValue>(arrayedDisplayedValue),
         )
 
         const removedFieldHasNoInvalidMessages: boolean =

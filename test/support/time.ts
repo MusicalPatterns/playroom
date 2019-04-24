@@ -1,13 +1,13 @@
-import { as, Ms, notAs, parseInteger, sleep } from '@musical-patterns/utilities'
+import { as, Ms, parseInteger, Point, sleep, Translation } from '@musical-patterns/utilities'
 import { SecretTestSelector } from '../../src/indexForTest'
 import { LONG_ENOUGH_FOR_TIME_TO_HAVE_BEEN_RESET, LONG_ENOUGH_FOR_TIME_TO_PASS } from './constants'
 import { clickElement, elementInnerText } from './generic'
 
 const isPaused: () => Promise<void> =
     async (): Promise<void> => {
-        const initialTime: Ms = await currentTime()
+        const initialTime: Point<Ms> = await currentTime()
         await sleep(LONG_ENOUGH_FOR_TIME_TO_PASS)
-        const shouldBeSameTime: Ms = await currentTime()
+        const shouldBeSameTime: Point<Ms> = await currentTime()
         expect(shouldBeSameTime)
             .toBe(
                 initialTime,
@@ -17,9 +17,9 @@ const isPaused: () => Promise<void> =
 
 const isPlaying: () => Promise<void> =
     async (): Promise<void> => {
-        const initialTime: Ms = await currentTime()
+        const initialTime: Point<Ms> = await currentTime()
         await sleep(LONG_ENOUGH_FOR_TIME_TO_PASS)
-        const shouldBeLaterTime: Ms = await currentTime()
+        const shouldBeLaterTime: Point<Ms> = await currentTime()
         expect(shouldBeLaterTime)
             .toBeGreaterThanTyped(
                 initialTime,
@@ -27,10 +27,10 @@ const isPlaying: () => Promise<void> =
             )
     }
 
-const hasBeenReset: (options?: { toBefore?: Ms }) => Promise<void> =
-    async ({ toBefore = as.Ms(1) }: { toBefore?: Ms } = {}): Promise<void> => {
+const hasBeenReset: (options?: { toBefore?: Point<Ms> }) => Promise<void> =
+    async ({ toBefore = as.Point<Ms>(1) }: { toBefore?: Point<Ms> } = {}): Promise<void> => {
         await sleep(LONG_ENOUGH_FOR_TIME_TO_HAVE_BEEN_RESET)
-        const timeAfterResetting: Ms = await currentTime()
+        const timeAfterResetting: Point<Ms> = await currentTime()
         expect(timeAfterResetting)
             .toBeLessThanTyped(
                 toBefore,
@@ -38,25 +38,25 @@ const hasBeenReset: (options?: { toBefore?: Ms }) => Promise<void> =
             )
     }
 
-const currentTime: () => Promise<Ms> =
-    async (): Promise<Ms> =>
-        as.Ms(parseInteger(await elementInnerText(`#${SecretTestSelector.TIME_POSITION}`)))
+const currentTime: () => Promise<Point<Ms>> =
+    async (): Promise<Point<Ms>> =>
+        as.Point<Ms>(parseInteger(await elementInnerText(`#${SecretTestSelector.TIME_POSITION}`)))
 
-const patternDuration: () => Promise<Ms> =
-    async (): Promise<Ms> =>
-        as.Ms(parseInteger(await elementInnerText(`#${SecretTestSelector.PATTERN_DURATION}`)))
+const patternDuration: () => Promise<Translation<Ms>> =
+    async (): Promise<Translation<Ms>> =>
+        as.Translation<Ms>(parseInteger(await elementInnerText(`#${SecretTestSelector.PATTERN_DURATION}`)))
 
 const clickTimeControl: (control: string) => Promise<void> =
     async (control: string): Promise<void> => {
         await clickElement(`#${control}`)
     }
 
-const isAfter: (previousTime: Ms) => Promise<void> =
-    async (previousTime: Ms): Promise<void> => {
-        const newTime: Ms = await currentTime()
+const isAfter: (previousTime: Point<Ms>) => Promise<void> =
+    async (previousTime: Point<Ms>): Promise<void> => {
+        const newTime: Point<Ms> = await currentTime()
 
         expect(newTime)
-            .toBeGreaterThan(notAs.Ms(previousTime), `time ${newTime} was not after ${previousTime}`)
+            .toBeGreaterThanTyped(previousTime, `time ${newTime} was not after ${previousTime}`)
     }
 
 export {

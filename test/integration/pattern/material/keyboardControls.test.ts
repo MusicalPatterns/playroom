@@ -1,4 +1,4 @@
-import { Ms, sleep } from '@musical-patterns/utilities'
+import { Ms, Point, sleep } from '@musical-patterns/utilities'
 import {
     A_BIT_LONGER,
     currentTime,
@@ -62,7 +62,7 @@ describe('keyboard controls', () => {
 
         it('pressing home key rewinds (resets time to the beginning and keeps playing)', async (done: DoneFn) => {
             await sleep(A_BIT_LONGER)
-            const timeOfPressingRewind: Ms = await currentTime()
+            const timeOfPressingRewind: Point<Ms> = await currentTime()
 
             await press('Home')
             await hasBeenReset({ toBefore: timeOfPressingRewind })

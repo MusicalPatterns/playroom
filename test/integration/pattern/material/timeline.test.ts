@@ -1,4 +1,4 @@
-import { difference, Ms, notAs, ONE_HALF, Scalar, sleep, sum, use } from '@musical-patterns/utilities'
+import { difference, Ms, ONE_HALF, Point, sleep, sum, Translation, use } from '@musical-patterns/utilities'
 import {
     A_BIT_LONGER,
     clickTimeControl,
@@ -13,7 +13,7 @@ import {
 
 const playJustLongEnoughToBeAlmostAboutToRepeat: () => Promise<void> =
     async (): Promise<void> => {
-        const totalTime: Ms = await patternDuration()
+        const totalTime: Translation<Ms> = await patternDuration()
         await sleep(difference(totalTime, A_BIT_LONGER))
     }
 
@@ -24,7 +24,7 @@ const playJustLongEnoughMoreToRepeat: () => Promise<void> =
 
 const playLongEnoughToHaveReachedTheEnd: () => Promise<void> =
     async (): Promise<void> => {
-        const totalTime: Ms = await patternDuration()
+        const totalTime: Translation<Ms> = await patternDuration()
         await sleep(sum(totalTime, A_BIT_LONGER))
     }
 
@@ -49,10 +49,10 @@ describe('timeline', () => {
         })
 
         it('works', async (done: DoneFn) => {
-            const initialTime: Ms = await currentTime()
+            const initialTime: Point<Ms> = await currentTime()
 
             await playJustLongEnoughToBeAlmostAboutToRepeat()
-            const beforeRepeatingTime: Ms = await currentTime()
+            const beforeRepeatingTime: Point<Ms> = await currentTime()
             expect(beforeRepeatingTime)
                 .toBeGreaterThanTyped(
                     initialTime,
@@ -60,7 +60,7 @@ describe('timeline', () => {
                 )
 
             await playJustLongEnoughMoreToRepeat()
-            const afterRepeatingTime: Ms = await currentTime()
+            const afterRepeatingTime: Point<Ms> = await currentTime()
             expect(afterRepeatingTime)
                 .toBeLessThanTyped(
                     beforeRepeatingTime,
@@ -69,7 +69,7 @@ describe('timeline', () => {
 
             expect(afterRepeatingTime)
                 .toBeLessThanTyped(
-                    use.Scalar(await patternDuration(), ONE_HALF as Scalar<Ms>),
+                    use.Scalar(await patternDuration(), ONE_HALF),
                     'pattern did not repeat from the beginning, because it was past halfway done after repeating',
                 )
 
@@ -92,18 +92,18 @@ describe('timeline', () => {
         })
 
         it('works', async (done: DoneFn) => {
-            const initialTime: Ms = await currentTime()
+            const initialTime: Point<Ms> = await currentTime()
 
             await playJustLongEnoughToBeAlmostAboutToRepeat()
-            const beforeRepeatingTime: Ms = await currentTime()
+            const beforeRepeatingTime: Point<Ms> = await currentTime()
             expect(beforeRepeatingTime)
-                .toBeGreaterThan(
-                    notAs.Ms(initialTime),
+                .toBeGreaterThanTyped(
+                    initialTime,
                     'tried to play long enough to be just about to repeat, but was still at the initial time',
                 )
 
             await playJustLongEnoughMoreToRepeat()
-            const afterRepeatingTime: Ms = await currentTime()
+            const afterRepeatingTime: Point<Ms> = await currentTime()
             expect(afterRepeatingTime)
                 .toBeLessThanTyped(
                     beforeRepeatingTime,
@@ -112,7 +112,7 @@ describe('timeline', () => {
 
             expect(afterRepeatingTime)
                 .toBeGreaterThanTyped(
-                    use.Scalar(await patternDuration(), ONE_HALF as Scalar<Ms>),
+                    use.Scalar(await patternDuration(), ONE_HALF),
                     'pattern did not repeat from the segno time, because it was before the halfway point after repeating',
                 )
 
@@ -135,18 +135,18 @@ describe('timeline', () => {
         })
 
         it('works', async (done: DoneFn) => {
-            const initialTime: Ms = await currentTime()
+            const initialTime: Point<Ms> = await currentTime()
 
             await playLongEnoughToHaveReachedTheEnd()
-            const endTime: Ms = await currentTime()
+            const endTime: Point<Ms> = await currentTime()
             expect(endTime)
-                .toBeGreaterThan(
-                    notAs.Ms(initialTime),
+                .toBeGreaterThanTyped(
+                    initialTime,
                     'does not seem to have played',
                 )
 
             await playLongerToProveItIsStillStuckAtTheEndTime()
-            const afterPlayingMoreTime: Ms = await currentTime()
+            const afterPlayingMoreTime: Point<Ms> = await currentTime()
             expect(afterPlayingMoreTime)
                 .toEqual(
                     endTime,

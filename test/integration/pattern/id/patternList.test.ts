@@ -1,4 +1,4 @@
-import { Ms, sleep } from '@musical-patterns/utilities'
+import { Ms, Point, sleep } from '@musical-patterns/utilities'
 import { ElementHandle } from 'puppeteer'
 import { FieldValidityClassName, SecretTestSelector } from '../../../../src/indexForTest'
 import {
@@ -263,7 +263,7 @@ describe('pattern list', () => {
 
         it('when you select a new pattern, it resets the time to the beginning but keeps playing', async (done: DoneFn) => {
             await sleep(A_BIT_LONGER)
-            const timeOfSelectingNewPattern: Ms = await currentTime()
+            const timeOfSelectingNewPattern: Point<Ms> = await currentTime()
 
             await selectLongDurationPattern()
             await hasBeenReset({ toBefore: timeOfSelectingNewPattern })

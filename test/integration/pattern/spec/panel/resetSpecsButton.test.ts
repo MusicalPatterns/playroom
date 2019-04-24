@@ -1,4 +1,4 @@
-import { Ms, sleep } from '@musical-patterns/utilities'
+import { Ms, Point, sleep } from '@musical-patterns/utilities'
 import { ElementHandle } from 'puppeteer'
 import { FieldValidityClassName } from '../../../../../src/indexForTest'
 import {
@@ -234,7 +234,7 @@ describe('reset specs button', () => {
             await openSpecControlsIfNotOpen()
             await modifyControl()
             await resetSpecsButtonIsEnabled()
-            const timeOfResettingSpec: Ms = await currentTime()
+            const timeOfResettingSpec: Point<Ms> = await currentTime()
             await clickResetSpecsButton()
             await isAfter(timeOfResettingSpec)
             await isPlaying()
@@ -265,7 +265,7 @@ describe('reset specs button', () => {
             await modifyControl()
             await resetSpecsButtonIsEnabled()
             await sleep(A_BIT_LONGER)
-            const timeOfResettingSpecs: Ms = await currentTime()
+            const timeOfResettingSpecs: Point<Ms> = await currentTime()
             await clickResetSpecsButton()
             await hasBeenReset({ toBefore: timeOfResettingSpecs })
             await isPlaying()

@@ -1,4 +1,4 @@
-import { Ms, sleep } from '@musical-patterns/utilities'
+import { Ms, Point, sleep } from '@musical-patterns/utilities'
 import { ElementHandle } from 'puppeteer'
 import { FieldValidityClassName, SecretTestSelector } from '../../../../../src/indexForTest'
 import {
@@ -231,7 +231,7 @@ describe('spec controls', () => {
         })
 
         it('keeps playing when you modify the spec but does not reset time to the beginning', async (done: DoneFn) => {
-            const timeOfModifyingSpecs: Ms = await currentTime()
+            const timeOfModifyingSpecs: Point<Ms> = await currentTime()
 
             await openSpecControlsIfNotOpen()
             await modifySpecs()
@@ -262,7 +262,7 @@ describe('spec controls', () => {
         it('keeps playing when you modify the spec and resets time to the beginning', async (done: DoneFn) => {
             await openSpecControlsIfNotOpen()
             await sleep(A_BIT_LONGER)
-            const timeOfModifyingSpecs: Ms = await currentTime()
+            const timeOfModifyingSpecs: Point<Ms> = await currentTime()
             await modifySpecs()
             await hasBeenReset({ toBefore: timeOfModifyingSpecs })
             await isPlaying()

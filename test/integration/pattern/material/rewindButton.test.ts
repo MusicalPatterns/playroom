@@ -1,4 +1,4 @@
-import { Ms, sleep } from '@musical-patterns/utilities'
+import { Ms, Point, sleep } from '@musical-patterns/utilities'
 import {
     clickTimeControl,
     currentTime,
@@ -28,7 +28,7 @@ describe('rewind button', () => {
 
     it('clicking rewind resets time to the beginning, but keeps playing', async (done: DoneFn) => {
         await sleep(EVEN_A_BIT_LONGER)
-        const timeOfPressingRewind: Ms = await currentTime()
+        const timeOfPressingRewind: Point<Ms> = await currentTime()
         await clickTimeControl('rewind')
         await hasBeenReset({ toBefore: timeOfPressingRewind })
         await isPlaying()

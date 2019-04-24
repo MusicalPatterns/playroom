@@ -44,7 +44,7 @@ const TimeInMinutesAndSeconds: React.ComponentType<TimelineOrTimeInMinutesAndSec
         })
 
         const totalSeconds: number =
-            round(quotient(notAs.Ms(timePositionForDisplay), notAs.Cardinal<Ms>(MILLISECONDS_PER_SECOND)))
+            round(quotient(notAs.Point<Ms>(timePositionForDisplay), notAs.Cardinal<Ms>(MILLISECONDS_PER_SECOND)))
         const timeMinutesPart: string = floor(quotient(totalSeconds, notAs.Cardinal(SECONDS_PER_MINUTE)))
             .toString()
         let timeSecondsPart: string = modulus(totalSeconds, notAs.Cardinal(SECONDS_PER_MINUTE))
