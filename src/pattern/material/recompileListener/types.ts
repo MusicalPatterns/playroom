@@ -1,7 +1,7 @@
 import { Id } from '@musical-patterns/id'
 import { Patterns } from '@musical-patterns/pattern'
 import { Specs } from '@musical-patterns/spec'
-import { Maybe, Ms, Translation } from '@musical-patterns/utilities'
+import { Duration, Maybe } from '@musical-patterns/utilities'
 
 interface RecompileListenerPropsFromState {
     debugMode: boolean,
@@ -11,7 +11,7 @@ interface RecompileListenerPropsFromState {
 }
 
 interface RecompileListenerPropsFromDispatch {
-    setPatternDuration: (patternDuration: Translation<Ms>) => void,
+    setPatternDuration: (patternDuration: Duration) => void,
 }
 
 interface RecompileListenerProps extends RecompileListenerPropsFromState,

@@ -1,8 +1,8 @@
-import { Ms, Point, Translation } from '@musical-patterns/utilities'
+import { Duration, Ms, Point } from '@musical-patterns/utilities'
 
 interface SecretTimeForTestProps {
     debugMode: boolean,
-    patternDuration: Translation<Ms>,
+    patternDuration: Duration,
     timePosition: Point<Ms>,
 }
 

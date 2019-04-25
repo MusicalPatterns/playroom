@@ -1,5 +1,5 @@
 import { OnUpdate, ToggleImmersiveAudioHandlers } from '@musical-patterns/material'
-import { ActionForState, Maybe, Ms, Point, Translation, TypedMap } from '@musical-patterns/utilities'
+import { ActionForState, Duration, Maybe, Ms, Point, Translation, TypedMap } from '@musical-patterns/utilities'
 import { KeyboardEventHandler } from '../../types'
 
 enum MaterialStateKey {
@@ -19,7 +19,7 @@ enum MaterialStateKey {
 
 interface MaterialState {
     [ MaterialStateKey.TIME_POSITION ]: Point<Ms>,
-    [ MaterialStateKey.PATTERN_DURATION ]: Translation<Ms>,
+    [ MaterialStateKey.PATTERN_DURATION ]: Duration,
     [ MaterialStateKey.PAUSED ]: boolean,
     [ MaterialStateKey.TOGGLE_IMMERSIVE_AUDIO_HANDLERS ]: Maybe<ToggleImmersiveAudioHandlers>,
     [ MaterialStateKey.IMMERSIVE_AUDIO_READY ]: boolean,
@@ -36,7 +36,7 @@ type ImmutableMaterialState = TypedMap<MaterialState>
 type MaterialAction = ActionForState<MaterialState>
 
 interface TimelineOrTimeInMinutesAndSecondsProps extends PerformerDisabledParameter {
-    patternDuration: Translation<Ms>,
+    patternDuration: Duration,
     timePosition: Point<Ms>,
 }
 

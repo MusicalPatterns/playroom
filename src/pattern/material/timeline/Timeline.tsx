@@ -1,6 +1,6 @@
 // tslint:disable variable-name file-name-casing no-default-export no-import-side-effect no-null-keyword
 
-import { Ms, notAs } from '@musical-patterns/utilities'
+import { as } from '@musical-patterns/utilities'
 import * as React from 'react'
 import { connect } from 'react-redux'
 import { ImmutableState, StateKey } from '../../../types'
@@ -40,11 +40,11 @@ const Timeline: React.ComponentType<TimelineOrTimeInMinutesAndSecondsProps> =
                 {...{
                     disabled: performerDisabled,
                     id: 'timeline',
-                    max: notAs.Translation<Ms>(patternDurationForDisplay) || 0,
+                    max: as.number(patternDurationForDisplay) || 0,
                     min: 0,
                     onChange: handleTimelineChangeEvent,
                     type: 'range',
-                    value: notAs.Point<Ms>(timePositionForDisplay) || 0,
+                    value: as.number(timePositionForDisplay) || 0,
                 }}
             />
         )

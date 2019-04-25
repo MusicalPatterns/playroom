@@ -2,14 +2,13 @@
 
 import { Preset } from '@musical-patterns/spec'
 import {
-    ARBITRARILY_LARGE_NUMBER,
+    ARBITRARILY_LARGE_NUMBER, as,
     camelCaseToUpperCase,
     deepEqual,
     entries,
     isUndefined,
     map,
     negative,
-    notAs,
     Ordinal,
     translateFromZeroIndexedToOneIndexed,
 } from '@musical-patterns/utilities'
@@ -71,7 +70,7 @@ const PresetSelect: React.ComponentType<PresetSelectProps> =
                     selectValue = presetKey
                 }
                 const displayName: string = formattedName || camelCaseToUpperCase(presetKey)
-                const key: number = notAs.Ordinal<Array<[ string, Preset ]>>(
+                const key: number = as.number(
                     translateFromZeroIndexedToOneIndexed(index),
                 )
 

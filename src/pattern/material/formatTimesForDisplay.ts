@@ -1,17 +1,17 @@
-import { BEGINNING, Ms, NO_DURATION, Point, round, Translation } from '@musical-patterns/utilities'
+import { BEGINNING, Duration, Ms, NO_DURATION, Point, round } from '@musical-patterns/utilities'
 
 const formatTimesForDisplay: (parameters: {
-    patternDuration: Translation<Ms>,
+    patternDuration: Duration,
     timePosition: Point<Ms>,
 }) => {
-    patternDurationForDisplay: Translation<Ms>,
+    patternDurationForDisplay: Duration,
     timePositionForDisplay: Point<Ms>,
 } =
     ({ patternDuration, timePosition }: {
-        patternDuration: Translation<Ms>,
+        patternDuration: Duration,
         timePosition: Point<Ms>,
     }): {
-        patternDurationForDisplay: Translation<Ms>,
+        patternDurationForDisplay: Duration,
         timePositionForDisplay: Point<Ms>,
     } => ({
         patternDurationForDisplay: round(patternDuration) || NO_DURATION,

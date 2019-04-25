@@ -1,4 +1,4 @@
-import { indexOfFinalElement, notAs } from '@musical-patterns/utilities'
+import { as, indexOfFinalElement } from '@musical-patterns/utilities'
 import { SecretTestSelector } from '../../../../../src/indexForTest'
 import {
     ARRAYED_SPEC_KEY,
@@ -54,7 +54,7 @@ const theSubmittedValueForTheArrayedSpecControlAsAWholeIsInItsInitialStateJustWi
                 JSON.stringify(
                     SPEC_CONTROLS_PATTERN_ARRAYED_SPEC_INITIAL_VALUE.slice(
                         0,
-                        notAs.Ordinal(indexOfFinalElement(SPEC_CONTROLS_PATTERN_ARRAYED_SPEC_INITIAL_VALUE)),
+                        as.number(indexOfFinalElement(SPEC_CONTROLS_PATTERN_ARRAYED_SPEC_INITIAL_VALUE)),
                     ),
                 ),
                 `the submitted value for the arrayed spec control as a whole was not in its initial state just with its final element gone`,

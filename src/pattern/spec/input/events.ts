@@ -1,5 +1,5 @@
 import { ArrayedDomSpecValue, computeArrayedDomSpecValue, DomSpecs, DomSpecValue } from '@musical-patterns/spec'
-import { arraySet, HtmlValueOrChecked, isUndefined, notAs, Ordinal } from '@musical-patterns/utilities'
+import { arraySet, as, HtmlValueOrChecked, isUndefined,  Ordinal } from '@musical-patterns/utilities'
 import { Dispatch } from 'redux'
 import { batchActions } from 'redux-batched-actions'
 import { extractValueOrCheckedFromEvent } from '../../../extractValueOrCheckedFromEvent'
@@ -16,7 +16,7 @@ const mergeEventValueIntoArrayedValue: (parameters: {
     ({ displayedSpecs, specKey, fieldIndex, eventValue }: MergeEventValueIntoValueParameters): ArrayedDomSpecValue => {
         const arrayedDisplayedValue: ArrayedDomSpecValue = computeArrayedDomSpecValue(displayedSpecs, specKey)
 
-        while (arrayedDisplayedValue.length < notAs.Ordinal(fieldIndex)) {
+        while (arrayedDisplayedValue.length < as.number(fieldIndex)) {
             arrayedDisplayedValue.push('')
         }
         arraySet(arrayedDisplayedValue, fieldIndex, eventValue)

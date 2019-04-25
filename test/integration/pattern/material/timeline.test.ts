@@ -1,4 +1,4 @@
-import { difference, Ms, ONE_HALF, Point, sleep, sum, Translation, use } from '@musical-patterns/utilities'
+import { difference, Duration, Ms, ONE_HALF, Point, sleep, sum, use } from '@musical-patterns/utilities'
 import {
     A_BIT_LONGER,
     clickTimeControl,
@@ -13,7 +13,7 @@ import {
 
 const playJustLongEnoughToBeAlmostAboutToRepeat: () => Promise<void> =
     async (): Promise<void> => {
-        const totalTime: Translation<Ms> = await patternDuration()
+        const totalTime: Duration = await patternDuration()
         await sleep(difference(totalTime, A_BIT_LONGER))
     }
 
@@ -24,7 +24,7 @@ const playJustLongEnoughMoreToRepeat: () => Promise<void> =
 
 const playLongEnoughToHaveReachedTheEnd: () => Promise<void> =
     async (): Promise<void> => {
-        const totalTime: Translation<Ms> = await patternDuration()
+        const totalTime: Duration = await patternDuration()
         await sleep(sum(totalTime, A_BIT_LONGER))
     }
 
