@@ -52,7 +52,7 @@ const PresetSelect: React.ComponentType<PresetSelectProps> =
 
         let selectValue: string = ''
         const options: Array<React.ReactElement | null> = map(
-            entries<string, Preset>(presets)
+            entries(presets)
                 .sort(([ _, preset ]: [ string, Preset ], [ __, nextPreset ]: [ string, Preset ]): number => {
                     const order: number = isUndefined(preset.order) ? ARBITRARILY_LARGE_NUMBER : preset.order
                     const nextOrder: number = isUndefined(nextPreset.order) ?
