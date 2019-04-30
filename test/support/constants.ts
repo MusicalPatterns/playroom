@@ -10,7 +10,7 @@ import {
     StandardSpec,
     StringedConstraint,
 } from '@musical-patterns/spec'
-import { as, Duration, Ms, ObjectOf } from '@musical-patterns/utilities'
+import { Duration, musicalAs, ObjectOf } from '@musical-patterns/utilities'
 // @ts-ignore
 import { port } from '../../bin/port'
 
@@ -104,10 +104,10 @@ const POST_PATTERN_OPTIONED_SPEC_TWO_MODIFIED_VALUE: string = postPatternOptione
 
 const LONG_DURATION_PATTERN_ID: string = playroomTestLongDuration!.id
 
-const LONG_ENOUGH_FOR_TIME_TO_PASS: Duration = as.Delta<Ms>(100)
-const LONG_ENOUGH_FOR_TIME_TO_HAVE_BEEN_RESET: Duration = as.Delta<Ms>(200)
-const A_BIT_LONGER: Duration = as.Delta<Ms>(1000)
-const EVEN_A_BIT_LONGER: Duration = as.Delta<Ms>(2000)
+const LONG_ENOUGH_FOR_TIME_TO_PASS: Duration = musicalAs.Duration(100)
+const LONG_ENOUGH_FOR_TIME_TO_HAVE_BEEN_RESET: Duration = musicalAs.Duration(200)
+const A_BIT_LONGER: Duration = musicalAs.Duration(1000)
+const EVEN_A_BIT_LONGER: Duration = musicalAs.Duration(2000)
 
 const TIME_CONTROLS_PATTERN_ID: Id = playroomTestTimeControls!.id
 

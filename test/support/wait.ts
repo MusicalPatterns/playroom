@@ -1,8 +1,8 @@
-import { as, Ms, sleep } from '@musical-patterns/utilities'
+import { musicalAs, sleep } from '@musical-patterns/utilities'
 
 const waitLongEnoughForAnimationToComplete: () => Promise<void> =
     async (): Promise<void> => {
-        await sleep(as.Delta<Ms>(300))
+        await sleep(musicalAs.Duration(300))
     }
 
 export {
