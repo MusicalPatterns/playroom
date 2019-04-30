@@ -1,4 +1,4 @@
-import { setTimePosition } from '@musical-patterns/material'
+import { setTime } from '@musical-patterns/material'
 import { computePatternName, computePost } from '@musical-patterns/metadata'
 import { Pattern } from '@musical-patterns/pattern'
 import { BEGINNING, doAsync } from '@musical-patterns/utilities'
@@ -57,7 +57,7 @@ const changePattern: (parameters: {
         dispatch(batchedAction)
 
         doAsync(async () => {
-            await setTimePosition(BEGINNING)
+            await setTime(BEGINNING)
         })
 
         openRightColumn({ dispatch, rightColumnOpen })

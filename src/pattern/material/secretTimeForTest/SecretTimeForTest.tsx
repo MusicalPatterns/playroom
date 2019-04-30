@@ -18,24 +18,24 @@ const mapStateToProps: (state: ImmutableState) => SecretTimeForTestProps =
             debugMode: state.get(StateKey.PAGE)
                 .get(PageStateKey.DEBUG_MODE),
             patternDuration: materialState.get(MaterialStateKey.PATTERN_DURATION),
-            timePosition: materialState.get(MaterialStateKey.TIME_POSITION),
+            time: materialState.get(MaterialStateKey.TIME),
         }
     }
 
 const SecretTimeForTest: React.ComponentType<SecretTimeForTestProps> =
-    ({ debugMode, patternDuration, timePosition }: SecretTimeForTestProps): React.ReactElement | null => {
+    ({ debugMode, patternDuration, time }: SecretTimeForTestProps): React.ReactElement | null => {
         if (!debugMode) {
             return null
         }
 
-        const { timePositionForDisplay, patternDurationForDisplay } = formatTimesForDisplay({
+        const { timeForDisplay, patternDurationForDisplay } = formatTimesForDisplay({
             patternDuration,
-            timePosition,
+            time,
         })
 
         return (
             <div>
-                <div {...{ id: SecretTestSelector.TIME_POSITION }}>{timePositionForDisplay}</div>
+                <div {...{ id: SecretTestSelector.TIME }}>{timeForDisplay}</div>
                 <div {...{ id: SecretTestSelector.PATTERN_DURATION }}>{patternDurationForDisplay}</div>
             </div>
         )

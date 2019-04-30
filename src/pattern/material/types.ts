@@ -3,7 +3,7 @@ import { ActionForState, Duration, Maybe, Ms, Point, Translation, TypedMap } fro
 import { KeyboardEventHandler } from '../../types'
 
 enum MaterialStateKey {
-    TIME_POSITION = 'TIME_POSITION',
+    TIME = 'TIME',
     PATTERN_DURATION = 'PATTERN_DURATION',
     PAUSED = 'PAUSED',
     TOGGLE_IMMERSIVE_AUDIO_HANDLERS = 'TOGGLE_IMMERSIVE_AUDIO_HANDLERS',
@@ -18,7 +18,7 @@ enum MaterialStateKey {
 }
 
 interface MaterialState {
-    [ MaterialStateKey.TIME_POSITION ]: Point<Ms>,
+    [ MaterialStateKey.TIME ]: Point<Ms>,
     [ MaterialStateKey.PATTERN_DURATION ]: Duration,
     [ MaterialStateKey.PAUSED ]: boolean,
     [ MaterialStateKey.TOGGLE_IMMERSIVE_AUDIO_HANDLERS ]: Maybe<ToggleImmersiveAudioHandlers>,
@@ -37,7 +37,7 @@ type MaterialAction = ActionForState<MaterialState>
 
 interface TimelineOrTimeInMinutesAndSecondsProps extends PerformerDisabledParameter {
     patternDuration: Duration,
-    timePosition: Point<Ms>,
+    time: Point<Ms>,
 }
 
 interface PerformerDisabledParameter {

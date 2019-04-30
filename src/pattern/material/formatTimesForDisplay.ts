@@ -2,20 +2,20 @@ import { BEGINNING, Duration, Ms, NO_DURATION, Point, round } from '@musical-pat
 
 const formatTimesForDisplay: (parameters: {
     patternDuration: Duration,
-    timePosition: Point<Ms>,
+    time: Point<Ms>,
 }) => {
     patternDurationForDisplay: Duration,
-    timePositionForDisplay: Point<Ms>,
+    timeForDisplay: Point<Ms>,
 } =
-    ({ patternDuration, timePosition }: {
+    ({ patternDuration, time }: {
         patternDuration: Duration,
-        timePosition: Point<Ms>,
+        time: Point<Ms>,
     }): {
         patternDurationForDisplay: Duration,
-        timePositionForDisplay: Point<Ms>,
+        timeForDisplay: Point<Ms>,
     } => ({
         patternDurationForDisplay: round(patternDuration) || NO_DURATION,
-        timePositionForDisplay: round(timePosition) || BEGINNING,
+        timeForDisplay: round(time) || BEGINNING,
     })
 
 export {

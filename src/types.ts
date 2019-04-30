@@ -7,7 +7,7 @@ import { ImmutablePatternState, PatternAction } from './pattern'
 
 enum SecretTestSelector {
     SUBMITTED_SPEC = 'secret-submitted-spec',
-    TIME_POSITION = 'secret-time-position',
+    TIME = 'secret-time',
     PATTERN_DURATION = 'secret-pattern-duration',
 }
 

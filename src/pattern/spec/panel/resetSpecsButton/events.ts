@@ -1,4 +1,4 @@
-import { setTimePosition } from '@musical-patterns/material'
+import { setTime } from '@musical-patterns/material'
 import { Specs } from '@musical-patterns/spec'
 import { BEGINNING, doAsync } from '@musical-patterns/utilities'
 import { Dispatch } from 'redux'
@@ -16,7 +16,7 @@ const handleSpecsReset:
 
         doAsync(async () => {
             if (restartOnModify) {
-                await setTimePosition(BEGINNING)
+                await setTime(BEGINNING)
             }
         })
     }

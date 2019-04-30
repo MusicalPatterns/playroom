@@ -40,7 +40,7 @@ const hasBeenReset: (options?: { toBefore?: Point<Ms> }) => Promise<void> =
 
 const currentTime: () => Promise<Point<Ms>> =
     async (): Promise<Point<Ms>> =>
-        as.Point<Ms>(parseInteger(await elementInnerText(`#${SecretTestSelector.TIME_POSITION}`)))
+        as.Point<Ms>(parseInteger(await elementInnerText(`#${SecretTestSelector.TIME}`)))
 
 const patternDuration: () => Promise<Duration> =
     async (): Promise<Duration> =>

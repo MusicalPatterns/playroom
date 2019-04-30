@@ -1,4 +1,4 @@
-import { setTimePosition } from '@musical-patterns/material'
+import { setTime } from '@musical-patterns/material'
 import {
     ComputeValidations,
     Configurations,
@@ -61,7 +61,7 @@ const computeAttemptSubmitActions: (parameters: {
 
         doAsync(async () => {
             if (restartOnModify) {
-                await setTimePosition(BEGINNING)
+                await setTime(BEGINNING)
             }
         })
 

@@ -6,8 +6,8 @@ import { MaterialStateKey } from '../types'
 const computeSetOnPerformerUpdate: (parameters: DispatchParameter) => () => Promise<void> =
     ({ dispatch }: DispatchParameter): () => Promise<void> =>
         async (): Promise<void> => {
-            const onPerformerUpdate: OnUpdate = (timePosition: Point<Ms>): void => {
-                dispatch({ type: MaterialStateKey.TIME_POSITION, data: timePosition })
+            const onPerformerUpdate: OnUpdate = (time: Point<Ms>): void => {
+                dispatch({ type: MaterialStateKey.TIME, data: time })
             }
             dispatch({ type: MaterialStateKey.ON_PERFORMER_UPDATE, data: onPerformerUpdate })
             await setupPerformer({ onUpdate: onPerformerUpdate })

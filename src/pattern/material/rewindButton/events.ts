@@ -1,9 +1,9 @@
-import { setTimePosition } from '@musical-patterns/material'
+import { setTime } from '@musical-patterns/material'
 import { BEGINNING } from '@musical-patterns/utilities'
 
 const handleRewindClickEvent: () => Promise<void> =
     async (): Promise<void> =>
-        setTimePosition(BEGINNING)
+        setTime(BEGINNING)
 
 export {
     handleRewindClickEvent,

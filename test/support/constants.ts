@@ -34,8 +34,8 @@ const VALID_TEST_MODIFICATION: string = '2'
 const OUT_OF_RANGE_INVALID_TEST_MODIFICATION: string = '3'
 const BAD_FORMAT_INVALID_TEST_MODIFICATION: string = 'e'
 
-const RANGED_SPEC_ONE_KEY: string = StandardSpec.BASIS_DURATION
-const RANGED_SPEC_TWO_KEY: string = StandardSpec.BASIS_FREQUENCY
+const RANGED_SPEC_ONE_KEY: string = StandardSpec.MS_PHYSICALIZATION
+const RANGED_SPEC_TWO_KEY: string = StandardSpec.HZ_PHYSICALIZATION
 const OPTIONED_SPEC_ONE_KEY: string = 'optionedSpecOne'
 const OPTIONED_SPEC_TWO_KEY: string = 'optionedSpecTwo'
 const STRINGED_SPEC_KEY: string = 'stringedSpec'

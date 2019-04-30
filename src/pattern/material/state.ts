@@ -3,7 +3,7 @@ import { ImmutableMaterialState, MaterialState, MaterialStateKey } from './types
 
 const initialMaterialState: ImmutableMaterialState = typedMap<MaterialState>({
     [ MaterialStateKey.PAUSED ]: true,
-    [ MaterialStateKey.TIME_POSITION ]: BEGINNING,
+    [ MaterialStateKey.TIME ]: BEGINNING,
     [ MaterialStateKey.PATTERN_DURATION ]: NO_DURATION,
     [ MaterialStateKey.TOGGLE_IMMERSIVE_AUDIO_HANDLERS ]: undefined,
     [ MaterialStateKey.IMMERSIVE_AUDIO_READY ]: false,

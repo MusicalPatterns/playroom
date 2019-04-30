@@ -1,22 +1,22 @@
-import { setTimePosition } from '@musical-patterns/material'
+import { setTime } from '@musical-patterns/material'
 import { as, HtmlValueOrChecked, Ms, Point, round } from '@musical-patterns/utilities'
 import * as React from 'react'
 import { extractValueOrCheckedFromEvent } from '../../../extractValueOrCheckedFromEvent'
 import { AsyncEventHandler } from '../../../types'
 
-const timePositionIsNumber: (timePosition: HtmlValueOrChecked) => timePosition is number =
-    (timePosition: HtmlValueOrChecked): timePosition is number =>
-        typeof timePosition === 'number'
+const timeIsNumber: (time: HtmlValueOrChecked) => time is number =
+    (time: HtmlValueOrChecked): time is number =>
+        typeof time === 'number'
 
 const handleTimelineChangeEvent: AsyncEventHandler =
     async (event: React.SyntheticEvent): Promise<void> => {
-        const timePosition: HtmlValueOrChecked = extractValueOrCheckedFromEvent(event)
-        if (!timePositionIsNumber(timePosition)) {
+        const time: HtmlValueOrChecked = extractValueOrCheckedFromEvent(event)
+        if (!timeIsNumber(time)) {
             throw new Error('time position was not a number')
         }
-        const roundedTimePosition: number = round(timePosition)
-        const typedTimePosition: Point<Ms> = as.Point<Ms>(roundedTimePosition)
-        await setTimePosition(typedTimePosition)
+        const roundedTime: number = round(time)
+        const typedTime: Point<Ms> = as.Point<Ms>(roundedTime)
+        await setTime(typedTime)
     }
 
 export {

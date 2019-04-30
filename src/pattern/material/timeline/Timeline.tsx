@@ -18,7 +18,7 @@ const mapStateToProps: (state: ImmutableState) => TimelineOrTimeInMinutesAndSeco
         return {
             patternDuration: materialState.get(MaterialStateKey.PATTERN_DURATION),
             performerDisabled: materialState.get(MaterialStateKey.PERFORMER_DISABLED),
-            timePosition: materialState.get(MaterialStateKey.TIME_POSITION),
+            time: materialState.get(MaterialStateKey.TIME),
         }
     }
 
@@ -27,12 +27,12 @@ const Timeline: React.ComponentType<TimelineOrTimeInMinutesAndSecondsProps> =
         {
             performerDisabled,
             patternDuration,
-            timePosition,
+            time,
         }: TimelineOrTimeInMinutesAndSecondsProps,
     ): React.ReactElement | null => {
-        const { timePositionForDisplay, patternDurationForDisplay } = formatTimesForDisplay({
+        const { timeForDisplay, patternDurationForDisplay } = formatTimesForDisplay({
             patternDuration,
-            timePosition,
+            time,
         })
 
         return (
@@ -44,7 +44,7 @@ const Timeline: React.ComponentType<TimelineOrTimeInMinutesAndSecondsProps> =
                     min: 0,
                     onChange: handleTimelineChangeEvent,
                     type: 'range',
-                    value: as.number(timePositionForDisplay) || 0,
+                    value: as.number(timeForDisplay) || 0,
                 }}
             />
         )

@@ -25,7 +25,7 @@ const mapStateToProps: (state: ImmutableState) => TimelineOrTimeInMinutesAndSeco
         return {
             patternDuration: materialState.get(MaterialStateKey.PATTERN_DURATION),
             performerDisabled: materialState.get(MaterialStateKey.PERFORMER_DISABLED),
-            timePosition: materialState.get(MaterialStateKey.TIME_POSITION),
+            time: materialState.get(MaterialStateKey.TIME),
         }
     }
 
@@ -34,16 +34,16 @@ const TimeInMinutesAndSeconds: React.ComponentType<TimelineOrTimeInMinutesAndSec
         {
             performerDisabled,
             patternDuration,
-            timePosition,
+            time,
         }: TimelineOrTimeInMinutesAndSecondsProps,
     ): React.ReactElement | null => {
-        const { timePositionForDisplay } = formatTimesForDisplay({
+        const { timeForDisplay } = formatTimesForDisplay({
             patternDuration,
-            timePosition,
+            time,
         })
 
         const totalSeconds: number =
-            round(quotient(as.number(timePositionForDisplay), as.number(MILLISECONDS_PER_SECOND)))
+            round(quotient(as.number(timeForDisplay), as.number(MILLISECONDS_PER_SECOND)))
         const timeMinutesPart: string = floor(quotient(totalSeconds, as.number(SECONDS_PER_MINUTE)))
             .toString()
         let timeSecondsPart: string = modulus(totalSeconds, as.number(SECONDS_PER_MINUTE))
