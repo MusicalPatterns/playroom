@@ -1,5 +1,5 @@
 import { ArrayedConstraint, ArrayedDomSpecValue, Configurations } from '@musical-patterns/spec'
-import { as, Cardinal, HtmlValueOrChecked, isUndefined, length, Maybe } from '@musical-patterns/utilities'
+import { as, Cardinal, computeLength, HtmlValueOrChecked, isUndefined, Maybe } from '@musical-patterns/utilities'
 import { FieldButtonAttributes } from '../types'
 import { ComputeAddFieldButtonAttributesParameters } from './types'
 
@@ -24,7 +24,7 @@ const computeAddFieldButtonAttributes: (parameters: {
         const arrayedConstraint: Maybe<ArrayedConstraint> = configurations[ specKey ].arrayedConstraint
         const maxLength: Maybe<Cardinal<HtmlValueOrChecked[]>> =
             computeMaxLength(arrayedConstraint)
-        const isAtMaxLength: boolean = !!maxLength && length(displayedValue) >= maxLength
+        const isAtMaxLength: boolean = !isUndefined(maxLength) && computeLength(displayedValue) >= maxLength
         const disabled: boolean = isAtMaxLength
         const title: string = disabled ? `This arrayed spec control has a maximum length of ${maxLength}.` : ''
 

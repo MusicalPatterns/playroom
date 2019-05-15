@@ -2,7 +2,8 @@
 
 import {
     as,
-    floor,
+    computeLength,
+    integerDivide,
     MILLISECONDS_PER_SECOND,
     modulus,
     quotient,
@@ -44,11 +45,11 @@ const TimeInMinutesAndSeconds: React.ComponentType<TimelineOrTimeInMinutesAndSec
 
         const totalSeconds: number =
             round(quotient(as.number(timeForDisplay), as.number(MILLISECONDS_PER_SECOND)))
-        const timeMinutesPart: string = floor(quotient(totalSeconds, as.number(SECONDS_PER_MINUTE)))
+        const timeMinutesPart: string = integerDivide(totalSeconds, as.number(SECONDS_PER_MINUTE))
             .toString()
         let timeSecondsPart: string = modulus(totalSeconds, as.number(SECONDS_PER_MINUTE))
             .toString()
-        if (timeSecondsPart.length === 1) {
+        if (computeLength(timeSecondsPart) === as.Cardinal<string>(1)) {
             timeSecondsPart = `0${timeSecondsPart}`
         }
 

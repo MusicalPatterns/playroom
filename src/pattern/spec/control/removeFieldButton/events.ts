@@ -58,7 +58,7 @@ const handleFieldRemove: (parameters: {
         const updatedArrayedDisplayedValue: ArrayedDomSpecValue = slice(
             arrayedDisplayedValue,
             INITIAL,
-            indexOfFinalElement<SingularDomSpecValue, ArrayedDomSpecValue>(arrayedDisplayedValue),
+            indexOfFinalElement(arrayedDisplayedValue),
         )
 
         const removedFieldHasNoInvalidMessages: boolean =
