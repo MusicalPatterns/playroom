@@ -81,12 +81,12 @@ const invalidMessagesForAllControlsInvolvedInCustomInvalidity: () => Promise<voi
     async (): Promise<void> => {
         expect(await elementInnerText(`#${RANGED_SPEC_ONE_KEY} .invalid-message`))
             .toBe(
-                'duration must be less than pitch, obvs',
+                'value must be less than pitch, obvs',
                 'ranged spec one did not have the custom invalid message',
             )
         expect(await elementInnerText(`#${RANGED_SPEC_TWO_KEY} .invalid-message`))
             .toBe(
-                'pitch must be more than duration, obvs',
+                'pitch must be more than value, obvs',
                 'ranged spec two did not have the custom invalid message',
             )
     }
