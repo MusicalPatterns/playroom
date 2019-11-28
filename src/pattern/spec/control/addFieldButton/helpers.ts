@@ -26,7 +26,7 @@ const computeAddFieldButtonAttributes: (parameters: {
             computeMaxLength(arrayedConstraint)
         const isAtMaxLength: boolean = !isUndefined(maxLength) && computeLength(displayedValue) >= maxLength
         const disabled: boolean = isAtMaxLength
-        const title: string = disabled ? `This arrayed spec control has a maximum length of ${maxLength}.` : ''
+        const title: string = disabled ? `This arrayed spec control has a maximum length of ${String(maxLength)}.` : ''
 
         return { disabled, title }
     }

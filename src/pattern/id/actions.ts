@@ -61,6 +61,8 @@ const changePattern: (parameters: {
         })
 
         openRightColumn({ dispatch, rightColumnOpen })
+
+        return
     }
 
 export {

@@ -11,7 +11,7 @@ const isPaused: () => Promise<void> =
         expect(shouldBeSameTime)
             .toBe(
                 initialTime,
-                `was not paused: second time taken was ${shouldBeSameTime} while initial time was ${initialTime}`,
+                `was not paused: second time taken was ${String(shouldBeSameTime)} while initial time was ${String(initialTime)}`,
             )
     }
 
@@ -23,7 +23,7 @@ const isPlaying: () => Promise<void> =
         expect(shouldBeLaterTime)
             .toBeGreaterThanTyped(
                 initialTime,
-                `was not playing: second time was ${shouldBeLaterTime} while initial time was ${initialTime}`,
+                `was not playing: second time was ${String(shouldBeLaterTime)} while initial time was ${String(initialTime)}`,
             )
     }
 
@@ -34,7 +34,7 @@ const hasBeenReset: (options?: { toBefore?: Point<Ms> }) => Promise<void> =
         expect(timeAfterResetting)
             .toBeLessThanTyped(
                 toBefore,
-                `time was not reset: time after resetting was ${timeAfterResetting} while it was expected to be before ${toBefore}`,
+                `time was not reset: time after resetting was ${String(timeAfterResetting)} while it was expected to be before ${String(toBefore)}`,
             )
     }
 
@@ -56,7 +56,7 @@ const isAfter: (previousTime: Point<Ms>) => Promise<void> =
         const newTime: Point<Ms> = await currentTime()
 
         expect(newTime)
-            .toBeGreaterThanTyped(previousTime, `time ${newTime} was not after ${previousTime}`)
+            .toBeGreaterThanTyped(previousTime, `time ${String(newTime)} was not after ${String(previousTime)}`)
     }
 
 export {

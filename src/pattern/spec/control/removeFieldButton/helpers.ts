@@ -33,7 +33,9 @@ const computeRemoveFieldButtonAttributes: (parameters: {
         const minLength: Maybe<Cardinal<HtmlValueOrChecked[]>> = computeMinLength(arrayedConstraint)
         const isAtMinLength: boolean = !isUndefined(minLength) && computeLength(displayedValue) <= minLength
         const disabled: boolean = isEmpty(displayedValue) || isAtMinLength
-        const title: string = isAtMinLength ? `This arrayed spec control has a minimum length of ${minLength}.` : ''
+        const title: string = isAtMinLength ?
+            `This arrayed spec control has a minimum length of ${String(minLength)}.` :
+            ''
 
         return { disabled, title }
     }

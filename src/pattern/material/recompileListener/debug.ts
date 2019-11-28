@@ -11,6 +11,8 @@ const logDebugInfo: (compiledPattern: CompiledPattern) => Promise<void> =
         )
         logMessageToConsole('total compiled duration: ', totalDuration)
         logMessageToConsole('segno time: ', segnoTime)
+
+        return
     }
 
 export {

@@ -44,7 +44,6 @@ const computeHandleFieldChangeEvent: (parameters: { dispatch: Dispatch<Action> }
                 submittedSpecs,
             }: HandleFieldChangeEventParameters,
         ): Promise<void> => {
-
             const eventValue: HtmlValueOrChecked = extractValueOrCheckedFromEvent(event)
 
             let updatedValue: DomSpecValue = eventValue
@@ -68,6 +67,8 @@ const computeHandleFieldChangeEvent: (parameters: { dispatch: Dispatch<Action> }
             })
 
             dispatch(batchActions(actions))
+
+            return
         }
 
 export {

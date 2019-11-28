@@ -29,7 +29,7 @@ const SpecControls: React.ComponentType<SpecControlsProps> =
             keys(displayedSpecs)
                 .filter((specKey: string) =>
                     Object.values(StandardSpec)
-                        .includes(specKey),
+                        .includes(specKey as StandardSpec),
                 )
                 .sort(computeSortSpecs(configurations)),
             (specKey: string, index: Ordinal<string[]>): React.ReactElement | null =>
@@ -39,7 +39,7 @@ const SpecControls: React.ComponentType<SpecControlsProps> =
             keys(displayedSpecs)
                 .filter((specKey: string) =>
                     !Object.values(StandardSpec)
-                        .includes(specKey),
+                        .includes(specKey as StandardSpec),
                 )
                 .sort(computeSortSpecs(configurations)),
             (specKey: string, index: Ordinal<string[]>): React.ReactElement | null =>

@@ -4,7 +4,7 @@ import { ComputeFieldLabelParameters, FieldParentProps, FieldValidityClassName }
 
 const computeFieldId: (parameters: { fieldIndex?: Ordinal, specKey: string }) => string =
     ({ specKey, fieldIndex }: FieldParentProps): string =>
-        isUndefined(fieldIndex) ? specKey : `${specKey}-${fieldIndex}`
+        isUndefined(fieldIndex) ? specKey : `${specKey}-${String(fieldIndex)}`
 
 const computeFieldLabel: (parameters: {
     fieldIndex?: Ordinal,
@@ -12,7 +12,7 @@ const computeFieldLabel: (parameters: {
     specKey: string,
 }) => string =
     ({ fieldIndex, formattedName, specKey }: ComputeFieldLabelParameters): string =>
-        isUndefined(fieldIndex) ? formattedName || camelCaseToUpperCase(specKey) : `${fieldIndex}`
+        isUndefined(fieldIndex) ? formattedName || camelCaseToUpperCase(specKey) : `${String(fieldIndex)}`
 
 const computeFieldValidityClassName: (singularValidation: SingularValidation) => FieldValidityClassName =
     (singularValidation: SingularValidation): FieldValidityClassName =>

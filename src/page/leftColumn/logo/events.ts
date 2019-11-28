@@ -24,6 +24,8 @@ const handleLogoClick: (parameters: {
         dispatch(batchedAction)
 
         closeRightColumn({ dispatch, rightColumnOpen })
+
+        return
     }
 
 export {
