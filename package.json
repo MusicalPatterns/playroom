@@ -1,6 +1,6 @@
 {
   "name": "@musical-patterns/playroom",
-  "version": "1.0.409",
+  "version": "1.0.410",
   "main": "dist/index.js",
   "typings": "dist/index.d.ts",
   "repository": {
@@ -20,7 +20,7 @@
     "@fortawesome/fontawesome-svg-core": "^1.2.25",
     "@fortawesome/free-solid-svg-icons": "^5.11.2",
     "@fortawesome/react-fontawesome": "^0.1.7",
-    "@musical-patterns/cli": "^1.0.564",
+    "@musical-patterns/cli": "^1.0.567",
     "@musical-patterns/id": "^1.0.8",
     "@musical-patterns/material": "^1.0.106",
     "@musical-patterns/metadata": "^1.0.10",
