@@ -10,7 +10,7 @@ import {
     StandardSpec,
     StringedConstraint,
 } from '@musical-patterns/spec'
-import { Duration, musicalAs, ObjectOf } from '@musical-patterns/utilities'
+import { Duration, Maybe, musicalAs, ObjectOf } from '@musical-patterns/utilities'
 // @ts-ignore
 import { port } from '../../bin/port'
 
@@ -58,13 +58,13 @@ const SPEC_CONTROLS_PATTERN_OPTIONED_SPEC_ONE_INITIAL_VALUE: string =
 const specControlsPatternOptionedSpecOneConstraint: OptionedConstraint =
     specControlsPatternConfigurations[ OPTIONED_SPEC_ONE_KEY ].constraint as OptionedConstraint
 const SPEC_CONTROLS_PATTERN_OPTIONED_SPEC_ONE_MODIFIED_VALUE: string =
-    specControlsPatternOptionedSpecOneConstraint[ 0 ].value
+    specControlsPatternOptionedSpecOneConstraint[ 0 ].value || ''
 const SPEC_CONTROLS_PATTERN_OPTIONED_SPEC_TWO_INITIAL_VALUE: string =
     playroomTestSpecControls!.spec.initialSpecs[ OPTIONED_SPEC_TWO_KEY ] as string
 const specControlsPatternOptionedSpecTwoConstraint: OptionedConstraint =
     specControlsPatternConfigurations[ OPTIONED_SPEC_TWO_KEY ].constraint as OptionedConstraint
 const SPEC_CONTROLS_PATTERN_OPTIONED_SPEC_TWO_MODIFIED_VALUE: string =
-    specControlsPatternOptionedSpecTwoConstraint[ 1 ].value
+    specControlsPatternOptionedSpecTwoConstraint[ 1 ].value || ''
 const SPEC_CONTROLS_PATTERN_STRINGED_SPEC_INITIAL_VALUE: string =
     playroomTestSpecControls!.spec.initialSpecs[ STRINGED_SPEC_KEY ] as string
 const specControlsPatternStringedSpecConstraint: StringedConstraint =
@@ -95,12 +95,12 @@ const POST_PATTERN_OPTIONED_SPEC_ONE_INITIAL_VALUE: string =
 const postPatternConfigurations: Configurations = playroomTestPost!.spec.configurations
 const postPatternOptionedSpecOneConstraint: OptionedConstraint =
     postPatternConfigurations[ OPTIONED_SPEC_ONE_KEY ].constraint as OptionedConstraint
-const POST_PATTERN_OPTIONED_SPEC_ONE_MODIFIED_VALUE: string = postPatternOptionedSpecOneConstraint[ 1 ].value
+const POST_PATTERN_OPTIONED_SPEC_ONE_MODIFIED_VALUE: string = postPatternOptionedSpecOneConstraint[ 1 ].value || ''
 const POST_PATTERN_OPTIONED_SPEC_TWO_INITIAL_VALUE: string =
     playroomTestPost!.spec.initialSpecs[ OPTIONED_SPEC_TWO_KEY ] as string
 const postPatternOptionedSpecTwoConstraint: OptionedConstraint =
     postPatternConfigurations[ OPTIONED_SPEC_TWO_KEY ].constraint as OptionedConstraint
-const POST_PATTERN_OPTIONED_SPEC_TWO_MODIFIED_VALUE: string = postPatternOptionedSpecTwoConstraint[ 0 ].value
+const POST_PATTERN_OPTIONED_SPEC_TWO_MODIFIED_VALUE: string = postPatternOptionedSpecTwoConstraint[ 0 ].value || ''
 
 const LONG_DURATION_PATTERN_ID: string = playroomTestLongDuration!.id
 
