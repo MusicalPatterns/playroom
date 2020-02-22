@@ -18,14 +18,14 @@ const toggledInputIsModified: () => Promise<void> =
             .toBe(`${SPEC_CONTROLS_PATTERN_TOGGLED_SPEC_MODIFIED_VALUE}`, 'toggled input was not modified')
     }
 
-describe('toggled input', () => {
-    describe('submitting', () => {
-        beforeEach(async (done: DoneFn) => {
+describe('toggled input', (): void => {
+    describe('submitting', (): void => {
+        beforeEach(async (done: DoneFn): Promise<void> => {
             await refreshForSpecControlsTest()
             done()
         })
 
-        it('immediately submits when you modify', async (done: DoneFn) => {
+        it('immediately submits when you modify', async (done: DoneFn): Promise<void> => {
             await modifyToggledInput()
             await toggledInputIsModified()
 

@@ -14,7 +14,7 @@ const handleSpecsReset:
         const batchedAction: BatchAction = batchActions(actions)
         dispatch(batchedAction)
 
-        doAsync(async () => {
+        doAsync(async (): Promise<void> => {
             if (restartOnModify) {
                 await setTime(BEGINNING)
             }

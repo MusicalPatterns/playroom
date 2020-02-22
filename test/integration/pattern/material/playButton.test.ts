@@ -9,8 +9,8 @@ import {
     selectTimeControlsPattern,
 } from '../../../support'
 
-describe('time controls', () => {
-    it('starts off paused', async (done: DoneFn) => {
+describe('time controls', (): void => {
+    it('starts off paused', async (done: DoneFn): Promise<void> => {
         await quickRefresh()
         await selectTimeControlsPattern()
         await isPaused()
@@ -18,8 +18,8 @@ describe('time controls', () => {
         done()
     })
 
-    describe('after pressing play', () => {
-        beforeEach(async (done: DoneFn) => {
+    describe('after pressing play', (): void => {
+        beforeEach(async (done: DoneFn): Promise<void> => {
             await quickRefresh()
             await selectLongDurationPattern()
             await clickTimeControl('play')
@@ -28,13 +28,13 @@ describe('time controls', () => {
             done()
         })
 
-        afterEach(async (done: DoneFn) => {
+        afterEach(async (done: DoneFn): Promise<void> => {
             await clickTimeControl('pause')
 
             done()
         })
 
-        it('begins incrementing the time', async (done: DoneFn) => {
+        it('begins incrementing the time', async (done: DoneFn): Promise<void> => {
             await isPlaying()
 
             done()

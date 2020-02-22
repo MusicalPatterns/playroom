@@ -52,7 +52,7 @@ const KeyboardControls: React.ComponentType<KeyboardControlsProps> =
             await handleKeyDownEvent({ event, paused })
         }
         window.addEventListener('keydown', newOnKeyDown)
-        doAsync(() => {
+        doAsync((): void => {
             updateOnKeyDown(newOnKeyDown, paused)
         })
 

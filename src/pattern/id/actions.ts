@@ -56,7 +56,7 @@ const changePattern: (parameters: {
         const batchedAction: BatchAction = batchActions(actions)
         dispatch(batchedAction)
 
-        doAsync(async () => {
+        doAsync(async (): Promise<void> => {
             await setTime(BEGINNING)
         })
 

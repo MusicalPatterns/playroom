@@ -10,8 +10,8 @@ import {
     selectLongDurationPattern,
 } from '../../../support'
 
-describe('rewind button', () => {
-    beforeEach(async (done: DoneFn) => {
+describe('rewind button', (): void => {
+    beforeEach(async (done: DoneFn): Promise<void> => {
         await quickRefresh()
         await selectLongDurationPattern()
         await clickTimeControl('play')
@@ -20,13 +20,13 @@ describe('rewind button', () => {
         done()
     })
 
-    afterEach(async (done: DoneFn) => {
+    afterEach(async (done: DoneFn): Promise<void> => {
         await clickTimeControl('pause')
 
         done()
     })
 
-    it('clicking rewind resets time to the beginning, but keeps playing', async (done: DoneFn) => {
+    it('clicking rewind resets time to the beginning, but keeps playing', async (done: DoneFn): Promise<void> => {
         await sleep(EVEN_A_BIT_LONGER)
         const timeOfPressingRewind: Point<Ms> = await currentTime()
         await clickTimeControl('rewind')

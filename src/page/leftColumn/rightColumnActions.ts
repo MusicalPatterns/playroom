@@ -9,7 +9,7 @@ const allowNewComponentsToMountUnderPreviousRightColumnStateSoThatTheyAnimate: (
 const openRightColumn: (parameters: { dispatch: Dispatch<Action>, rightColumnOpen: boolean }) => void =
     ({ rightColumnOpen, dispatch }: ToggleRightColumnOpenParameters): void => {
         if (!rightColumnOpen) {
-            allowNewComponentsToMountUnderPreviousRightColumnStateSoThatTheyAnimate(() => {
+            allowNewComponentsToMountUnderPreviousRightColumnStateSoThatTheyAnimate((): void => {
                 dispatch({ type: PageStateKey.RIGHT_COLUMN_OPEN, data: true })
             })
         }
@@ -18,7 +18,7 @@ const openRightColumn: (parameters: { dispatch: Dispatch<Action>, rightColumnOpe
 const closeRightColumn: (parameters: { dispatch: Dispatch<Action>, rightColumnOpen: boolean }) => void =
     ({ rightColumnOpen, dispatch }: ToggleRightColumnOpenParameters): void => {
         if (rightColumnOpen) {
-            allowNewComponentsToMountUnderPreviousRightColumnStateSoThatTheyAnimate(() => {
+            allowNewComponentsToMountUnderPreviousRightColumnStateSoThatTheyAnimate((): void => {
                 dispatch({ type: PageStateKey.RIGHT_COLUMN_OPEN, data: false })
             })
         }

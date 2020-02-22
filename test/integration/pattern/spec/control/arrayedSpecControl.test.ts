@@ -66,14 +66,14 @@ const justThatOneFieldIsMarkedIsInvalidAndTheOtherFieldsOfThatArrayedSpecControl
             .toBeTruthy('one of the other fields of the arrayed spec control was not valid, #4')
     }
 
-describe('arrayed spec control', () => {
-    describe('submitting', () => {
-        beforeEach(async (done: DoneFn) => {
+describe('arrayed spec control', (): void => {
+    describe('submitting', (): void => {
+        beforeEach(async (done: DoneFn): Promise<void> => {
             await refreshForSpecControlsTest()
             done()
         })
 
-        it('only submits the field you modify, not the others', async (done: DoneFn) => {
+        it('only submits the field you modify, not the others', async (done: DoneFn): Promise<void> => {
             await modifyFieldOfArrayedSpecControl()
             await onlyThatOneFieldOfTheArrayedSpecControlIsModified()
 
@@ -81,15 +81,15 @@ describe('arrayed spec control', () => {
         })
     })
 
-    describe('invalid state', () => {
-        beforeEach(async (done: DoneFn) => {
+    describe('invalid state', (): void => {
+        beforeEach(async (done: DoneFn): Promise<void> => {
             await refreshForSpecControlsTest()
             await invalidateJustOneFieldOfAnArrayedSpecControl()
 
             done()
         })
 
-        it('only marks the specific field which is invalid', async (done: DoneFn) => {
+        it('only marks the specific field which is invalid', async (done: DoneFn): Promise<void> => {
             await justThatOneFieldIsMarkedIsInvalidAndTheOtherFieldsOfThatArrayedSpecControlAreStillMarkedAsValid()
 
             done()

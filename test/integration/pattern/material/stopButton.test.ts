@@ -7,8 +7,8 @@ import {
     selectLongDurationPattern,
 } from '../../../support'
 
-describe('stop button', () => {
-    beforeEach(async (done: DoneFn) => {
+describe('stop button', (): void => {
+    beforeEach(async (done: DoneFn): Promise<void> => {
         await quickRefresh()
         await selectLongDurationPattern()
         await clickTimeControl('play')
@@ -17,7 +17,7 @@ describe('stop button', () => {
         done()
     })
 
-    it('clicking stop stops playing, plus resets the time to the beginning', async (done: DoneFn) => {
+    it('clicking stop stops playing, plus resets the time to the beginning', async (done: DoneFn): Promise<void> => {
         await clickTimeControl('stop')
         await hasBeenReset()
         await isPaused()

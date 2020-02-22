@@ -1,7 +1,7 @@
 import { elementExists, refreshPage } from '../../../support'
 
-describe('time controls', () => {
-    it('are disabled if you have not yet selected a pattern', async (done: DoneFn) => {
+describe('time controls', (): void => {
+    it('are disabled if you have not yet selected a pattern', async (done: DoneFn): Promise<void> => {
         await refreshPage()
         expect(await elementExists(`#rewind:disabled`))
             .toBeTruthy('rewind was not disabled')

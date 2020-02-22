@@ -27,7 +27,7 @@ const SpecControls: React.ComponentType<SpecControlsProps> =
     ({ displayedSpecs, configurations }: SpecControlsProps): React.ReactElement | null => {
         const standardSpecControls: Array<React.ReactElement | null> = map(
             keys(displayedSpecs)
-                .filter((specKey: string) =>
+                .filter((specKey: string): boolean =>
                     Object.values(StandardSpec)
                         .includes(specKey as StandardSpec),
                 )
@@ -37,7 +37,7 @@ const SpecControls: React.ComponentType<SpecControlsProps> =
         )
         const patternParticularControls: Array<React.ReactElement | null> = map(
             keys(displayedSpecs)
-                .filter((specKey: string) =>
+                .filter((specKey: string): boolean =>
                     !Object.values(StandardSpec)
                         .includes(specKey as StandardSpec),
                 )

@@ -1,4 +1,4 @@
-import { as, Duration, Ms, musicalAs, parseInteger, Point, sleep } from '@musical-patterns/utilities'
+import { as, AsyncThunk, Duration, Ms, musicalAs, parseInteger, Point, sleep } from '@musical-patterns/utilities'
 import { SecretTestSelector } from '../../src/indexForTest'
 import { LONG_ENOUGH_FOR_TIME_TO_HAVE_BEEN_RESET, LONG_ENOUGH_FOR_TIME_TO_PASS } from './constants'
 import { clickElement, elementInnerText } from './generic'
@@ -38,11 +38,11 @@ const hasBeenReset: (options?: { toBefore?: Point<Ms> }) => Promise<void> =
             )
     }
 
-const currentTime: () => Promise<Point<Ms>> =
+const currentTime: AsyncThunk<Point<Ms>> =
     async (): Promise<Point<Ms>> =>
         as.Point<Ms>(parseInteger(await elementInnerText(`#${SecretTestSelector.TIME}`)))
 
-const patternDuration: () => Promise<Duration> =
+const patternDuration: AsyncThunk<Duration> =
     async (): Promise<Duration> =>
         musicalAs.Duration(parseInteger(await elementInnerText(`#${SecretTestSelector.PATTERN_DURATION}`)))
 

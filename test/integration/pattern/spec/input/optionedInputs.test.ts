@@ -21,14 +21,14 @@ const optionedInputIsModified: () => Promise<void> =
             .toBe(SPEC_CONTROLS_PATTERN_OPTIONED_SPEC_TWO_MODIFIED_VALUE, 'optioned input was not modified')
     }
 
-describe('optioned input', () => {
-    describe('submitting', () => {
-        beforeEach(async (done: DoneFn) => {
+describe('optioned input', (): void => {
+    describe('submitting', (): void => {
+        beforeEach(async (done: DoneFn): Promise<void> => {
             await refreshForSpecControlsTest()
             done()
         })
 
-        it('immediately submits when you modify it', async (done: DoneFn) => {
+        it('immediately submits when you modify it', async (done: DoneFn): Promise<void> => {
             await modifyOptionedInput()
             await optionedInputIsModified()
 

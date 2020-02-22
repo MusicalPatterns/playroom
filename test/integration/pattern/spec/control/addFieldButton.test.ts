@@ -165,14 +165,14 @@ const addFieldButtonHasHoverTextExplainingArrayedConstraintMaxLengthHasBeenReach
             .toBe('This arrayed spec control has a maximum length of 7.')
     }
 
-describe('add field button', () => {
-    beforeEach(async (done: DoneFn) => {
+describe('add field button', (): void => {
+    beforeEach(async (done: DoneFn): Promise<void> => {
         await refreshForSpecControlsTest()
         done()
     })
 
-    describe('for arrayed spec controls with no initial element value', () => {
-        it('clicking the add field button displays a new blank field at the end of the arrayed spec control', async (done: DoneFn) => {
+    describe('for arrayed spec controls with no initial element value', (): void => {
+        it('clicking the add field button displays a new blank field at the end of the arrayed spec control', async (done: DoneFn): Promise<void> => {
             const originalFieldCount: number = await elementCount(`#${ARRAYED_SPEC_KEY} input[type=number]`)
 
             await clickAddFieldButton()
@@ -182,7 +182,7 @@ describe('add field button', () => {
             done()
         })
 
-        it('does not submit the new field until you add something valid to it', async (done: DoneFn) => {
+        it('does not submit the new field until you add something valid to it', async (done: DoneFn): Promise<void> => {
             await clickAddFieldButton()
             await newFieldExistsButHasNotBeenSubmitted()
 
@@ -192,28 +192,28 @@ describe('add field button', () => {
             done()
         })
 
-        describe('adding two fields at once', () => {
-            beforeEach(async (done: DoneFn) => {
+        describe('adding two fields at once', (): void => {
+            beforeEach(async (done: DoneFn): Promise<void> => {
                 await clickAddFieldButton()
                 await clickAddFieldButton()
 
                 done()
             })
 
-            it('lets you do it', async (done: DoneFn) => {
+            it('lets you do it', async (done: DoneFn): Promise<void> => {
                 await newFieldExistsButHasNotBeenSubmitted()
                 await andTheOtherNewFieldExistsButHasNotBeenSubmitted()
 
                 done()
             })
 
-            it('does not show invalid messages right away', async (done: DoneFn) => {
+            it('does not show invalid messages right away', async (done: DoneFn): Promise<void> => {
                 await noInvalidMessagesAreShown()
 
                 done()
             })
 
-            it('lets you modify the first new field before you modify the first', async (done: DoneFn) => {
+            it('lets you modify the first new field before you modify the first', async (done: DoneFn): Promise<void> => {
                 await modifyTheSecondOfTheTwoNewFields()
                 await theSecondOfTheTwoNewFieldsTheOneYouModifiedIsValidWhileTheFirstOfTheTwoNewFieldsIsBrieflyInvalid()
                 await newFieldExistsButHasNotBeenSubmitted()
@@ -225,7 +225,7 @@ describe('add field button', () => {
                 done()
             })
 
-            it('lets you modify the first new field before you modify the second', async (done: DoneFn) => {
+            it('lets you modify the first new field before you modify the second', async (done: DoneFn): Promise<void> => {
                 await modifyTheFirstOfTheTwoNewFields()
                 await theFirstOfTheTwoNewFieldsTheOneYouModifiedIsValidWhileTheSecondOfTheTwoNewFieldsIsBrieflyInvalid()
                 await newFieldExistsButHasNotBeenSubmitted()
@@ -238,7 +238,7 @@ describe('add field button', () => {
             })
         })
 
-        it('does not start out with an invalid message if had existed before with an invalid message then was removed', async (done: DoneFn) => {
+        it('does not start out with an invalid message if had existed before with an invalid message then was removed', async (done: DoneFn): Promise<void> => {
             await clickAddFieldButton()
             await invalidateNewField()
             await clickRemoveFieldButton()
@@ -249,8 +249,8 @@ describe('add field button', () => {
         })
     })
 
-    describe('for arrayed spec controls with an initial field value', () => {
-        it('clicking the add field button displays a new field at the end of the arrayed spec control with that initial value, even if it is zero', async (done: DoneFn) => {
+    describe('for arrayed spec controls with an initial field value', (): void => {
+        it('clicking the add field button displays a new field at the end of the arrayed spec control with that initial value, even if it is zero', async (done: DoneFn): Promise<void> => {
             const originalFieldCount: number = await elementCount(`#${ARRAYED_SPEC_WITH_INITIAL_FIELD_VALUE_KEY} input[type=range]`)
 
             await clickAddForTheArrayedSpecControlWithTheInitialFieldValue()
@@ -260,7 +260,7 @@ describe('add field button', () => {
             done()
         })
 
-        it('immediately submits the arrayed spec control with the new field with the initial value added to the end', async (done: DoneFn) => {
+        it('immediately submits the arrayed spec control with the new field with the initial value added to the end', async (done: DoneFn): Promise<void> => {
             await theSubmittedValueForTheArrayedSpecControlWithTheInitialFieldValueAsAWholeIsInItsInitialState()
 
             await clickAddForTheArrayedSpecControlWithTheInitialFieldValue()
@@ -270,7 +270,7 @@ describe('add field button', () => {
         })
     })
 
-    it('does not allow you to add elements past the maximum length of the arrayed constraint', async (done: DoneFn) => {
+    it('does not allow you to add elements past the maximum length of the arrayed constraint', async (done: DoneFn): Promise<void> => {
         await clickAddFieldButton()
         await clickAddFieldButton()
         await addFieldButtonIsDisabled()

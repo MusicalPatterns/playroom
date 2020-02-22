@@ -59,7 +59,7 @@ const computeAttemptSubmitActions: (parameters: {
             type: SpecStateKey.SUBMITTED_SPECS,
         })
 
-        doAsync(async () => {
+        doAsync(async (): Promise<void> => {
             if (restartOnModify) {
                 await setTime(BEGINNING)
             }

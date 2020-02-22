@@ -24,7 +24,9 @@ const setupPlayroom: (patterns: Partial<Patterns>, debugMode?: boolean) => Promi
         const root: HTMLDivElement = document.createElement('div')
         root.id = 'root'
 
-        store.subscribe(() => render(createElement(Provider, { store }, createElement(App)), root))
+        store.subscribe((): void => {
+            render(createElement(Provider, { store }, createElement(App)), root)
+        })
 
         render(createElement(Provider, { store }, createElement(App)), root)
 

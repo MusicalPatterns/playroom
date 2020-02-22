@@ -33,22 +33,22 @@ const playLongerToProveItIsStillStuckAtTheEndTime: () => Promise<void> =
         await sleep(LONG_ENOUGH_FOR_TIME_TO_PASS)
     }
 
-describe('timeline', () => {
-    describe('for some patterns, time repeats from the beginning upon reaching the end', () => {
-        beforeEach(async (done: DoneFn) => {
+describe('timeline', (): void => {
+    describe('for some patterns, time repeats from the beginning upon reaching the end', (): void => {
+        beforeEach(async (done: DoneFn): Promise<void> => {
             await quickRefresh()
             await selectTimeControlsPattern()
             await clickTimeControl('play')
             done()
         })
 
-        afterEach(async (done: DoneFn) => {
+        afterEach(async (done: DoneFn): Promise<void> => {
             await clickTimeControl('pause')
 
             done()
         })
 
-        it('works', async (done: DoneFn) => {
+        it('works', async (done: DoneFn): Promise<void> => {
             const initialTime: Point<Ms> = await currentTime()
 
             await playJustLongEnoughToBeAlmostAboutToRepeat()
@@ -77,21 +77,21 @@ describe('timeline', () => {
         })
     })
 
-    describe('for some patterns, time repeats from a point in the middle upon reaching the end', () => {
-        beforeEach(async (done: DoneFn) => {
+    describe('for some patterns, time repeats from a point in the middle upon reaching the end', (): void => {
+        beforeEach(async (done: DoneFn): Promise<void> => {
             await quickRefresh()
             await selectRepetendPattern()
             await clickTimeControl('play')
             done()
         })
 
-        afterEach(async (done: DoneFn) => {
+        afterEach(async (done: DoneFn): Promise<void> => {
             await clickTimeControl('pause')
 
             done()
         })
 
-        it('works', async (done: DoneFn) => {
+        it('works', async (done: DoneFn): Promise<void> => {
             const initialTime: Point<Ms> = await currentTime()
 
             await playJustLongEnoughToBeAlmostAboutToRepeat()
@@ -120,21 +120,21 @@ describe('timeline', () => {
         })
     })
 
-    describe('for some patterns, upon reaching the end, time stops, the pattern is finished', () => {
-        beforeEach(async (done: DoneFn) => {
+    describe('for some patterns, upon reaching the end, time stops, the pattern is finished', (): void => {
+        beforeEach(async (done: DoneFn): Promise<void> => {
             await quickRefresh()
             await selectFinitePattern()
             await clickTimeControl('play')
             done()
         })
 
-        afterEach(async (done: DoneFn) => {
+        afterEach(async (done: DoneFn): Promise<void> => {
             await clickTimeControl('pause')
 
             done()
         })
 
-        it('works', async (done: DoneFn) => {
+        it('works', async (done: DoneFn): Promise<void> => {
             const initialTime: Point<Ms> = await currentTime()
 
             await playLongEnoughToHaveReachedTheEnd()

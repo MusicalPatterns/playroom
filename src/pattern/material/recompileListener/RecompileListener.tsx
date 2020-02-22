@@ -45,7 +45,7 @@ const RecompileListener: React.ComponentType<RecompileListenerProps> =
             setPatternDuration,
         }: RecompileListenerProps,
     ): React.ReactElement | null => {
-        doAsync(async () => {
+        doAsync(async (): Promise<void> => {
             const pattern: Maybe<Pattern> = computeMaybePattern({ patterns, patternId })
             if (isUndefined(pattern)) {
                 return

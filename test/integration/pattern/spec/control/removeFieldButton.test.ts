@@ -102,13 +102,13 @@ const everyFieldHasACustomInvalidityMessage: () => Promise<void> =
             .toBe(expectedInvalidMessage, `field 3 did not have an custom invalidity message`)
     }
 
-describe('remove field button', () => {
-    beforeEach(async (done: DoneFn) => {
+describe('remove field button', (): void => {
+    beforeEach(async (done: DoneFn): Promise<void> => {
         await refreshForSpecControlsTest()
         done()
     })
 
-    it('clicking the remove field button removes the final field from the arrayed spec control', async (done: DoneFn) => {
+    it('clicking the remove field button removes the final field from the arrayed spec control', async (done: DoneFn): Promise<void> => {
         const originalFieldCount: number = await elementCount(`#${ARRAYED_SPEC_KEY} input[type=number]`)
 
         await clickRemoveFieldButton()
@@ -118,7 +118,7 @@ describe('remove field button', () => {
         done()
     })
 
-    it('removing the field immediately submits the modification to the arrayed spec control', async (done: DoneFn) => {
+    it('removing the field immediately submits the modification to the arrayed spec control', async (done: DoneFn): Promise<void> => {
         await theSubmittedValueForTheArrayedSpecControlAsAWholeIsInItsInitialState()
 
         await clickRemoveFieldButton()
@@ -127,7 +127,7 @@ describe('remove field button', () => {
         done()
     })
 
-    it('removing the field does not show invalid messages if the removed element was not yet defined', async (done: DoneFn) => {
+    it('removing the field does not show invalid messages if the removed element was not yet defined', async (done: DoneFn): Promise<void> => {
         await theSubmittedValueForTheArrayedSpecControlAsAWholeIsInItsInitialState()
 
         await clickAddFieldButton()
@@ -138,7 +138,7 @@ describe('remove field button', () => {
         done()
     })
 
-    it('runs validation when removing an element', async (done: DoneFn) => {
+    it('runs validation when removing an element', async (done: DoneFn): Promise<void> => {
         await selectValidationPattern()
         await clickRemoveFieldButton()
         await everyFieldHasACustomInvalidityMessage()
@@ -146,7 +146,7 @@ describe('remove field button', () => {
         done()
     })
 
-    it('does not allow you to remove elements past the minimum length of the arrayed constraint', async (done: DoneFn) => {
+    it('does not allow you to remove elements past the minimum length of the arrayed constraint', async (done: DoneFn): Promise<void> => {
         await clickRemoveFieldButton()
         await removeFieldButtonIsDisabled()
         await removeFieldButtonForHasHoverTextExplainingArrayedConstraintMinLengthHasBeenReached()
@@ -154,8 +154,8 @@ describe('remove field button', () => {
         done()
     })
 
-    describe('need to use the other arrayed spec control which has no minimum length constraint for this test', () => {
-        it('disables the remove field button when there are no fields remaining in the arrayed spec control', async (done: DoneFn) => {
+    describe('need to use the other arrayed spec control which has no minimum length constraint for this test', (): void => {
+        it('disables the remove field button when there are no fields remaining in the arrayed spec control', async (done: DoneFn): Promise<void> => {
             await removeAllTheFieldsForOtherArrayedSpecControl()
             await removeFieldButtonForOtherArrayedSpecControlIsDisabled()
 

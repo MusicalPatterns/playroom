@@ -1,7 +1,7 @@
 import { clickElement, leftColumnIs, refreshPage } from '../../../support'
 
-describe('hamburger', () => {
-    it('collapses and expands the left column', async (done: DoneFn) => {
+describe('hamburger', (): void => {
+    it('collapses and expands the left column', async (done: DoneFn): Promise<void> => {
         await refreshPage()
         await leftColumnIs('open')
 

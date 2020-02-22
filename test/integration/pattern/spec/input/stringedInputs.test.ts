@@ -142,14 +142,14 @@ const modifyStringedInputToBeTooLong: () => Promise<void> =
         await stringedInput.type(MODIFICATION_CAUSING_STRINGED_INPUT_TO_EXCEED_ITS_MAX_LENGTH)
     }
 
-describe('stringed input', () => {
-    describe('submitting', () => {
-        beforeEach(async (done: DoneFn) => {
+describe('stringed input', (): void => {
+    describe('submitting', (): void => {
+        beforeEach(async (done: DoneFn): Promise<void> => {
             await refreshForSpecControlsTest()
             done()
         })
 
-        it('immediately submits when you modify it', async (done: DoneFn) => {
+        it('immediately submits when you modify it', async (done: DoneFn): Promise<void> => {
             await modifyStringedInput()
             await stringedInputIsModified()
 
@@ -157,47 +157,47 @@ describe('stringed input', () => {
         })
     })
 
-    describe('invalid state', () => {
-        describe('too short', () => {
-            beforeEach(async (done: DoneFn) => {
+    describe('invalid state', (): void => {
+        describe('too short', (): void => {
+            beforeEach(async (done: DoneFn): Promise<void> => {
                 await refreshForSpecControlsTest()
                 await modifyStringedInputToBeTooShort()
 
                 done()
             })
 
-            it('marks the input as invalid', async (done: DoneFn) => {
+            it('marks the input as invalid', async (done: DoneFn): Promise<void> => {
                 await stringedInputIsMarkedAsInvalid()
 
                 done()
             })
 
-            it('it does not submit the invalid value which could crash things', async (done: DoneFn) => {
+            it('it does not submit the invalid value which could crash things', async (done: DoneFn): Promise<void> => {
                 await stringedInputWasNotSubmitted()
 
                 done()
             })
 
-            it('displays the too-short value in the input', async (done: DoneFn) => {
+            it('displays the too-short value in the input', async (done: DoneFn): Promise<void> => {
                 await stringedInputDisplayValueIsTheTooShortValue()
 
                 done()
             })
 
-            it('shows an invalid message', async (done: DoneFn) => {
+            it('shows an invalid message', async (done: DoneFn): Promise<void> => {
                 await stringedInputHasTooShortMessage()
 
                 done()
             })
 
-            it('resets the input to valid after typing something valid into it', async (done: DoneFn) => {
+            it('resets the input to valid after typing something valid into it', async (done: DoneFn): Promise<void> => {
                 await undoStringedInputTooShortModification()
                 await stringedContolInputIsMarkedAsValid()
 
                 done()
             })
 
-            it('preserves the invalid state, displayed value, and invalid message, and still withholds submitting, if you modify an input for another control', async (done: DoneFn) => {
+            it('preserves the invalid state, displayed value, and invalid message, and still withholds submitting, if you modify an input for another control', async (done: DoneFn): Promise<void> => {
                 await modifyInputForAnotherControlValidly()
                 await stringedInputIsMarkedAsInvalid()
                 await stringedInputDisplayValueIsTheTooShortValue()
@@ -208,46 +208,46 @@ describe('stringed input', () => {
             })
         })
 
-        describe('too long', () => {
-            beforeEach(async (done: DoneFn) => {
+        describe('too long', (): void => {
+            beforeEach(async (done: DoneFn): Promise<void> => {
                 await refreshForSpecControlsTest()
                 await modifyStringedInputToBeTooLong()
 
                 done()
             })
 
-            it('marks the input as invalid', async (done: DoneFn) => {
+            it('marks the input as invalid', async (done: DoneFn): Promise<void> => {
                 await stringedInputIsMarkedAsInvalid()
 
                 done()
             })
 
-            it('it does not submit the invalid value which could crash things', async (done: DoneFn) => {
+            it('it does not submit the invalid value which could crash things', async (done: DoneFn): Promise<void> => {
                 await stringedInputTooLongValueWasNotSubmittedAndItIsAtTheFinalValidValueBeforeItGotTooLong()
 
                 done()
             })
 
-            it('displays the too-long value in the input', async (done: DoneFn) => {
+            it('displays the too-long value in the input', async (done: DoneFn): Promise<void> => {
                 await stringedInputDisplayValueIsTheTooLongValue()
 
                 done()
             })
 
-            it('shows an invalid message', async (done: DoneFn) => {
+            it('shows an invalid message', async (done: DoneFn): Promise<void> => {
                 await stringedInputHasTooLongMessage()
 
                 done()
             })
 
-            it('resets the input to valid after typing something valid into it', async (done: DoneFn) => {
+            it('resets the input to valid after typing something valid into it', async (done: DoneFn): Promise<void> => {
                 await undoStringedInputTooLongModification()
                 await stringedContolInputIsMarkedAsValid()
 
                 done()
             })
 
-            it('preserves the invalid state, displayed value, and invalid message, and still withholds submitting, if you modify an input for another control', async (done: DoneFn) => {
+            it('preserves the invalid state, displayed value, and invalid message, and still withholds submitting, if you modify an input for another control', async (done: DoneFn): Promise<void> => {
                 await modifyInputForAnotherControlValidly()
                 await stringedInputIsMarkedAsInvalid()
                 await stringedInputDisplayValueIsTheTooLongValue()
