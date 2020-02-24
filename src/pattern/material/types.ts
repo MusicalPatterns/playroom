@@ -1,5 +1,5 @@
 import { OnUpdate, ToggleImmersiveAudioHandlers } from '@musical-patterns/material'
-import { ActionForState, Duration, Maybe, Ms, Point, Translation, TypedMap } from '@musical-patterns/utilities'
+import { ActionForState, Duration, Maybe, Ms, Point, TypedMap } from '@musical-patterns/utilities'
 import { KeyboardEventHandler } from '../../types'
 
 enum MaterialStateKey {

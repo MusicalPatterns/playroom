@@ -2,7 +2,8 @@
 
 import { Preset } from '@musical-patterns/spec'
 import {
-    ARBITRARILY_LARGE_NUMBER, as,
+    ARBITRARILY_LARGE_NUMBER,
+    as,
     camelCaseToUpperCase,
     deepEqual,
     entries,

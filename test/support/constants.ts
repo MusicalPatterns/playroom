@@ -10,7 +10,7 @@ import {
     StandardSpec,
     StringedConstraint,
 } from '@musical-patterns/spec'
-import { Duration, Maybe, musicalAs, ObjectOf } from '@musical-patterns/utilities'
+import { Duration, musicalAs, ObjectOf } from '@musical-patterns/utilities'
 // @ts-ignore
 import { port } from '../../bin/port'
 

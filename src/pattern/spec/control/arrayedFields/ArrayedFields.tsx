@@ -1,6 +1,6 @@
 // tslint:disable variable-name file-name-casing no-default-export no-import-side-effect no-null-keyword
 
-import { ArrayedDomSpecValue, computeArrayedDomSpecValue, SingularDomSpecValue } from '@musical-patterns/spec'
+import { ArrayedDomSpecValue, computeArrayedDomSpecValue } from '@musical-patterns/spec'
 import { as, indexOfFinalElement, INITIAL, NEXT, Ordinal, use } from '@musical-patterns/utilities'
 import * as React from 'react'
 import { connect } from 'react-redux'

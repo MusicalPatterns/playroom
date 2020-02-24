@@ -6,7 +6,6 @@ import {
     ComputeValidations,
     Configurations,
     DomSpecs,
-    SingularDomSpecValue,
     Specs,
     Validations,
 } from '@musical-patterns/spec'

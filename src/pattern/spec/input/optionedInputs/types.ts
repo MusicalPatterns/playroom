@@ -1,4 +1,4 @@
-import { HtmlValue, Maybe } from '@musical-patterns/utilities'
+import { HtmlValue } from '@musical-patterns/utilities'
 import { SharedInputProps } from '../types'
 
 interface OptionedInputProps extends SharedInputProps {
