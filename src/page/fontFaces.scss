@@ -75,10 +75,10 @@
 
 @font-face {
   font-family: 'Bravura Text';
-  src: url('../../assets/fonts/BravuraText.otf') format("opentype");
-  src:
-    url('../../assets/fonts/BravuraText.eot'),
-    url('../../assets/fonts/BravuraText.eot?#iefix') format('embedded-opentype'),
-    url('../../assets/fonts/BravuraText.woff2') format('woff2'),
-    url('../../assets/fonts/BravuraText.woff') format('woff');
+  src: url('../../assets/fonts/BravuraText_recentDanielPatch.woff2') format("woff2");
+  //src:
+    //url('../../assets/fonts/BravuraText.eot'),
+    //url('../../assets/fonts/BravuraText.eot?#iefix') format('embedded-opentype'),
+    //url('../../assets/fonts/BravuraText.woff2') format('woff2');
+  //  url('../../assets/fonts/BravuraText.woff') format('woff');
 }
