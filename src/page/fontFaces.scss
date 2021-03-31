@@ -75,10 +75,5 @@
 
 @font-face {
   font-family: 'Bravura Text';
-  src: url('../../assets/fonts/BravuraText.eot');
-  src:
-    url('../../assets/fonts/BravuraText.eot?#iefix') format('embedded-opentype'),
-    url('../../assets/fonts/BravuraText.woff2') format('woff2'),
-    url('../../assets/fonts/BravuraText.woff') format('woff'),
-    url('../../assets/fonts/BravuraText.otf') format("opentype");
+  src: url('../../assets/fonts/BravuraText.otf') format("opentype");
 }
