@@ -40,7 +40,6 @@ const Logo: React.ComponentType<LogoProps> =
                     <h1 {...{ onClick }}>Musical Patterns</h1>
                     <div><a {...{ href: 'https://douglasblumeyer.com', target: '__blank' }}>Douglas Blumeyer</a></div>
                 </div>
-                <div id='bravura-text-test'>---</div>
             </div>
         )
     }

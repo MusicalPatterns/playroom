@@ -18,7 +18,7 @@ module.exports = {
                 ],
             },
             {
-                test: /\.(otf|eot|woff|woff2|ttf)/,
+                test: /\.(eot|woff|woff2|ttf)/,
                 loader: 'url-loader',
             },
         ],
