@@ -1,4 +1,6 @@
-@import '../../../baseColors';
+@import "../../../baseColors";
+
+@use "sass:list" as *;
 
 $spec-control-track: nth($greys, 4);
 $spec-control-thumb: nth($greys, 2);

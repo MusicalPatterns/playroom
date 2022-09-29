@@ -6,7 +6,7 @@ const initialMaterialState: ImmutableMaterialState = typedMap<MaterialState>({
     [ MaterialStateKey.TIME ]: BEGINNING,
     [ MaterialStateKey.PATTERN_DURATION ]: NO_DURATION,
     [ MaterialStateKey.TOGGLE_IMMERSIVE_AUDIO_HANDLERS ]: undefined,
-    [ MaterialStateKey.IMMERSIVE_AUDIO_READY ]: false,
+    [ MaterialStateKey.IMMERSIVE_AUDIO_READY ]: true,
     [ MaterialStateKey.IMMERSIVE_AUDIO_UNAVAILABLE ]: false,
     [ MaterialStateKey.IMMERSIVE_AUDIO_ENABLED ]: false,
     [ MaterialStateKey.PERFORMER_DISABLED ]: true,

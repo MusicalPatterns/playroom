@@ -1,4 +1,6 @@
-@import '../../baseColors';
+@import "../../baseColors";
+
+@use "sass:list" as *;
 
 $time-controls-color: nth($greys, 6);
 $time-controls-background: nth($greys, 2);

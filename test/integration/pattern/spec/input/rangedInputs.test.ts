@@ -162,135 +162,100 @@ const undoRangedInputEitherModification: () => Promise<void> =
 
 describe('ranged input', (): void => {
     describe('submitting', (): void => {
-        beforeEach(async (done: DoneFn): Promise<void> => {
+        beforeEach(async (): Promise<void> => {
             await refreshForSpecControlsTest()
-            done()
         })
 
-        it('immediately submits when you modify it', async (done: DoneFn): Promise<void> => {
+        it('immediately submits when you modify it', async (): Promise<void> => {
             await modifyRangedInput()
             await rangedInputIsModified()
-
-            done()
         })
 
-        it('preserves earlier spec modifications when you modify another control', async (done: DoneFn): Promise<void> => {
+        it('preserves earlier spec modifications when you modify another control', async (): Promise<void> => {
             await modifyInputsForSomeOtherControls()
 
             await modifyRangedInput()
             await theInputsForThoseOtherControlsAreStillModified()
-
-            done()
         })
 
-        it('keeps the controls in the same order after modifying', async (done: DoneFn): Promise<void> => {
+        it('keeps the controls in the same order after modifying', async (): Promise<void> => {
             await controlsAreInOrder()
 
             await modifyRangedInput()
             await controlsAreInOrder()
-
-            done()
         })
     })
 
     describe('invalid state', (): void => {
         describe('bad format', (): void => {
-            beforeEach(async (done: DoneFn): Promise<void> => {
+            beforeEach(async (): Promise<void> => {
                 await refreshForSpecControlsTest()
                 await modifyRangedInputToBeBadlyFormatted()
-
-                done()
             })
 
-            it('marks the input as invalid', async (done: DoneFn): Promise<void> => {
+            it('marks the input as invalid', async (): Promise<void> => {
                 await rangedInputIsMarkedAsInvalid()
-
-                done()
             })
 
-            it('it does not submit the invalid value which could crash things', async (done: DoneFn): Promise<void> => {
+            it('it does not submit the invalid value which could crash things', async (): Promise<void> => {
                 await rangedInputWasNotSubmitted()
-
-                done()
             })
 
-            it('wipes out the displayed value', async (done: DoneFn): Promise<void> => {
+            it('wipes out the displayed value', async (): Promise<void> => {
                 await rangedInputDisplayValueIsWiped()
-
-                done()
             })
 
-            it('shows an invalid message', async (done: DoneFn): Promise<void> => {
+            it('shows an invalid message', async (): Promise<void> => {
                 await rangedInputHasBadFormatMessage()
-
-                done()
             })
 
-            it('resets the input to valid after typing something valid into it', async (done: DoneFn): Promise<void> => {
+            it('resets the input to valid after typing something valid into it', async (): Promise<void> => {
                 await undoRangedInputEitherModification()
                 await rangedInputIsMarkedAsValid()
-
-                done()
             })
 
-            it('preserves the invalid state, displayed value, and invalid message, and still withholds submitting, if you modify an input for another control', async (done: DoneFn): Promise<void> => {
+            it('preserves the invalid state, displayed value, and invalid message, and still withholds submitting, if you modify an input for another control', async (): Promise<void> => {
                 await modifyInputForAnotherControlValidly()
                 await rangedInputIsMarkedAsInvalid()
                 await rangedInputWasNotSubmitted()
                 await rangedInputDisplayValueIsWiped()
                 await rangedInputHasBadFormatMessage()
-
-                done()
             })
         })
 
         describe('out of range', (): void => {
-            beforeEach(async (done: DoneFn): Promise<void> => {
+            beforeEach(async (): Promise<void> => {
                 await refreshForSpecControlsTest()
                 await modifyRangedInputToBeOutOfRange()
-
-                done()
             })
 
-            it('marks the input as invalid', async (done: DoneFn): Promise<void> => {
+            it('marks the input as invalid', async (): Promise<void> => {
                 await rangedInputIsMarkedAsInvalid()
-
-                done()
             })
 
-            it('it does not submit the invalid value which could crash things', async (done: DoneFn): Promise<void> => {
+            it('it does not submit the invalid value which could crash things', async (): Promise<void> => {
                 await rangedInputWasNotSubmitted()
-
-                done()
             })
 
-            it('displays the out of range value in the input', async (done: DoneFn): Promise<void> => {
+            it('displays the out of range value in the input', async (): Promise<void> => {
                 await rangedInputDisplayValueIsTheOutOfRangeValue()
-
-                done()
             })
 
-            it('shows an invalid message', async (done: DoneFn): Promise<void> => {
+            it('shows an invalid message', async (): Promise<void> => {
                 await rangedInputHasOutOfRangeMessage()
-
-                done()
             })
 
-            it('resets the input to valid after typing something valid into it', async (done: DoneFn): Promise<void> => {
+            it('resets the input to valid after typing something valid into it', async (): Promise<void> => {
                 await undoRangedInputEitherModification()
                 await rangedInputIsMarkedAsValid()
-
-                done()
             })
 
-            it('preserves the invalid state, displayed value, and invalid message, and still withholds submitting, if you modify an input for another control', async (done: DoneFn): Promise<void> => {
+            it('preserves the invalid state, displayed value, and invalid message, and still withholds submitting, if you modify an input for another control', async (): Promise<void> => {
                 await modifyInputForAnotherControlValidly()
                 await rangedInputIsMarkedAsInvalid()
                 await rangedInputDisplayValueIsTheOutOfRangeValue()
                 await rangedInputWasNotSubmitted()
                 await rangedInputHasOutOfRangeMessage()
-
-                done()
             })
         })
     })

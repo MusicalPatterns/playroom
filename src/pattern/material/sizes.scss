@@ -1,4 +1,6 @@
-@import '../../baseSizes';
+@import "../../baseSizes";
+
+@use "sass:list" as *;
 
 $toggle-immersive-audio-button-width: 1px * nth($fibonacci-series, 9 + $fibonacci-series-size-translation);
 

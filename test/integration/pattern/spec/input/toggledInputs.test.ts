@@ -20,16 +20,13 @@ const toggledInputIsModified: () => Promise<void> =
 
 describe('toggled input', (): void => {
     describe('submitting', (): void => {
-        beforeEach(async (done: DoneFn): Promise<void> => {
+        beforeEach(async (): Promise<void> => {
             await refreshForSpecControlsTest()
-            done()
         })
 
-        it('immediately submits when you modify', async (done: DoneFn): Promise<void> => {
+        it('immediately submits when you modify', async (): Promise<void> => {
             await modifyToggledInput()
             await toggledInputIsModified()
-
-            done()
         })
     })
 })

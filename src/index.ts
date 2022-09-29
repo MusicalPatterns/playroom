@@ -1,7 +1,7 @@
 import { Pattern, Patterns } from '@musical-patterns/pattern'
 import { isSingleton } from '@musical-patterns/utilities'
 import { createElement } from 'react'
-import { render } from 'react-dom'
+import * as ReactDOMClient from 'react-dom/client'
 import { Provider } from 'react-redux'
 import { BatchAction, batchActions } from 'redux-batched-actions'
 import { App, PageStateKey } from './page'
@@ -21,14 +21,16 @@ const autoSelectOnlyPattern: (onlyPattern: Pattern, actions: Action[]) => Promis
 // tslint:disable-next-line bool-param-default
 const setupPlayroom: (patterns: Partial<Patterns>, debugMode?: boolean) => Promise<HTMLDivElement> =
     async (patterns: Partial<Patterns>, debugMode: boolean = false): Promise<HTMLDivElement> => {
-        const root: HTMLDivElement = document.createElement('div')
-        root.id = 'root'
+        const rootElement: HTMLDivElement = document.createElement('div')
+        rootElement.id = 'root'
+
+        const root = ReactDOMClient.createRoot(rootElement)
 
         store.subscribe((): void => {
-            render(createElement(Provider, { store }, createElement(App)), root)
+            root.render(createElement(Provider, { store } as any, createElement(App)))
         })
 
-        render(createElement(Provider, { store }, createElement(App)), root)
+        root.render(createElement(Provider, { store } as any, createElement(App)))
 
         const actions: Action[] = [
             { type: IdStateKey.PATTERNS, data: patterns },
@@ -45,7 +47,7 @@ const setupPlayroom: (patterns: Partial<Patterns>, debugMode?: boolean) => Promi
             store.dispatch(batchedAction)
         }
 
-        return root
+        return rootElement
     }
 
 export {

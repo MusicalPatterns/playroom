@@ -1,7 +1,7 @@
 import { clickElement, leftColumnIs, refreshPage } from '../../../support'
 
 describe('hamburger', (): void => {
-    it('collapses and expands the left column', async (done: DoneFn): Promise<void> => {
+    it('collapses and expands the left column', async (): Promise<void> => {
         await refreshPage()
         await leftColumnIs('open')
 
@@ -10,7 +10,5 @@ describe('hamburger', (): void => {
 
         await clickElement('#hamburger')
         await leftColumnIs('open')
-
-        done()
     })
 })

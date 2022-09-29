@@ -8,6 +8,8 @@
   ],
   "rules": {
     "at-rule-no-unknown": null,
-    "no-empty-source": null
+    "no-empty-source": null,
+    "scss/no-global-function-names": null,
+    "function-no-unknown": null
   }
 }

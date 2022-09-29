@@ -128,148 +128,117 @@ const specsModificationsPreserved: () => Promise<void> =
     }
 
 describe('pattern list', (): void => {
-    beforeEach(async (done: DoneFn): Promise<void> => {
+    beforeEach(async (): Promise<void> => {
         await refreshPage()
-        done()
     })
 
-    it('shows the no-pattern message before you select a pattern', async (done: DoneFn): Promise<void> => {
+    it('shows the no-pattern message before you select a pattern', async (): Promise<void> => {
         expect(await elementExists('#no-pattern-message'))
             .toBeTruthy('no pattern message was not shown before selecting a pattern')
-
-        done()
     })
 
-    it('does not show a header for a pattern before you select a pattern', async (done: DoneFn): Promise<void> => {
+    it('does not show a header for a pattern before you select a pattern', async (): Promise<void> => {
         expect(await elementInnerText('#second-row h1'))
             .toBe('')
-
-        done()
     })
 
     describe('after selecting a pattern', (): void => {
-        beforeEach(async (done: DoneFn): Promise<void> => {
+        beforeEach(async (): Promise<void> => {
             await simulateDesktopViewport()
             await selectSpecControlsPattern()
-            done()
         })
 
-        it('no longer shows the no-pattern message', async (done: DoneFn): Promise<void> => {
+        it('no longer shows the no-pattern message', async (): Promise<void> => {
             expect(await elementExists('#no-pattern-message'))
                 .toBeFalsy('no pattern message was still shown')
-
-            done()
         })
 
-        it('opens the right column', async (done: DoneFn): Promise<void> => {
+        it('opens the right column', async (): Promise<void> => {
             expect(await elementExists('#middle-plus-right-column.right-column-open'))
                 .toBeTruthy('the right column was not open')
-
-            done()
         })
 
-        it(`shows the pattern's name as the title`, async (done: DoneFn): Promise<void> => {
+        it(`shows the pattern's name as the title`, async (): Promise<void> => {
             const title: string = await elementInnerText('#second-row h1')
 
             expect(title)
                 .toBe('Playroom Test Spec Controls', `title was not the pattern's name`)
-
-            done()
         })
 
-        it('the selected pattern is highlighted', async (done: DoneFn): Promise<void> => {
+        it('the selected pattern is highlighted', async (): Promise<void> => {
             expect(await elementExists(`#${SPEC_CONTROLS_PATTERN_ID}.selected`))
                 .toBeTruthy('the selected pattern was not highlighted')
-
-            done()
         })
 
         describe('selecting another pattern', (): void => {
             describe('when it is a different pattern than the current selection', (): void => {
-                beforeEach(async (done: DoneFn): Promise<void> => {
+                beforeEach(async (): Promise<void> => {
                     await openSpecControlsIfNotOpen()
-                    done()
                 })
 
-                it(`sets the spec to the new pattern's initial`, async (done: DoneFn): Promise<void> => {
+                it(`sets the spec to the new pattern's initial`, async (): Promise<void> => {
                     await expectInitial()
 
                     await selectPostPattern()
                     await expectOtherInitial()
-
-                    done()
                 })
 
-                it('if there were any invalid controls, they no longer appear as invalid', async (done: DoneFn): Promise<void> => {
+                it('if there were any invalid controls, they no longer appear as invalid', async (): Promise<void> => {
                     await invalidateControl()
 
                     await selectPostPattern()
                     await controlIsValid()
-
-                    done()
                 })
             })
 
             describe('when it is the same pattern as the one already selected', (): void => {
-                it('does not reset the spec modifications you have made', async (done: DoneFn): Promise<void> => {
+                it('does not reset the spec modifications you have made', async (): Promise<void> => {
                     await modifySpecs()
 
                     await selectSpecControlsPattern()
                     await specsModificationsPreserved()
-
-                    done()
                 })
             })
         })
     })
 
     describe('when the viewport is smaller than 1000px wide', (): void => {
-        beforeEach(async (done: DoneFn): Promise<void> => {
+        beforeEach(async (): Promise<void> => {
             await simulateMobileViewport()
-
-            done()
         })
 
-        afterEach(async (done: DoneFn): Promise<void> => {
+        afterEach(async (): Promise<void> => {
             await simulateDesktopViewport()
-
-            done()
         })
 
-        it('collapses the left column when you select a pattern', async (done: DoneFn): Promise<void> => {
+        it('collapses the left column when you select a pattern', async (): Promise<void> => {
             await leftColumnIs('open')
 
             await selectSpecControlsPattern()
             await leftColumnIs('closed')
-
-            done()
         })
     })
 
     describe('when a pattern is playing', (): void => {
-        beforeEach(async (done: DoneFn): Promise<void> => {
+        beforeEach(async (): Promise<void> => {
             await quickRefresh()
             await selectTimeControlsPattern()
             await clickTimeControl('play')
-            done()
         })
 
-        afterEach(async (done: DoneFn): Promise<void> => {
+        afterEach(async (): Promise<void> => {
             if (await elementExists('#pause')) {
                 await clickTimeControl('pause')
             }
-            done()
         })
 
-        it('when you select a new pattern, it resets the time to the beginning but keeps playing', async (done: DoneFn): Promise<void> => {
+        it('when you select a new pattern, it resets the time to the beginning but keeps playing', async (): Promise<void> => {
             await sleep(A_BIT_LONGER)
             const timeOfSelectingNewPattern: Point<Ms> = await currentTime()
 
             await selectLongDurationPattern()
             await hasBeenReset({ toBefore: timeOfSelectingNewPattern })
             await isPlaying()
-
-            done()
         })
     })
 })

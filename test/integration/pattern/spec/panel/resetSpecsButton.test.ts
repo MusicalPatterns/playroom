@@ -163,74 +163,60 @@ const controlIsBackToValid: () => Promise<void> =
     }
 
 describe('reset specs button', (): void => {
-    beforeEach(async (done: DoneFn): Promise<void> => {
+    beforeEach(async (): Promise<void> => {
         await refreshForSpecControlsTest()
-        done()
     })
 
-    it('reset specs button is disabled initially', async (done: DoneFn): Promise<void> => {
+    it('reset specs button is disabled initially', async (): Promise<void> => {
         await resetSpecsButtonIsDisabled()
-
-        done()
     })
 
-    it('reset specs button is enabled when any control is modified', async (done: DoneFn): Promise<void> => {
+    it('reset specs button is enabled when any control is modified', async (): Promise<void> => {
         await modifyControl()
         await resetSpecsButtonIsEnabled()
-
-        done()
     })
 
-    it('reset specs button is disabled when the control is modified back to the defaults', async (done: DoneFn): Promise<void> => {
+    it('reset specs button is disabled when the control is modified back to the defaults', async (): Promise<void> => {
         await modifyControl()
         await resetSpecsButtonIsEnabled()
 
         await returnControlBackToItsDefault()
 
         await resetSpecsButtonIsDisabled()
-
-        done()
     })
 
-    it(`resets the specs to the pattern's defaults`, async (done: DoneFn): Promise<void> => {
+    it(`resets the specs to the pattern's defaults`, async (): Promise<void> => {
         await modifyAllTheThings()
         await expectAllTheThingsToBeModified()
 
         await clickResetSpecsButton()
         await expectAllTheThingsToBeBackToTheirInitialStates()
-
-        done()
     })
 
-    it('if there were any invalid controls, they no longer appear as invalid', async (done: DoneFn): Promise<void> => {
+    it('if there were any invalid controls, they no longer appear as invalid', async (): Promise<void> => {
         await modifyControlToBeInvalid()
 
         await modifyAnotherControlJustSoThatTheResetButtonIsEnabled()
 
         await clickResetSpecsButton()
         await controlIsBackToValid()
-
-        done()
     })
 
     describe('when a pattern is playing', (): void => {
-        beforeEach(async (done: DoneFn): Promise<void> => {
+        beforeEach(async (): Promise<void> => {
             await quickRefresh()
             await selectLongDurationPattern()
             await clickTimeControl('play')
             await sleep(LONG_ENOUGH_FOR_TIME_TO_PASS)
-
-            done()
         })
 
-        afterEach(async (done: DoneFn): Promise<void> => {
+        afterEach(async (): Promise<void> => {
             if (await elementExists('#pause')) {
                 await clickTimeControl('pause')
             }
-            done()
         })
 
-        it('keeps playing when you reset the spec but does not reset time to the beginning', async (done: DoneFn): Promise<void> => {
+        it('keeps playing when you reset the spec but does not reset time to the beginning', async (): Promise<void> => {
             await openSpecControlsIfNotOpen()
             await modifyControl()
             await resetSpecsButtonIsEnabled()
@@ -238,29 +224,24 @@ describe('reset specs button', (): void => {
             await clickResetSpecsButton()
             await isAfter(timeOfResettingSpec)
             await isPlaying()
-
-            done()
         })
     })
 
     describe('when a pattern is playing that restarts upon spec modification', (): void => {
-        beforeEach(async (done: DoneFn): Promise<void> => {
+        beforeEach(async (): Promise<void> => {
             await quickRefresh()
             await selectRestartPattern()
             await clickTimeControl('play')
             await sleep(LONG_ENOUGH_FOR_TIME_TO_PASS)
-
-            done()
         })
 
-        afterEach(async (done: DoneFn): Promise<void> => {
+        afterEach(async (): Promise<void> => {
             if (await elementExists('#pause')) {
                 await clickTimeControl('pause')
             }
-            done()
         })
 
-        it('keeps playing when you reset the spec and resets time to the beginning', async (done: DoneFn): Promise<void> => {
+        it('keeps playing when you reset the spec and resets time to the beginning', async (): Promise<void> => {
             await openSpecControlsIfNotOpen()
             await modifyControl()
             await resetSpecsButtonIsEnabled()
@@ -269,8 +250,6 @@ describe('reset specs button', (): void => {
             await clickResetSpecsButton()
             await hasBeenReset({ toBefore: timeOfResettingSpecs })
             await isPlaying()
-
-            done()
         })
     })
 })

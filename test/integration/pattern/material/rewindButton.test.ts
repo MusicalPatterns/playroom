@@ -11,28 +11,22 @@ import {
 } from '../../../support'
 
 describe('rewind button', (): void => {
-    beforeEach(async (done: DoneFn): Promise<void> => {
+    beforeEach(async (): Promise<void> => {
         await quickRefresh()
         await selectLongDurationPattern()
         await clickTimeControl('play')
         await sleep(LONG_ENOUGH_FOR_TIME_TO_PASS)
-
-        done()
     })
 
-    afterEach(async (done: DoneFn): Promise<void> => {
+    afterEach(async (): Promise<void> => {
         await clickTimeControl('pause')
-
-        done()
     })
 
-    it('clicking rewind resets time to the beginning, but keeps playing', async (done: DoneFn): Promise<void> => {
+    it('clicking rewind resets time to the beginning, but keeps playing', async (): Promise<void> => {
         await sleep(EVEN_A_BIT_LONGER)
         const timeOfPressingRewind: Point<Ms> = await currentTime()
         await clickTimeControl('rewind')
         await hasBeenReset({ toBefore: timeOfPressingRewind })
         await isPlaying()
-
-        done()
     })
 })

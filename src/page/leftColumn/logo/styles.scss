@@ -1,8 +1,8 @@
-@import '../../../colors';
-@import '../../../fonts';
-@import '../../../sizes';
-@import '../proportions';
-@import '../sizes';
+@import "../../../colors";
+@import "../../../fonts";
+@import "../../../sizes";
+@import "../proportions";
+@import "../sizes";
 
 #logo {
   flex: $logo-proportion;
@@ -22,7 +22,7 @@
     align-items: center;
 
     div {
-      @extend .leipziger-antiqua-regular;
+      @extend %leipziger-antiqua-regular;
 
       font-size: $detail-text-size;
     }

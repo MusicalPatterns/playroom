@@ -128,146 +128,116 @@ const modificationToTheOtherControlThatWasInvalidHasBeenSubmitted: () => Promise
     }
 
 describe('spec controls', (): void => {
-    it('shows sub-headings when both standard and pattern-particular controls are present', async (done: DoneFn): Promise<void> => {
+    it('shows sub-headings when both standard and pattern-particular controls are present', async (): Promise<void> => {
         await selectSpecControlsPattern()
         await openSpecControlsIfNotOpen()
 
         expect(await elementExists(SECTION_HEADING))
             .toBeTruthy('section headings were not shown')
-
-        done()
     })
 
-    it('shows no sub-heading when only standard controls are present', async (done: DoneFn): Promise<void> => {
+    it('shows no sub-heading when only standard controls are present', async (): Promise<void> => {
         await selectOnlyStandardSpecsPattern()
         await openSpecControlsIfNotOpen()
 
         expect(await elementInnerText(SECTION_HEADING))
             .toBe('')
-
-        done()
     })
 
-    it('shows no sub-heading when only pattern-particular controls are present', async (done: DoneFn): Promise<void> => {
+    it('shows no sub-heading when only pattern-particular controls are present', async (): Promise<void> => {
         await selectOnlyPatternParticularSpecsPattern()
         await openSpecControlsIfNotOpen()
 
         expect(await elementInnerText(SECTION_HEADING))
             .toBe('')
-
-        done()
     })
 
     describe('breaking custom validity across controls', (): void => {
         let finalStillValidValue: string
-        beforeEach(async (done: DoneFn): Promise<void> => {
+        beforeEach(async (): Promise<void> => {
             await quickRefresh()
             await selectValidationPattern()
             await openSpecControlsIfNotOpen()
             finalStillValidValue = await enterCustomInvalidityStateAndStoreFinalStillValidValue()
-
-            done()
         })
 
-        it('marks all involved controls as invalid', async (done: DoneFn): Promise<void> => {
+        it('marks all involved controls as invalid', async (): Promise<void> => {
             await rangedInputIsMarkedAsInvalid()
             await otherInputIsAlsoMarkedAsInvalid()
-
-            done()
         })
 
-        it('it does not submit the invalid value which could crash things', async (done: DoneFn): Promise<void> => {
+        it('it does not submit the invalid value which could crash things', async (): Promise<void> => {
             await theSubmittedValueIsTheFinalStillValidValue(finalStillValidValue)
-
-            done()
         })
 
-        it('shows invalid messages for all involved controls', async (done: DoneFn): Promise<void> => {
+        it('shows invalid messages for all involved controls', async (): Promise<void> => {
             await invalidMessagesForAllControlsInvolvedInCustomInvalidity()
-
-            done()
         })
 
-        it('preserves the invalid states if you modify another control', async (done: DoneFn): Promise<void> => {
+        it('preserves the invalid states if you modify another control', async (): Promise<void> => {
             await modifyAControlNotInvolvedInTheCustomValidityCheck()
             await rangedInputIsMarkedAsInvalid()
             await otherInputIsAlsoMarkedAsInvalid()
-
-            done()
         })
 
-        it('resets all involved controls to valid state after typing a fix', async (done: DoneFn): Promise<void> => {
+        it('resets all involved controls to valid state after typing a fix', async (): Promise<void> => {
             await fixCustomValidity()
             await rangedInputIsMarkedAsValid()
             await otherInputIsAlsoMarkedAsValid()
-
-            done()
         })
 
-        it('if you have modified the other spec while both were invalid, it submits both it and the one you changed', async (done: DoneFn): Promise<void> => {
+        it('if you have modified the other spec while both were invalid, it submits both it and the one you changed', async (): Promise<void> => {
             await modifyTheOtherInvalidControl()
             await fixCustomValidity()
             await modificationToTheOtherControlThatWasInvalidHasBeenSubmitted()
-
-            done()
         })
     })
 
     describe('when a pattern is playing', (): void => {
-        beforeEach(async (done: DoneFn): Promise<void> => {
+        beforeEach(async (): Promise<void> => {
             await quickRefresh()
             await selectLongDurationPattern()
             await clickTimeControl('play')
             await sleep(LONG_ENOUGH_FOR_TIME_TO_PASS)
-
-            done()
         })
 
-        afterEach(async (done: DoneFn): Promise<void> => {
+        afterEach(async (): Promise<void> => {
             if (await elementExists('#pause')) {
                 await clickTimeControl('pause')
             }
-            done()
         })
 
-        it('keeps playing when you modify the spec but does not reset time to the beginning', async (done: DoneFn): Promise<void> => {
+        it('keeps playing when you modify the spec but does not reset time to the beginning', async (): Promise<void> => {
             const timeOfModifyingSpecs: Point<Ms> = await currentTime()
 
             await openSpecControlsIfNotOpen()
             await modifySpecs()
             await isAfter(timeOfModifyingSpecs)
             await isPlaying()
-
-            done()
         })
     })
 
     describe('when a pattern is playing that restarts upon spec modification', (): void => {
-        beforeEach(async (done: DoneFn): Promise<void> => {
+        beforeEach(async (): Promise<void> => {
             await quickRefresh()
             await selectRestartPattern()
             await clickTimeControl('play')
             await sleep(LONG_ENOUGH_FOR_TIME_TO_PASS)
-
-            done()
         })
 
-        afterEach(async (done: DoneFn): Promise<void> => {
+        afterEach(async (): Promise<void> => {
             if (await elementExists('#pause')) {
                 await clickTimeControl('pause')
             }
-            done()
         })
 
-        it('keeps playing when you modify the spec and resets time to the beginning', async (done: DoneFn): Promise<void> => {
+        it('keeps playing when you modify the spec and resets time to the beginning', async (): Promise<void> => {
             await openSpecControlsIfNotOpen()
             await sleep(A_BIT_LONGER)
             const timeOfModifyingSpecs: Point<Ms> = await currentTime()
             await modifySpecs()
             await hasBeenReset({ toBefore: timeOfModifyingSpecs })
             await isPlaying()
-
-            done()
         })
     })
 })

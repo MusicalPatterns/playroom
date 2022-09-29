@@ -1,13 +1,13 @@
-@import '../../../../colors';
-@import '../../../../sizes';
-@import '../colors';
+@import "../../../../colors";
+@import "../../../../sizes";
+@import "../colors";
 
 .toggled-inputs {
   min-width: $toggled-control-size !important;
   width: $toggled-control-size !important;
   max-width: $toggled-control-size !important;
 
-  input[type=checkbox] {
+  input[type="checkbox"] {
     cursor: pointer;
     flex: 0;
     min-width: $toggled-control-size;

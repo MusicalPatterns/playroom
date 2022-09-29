@@ -12,63 +12,50 @@ import {
 } from '../../../support'
 
 describe('keyboard controls', (): void => {
-    beforeEach(async (done: DoneFn): Promise<void> => {
+    beforeEach(async (): Promise<void> => {
         await quickRefresh()
         await selectLongDurationPattern()
-        done()
     })
 
-    it('starts off paused', async (done: DoneFn): Promise<void> => {
+    it('starts off paused', async (): Promise<void> => {
         await isPaused()
-
-        done()
     })
 
     describe('after pressing space bar', (): void => {
-        beforeEach(async (done: DoneFn): Promise<void> => {
+        beforeEach(async (): Promise<void> => {
             if (await elementExists('#play')) {
                 await press('Space')
             }
-            done()
         })
 
-        afterEach(async (done: DoneFn): Promise<void> => {
+        afterEach(async (): Promise<void> => {
             if (await elementExists('#pause')) {
                 await press('Space')
             }
-            done()
         })
 
-        it('begins incrementing the time', async (done: DoneFn): Promise<void> => {
+        it('begins incrementing the time', async (): Promise<void> => {
             await isPlaying()
-
-            done()
         })
 
-        it('pressing space bar pauses', async (done: DoneFn): Promise<void> => {
+        it('pressing space bar pauses', async (): Promise<void> => {
             await press('Space')
             await isPaused()
-
-            done()
         })
 
-        it('pressing escape key stops (resets the time to the beginning and stops playing)', async (done: DoneFn): Promise<void> => {
+        it('pressing escape key stops (resets the time to the beginning and stops playing)', async (): Promise<void> => {
             await press('Escape')
             await hasBeenReset()
             await isPaused()
-
-            done()
         })
 
-        it('pressing home key rewinds (resets time to the beginning and keeps playing)', async (done: DoneFn): Promise<void> => {
+        it('pressing home key rewinds (resets time to the beginning and keeps playing)', async (): Promise<void> => {
             await sleep(A_BIT_LONGER)
             const timeOfPressingRewind: Point<Ms> = await currentTime()
 
             await press('Home')
             await hasBeenReset({ toBefore: timeOfPressingRewind })
             await isPlaying()
-
-            done()
         })
     })
 })

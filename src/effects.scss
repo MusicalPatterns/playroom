@@ -1,5 +1,7 @@
-@import './baseColors';
-@import './baseSizes';
+@import "./baseColors";
+@import "./baseSizes";
+
+@use "sass:list" as *;
 
 @mixin hoverable-color($some-grey) {
   $i: 1;
@@ -37,13 +39,11 @@
 
 @mixin glow($color) {
   box-shadow: 0 0 $eency-weency $eency-weency $color;
-  -webkit-box-shadow: 0 0 $eency-weency $eency-weency $color;
-  -webkit-appearance: none;
+  appearance: none;
 }
 
 @mixin no-glow() {
   box-shadow: none;
-  -webkit-box-shadow: none;
 }
 
 @mixin animate($properties...) {

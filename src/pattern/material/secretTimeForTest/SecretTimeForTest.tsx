@@ -35,8 +35,8 @@ const SecretTimeForTest: React.ComponentType<SecretTimeForTestProps> =
 
         return (
             <div>
-                <div {...{ id: SecretTestSelector.TIME }}>{timeForDisplay}</div>
-                <div {...{ id: SecretTestSelector.PATTERN_DURATION }}>{patternDurationForDisplay}</div>
+                <div {...{ id: SecretTestSelector.TIME }}>{timeForDisplay.toString()}</div>
+                <div {...{ id: SecretTestSelector.PATTERN_DURATION }}>{patternDurationForDisplay.toString()}</div>
             </div>
         )
     }

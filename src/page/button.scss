@@ -1,6 +1,8 @@
-@import '../colors';
-@import '../sizes';
-@import '../effects';
+@import "../colors";
+@import "../sizes";
+@import "../effects";
+
+@use "sass:list" as *;
 
 button {
   cursor: pointer;

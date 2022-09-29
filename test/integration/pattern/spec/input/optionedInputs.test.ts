@@ -23,16 +23,13 @@ const optionedInputIsModified: () => Promise<void> =
 
 describe('optioned input', (): void => {
     describe('submitting', (): void => {
-        beforeEach(async (done: DoneFn): Promise<void> => {
+        beforeEach(async (): Promise<void> => {
             await refreshForSpecControlsTest()
-            done()
         })
 
-        it('immediately submits when you modify it', async (done: DoneFn): Promise<void> => {
+        it('immediately submits when you modify it', async (): Promise<void> => {
             await modifyOptionedInput()
             await optionedInputIsModified()
-
-            done()
         })
     })
 })

@@ -1,4 +1,6 @@
-@import './baseColors';
+@import "./baseColors";
+
+@use "sass:list" as *;
 
 $text-color: nth($greys, 2);
 

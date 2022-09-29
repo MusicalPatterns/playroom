@@ -68,31 +68,24 @@ const justThatOneFieldIsMarkedIsInvalidAndTheOtherFieldsOfThatArrayedSpecControl
 
 describe('arrayed spec control', (): void => {
     describe('submitting', (): void => {
-        beforeEach(async (done: DoneFn): Promise<void> => {
+        beforeEach(async (): Promise<void> => {
             await refreshForSpecControlsTest()
-            done()
         })
 
-        it('only submits the field you modify, not the others', async (done: DoneFn): Promise<void> => {
+        it('only submits the field you modify, not the others', async (): Promise<void> => {
             await modifyFieldOfArrayedSpecControl()
             await onlyThatOneFieldOfTheArrayedSpecControlIsModified()
-
-            done()
         })
     })
 
     describe('invalid state', (): void => {
-        beforeEach(async (done: DoneFn): Promise<void> => {
+        beforeEach(async (): Promise<void> => {
             await refreshForSpecControlsTest()
             await invalidateJustOneFieldOfAnArrayedSpecControl()
-
-            done()
         })
 
-        it('only marks the specific field which is invalid', async (done: DoneFn): Promise<void> => {
+        it('only marks the specific field which is invalid', async (): Promise<void> => {
             await justThatOneFieldIsMarkedIsInvalidAndTheOtherFieldsOfThatArrayedSpecControlAreStillMarkedAsValid()
-
-            done()
         })
     })
 })

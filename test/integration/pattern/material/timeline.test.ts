@@ -35,20 +35,17 @@ const playLongerToProveItIsStillStuckAtTheEndTime: () => Promise<void> =
 
 describe('timeline', (): void => {
     describe('for some patterns, time repeats from the beginning upon reaching the end', (): void => {
-        beforeEach(async (done: DoneFn): Promise<void> => {
+        beforeEach(async (): Promise<void> => {
             await quickRefresh()
             await selectTimeControlsPattern()
             await clickTimeControl('play')
-            done()
         })
 
-        afterEach(async (done: DoneFn): Promise<void> => {
+        afterEach(async (): Promise<void> => {
             await clickTimeControl('pause')
-
-            done()
         })
 
-        it('works', async (done: DoneFn): Promise<void> => {
+        it('works', async (): Promise<void> => {
             const initialTime: Point<Ms> = await currentTime()
 
             await playJustLongEnoughToBeAlmostAboutToRepeat()
@@ -72,26 +69,21 @@ describe('timeline', (): void => {
                     use.Scalar(await patternDuration(), ONE_HALF),
                     'pattern did not repeat from the beginning, because it was past halfway done after repeating',
                 )
-
-            done()
         })
     })
 
     describe('for some patterns, time repeats from a point in the middle upon reaching the end', (): void => {
-        beforeEach(async (done: DoneFn): Promise<void> => {
+        beforeEach(async (): Promise<void> => {
             await quickRefresh()
             await selectRepetendPattern()
             await clickTimeControl('play')
-            done()
         })
 
-        afterEach(async (done: DoneFn): Promise<void> => {
+        afterEach(async (): Promise<void> => {
             await clickTimeControl('pause')
-
-            done()
         })
 
-        it('works', async (done: DoneFn): Promise<void> => {
+        it('works', async (): Promise<void> => {
             const initialTime: Point<Ms> = await currentTime()
 
             await playJustLongEnoughToBeAlmostAboutToRepeat()
@@ -115,26 +107,21 @@ describe('timeline', (): void => {
                     use.Scalar(await patternDuration(), ONE_HALF),
                     'pattern did not repeat from the segno time, because it was before the halfway point after repeating',
                 )
-
-            done()
         })
     })
 
     describe('for some patterns, upon reaching the end, time stops, the pattern is finished', (): void => {
-        beforeEach(async (done: DoneFn): Promise<void> => {
+        beforeEach(async (): Promise<void> => {
             await quickRefresh()
             await selectFinitePattern()
             await clickTimeControl('play')
-            done()
         })
 
-        afterEach(async (done: DoneFn): Promise<void> => {
+        afterEach(async (): Promise<void> => {
             await clickTimeControl('pause')
-
-            done()
         })
 
-        it('works', async (done: DoneFn): Promise<void> => {
+        it('works', async (): Promise<void> => {
             const initialTime: Point<Ms> = await currentTime()
 
             await playLongEnoughToHaveReachedTheEnd()
@@ -152,8 +139,6 @@ describe('timeline', (): void => {
                     endTime,
                     'did not stay at the same time after having reached the end',
                 )
-
-            done()
         })
     })
 })

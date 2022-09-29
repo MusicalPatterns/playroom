@@ -49,10 +49,12 @@ const elementAttribute: (selector: string, attribute: string) => Promise<unknown
 
 const findElement: (selector: string) => Promise<ElementHandle> =
     async (selector: string): Promise<ElementHandle> =>
+        // @ts-ignore
         utilitiesFindElement(page, selector)
 
 const press: (key: string) => Promise<void> =
     async (key: string): Promise<void> =>
+        // @ts-ignore
         utilitiesPress(page, key)
 
 const loseFocus: (selector?: string) => Promise<void> =

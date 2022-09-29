@@ -91,124 +91,98 @@ const specsAreInConformityWithTheDifferentPreset: () => Promise<void> =
 
 describe('preset select', (): void => {
     describe('when the pattern does not have presets', (): void => {
-        beforeEach(async (done: DoneFn): Promise<void> => {
+        beforeEach(async (): Promise<void> => {
             await refreshForSpecControlsTest()
-
-            done()
         })
 
-        it('does not show the preset select', async (done: DoneFn): Promise<void> => {
+        it('does not show the preset select', async (): Promise<void> => {
             expect(await elementExists('#presets'))
                 .toBeFalsy('preset select was shown')
-
-            done()
         })
     })
 
     describe('when the pattern has presets', (): void => {
-        beforeEach(async (done: DoneFn): Promise<void> => {
+        beforeEach(async (): Promise<void> => {
             await quickRefresh()
             await selectPresetsPattern()
             await openSpecControlsIfNotOpen()
-
-            done()
         })
 
-        it('shows them', async (done: DoneFn): Promise<void> => {
+        it('shows them', async (): Promise<void> => {
             expect(await elementExists('#presets'))
                 .toBeTruthy('presets were not shown')
-
-            done()
         })
 
-        it('displays the preset in the select whenever the current spec is a match for it', async (done: DoneFn): Promise<void> => {
+        it('displays the preset in the select whenever the current spec is a match for it', async (): Promise<void> => {
             await bringSpecsIntoConformityWithThePreset()
             await currentSpecsMatchesThePresetAndThusItIsDisplayedInThePresetSelect()
-
-            done()
         })
 
         describe('choosing a preset', (): void => {
-            beforeEach(async (done: DoneFn): Promise<void> => {
+            beforeEach(async (): Promise<void> => {
                 await selectAPreset()
-
-                done()
             })
 
-            it('sets the spec', async (done: DoneFn): Promise<void> => {
+            it('sets the spec', async (): Promise<void> => {
                 await specsAreInConformityWithThePreset()
 
                 await selectADifferentPreset()
                 await specsAreInConformityWithTheDifferentPreset()
-
-                done()
             })
 
-            it('stops showing the preset in the select once the current spec no longer matches it', async (done: DoneFn): Promise<void> => {
+            it('stops showing the preset in the select once the current spec no longer matches it', async (): Promise<void> => {
                 await currentSpecsMatchesThePresetAndThusItIsDisplayedInThePresetSelect()
 
                 await breakConformityWithThePreset()
                 await currentSpecsMatchesNoPresetsAndThusThePresetSelectDisplaysNothing()
-
-                done()
             })
         })
 
         describe('when a pattern is playing', (): void => {
-            beforeEach(async (done: DoneFn): Promise<void> => {
+            beforeEach(async (): Promise<void> => {
                 await quickRefresh()
                 await selectLongDurationPattern()
                 await clickTimeControl('play')
                 await sleep(LONG_ENOUGH_FOR_TIME_TO_PASS)
-
-                done()
             })
 
-            afterEach(async (done: DoneFn): Promise<void> => {
+            afterEach(async (): Promise<void> => {
                 if (await elementExists('#pause')) {
                     await clickTimeControl('pause')
                 }
-                done()
             })
 
-            it('keeps playing when you select a preset but does not reset time to the beginning', async (done: DoneFn): Promise<void> => {
+            it('keeps playing when you select a preset but does not reset time to the beginning', async (): Promise<void> => {
                 const timeOfSelectingPreset: Point<Ms> = await currentTime()
 
                 await openSpecControlsIfNotOpen()
                 await selectAPreset()
                 await isAfter(timeOfSelectingPreset)
                 await isPlaying()
-
-                done()
             })
         })
 
         describe('when a pattern is playing that restarts upon spec modification', (): void => {
-            beforeEach(async (done: DoneFn): Promise<void> => {
+            beforeEach(async (): Promise<void> => {
                 await quickRefresh()
                 await selectRestartPattern()
                 await clickTimeControl('play')
                 await sleep(LONG_ENOUGH_FOR_TIME_TO_PASS)
-
-                done()
             })
 
-            afterEach(async (done: DoneFn): Promise<void> => {
+            afterEach(async (): Promise<void> => {
                 if (await elementExists('#pause')) {
                     await clickTimeControl('pause')
                 }
-                done()
             })
 
-            it('keeps playing when you select a preset and resets time to the beginning', async (done: DoneFn): Promise<void> => {
+            it('keeps playing when you select a preset and resets time to the beginning', async (): Promise<void> => {
                 await openSpecControlsIfNotOpen()
                 await sleep(A_BIT_LONGER)
                 const timeOfSelectingPreset: Point<Ms> = await currentTime()
                 await selectAPreset()
                 await hasBeenReset({ toBefore: timeOfSelectingPreset })
                 await isPlaying()
-
-                done()
             })
         })
     })
