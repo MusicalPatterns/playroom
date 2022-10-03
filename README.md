@@ -1,5 +1,3 @@
-[![Build Status](https://travis-ci.com/MusicalPatterns/playroom.svg?branch=master)](https://travis-ci.com/MusicalPatterns/playroom)
-
 # Musical Patterns - Playroom
 
 The web-based UI for playing (with) the patterns.
