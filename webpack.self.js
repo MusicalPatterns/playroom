@@ -19,7 +19,7 @@ module.exports = {
             },
             {
                 test: /\.(eot|woff|woff2|ttf)/,
-                loader: 'url-loader',
+                type: 'asset/resource',
             },
         ],
     },

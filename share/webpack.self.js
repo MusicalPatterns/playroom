@@ -7,10 +7,13 @@ module.exports = {
             {
                 test: /\.html$/,
                 loader: 'html-loader',
+                options: {
+                    esModule: false,
+                },
             },
             {
                 test: /\.(jpg|png|svg|gif)/,
-                loader: 'url-loader',
+                type: 'asset/resource'
             },
         ],
     },
